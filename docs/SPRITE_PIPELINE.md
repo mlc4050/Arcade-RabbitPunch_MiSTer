@@ -62,3 +62,9 @@ No ROM data is committed. Hashes and results are in reference/sprite_checks.json
 The standalone Quartus project tests only this adapter and its JTFRAME drawer
 at the 48 MHz evaluation clock, with virtual I/O. This is not a full-core fit,
 a final board clock choice or a deployable RBF.
+
+Commit 2f886cb passes that Quartus 17.0.2 fit on 5CSEBA6U23I7: 116 ALMs,
+170 registers, zero M10K and zero DSP blocks. All corners pass setup, hold
+and minimum pulse width; worst setup slack is +10.794 ns and worst hold
+slack is +0.152 ns, with zero illegal clocks or unconstrained paths.
+The adapter and donor hierarchy survive synthesis. See reference/sprites_synth.json.

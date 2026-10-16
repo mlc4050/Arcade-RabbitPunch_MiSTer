@@ -74,6 +74,8 @@ through the actual VHDL view port. Results: reference/bitmap_checks.json.
 
 Both tile layers now run through VHDL lookup adapters and JTFRAME row drawing;
 see TILE_PIPELINE.md for captured pixel checks and preview provenance.
-Sprite RTL, final mixer/palette pipeline, physical raster/PLL choices, complete-core
+Sprite rows now run through a VHDL adapter and the same unchanged JTFRAME drawer;
+see SPRITE_PIPELINE.md for captured row checks and the standalone fit. Sprite list
+scheduling/priority, final mixer/palette pipeline, physical raster/PLL choices, complete-core
 fit and hardware verification remain open. Six matching scenes do not cover every
 register/flip/priority combination or establish a fully working game core.
