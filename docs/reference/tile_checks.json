@@ -3,13 +3,13 @@
     "case": "video_tile_row",
     "pass_marker": "TILE_ROW_PASS",
     "log": "debug\\baselines\\video_tile_row\\result.log",
-    "log_sha256": "8d589a8da081783576958817862459cfa64fcb8f5f6322d25b7dd2659751581a"
+    "log_sha256": "8c99c02241cbd1d0162fd4b20055d280b1dedab62450f2f32cbb7bf9f65c78bf"
   },
   {
     "case": "video_tile_layer",
     "pass_marker": "TILE_LAYER_PASS",
     "log": "debug\\baselines\\video_tile_layer\\result.log",
-    "log_sha256": "72fcb8101fcd4714bfa14a90191a40c7974697ecec55aec2c243f4e9b670c6db"
+    "log_sha256": "30b69063f42f147a5fecbe30efe2109a337e2649bdde8ef7cbdb7fb96b135ebf"
   },
   {
     "case": "tiles_rabiolep_attract",
@@ -22,7 +22,7 @@
     "registers_sha256": "6c8c1cc4b33ac91e576f8b3aeb49da92660a57a48f12bad82e81e4b6de747c9f",
     "rtl_pixels_sha256": "385ec708704b96fcf06591687b737c436cfd0dd0ea23b038be56dada123b1523",
     "scope": "HDL tile layers; captured RAM and behavioral ROM responders, no sprites/bitmap/raster",
-    "log_sha256": "eb9a1d68fff3e9dc6bf32e7dbf03ab96037df06f779a9a626f650754d3fe9764"
+    "log_sha256": "a15e18dd1b30432d3e155160600dd2d9b0124e30d6152d148134e7d9b5895960"
   },
   {
     "case": "tiles_rpunch_attract",
@@ -35,7 +35,7 @@
     "registers_sha256": "1be0ccd501ba66eacbcfa58e570b930da4dcd70975ace5da959ffb1c82686587",
     "rtl_pixels_sha256": "3d32dacb075f4a9a1d6000e91cfcec5f58e894578e1d1269050dedb51bffb1df",
     "scope": "HDL tile layers; captured RAM and behavioral ROM responders, no sprites/bitmap/raster",
-    "log_sha256": "65a9ac9de981c72ee24753f4835fc087ec6c101d5121b6a069dc2978c6c8adcc"
+    "log_sha256": "a40280878ace20a75a14f82d68bf1b9600a76ad4b3cc94e288c475ff37120956"
   },
   {
     "case": "tiles_rabiolep_play1000",
@@ -48,7 +48,7 @@
     "registers_sha256": "0756f6d0d15c9dd4f9d69caa1b386a026be3280aaff115d215b2e3991de016ed",
     "rtl_pixels_sha256": "1491aba57176e6ecd7647516eca0a4147e969ae1899ef7c94f1bc755b4beb60e",
     "scope": "HDL tile layers; captured RAM and behavioral ROM responders, no sprites/bitmap/raster",
-    "log_sha256": "cd656b1613aa8b58cc36d16ba911178e807ea11ce488ee30e3480a41c19661f0"
+    "log_sha256": "b1fc87d564b6af63e633d58840ce6932491358bb2613eb5b9c21293e94de6b7a"
   },
   {
     "case": "tiles_rpunch_play1000",
@@ -61,7 +61,7 @@
     "registers_sha256": "7fb4f53a5faffe3d8f548442e50c1f1c9081421dc4c4e10dc661be509257f162",
     "rtl_pixels_sha256": "8384ec6acdb6d73ba974b84aa00dfb0671b621a12850c31c823835ea942ea660",
     "scope": "HDL tile layers; captured RAM and behavioral ROM responders, no sprites/bitmap/raster",
-    "log_sha256": "714d167f9121ae768dae3e40db9b6f9795c6dbe18627626abd4cc2fca090a513"
+    "log_sha256": "1a45afca4460db064ad65f190044a2c2107ad4d77499dc388c79d8444bfe7dd8"
   },
   {
     "case": "tiles_rabiolep_play1800",
@@ -74,7 +74,7 @@
     "registers_sha256": "f8935c37b5ad8ad5e2adc3575d598dca777eaa03fd406fbeebff16daa7e3d860",
     "rtl_pixels_sha256": "e5a5658770e41e2374e3174bb4848c35671895018eb0b86dabd909de880a6f69",
     "scope": "HDL tile layers; captured RAM and behavioral ROM responders, no sprites/bitmap/raster",
-    "log_sha256": "21c3b45210f26bf24e32a7c3be78974271e064f7fd00ed4423075ef96ee2e0a2"
+    "log_sha256": "9b706ceee923834bb2a0a2f35117873d08ef48f495a74a9187e6c2e43ea47164"
   },
   {
     "case": "tiles_rpunch_play1800",
@@ -87,6 +87,6 @@
     "registers_sha256": "b416ebabd2d86aa7a7aec57e466248ed356c03b8af3d645ce0143368512abe63",
     "rtl_pixels_sha256": "3fc5d7fa355af7706320d48b021f3ea2558db6bb0ae26b7d441b6cc8005171cf",
     "scope": "HDL tile layers; captured RAM and behavioral ROM responders, no sprites/bitmap/raster",
-    "log_sha256": "24aa6b1e06afa8407dcd80b842a5803c322cb3ab73572617561574d042a9e9da"
+    "log_sha256": "0eb70153fce95deeda3eaca24c3fe85120759041ab18a94aad6bea591206b4c6"
   }
 ]

@@ -27,15 +27,26 @@ begin
     s_clk <= not s_clk after 5 ns;
     dut : entity work.rabbitpunch_tile_row
         port map (
-            i_clk => s_clk, i_reset => s_reset, i_row_valid => s_row_valid,
-            o_row_ready => s_ready, iu14_tile_code => su14_code, iu3_tile_row => su3_row,
-            iu9_pixel_x => su9_origin, iu9_pixel_y => su9_destination_y,
-            iu4_palette => su4_palette, i_foreground => s_foreground,
-            o_rom_request => s_request, ou17_rom_word_address => su17_address,
-            o_rom_foreground => s_rom_foreground, i_rom_response_valid => s_response_valid,
-            iu32_rom_response_data => su32_response_data, o_pixel_valid => s_pixel_valid,
-            ou9_pixel_x => su9_pixel_x, ou9_pixel_y => su9_pixel_y,
-            ou9_palette_index => su9_index, o_opaque => s_opaque
+            i_clk => s_clk,
+            i_reset => s_reset,
+            i_row_valid => s_row_valid,
+            o_row_ready => s_ready,
+            iu14_tile_code => su14_code,
+            iu3_tile_row => su3_row,
+            iu9_pixel_x => su9_origin,
+            iu9_pixel_y => su9_destination_y,
+            iu4_palette => su4_palette,
+            i_foreground => s_foreground,
+            o_rom_request => s_request,
+            ou17_rom_word_address => su17_address,
+            o_rom_foreground => s_rom_foreground,
+            i_rom_response_valid => s_response_valid,
+            iu32_rom_response_data => su32_response_data,
+            o_pixel_valid => s_pixel_valid,
+            ou9_pixel_x => su9_pixel_x,
+            ou9_pixel_y => su9_pixel_y,
+            ou9_palette_index => su9_index,
+            o_opaque => s_opaque
         );
 
     monitor : process(s_clk)

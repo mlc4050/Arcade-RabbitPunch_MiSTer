@@ -1,0 +1,32 @@
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY rabbitpunch_sprite_row
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 1
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprite_row.vhd
+set_global_assignment -name SYSTEMVERILOG_FILE ../../jtframe/jtframe_draw.v
+set_global_assignment -name SDC_FILE sprites_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_reset
+set_instance_assignment -name VIRTUAL_PIN ON -to i_row_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_row_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to iu11_sprite_code[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu5_sprite_row[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu9_pixel_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu9_pixel_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu4_palette[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_horizontal_flip
+set_instance_assignment -name VIRTUAL_PIN ON -to i_vertical_flip
+set_instance_assignment -name VIRTUAL_PIN ON -to i_behind_foreground
+set_instance_assignment -name VIRTUAL_PIN ON -to o_rom_request
+set_instance_assignment -name VIRTUAL_PIN ON -to ou17_rom_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_rom_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to iu32_rom_response_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_pixel_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to ou9_pixel_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou9_pixel_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou10_palette_index[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_opaque
+set_instance_assignment -name VIRTUAL_PIN ON -to o_behind_foreground

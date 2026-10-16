@@ -13,6 +13,7 @@ from hwlock import require_no_jtag
 CHECKS = {
     "memory": (835584, ("bitmap", "sprites", "tiles", "palette", "work_ram")),
     "tiles": (0, ("rabbitpunch_tile_lookup", "rabbitpunch_tile_row", "jtframe_draw")),
+    "sprites": (0, ("rabbitpunch_sprite_row", "jtframe_draw")),
 }
 
 

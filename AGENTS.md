@@ -25,6 +25,9 @@ Enclose every if/elsif condition in parentheses: if (s_signal = '1') then.
 Keep VHDL signal assignments as <=, comparisons as =, and variable assignments as :=.
 Use descriptive adapter ports around vendor logic; keep vendor pin names only inside that translation boundary and
 explain cryptic signals there. Preserve unchanged third-party sources.
+Write each named VHDL port-map association on its own line, indented four spaces
+inside the map. Put port map ( and the closing ); on separate lines from the
+associations. Do not combine inputs or outputs into paragraph-like maps.
 These conventions apply to every VHDL file we author or maintain, including
 testbenches and packages. Wrap imported entry points used by our board logic;
 required vendor-type conversions stay inside that wrapper. Do not rename imported

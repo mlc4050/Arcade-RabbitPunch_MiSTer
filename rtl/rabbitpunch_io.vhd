@@ -49,14 +49,15 @@ architecture rtl of rabbitpunch_io is
     signal su5_target : target_t;
     signal s_sound_pending : std_logic := '0';
 begin
-    decoder : entity work.rabbitpunch_decode port map (
-        iu24_address => iu24_request_address,
-        i_active => i_request,
-        i_read => not i_request_write,
-        i_upper_byte_strobe_n => not iu2_request_bytes(1),
-        i_lower_byte_strobe_n => not iu2_request_bytes(0),
-        ou5_target => su5_target
-    );
+    decoder : entity work.rabbitpunch_decode
+        port map (
+            iu24_address => iu24_request_address,
+            i_active => i_request,
+            i_read => not i_request_write,
+            i_upper_byte_strobe_n => not iu2_request_bytes(1),
+            i_lower_byte_strobe_n => not iu2_request_bytes(0),
+            ou5_target => su5_target
+        );
     ou4_gga_selected <= su4_gga_selected;
     ou8_gga_view_data <= su8_gga(to_integer(iu4_gga_view_address));
     o_sound_pending <= s_sound_pending;

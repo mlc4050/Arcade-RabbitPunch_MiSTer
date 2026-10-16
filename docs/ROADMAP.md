@@ -16,6 +16,9 @@ VHDL tilemap lookup and a JTFRAME row adapter now match both tile layers in
 all six reference scenes; sprites and the complete mixer/raster are still open.
 Their standalone fit also passes timing at the 48 MHz evaluation constraint,
 with 139 ALMs, 201 registers and no M10K blocks.
+Sprite row drawing now passes 30720 synthetic rows and all descriptor rows in
+six captured scenes, including flips, transparency, overlapped ROM fetching
+and reset draining. Scanline scheduling and sprite priority/mixing remain open.
 The complete game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
@@ -99,6 +102,10 @@ is excluded from the first scope. No remote repository has been created or publi
   bank/scroll/reset tests and 746496 captured layer pixels across six scenes.
   No line/frame RAM, physical raster or shared SDRAM transport is implemented
   by these blocks. See TILE_PIPELINE.md.
+- Native 16x32 sprite row drawing reuses the unchanged JTFRAME drawer through
+  a VHDL adapter. Synthetic and six captured-data tests pass; list scheduling,
+  occupancy/foreground priority and raster deadlines are not yet verified.
+  See SPRITE_PIPELINE.md.
 
 ## Component reuse candidates
 

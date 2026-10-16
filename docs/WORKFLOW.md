@@ -32,6 +32,11 @@ requires zero block RAM and the lookup/drawer hierarchy, and applies the same
 timing and unconstrained-path gates. Reports use the tiles_check project under
 build/rtl/synth_check/tiles/ and debug/tiles_synth.json.
 
+`--synth-check sprites` fits the native sprite-row adapter and unchanged
+JTFRAME drawer, requires zero block RAM, and applies the same timing and
+unconstrained-path gates. Reports use build/rtl/synth_check/sprites/ and
+debug/sprites_synth.json. A block fit does not establish scanline throughput.
+
 Three properties that must survive any port:
 
 - **Refuses a dirty tree.** "What was in that build?" has to be answerable.

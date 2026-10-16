@@ -46,17 +46,30 @@ begin
     s_clk <= not s_clk after 5 ns;
     dut : entity work.rabbitpunch_tile_layer
         port map (
-            i_clk => s_clk, i_reset => s_reset, i_request_valid => s_valid,
-            o_request_ready => s_ready, iu9_pixel_x => su9_x, iu9_pixel_y => su9_y,
-            iu9_scroll_x => su9_scroll_x, iu9_scroll_y => su9_scroll_y,
-            iu16_video_flags => su16_flags, i_foreground => s_foreground,
-            o_ram_request => s_ram_request, ou13_ram_word_address => su13_ram_address,
-            i_ram_response_valid => s_ram_valid, iu16_ram_response_data => su16_ram_data,
-            o_rom_request => s_rom_request, ou17_rom_word_address => su17_rom_address,
-            o_rom_foreground => s_rom_foreground, i_rom_response_valid => s_rom_valid,
-            iu32_rom_response_data => su32_rom_data, o_pixel_valid => s_pixel_valid,
-            ou9_pixel_x => su9_pixel_x, ou9_pixel_y => su9_pixel_y,
-            ou9_palette_index => su9_palette_index, o_opaque => s_opaque
+            i_clk => s_clk,
+            i_reset => s_reset,
+            i_request_valid => s_valid,
+            o_request_ready => s_ready,
+            iu9_pixel_x => su9_x,
+            iu9_pixel_y => su9_y,
+            iu9_scroll_x => su9_scroll_x,
+            iu9_scroll_y => su9_scroll_y,
+            iu16_video_flags => su16_flags,
+            i_foreground => s_foreground,
+            o_ram_request => s_ram_request,
+            ou13_ram_word_address => su13_ram_address,
+            i_ram_response_valid => s_ram_valid,
+            iu16_ram_response_data => su16_ram_data,
+            o_rom_request => s_rom_request,
+            ou17_rom_word_address => su17_rom_address,
+            o_rom_foreground => s_rom_foreground,
+            i_rom_response_valid => s_rom_valid,
+            iu32_rom_response_data => su32_rom_data,
+            o_pixel_valid => s_pixel_valid,
+            ou9_pixel_x => su9_pixel_x,
+            ou9_pixel_y => su9_pixel_y,
+            ou9_palette_index => su9_palette_index,
+            o_opaque => s_opaque
         );
 
     responders : process(s_clk)

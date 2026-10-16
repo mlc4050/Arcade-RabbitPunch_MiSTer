@@ -70,50 +70,52 @@ begin
         end if;
     end process;
 
-    cpu : entity work.rabbitpunch_fx68k port map (
-        i_clk => i_clk,
-        i_external_reset => i_reset,
-        i_powerup_reset => i_reset,
-        i_enable_phase1 => s_enable_phase1,
-        i_enable_phase2 => s_enable_phase2,
-        i_run => '1',
-        o_read => s_read,
-        o_address_strobe_n => s_address_strobe_n,
-        o_upper_byte_strobe_n => s_upper_byte_strobe_n,
-        o_lower_byte_strobe_n => s_lower_byte_strobe_n,
-        ou23_word_address => su23_word_address,
-        ou16_write_data => su16_write_data,
-        iu16_read_data => su16_read_data,
-        i_transfer_acknowledge_n => s_transfer_acknowledge_n,
-        i_peripheral_transfer_n => not s_interrupt_cycle, -- Autovector on interrupt acknowledge.
-        i_bus_error_n => '1',
-        i_bus_request_n => '1', -- No external bus master.
-        i_bus_grant_acknowledge_n => '1',
-        iu3_interrupt_level_n => su3_interrupt_level_n,
-        ou3_function_code => su3_function_code,
-        o_peripheral_clock => open,
-        o_peripheral_address_valid_n => open,
-        o_bus_grant_n => open,
-        o_external_reset_out_n => open,
-        o_halted_out_n => open
-    );
-    bus_adapter : entity work.rabbitpunch_bus port map (
-        i_clk => i_clk,
-        i_reset => i_reset,
-        i_cpu_address_strobe_n => s_memory_address_strobe_n,
-        i_cpu_read => s_read,
-        i_cpu_upper_byte_strobe_n => s_upper_byte_strobe_n,
-        i_cpu_lower_byte_strobe_n => s_lower_byte_strobe_n,
-        iu23_cpu_word_address => su23_word_address,
-        iu16_cpu_write_data => su16_write_data,
-        ou16_cpu_read_data => su16_read_data,
-        o_cpu_transfer_acknowledge_n => s_transfer_acknowledge_n,
-        o_request => o_request,
-        o_request_write => o_request_write,
-        ou24_request_address => ou24_request_address,
-        ou16_request_data => ou16_request_data,
-        ou2_request_bytes => ou2_request_bytes,
-        i_response_valid => i_response_valid,
-        iu16_response_data => iu16_response_data
-    );
+    cpu : entity work.rabbitpunch_fx68k
+        port map (
+            i_clk => i_clk,
+            i_external_reset => i_reset,
+            i_powerup_reset => i_reset,
+            i_enable_phase1 => s_enable_phase1,
+            i_enable_phase2 => s_enable_phase2,
+            i_run => '1',
+            o_read => s_read,
+            o_address_strobe_n => s_address_strobe_n,
+            o_upper_byte_strobe_n => s_upper_byte_strobe_n,
+            o_lower_byte_strobe_n => s_lower_byte_strobe_n,
+            ou23_word_address => su23_word_address,
+            ou16_write_data => su16_write_data,
+            iu16_read_data => su16_read_data,
+            i_transfer_acknowledge_n => s_transfer_acknowledge_n,
+            i_peripheral_transfer_n => not s_interrupt_cycle, -- Autovector on interrupt acknowledge.
+            i_bus_error_n => '1',
+            i_bus_request_n => '1', -- No external bus master.
+            i_bus_grant_acknowledge_n => '1',
+            iu3_interrupt_level_n => su3_interrupt_level_n,
+            ou3_function_code => su3_function_code,
+            o_peripheral_clock => open,
+            o_peripheral_address_valid_n => open,
+            o_bus_grant_n => open,
+            o_external_reset_out_n => open,
+            o_halted_out_n => open
+        );
+    bus_adapter : entity work.rabbitpunch_bus
+        port map (
+            i_clk => i_clk,
+            i_reset => i_reset,
+            i_cpu_address_strobe_n => s_memory_address_strobe_n,
+            i_cpu_read => s_read,
+            i_cpu_upper_byte_strobe_n => s_upper_byte_strobe_n,
+            i_cpu_lower_byte_strobe_n => s_lower_byte_strobe_n,
+            iu23_cpu_word_address => su23_word_address,
+            iu16_cpu_write_data => su16_write_data,
+            ou16_cpu_read_data => su16_read_data,
+            o_cpu_transfer_acknowledge_n => s_transfer_acknowledge_n,
+            o_request => o_request,
+            o_request_write => o_request_write,
+            ou24_request_address => ou24_request_address,
+            ou16_request_data => ou16_request_data,
+            ou2_request_bytes => ou2_request_bytes,
+            i_response_valid => i_response_valid,
+            iu16_response_data => iu16_response_data
+        );
 end architecture;

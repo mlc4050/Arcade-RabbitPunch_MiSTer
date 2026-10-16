@@ -38,14 +38,15 @@ architecture rtl of rabbitpunch_memory is
     signal su16_bitmap_data, su16_sprite_data, su16_tile_data, su16_palette_data, su16_work_data : unsigned(15 downto 0);
     signal su16_bitmap_view, su16_sprite_view, su16_tile_view, su16_palette_view, su16_work_view : unsigned(15 downto 0);
 begin
-    decoder : entity work.rabbitpunch_decode port map (
-        iu24_address => iu24_request_address,
-        i_active => i_request,
-        i_read => not i_request_write,
-        i_upper_byte_strobe_n => not iu2_request_bytes(1),
-        i_lower_byte_strobe_n => not iu2_request_bytes(0),
-        ou5_target => su5_target
-    );
+    decoder : entity work.rabbitpunch_decode
+        port map (
+            iu24_address => iu24_request_address,
+            i_active => i_request,
+            i_read => not i_request_write,
+            i_upper_byte_strobe_n => not iu2_request_bytes(1),
+            i_lower_byte_strobe_n => not iu2_request_bytes(0),
+            ou5_target => su5_target
+        );
     o_request_supported <= '1' when su5_target = TARGET_ROM or su5_target = TARGET_BITMAP or
         su5_target = TARGET_SPRITES or su5_target = TARGET_TILES or
         su5_target = TARGET_PALETTE or su5_target = TARGET_WORKRAM else '0';
@@ -60,36 +61,71 @@ begin
     s_palette_view <= '1' when i_view_enable = '1' and iu5_view_target = TARGET_PALETTE else '0';
     s_work_view <= '1' when i_view_enable = '1' and iu5_view_target = TARGET_WORKRAM else '0';
 
-    bitmap : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 15) port map (
-        i_clk => i_clk, i_cpu_enable => s_bitmap_enable, i_cpu_write => i_request_write,
-        iux_cpu_address => iu24_request_address(15 downto 1), iu2_cpu_bytes => iu2_request_bytes,
-        iu16_cpu_data => iu16_request_data, ou16_cpu_data => su16_bitmap_data,
-        i_view_enable => s_bitmap_view, iux_view_address => iu15_view_word_address,
-        ou16_view_data => su16_bitmap_view);
-    sprites : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 11) port map (
-        i_clk => i_clk, i_cpu_enable => s_sprite_enable, i_cpu_write => i_request_write,
-        iux_cpu_address => iu24_request_address(11 downto 1), iu2_cpu_bytes => iu2_request_bytes,
-        iu16_cpu_data => iu16_request_data, ou16_cpu_data => su16_sprite_data,
-        i_view_enable => s_sprite_view, iux_view_address => iu15_view_word_address(10 downto 0),
-        ou16_view_data => su16_sprite_view);
-    tiles : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 13) port map (
-        i_clk => i_clk, i_cpu_enable => s_tile_enable, i_cpu_write => i_request_write,
-        iux_cpu_address => iu24_request_address(13 downto 1), iu2_cpu_bytes => iu2_request_bytes,
-        iu16_cpu_data => iu16_request_data, ou16_cpu_data => su16_tile_data,
-        i_view_enable => s_tile_view, iux_view_address => iu15_view_word_address(12 downto 0),
-        ou16_view_data => su16_tile_view);
-    palette : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 10) port map (
-        i_clk => i_clk, i_cpu_enable => s_palette_enable, i_cpu_write => i_request_write,
-        iux_cpu_address => iu24_request_address(10 downto 1), iu2_cpu_bytes => iu2_request_bytes,
-        iu16_cpu_data => iu16_request_data, ou16_cpu_data => su16_palette_data,
-        i_view_enable => s_palette_view, iux_view_address => iu15_view_word_address(9 downto 0),
-        ou16_view_data => su16_palette_view);
-    work_ram : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 13) port map (
-        i_clk => i_clk, i_cpu_enable => s_work_enable, i_cpu_write => i_request_write,
-        iux_cpu_address => iu24_request_address(13 downto 1), iu2_cpu_bytes => iu2_request_bytes,
-        iu16_cpu_data => iu16_request_data, ou16_cpu_data => su16_work_data,
-        i_view_enable => s_work_view, iux_view_address => iu15_view_word_address(12 downto 0),
-        ou16_view_data => su16_work_view);
+    bitmap : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 15)
+        port map (
+            i_clk => i_clk,
+            i_cpu_enable => s_bitmap_enable,
+            i_cpu_write => i_request_write,
+            iux_cpu_address => iu24_request_address(15 downto 1),
+            iu2_cpu_bytes => iu2_request_bytes,
+            iu16_cpu_data => iu16_request_data,
+            ou16_cpu_data => su16_bitmap_data,
+            i_view_enable => s_bitmap_view,
+            iux_view_address => iu15_view_word_address,
+            ou16_view_data => su16_bitmap_view
+        );
+    sprites : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 11)
+        port map (
+            i_clk => i_clk,
+            i_cpu_enable => s_sprite_enable,
+            i_cpu_write => i_request_write,
+            iux_cpu_address => iu24_request_address(11 downto 1),
+            iu2_cpu_bytes => iu2_request_bytes,
+            iu16_cpu_data => iu16_request_data,
+            ou16_cpu_data => su16_sprite_data,
+            i_view_enable => s_sprite_view,
+            iux_view_address => iu15_view_word_address(10 downto 0),
+            ou16_view_data => su16_sprite_view
+        );
+    tiles : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 13)
+        port map (
+            i_clk => i_clk,
+            i_cpu_enable => s_tile_enable,
+            i_cpu_write => i_request_write,
+            iux_cpu_address => iu24_request_address(13 downto 1),
+            iu2_cpu_bytes => iu2_request_bytes,
+            iu16_cpu_data => iu16_request_data,
+            ou16_cpu_data => su16_tile_data,
+            i_view_enable => s_tile_view,
+            iux_view_address => iu15_view_word_address(12 downto 0),
+            ou16_view_data => su16_tile_view
+        );
+    palette : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 10)
+        port map (
+            i_clk => i_clk,
+            i_cpu_enable => s_palette_enable,
+            i_cpu_write => i_request_write,
+            iux_cpu_address => iu24_request_address(10 downto 1),
+            iu2_cpu_bytes => iu2_request_bytes,
+            iu16_cpu_data => iu16_request_data,
+            ou16_cpu_data => su16_palette_data,
+            i_view_enable => s_palette_view,
+            iux_view_address => iu15_view_word_address(9 downto 0),
+            ou16_view_data => su16_palette_view
+        );
+    work_ram : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 13)
+        port map (
+            i_clk => i_clk,
+            i_cpu_enable => s_work_enable,
+            i_cpu_write => i_request_write,
+            iux_cpu_address => iu24_request_address(13 downto 1),
+            iu2_cpu_bytes => iu2_request_bytes,
+            iu16_cpu_data => iu16_request_data,
+            ou16_cpu_data => su16_work_data,
+            i_view_enable => s_work_view,
+            iux_view_address => iu15_view_word_address(12 downto 0),
+            ou16_view_data => su16_work_view
+        );
 
     process(i_clk)
     begin
