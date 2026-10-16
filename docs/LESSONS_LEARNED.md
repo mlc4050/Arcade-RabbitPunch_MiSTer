@@ -1024,6 +1024,14 @@ ack address that is also an input port must acknowledge on writes only.
 
 ## Quartus synthesis gotchas (not visible in ModelSim)
 
+- **[RabbitPunch] Check the fitted size of byte-enabled VHDL RAM with two readers.**
+  One clock and a shared CPU read/write address did not prevent Quartus 17 from
+  duplicating each bank: 102 KiB became 204 M10K blocks. A descriptive unsigned
+  wrapper around `altsyncram` in `BIDIR_DUAL_PORT` mode uses 102 M10K blocks and
+  835584 bits. Keep the resource-count gate as well as timing checks. Independently
+  enable the CPU and view ports; the native ModelSim model is much slower when idle
+  ports keep clocking. Full-address/byte-lane and captured-bitmap regressions pass
+  against that vendor model; evidence is in reference/memory_synth.json.
 - **Non-blocking assignments to block-local (`automatic`) variables are rejected**, even with
   `static`: `Error (10959)`. Move to module scope, re-run the regression.
 - **Multi-driver conflicts on a shared tri-state net are a hard error** (`Error (13076)`), surfacing

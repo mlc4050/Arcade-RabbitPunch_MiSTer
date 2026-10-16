@@ -181,7 +181,12 @@ reading it, then verifies every word across all banks. It also checks byte merge
 upper-address mirrors, inspection reads, and ROM delays 0/20/40 clocks. It reports
 104486 checks. Six numeric_std metavalue warnings occur during initial combinational
 decode settling at time zero; no test reads uninitialized RAM. All test assertions
-pass. Physical M10K inference, packing, fit and timing are still unverified.
+pass. The standalone memory fit at commit ea6e0fd uses 102 M10K blocks (18%),
+835584 memory bits (15%), 226 ALMs and 58 registers on 5CSEBA6U23I7.
+At the 48 MHz evaluation constraint, worst setup slack is +7.947 ns and worst
+hold slack is +0.209 ns; pulse-width checks pass and no paths are unconstrained.
+Evidence is in reference/memory_synth.json. This is a virtual-I/O block test,
+not a full MiSTer fit, final clock plan, or hardware verification.
 
 The real-ROM boot bench now instantiates this VHDL backend rather than a behavioral
 RAM array. ROM transport and external input pins remain testbench models; inactive

@@ -10,6 +10,8 @@ Board I/O, GGA storage, sound mailbox interface and level-1 autovector handling
 pass directed tests; full raster and sound integration remain open.
 An offline Python renderer matches six complete MAME images. The VHDL bitmap reader
 passes exhaustive coordinate checks and all visible bitmap pixels in those scenes.
+The memory backend passes a standalone Cyclone V fit at the 48 MHz evaluation
+constraint: 102 M10K blocks, no duplicated RAM, positive timing in every corner.
 The complete game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
@@ -57,8 +59,8 @@ is excluded from the first scope. No remote repository has been created or publi
 - Pinned CPU/JTFRAME evaluation sources, ran unchanged donor CPU tests, and checked
   JTFRAME row/buffer interfaces. Selected fx68k after measured timing comparison;
   see BASELINES.md and reference/vendor_manifest.json. Sound modules remain candidates.
-- Physical sync timing, per-field write timing, continuous-play coverage, game CPU/RTL
-  validation and actual Quartus fit remain open. Installed tools are not a game build.
+- Physical sync timing, buffer latch timing, continuous-play coverage, full game CPU/RTL
+  validation and complete-core Quartus fit remain open. Installed tools are not a game build.
 - Mixed-language sound and direct JTFRAME reuse are approved. New board-specific
   logic remains VHDL. Module selection and evidence are in FRAMEWORK_DECISION.md.
 - Development MRAs for both games are generated under releases/_dev. Their complete
@@ -75,7 +77,8 @@ is excluded from the first scope. No remote repository has been created or publi
 - Main RAM/ROM backend: five banks totaling 52224 words, byte strobes, synchronous
   CPU and read-only inspection ports, serialized external ROM handshake. Every RAM
   word and independent banks are checked (104486 assertions/checks). No CPU-reset
-  RAM clear or request cancellation. Quartus inference/packing/timing remain open.
+  RAM clear or request cancellation. Native dual-port RAM passes a standalone
+  Quartus fit and timing checks; complete-core resource/timing closure remains open.
 - Board register/mailbox/GGA and IRQ scheduler tests pass. A real fx68k program
   verifies STOP -> level-1 autovector -> stack -> handler -> RTE via VHDL RAM.
   Boot comparison checks 24 I/O fields reconstructed from MAME writes. Physical
@@ -84,6 +87,10 @@ is excluded from the first scope. No remote repository has been created or publi
   New VHDL bitmap fetch logic passes all 512x256 coordinates, palette banks,
   transparency, delayed replies, reset draining and six captured RAM replays.
   This is not complete VHDL video output. See VIDEO_REFERENCE.md.
+- Per-field write sweeps now distinguish sprite positions/graphics and both
+  tilemaps for each set, in attract and scripted runs. Their timing differs and
+  does not yet justify a common vblank latch. See VIDEO_WRITE_TIMING.md for
+  source histograms, validation and gameplay-coverage limits.
 
 ## Component reuse candidates
 
