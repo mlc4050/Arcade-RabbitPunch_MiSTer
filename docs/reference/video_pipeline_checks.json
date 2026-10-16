@@ -25,11 +25,13 @@
       "rtl/rabbitpunch_sprites.vhd": "90f9a9119c401f446e8b2ce22156cd72bb01daa3f4b6c30e98224f79191b67a6",
       "rtl/rabbitpunch_bitmap_pixel.vhd": "13827f06b763926657a50dbbfc0dd32f1ba3b37b47bd5463af5a96e47bbdcd93",
       "rtl/rabbitpunch_video.vhd": "da67f131e68dcad35f4adf5ae07bce93ef4d19951d61a5731b45453f771148e3",
+      "rtl/rabbitpunch_palette_pixel.vhd": "9dda5fe21b2e6076308b0ec485d849d97136f4a76b05490fa5fc78d46db144bd",
+      "rtl/rabbitpunch_rgb_video.vhd": "c419fc5897ed61a113c9abc7d1ac5684e70a373042babae86882b131ee3f923b",
       "sim/video/tile_test_support.vhd": "8bc2eeaa799428b1fd7aa58e1a1ecee011d524133be591424402d17ededa7e24",
-      "sim/video/video_capture_tb.vhd": "ad1f8ced0143a1f7363b264a7eac8388ce68b25af2f6e0e8a7e4dc735c553599"
+      "sim/video/video_capture_tb.vhd": "a3004ffe38212d72d7b3d606c1274b17a35fdc53a3fbb0fbaeb5fff886863561"
     },
-    "log_sha256": "5b2b80749e22dec8ede566d1ae14b52f5e3592637203da0ecd33585e8521ce78",
-    "scope": "Actual VHDL/JTFRAME tiles, sprites, native line/bitmap RAM, bitmap decode and mixer; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster"
+    "log_sha256": "6a5f70f687c4dfc6324eae199a766a3d8e4b2f48bef0106e9d30579160bb5ee5",
+    "scope": "Actual VHDL/JTFRAME tiles, sprites, native line/bitmap/palette RAM, bitmap decode, mixer and RGB555 expansion; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster"
   },
   {
     "case": "video_rpunch_attract",
@@ -57,11 +59,13 @@
       "rtl/rabbitpunch_sprites.vhd": "90f9a9119c401f446e8b2ce22156cd72bb01daa3f4b6c30e98224f79191b67a6",
       "rtl/rabbitpunch_bitmap_pixel.vhd": "13827f06b763926657a50dbbfc0dd32f1ba3b37b47bd5463af5a96e47bbdcd93",
       "rtl/rabbitpunch_video.vhd": "da67f131e68dcad35f4adf5ae07bce93ef4d19951d61a5731b45453f771148e3",
+      "rtl/rabbitpunch_palette_pixel.vhd": "9dda5fe21b2e6076308b0ec485d849d97136f4a76b05490fa5fc78d46db144bd",
+      "rtl/rabbitpunch_rgb_video.vhd": "c419fc5897ed61a113c9abc7d1ac5684e70a373042babae86882b131ee3f923b",
       "sim/video/tile_test_support.vhd": "8bc2eeaa799428b1fd7aa58e1a1ecee011d524133be591424402d17ededa7e24",
-      "sim/video/video_capture_tb.vhd": "ad1f8ced0143a1f7363b264a7eac8388ce68b25af2f6e0e8a7e4dc735c553599"
+      "sim/video/video_capture_tb.vhd": "a3004ffe38212d72d7b3d606c1274b17a35fdc53a3fbb0fbaeb5fff886863561"
     },
-    "log_sha256": "49e0db7bfea749fa351fb15165e7be91b7fab5353c5f71cb5a11a525de39e7c4",
-    "scope": "Actual VHDL/JTFRAME tiles, sprites, native line/bitmap RAM, bitmap decode and mixer; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster"
+    "log_sha256": "256e2b8309d7483dfeb047919654d3ce13e9fdf7440d2c3a85ce5b1fc7b85628",
+    "scope": "Actual VHDL/JTFRAME tiles, sprites, native line/bitmap/palette RAM, bitmap decode, mixer and RGB555 expansion; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster"
   },
   {
     "case": "video_rabiolep_play1000",
@@ -89,11 +93,13 @@
       "rtl/rabbitpunch_sprites.vhd": "90f9a9119c401f446e8b2ce22156cd72bb01daa3f4b6c30e98224f79191b67a6",
       "rtl/rabbitpunch_bitmap_pixel.vhd": "13827f06b763926657a50dbbfc0dd32f1ba3b37b47bd5463af5a96e47bbdcd93",
       "rtl/rabbitpunch_video.vhd": "da67f131e68dcad35f4adf5ae07bce93ef4d19951d61a5731b45453f771148e3",
+      "rtl/rabbitpunch_palette_pixel.vhd": "9dda5fe21b2e6076308b0ec485d849d97136f4a76b05490fa5fc78d46db144bd",
+      "rtl/rabbitpunch_rgb_video.vhd": "c419fc5897ed61a113c9abc7d1ac5684e70a373042babae86882b131ee3f923b",
       "sim/video/tile_test_support.vhd": "8bc2eeaa799428b1fd7aa58e1a1ecee011d524133be591424402d17ededa7e24",
-      "sim/video/video_capture_tb.vhd": "ad1f8ced0143a1f7363b264a7eac8388ce68b25af2f6e0e8a7e4dc735c553599"
+      "sim/video/video_capture_tb.vhd": "a3004ffe38212d72d7b3d606c1274b17a35fdc53a3fbb0fbaeb5fff886863561"
     },
-    "log_sha256": "9a22c61c606286372f5ece7ddb76636fc73d0a16ec11ede80d095bec19219f4d",
-    "scope": "Actual VHDL/JTFRAME tiles, sprites, native line/bitmap RAM, bitmap decode and mixer; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster"
+    "log_sha256": "2f29c118c27a7c8d2b1fac0af119e5d61ee2bb1efb5fce21ddf0db8d889c2d45",
+    "scope": "Actual VHDL/JTFRAME tiles, sprites, native line/bitmap/palette RAM, bitmap decode, mixer and RGB555 expansion; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster"
   },
   {
     "case": "video_rpunch_play1000",
@@ -121,11 +127,13 @@
       "rtl/rabbitpunch_sprites.vhd": "90f9a9119c401f446e8b2ce22156cd72bb01daa3f4b6c30e98224f79191b67a6",
       "rtl/rabbitpunch_bitmap_pixel.vhd": "13827f06b763926657a50dbbfc0dd32f1ba3b37b47bd5463af5a96e47bbdcd93",
       "rtl/rabbitpunch_video.vhd": "da67f131e68dcad35f4adf5ae07bce93ef4d19951d61a5731b45453f771148e3",
+      "rtl/rabbitpunch_palette_pixel.vhd": "9dda5fe21b2e6076308b0ec485d849d97136f4a76b05490fa5fc78d46db144bd",
+      "rtl/rabbitpunch_rgb_video.vhd": "c419fc5897ed61a113c9abc7d1ac5684e70a373042babae86882b131ee3f923b",
       "sim/video/tile_test_support.vhd": "8bc2eeaa799428b1fd7aa58e1a1ecee011d524133be591424402d17ededa7e24",
-      "sim/video/video_capture_tb.vhd": "ad1f8ced0143a1f7363b264a7eac8388ce68b25af2f6e0e8a7e4dc735c553599"
+      "sim/video/video_capture_tb.vhd": "a3004ffe38212d72d7b3d606c1274b17a35fdc53a3fbb0fbaeb5fff886863561"
     },
-    "log_sha256": "3af89e26111fc355189cd1d164fe0430d7a9dfa959e9c76b33a5f9217e511835",
-    "scope": "Actual VHDL/JTFRAME tiles, sprites, native line/bitmap RAM, bitmap decode and mixer; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster"
+    "log_sha256": "ba7ab0dcf9962f0f8a2dacd927ded5349ebb4bae1ee3adfe03569fdaa5e47128",
+    "scope": "Actual VHDL/JTFRAME tiles, sprites, native line/bitmap/palette RAM, bitmap decode, mixer and RGB555 expansion; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster"
   },
   {
     "case": "video_rabiolep_play1800",
@@ -153,11 +161,13 @@
       "rtl/rabbitpunch_sprites.vhd": "90f9a9119c401f446e8b2ce22156cd72bb01daa3f4b6c30e98224f79191b67a6",
       "rtl/rabbitpunch_bitmap_pixel.vhd": "13827f06b763926657a50dbbfc0dd32f1ba3b37b47bd5463af5a96e47bbdcd93",
       "rtl/rabbitpunch_video.vhd": "da67f131e68dcad35f4adf5ae07bce93ef4d19951d61a5731b45453f771148e3",
+      "rtl/rabbitpunch_palette_pixel.vhd": "9dda5fe21b2e6076308b0ec485d849d97136f4a76b05490fa5fc78d46db144bd",
+      "rtl/rabbitpunch_rgb_video.vhd": "c419fc5897ed61a113c9abc7d1ac5684e70a373042babae86882b131ee3f923b",
       "sim/video/tile_test_support.vhd": "8bc2eeaa799428b1fd7aa58e1a1ecee011d524133be591424402d17ededa7e24",
-      "sim/video/video_capture_tb.vhd": "ad1f8ced0143a1f7363b264a7eac8388ce68b25af2f6e0e8a7e4dc735c553599"
+      "sim/video/video_capture_tb.vhd": "a3004ffe38212d72d7b3d606c1274b17a35fdc53a3fbb0fbaeb5fff886863561"
     },
-    "log_sha256": "826cdf200931ec0d9a697ec5c937be120f7d865ee40c29fb0ec503333c650eca",
-    "scope": "Actual VHDL/JTFRAME tiles, sprites, native line/bitmap RAM, bitmap decode and mixer; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster"
+    "log_sha256": "036980f79e7fef6e3a727ed612aea9cca2e987239a1a82fe33ef1dd5ac8faff1",
+    "scope": "Actual VHDL/JTFRAME tiles, sprites, native line/bitmap/palette RAM, bitmap decode, mixer and RGB555 expansion; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster"
   },
   {
     "case": "video_rpunch_play1800",
@@ -185,10 +195,12 @@
       "rtl/rabbitpunch_sprites.vhd": "90f9a9119c401f446e8b2ce22156cd72bb01daa3f4b6c30e98224f79191b67a6",
       "rtl/rabbitpunch_bitmap_pixel.vhd": "13827f06b763926657a50dbbfc0dd32f1ba3b37b47bd5463af5a96e47bbdcd93",
       "rtl/rabbitpunch_video.vhd": "da67f131e68dcad35f4adf5ae07bce93ef4d19951d61a5731b45453f771148e3",
+      "rtl/rabbitpunch_palette_pixel.vhd": "9dda5fe21b2e6076308b0ec485d849d97136f4a76b05490fa5fc78d46db144bd",
+      "rtl/rabbitpunch_rgb_video.vhd": "c419fc5897ed61a113c9abc7d1ac5684e70a373042babae86882b131ee3f923b",
       "sim/video/tile_test_support.vhd": "8bc2eeaa799428b1fd7aa58e1a1ecee011d524133be591424402d17ededa7e24",
-      "sim/video/video_capture_tb.vhd": "ad1f8ced0143a1f7363b264a7eac8388ce68b25af2f6e0e8a7e4dc735c553599"
+      "sim/video/video_capture_tb.vhd": "a3004ffe38212d72d7b3d606c1274b17a35fdc53a3fbb0fbaeb5fff886863561"
     },
-    "log_sha256": "da0fbf8bc91c3bad69162cdf3ea29104853f81e8bf415a4d31c9e5fc82b7eb9e",
-    "scope": "Actual VHDL/JTFRAME tiles, sprites, native line/bitmap RAM, bitmap decode and mixer; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster"
+    "log_sha256": "e1da72ca2e1d814a21cf5a0d60b63508011534b2b733d2d3c68bc1fd76470f6b",
+    "scope": "Actual VHDL/JTFRAME tiles, sprites, native line/bitmap/palette RAM, bitmap decode, mixer and RGB555 expansion; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster"
   }
 ]

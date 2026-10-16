@@ -1,109 +1,95 @@
 # Logical-line video pipeline
 
-`rabbitpunch_video.vhd` connects actual tile and sprite rendering, native line
-RAM, bitmap decoding and palette-index mixing. It has no physical raster,
-PLL, MiSTer output wrapper or composed frame memory. Its outputs are logical
-pixel coordinates and the ten-bit palette address, one pixel per clock once
-the selected bank is valid. It is not a playable RBF.
+`rabbitpunch_rgb_video.vhd` connects actual tile and sprite rendering, native line
+RAM, bitmap decoding, palette-index mixing and native palette RGB output. It has
+no physical raster, PLL, MiSTer output wrapper or composed frame memory. It is
+not a playable RBF. `rabbitpunch_video.vhd` remains the inner palette-index stage.
 
 A line command latches bank, Y, scroll, flags, sprite count and priority. Tile
 and sprite preparation run concurrently. Each has two native line banks; one
-can be prepared while the previous line is read. The controller reports line
-completion only after both renderers have finished their writes. The visible
-tile window is logical X 8..295 from MAME; sprite storage remains 512 entries.
-No raw line period or original-board register/list latch point is chosen here.
-Descriptor RAM must be supplied consistently by the caller during the scan.
+can be prepared while the previous line is read. Completion is reported only
+after both renderers finish their writes. The visible tile window is logical
+X 8..295 from MAME; sprite storage remains 512 entries. No raw line period or
+original-board register/list latch point is chosen here. Descriptor RAM must
+be supplied consistently by the caller during the scan.
 
-Each accepted pixel request reads both line banks and the native bitmap RAM
-in parallel. `rabbitpunch_bitmap_pixel.vhd` supplies X+4 wrapping, high-nibble-first
-word decoding and the sampled bitmap palette bank. Its RAM port requires fixed
-one-clock native read latency; a variable-latency transport cannot be connected
-directly. The pipeline aligns these inputs and mixes BG0, FG, sprite occupancy/
-foreground priority and bitmap. Output is registered two clocks after acceptance.
-The testbench observes this on its following sampling edge and checks that
-three-clock sampled interval for every request, while accepting one per clock.
+Each accepted pixel reads both line banks and native bitmap RAM in parallel.
+`rabbitpunch_bitmap_pixel.vhd` supplies X+4 wrapping, high-nibble-first word
+decoding and the sampled bitmap palette bank. The aligned mixer combines BG0,
+FG, sprite occupancy/foreground priority and bitmap into a ten-bit palette index.
+`rabbitpunch_palette_pixel.vhd` then reads native palette RAM and expands RGB555
+to RGB888 by replicating the upper three channel bits. Bit 15 is ignored.
+There are no gamma, brightness or CRT shader adjustments.
 
-The requested pixel Y must match both stored line tags. An invalid tag generates
-`o_pixel_error` rather than a valid mixed pixel. The caller must accept each
-asserted output; there is no output backpressure. Pixel flags for bitmap color
-are sampled per request independently of the line-command flags. Physical
-bank switching, blanking/sync and CPU-time register sampling remain integration work.
+Both bitmap and palette ports require fixed one-clock native RAM read latency;
+a variable-latency transport cannot connect directly. All stages use the same
+i_clk. The index is registered two clocks after acceptance, RGB four clocks
+after acceptance. The bench observes RGB on its following sampling edge and
+checks that five-clock sampled interval for every request. The pipeline accepts
+one pixel per clock once the selected bank is valid, with no output backpressure.
+
+Pixel Y must match both stored line tags. A mismatch produces o_pixel_error
+instead of a valid RGB pixel; error and coordinate tags reach the same pipeline
+slot. Global reset flushes derived pixel stages and invalidates line banks.
+Pixel bitmap flags are sampled per request independently of line-command flags.
+Physical bank switching, blanking/sync and CPU-time sampling remain integration work.
 
 ## Verification
 
-`video_capture_tb.vhd` loads actual native bitmap RAM through its write port,
-and uses the real native tile/sprite line banks and the unchanged JTFRAME drawer.
-Sprite/tile descriptors and graphics ROMs are static fixture responders with
-independent 0/3/11-cycle delays. No software-generated layer pixels feed this
-bench. While one bank is rendered, the previous line is requested in 288-pixel
-bursts at one pixel per clock. Every tag and fixed streaming latency is checked.
+`video_capture_tb.vhd` loads actual native bitmap and palette RAM through their
+write ports. It uses the real native tile/sprite line banks and unchanged
+JTFRAME drawer. Sprite/tile descriptors and graphics ROMs are static fixture
+responders with independent 0/3/11-cycle delays. No software-decoded layer pixels
+feed the bench. While one bank is rendered, the previous line is requested in
+288-pixel bursts at one pixel per clock; every coordinate and latency is checked.
 
 All six fixtures match every MAME screenshot pixel: 62208 per scene, 373248 total.
-The actual HDL output is the palette index; the current replay runner converts
-it to RGB with the captured palette for comparison. Palette-RAM/RGB frontend
-integration is a subsequent gate. `rabbitpunch_palette_pixel.vhd` is the new
-frontend awaiting that integration test. Results and exact source/RGB hashes
-are in reference/video_pipeline_checks.json. Previews are under
-debug/baselines/video_*/video.png.
+The runner writes HDL-generated 24-bit RGB directly to each comparison image;
+Python no longer converts palette indices to RGB. Results, exact source hashes,
+transcript hashes and matching RGB hashes are in reference/video_pipeline_checks.json.
+Previews are under debug/baselines/video_*/video.png. The tests also check a wrong
+line tag and reset with descriptor transactions held pending and a pixel in
+flight, then re-render and compare the first pixel.
 
-The bench also checks a deliberately wrong line tag and global reset with
-descriptor transactions deliberately held pending while a pixel is in flight,
-then re-renders and compares the first pixel. Independently,
-`bitmap_pixel_tb.vhd` checks all 131072 bitmap coordinates, all palette banks,
-wrap/nibble order, dense traffic, gaps and reset against native RAM; report:
-reference/bitmap_pixel_checks.json. ModelSim Starter warns that the combined
-design exceeds its recommended statement capacity, which slows replay; the
-checks complete within the wall-clock guard.
+Independently, bitmap_pixel_tb.vhd checks all 131072 coordinates, palette banks,
+wrap/nibble order, dense traffic, gaps and reset against native RAM. The palette
+bench checks all 65536 RAM word values, all palette addresses, continuous traffic,
+gaps, coordinate tags and fixed latency. It resets after accepting a pixel but
+before palette output, checks that the pixel is dropped, and verifies two fresh
+pixels. Reports: reference/bitmap_pixel_checks.json and palette_pixel_checks.json.
+ModelSim Starter warns that the combined design exceeds its recommended statement
+capacity; all checks complete within the wall-clock guard.
 
-These tests do not include CPU execution/writes, physical raster/PLL, a shared
-SDRAM arbiter, palette-write collisions or dynamic state across frame boundaries.
-The measured line cycles are not a physical deadline proof. Source RAM/ROM
-accesses still need to be connected to the board memory system before hardware.
+These tests exclude CPU execution/writes, physical raster/PLL, a shared SDRAM
+arbiter, palette-write collisions and dynamic state across frame boundaries.
+Measured line cycles are not a physical deadline proof. Source RAM/ROM access
+must still connect to the board memory system before hardware.
+
+## Isolated fitting
+
+All fits use a 48 MHz evaluation constraint and virtual I/O. They do not establish
+the physical raster deadline or shared-SDRAM bandwidth.
+
+| Block | ALMs | Registers | M10K blocks | RAM bits | Report |
+|---|---:|---:|---:|---:|---|
+| Packed tile lines | 202 | 302 | 2 | 16384 | reference/tile_line_synth.json |
+| Combined palette-index video | 506 | 864 | 4 | 32768 | reference/video_synth.json |
+| Combined RGB video | 546 | 977 | 4 | 32768 | reference/video_rgb_synth.json |
+
+All reported setup, hold and minimum-pulse checks pass, with no illegal clocks
+or unconstrained paths. The reports identify each source commit and fitter seed.
+The initial RGB seed-1 fit was rejected for -0.054 ns hold slack in the slow
+1100 mV/-40 C corner, from virtual iu9_pixel_x[6] to the sprite line read-valid
+register. Seed 2 passes every corner with unchanged RTL and constraints. No
+pipeline or timing exception was added to hide the failure. The reporter reads
+the seed from the project's QSF.
 
 ```powershell
 ./scripts/d_drive.ps1 scripts/run_tile_line_tests.py
 ./scripts/d_drive.ps1 scripts/run_bitmap_pixel_tests.py
+./scripts/d_drive.ps1 scripts/run_palette_pixel_tests.py
 ./scripts/d_drive.ps1 scripts/run_video_tests.py
 ./scripts/d_drive.ps1 scripts/build_staged.py --synth-check tile_line
 ./scripts/d_drive.ps1 scripts/build_staged.py --synth-check video
+./scripts/d_drive.ps1 scripts/build_staged.py --synth-check video_rgb
 ```
-
-## Isolated fitting
-
-The packed tile-line renderer fits at the 48 MHz evaluation constraint with
-202 ALMs, 302 registers and exactly two M10K blocks (16384 bits). The combined
-palette-index video pipeline fits with 506 ALMs, 864 registers and exactly
-four M10K blocks (32768 bits). All reported setup, hold and minimum-pulse checks
-are nonnegative, with no illegal clocks or unconstrained paths. Exact source
-commit, timing corners and resources are recorded in reference/tile_line_synth.json
-and reference/video_synth.json. These virtual-I/O fits do not establish the
-physical raster deadline or shared-SDRAM bandwidth.
-
-## Native RGB frontend
-
-`rabbitpunch_rgb_video.vhd` wraps the palette-index pipeline and
-`rabbitpunch_palette_pixel.vhd`. The caller supplies a fixed one-clock native
-palette RAM read port. RGB555 channels expand to eight bits by replicating the
-upper three bits; bit 15 is ignored. All stages use the same i_clk. Errors and
-coordinates are delayed to the RGB slot. RGB is registered four clocks after
-request acceptance; the scoreboard observes a five-clock sampled interval.
-There is no output backpressure and no frame buffer.
-
-The updated video bench loads actual native palette RAM as well as bitmap RAM.
-It writes the HDL's 24-bit RGB output directly to the comparison image; Python
-no longer translates palette indices to colors. The focused Rabio Lepus attract
-replay passes all 62208 pixels. The complete six-scene RGB regression and RGB
-wrapper fit are in progress at this checkpoint; the existing six-scene report
-above records the preceding palette-index pipeline result.
-
-`palette_pixel_tb.vhd` independently checks all 65536 RAM word values, all
-palette addresses, continuous traffic, gaps, coordinates, fixed latency and
-reset dropping an accepted in-flight pixel, followed by two fresh pixels.
-Its native RAM results are in reference/palette_pixel_checks.json.
-
-The initial RGB seed-1 fit was rejected for -0.054 ns hold slack at the slow
-1100 mV/-40 C corner, on the virtual iu9_pixel_x[6] input path to the sprite
-line view-valid register. Setup passed. The isolated RGB project now pins seed
-2 for a fresh placement; timing gates and RTL are unchanged. The synthesis
-reporter reads the seed from each project's QSF instead of assuming seed 1.
-The successful fit, when available, must still pass every corner and coverage gate.

@@ -31,10 +31,11 @@ blocks. Whole-controller tests pass both stress lists and all six captures,
 including concurrent display reads and global reset with RAM/ROM work pending;
 its combined standalone fit passes with two M10K blocks and positive timing.
 Native packed tile-line storage and a fixed-rate bitmap reader are now connected
-to the sprite lines and mixer. The complete logical palette-index pipeline matches
-all six MAME screenshots with actual HDL-generated layer pixels and native line/
-bitmap RAM. Palette/RGB frontend, CPU/shared-memory and physical raster integration
-remain open; see VIDEO_PIPELINE.md for exact scope.
+to the sprite lines and mixer. The complete logical RGB pipeline matches all
+six MAME screenshots with actual HDL-generated layer pixels and native line/
+bitmap/palette RAM. Palette expansion passes all 65536 RAM values. Combined RGB
+fitting passes all corners with four M10K blocks and one clock domain. CPU/shared-
+memory and physical raster integration remain open; see VIDEO_PIPELINE.md for scope.
 The complete game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 

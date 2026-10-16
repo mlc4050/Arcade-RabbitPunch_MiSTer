@@ -43,7 +43,7 @@ every frame.
 | Sprite logical-line controller FSM, latched command, scan-finished flag and accepted draw index | rabbitpunch_sprites.vhd | Derived line-command state | Finish/flush whole renderer before capture and rebuild the line before output | Coordinates selector, row drawer and line storage; no PCB raster policy |
 | Tile logical-line FSM, bank/window cursor, scroll/flags, issued/written counts, pending transport flags and view tags | rabbitpunch_tiles.vhd | Derived line state | Drain transport and rebuild both layer bytes before resuming output | Packed tile-line scheduling; no complete save interface |
 | Video line FSM, command, completion flags and aligned pixel/tag registers | rabbitpunch_video.vhd | Derived line/pixel pipeline | Finish/flush and rebuild lines, suppress output until valid | Coordinates renderers and fixed-rate native bitmap read/mixing |
-| Native bitmap/palette frontend metadata and valid stage | rabbitpunch_bitmap_pixel / rabbitpunch_palette_pixel | Derived coordinate/color stages | Flush on restore before accepting output | Fixed one-clock native RAM read contract; palette RGB wrapper integrated; complete scene regression in progress |
+| Native bitmap/palette frontend metadata and valid stage | rabbitpunch_bitmap_pixel / rabbitpunch_palette_pixel | Derived coordinate/color stages | Flush on restore before accepting output | Fixed one-clock native RAM read contract; palette RGB wrapper passes six complete MAME scenes |
 
 | RGB wrapper error-valid/coordinate delay | rabbitpunch_rgb_video.vhd | Derived pixel metadata | Flush on restore | Aligns invalid line tags with native palette latency |
 
