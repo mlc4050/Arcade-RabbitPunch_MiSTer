@@ -12,12 +12,20 @@ set_global_assignment -name VHDL_FILE ../../rabbitpunch_memory.vhd
 set_global_assignment -name SDC_FILE memory_check.sdc
 # Virtual I/O keeps the block visible without requiring a complete MiSTer pinout.
 # The sole physical clock pin matches sys/sys.tcl; no bitstream is deployed.
-foreach port_name {
-    i_request i_request_write iu24_request_address iu16_request_data iu2_request_bytes
-    o_request_supported o_response_valid ou16_response_data o_rom_request
-    ou18_rom_byte_address i_rom_response_valid iu16_rom_response_data i_view_enable
-    iu5_view_target iu15_view_word_address o_view_valid ou16_view_data
-} {
-    set_instance_assignment -name VIRTUAL_PIN ON -to ${port_name}*
-}
+set_instance_assignment -name VIRTUAL_PIN ON -to i_request*
+set_instance_assignment -name VIRTUAL_PIN ON -to iu24_request_address*
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_request_data*
+set_instance_assignment -name VIRTUAL_PIN ON -to iu2_request_bytes*
+set_instance_assignment -name VIRTUAL_PIN ON -to o_request_supported*
+set_instance_assignment -name VIRTUAL_PIN ON -to o_response_valid*
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_response_data*
+set_instance_assignment -name VIRTUAL_PIN ON -to o_rom_request*
+set_instance_assignment -name VIRTUAL_PIN ON -to ou18_rom_byte_address*
+set_instance_assignment -name VIRTUAL_PIN ON -to i_rom_response_valid*
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_rom_response_data*
+set_instance_assignment -name VIRTUAL_PIN ON -to i_view_enable*
+set_instance_assignment -name VIRTUAL_PIN ON -to iu5_view_target*
+set_instance_assignment -name VIRTUAL_PIN ON -to iu15_view_word_address*
+set_instance_assignment -name VIRTUAL_PIN ON -to o_view_valid*
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_view_data*
 set_location_assignment PIN_V11 -to i_clk
