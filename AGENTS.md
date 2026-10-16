@@ -5,6 +5,9 @@ that scope; do not ask for the same approval again. Read CLAUDE.md and docs/WORK
 for the inherited project workflow. New board RTL and adapters must be VHDL; approved
 CPU, sound, memory, MiSTer framework, and directly instantiated JTFRAME modules may
 retain their existing HDL. The user explicitly approved Verilog JTFRAME reuse.
+All newly authored HDL, including testbenches and simulation packages, must be
+VHDL. Preserve imported HDL unchanged. Use VHDL-2008 features supported by the
+target tool; ModelSim acceptance alone does not prove Quartus synthesizability.
 Do not treat the inherited template demo as a Rabbit Punch implementation.
 
 User VHDL conventions: use ieee.numeric_std and unsigned, never std_logic_vector

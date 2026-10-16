@@ -27,6 +27,13 @@ physical raster timing is claimed by this clock-independent plumbing.
 
 ## Verification
 
+The row, queued-layer and captured-data benches are VHDL-2008, compiled with
+ModelSim `vcom -2008`. A shared VHDL package reads unsigned hex vectors and
+generates synthetic memory data. The captured-data bench selects a capture mode
+of the layer bench; the imported JTFRAME drawer remains unchanged Verilog.
+Only synthesizable RTL is passed to Quartus; simulation-only file I/O, waits
+and assertions in these benches are not part of the hardware build.
+
 The row test checks 4611 complete rows, plus a deliberately interrupted burst:
 all eight tile rows, palette banks, both layers, code-bank boundaries, X wrap,
 changing upstream inputs, ROM delays and reset before/during fetch/drawing.

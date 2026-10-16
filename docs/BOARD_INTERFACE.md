@@ -189,13 +189,15 @@ Evidence is in reference/memory_synth.json. This is a virtual-I/O block test,
 not a full MiSTer fit, final clock plan, or hardware verification.
 
 The real-ROM boot bench now instantiates this VHDL backend rather than a behavioral
-RAM array. ROM transport and external input pins remain testbench models; inactive
+RAM array. ROM transport and external input pins remain testbench models. Inactive
+controls are zero (active-high hardware) and DSW defaults come directly from each
+game's MRA.
+
 Both games' 10000-write/24-register comparisons have also completed using the
 final native `altera_mf.altsyncram` model. The reference report records the RAM
 wrapper and simulation log hashes. Native vendor simulation is slower, so the
 wall-clock guard is 900 seconds per set; simulated duration and assertions are unchanged.
-controls are zero (active-high hardware) and DSW defaults come directly from each
-generated MRA. A poll of a pending sound command fails rather than fabricating a reply. The
+A poll of a pending sound command fails rather than fabricating a reply. The
 comparison length is selected with `check_boot_writes.py --writes <count>`.
 
 ## Board I/O and level-1 interrupts

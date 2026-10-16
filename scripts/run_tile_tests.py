@@ -71,18 +71,21 @@ def main():
     else:
         raise SystemExit("JTFRAME drawer provenance is missing")
     results = [run_case("video_tile_row", ["rtl/jtframe/jtframe_draw.v",
-                       "rtl/rabbitpunch_tile_row.vhd", "sim/video/tile_row_tb.sv"],
+                       "rtl/rabbitpunch_tile_row.vhd", "sim/video/tile_test_support.vhd",
+                       "sim/video/tile_row_tb.vhd"],
                        "tile_row_tb", "20 ms", "TILE_ROW_PASS")]
     results.append(run_case("video_tile_layer", ["rtl/jtframe/jtframe_draw.v",
                    "rtl/rabbitpunch_tile_row.vhd", "rtl/rabbitpunch_tile_lookup.vhd",
-                   "rtl/rabbitpunch_tile_layer.vhd", "sim/video/tile_layer_tb.sv"],
+                   "rtl/rabbitpunch_tile_layer.vhd", "sim/video/tile_test_support.vhd",
+                   "sim/video/tile_layer_tb.vhd"],
                    "tile_layer_tb", "20 ms", "TILE_LAYER_PASS"))
     fixtures = json.loads((root / "scripts/mame/video_fixtures.json").read_text())
     for fixture in fixtures:
         name, run_dir, capture = capture_vectors(root, fixture)
         result = run_case(name, ["rtl/jtframe/jtframe_draw.v", "rtl/rabbitpunch_tile_row.vhd",
                           "rtl/rabbitpunch_tile_lookup.vhd", "rtl/rabbitpunch_tile_layer.vhd",
-                          "sim/video/tile_capture_tb.sv"], "tile_capture_tb", "20 ms", "TILE_CAPTURE_PASS")
+                          "sim/video/tile_test_support.vhd", "sim/video/tile_layer_tb.vhd",
+                          "sim/video/tile_capture_tb.vhd"], "tile_capture_tb", "20 ms", "TILE_CAPTURE_PASS")
         capture_preview(run_dir, capture)
         result.update(set=fixture["set"], capture=fixture["capture"], layer_pixels=124416,
                       vram_sha256=hashlib.sha256((capture / "videoram.bin").read_bytes()).hexdigest(),
