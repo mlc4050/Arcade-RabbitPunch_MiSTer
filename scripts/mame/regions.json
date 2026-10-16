@@ -16,6 +16,24 @@
     "vregs": ["0x0c0000", "0x0c0029"]
   },
   "sweep": ["bitmap", "spriteram", "videoram", "palette", "vregs"],
+  "_sweep_fields_format": "region, first byte, last byte, stride bytes, offset within stride, write mask. Sprite fields cover the 64 descriptor slots selected by the 6-bit count register.",
+  "sweep_fields": {
+    "sprite_y": ["spriteram", "0x0", "0x1ff", 8, 0, "0x01ff"],
+    "sprite_code": ["spriteram", "0x0", "0x1ff", 8, 2, "0x07ff"],
+    "sprite_flip": ["spriteram", "0x0", "0x1ff", 8, 2, "0x1800"],
+    "sprite_color": ["spriteram", "0x0", "0x1ff", 8, 2, "0xe000"],
+    "sprite_x": ["spriteram", "0x0", "0x1ff", 8, 4, "0x01ff"],
+    "sprite_unused": ["spriteram", "0x0", "0x1ff", 8, 6, "0xffff"],
+    "tile_bg0": ["videoram", "0x0", "0x1fff", 2, 0, "0xffff"],
+    "tile_bg1": ["videoram", "0x2000", "0x3fff", 2, 0, "0xffff"],
+    "scroll_bg0_y": ["vregs", "0x0", "0x1", 2, 0, "0xffff"],
+    "scroll_bg0_x": ["vregs", "0x2", "0x3", 2, 0, "0xffff"],
+    "scroll_bg1_y": ["vregs", "0x4", "0x5", 2, 0, "0xffff"],
+    "scroll_bg1_x": ["vregs", "0x6", "0x7", 2, 0, "0xffff"],
+    "video_flags": ["vregs", "0xc", "0xd", 2, 0, "0xffff"],
+    "sprite_count": ["vregs", "0x10", "0x11", 2, 0, "0x00ff"],
+    "sprite_priority": ["vregs", "0x12", "0x13", 2, 0, "0x00ff"]
+  },
   "trace": {
     "addr_hi": "0x0fffff", "io": ["0x0c0000", "0x0c0029"],
     "vectors": ["0x000000", "0x0000ff"],

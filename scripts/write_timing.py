@@ -28,25 +28,44 @@ from mame_capture import (NO_WINDOW, lua_env, lua_runner_env, mame_cmd,  # noqa:
                           mame_paths, regions, spec)
 
 
-def run(game, skip, frames, coin=0, tag="", extra=""):
+def field_spec(config):
+    """Board-specific byte windows and word masks, relative to an existing tap."""
+    return ",".join(":".join([name, item[0], *[f"{int(value,0) if isinstance(value,str) else value:x}"
+                        for value in item[1:]]])
+                    for name,item in config.get("sweep_fields",{}).items())
+
+
+def run(game, skip, frames, coin=0, tag="", extra="", fields=False):
     mame_dir, exe = mame_paths()
     r = regions()
     out = REPO / "debug" / "wtiming" / f"{game}{tag}.txt"
     out.parent.mkdir(parents=True, exist_ok=True)
+    out.unlink(missing_ok=True)
+    run_dir=out.parent/f"{game}{tag}_run"
+    run_dir.mkdir(parents=True,exist_ok=True)
+    error=run_dir/"lua_error.txt"
+    error.unlink(missing_ok=True)
     table = {**r.get("read", {}), **r.get("wtap", {})}
     taps = spec(table, r.get("sweep"))
     if extra:
         taps = f"{taps},{extra}" if taps else extra
     inp = r.get("inputs", {})
-    env = dict(os.environ, **lua_env(r), **lua_runner_env("wtiming.lua"),
+    env = dict(os.environ, **lua_env(r), **lua_runner_env("wtiming.lua"), CORE_OUT=str(run_dir),
                WT_OUT=out.as_posix(), WT_TAPS=taps,
                WT_SKIP=str(skip), WT_FRAMES=str(frames), WT_COIN=str(coin), WT_SNAP="1",
+               WT_FIELDS=field_spec(r) if fields else "",
                WT_IN_COIN=inp.get("coin", "Coin 1"), WT_IN_START=inp.get("start", "1 Player Start"),
                WT_IN_HOLD=inp.get("hold", "P1 Right"), WT_IN_PULSE=inp.get("pulse", "P1 Button 1"))
     cmd = mame_cmd(exe, game, "wtiming.lua", mame_dir,
                    ["-snapshot_directory", (out.parent / f"snap{tag}").as_posix(),
-                    "-snapview", "native"])
-    subprocess.run(cmd, cwd=str(mame_dir), env=env, capture_output=True, timeout=3600, **NO_WINDOW)
+                    "-snapview", "native", "-cfg_directory", str(out.parent/f"{game}{tag}_cfg"),
+                    "-nvram_directory", str(out.parent/f"{game}{tag}_nvram")])
+    result=subprocess.run(cmd, cwd=str(mame_dir), env=env, capture_output=True, timeout=3600, **NO_WINDOW)
+    if error.exists():
+        raise SystemExit(f"{game}: write sweep Lua error: "+error.read_text())
+    if result.returncode or not out.exists():
+        raise SystemExit(f"{game}: write sweep failed:\n"+result.stdout.decode(errors="replace")[-2000:]
+                         +result.stderr.decode(errors="replace")[-2000:])
     return out
 
 
@@ -92,12 +111,13 @@ def main():
                     help="insert a coin at this frame and play; counting still starts at --skip")
     ap.add_argument("--extra", default="", help="more taps, name:hexlo:hexhi[,...]")
     ap.add_argument("--tag", default="", help="suffix for the result file")
+    ap.add_argument("--fields", action="store_true", help="also bin the board's configured video fields")
     ap.add_argument("--reuse", action="store_true", help="report existing results only")
     a = ap.parse_args()
     for g in a.sets:
         path = REPO / "debug" / "wtiming" / f"{g}{a.tag}.txt"
         if not a.reuse or not path.exists():
-            run(g, a.skip, a.frames, a.coin, a.tag, a.extra)
+            run(g, a.skip, a.frames, a.coin, a.tag, a.extra, a.fields)
         if not path.exists():
             print(f"{g}: no result (MAME failed?)\n")
             continue

@@ -97,7 +97,8 @@ def mame_cmd(exe, game, lua, mame_dir, extra=()):
     # -nodebug/-nowindow explicit: a mame.ini with `debug 1` halts in the debugger
     # while the autoboot script still loads and prints, so it looks alive.
     # -autoboot_script points at run.lua, not at `lua`: see lua_runner_env().
-    return [str(exe), game, "-nodebug", "-nowindow", "-video", "none", "-sound", "none",
+    return [str(exe), game, "-noreadconfig", "-brightness", "1", "-contrast", "1", "-gamma", "1",
+            "-nohlsl_enable", "-nodebug", "-nowindow", "-video", "none", "-sound", "none",
             "-skip_gameinfo", "-nothrottle", "-autoboot_delay", "0",
             "-autoboot_script", str(LUA_DIR / "run.lua"),
             "-rompath", rompath(mame_dir), *extra]
@@ -128,7 +129,8 @@ def seed_dips(exe, mame_dir, game, dips, out):
     cfg_dir.mkdir(parents=True, exist_ok=True)
     # setdip.lua is its own error reporter (lua_error.txt, LUAFAIL), so it
     # runs directly rather than through run.lua.
-    seed = [str(exe), game, "-nodebug", "-nowindow", "-video", "none", "-sound", "none",
+    seed = [str(exe), game, "-noreadconfig", "-brightness", "1", "-contrast", "1", "-gamma", "1",
+            "-nohlsl_enable", "-nodebug", "-nowindow", "-video", "none", "-sound", "none",
             "-skip_gameinfo", "-nothrottle", "-autoboot_delay", "0",
             "-autoboot_script", str(LUA_DIR / "setdip.lua"),
             "-cfg_directory", cfg_dir.as_posix(),

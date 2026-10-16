@@ -1,0 +1,42 @@
+[
+  {
+    "set": "rabiolep",
+    "frame": 1200,
+    "pixels": 62208,
+    "rgb_sha256": "94976b9cf7eb720b20a203e92518cbbdeb83b70fd6ee6dcf2dd3cbc8f1c0a77e",
+    "comparison": "identical",
+    "dumps_compared": [
+      "bitmap.bin",
+      "palette.bin",
+      "reg_bitmap.bin",
+      "reg_palette.bin",
+      "reg_spriteram.bin",
+      "reg_videoram.bin",
+      "reg_vregs.bin",
+      "spriteram.bin",
+      "videoram.bin",
+      "workram.bin"
+    ],
+    "options": "noreadconfig, brightness=1, contrast=1, gamma=1, nohlsl_enable, video=none"
+  },
+  {
+    "set": "rpunch",
+    "frame": 1200,
+    "pixels": 62208,
+    "rgb_sha256": "acc321ce586f2f9e9d9d122ad2b250432241d21cbe45a5f13a4b48cddf098927",
+    "comparison": "identical",
+    "dumps_compared": [
+      "bitmap.bin",
+      "palette.bin",
+      "reg_bitmap.bin",
+      "reg_palette.bin",
+      "reg_spriteram.bin",
+      "reg_videoram.bin",
+      "reg_vregs.bin",
+      "spriteram.bin",
+      "videoram.bin",
+      "workram.bin"
+    ],
+    "options": "noreadconfig, brightness=1, contrast=1, gamma=1, nohlsl_enable, video=none"
+  }
+]

@@ -85,7 +85,9 @@ def main():
                     "rtl/rabbitpunch_fx68k.vhd", "rtl/rabbitpunch_maincpu.vhd", "rtl/rabbitpunch_io.vhd",
                     "rtl/rabbitpunch_irq.vhd", "sim/board/boot_writes_tb.sv"],
                  "boot_writes_tb", "100 ms", "BOOT_PREFIX_COMPLETE",
-                 [f"+BOOT_WRITES={args.writes}", f"+DSW={dip_default:04x}"], wall_timeout=180)
+                 # Native altsyncram models are slower than inferred RAM in ModelSim.
+                 # Keep the simulated duration and complete ordered-write check unchanged.
+                 [f"+BOOT_WRITES={args.writes}", f"+DSW={dip_default:04x}"], wall_timeout=900)
         expected = [tuple(int(x, 16) for x in line.split())
                     for line in (out / "mame_writes.txt").read_text().splitlines()]
         actual = [tuple(int(x, 16) for x in line.split())

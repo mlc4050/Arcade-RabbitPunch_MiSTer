@@ -4,6 +4,7 @@
 --   WT_IN_COIN/START/HOLD/PULSE  input field names (regions.json "inputs")
 --   WT_OUT     output file
 --   WT_TAPS    "name:hexlo:hexhi,..." regions to count
+--   WT_FIELDS  "name:region:first:last:stride:offset:mask,..." (hex byte offsets)
 --   WT_SKIP    frames to run before counting (boot)
 --   WT_FRAMES  frames to count
 --   WT_COIN    frame to insert a coin and then press Start (0 = attract only);
@@ -52,22 +53,53 @@ local vb_votes = {}
 local names, hist, lastl = {}, {}, {}
 local counting = false
 local frame_last = {}
-_G.__wt_taps = {}
-for _, spec in ipairs(split(TAPS, ",")) do
-    local f = split(spec, ":")
-    local name, lo, hi = f[1], tonumber(f[2], 16), tonumber(f[3], 16)
+local fields = {}
+local function add_histogram(name)
+    assert(hist[name] == nil, "duplicate write histogram: " .. name)
     names[#names + 1] = name
     hist[name] = {}
     lastl[name] = {}
+end
+local function count_write(name, line)
+    hist[name][line] = (hist[name][line] or 0) + 1
+    frame_last[name] = line
+end
+for _, entry in ipairs(split(os.getenv("WT_FIELDS") or "", ",")) do
+    local f = split(entry, ":")
+    assert(#f == 7, "malformed WT_FIELDS entry: " .. entry)
+    local item = {name=f[1], first=tonumber(f[3],16), last=tonumber(f[4],16),
+                  stride=tonumber(f[5],16), offset=tonumber(f[6],16), mask=tonumber(f[7],16)}
+    assert(item.stride > 0 and item.first <= item.last, "invalid video field: " .. entry)
+    fields[f[2]] = fields[f[2]] or {}
+    table.insert(fields[f[2]], item)
+    add_histogram(item.name)
+end
+_G.__wt_taps = {}
+local tapped = {}
+for _, spec in ipairs(split(TAPS, ",")) do
+    local f = split(spec, ":")
+    local name, lo, hi = f[1], tonumber(f[2], 16), tonumber(f[3], 16)
+    add_histogram(name)
+    tapped[name] = true
     local tap = prog:install_write_tap(lo, hi, "wt_" .. name, function(offset, data, mask)
         if counting then
             local l = cur_line()
-            hist[name][l] = (hist[name][l] or 0) + 1
-            frame_last[name] = l
+            count_write(name, l)
+            local relative = offset - lo
+            for _, item in ipairs(fields[name] or {}) do
+                if relative >= item.first and relative <= item.last
+                    and (relative - item.first) % item.stride == item.offset
+                    and (mask & item.mask) ~= 0 then
+                    count_write(item.name, l)
+                end
+            end
         end
         return data
     end)
     _G.__wt_taps[#_G.__wt_taps + 1] = tap
+end
+for name, _ in pairs(fields) do
+    assert(tapped[name], "video field source is not tapped: " .. name)
 end
 
 local function field(name)
@@ -79,6 +111,9 @@ local function field(name)
 end
 local f_coin, f_start = field(os.getenv("WT_IN_COIN") or "Coin 1"), field(os.getenv("WT_IN_START") or "1 Player Start")
 local f_right, f_b1 = field(os.getenv("WT_IN_HOLD") or "P1 Right"), field(os.getenv("WT_IN_PULSE") or "P1 Button 1")
+if COIN > 0 then
+    assert(f_coin and f_start and f_right and f_b1, "a scripted-play input field is missing")
+end
 
 local n = 0
 emu.register_frame_done(function()
