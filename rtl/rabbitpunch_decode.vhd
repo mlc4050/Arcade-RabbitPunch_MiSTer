@@ -12,6 +12,17 @@ entity rabbitpunch_decode is
 end entity;
 
 architecture rtl of rabbitpunch_decode is
+    -- Quartus 17 does not provide the numeric_std is_x(unsigned) overload.
+    function address_is_known(iux_address : unsigned) return boolean is
+    begin
+        for vint_bit in iux_address'range loop
+            case iux_address(vint_bit) is
+                when '0' | '1' | 'L' | 'H' => null;
+                when others => return false;
+            end case;
+        end loop;
+        return true;
+    end function;
 begin
     process(iu24_address, i_active, i_read, i_upper_byte_strobe_n, i_lower_byte_strobe_n)
         variable vu20_masked : unsigned(19 downto 0);
@@ -20,7 +31,7 @@ begin
     begin
         -- MAME's global_mask is 20 bits; the strobes select bytes within the word.
         vu5_selected := TARGET_NONE;
-        if (i_active = '1' and (i_upper_byte_strobe_n = '0' or i_lower_byte_strobe_n = '0') and not is_x(iu24_address)) then
+        if (i_active = '1' and (i_upper_byte_strobe_n = '0' or i_lower_byte_strobe_n = '0') and address_is_known(iu24_address)) then
             vu20_masked := unsigned(iu24_address(19 downto 0));
             vu20_masked(0) := '0';
             vint_address := to_integer(vu20_masked);
