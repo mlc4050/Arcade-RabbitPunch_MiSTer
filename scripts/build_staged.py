@@ -159,6 +159,8 @@ def check_present(stage):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--synth-check", choices=["memory"],
+                    help="fit an isolated block from HEAD instead of the MiSTer core")
     ap.add_argument("--rev", help="Quartus revision (default: CORE_REV, else the one "
                                   ".qsf in the core root, else the .qpf's last)")
     ap.add_argument("--seed", type=int,
@@ -172,10 +174,12 @@ def main():
                     help="build HEAD even though the tree has uncommitted "
                          "changes (they are NOT included in the build)")
     args = ap.parse_args()
+    if args.synth_check and (args.seed is not None or args.rev or args.allow_negative_slack):
+        ap.error("isolated checks pin their own revision/seed and require nonnegative timing")
 
     global REV, QUARTUS_BIN
     here = str(core_root())
-    REV = revision(Path(here), args.rev)
+    REV = "memory_check" if args.synth_check else revision(Path(here), args.rev)
     QUARTUS_BIN = str(quartus_bin(Path(here)))
     stage = os.path.join(here, "build")
 
@@ -246,6 +250,10 @@ def main():
     if dirty and args.allow_dirty:
         print("NOTE:   the tree has uncommitted changes and they are NOT in "
               "this build")
+
+    if args.synth_check == "memory":
+        from synth_checks import run_memory
+        return run_memory(stage, QUARTUS_BIN, stamp)
 
     for src, dst in STAGE_COPIES:
         with open(os.path.join(stage, src), "rb") as f_in, \

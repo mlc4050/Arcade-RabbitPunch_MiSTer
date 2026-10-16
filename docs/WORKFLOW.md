@@ -19,6 +19,14 @@ the Quartus flow there. The main tree stays editable for the whole compile, Quar
 out of the repo root, and the build is exactly HEAD — a dirty tree is refused by default. The built
 commit and seed are recorded in `build/BUILT_COMMIT` beside the log.
 
+For the standalone board RAM check, run
+`./scripts/d_drive.ps1 scripts/build_staged.py --synth-check memory`.
+It fits only `rabbitpunch_memory` with virtual I/O at a 48 MHz evaluation
+constraint, checks the five banks and 835584 block RAM bits, and rejects negative
+timing. Its reports live under `build/rtl/synth_check/memory/output_files/`,
+with `build/q_memory_check.log` and `debug/memory_synth.json`. This is not a
+complete MiSTer build or a deployable game core.
+
 Three properties that must survive any port:
 
 - **Refuses a dirty tree.** "What was in that build?" has to be answerable.
