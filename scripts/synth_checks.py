@@ -81,8 +81,12 @@ def run_check(stage, quartus_bin, stamp, name):
                   r";\s*(Illegal Clocks|Unconstrained [^;]+?)\s*;\s*(\d+)\s*;\s*(\d+)\s*;",detail)}
     if len(coverage)!=6 or any(count for row in coverage.values() for count in row.values()):
         raise SystemExit(f"Illegal clocks or unconstrained timing paths: {coverage}")
+    assignments=(project/f"{project_name}.qsf").read_text(encoding="utf-8")
+    seed_match=re.search(r"(?m)^set_global_assignment -name SEED (\d+)\s*$",assignments)
+    if not seed_match:
+        raise SystemExit("Isolated project must pin a fitter seed")
     report={"commit":stamp.split()[0],"device":"5CSEBA6U23I7","project":project_name,
-            "constraint_mhz":48,"seed":1,"memory_bits":expected_bits,"timings":timings,
+            "constraint_mhz":48,"seed":int(seed_match[1]),"memory_bits":expected_bits,"timings":timings,
             "timing_coverage":coverage,
             "fit_summary":fit.splitlines(),"log_sha256":hashlib.sha256(log_path.read_bytes()).hexdigest(),
             "scope":f"Standalone {name} block with virtual I/O; not a complete core or hardware release"}

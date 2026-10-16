@@ -100,3 +100,10 @@ above records the preceding palette-index pipeline result.
 palette addresses, continuous traffic, gaps, coordinates, fixed latency and
 reset dropping an accepted in-flight pixel, followed by two fresh pixels.
 Its native RAM results are in reference/palette_pixel_checks.json.
+
+The initial RGB seed-1 fit was rejected for -0.054 ns hold slack at the slow
+1100 mV/-40 C corner, on the virtual iu9_pixel_x[6] input path to the sprite
+line view-valid register. Setup passed. The isolated RGB project now pins seed
+2 for a fresh placement; timing gates and RTL are unchanged. The synthesis
+reporter reads the seed from each project's QSF instead of assuming seed 1.
+The successful fit, when available, must still pass every corner and coverage gate.
