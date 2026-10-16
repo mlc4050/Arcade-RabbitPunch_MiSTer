@@ -47,6 +47,9 @@ is excluded from the first scope. No remote repository has been created or publi
 
 ## Component reuse candidates
 
+The expanded local survey and MRA deliverables are in [REUSE_SURVEY.md](REUSE_SURVEY.md).
+It distinguishes reused chip cores, adapted video pipeline designs, and new VHDL board glue.
+
 These are inspected local candidates, not vendored or validated for Rabbit Punch yet.
 Exact donor commits, dirty-tree checks, copied file hashes, full dependency lists, and
 unaltered baseline tests must be captured before accepting them.
