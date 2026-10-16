@@ -1,57 +1,27 @@
 {
-  "_comment": "Core-specific. The main CPU's view of the machine, from the MAME driver's address map. Read by mame_capture.py and write_timing.py. Addresses are hex strings, inclusive.",
-  "cpu": ":maincpu",
-  "space": "program",
-  "bus_bytes": 2,
-  "big_endian": true,
+  "_comment": "Rabbit Punch / Rabio Lepus. Inclusive CPU byte addresses. Video registers are write-only; reconstruct their state from taps.",
+  "cpu": ":maincpu", "space": "program", "bus_bytes": 2, "big_endian": true,
   "read": {
-    "workram": [
-      "0x000000",
-      "0x00ffff"
-    ]
+    "bitmap": ["0x040000", "0x04ffff"],
+    "spriteram": ["0x060000", "0x060fff"],
+    "videoram": ["0x080000", "0x083fff"],
+    "palette": ["0x0a0000", "0x0a07ff"],
+    "workram": ["0x0fc000", "0x0fffff"]
   },
   "wtap": {
-    "vregs": [
-      "0x000000",
-      "0x00001f"
-    ]
+    "bitmap": ["0x040000", "0x04ffff"],
+    "spriteram": ["0x060000", "0x060fff"],
+    "videoram": ["0x080000", "0x083fff"],
+    "palette": ["0x0a0000", "0x0a07ff"],
+    "vregs": ["0x0c0000", "0x0c0029"]
   },
-  "sweep": [
-    "workram",
-    "vregs"
-  ],
+  "sweep": ["bitmap", "spriteram", "videoram", "palette", "vregs"],
   "trace": {
-    "addr_hi": "0xffffff",
-    "io": [
-      "0x000000",
-      "0x000000"
-    ],
-    "vectors": [
-      "0x000000",
-      "0x000000"
-    ],
-    "ipl": {
-      "reg": "SR",
-      "shift": 8,
-      "mask": 7
-    },
-    "rom": [
-      [
-        "0x000000",
-        "0x0fffff"
-      ]
-    ],
-    "ram": [
-      [
-        "0x100000",
-        "0x10ffff"
-      ]
-    ]
+    "addr_hi": "0x0fffff", "io": ["0x0c0000", "0x0c0029"],
+    "vectors": ["0x000000", "0x0000ff"],
+    "ipl": {"reg": "SR", "shift": 8, "mask": 7},
+    "rom": [["0x000000", "0x03ffff"]],
+    "ram": [["0x040000", "0x04ffff"], ["0x060000", "0x060fff"], ["0x080000", "0x083fff"], ["0x0a0000", "0x0a07ff"], ["0x0fc000", "0x0fffff"]]
   },
-  "inputs": {
-    "coin": "Coin 1",
-    "start": "1 Player Start",
-    "hold": "P1 Right",
-    "pulse": "P1 Button 1"
-  }
+  "inputs": {"coin": "Coin 1", "start": "1 Player Start", "hold": "P1 Right", "pulse": "P1 Button 1"}
 }

@@ -1,253 +1,180 @@
-# {{HARDWARE_NAME}} — MiSTer Core Roadmap
+# Rabbit Punch / Rabio Lepus MiSTer roadmap
 
-**This roadmap is a proposal until the user approves it. No phase executes before that approval,
-and a phase whose scope changes goes back for approval.**
+Approved by the user in the originating chat. Local framework bootstrap and source
+reference setup are complete; game RTL implementation has not started.
+Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
-## Context
+## Goal and scope
 
-Goal: a DE10-nano MiSTer core for {{HARDWARE_NAME}}, emulated by MAME's `{{MAME_DRIVER}}` and the
-devices it instantiates — a Quartus 17.0.2 Verilog/SystemVerilog project producing one `.rbf` and a
-`.mra` per supported set, reusing proven open components where they exist.
+Build one DE10-nano core supporting `rabiolep` and `rpunch`, producing an RBF and an MRA
+for each game. New board logic, CPU bus adapters, tile/sprite/bitmap engines, registers,
+and tests will be VHDL. Reuse VHDL TG68K.C and T80 CPUs rather than write CPUs.
+Proposed framework, SDRAM transport, and sound reuse are mixed-language dependencies;
+this proposal does not promise an entirely VHDL source tree. Retain MiSTer `sys/` unchanged.
 
-{{WHAT_SHAPES_THIS_PROJECT}}
-<!-- The one fact that sets the shape: how much already exists in open RTL, whether the CPU is
-     proven in a sibling core, what has no implementation anywhere. Then a numbered list of what
-     is genuinely new work. Everything else is a port with verification. -->
+Target the user's one 256 MB SDRAM module, with ROM addresses entirely below 32 MiB.
+No second module and no game-data DDR3 access during gameplay are proposed.
+MiSTer framework video rotation/scaling may independently use HPS DDR3.
+Load-time DDR ROM staging is a later standard feature.
 
-Cross-cutting findings from the previous cores are in **[`LESSONS_LEARNED.md`](LESSONS_LEARNED.md)**.
-Working practice built on them is in **[`WORKFLOW.md`](WORKFLOW.md)**. The entries that already
-bind decisions here are collected under "Pitfalls that already bind decisions here".
+First reference set: `rabiolep` (MAME parent), followed by `rpunch`; bring-up order can
+change based on available lawful local ROMs and executable behavior. Super Volleyball
+is excluded from the first scope. No remote repository has been created or published.
 
-## Progress
+## Research status and open decisions
 
-{{PROGRESS}}
-<!-- Kept current. Opens with one bold sentence on where the project is. Every number says where
-     it came from: MAME source, a sibling core's measurement, a build report, a bench run. Use
-     "N of N" counts, not adjectives. Strike through closed items while a later reader needs the
-     history; delete them when nobody does. -->
+- Local repository: `D:/git/MiSTer-CoreSkill/RabbitPunch-workspace/Arcade-RabbitPunch_MiSTer`,
+  branch `develop`. Both Quartus revisions exist; template demo remains connected.
+- Pinned framework `9c8eadb40067c8ce3aef90899844f62d688ac73a`; comparison of sys
+  against fetched source passes when ignoring checkout end-of-line differences.
+- `scripts/reference_manifest.py` generated ROM metadata, including explicit fills;
+  both games' DIP self-check passes. Capture regions are configured for this board.
+- User's merged `rabiolep.zip` contains all 18 required files per set, verified by
+  uncompressed length and CRC of actual data. No ROM bytes were copied into this repository.
+- MAME checkout identifies as `mame0289-1577-g00ab4817bd7`; the three inspected board
+  files have no working-tree changes. It is newer than release 0.289, so a release binary
+  must use a separately pinned matching source before captures become trusted references.
+- Quartus, ModelSim, and a MAME executable are not configured/located. User is arranging
+  installation. This blocks capture and HDL simulation/synthesis gates, not source research.
 
-## Game scope
+- Located board driver and GGA device; recorded local MAME HEAD and memory maps.
+- Counted declared/file-loaded ROM storage from both sets: 2.0625 / 1.3125 MiB each.
+- Found local reusable CPU and sound implementations and read their provenance/headers.
+- Matching MAME executable, ROM availability, installed simulator/compiler paths,
+  physical sync timing, measured write timing, and source-tree cleanliness remain open.
+- Resolve whether the user requires every game/sound module in VHDL before vendoring
+  Verilog sound modules. Proposed default is new VHDL board logic plus proven dependencies.
 
-{{SET_TABLE}}
-<!-- Generated from each ROM_START: set, board type, machine config, loaded bytes per region,
-     MAME flags. Loaded bytes, not declared region size. -->
+## Component reuse candidates
 
-### Scope decision
+These are inspected local candidates, not vendored or validated for Rabbit Punch yet.
+Exact donor commits, dirty-tree checks, copied file hashes, full dependency lists, and
+unaltered baseline tests must be captured before accepting them.
 
-- **In scope:** {{IN_SCOPE}} — one memory map, one screen, one chipset, fits the SDRAM module.
-- **Out of the first scope:** {{OUT_OF_SCOPE}} — give two independent reasons where they exist.
-- **First-target set:** {{FIRST_TARGET}} — the smallest set with the least protection involvement.
-  Final choice is a Phase 0 decision, made on which boots furthest, measured.
-- **Second target:** {{SECOND_TARGET}} — the set that exercises the next variant.
-
-## Hardware reality (from the driver, not assumption)
-
-Every value below is read out of the MAME driver or a device file and cites file and line. A
-value from a datasheet, a schematic or a PCB measurement says so.
-
-### Chips
-
-{{CHIP_TABLE}}
-
-### Clocks
-
-{{CLOCKS}}
-<!-- The plan, before any RTL (the skill's clocks.md). Every board clock with its source line
-     and the pixel clock; the chosen clk_sys, which is also the video clock, with the candidates
-     considered and the arithmetic, starting from ~48 MHz with the SDRAM on the same clock; any
-     higher value carries the measurement that forced it: an integer multiple (>= 4x) of the pixel clock, >= every
-     board clock, and a base for an integer SDRAM multiple. The SDRAM multiple. Every fractional
-     clock enable with its exact ratio. How far the main CPU runs ahead to catch up SDRAM stalls.
-     Any clock that does not divide exactly, in ppm, also goes in HACKS.md. -->
-
-### Interrupts
-
-{{INTERRUPTS}}
-<!-- Levels, sources, HOLD_LINE vs ASSERT_LINE in the driver, the enable/ack registers, and the
-     vectors as read from the program ROM. -->
-
-### Memory map
-
-{{MEMORY_MAP}}
-
-### Video
-
-{{VIDEO}}
-<!-- Layers, sprite format, colour depths, palette format, priority/mixing model, screen flip,
-     what MAME says it does not emulate. -->
-
-### Sound
-
-{{SOUND}}
-
-### Protection
-
-{{PROTECTION}}
-
-### Per-game configuration
-
-{{PER_GAME}}
-<!-- Everything that differs between sets and so becomes .mra mod-byte configuration. -->
-
-## Component reuse map
-
-Every row's "source" is a file that was located and whose header was read.
-
-| block | plan | source |
+| Block | Candidate | Evidence / licence |
 |---|---|---|
-{{REUSE_MAP}}
-<!-- plan: "Port X" / "Written from the software model" / "From scratch" / "Sibling core's Y".
-     source: repository, path, commit, licence as stated in the files. Built by enumerating the
-     boards that use each chip and looking at those boards' cores, not by searching for the chip
-     number. -->
+| 68000 | `D:/git/Arcade-Seta_MiSTer/rtl/cpu/tg68k/` | PROVENANCE.md; TobiFlex upstream ade33e396a1e647c2de9daf71ff9d5b3979639b2, inherited fixes; LGPLv3+; VHDL kernel in 68000 mode |
+| Z80 | `D:/git/Arcade-Psikyo_MiSTer/rtl/cpu/t80/` | PROVENANCE.md; MiSTer T80 830fd0315f0af5cdbcb0e703f1cea3ce4e91f538; BSD-style; VHDL |
+| YM2151 | `D:/git/Arcade-JalecoMS1BCD_MiSTer/rtl/third_party/jt51/hdl/jt51.v` | Header GPLv3+; Verilog; exact donor version pending |
+| uPD7759 | `D:/git/Arcade-SystemC2_MiSTer/rtl/jt7759/hdl/jt7759.v` | Header GPLv3+; Verilog; standalone mode, bank/reset/start adaptation required |
+| SDRAM | `D:/git/Arcade-Seta_MiSTer/rtl/memory/sdram/` | PROVENANCE.md; GPLv3+ inherited transport; verify supported geometry and read-data fixes |
+| Framework | MiSTer-devel/Template_MiSTer | Fetch and pin at bootstrap; wrapper uses framework HDL; no sys edits |
+| Board video/GGA/bus | New VHDL | MAME behavioral reference; no certified board video RTL has been identified |
 
-## On-chip RAM budget
+For sprites, inspect standard JTFRAME object engines as pipeline references before
+writing the VHDL implementation. Verify licence obligations for any translated logic.
+Provisional overall distribution licence: GPL-3.0-or-later, subject to full dependency audit.
 
-{{RAM_BUDGET}}
-<!-- Every declared memory, its bits, its M10K count at the width it is actually read at, as a
-     fraction of the device, starting from the framework's own baseline. Name the one to watch. -->
+### Additional examples from the user's meatsauce checkout
 
-## Memory plan
+`D:/git/meatsauce/README.md` identifies this as the source collection for Meatcores.
+Initial inspection found these useful architectural references; they are different boards,
+not Rabbit Punch hardware descriptions:
 
-{{MEMORY_PLAN}}
-<!-- SDRAM region layout (the RTL's localparams are the source of truth; the .mra generator reads
-     them), DDR use if any, the clients of each and the per-scanline fetch budget. DDR3 at load
-     time is standard; any DDR3 client during play (ROM, graphics, frame buffer) states its
-     reason here: ROMs larger than the SDRAM, or fetch arithmetic SDRAM cannot serve. -->
+- `cores/ikki/rtl/ikki_video.sv`: 16 x 32 sprites, M10K line buffers, and an interface
+  tracking sprite-RAM writes for snapshot collision handling. Inspect the full schedule
+  before adapting ideas to VHDL; Rabbit Punch's actual latch point still needs its own sweep.
+- `cores/MCR-68K/rtl/mcr68_addr_decode.sv` and `mcr68_main_board.sv`: 68000 address decode
+  and main-board integration examples. They use fx68k, so they are bus-contract references
+  rather than a direct TG68K wrapper donor.
+- `cores/escapekids/rtl/vendor/jtcores/modules/jt51/hdl/`: another local JT51 candidate;
+  compare provenance, version, and integration tests with the current donor before choosing.
+- `cores/Suna8bit/rtl/suna8_sprite_render.sv`: inspected header describes full-frame
+  rendering and a simplified priority model. Do not copy that rendering architecture:
+  Rabbit Punch's separate bitmap RAM does not justify frame-buffering all composited layers.
 
-## Design decisions
+Most inspected board glue here is SystemVerilog. Use these examples to check interface,
+memory, and verification choices while keeping the new Rabbit Punch board modules VHDL.
 
-<!-- Each a bold sentence, then the evidence. Standing rules first, project decisions after. -->
+## Clocks and memory
 
-**Follow MAME, including where MAME is wrong, and write down every place that is.** There is no
-PCB here. MAME is the accuracy target and its acknowledged guesses are inherited deliberately. Each
-goes in `docs/MAME_KLUDGES.md` when it is implemented, with what MAME does, what the hardware is
-suspected to do, and what would settle it.
+Start evaluation near 48 MHz for system/video and SDRAM. No final PLL or pixel divider
+can be selected from this driver: its 6.6665 MHz GGA input is not a proven pixel clock,
+and 304 x 224 is not a measured physical raster. Obtain schematics/raw timing evidence
+or explicitly approve a documented provisional output timing before video RTL.
+Require an exact integer pixel-enable divider >= 4, system clock >= board clocks,
+and prefer SDRAM at system rate. Any increase needs bandwidth measurements.
 
-**Where a vendored module and MAME disagree, record it and keep the module.** A silicon-derived
-disagreement is evidence about the chip; MAME's is evidence about MAME. It goes in
-`docs/MAME_KLUDGES.md`, not into a "fix", until one side is shown to describe the chip.
+If 48 MHz survives the timing investigation, logical 8 MHz, 4 MHz, and 640 kHz enables
+have ratios 1/6, 1/12, and 1/75. These are conditional examples, not a committed clock
+plan; TG68K and Yamaha modules may require additional internal enable phases.
+CPU effective execution/bus timing must be measured, not inferred from enable labels.
 
-**Every approximation of this core's own goes in `docs/HACKS.md`** in the commit it lands, with
-what would make it correct. A hack that is not written down is a bug nobody will find.
+Proposed selected-set SDRAM byte layout, to become generated constants after approval:
 
-**Transcribe the reference literally first, then look for the chip.** Build MAME's version, get
-pixel-exact (or trace-exact) agreement with captured references, and only then experiment — with
-the experiment on an OSD switch so it is an A/B, not a rebuild.
+| Start | End inclusive | Region |
+|---|---|---|
+| 000000 | 03ffff | maincpu |
+| 040000 | 04ffff | audiocpu |
+| 050000 | 0cffff | tiles1 |
+| 0d0000 | 14ffff | tiles2 |
+| 150000 | 1cffff | sprites |
+| 1d0000 | 20ffff | upd |
 
-**One `.rbf` for all games.** Per-set differences are `.mra` mod-byte configuration.
+The runtime layout above totals 0x210000 and preserves all declared regions. Validate
+the table against generated RTL constants and MRA output, including all fill semantics.
 
-**Two Quartus revisions, `RabbitPunch_stp` and `RabbitPunch`,** differing only by a `DEBUG_ISSP` macro.
-See [`WORKFLOW.md`](WORKFLOW.md).
+Keep work RAM, tilemaps, palette, sprite RAM, and bitmap RAM in M10K where feasible.
+Known game RAM is 104 KiB (64 bitmap + 16 tilemap + 16 main work + 4 sprite + 2 palette
++ 2 audio work). Raw bits alone suggest at least 84 M10Ks; actual width/depth packing,
+ports, sprite snapshot, line buffers, caches, framework, and CPU/sound tables add overhead.
+Measure each block and the framework baseline; do not treat this as a fit report.
 
-**Licence: {{LICENCE}}.** Every dependency, what it obliges and the release checklist are in
-[`THIRD-PARTY.md`](../THIRD-PARTY.md). `sys/` is never edited.
+Per-line ROM payload upper-bound sketch: at most 37 tile rows per layer for a scrolled
+288-pixel window, 4 bytes each = 296 bytes; at most 63 active 16-pixel sprite rows,
+8 bytes each = 504 bytes. That is 800 bytes before alignment, burst waste, map accesses,
+CPU/sound demand, refresh, and turnaround. Bitmap reads come from BRAM. This is payload
+arithmetic only: close the actual cycle budget once line period and controller cost are known.
 
-**Per-scanline rendering from buffered sprite RAM.** The default shape, as the boards worked:
-the list latched once a frame at the point the video-write sweep identifies, a per-scanline
-engine, a double-buffered line buffer. A frame buffer only where the driver shows the board had
-one; cite it here.
+## Implementation phases and exit criteria
 
-**No multiplies, no divides, in 2D pipelines.** Shifts, masks, adds and accumulators; WORKFLOW §14.
-GPU-like chips (3D geometry, rasterisers) use multipliers by design, budgeted in DSP blocks.
+1. **Bootstrap and reference tooling.** Create a separate local `Arcade-RabbitPunch_MiSTer`
+   repository from Template, establish `develop`, pin framework and donors, and carry these
+   docs across. Locate Quartus 17.0.2, mixed VHDL/Verilog simulator, matching MAME and ROMs.
+   Record source hashes/version, validate ROM sets, build regions.json, and capture boot,
+   video state, inputs, sound commands, and write sweeps in attract/play for both sets.
+   Exit: reproducible reference artifacts and resolved clock/memory budget.
+2. **CPU and bus.** Vendor CPUs with provenance and baseline tests; write VHDL decode,
+   byte enables, ROM/RAM path, GGA register latch/IRQ model, sound latch, DIP/input ports,
+   reset and pause. Use TG68K kernel directly with a controlled bus adapter.
+   Exit: boot execution/state and peripheral accesses agree with MAME, with instruction
+   and bus-cycle differences explained; standalone CPU synthesis closes timing.
+3. **Video.** Build a software renderer checked against MAME snapshots, then VHDL tile
+   scrollers, sprite scanline pipeline, bitmap reader and palette/priority mixer.
+   Bitmap image RAM is part of this board; do not add a full-frame compositing buffer.
+   Select sprite/register snapshots only from measured write timing. Provide accessible
+   state ports and document STATE.md from the first RAM.
+   Exit: decoded layouts and each layer/composite match reference scenes from both sets;
+   measured worst-case line deadlines hold with CPU and sound clients active.
+4. **MiSTer integration and silent hardware.** Integrate ROM loading, selected-set MRA
+   generation, controls (Missile/Punch per driver and verified manual), DIP defaults,
+   aspect 4:3, video output, debug identity/probes and pause. Create release and `_stp`
+   revisions. Exit: simulation passes, staged Quartus build has nonnegative required
+   slack, and both games boot/play on the user's board with recorded evidence.
+5. **Sound.** Integrate Z80, YM2151, uPD7759, bank/reset/start and latch IRQ behavior.
+   Exit: command/register traces and sample-bank tests pass, playback is verified on
+   hardware and captured for comparison; no sample underruns or sound-induced video stalls.
+6. **Features and release.** Add/test CRT Adjust, hiscore, fast load staging, HDMI scale/
+   crop/rotation, common flip path, audio options, OSD visibility and both-player controls.
+   Log inherited MAME assumptions in MAME_KLUDGES.md and own approximations in HACKS.md.
+   Generate version-tagged MRAs, verify layouts against ROM_START, document provenance,
+   contribution requirements, AI-code disclosure and floorplan. Release only after
+   hardware verification; publishing and downstream database updates require user direction.
 
-{{PROJECT_DECISIONS}}
-<!-- Clocking plan and the measurement it rests on; CPU integration choice; sprite rendering
-     shape (line-based, not frame-buffered, and why); which memory each large array lives in. -->
+Full savestates and cheats are optional follow-up scope; debug state capture is designed early.
+Each completed implementation phase is committed on develop; do not push develop.
 
-## Pitfalls that already bind decisions here
+## Verification rules
 
-Entries from [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md) that are not general advice but already
-constrain something written above. Read the entry, not the summary.
+Follow MAME, including its acknowledged guesses, and log them. Preserve trusted chip RTL
+when it disagrees until evidence identifies the correct behavior. Every subsystem gets
+a meaningful testbench before hardware. Use mixed-language simulation for VHDL board
+logic plus reused Verilog; Verilator alone cannot directly execute VHDL.
+No module is considered proven here merely because a donor provenance file calls it proven.
+No hardware result is reported without a capture/log/probe; staged builds gate on timing.
 
-| Entry | What it binds here |
-|---|---|
-{{PITFALLS}}
+## Approval boundary
 
-## Phased roadmap
-
-<!-- Phase 0 is the gate: nothing after it starts until its exit criteria are met, and each
-     criterion is answered in place ("— Met: <evidence>" / "— Open: <what is missing>"). -->
-
-**Phase 0 — Vendoring spike and the measurements. The gate.**
-
-Vendor every reused module into `rtl/` with a `PROVENANCE.md` per directory. Run every upstream
-testbench unchanged before editing anything. Stand the CPU up in its own Quartus project
-(`rtl/synth_check/`) with the bus wrapper and the memory transport and nothing else.
-Exit criteria:
-
-1. **Every vendored module's own tests pass unchanged, on arrival.**
-2. **The CPU boots the first target's program ROM and matches MAME's bus trace**, diffed access by
-   access, every peripheral stubbed to what MAME's returns.
-3. **Measured CPI on real game code** against the board's clock, split between execution and
-   memory stall.
-4. **Standalone Fmax and area for the CPU at this project's settings**, with the constraint that
-   proves it committed in the same commit as the measurement. This decides the clock plan.
-5. {{PHASE0_PROJECT_SPECIFIC_QUESTION}}
-
-**Phase 1 — Video, against a software model.**
-
-Build the MAME capture pipeline first (`mame_capture.py` + a `render_model.py` that reproduces the
-driver's video file), get it pixel-exact on captured frames, then check RTL against the model layer
-by layer. Exit criteria: the first target renders frames pixel-identical to MAME's for a captured
-set of scenes, silent, in simulation.
-
-**Phase 2 — Hardware bring-up and the first games.**
-
-SDRAM backend with all clients, the ROM download path, `.mra` generation, inputs, DIPs, NVRAM,
-the ISSP probe and the OSD debug page. The standard feature set: CRT Adjust (and v-size if BRAM
-allows), hiscore, fast DDR ROM loading, HDMI scaling and crop, HDMI rotation, audio mix, HDMI-only
-options hidden under direct video, CRT Adjust parameters hidden until enabled, peripheral menus
-only for games that use them (rotary: Ikari Warriors controls; guns: mouse and synthetic
-crosshair), and flip screen from the OSD or the DIP (fake DIP where the
-game has none) through one path, worked out per layer for this board. Exit criteria: {{PHASE2_SETS}} boot and play on a
-DE10-nano, silent.
-
-**Phase 3 — Sound.**
-
-{{SOUND_PLAN}}. Exit criteria: register-write traces captured from MAME reproduce correct audio,
-by ear and by a decoded capture against MAME's output.
-
-**Phase 4 — The rest of the list, and accuracy.**
-
-The remaining sets, every clone's `.mra`, {{PHASE4_ITEMS}}. `docs/MAME_KLUDGES.md` and
-`docs/HACKS.md` are the deliverables that say what is still not right and what would settle it.
-
-**Phase 5 — {{OPTIONAL_SCOPE_EXTENSION}}.** A decision with evidence rather than a default.
-
-**Phase 6 — Savestates, state dumps and cheats.** Optional but desirable. Not before Phase 4, but
-the RTL is written for it from Phase 1 (the skill's `savestates.md`): reachable RAM ports, a
-`docs/STATE.md` inventory, addressable chip state. The state dump and its simulator loader are worth
-building before the savestate itself, because they make hardware bugs reproducible in a bench.
-
-## Verification strategy
-
-- **MAME is a reference generator, driven from scripts, not a thing to eyeball.** Boot traces, VRAM
-  and register dumps at known frames, palette dumps, register-write logs. WORKFLOW §9 applies.
-- **The software model comes before the RTL.** The model is checked against MAME first; the RTL
-  against the model.
-- **Every vendored module is verified against MAME before it is wired to anything**, and its own
-  testbench is the regression for every later change to it.
-- **Layouts are verified before ROMs are involved**: every `gfx_layout` gets the "every bit of a
-  tile exactly once" check.
-- **`.mra` files are generated, not written**, re-read byte-for-byte against an image built from
-  `ROM_START`, and gated on an XML well-formedness check before deploy.
-- **Worst cases are measured in the RTL**, not modelled: saturating counters with no reset port,
-  each paired with a total.
-
-## Repository setup
-
-Seeded from **MiSTer-devel/Template_MiSTer**, `Template.*` renamed to `RabbitPunch.*` and split into
-the `RabbitPunch_stp` and `RabbitPunch` revisions; the Quartus 13 project dropped. Quartus **17.0.2**.
-Conventions are in [`WORKFLOW.md`](WORKFLOW.md) and `CONVENTIONS.md`.
-
-## Open items
-
-{{OPEN_ITEMS}}
-<!-- One bold sentence each, then what is known, what is assumed, and what closes it. Strike
-     through when closed and say what closed it. -->
-
-## Next steps
-
-1. {{NEXT_STEP}}
-<!-- Numbered, in order, struck through as done with a pointer to the evidence. -->
+The user approved this roadmap and the mixed-language reuse approach. That approval
+authorizes the local bootstrap and staged work above; it does not turn unresolved physical
+timing guesses into measurements. Close those decisions with evidence before the dependent RTL.

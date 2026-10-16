@@ -55,7 +55,7 @@ KINDS = {
     "ROM_COPY": "copy",
 }
 # The sets in scope: the default when none are named.
-IN_SCOPE = []
+IN_SCOPE = ["rabiolep", "rpunch"]
 # ---------------------------------------------------------------------------
 
 

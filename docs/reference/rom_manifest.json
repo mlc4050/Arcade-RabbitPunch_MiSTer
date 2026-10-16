@@ -1,0 +1,383 @@
+{
+  "schema": 1,
+  "reference_kind": "source-only; not checked against listxml",
+  "sources": {
+    "rpunch.cpp": "856dffea9e6c101bbf3a0c8fca20e41ad5913f6a16437212a0c4b79385fd0fce",
+    "vsystem_gga.cpp": "b6664e283f49792b50794d3b6068e5c2b75c41762053c1361fea39dc614ee05d",
+    "vsystem_gga.h": "dbfd71276d075f1ceb02aa8d7765e3b925db3d7ada681d469e8b20d1141ae7c1"
+  },
+  "sets": {
+    "rabiolep": {
+      "declared_bytes": 2162688,
+      "loaded_bytes": 1376256,
+      "regions": [
+        {
+          "tag": "maincpu",
+          "size": 262144,
+          "flags": "0",
+          "loads": [
+            {
+              "kind": "load16_byte",
+              "file": "rl_e2.bin",
+              "offset": 0,
+              "length": 32768,
+              "crc32": "7d936a12"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rl_d2.bin",
+              "offset": 1,
+              "length": 32768,
+              "crc32": "d8d85429"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rl_e4.bin",
+              "offset": 65536,
+              "length": 32768,
+              "crc32": "5bfaee12"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rl_d4.bin",
+              "offset": 65537,
+              "length": 32768,
+              "crc32": "e64216bf"
+            }
+          ],
+          "fills": []
+        },
+        {
+          "tag": "audiocpu",
+          "size": 65536,
+          "flags": "0",
+          "loads": [
+            {
+              "kind": "load",
+              "file": "rl_f20.bin",
+              "offset": 0,
+              "length": 65536,
+              "crc32": "a6f50351"
+            }
+          ],
+          "fills": []
+        },
+        {
+          "tag": "tiles1",
+          "size": 524288,
+          "flags": "ROMREGION_ERASEFF",
+          "loads": [
+            {
+              "kind": "load",
+              "file": "rl_c13.bin",
+              "offset": 0,
+              "length": 262144,
+              "crc32": "7c8403b0"
+            },
+            {
+              "kind": "load",
+              "file": "rl_c10.bin",
+              "offset": 262144,
+              "length": 32768,
+              "crc32": "312eb260"
+            },
+            {
+              "kind": "load",
+              "file": "rl_c12.bin",
+              "offset": 294912,
+              "length": 32768,
+              "crc32": "bea85219"
+            }
+          ],
+          "fills": [
+            {
+              "offset": 327680,
+              "length": 65536,
+              "value": 255
+            }
+          ]
+        },
+        {
+          "tag": "tiles2",
+          "size": 524288,
+          "flags": "ROMREGION_ERASEFF",
+          "loads": [
+            {
+              "kind": "load",
+              "file": "rl_a10.bin",
+              "offset": 0,
+              "length": 262144,
+              "crc32": "c2a77619"
+            },
+            {
+              "kind": "load",
+              "file": "rl_a13.bin",
+              "offset": 262144,
+              "length": 32768,
+              "crc32": "a39c2c16"
+            },
+            {
+              "kind": "load",
+              "file": "rl_a12.bin",
+              "offset": 294912,
+              "length": 32768,
+              "crc32": "970b0e32"
+            }
+          ],
+          "fills": []
+        },
+        {
+          "tag": "sprites",
+          "size": 524288,
+          "flags": "ROMREGION_ERASEFF",
+          "loads": [
+            {
+              "kind": "load16_byte",
+              "file": "rl_4g.bin",
+              "offset": 0,
+              "length": 131072,
+              "crc32": "c5cb4b7a"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rl_4h.bin",
+              "offset": 1,
+              "length": 131072,
+              "crc32": "8a4d3c99"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rl_1g.bin",
+              "offset": 262144,
+              "length": 32768,
+              "crc32": "74d41b2e"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rl_1h.bin",
+              "offset": 262145,
+              "length": 32768,
+              "crc32": "7dcb32bb"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rl_2g.bin",
+              "offset": 327680,
+              "length": 32768,
+              "crc32": "744903b4"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rl_2h.bin",
+              "offset": 327681,
+              "length": 32768,
+              "crc32": "09649e75"
+            }
+          ],
+          "fills": []
+        },
+        {
+          "tag": "upd",
+          "size": 262144,
+          "flags": "0",
+          "loads": [
+            {
+              "kind": "load",
+              "file": "rl_f18.bin",
+              "offset": 0,
+              "length": 131072,
+              "crc32": "47840673"
+            }
+          ],
+          "fills": []
+        }
+      ]
+    },
+    "rpunch": {
+      "declared_bytes": 2162688,
+      "loaded_bytes": 1376256,
+      "regions": [
+        {
+          "tag": "maincpu",
+          "size": 262144,
+          "flags": "0",
+          "loads": [
+            {
+              "kind": "load16_byte",
+              "file": "rpunch.20",
+              "offset": 0,
+              "length": 32768,
+              "crc32": "a2028d59"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rpunch.21",
+              "offset": 1,
+              "length": 32768,
+              "crc32": "1cdb13d3"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rpunch.2",
+              "offset": 65536,
+              "length": 32768,
+              "crc32": "9b9729bb"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rpunch.3",
+              "offset": 65537,
+              "length": 32768,
+              "crc32": "5704a688"
+            }
+          ],
+          "fills": []
+        },
+        {
+          "tag": "audiocpu",
+          "size": 65536,
+          "flags": "0",
+          "loads": [
+            {
+              "kind": "load",
+              "file": "rpunch.92",
+              "offset": 0,
+              "length": 65536,
+              "crc32": "5e1870e3"
+            }
+          ],
+          "fills": []
+        },
+        {
+          "tag": "tiles1",
+          "size": 524288,
+          "flags": "ROMREGION_ERASEFF",
+          "loads": [
+            {
+              "kind": "load",
+              "file": "rl_c13.bin",
+              "offset": 0,
+              "length": 262144,
+              "crc32": "7c8403b0"
+            },
+            {
+              "kind": "load",
+              "file": "rl_c10.bin",
+              "offset": 262144,
+              "length": 32768,
+              "crc32": "312eb260"
+            },
+            {
+              "kind": "load",
+              "file": "rl_c12.bin",
+              "offset": 294912,
+              "length": 32768,
+              "crc32": "bea85219"
+            }
+          ],
+          "fills": [
+            {
+              "offset": 327680,
+              "length": 65536,
+              "value": 255
+            }
+          ]
+        },
+        {
+          "tag": "tiles2",
+          "size": 524288,
+          "flags": "ROMREGION_ERASEFF",
+          "loads": [
+            {
+              "kind": "load",
+              "file": "rl_a10.bin",
+              "offset": 0,
+              "length": 262144,
+              "crc32": "c2a77619"
+            },
+            {
+              "kind": "load",
+              "file": "rl_a13.bin",
+              "offset": 262144,
+              "length": 32768,
+              "crc32": "a39c2c16"
+            },
+            {
+              "kind": "load",
+              "file": "rpunch.54",
+              "offset": 294912,
+              "length": 32768,
+              "crc32": "e2969747"
+            }
+          ],
+          "fills": []
+        },
+        {
+          "tag": "sprites",
+          "size": 524288,
+          "flags": "ROMREGION_ERASEFF",
+          "loads": [
+            {
+              "kind": "load16_byte",
+              "file": "rl_4g.bin",
+              "offset": 0,
+              "length": 131072,
+              "crc32": "c5cb4b7a"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rl_4h.bin",
+              "offset": 1,
+              "length": 131072,
+              "crc32": "8a4d3c99"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rl_1g.bin",
+              "offset": 262144,
+              "length": 32768,
+              "crc32": "74d41b2e"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rl_1h.bin",
+              "offset": 262145,
+              "length": 32768,
+              "crc32": "7dcb32bb"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rpunch.85",
+              "offset": 327680,
+              "length": 32768,
+              "crc32": "60b88a2c"
+            },
+            {
+              "kind": "load16_byte",
+              "file": "rpunch.86",
+              "offset": 327681,
+              "length": 32768,
+              "crc32": "91d204f6"
+            }
+          ],
+          "fills": []
+        },
+        {
+          "tag": "upd",
+          "size": 262144,
+          "flags": "0",
+          "loads": [
+            {
+              "kind": "load",
+              "file": "rl_f18.bin",
+              "offset": 0,
+              "length": 131072,
+              "crc32": "47840673"
+            }
+          ],
+          "fills": []
+        }
+      ]
+    }
+  }
+}

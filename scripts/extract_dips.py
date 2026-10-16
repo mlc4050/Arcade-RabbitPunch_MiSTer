@@ -48,7 +48,7 @@ SRC = setting("MAME_SRC") or ""
 
 # --- core-specific: edit for this core -------------------------------------
 # The sets the core takes: --all, --selftest and the default game list.
-SETS = []
+SETS = ["rabiolep", "rpunch"]
 # The port that carries the DIP switches, checked by --selftest.
 DSW_PORT = "DSW"
 # The controlling switch's labels, shortened for a folded conditional DIP's
