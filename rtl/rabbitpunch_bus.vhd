@@ -22,23 +22,23 @@ entity rabbitpunch_bus is
 end entity;
 
 architecture rtl of rabbitpunch_bus is
-    type styp_state is (STATE_IDLE, STATE_WAITING, STATE_COMPLETE, STATE_DRAINING);
-    signal s_state : styp_state := STATE_IDLE;
+    type t_state is (STATE_IDLE, STATE_WAITING, STATE_COMPLETE, STATE_DRAINING);
+    signal styp_state : t_state := STATE_IDLE;
 begin
-    o_cpu_transfer_acknowledge_n <= '0' when s_state = STATE_COMPLETE and i_cpu_address_strobe_n = '0' and i_reset = '0' else '1';
+    o_cpu_transfer_acknowledge_n <= '0' when styp_state = STATE_COMPLETE and i_cpu_address_strobe_n = '0' and i_reset = '0' else '1';
     process(i_clk)
     begin
         if (rising_edge(i_clk)) then
             o_request <= '0';
             if (i_reset = '1') then
-                if ((s_state = STATE_WAITING or s_state = STATE_DRAINING) and i_response_valid = '0') then
-                    s_state <= STATE_DRAINING;
+                if ((styp_state = STATE_WAITING or styp_state = STATE_DRAINING) and i_response_valid = '0') then
+                    styp_state <= STATE_DRAINING;
                 else
-                    s_state <= STATE_IDLE;
+                    styp_state <= STATE_IDLE;
                 end if;
                 ou16_cpu_read_data <= (others => '1');
             else
-                case s_state is
+                case styp_state is
                     when STATE_IDLE =>
                         if (i_cpu_address_strobe_n = '0' and (i_cpu_upper_byte_strobe_n = '0' or i_cpu_lower_byte_strobe_n = '0')) then
                             o_request <= '1';
@@ -46,26 +46,26 @@ begin
                             ou24_request_address <= iu23_cpu_word_address & '0';
                             ou16_request_data <= iu16_cpu_write_data;
                             ou2_request_bytes <= (not i_cpu_upper_byte_strobe_n) & (not i_cpu_lower_byte_strobe_n);
-                            s_state <= STATE_WAITING;
+                            styp_state <= STATE_WAITING;
                         end if;
                     when STATE_WAITING =>
                         if (i_cpu_address_strobe_n = '1') then
                             if (i_response_valid = '1') then
-                                s_state <= STATE_IDLE;
+                                styp_state <= STATE_IDLE;
                             else
-                                s_state <= STATE_DRAINING;
+                                styp_state <= STATE_DRAINING;
                             end if;
                         elsif (i_response_valid = '1') then
                             ou16_cpu_read_data <= iu16_response_data;
-                            s_state <= STATE_COMPLETE;
+                            styp_state <= STATE_COMPLETE;
                         end if;
                     when STATE_COMPLETE =>
                         if (i_cpu_address_strobe_n = '1') then
-                            s_state <= STATE_IDLE;
+                            styp_state <= STATE_IDLE;
                         end if;
                     when STATE_DRAINING =>
                         if (i_response_valid = '1') then
-                            s_state <= STATE_IDLE;
+                            styp_state <= STATE_IDLE;
                         end if;
                 end case;
             end if;

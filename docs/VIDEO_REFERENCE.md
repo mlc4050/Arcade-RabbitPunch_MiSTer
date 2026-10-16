@@ -17,6 +17,12 @@ the generic packed-low-nibble-first tile layout and priority pixel operations
 were also inspected in MAME's video/generic.cpp, drawgfx.cpp and drawgfxt.ipp.
 Capture-region and output hashes are in reference/video_checks.json.
 
+Reference comparisons use default MAME brightness/gamma with display shaders
+disabled. Keep ROM audits tied to the pinned MAME 0.289 definitions. Reports of
+analog brightness differences on other boards are not evidence for changing this
+board's palette conversion; any such adjustment needs Rabbit Punch / Rabio Lepus
+PCB evidence and a separate display-calibration check.
+
 The model implements both 64x64 column-major tilemaps, tile ROM banks and palette
 bits, 16x32 sprite decode/flip/clipping, sprite priority, bitmap overlay and RGB555.
 The sprite X layout reverses each pair of packed bytes within a four-pixel group;

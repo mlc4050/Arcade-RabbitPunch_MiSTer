@@ -26,14 +26,14 @@ entity rabbitpunch_bitmap is
 end entity;
 
 architecture rtl of rabbitpunch_bitmap is
-    type styp_state is (STATE_IDLE, STATE_WAITING, STATE_DRAINING);
-    signal s_state : styp_state := STATE_IDLE;
+    type t_state is (STATE_IDLE, STATE_WAITING, STATE_DRAINING);
+    signal styp_state : t_state := STATE_IDLE;
     signal su9_pixel_x : unsigned(8 downto 0);
     signal su8_pixel_y : unsigned(7 downto 0);
     signal su2_nibble : unsigned(1 downto 0);
     signal su4_palette_bank : unsigned(3 downto 0);
 begin
-    o_pixel_ready <= '1' when s_state = STATE_IDLE and i_reset = '0' else '0';
+    o_pixel_ready <= '1' when styp_state = STATE_IDLE and i_reset = '0' else '0';
     process(i_clk)
         variable vu9_source_x : unsigned(8 downto 0);
         variable vu4_pen : unsigned(3 downto 0);
@@ -43,13 +43,13 @@ begin
             o_ram_request <= '0';
             if (i_reset = '1') then
                 -- An accepted RAM request must still reply after pixel-pipeline reset.
-                if ((s_state = STATE_WAITING or s_state = STATE_DRAINING) and i_ram_response_valid = '0') then
-                    s_state <= STATE_DRAINING;
+                if ((styp_state = STATE_WAITING or styp_state = STATE_DRAINING) and i_ram_response_valid = '0') then
+                    styp_state <= STATE_DRAINING;
                 else
-                    s_state <= STATE_IDLE;
+                    styp_state <= STATE_IDLE;
                 end if;
             else
-                case s_state is
+                case styp_state is
                     when STATE_IDLE =>
                         if (i_pixel_valid = '1') then
                             vu9_source_x := iu9_pixel_x + 4;
@@ -59,7 +59,7 @@ begin
                             su9_pixel_x <= iu9_pixel_x;
                             su8_pixel_y <= iu8_pixel_y;
                             o_ram_request <= '1';
-                            s_state <= STATE_WAITING;
+                            styp_state <= STATE_WAITING;
                         end if;
                     when STATE_WAITING =>
                         if (i_ram_response_valid = '1') then
@@ -79,11 +79,11 @@ begin
                             ou9_pixel_x <= su9_pixel_x;
                             ou8_pixel_y <= su8_pixel_y;
                             o_pixel_valid <= '1';
-                            s_state <= STATE_IDLE;
+                            styp_state <= STATE_IDLE;
                         end if;
                     when STATE_DRAINING =>
                         if (i_ram_response_valid = '1') then
-                            s_state <= STATE_IDLE;
+                            styp_state <= STATE_IDLE;
                         end if;
                 end case;
             end if;

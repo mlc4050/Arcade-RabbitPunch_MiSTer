@@ -13,8 +13,9 @@ signals use s_. Unsigned input/output ports use iu<width>_/ou<width>_ (iu16_data
 for unsigned(15 downto 0)); unconstrained unsigned ports use iux_/oux_. Internal
 unsigned signals use su<width>_; unsigned variables use vu<width>_. Integer/natural
 signals use sint_, integer/natural variables use vint_. Every state-machine
-enumeration type uses styp_ (styp_state), with uppercase STATE_ literals:
-type styp_state is (STATE_IDLE, STATE_WAITING, STATE_DRAINING).
+enumeration type uses t_ (t_state), its signal uses styp_ (styp_state), with uppercase STATE_ literals:
+type t_state is (STATE_IDLE, STATE_WAITING, STATE_DRAINING);
+signal styp_state : t_state := STATE_IDLE;
 Expand all sequential if/elsif/else bodies onto separate lines, closing with
 end if;. Use four spaces per indentation level and no tabs in authored VHDL.
 Enclose every if/elsif condition in parentheses: if (s_signal = '1') then.
