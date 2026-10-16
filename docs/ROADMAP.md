@@ -12,6 +12,8 @@ An offline Python renderer matches six complete MAME images. The VHDL bitmap rea
 passes exhaustive coordinate checks and all visible bitmap pixels in those scenes.
 The memory backend passes a standalone Cyclone V fit at the 48 MHz evaluation
 constraint: 102 M10K blocks, no duplicated RAM, positive timing in every corner.
+VHDL tilemap lookup and a JTFRAME row adapter now match both tile layers in
+all six reference scenes; sprites and the complete mixer/raster are still open.
 The complete game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
@@ -91,6 +93,10 @@ is excluded from the first scope. No remote repository has been created or publi
   tilemaps for each set, in attract and scripted runs. Their timing differs and
   does not yet justify a common vblank latch. See VIDEO_WRITE_TIMING.md for
   source histograms, validation and gameplay-coverage limits.
+- Tile lookup and queued eight-pixel JTFRAME drawing pass every tilemap address,
+  bank/scroll/reset tests and 746496 captured layer pixels across six scenes.
+  No line/frame RAM, physical raster or shared SDRAM transport is implemented
+  by these blocks. See TILE_PIPELINE.md.
 
 ## Component reuse candidates
 

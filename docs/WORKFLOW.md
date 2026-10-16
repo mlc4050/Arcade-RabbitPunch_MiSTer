@@ -27,6 +27,11 @@ timing. Its reports live under `build/rtl/synth_check/memory/output_files/`,
 with `build/q_memory_check.log` and `debug/memory_synth.json`. This is not a
 complete MiSTer build or a deployable game core.
 
+`--synth-check tiles` similarly fits only the tile lookup/JTFRAME row pipeline,
+requires zero block RAM and the lookup/drawer hierarchy, and applies the same
+timing and unconstrained-path gates. Reports use the tiles_check project under
+build/rtl/synth_check/tiles/ and debug/tiles_synth.json.
+
 Three properties that must survive any port:
 
 - **Refuses a dirty tree.** "What was in that build?" has to be answerable.

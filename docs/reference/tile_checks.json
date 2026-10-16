@@ -1,0 +1,92 @@
+[
+  {
+    "case": "video_tile_row",
+    "pass_marker": "TILE_ROW_PASS",
+    "log": "debug\\baselines\\video_tile_row\\result.log",
+    "log_sha256": "67cb767f0ae45e173c567b7e3facf772c96344a6db9abb462c14a6c8372332ca"
+  },
+  {
+    "case": "video_tile_layer",
+    "pass_marker": "TILE_LAYER_PASS",
+    "log": "debug\\baselines\\video_tile_layer\\result.log",
+    "log_sha256": "128d6336d2365656dbbec3d53f871dc5bc5b9474d4ba60f21ce0b11be204097b"
+  },
+  {
+    "case": "tiles_rabiolep_attract",
+    "pass_marker": "TILE_CAPTURE_PASS",
+    "log": "debug\\baselines\\tiles_rabiolep_attract\\result.log",
+    "set": "rabiolep",
+    "capture": "debug/rabiolep-attract",
+    "layer_pixels": 124416,
+    "vram_sha256": "a319dc3a42ec7c001db6ae5e374fbf0d2628b70eaaeb8fd43651a3bfb79d1414",
+    "registers_sha256": "6c8c1cc4b33ac91e576f8b3aeb49da92660a57a48f12bad82e81e4b6de747c9f",
+    "rtl_pixels_sha256": "4ccd882d8cb8fe21184cf26ba8ccff4090748ee8965608c7feb23cd46c523e31",
+    "scope": "HDL tile layers; captured RAM and behavioral ROM responders, no sprites/bitmap/raster",
+    "log_sha256": "a3b9f54dca909013f1e7acc2ad29a99e4d11bb457d7b3f921ca1f145e3ddfba4"
+  },
+  {
+    "case": "tiles_rpunch_attract",
+    "pass_marker": "TILE_CAPTURE_PASS",
+    "log": "debug\\baselines\\tiles_rpunch_attract\\result.log",
+    "set": "rpunch",
+    "capture": "debug/rpunch-attract",
+    "layer_pixels": 124416,
+    "vram_sha256": "84daafdfb9a5a8dd9f6c29506e2958208607e8196a4e5f125cf1fc9f33bec02c",
+    "registers_sha256": "1be0ccd501ba66eacbcfa58e570b930da4dcd70975ace5da959ffb1c82686587",
+    "rtl_pixels_sha256": "58acd398b53ad5a4f829bffcdf72eb3b8afa38e25717d34403840f9aef3fde3d",
+    "scope": "HDL tile layers; captured RAM and behavioral ROM responders, no sprites/bitmap/raster",
+    "log_sha256": "b645a0930c9017872b3c01d72ba5de7223a2b193f68bcab701a278b536f4503b"
+  },
+  {
+    "case": "tiles_rabiolep_play1000",
+    "pass_marker": "TILE_CAPTURE_PASS",
+    "log": "debug\\baselines\\tiles_rabiolep_play1000\\result.log",
+    "set": "rabiolep",
+    "capture": "debug/rabiolep-play1000",
+    "layer_pixels": 124416,
+    "vram_sha256": "c6b32c964faa247c6a188222dc633fc4439ad16c6c094c5f6bd019374bb8caf0",
+    "registers_sha256": "0756f6d0d15c9dd4f9d69caa1b386a026be3280aaff115d215b2e3991de016ed",
+    "rtl_pixels_sha256": "030ddc788e3ca542960f846d2b63f5064d196d92288e92382816033f35c05baf",
+    "scope": "HDL tile layers; captured RAM and behavioral ROM responders, no sprites/bitmap/raster",
+    "log_sha256": "dace37fa24a34c4e6328c0e11cc37957a775d4b2999664f3151ff867e7d95e3a"
+  },
+  {
+    "case": "tiles_rpunch_play1000",
+    "pass_marker": "TILE_CAPTURE_PASS",
+    "log": "debug\\baselines\\tiles_rpunch_play1000\\result.log",
+    "set": "rpunch",
+    "capture": "debug/rpunch-play1000",
+    "layer_pixels": 124416,
+    "vram_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+    "registers_sha256": "7fb4f53a5faffe3d8f548442e50c1f1c9081421dc4c4e10dc661be509257f162",
+    "rtl_pixels_sha256": "d3cd4ab11976bd3aed9035de865fd00a597a8d858beb1214e3aef9fb8d0cd2d3",
+    "scope": "HDL tile layers; captured RAM and behavioral ROM responders, no sprites/bitmap/raster",
+    "log_sha256": "b7722e47657d356c667aa64173582837d50fd9767e4a2caaf9f0dc2fb06400af"
+  },
+  {
+    "case": "tiles_rabiolep_play1800",
+    "pass_marker": "TILE_CAPTURE_PASS",
+    "log": "debug\\baselines\\tiles_rabiolep_play1800\\result.log",
+    "set": "rabiolep",
+    "capture": "debug/rabiolep-play1800",
+    "layer_pixels": 124416,
+    "vram_sha256": "041380f25fe1ee0c9ba0fcef125001f46f8f92d47d7feb4dad04cbf5aedba6b6",
+    "registers_sha256": "f8935c37b5ad8ad5e2adc3575d598dca777eaa03fd406fbeebff16daa7e3d860",
+    "rtl_pixels_sha256": "2d21f015b976b2d516816f3d76c26b66c9bea4fe847fe0c204d0c61b8d623a34",
+    "scope": "HDL tile layers; captured RAM and behavioral ROM responders, no sprites/bitmap/raster",
+    "log_sha256": "b3e1da4125feb3d8aee6335f743f93863329e631e0b6457a64d268c8c105469b"
+  },
+  {
+    "case": "tiles_rpunch_play1800",
+    "pass_marker": "TILE_CAPTURE_PASS",
+    "log": "debug\\baselines\\tiles_rpunch_play1800\\result.log",
+    "set": "rpunch",
+    "capture": "debug/rpunch-play1800",
+    "layer_pixels": 124416,
+    "vram_sha256": "7c5bf45dbb46c94803ce774cc9f5a0cda8af2772848b98a33a284833d4ca51c8",
+    "registers_sha256": "b416ebabd2d86aa7a7aec57e466248ed356c03b8af3d645ce0143368512abe63",
+    "rtl_pixels_sha256": "1a7ae7bdbaef3bba6f404917afa58a8d1470229897e803161bb45a10ed42e39a",
+    "scope": "HDL tile layers; captured RAM and behavioral ROM responders, no sprites/bitmap/raster",
+    "log_sha256": "1f18adfc811156d374c38ca74b816f619cddbef6b482463849ff980dfbfe9be1"
+  }
+]

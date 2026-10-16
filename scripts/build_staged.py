@@ -159,7 +159,7 @@ def check_present(stage):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--synth-check", choices=["memory"],
+    ap.add_argument("--synth-check", choices=["memory", "tiles"],
                     help="fit an isolated block from HEAD instead of the MiSTer core")
     ap.add_argument("--rev", help="Quartus revision (default: CORE_REV, else the one "
                                   ".qsf in the core root, else the .qpf's last)")
@@ -179,7 +179,7 @@ def main():
 
     global REV, QUARTUS_BIN
     here = str(core_root())
-    REV = "memory_check" if args.synth_check else revision(Path(here), args.rev)
+    REV = f"{args.synth_check}_check" if args.synth_check else revision(Path(here), args.rev)
     QUARTUS_BIN = str(quartus_bin(Path(here)))
     stage = os.path.join(here, "build")
 
@@ -251,9 +251,9 @@ def main():
         print("NOTE:   the tree has uncommitted changes and they are NOT in "
               "this build")
 
-    if args.synth_check == "memory":
-        from synth_checks import run_memory
-        return run_memory(stage, QUARTUS_BIN, stamp)
+    if args.synth_check:
+        from synth_checks import run_check
+        return run_check(stage, QUARTUS_BIN, stamp, args.synth_check)
 
     for src, dst in STAGE_COPIES:
         with open(os.path.join(stage, src), "rb") as f_in, \

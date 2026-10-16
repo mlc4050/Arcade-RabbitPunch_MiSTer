@@ -10,14 +10,22 @@ from coretools import core_root, NO_WINDOW
 from hwlock import require_no_jtag
 
 
-def run_memory(stage, quartus_bin, stamp):
+CHECKS = {
+    "memory": (835584, ("bitmap", "sprites", "tiles", "palette", "work_ram")),
+    "tiles": (0, ("rabbitpunch_tile_lookup", "rabbitpunch_tile_row", "jtframe_draw")),
+}
+
+
+def run_check(stage, quartus_bin, stamp, name):
+    expected_bits, required_instances = CHECKS[name]
+    project_name=f"{name}_check"
     stage=Path(stage).resolve()
     if stage.parent!=core_root().resolve() or stage.name!="build":
-        raise SystemExit("Memory check must run in the core's staged build checkout")
-    require_no_jtag("Rabbit Punch standalone memory fit")
-    project=stage/"rtl/synth_check/memory"
+        raise SystemExit("Block checks must run in the core's staged build checkout")
+    require_no_jtag(f"Rabbit Punch standalone {name} fit")
+    project=stage/"rtl/synth_check"/name
     marker=stage/".build_running"
-    log_path=stage/"q_memory_check.log"
+    log_path=stage/f"q_{project_name}.log"
     scratch=core_root()/".local/quartus"
     env=dict(os.environ)
     # Scope application scratch redirection to this child; the shared JTAG guard
@@ -31,23 +39,23 @@ def run_memory(stage, quartus_bin, stamp):
     marker.write_text(stamp,encoding="utf-8")
     try:
         with log_path.open("w",encoding="utf-8") as log:
-            result=subprocess.run([str(Path(quartus_bin)/"quartus_sh.exe"),"--flow","compile","memory_check"],
+            result=subprocess.run([str(Path(quartus_bin)/"quartus_sh.exe"),"--flow","compile",project_name],
                                   cwd=project,env=env,stdout=log,stderr=subprocess.STDOUT,**NO_WINDOW)
     finally:
         marker.unlink(missing_ok=True)
     log=log_path.read_text(encoding="utf-8",errors="replace")
     if result.returncode or "Full Compilation was successful" not in log:
         print("\n".join(log.splitlines()[-35:]))
-        raise SystemExit(f"Standalone memory compile failed: {log_path}")
+        raise SystemExit(f"Standalone {name} compile failed: {log_path}")
     output=project/"output_files"
-    fit=(output/"memory_check.fit.summary").read_text(encoding="utf-8",errors="replace")
+    fit=(output/f"{project_name}.fit.summary").read_text(encoding="utf-8",errors="replace")
     bits=re.search(r"Total block memory bits\s*:\s*([\d,]+)",fit)
-    if not bits or int(bits[1].replace(",",""))!=835584:
-        raise SystemExit("Memory bits missing, duplicated, or implemented outside block RAM; inspect fit reports")
-    hierarchy=(output/"memory_check.map.rpt").read_text(encoding="utf-8",errors="replace")
-    if any(name not in hierarchy for name in ("bitmap","sprites","tiles","palette","work_ram")):
-        raise SystemExit("A required RAM bank disappeared during synthesis")
-    summary=(output/"memory_check.sta.summary").read_text(encoding="utf-8",errors="replace")
+    if not bits or int(bits[1].replace(",",""))!=expected_bits:
+        raise SystemExit(f"Expected {expected_bits} RAM bits; memory missing, duplicated, or unexpectedly inferred")
+    hierarchy=(output/f"{project_name}.map.rpt").read_text(encoding="utf-8",errors="replace")
+    if any(instance not in hierarchy for instance in required_instances):
+        raise SystemExit("A required block disappeared during synthesis")
+    summary=(output/f"{project_name}.sta.summary").read_text(encoding="utf-8",errors="replace")
     timings=[]
     for block in summary.split("\n\n"):
         kind=re.search(r"Type\s*:\s*(.+)",block)
@@ -55,21 +63,21 @@ def run_memory(stage, quartus_bin, stamp):
         if kind and slack:
             timings.append({"type":kind[1].strip(),"slack_ns":float(slack[1])})
     if not timings or any(item["slack_ns"]<0 for item in timings):
-        raise SystemExit(f"Memory timing not verified or negative: {timings}")
-    detail=(output/"memory_check.sta.rpt").read_text(encoding="utf-8",errors="replace")
+        raise SystemExit(f"Block timing not verified or negative: {timings}")
+    detail=(output/f"{project_name}.sta.rpt").read_text(encoding="utf-8",errors="replace")
     coverage={name.strip():{"setup":int(setup),"hold":int(hold)}
               for name,setup,hold in re.findall(
                   r";\s*(Illegal Clocks|Unconstrained [^;]+?)\s*;\s*(\d+)\s*;\s*(\d+)\s*;",detail)}
     if len(coverage)!=6 or any(count for row in coverage.values() for count in row.values()):
         raise SystemExit(f"Illegal clocks or unconstrained timing paths: {coverage}")
-    report={"commit":stamp.split()[0],"device":"5CSEBA6U23I7","project":"memory_check",
-            "constraint_mhz":48,"seed":1,"memory_bits":835584,"timings":timings,
+    report={"commit":stamp.split()[0],"device":"5CSEBA6U23I7","project":project_name,
+            "constraint_mhz":48,"seed":1,"memory_bits":expected_bits,"timings":timings,
             "timing_coverage":coverage,
             "fit_summary":fit.splitlines(),"log_sha256":hashlib.sha256(log_path.read_bytes()).hexdigest(),
-            "scope":"Standalone memory block with virtual I/O; not a complete core or hardware release"}
-    destination=core_root()/"debug/memory_synth.json"
+            "scope":f"Standalone {name} block with virtual I/O; not a complete core or hardware release"}
+    destination=core_root()/f"debug/{name}_synth.json"
     destination.parent.mkdir(parents=True,exist_ok=True)
     destination.write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
-    print("PASS standalone memory fit: 835584 RAM bits; all reported timing checks nonnegative")
+    print(f"PASS standalone {name} fit: {expected_bits} RAM bits; all reported timing checks nonnegative")
     print(destination)
     return 0

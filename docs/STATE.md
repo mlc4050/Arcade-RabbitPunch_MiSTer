@@ -33,6 +33,8 @@ every frame.
 | CPU previous interrupt-acknowledge cycle | rabbitpunch_maincpu.vhd | 1 | Capture outside acknowledge cycle | Bus protocol edge detection |
 | Bitmap fetch FSM and X/Y/nibble/palette-bank metadata | rabbitpunch_bitmap.vhd | 2 logical + 9 + 8 + 2 + 4 | Future capture or drain before video restart | Pixel pipeline, no direct MAME saved state |
 | Bitmap request address and pixel output registers | rabbitpunch_bitmap.vhd | 15 + 9 + 8 + 10 + opacity/valid strobes | Drain/flush before video restart | Pixel pipeline |
+| Tile lookup FSM, queued descriptor, flags and RAM request | rabbitpunch_tile_lookup.vhd | 58 logical | Drain RAM and consume/drop queued row before capture | Derived tile pipeline; source VRAM and registers are saved separately |
+| Tile row FSM, code/row/palette/X/Y metadata and planar ROM word | rabbitpunch_tile_row.vhd | Transport and row metadata | Drain ROM and finish/flush active row before capture | Derived tile pipeline |
 
 ## Chip state
 
@@ -40,7 +42,8 @@ every frame.
 |---|---|---|---|---|
 | fx68k | rtl/cpu/fx68k, rabbitpunch_fx68k.vhd | No CPU register state port | CPU simulation integration | Adapter exposes descriptive bus pins; full CPU state capture remains open |
 | T80 | rtl/cpu/t80, rabbitpunch_t80.vhd | No CPU register state port | Wrapper test | Descriptive unsigned interface tested; not connected to sound board |
-| JTFRAME evaluation copies | rtl/jtframe | Not integrated | Evaluation | Not part of the game state yet |
+| JTFRAME drawer | rtl/jtframe/jtframe_draw.v, rabbitpunch_tile_row.vhd | No state port | Tile-row simulation | Pixel shifter, counters and request state must finish/flush before restart |
+| JTFRAME buffer evaluation copies | rtl/jtframe | Not integrated | Evaluation | Not part of the game state yet |
 
 ## Deliberately skipped
 

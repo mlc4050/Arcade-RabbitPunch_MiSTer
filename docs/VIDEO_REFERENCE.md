@@ -72,6 +72,8 @@ through the actual VHDL view port. Results: reference/bitmap_checks.json.
 ./scripts/d_drive.ps1 scripts/mame_capture.py rpunch --frame 1800 --coin 600 --name play1800
 ```
 
-Tile/sprite RTL, final mixer/palette pipeline, physical raster/PLL choices, Quartus
+Both tile layers now run through VHDL lookup adapters and JTFRAME row drawing;
+see TILE_PIPELINE.md for captured pixel checks and preview provenance.
+Sprite RTL, final mixer/palette pipeline, physical raster/PLL choices, complete-core
 fit and hardware verification remain open. Six matching scenes do not cover every
 register/flip/priority combination or establish a fully working game core.
