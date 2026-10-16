@@ -36,6 +36,7 @@ every frame.
 | Tile lookup FSM, queued descriptor, flags and RAM request | rabbitpunch_tile_lookup.vhd | 58 logical | Drain RAM and consume/drop queued row before capture | Derived tile pipeline; source VRAM and registers are saved separately |
 | Tile row FSM, code/row/palette/X/Y metadata and planar ROM word | rabbitpunch_tile_row.vhd | Transport and row metadata | Drain ROM and finish/flush active row before capture | Derived tile pipeline |
 | Sprite row FSM, latched code/row/position/palette/flips/priority, last ROM address and planar word | rabbitpunch_sprite_row.vhd | Transport and row metadata | Drain ROM and finish/flush active row before capture | Derived sprite pipeline; source RAM and registers are saved separately |
+| Sprite scan FSM, line Y, current index, priority/palette bank and queued candidate metadata | rabbitpunch_sprite_scan.vhd | Transport and candidate metadata | Drain descriptor read and finish/flush queued candidate and drawer before capture | Derived line selection; no original-board list snapshot implemented |
 
 ## Chip state
 

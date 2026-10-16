@@ -65,6 +65,49 @@ a final board clock choice or a deployable RBF.
 
 Commit 2f886cb passes that Quartus 17.0.2 fit on 5CSEBA6U23I7: 116 ALMs,
 170 registers, zero M10K and zero DSP blocks. All corners pass setup, hold
-and minimum pulse width; worst setup slack is +10.794 ns and worst hold
-slack is +0.152 ns, with zero illegal clocks or unconstrained paths.
+and minimum pulse width; worst setup slack is +10.788 ns and worst hold
+slack is +0.146 ns, with zero illegal clocks or unconstrained paths.
 The adapter and donor hierarchy survive synthesis. See reference/sprites_synth.json.
+
+## Scanline selection
+
+`rabbitpunch_sprite_scan.vhd` accepts logical Y, count, priority and video flags,
+and scans descriptors in descending index order as MAME does. Count zero completes
+without reading RAM. Every entry first fetches Y; intersecting entries then fetch
+attributes and X. Row eligibility is `(line_y + sprite_y - 1) mod 512 < 32`.
+The emitted row carries unflipped local Y, code, wrapped X+8, palette/flips,
+descriptor index and the behind-foreground tag. The row drawer applies the flips.
+
+One decoded candidate may wait for the drawer while its current row completes.
+All candidate fields remain stable under backpressure. Reset discards a queued
+candidate and drains any accepted descriptor reply. `o_scan_done` means all row
+commands have been accepted; the final row may still be drawing. A downstream
+line controller must wait for that drawer too before declaring the line complete.
+
+The caller must provide stable descriptor RAM during a scan. This block does not
+copy RAM or select an original-board latch point. Static capture tests are not
+evidence for the final policy with CPU writes active.
+
+`run_sprite_scan_tests.py` checks 2049 synthetic line commands for each of two
+lists: spread Y positions and all 63 sprites on the same Y. Counts 0/1/63,
+priority boundaries, all 512 Y coordinates, unused upper RAM bits, skipped rows,
+delayed replies, output stalls, changing upstream inputs and resets in all three
+read phases/output/pre-request phases are checked. Each capture adds 216 visible
+line commands and one directed line for reset testing. The reference report is
+reference/sprite_scan_checks.json.
+
+With `--draw`, the VHDL scan drives the actual VHDL/JTFRAME row engine. Every
+selected row's sixteen pixels, positions, opacity and foreground tag are checked
+against the direct ROM sampler. This mode waits for both scan and drawer to finish;
+its normal-traffic tests complement the separate component reset tests. Results:
+reference/sprite_scan_draw_checks.json. The crowded synthetic list takes at most
+2816 clocks, or 58.67 microseconds at the 48 MHz evaluation clock. These figures
+include independently delayed RAM/ROM responders and simulated consumer stalls;
+they exclude line RAM clearing/writes, CPU traffic and shared SDRAM arbitration.
+They do not establish a physical scanline deadline or final timing margin.
+
+```powershell
+./scripts/d_drive.ps1 scripts/run_sprite_scan_tests.py
+./scripts/d_drive.ps1 scripts/run_sprite_scan_tests.py --draw
+./scripts/d_drive.ps1 scripts/build_staged.py --synth-check sprite_scan
+```

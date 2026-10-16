@@ -18,7 +18,9 @@ Their standalone fit also passes timing at the 48 MHz evaluation constraint,
 with 139 ALMs, 201 registers and no M10K blocks.
 Sprite row drawing now passes 30720 synthetic rows and all descriptor rows in
 six captured scenes, including flips, transparency, overlapped ROM fetching
-and reset draining. Scanline scheduling and sprite priority/mixing remain open.
+and reset draining. Scanline candidate selection now feeds that drawer correctly
+in directed stress tests and six static captures. Sprite line storage, priority/mixing,
+shared memory scheduling and physical line deadlines remain open.
 The complete game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
