@@ -1,6 +1,7 @@
 # Rabbit Punch / Rabio Lepus hardware notes
 
-Status: initial source research; no RTL, synthesis, MAME captures, or hardware validation yet.
+Status: source research plus first MAME captures/coarse timing sweeps. No game RTL,
+synthesis or FPGA hardware validation yet. See TOOLCHAIN.md for verified setup.
 
 ## Reference
 
@@ -16,8 +17,11 @@ The driver contains the video implementation itself; no separate `rpunch_v.cpp` 
 Additional board model: `src/mame/vsystem/vsystem_gga.{cpp,h}`. Device references:
 `src/devices/sound/{ymopm,upd7759}.{cpp,h}`, `src/devices/cpu/m68000/`,
 `src/devices/cpu/z80/`; packed tile decoding comes from MAME's shared graphics layouts.
-No MAME executable is installed/configured yet. The merged archive supplied by the user
-contains all 18 required ROM files per set, verified against source lengths and actual CRCs.
+Active capture reference is now MAME 0.289 with source tag mame0289 at
+commit f34f02505e32c1993c6a782b6814232cbfc74e36, in a separate workspace snapshot.
+Earlier line citations above/below describe the initial checkout; active source hashes
+are in reference/rom_manifest.json. Both sets pass the executable's ROM verification.
+The merged archive contains all 18 required ROM files per set.
 
 ## Games and ROM capacity
 

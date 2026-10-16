@@ -43,8 +43,9 @@ JTFRAME primitive. MAME's incomplete GGA does not provide raw PCB timing.
 
 1. Record exact donor revision, local modifications, file hashes, licence and dependency
    closure in the vendored module directory. JTFRAME headers inspected state GPLv3+.
-2. Run available unmodified donor testbenches before adapting modules. Simulator/tool
-   setup is still pending; no JTFRAME simulation or synthesis has passed for this core.
+2. Run available unmodified donor testbenches before adapting modules. The ModelSim
+   mixed-language installation check passes (TOOLCHAIN.md); no JTFRAME simulation or
+   synthesis has passed for this core yet.
 3. Verify Rabbit Punch graphics bit order and row addressing before connecting memory.
    A 16-pixel generic row drawer and 4-bit ysub need mapping to 32-line sprites.
 4. Use MAME captures/write sweeps for snapshot timing and priority tests, including

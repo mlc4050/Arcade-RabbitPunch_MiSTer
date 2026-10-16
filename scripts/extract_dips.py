@@ -58,6 +58,7 @@ FOLD_TAG = {}
 
 # From MAME's src/emu/inpttype.ipp: the common strings.
 DEF_STR = {
+    "Continues": "Continues", "4C_5C": "4 Coins/5 Credits",
     "Off": "Off", "On": "On", "Yes": "Yes", "No": "No",
     "None": "None", "Unknown": "Unknown", "Unused": "Unused",
     "Upright": "Upright", "Cocktail": "Cocktail", "Cabinet": "Cabinet",

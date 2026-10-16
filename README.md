@@ -3,7 +3,7 @@
 Early development for Video System's 1987 arcade hardware, using MAME's rpunch.cpp
 as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
 
-Status: framework bootstrapped, source research and reference tooling underway.
+Status: framework bootstrapped; tools verified and first MAME reference captures taken.
 No game RTL or playable RBF. The inherited template demo remains connected.
 
 New board logic will use VHDL, with existing VHDL CPUs, directly reused JTFRAME
@@ -12,6 +12,7 @@ SDRAM module of at least 32 MB. Each set declares 0x210000 ROM bytes (2.0625 MiB
 
 See [ROADMAP](docs/ROADMAP.md), [hardware notes](docs/HARDWARE_NOTES.md), and
 [WORKFLOW](docs/WORKFLOW.md) for scope, evidence, and build coordination.
+Installed versions and baseline results are recorded in [TOOLCHAIN](docs/TOOLCHAIN.md).
 
 ## Reference setup
 

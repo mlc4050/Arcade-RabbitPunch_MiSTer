@@ -1,4 +1,8 @@
-# Windows tools still needed
+# Windows tool setup
+
+Installation and basic execution are now verified; see TOOLCHAIN.md for actual paths,
+versions, matching MAME source and baseline results. The guidance below is retained
+for reinstalling the tools.
 
 ## MAME
 

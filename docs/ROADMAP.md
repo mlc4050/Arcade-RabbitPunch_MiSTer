@@ -36,14 +36,16 @@ is excluded from the first scope. No remote repository has been created or publi
 - MAME checkout identifies as `mame0289-1577-g00ab4817bd7`; the three inspected board
   files have no working-tree changes. It is newer than release 0.289, so a release binary
   must use a separately pinned matching source before captures become trusted references.
-- Quartus, ModelSim, and a MAME executable are not configured/located. User is arranging
-  installation. This blocks capture and HDL simulation/synthesis gates, not source research.
+- Quartus Lite 17.0.2/602, Cyclone V support, ModelSim Starter 10.5b and MAME 0.289
+  are installed/configured. The mixed-language simulator check passes. Reference source
+  is now pinned to matching mame0289; both sets pass MAME ROM verification and have
+  first captures and coarse write sweeps. See TOOLCHAIN.md for evidence and remaining gates.
 
 - Located board driver and GGA device; recorded local MAME HEAD and memory maps.
 - Counted declared/file-loaded ROM storage from both sets: 2.0625 / 1.3125 MiB each.
 - Found local reusable CPU and sound implementations and read their provenance/headers.
-- Matching MAME executable, ROM availability, installed simulator/compiler paths,
-  physical sync timing, measured write timing, and source-tree cleanliness remain open.
+- Physical sync timing, per-field write timing, continuous-play coverage, game CPU/RTL
+  validation and actual Quartus fit remain open. Installed tools are not a game build.
 - Mixed-language sound and direct JTFRAME reuse are approved. New board-specific
   logic remains VHDL. Module selection and evidence are in FRAMEWORK_DECISION.md.
 

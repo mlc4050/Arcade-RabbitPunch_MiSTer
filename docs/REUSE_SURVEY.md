@@ -67,7 +67,7 @@ The generator must:
    Missile/Punch, Start, Coin, Pause, Service and Test. Confirm button order against driver
    ports and ROM behavior; don't reuse another core's status-bit assignments.
 4. Write mameversion from the actual reference executable, not a hand-entered guess.
-   The downloaded package is not yet an installed/configured reference executable.
+   The configured MAME 0.289 executable now provides version 0289 (see TOOLCHAIN.md).
 5. Reassemble the XML with scripts/mra.py and compare it byte-for-byte with a separate
    ROM_START-based image. Then run validate_mra.py for XML, controls, DIP width/defaults,
    version and rotation. Retain checksums/results rather than copyrighted ROM bytes.
