@@ -92,6 +92,12 @@ The final run has no simulation errors or warnings. Results are in
 reference/sprite_line_checks.json. This is a directed RAM/pipeline test;
 captured scan/draw-to-line-RAM integration and physical deadlines remain open.
 
+The standalone native line-RAM fit for cf6032f passes Quartus 17.0.2 at the
+48 MHz evaluation clock: 139 ALMs, 106 registers and exactly two M10K blocks
+(16384 data bits), zero DSP. Worst setup slack is +8.957 ns and worst hold
+is +0.167 ns. All reported corners and pulse-width checks pass, with no
+illegal clocks or unconstrained timing paths. See reference/sprite_line_synth.json.
+
 ```powershell
 ./scripts/d_drive.ps1 scripts/run_sprite_line_tests.py
 ./scripts/d_drive.ps1 scripts/build_staged.py --synth-check sprite_line
