@@ -71,3 +71,27 @@ JTFRAME drawer hierarchy survive synthesis. See reference/tiles_synth.json.
 Shared memory arbitration,
 continuous raster scheduling, sprite priority/mixing, final palette logic and
 dynamic CPU-write timing still need integration and verification.
+
+## Packed tile-line storage
+
+`rabbitpunch_tiles.vhd` now schedules both layers into two native 512-word line
+banks. BG0 writes the low byte, FG the high byte, using the RAM's actual byte
+enables. Both bytes in the configured X window are filled before a bank is
+readable. No bulk clear or assigned power-up contents are required. Coordinates
+outside the configured window are not accepted by its view port. Output has
+valid and the bank's saved line-Y tag; the opposite valid bank can be read
+concurrently with rendering.
+
+The default standalone window is 0..511. Misaligned scrolling emits an extra
+edge row, whose wrapping duplicate pixels have identical data. The logical video
+controller selects MAME's visible X 8..295, avoiding work outside its viewport.
+The window does not define physical sync/blanking or a PCB latch policy.
+Reset invalidates both banks, drops partial output and drains accepted descriptor/
+graphics transactions before a fresh line command is accepted.
+
+`tile_line_tb.vhd` compares every X in both packed layers for all 216 visible Y
+coordinates in six fixtures: 663552 packed words, 1327104 layer pixels. It also
+checks input changes after acceptance, concurrent previous-bank reads, repeated
+bank use and reset during RAM/ROM fetch. Native vendor RAM is used. Results:
+reference/tile_line_checks.json. This is separate from CPU/shared-memory timing.
+See VIDEO_PIPELINE.md for the complete mixed logical-line replay.

@@ -82,6 +82,8 @@ with software-decoded layer stimulus; see VIDEO_PRIORITY.md for the scope.
 Native sprite line RAM also passes directed and captured scan/draw integration
 tests; the full logical-line controller also passes synthetic/captured lines,
 global reset and concurrent display, plus its combined Quartus fit. Integrated
-tile/bitmap/mixer/palette output, physical raster/PLL choices, complete-core
+tile/sprite/bitmap/mixer output now matches all six MAME screenshots using actual
+HDL layer pixels and native line/bitmap RAM; see VIDEO_PIPELINE.md. Palette/RGB
+frontend, physical raster/PLL choices, CPU/shared memory, complete-core
 fit and hardware verification remain open. Six matching scenes do not cover every
 register/flip/priority combination or establish a fully working game core.

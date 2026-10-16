@@ -1,0 +1,68 @@
+[
+  {
+    "case": "tile_line_rabiolep_attract",
+    "pass_marker": "TILE_LINE_PASS",
+    "log": "debug\\baselines\\tile_line_rabiolep_attract\\result.log",
+    "set": "rabiolep",
+    "capture": "debug/rabiolep-attract",
+    "packed_pixels": 110592,
+    "max_cycles": 2838,
+    "log_sha256": "482046d796617850d12c4c5a4c0fe8f5ff5c283a9b3cf31feb07865a1fc0e41a",
+    "scope": "VHDL/JTFRAME tile lookup/drawing and native packed two-bank line RAM; static descriptor/ROM responders, no raster/shared arbitration"
+  },
+  {
+    "case": "tile_line_rpunch_attract",
+    "pass_marker": "TILE_LINE_PASS",
+    "log": "debug\\baselines\\tile_line_rpunch_attract\\result.log",
+    "set": "rpunch",
+    "capture": "debug/rpunch-attract",
+    "packed_pixels": 110592,
+    "max_cycles": 3029,
+    "log_sha256": "a323b11725a1ee44d32937fd9ae651930454ec590d56012ff9ad08a4e560a02a",
+    "scope": "VHDL/JTFRAME tile lookup/drawing and native packed two-bank line RAM; static descriptor/ROM responders, no raster/shared arbitration"
+  },
+  {
+    "case": "tile_line_rabiolep_play1000",
+    "pass_marker": "TILE_LINE_PASS",
+    "log": "debug\\baselines\\tile_line_rabiolep_play1000\\result.log",
+    "set": "rabiolep",
+    "capture": "debug/rabiolep-play1000",
+    "packed_pixels": 110592,
+    "max_cycles": 3134,
+    "log_sha256": "809b554d2ab2d51a1a20592cad845a95dea7e7d9e5844f7f581a64ef37b66d64",
+    "scope": "VHDL/JTFRAME tile lookup/drawing and native packed two-bank line RAM; static descriptor/ROM responders, no raster/shared arbitration"
+  },
+  {
+    "case": "tile_line_rpunch_play1000",
+    "pass_marker": "TILE_LINE_PASS",
+    "log": "debug\\baselines\\tile_line_rpunch_play1000\\result.log",
+    "set": "rpunch",
+    "capture": "debug/rpunch-play1000",
+    "packed_pixels": 110592,
+    "max_cycles": 2838,
+    "log_sha256": "e246e5f03fba898158edd3d000453c4bc1339194581a882313f0fffc05830ad9",
+    "scope": "VHDL/JTFRAME tile lookup/drawing and native packed two-bank line RAM; static descriptor/ROM responders, no raster/shared arbitration"
+  },
+  {
+    "case": "tile_line_rabiolep_play1800",
+    "pass_marker": "TILE_LINE_PASS",
+    "log": "debug\\baselines\\tile_line_rabiolep_play1800\\result.log",
+    "set": "rabiolep",
+    "capture": "debug/rabiolep-play1800",
+    "packed_pixels": 110592,
+    "max_cycles": 2896,
+    "log_sha256": "45247d99943e8b57de9fa117e5ac8a64dd136c8706bf31d19c3d9da0e3721322",
+    "scope": "VHDL/JTFRAME tile lookup/drawing and native packed two-bank line RAM; static descriptor/ROM responders, no raster/shared arbitration"
+  },
+  {
+    "case": "tile_line_rpunch_play1800",
+    "pass_marker": "TILE_LINE_PASS",
+    "log": "debug\\baselines\\tile_line_rpunch_play1800\\result.log",
+    "set": "rpunch",
+    "capture": "debug/rpunch-play1800",
+    "packed_pixels": 110592,
+    "max_cycles": 2781,
+    "log_sha256": "588791796127ec125b27e7ecc5836356f657f012b3adfcb63f17b7e15a0a0827",
+    "scope": "VHDL/JTFRAME tile lookup/drawing and native packed two-bank line RAM; static descriptor/ROM responders, no raster/shared arbitration"
+  }
+]

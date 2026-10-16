@@ -116,8 +116,10 @@ and the u8 handlers must not be conflated. Test both byte lanes and CPU mirror a
   other values one. First callback at vblank then periodic at frame-period/count
   (`crtc_interrupt_gen`, `gga_data_w`). Do not reduce this to unconditional vblank IRQ.
 
-Run attract AND active-play write sweeps for both sets, at least 1800 frames each,
-before choosing sprite snapshot and scroll/palette latch timing. No snapshot is measured yet.
+Per-field attract and scripted-play sweeps for both sets are now recorded in
+VIDEO_WRITE_TIMING.md. They show writes outside vblank and do not establish a
+common original-board snapshot/latch point. Continuous active-play coverage and
+PCB timing remain open; the logical-line renderer is not evidence of that policy.
 
 ## Sound map and behavior
 
@@ -133,9 +135,16 @@ both YM outputs and sample output each have gain 0.50 in the MAME model.
 User-confirmed hardware: one Mister Addons 128 MB SDRAM module; no dual-SDRAM requirement. All game storage
 can live below 32 MiB, making physical high-address support unnecessary for this scope.
 Confirm the installed module/controller electrical compatibility during bring-up.
-ROM capacity is comfortable. CPU/video/sound resource fit and memory deadlines remain
-unmeasured until standalone synthesis and simulation.
+ROM capacity is comfortable. CPU and multiple video blocks now have bounded
+simulation/standalone-fit evidence in ROADMAP.md. Full CPU/video/sound integration,
+shared-memory deadlines and the complete MiSTer fit remain unverified.
 
-The main uncertainties are physical video timing, incomplete GGA behavior, CPU timing
-agreement, reference executable/ROM availability, and whether reused Verilog dependencies
-are acceptable alongside new VHDL. No playable core or build result is claimed.
+The main uncertainties are physical video timing, incomplete GGA behavior,
+dynamic CPU/video agreement, shared-memory deadlines and sound integration.
+MAME 0.289 and matching ROM audits are available, and the user approved unchanged
+Verilog dependencies behind VHDL wrappers. No playable core or full-core build is claimed.
+
+A first-hand [Rabio Lepus PCB repair log](https://jammarcade.net/rabio-lepus-repair-log/)
+traces shared sprite-ROM address A7 through a 74LS273 at 8A to data D0 of a
+2Kx8 SRAM at 10A. It supports an address-latch path on that board, but supplies
+no pixel-clock, raw-raster or frame-latch measurement. Do not infer those from it.

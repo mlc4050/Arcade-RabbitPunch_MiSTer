@@ -19,6 +19,9 @@ CHECKS = {
     "sprite_line": (16384, ("rabbitpunch_sprite_line", "rabbitpunch_sprite_priority", "line_ram")),
     "sprite_renderer": (16384, ("rabbitpunch_sprites", "rabbitpunch_sprite_scan", "rabbitpunch_sprite_row",
                                "rabbitpunch_sprite_line", "jtframe_draw")),
+    "tile_line": (16384, ("rabbitpunch_tiles", "rabbitpunch_tile_layer", "line_ram", "jtframe_draw")),
+    "video": (32768, ("rabbitpunch_video", "rabbitpunch_tiles", "rabbitpunch_sprites",
+                      "rabbitpunch_bitmap_pixel", "rabbitpunch_pixel_mixer", "jtframe_draw")),
 }
 
 

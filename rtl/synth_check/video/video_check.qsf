@@ -1,0 +1,67 @@
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY rabbitpunch_video
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 1
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_ram16.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprite_priority.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_pixel_mixer.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_tile_row.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_tile_lookup.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_tile_layer.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_tiles.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprite_scan.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprite_row.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprite_line.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprites.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_bitmap_pixel.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_video.vhd
+set_global_assignment -name SYSTEMVERILOG_FILE ../../jtframe/jtframe_draw.v
+set_global_assignment -name SDC_FILE video_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_reset
+set_instance_assignment -name VIRTUAL_PIN ON -to i_line_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_line_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to i_render_bank
+set_instance_assignment -name VIRTUAL_PIN ON -to iu9_line_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu6_sprite_count[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu6_sprite_priority[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu9_background_scroll_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu9_background_scroll_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu9_foreground_scroll_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu9_foreground_scroll_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_video_flags[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_line_done
+set_instance_assignment -name VIRTUAL_PIN ON -to o_sprite_ram_request
+set_instance_assignment -name VIRTUAL_PIN ON -to ou11_sprite_ram_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_sprite_ram_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_sprite_ram_response_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_tile_ram_request
+set_instance_assignment -name VIRTUAL_PIN ON -to ou13_tile_ram_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_tile_ram_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_tile_ram_response_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_sprite_rom_request
+set_instance_assignment -name VIRTUAL_PIN ON -to ou17_sprite_rom_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_sprite_rom_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to iu32_sprite_rom_response_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_tile_rom_request
+set_instance_assignment -name VIRTUAL_PIN ON -to ou17_tile_rom_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_tile_rom_foreground
+set_instance_assignment -name VIRTUAL_PIN ON -to i_tile_rom_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to iu32_tile_rom_response_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_bitmap_ram_read_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to ou15_bitmap_ram_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_bitmap_ram_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_pixel_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_pixel_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to i_pixel_bank
+set_instance_assignment -name VIRTUAL_PIN ON -to iu9_pixel_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_pixel_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_pixel_video_flags[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_pixel_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_pixel_error
+set_instance_assignment -name VIRTUAL_PIN ON -to ou9_pixel_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_pixel_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou10_palette_index[*]

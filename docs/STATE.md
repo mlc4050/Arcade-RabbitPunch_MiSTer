@@ -14,6 +14,7 @@ every frame.
 | Palette | rabbitpunch_memory / rabbitpunch_ram16 | 16 x 1024 | 2048 | Yes; same access paths |
 | Main work | rabbitpunch_memory / rabbitpunch_ram16 | 16 x 8192 | 16384 | Yes; same access paths |
 | Sprite line banks | rabbitpunch_sprite_line / rabbitpunch_ram16 | 2 x 16 x 512 | 2048 | Derived pixels and occupancy/index/tag; finish/flush and re-render before resuming video, or capture both banks with scheduler phase |
+| Packed tile line banks | rabbitpunch_tiles / rabbitpunch_ram16 | 2 x 16 x 512 | 2048 | Derived BG0/FG pixels; finish/flush and re-render, or capture banks and scheduler phase |
 
 ## Registers and FSMs
 
@@ -40,6 +41,9 @@ every frame.
 | Sprite scan FSM, line Y, current index, priority/palette bank and queued candidate metadata | rabbitpunch_sprite_scan.vhd | Transport and candidate metadata | Drain descriptor read and finish/flush queued candidate and drawer before capture | Derived line selection; no original-board list snapshot implemented |
 | Sprite line FSM, clear cursor, active bank, bank validity/line tags, staged candidate, forwarding entry and view response | rabbitpunch_sprite_line.vhd | Derived line/pipeline state | Finish/flush and re-render before video restart; no complete save interface | Line buffering and hazard bypass, not game-visible source RAM |
 | Sprite logical-line controller FSM, latched command, scan-finished flag and accepted draw index | rabbitpunch_sprites.vhd | Derived line-command state | Finish/flush whole renderer before capture and rebuild the line before output | Coordinates selector, row drawer and line storage; no PCB raster policy |
+| Tile logical-line FSM, bank/window cursor, scroll/flags, issued/written counts, pending transport flags and view tags | rabbitpunch_tiles.vhd | Derived line state | Drain transport and rebuild both layer bytes before resuming output | Packed tile-line scheduling; no complete save interface |
+| Video line FSM, command, completion flags and aligned pixel/tag registers | rabbitpunch_video.vhd | Derived line/pixel pipeline | Finish/flush and rebuild lines, suppress output until valid | Coordinates renderers and fixed-rate native bitmap read/mixing |
+| Native bitmap/palette frontend metadata and valid stage | rabbitpunch_bitmap_pixel / rabbitpunch_palette_pixel | Derived coordinate/color stages | Flush on restore before accepting output | Fixed one-clock native RAM read contract; palette frontend integration pending |
 
 ## Chip state
 

@@ -1,0 +1,14 @@
+{
+  "case": "video_bitmap_pixel",
+  "pass_marker": "BITMAP_PIXEL_PASS",
+  "log": "debug\\baselines\\video_bitmap_pixel\\result.log",
+  "coordinates": 131072,
+  "post_reset_pixels": 2,
+  "source_sha256": {
+    "rtl/rabbitpunch_ram16.vhd": "3d7d435a69db34c53c30fe265f8b6a45be083f73542a37b30069c3b20b312199",
+    "rtl/rabbitpunch_bitmap_pixel.vhd": "13827f06b763926657a50dbbfc0dd32f1ba3b37b47bd5463af5a96e47bbdcd93",
+    "sim/video/bitmap_pixel_tb.vhd": "69838ed39541710c49d335ce9e24eec5f25dfc5c490f5ca6c950ac452d48c174"
+  },
+  "log_sha256": "d3f37b631318c44f4c7a008161b65d23899d83384b3e8fb1d45ab498f3370e8a",
+  "ram_model": "altera_mf.altsyncram BIDIR_DUAL_PORT"
+}
