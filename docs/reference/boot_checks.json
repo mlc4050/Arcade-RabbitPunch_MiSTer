@@ -1,0 +1,22 @@
+[
+  {
+    "set": "rabiolep",
+    "mameversion": "0289",
+    "writes_compared": 512,
+    "comparison": "identical",
+    "maincpu_sha256": "c740cf9a2a1d96adfc8b2bbd6dedc82420de05df5fbe96cd95117c6b3be5d695",
+    "mame_trace_sha256": "8329cd615bb470e0e2fa9ac12c164ba73f7b00040dac90daeef23304de94cc85",
+    "rtl_trace_sha256": "8329cd615bb470e0e2fa9ac12c164ba73f7b00040dac90daeef23304de94cc85",
+    "scope": "Early reset write prefix; behavioral backend, no IRQ or sound integration"
+  },
+  {
+    "set": "rpunch",
+    "mameversion": "0289",
+    "writes_compared": 512,
+    "comparison": "identical",
+    "maincpu_sha256": "457160a6ea8faf6aff803a579c890e3ee1bdd811acd46764d5a3076f1937b6c8",
+    "mame_trace_sha256": "8329cd615bb470e0e2fa9ac12c164ba73f7b00040dac90daeef23304de94cc85",
+    "rtl_trace_sha256": "8329cd615bb470e0e2fa9ac12c164ba73f7b00040dac90daeef23304de94cc85",
+    "scope": "Early reset write prefix; behavioral backend, no IRQ or sound integration"
+  }
+]

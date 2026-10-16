@@ -65,18 +65,76 @@ DTACK goes low only after the response and stays low until AS is released.
 The backend must finish accepted requests across CPU reset. The adapter drains an old
 reply before accepting a post-reset request, preventing a stale reply from completing
 the new cycle. AS before its byte strobes does not create a request. Bus-error/timeout
-policy, CPU phase generation and a complete memory backend remain to be integrated.
+policy and a complete memory backend remain to be integrated.
 
 The test covers seven completed reads/writes with upper/lower/full-word lanes and
 0/3/11-cycle backend delays, holding AS after acknowledgement, delayed byte strobes,
 and a new request immediately after resetting a CPU with an outstanding transaction.
 
 ```
-python scripts/run_board_tests.py
-python scripts/build_mras.py
-python scripts/validate_mra.py "releases/_dev/*.mra"
+./scripts/d_drive.ps1 scripts/run_board_tests.py
+./scripts/d_drive.ps1 scripts/build_mras.py
+./scripts/d_drive.ps1 scripts/validate_mra.py "releases/_dev/*.mra"
+./scripts/d_drive.ps1 scripts/check_boot_writes.py
 ```
 
 ModelSim logs are debug/baselines/board_decode/result.log and board_bus/result.log.
 The interfaces have not been added to files.qip; the inherited demo remains connected.
 These MRAs are development definitions, not a playable release. No RBF has been built.
+
+## CPU adapter and diagnostic
+
+`rabbitpunch_fx68k.vhd` is a naming-only adapter around unchanged vendor logic.
+Its ports describe the bus signals; the vendor's pin names appear only in the
+component declaration and translation map. `E` means the Motorola 6800 peripheral
+clock, `VMA` qualifies a peripheral address, and `VPA` selects the peripheral cycle
+or an interrupt autovector. The wrapper documents these signals even where unused.
+
+`rabbitpunch_maincpu.vhd` connects that adapter to our request bus. At the evaluation
+48 MHz clock it alternates phase enables every three clocks, giving an 8 MHz CPU.
+Delayed replies add actual wait states. Pause stops phase advancement once the
+current bus cycle finishes; the backend can still complete outstanding replies.
+The system reset currently drives both external and power-up reset. IRQs, bus error,
+DMA and peripheral cycles remain unconnected. This is not a complete board model.
+
+The diagnostic executes real 68000 opcodes: word writes, upper/lower byte writes,
+readback through D0 and writes to distinct RAM addresses. It checks the resulting
+1234/1234/1234/600d words, memory response latencies 0/17/65 clocks, pause with no
+new requests, and reset/replay. Two runs complete with 14 writes and eight reset
+vector reads. The test uses behavioral memory, so it does not validate FPGA BRAM
+indexing or SDRAM transport. Log: debug/baselines/board_maincpu/result.log.
+
+## Real-ROM comparison against MAME
+
+`check_boot_writes.py` loads each game's main ROM from the previously verified
+MAME region dumps (`build_mras.py` regenerates these), and captures 512 MAME writes
+after an explicit soft reset. The Lua script guards against repeated autoboot
+execution on reset. The runner verifies the first four vector reads, including
+their data, before accepting the trace. Later reads of low ROM addresses are not
+miscounted as additional resets.
+
+For both rabiolep and rpunch, the first 512 RTL writes match MAME exactly in order,
+address, byte mask and masked data. This includes stack writes, GGA initialization
+and early RAM clearing. No trace alignment or skipped writes are used. The CLR.B
+read preceding a write-only GGA register write returns unmapped ffff, as in MAME.
+
+This is an early execution check, not a successful game boot: no raster interrupts,
+sound CPU or synthesized memory backend are present. The bench stops with a failure
+if it reaches an input/mailbox read needing an implemented backend. Timings and
+ROM prefetch streams are not compared. Evidence: reference/boot_checks.json;
+raw traces: debug/boot_writes/<set>/mame_writes.txt and
+debug/baselines/boot_<set>/rtl_writes.txt.
+
+## VHDL conventions and local storage
+
+Use numeric_std and unsigned for vectors, with iu16_/ou16_ for 16-bit ports,
+iux_/oux_ for unconstrained ports, su16_ for internal signals and vu16_ for
+variables. Single-bit ports use i_/o_, internal std_logic uses s_. Integer/natural
+signals use sint_; integer/natural variables use vint_. Vendor pin names remain
+inside their descriptive adapters. Unchanged third-party files retain their style.
+
+Run Python tools through scripts/d_drive.ps1. It places TEMP/TMP/TMPDIR, Python
+cache/user-base, pip cache and ModelSim configuration under this repository on D:.
+Each simulation uses its own D-drive work library and logs. The shared JTAG guard
+retains its machine-wide marker location so other repositories still coordinate;
+these simulation runs need no JTAG marker creation.

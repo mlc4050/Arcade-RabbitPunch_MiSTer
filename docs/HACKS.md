@@ -21,7 +21,9 @@ Rules:
 
 | What | Where | Why it is a hack | What would make it correct | Evidence | Severity |
 |---|---|---|---|---|---|
-| {{ONE_LINE_WHAT}} | `{{FILE}}:{{LINE}}` | {{WHY}} | {{FIX}} | {{EVIDENCE}} | {{SEVERITY}} |
+| CPU IRQ/peripheral/error inputs held inactive | `rabbitpunch_maincpu.vhd`, cpu instance | Initial CPU integration exercises no complete board IRQ model | Implement GGA/IRQ and autovector behavior with directed tests and MAME traces | First 512 boot writes match both sets; later execution unverified | visible |
+| System reset also drives CPU power-up reset | `rabbitpunch_maincpu.vhd`, i_powerup_reset | No separate cold/warm reset policy yet | Wire and verify distinct reset behavior during board integration | Diagnostic reset replay passes; game warm reset unverified | latent |
+| Early-boot memory is a behavioral testbench array | `sim/board/boot_writes_tb.sv` | Not the synthesized BRAM/register backend | Implement and test the real memory/backend path | First 512 writes compare; input/mailbox reads deliberately fail | tooling |
 
 <!-- Examples of the shape, from sibling cores:
 | Sound mailbox is a stub that answers the power-on test | `rtl/gx_snd_stub.sv` | No sound CPU yet; the stub returns the reply the test expects and a heartbeat | Phase 3: the real sound board | The game's RAM check passes with it; nothing else is exercised | visible |

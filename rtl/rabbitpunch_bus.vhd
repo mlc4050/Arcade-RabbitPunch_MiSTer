@@ -1,64 +1,65 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 -- One request pulse and one response per 68000 bus cycle. The backend must finish
 -- accepted requests even across CPU reset; stale replies are drained before reuse.
 entity rabbitpunch_bus is
     port (
-        clk, reset : in std_logic;
-        cpu_as_n, cpu_rw, cpu_uds_n, cpu_lds_n : in std_logic;
-        cpu_address : in std_logic_vector(23 downto 1);
-        cpu_write_data : in std_logic_vector(15 downto 0);
-        cpu_read_data : out std_logic_vector(15 downto 0);
-        cpu_dtack_n : out std_logic;
-        request, request_write : out std_logic;
-        request_address : out std_logic_vector(23 downto 0);
-        request_data : out std_logic_vector(15 downto 0);
-        request_bytes : out std_logic_vector(1 downto 0);
-        response_valid : in std_logic;
-        response_data : in std_logic_vector(15 downto 0)
+        i_clk, i_reset : in std_logic;
+        i_cpu_address_strobe_n, i_cpu_read, i_cpu_upper_byte_strobe_n, i_cpu_lower_byte_strobe_n : in std_logic;
+        iu23_cpu_word_address : in unsigned(23 downto 1);
+        iu16_cpu_write_data : in unsigned(15 downto 0);
+        ou16_cpu_read_data : out unsigned(15 downto 0);
+        o_cpu_transfer_acknowledge_n : out std_logic;
+        o_request, o_request_write : out std_logic;
+        ou24_request_address : out unsigned(23 downto 0);
+        ou16_request_data : out unsigned(15 downto 0);
+        ou2_request_bytes : out unsigned(1 downto 0);
+        i_response_valid : in std_logic;
+        iu16_response_data : in unsigned(15 downto 0)
     );
 end entity;
 
 architecture rtl of rabbitpunch_bus is
     type state_t is (idle, waiting, complete, draining);
-    signal state : state_t := idle;
+    signal e_state : state_t := idle;
 begin
-    cpu_dtack_n <= '0' when state = complete and cpu_as_n = '0' and reset = '0' else '1';
-    process(clk)
+    o_cpu_transfer_acknowledge_n <= '0' when e_state = complete and i_cpu_address_strobe_n = '0' and i_reset = '0' else '1';
+    process(i_clk)
     begin
-        if rising_edge(clk) then
-            request <= '0';
-            if reset = '1' then
-                if (state = waiting or state = draining) and response_valid = '0' then
-                    state <= draining;
+        if rising_edge(i_clk) then
+            o_request <= '0';
+            if i_reset = '1' then
+                if (e_state = waiting or e_state = draining) and i_response_valid = '0' then
+                    e_state <= draining;
                 else
-                    state <= idle;
+                    e_state <= idle;
                 end if;
-                cpu_read_data <= (others => '1');
+                ou16_cpu_read_data <= (others => '1');
             else
-                case state is
+                case e_state is
                     when idle =>
-                        if cpu_as_n = '0' and (cpu_uds_n = '0' or cpu_lds_n = '0') then
-                            request <= '1';
-                            request_write <= not cpu_rw;
-                            request_address <= cpu_address & '0';
-                            request_data <= cpu_write_data;
-                            request_bytes <= (not cpu_uds_n) & (not cpu_lds_n);
-                            state <= waiting;
+                        if i_cpu_address_strobe_n = '0' and (i_cpu_upper_byte_strobe_n = '0' or i_cpu_lower_byte_strobe_n = '0') then
+                            o_request <= '1';
+                            o_request_write <= not i_cpu_read;
+                            ou24_request_address <= iu23_cpu_word_address & '0';
+                            ou16_request_data <= iu16_cpu_write_data;
+                            ou2_request_bytes <= (not i_cpu_upper_byte_strobe_n) & (not i_cpu_lower_byte_strobe_n);
+                            e_state <= waiting;
                         end if;
                     when waiting =>
-                        if cpu_as_n = '1' then
-                            if response_valid = '1' then state <= idle;
-                            else state <= draining; end if;
-                        elsif response_valid = '1' then
-                            cpu_read_data <= response_data;
-                            state <= complete;
+                        if i_cpu_address_strobe_n = '1' then
+                            if i_response_valid = '1' then e_state <= idle;
+                            else e_state <= draining; end if;
+                        elsif i_response_valid = '1' then
+                            ou16_cpu_read_data <= iu16_response_data;
+                            e_state <= complete;
                         end if;
                     when complete =>
-                        if cpu_as_n = '1' then state <= idle; end if;
+                        if i_cpu_address_strobe_n = '1' then e_state <= idle; end if;
                     when draining =>
-                        if response_valid = '1' then state <= idle; end if;
+                        if i_response_valid = '1' then e_state <= idle; end if;
                 end case;
             end if;
         end if;

@@ -3,7 +3,9 @@
 Approved by the user in the originating chat. Local framework bootstrap and source
 reference setup are complete. CPU/JTFRAME evaluation copies and initial baseline tests
 are now checked in. The shared ROM/control layout, VHDL address decoder and bus
-request adapter are implemented and tested; the game is not integrated/running yet.
+request adapter are implemented and tested. A descriptive fx68k adapter and CPU phase
+generator pass diagnostic tests, and both real ROMs match MAME's first 512 writes.
+The complete game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
 ## Goal and scope
@@ -60,6 +62,10 @@ is excluded from the first scope. No remote repository has been created or publi
 - First clock-independent board interfaces pass: 67 decoder boundary/lane/mirror checks,
   and bus transactions with delayed responses, held strobes and CPU-reset reply draining.
   They are not connected to the MiSTer top-level or compiled into an RBF yet.
+- CPU integration diagnostic passes word/byte readback, 0/17/65-clock response delays,
+  pause and reset replay. Real-ROM early-boot comparisons match the first 512 writes
+  for both games exactly. Backend remains behavioral, interrupts are not wired, and
+  this prefix does not establish a full boot. See BOARD_INTERFACE.md and reference/boot_checks.json.
 
 ## Component reuse candidates
 

@@ -4,7 +4,9 @@ Early development for Video System's 1987 arcade hardware, using MAME's rpunch.c
 as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
 
 Status: CPU/JTFRAME baselines and first VHDL board interfaces pass; both development
-MRAs are generated and their ROM streams match MAME. No complete game or playable RBF.
+MRAs are generated and their ROM streams match MAME. CPU integration diagnostics pass,
+and each game's first 512 writes match MAME exactly in simulation.
+No complete game or playable RBF.
 The inherited template demo remains connected.
 
 New board logic will use VHDL, with fx68k (SystemVerilog), T80 (VHDL), directly reused JTFRAME

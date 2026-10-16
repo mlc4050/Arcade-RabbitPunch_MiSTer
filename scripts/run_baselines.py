@@ -14,7 +14,7 @@ def run_case(name, sources, top, duration, marker):
     root, tools = core_root(), modelsim_bin()
     run_dir = root / "debug/baselines" / name
     run_dir.mkdir(parents=True, exist_ok=True)
-    if name == "fx68k_pace":
+    if any(path.startswith("rtl/cpu/fx68k/") for path in sources):
         for path in ("rtl/cpu/fx68k/microrom.mem", "rtl/cpu/fx68k/nanorom.mem"):
             target = run_dir / path
             target.parent.mkdir(parents=True, exist_ok=True)

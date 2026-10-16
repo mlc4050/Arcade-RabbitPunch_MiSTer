@@ -18,12 +18,14 @@ every frame.
 | Latched request address/data/byte enables/write flag | rabbitpunch_bus.vhd | 43 | Future; can be discarded only at drained/idle boundary | Current 68000 bus access |
 | CPU read-data holding register | rabbitpunch_bus.vhd | 16 | Future | Current 68000 bus access |
 | Request pulse register | rabbitpunch_bus.vhd | 1 | Must be inactive at proposed capture boundary | Transport |
+| CPU phase divider count and phase | rabbitpunch_maincpu.vhd | ceil(log2(PHASE_DIVIDER)) + 1 | Future, together with CPU | CPU clock phase |
 
 ## Chip state
 
 | Chip | Module | Addressable? | Tier | Note |
 |---|---|---|---|---|
-| fx68k/T80/JTFRAME evaluation copies | rtl/cpu, rtl/jtframe | Not integrated | Evaluation | Not part of the game state yet |
+| fx68k | rtl/cpu/fx68k, rabbitpunch_fx68k.vhd | No CPU register state port | CPU simulation integration | Adapter exposes descriptive bus pins; full CPU state capture remains open |
+| T80/JTFRAME evaluation copies | rtl/cpu/t80, rtl/jtframe | Not integrated | Evaluation | Not part of the game state yet |
 
 ## Deliberately skipped
 

@@ -6,3 +6,14 @@ for the inherited project workflow. New board RTL and adapters must be VHDL; app
 CPU, sound, memory, MiSTer framework, and directly instantiated JTFRAME modules may
 retain their existing HDL. The user explicitly approved Verilog JTFRAME reuse.
 Do not treat the inherited template demo as a Rabbit Punch implementation.
+
+User VHDL conventions: use ieee.numeric_std and unsigned, never std_logic_vector
+in our new board RTL. std_logic ports use i_/o_ (i_clk/o_ready), internal std_logic
+signals use s_. Unsigned input/output ports use iu<width>_/ou<width>_ (iu16_data
+for unsigned(15 downto 0)); unconstrained unsigned ports use iux_/oux_. Internal
+unsigned signals use su<width>_; unsigned variables use vu<width>_. Integer/natural
+signals use sint_, integer/natural variables use vint_. Use descriptive adapter ports around
+vendor logic; keep vendor pin names only inside that translation boundary and
+explain cryptic signals there. Preserve unchanged third-party sources.
+All generated work, caches, build outputs, logs and temporary files go on D:.
+Use scripts/d_drive.ps1 to launch Python tools with D-drive temporary/cache paths.

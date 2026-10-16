@@ -27,7 +27,7 @@ package rabbitpunch_layout is
     constant JOY_SERVICE : natural := 13;
     constant JOY_TEST : natural := 14;
 
-    subtype target_t is std_logic_vector(4 downto 0);
+    subtype target_t is unsigned(4 downto 0);
     constant TARGET_NONE : target_t := "00000";
     constant TARGET_ROM : target_t := "00001";
     constant TARGET_BITMAP : target_t := "00010";
