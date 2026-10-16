@@ -65,7 +65,7 @@ DTACK goes low only after the response and stays low until AS is released.
 The backend must finish accepted requests across CPU reset. The adapter drains an old
 reply before accepting a post-reset request, preventing a stale reply from completing
 the new cycle. AS before its byte strobes does not create a request. Bus-error/timeout
-policy and a complete memory backend remain to be integrated.
+policy and a complete board I/O backend remain to be integrated.
 
 The test covers seven completed reads/writes with upper/lower/full-word lanes and
 0/3/11-cycle backend delays, holding AS after acknowledgement, delayed byte strobes,
@@ -107,20 +107,20 @@ indexing or SDRAM transport. Log: debug/baselines/board_maincpu/result.log.
 ## Real-ROM comparison against MAME
 
 `check_boot_writes.py` loads each game's main ROM from the previously verified
-MAME region dumps (`build_mras.py` regenerates these), and captures 512 MAME writes
+MAME region dumps (`build_mras.py` regenerates these), and captures 10000 MAME writes
 after an explicit soft reset. The Lua script guards against repeated autoboot
 execution on reset. The runner verifies the first four vector reads, including
 their data, before accepting the trace. Later reads of low ROM addresses are not
 miscounted as additional resets.
 
-For both rabiolep and rpunch, the first 512 RTL writes match MAME exactly in order,
+For both rabiolep and rpunch, the first 10000 RTL writes match MAME exactly in order,
 address, byte mask and masked data. This includes stack writes, GGA initialization
-and early RAM clearing. No trace alignment or skipped writes are used. The CLR.B
+and RAM/bitmap clearing. No trace alignment or skipped writes are used. The CLR.B
 read preceding a write-only GGA register write returns unmapped ffff, as in MAME.
 
-This is an early execution check, not a successful game boot: no raster interrupts,
-sound CPU or synthesized memory backend are present. The bench stops with a failure
-if it reaches an input/mailbox read needing an implemented backend. Timings and
+This is an early execution check, not a successful game boot: no raster interrupts
+or sound CPU are present. RAM is actual VHDL; board I/O remains a testbench boundary.
+The bench stops with a failure if it reaches a sound-mailbox read. Timings and
 ROM prefetch streams are not compared. Evidence: reference/boot_checks.json;
 raw traces: debug/boot_writes/<set>/mame_writes.txt and
 debug/baselines/boot_<set>/rtl_writes.txt.
@@ -146,3 +146,40 @@ LD/memory-write/OUT/HALT program and checks the complete I/O address (4200), dat
 (42), RAM write address (8000), and halt output. The wrapper is not connected to a
 sound board yet. Imported TG68K evaluation files and MiSTer sys sources remain intact.
 The mixed-language toolchain smoke-test VHDL also follows the same conventions.
+
+## Main memory backend
+
+`rabbitpunch_memory.vhd` uses the tested address decoder and five instances of
+`rabbitpunch_ram16.vhd`. Sizes are bitmap 32768, sprites 2048, tilemaps 8192, palette
+1024 and work RAM 8192 words: 52224 words / 102 KiB total, excluding sound RAM.
+The CPU port reads or writes one word, with independent upper/lower byte enables.
+There is no RAM clear loop or CPU-reset input. Accepted requests complete across
+CPU reset as required by the bus adapter. Writes acknowledge with zero data;
+read data is registered, then acknowledged on the following clock.
+
+ROM requests expose a held, aligned 18-bit byte address and one request pulse.
+The external transport returns one valid/data response. No 68000 byte swapping is
+done here: the transport must return the big-endian word in normal CPU bit order.
+Requests to board I/O or unmapped space are not acknowledged by this module;
+`o_request_supported` identifies accesses that a separate I/O responder must handle.
+The caller must serialize requests until the response; this is not a queued bus.
+
+The read-only second RAM port can serve future video/state inspection. It uses a
+target code and local word address, with one-cycle valid/data. Shorter banks use
+the low word-address bits. Read-during-write collisions at the same address have
+no guaranteed hardware result. The future video/snapshot policy must define that
+scheduling; this interface does not choose a latch point or add a frame buffer.
+State restoration can borrow the CPU request path while the CPU is paused/drained.
+
+`memory_tb.sv` initializes every location to a bank/address-specific pattern before
+reading it, then verifies every word across all banks. It also checks byte merges,
+upper-address mirrors, inspection reads, and ROM delays 0/20/40 clocks. It reports
+104486 checks. Six numeric_std metavalue warnings occur during initial combinational
+decode settling at time zero; no test reads uninitialized RAM. All test assertions
+pass. Physical M10K inference, packing, fit and timing are still unverified.
+
+The real-ROM boot bench now instantiates this VHDL backend rather than a behavioral
+RAM array. ROM transport and register/I/O behavior remain testbench models; inactive
+controls are zero (active-high hardware) and DSW defaults come directly from each
+generated MRA. A sound-mailbox read fails rather than fabricating a reply. The
+comparison length is selected with `check_boot_writes.py --writes <count>`.

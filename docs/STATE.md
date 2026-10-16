@@ -8,7 +8,11 @@ every frame.
 
 | Region | RTL | Width x depth | Bytes | Save? |
 |---|---|---|---|---|
-| None in new board interfaces yet | decoder/bus/layout | N/A | 0 | No board RAM implemented |
+| Bitmap | rabbitpunch_memory / rabbitpunch_ram16 | 16 x 32768 | 65536 | Yes; read-only view port, restore through paused CPU request port |
+| Sprites | rabbitpunch_memory / rabbitpunch_ram16 | 16 x 2048 | 4096 | Yes; same access paths |
+| Tilemaps | rabbitpunch_memory / rabbitpunch_ram16 | 16 x 8192 | 16384 | Yes; same access paths |
+| Palette | rabbitpunch_memory / rabbitpunch_ram16 | 16 x 1024 | 2048 | Yes; same access paths |
+| Main work | rabbitpunch_memory / rabbitpunch_ram16 | 16 x 8192 | 16384 | Yes; same access paths |
 
 ## Registers and FSMs
 
@@ -19,6 +23,9 @@ every frame.
 | CPU read-data holding register | rabbitpunch_bus.vhd | 16 | Future | Current 68000 bus access |
 | Request pulse register | rabbitpunch_bus.vhd | 1 | Must be inactive at proposed capture boundary | Transport |
 | CPU phase divider count and phase | rabbitpunch_maincpu.vhd | ceil(log2(PHASE_DIVIDER)) + 1 | Future, together with CPU | CPU clock phase |
+| Memory backend FSM / target / write flag | rabbitpunch_memory.vhd | 2 logical + 5 + 1 | Capture at idle boundary | Transport |
+| ROM request address and response holding data | rabbitpunch_memory.vhd | 18 + 16 | Capture at idle boundary | Transport |
+| Inspection target, valid and per-bank read holding data | rabbitpunch_memory / rabbitpunch_ram16 | Derived pipeline state | Discard only when inspection idle | Debug/video port pipeline |
 
 ## Chip state
 
@@ -40,4 +47,13 @@ every frame.
 No save/restore interface exists yet. Proposed transport capture boundary is a paused
 CPU with no outstanding request and an idle adapter; saving an in-flight transaction
 would also require the backend's outstanding-response state. Video/frame alignment,
-CPU register capture, RAM state ports and full savestates remain integration work.
+CPU register capture, RAM state arbitration and full savestates remain integration work.
+
+RAM inspection is now implemented: choose a target code and local word address,
+assert view enable, then sample data with view valid after the next rising edge.
+Shorter banks use the low address bits. The port is read-only; restore must borrow
+the CPU request port while paused/drained. No complete state transport/arbitration
+exists yet. Simultaneous inspection of the exact byte being written has no promised
+hardware value and must be avoided by future snapshot/video scheduling. CPU reset
+does not clear any RAM or cancel an accepted ROM/memory request. Power-up RAM contents
+are not assigned; comparisons must not rely on uninitialized bytes.

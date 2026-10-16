@@ -18,7 +18,10 @@ def main():
                          "rtl/rabbitpunch_fx68k.vhd", "rtl/rabbitpunch_maincpu.vhd", "sim/board/maincpu_tb.sv"],
                         "maincpu_tb", "2 ms", "MAINCPU_PASS"),
                run_case("board_t80_wrapper", t80 + ["rtl/rabbitpunch_t80.vhd", "sim/board/t80_wrapper_tb.sv"],
-                        "t80_wrapper_tb", "3 us", "T80_WRAPPER_PASS")]
+                        "t80_wrapper_tb", "3 us", "T80_WRAPPER_PASS"),
+               run_case("board_memory", ["rtl/rabbitpunch_layout.vhd", "rtl/rabbitpunch_decode.vhd",
+                         "rtl/rabbitpunch_ram16.vhd", "rtl/rabbitpunch_memory.vhd", "sim/board/memory_tb.sv"],
+                        "memory_tb", "20 ms", "MEMORY_PASS")]
     for result in results:
         result["log_sha256"] = hashlib.sha256((core_root() / result["log"]).read_bytes()).hexdigest()
     report = json.dumps(results, indent=2) + "\n"

@@ -4,7 +4,8 @@ Approved by the user in the originating chat. Local framework bootstrap and sour
 reference setup are complete. CPU/JTFRAME evaluation copies and initial baseline tests
 are now checked in. The shared ROM/control layout, VHDL address decoder and bus
 request adapter are implemented and tested. A descriptive fx68k adapter and CPU phase
-generator pass diagnostic tests, and both real ROMs match MAME's first 512 writes.
+generator pass diagnostic tests. Five VHDL RAM banks pass full-address tests, and
+both real ROMs match MAME's first 10000 writes through that memory backend.
 The complete game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
@@ -63,9 +64,14 @@ is excluded from the first scope. No remote repository has been created or publi
   and bus transactions with delayed responses, held strobes and CPU-reset reply draining.
   They are not connected to the MiSTer top-level or compiled into an RBF yet.
 - CPU integration diagnostic passes word/byte readback, 0/17/65-clock response delays,
-  pause and reset replay. Real-ROM early-boot comparisons match the first 512 writes
-  for both games exactly. Backend remains behavioral, interrupts are not wired, and
+  pause and reset replay. Real-ROM early-boot comparisons match the first 10000 writes
+  for both games exactly using the actual VHDL RAM backend. ROM transport and board
+  I/O remain behavioral, interrupts are not wired, and
   this prefix does not establish a full boot. See BOARD_INTERFACE.md and reference/boot_checks.json.
+- Main RAM/ROM backend: five banks totaling 52224 words, byte strobes, synchronous
+  CPU and read-only inspection ports, serialized external ROM handshake. Every RAM
+  word and independent banks are checked (104486 assertions/checks). No CPU-reset
+  RAM clear or request cancellation. Quartus inference/packing/timing remain open.
 
 ## Component reuse candidates
 

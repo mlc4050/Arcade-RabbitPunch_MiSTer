@@ -5,7 +5,8 @@ as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
 
 Status: CPU/JTFRAME baselines and first VHDL board interfaces pass; both development
 MRAs are generated and their ROM streams match MAME. CPU integration diagnostics pass,
-and each game's first 512 writes match MAME exactly in simulation.
+all 52224 main RAM words pass read/write checks, and each game's first 10000 writes
+match MAME exactly using the VHDL memory backend in simulation.
 No complete game or playable RBF.
 The inherited template demo remains connected.
 
