@@ -26,6 +26,11 @@ every frame.
 | Memory backend FSM / target / write flag | rabbitpunch_memory.vhd | 2 logical + 5 + 1 | Capture at idle boundary | Transport |
 | ROM request address and response holding data | rabbitpunch_memory.vhd | 18 + 16 | Capture at idle boundary | Transport |
 | Inspection target, valid and per-bank read holding data | rabbitpunch_memory / rabbitpunch_ram16 | Derived pipeline state | Discard only when inspection idle | Debug/video port pipeline |
+| Video flags / scroll registers / sprite count and priority | rabbitpunch_io.vhd | 16 + 36 + 12 | Read through explicit outputs; restore through CPU write path | m_videoflags, tilemap scroll, m_sprite_num, m_sprite_pri |
+| GGA register file and selected index | rabbitpunch_io.vhd | 128 + 4 | Indexed GGA view; restore through select/data writes | GGA m_regs / m_address_latch |
+| Sound command and pending flag | rabbitpunch_io.vhd | 8 + 1 | Capture with sound CPU stopped; future coordinated state loader | generic_latch_8 state |
+| IRQ enabled / first-event state / frequency / pending | rabbitpunch_irq.vhd | 4 | Future explicit state loader | CRTC timer configuration and CPU HOLD_LINE |
+| CPU previous interrupt-acknowledge cycle | rabbitpunch_maincpu.vhd | 1 | Capture outside acknowledge cycle | Bus protocol edge detection |
 
 ## Chip state
 
@@ -57,3 +62,8 @@ exists yet. Simultaneous inspection of the exact byte being written has no promi
 hardware value and must be avoided by future snapshot/video scheduling. CPU reset
 does not clear any RAM or cancel an accepted ROM/memory request. Power-up RAM contents
 are not assigned; comparisons must not rely on uninitialized bytes.
+
+Board I/O initialization is separate from CPU reset. GGA registers can now be read
+without borrowing the CPU bus; the boot bench pauses/drains before dumping all 24
+video/GGA state fields. IRQ and sound state lack a complete save/restore protocol.
+Input/DIP pins must be recorded with the future capture manifest.

@@ -21,9 +21,9 @@ Rules:
 
 | What | Where | Why it is a hack | What would make it correct | Evidence | Severity |
 |---|---|---|---|---|---|
-| CPU IRQ/peripheral/error inputs held inactive | `rabbitpunch_maincpu.vhd`, cpu instance | Initial CPU integration exercises no complete board IRQ model | Implement GGA/IRQ and autovector behavior with directed tests and MAME traces | First 512 boot writes match both sets; later execution unverified | visible |
+| Raster events not generated in real-ROM boot bench | `boot_writes_tb.sv`, interrupts instance | GGA IRQ state and CPU acknowledge work, but vblank/half-frame events are tied low | Supply verified raster events and compare IRQ execution against MAME | Directed scheduler and CPU STOP/handler/RTE tests pass; early boot is not a full timing comparison | tooling |
 | System reset also drives CPU power-up reset | `rabbitpunch_maincpu.vhd`, i_powerup_reset | No separate cold/warm reset policy yet | Wire and verify distinct reset behavior during board integration | Diagnostic reset replay passes; game warm reset unverified | latent |
-| Boot reference transport and board I/O remain behavioral | `sim/board/boot_writes_tb.sv` | ROM array supplies the external memory handshake; register writes are traced, DIP defaults come from MRA, controls are inactive | Integrate SDRAM transport, board registers, GGA/IRQ and sound | Actual VHDL RAM banks now exercised; sound mailbox reads deliberately fail | tooling |
+| Boot ROM transport and external inputs remain behavioral | `sim/board/boot_writes_tb.sv` | ROM array supplies the external handshake; DIP defaults come from MRA, controls are inactive | Integrate SDRAM transport, input mapper and sound CPU | VHDL RAM, board I/O and mailbox now used; a poll of a pending command stops for the missing sound CPU | tooling |
 | No assigned RAM power-up contents yet | `rabbitpunch_ram16.vhd`, su16_memory | MAME starts ordinary RAM at zero and bitmap pixels at transparent 15; current RAM model has undefined contents until software writes | Define and verify FPGA configuration-time initialization or a startup fill before CPU/video release | Tests explicitly initialize all checked words; 10000-write boot prefix passes, pre-clear display unverified | latent |
 
 <!-- Examples of the shape, from sibling cores:

@@ -22,6 +22,15 @@ def main():
                run_case("board_memory", ["rtl/rabbitpunch_layout.vhd", "rtl/rabbitpunch_decode.vhd",
                          "rtl/rabbitpunch_ram16.vhd", "rtl/rabbitpunch_memory.vhd", "sim/board/memory_tb.sv"],
                         "memory_tb", "20 ms", "MEMORY_PASS")]
+    results += [run_case("board_io", ["rtl/rabbitpunch_layout.vhd", "rtl/rabbitpunch_decode.vhd",
+                         "rtl/rabbitpunch_io.vhd", "sim/board/io_tb.sv"], "io_tb", "10 us", "IO_PASS"),
+                run_case("board_irq", ["rtl/rabbitpunch_irq.vhd", "sim/board/irq_tb.sv"],
+                         "irq_tb", "10 us", "IRQ_PASS"),
+                run_case("board_cpu_irq", ["rtl/cpu/fx68k/fx68k.sv", "rtl/cpu/fx68k/fx68kAlu.sv",
+                         "rtl/cpu/fx68k/uaddrPla.sv", "rtl/rabbitpunch_layout.vhd", "rtl/rabbitpunch_decode.vhd",
+                         "rtl/rabbitpunch_ram16.vhd", "rtl/rabbitpunch_memory.vhd", "rtl/rabbitpunch_bus.vhd",
+                         "rtl/rabbitpunch_fx68k.vhd", "rtl/rabbitpunch_maincpu.vhd", "sim/board/cpu_irq_tb.sv"],
+                         "cpu_irq_tb", "1 ms", "CPU_IRQ_PASS")]
     for result in results:
         result["log_sha256"] = hashlib.sha256((core_root() / result["log"]).read_bytes()).hexdigest()
     report = json.dumps(results, indent=2) + "\n"

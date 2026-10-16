@@ -12,6 +12,8 @@ entity rabbitpunch_maincpu is
         i_clk : in std_logic;
         i_reset : in std_logic;
         i_pause : in std_logic;
+        i_interrupt_level1 : in std_logic := '0';
+        o_interrupt_acknowledge : out std_logic;
         o_request : out std_logic;
         o_request_write : out std_logic;
         ou24_request_address : out unsigned(23 downto 0);
@@ -30,7 +32,26 @@ architecture rtl of rabbitpunch_maincpu is
     signal s_address_strobe_n, s_upper_byte_strobe_n, s_lower_byte_strobe_n, s_read, s_transfer_acknowledge_n : std_logic;
     signal su23_word_address : unsigned(23 downto 1);
     signal su16_read_data, su16_write_data : unsigned(15 downto 0);
+    signal su3_function_code, su3_interrupt_level_n : unsigned(2 downto 0);
+    signal s_interrupt_cycle, s_interrupt_cycle_previous : std_logic := '0';
+    signal s_memory_address_strobe_n : std_logic;
 begin
+    su3_interrupt_level_n <= "110" when i_interrupt_level1 = '1' else "111";
+    s_interrupt_cycle <= '1' when s_address_strobe_n = '0' and su3_function_code = "111" else '0';
+    s_memory_address_strobe_n <= s_address_strobe_n or s_interrupt_cycle;
+    process(i_clk)
+    begin
+        if rising_edge(i_clk) then
+            o_interrupt_acknowledge <= '0';
+            if i_reset = '1' then s_interrupt_cycle_previous <= '0';
+            else
+                s_interrupt_cycle_previous <= s_interrupt_cycle;
+                if s_interrupt_cycle = '1' and s_interrupt_cycle_previous = '0' then
+                    o_interrupt_acknowledge <= '1';
+                end if;
+            end if;
+        end if;
+    end process;
     -- Finish the current bus cycle before stopping. Backend replies keep running.
     s_frozen <= '1' when i_pause = '1' and s_address_strobe_n = '1' and i_reset = '0' else '0';
     o_paused <= s_frozen;
@@ -62,12 +83,12 @@ begin
         ou16_write_data => su16_write_data,
         iu16_read_data => su16_read_data,
         i_transfer_acknowledge_n => s_transfer_acknowledge_n,
-        i_peripheral_transfer_n => '1', -- No 6800 peripheral or IRQ wiring yet.
+        i_peripheral_transfer_n => not s_interrupt_cycle, -- Autovector on interrupt acknowledge.
         i_bus_error_n => '1',
         i_bus_request_n => '1', -- No external bus master.
         i_bus_grant_acknowledge_n => '1',
-        iu3_interrupt_level_n => "111", -- Interrupts disabled for initial CPU tests.
-        ou3_function_code => open,
+        iu3_interrupt_level_n => su3_interrupt_level_n,
+        ou3_function_code => su3_function_code,
         o_peripheral_clock => open,
         o_peripheral_address_valid_n => open,
         o_bus_grant_n => open,
@@ -77,7 +98,7 @@ begin
     bus_adapter : entity work.rabbitpunch_bus port map (
         i_clk => i_clk,
         i_reset => i_reset,
-        i_cpu_address_strobe_n => s_address_strobe_n,
+        i_cpu_address_strobe_n => s_memory_address_strobe_n,
         i_cpu_read => s_read,
         i_cpu_upper_byte_strobe_n => s_upper_byte_strobe_n,
         i_cpu_lower_byte_strobe_n => s_lower_byte_strobe_n,

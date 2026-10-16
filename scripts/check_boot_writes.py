@@ -11,6 +11,30 @@ from mame_capture import mame_cmd, lua_runner_env, check_lua_error
 from run_baselines import run_case
 
 
+def reference_io_state(writes):
+    """Reconstruct write-only state from MAME taps using the pinned driver semantics."""
+    state = dict(flags=0, scroll0_y=0, scroll0_x=0, scroll1_y=0, scroll1_x=0,
+                 sprite_count=0, sprite_priority=0, gga_selected=0)
+    state.update({f"gga{index:02x}": 0 for index in range(16)})
+    scroll = ("scroll0_y", "scroll0_x", "scroll1_y", "scroll1_x")
+    for address, mask, data in writes:
+        address &= 0xffffe
+        if address == 0xc000c:
+            state["flags"] = (state["flags"] & (~mask & 65535)) | (data & mask)
+        elif 0xc0000 <= address <= 0xc0006 and mask == 65535:
+            state[scroll[(address-0xc0000)//2]] = data & 511
+        elif mask & 255:
+            if address == 0xc0028:
+                state["gga_selected"] = data & 15
+            elif address == 0xc0008:
+                state[f"gga{state['gga_selected']:02x}"] = data & 255
+            elif address == 0xc0010:
+                state["sprite_count"] = data & 63
+            elif address == 0xc0012:
+                state["sprite_priority"] = data & 63
+    return state
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--writes", type=int, default=10000)
@@ -58,9 +82,10 @@ def main():
         run_case("boot_" + game, ["rtl/cpu/fx68k/fx68k.sv", "rtl/cpu/fx68k/fx68kAlu.sv",
                     "rtl/cpu/fx68k/uaddrPla.sv", "rtl/rabbitpunch_layout.vhd", "rtl/rabbitpunch_decode.vhd",
                     "rtl/rabbitpunch_ram16.vhd", "rtl/rabbitpunch_memory.vhd", "rtl/rabbitpunch_bus.vhd",
-                    "rtl/rabbitpunch_fx68k.vhd", "rtl/rabbitpunch_maincpu.vhd", "sim/board/boot_writes_tb.sv"],
+                    "rtl/rabbitpunch_fx68k.vhd", "rtl/rabbitpunch_maincpu.vhd", "rtl/rabbitpunch_io.vhd",
+                    "rtl/rabbitpunch_irq.vhd", "sim/board/boot_writes_tb.sv"],
                  "boot_writes_tb", "100 ms", "BOOT_PREFIX_COMPLETE",
-                 [f"+BOOT_WRITES={args.writes}", f"+DSW={dip_default:04x}"])
+                 [f"+BOOT_WRITES={args.writes}", f"+DSW={dip_default:04x}"], wall_timeout=180)
         expected = [tuple(int(x, 16) for x in line.split())
                     for line in (out / "mame_writes.txt").read_text().splitlines()]
         actual = [tuple(int(x, 16) for x in line.split())
@@ -70,14 +95,21 @@ def main():
                             min(len(expected), len(actual)))
             raise SystemExit(f"{game}: write mismatch #{mismatch}: "
                              f"MAME {expected[mismatch:mismatch+1]}, RTL {actual[mismatch:mismatch+1]}")
+        actual_state = {key: int(value, 16) for key, value in
+                        (line.split() for line in (run_dir / "rtl_io_state.txt").read_text().splitlines())}
+        expected_state = reference_io_state(expected)
+        if actual_state != expected_state:
+            raise SystemExit(f"{game}: IO state mismatch: expected {expected_state}, actual {actual_state}")
         reports.append({"set": game, "mameversion": version,
                         "writes_compared": len(actual), "comparison": "identical",
                         "maincpu_sha256": hashlib.sha256(rom).hexdigest(),
                         "mame_trace_sha256": hashlib.sha256((out / "mame_writes.txt").read_bytes()).hexdigest(),
                         "rtl_trace_sha256": hashlib.sha256((run_dir / "rtl_writes.txt").read_bytes()).hexdigest(),
                         "dip_default": f"{dip_default:04x}",
-                        "scope": "Early reset write prefix; actual VHDL RAM/ROM backend, behavioral ROM transport and IO with MRA DIP defaults/inactive inputs; no IRQ or sound integration"})
-        print(f"PASS {game}: first {len(actual)} writes identical to MAME (address, byte mask, data)")
+                        "io_state": "identical to state reconstructed from MAME writes",
+                        "io_state_fields": len(actual_state),
+                        "scope": "Early reset prefix with actual VHDL RAM and board IO; behavioral ROM transport, no raster event generation or sound CPU"})
+        print(f"PASS {game}: first {len(actual)} writes and {len(actual_state)} IO state fields match MAME")
     (root / "docs/reference/boot_checks.json").write_text(json.dumps(reports, indent=2) + "\n", encoding="utf-8")
 
 

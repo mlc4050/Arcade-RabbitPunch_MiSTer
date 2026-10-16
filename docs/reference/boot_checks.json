@@ -8,7 +8,9 @@
     "mame_trace_sha256": "1c86e032223fe48c7db151b617f731746aa089cccd65cf61410a798641ec4b0b",
     "rtl_trace_sha256": "1c86e032223fe48c7db151b617f731746aa089cccd65cf61410a798641ec4b0b",
     "dip_default": "0000",
-    "scope": "Early reset write prefix; actual VHDL RAM/ROM backend, behavioral ROM transport and IO with MRA DIP defaults/inactive inputs; no IRQ or sound integration"
+    "io_state": "identical to state reconstructed from MAME writes",
+    "io_state_fields": 24,
+    "scope": "Early reset prefix with actual VHDL RAM and board IO; behavioral ROM transport, no raster event generation or sound CPU"
   },
   {
     "set": "rpunch",
@@ -19,6 +21,8 @@
     "mame_trace_sha256": "b220109c13ee36b49fa416d392db6adb3d03db994a88159d9c1ca23b97d158a3",
     "rtl_trace_sha256": "b220109c13ee36b49fa416d392db6adb3d03db994a88159d9c1ca23b97d158a3",
     "dip_default": "2000",
-    "scope": "Early reset write prefix; actual VHDL RAM/ROM backend, behavioral ROM transport and IO with MRA DIP defaults/inactive inputs; no IRQ or sound integration"
+    "io_state": "identical to state reconstructed from MAME writes",
+    "io_state_fields": 24,
+    "scope": "Early reset prefix with actual VHDL RAM and board IO; behavioral ROM transport, no raster event generation or sound CPU"
   }
 ]

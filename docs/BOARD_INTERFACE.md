@@ -65,7 +65,7 @@ DTACK goes low only after the response and stays low until AS is released.
 The backend must finish accepted requests across CPU reset. The adapter drains an old
 reply before accepting a post-reset request, preventing a stale reply from completing
 the new cycle. AS before its byte strobes does not create a request. Bus-error/timeout
-policy and a complete board I/O backend remain to be integrated.
+policy and final top-level arbitration remain to be integrated.
 
 The test covers seven completed reads/writes with upper/lower/full-word lanes and
 0/3/11-cycle backend delays, holding AS after acknowledgement, delayed byte strobes,
@@ -94,8 +94,9 @@ or an interrupt autovector. The wrapper documents these signals even where unuse
 48 MHz clock it alternates phase enables every three clocks, giving an 8 MHz CPU.
 Delayed replies add actual wait states. Pause stops phase advancement once the
 current bus cycle finishes; the backend can still complete outstanding replies.
-The system reset currently drives both external and power-up reset. IRQs, bus error,
-DMA and peripheral cycles remain unconnected. This is not a complete board model.
+The system reset currently drives both external and power-up reset. Level-1 IRQ
+and autovector acknowledge are connected and tested; bus error, DMA and general
+6800 peripheral cycles remain unconnected. This is not a complete board model.
 
 The diagnostic executes real 68000 opcodes: word writes, upper/lower byte writes,
 readback through D0 and writes to distinct RAM addresses. It checks the resulting
@@ -118,9 +119,9 @@ address, byte mask and masked data. This includes stack writes, GGA initializati
 and RAM/bitmap clearing. No trace alignment or skipped writes are used. The CLR.B
 read preceding a write-only GGA register write returns unmapped ffff, as in MAME.
 
-This is an early execution check, not a successful game boot: no raster interrupts
-or sound CPU are present. RAM is actual VHDL; board I/O remains a testbench boundary.
-The bench stops with a failure if it reaches a sound-mailbox read. Timings and
+This is an early execution check, not a successful game boot: no raster events
+or sound CPU are generated. RAM and board I/O are actual VHDL. The bench stops with
+a failure if a command is pending when the CPU polls the missing sound CPU. Timings and
 ROM prefetch streams are not compared. Evidence: reference/boot_checks.json;
 raw traces: debug/boot_writes/<set>/mame_writes.txt and
 debug/baselines/boot_<set>/rtl_writes.txt.
@@ -179,7 +180,41 @@ decode settling at time zero; no test reads uninitialized RAM. All test assertio
 pass. Physical M10K inference, packing, fit and timing are still unverified.
 
 The real-ROM boot bench now instantiates this VHDL backend rather than a behavioral
-RAM array. ROM transport and register/I/O behavior remain testbench models; inactive
+RAM array. ROM transport and external input pins remain testbench models; inactive
 controls are zero (active-high hardware) and DSW defaults come directly from each
-generated MRA. A sound-mailbox read fails rather than fabricating a reply. The
+generated MRA. A poll of a pending sound command fails rather than fabricating a reply. The
 comparison length is selected with `check_boot_writes.py --writes <count>`.
+
+## Board I/O and level-1 interrupts
+
+`rabbitpunch_io.vhd` implements video-flag byte merging, four nine-bit scroll
+registers (full-word writes only), six-bit sprite count/priority, GGA select/data
+storage, player/service/DIP reads and the sound-command mailbox. Each player read
+combines the common service byte above that player's control byte. Unmapped reads,
+including write-only ports, return ffff. Cold initialization is separate from CPU
+reset. Sound commands remain pending until read by the future sound CPU; a new
+write wins over simultaneous consume. No delayed fake acknowledgement is generated.
+
+The GGA selector masks to four bits; all sixteen byte registers have an indexed
+state read port. Data writes expose an address/data pulse. Register 0b rearms the
+IRQ scheduler: c0 selects two interrupts per frame, other values select one, as in
+the pinned MAME model. See MAME_KLUDGES.md for this incomplete chip model.
+
+`rabbitpunch_irq.vhd` accepts external vblank-start and half-frame events. The first
+event after configuration must be vblank. Level 1 holds until acknowledged.
+Reconfiguration preserves an existing pending IRQ; an event simultaneous with ack
+sets it again. No pixel clock, frame rate or raw raster is assumed here.
+
+The CPU adapter maps level 1 to active-low IPL=110. A function-code-111 address-strobe
+cycle asserts VPA for autovectoring and is excluded from normal memory requests.
+One acknowledge pulse is emitted per such cycle. The directed CPU test verifies
+STOP waits, vector 25 at address 64 is fetched, three exception words are stacked
+through VHDL work RAM, the handler executes and RTE resumes after STOP. Interrupt
+acknowledge addresses never reach memory.
+
+I/O tests cover all GGA registers, byte lanes, scroll masks, inputs, sprite limits
+and mailbox behavior. IRQ tests cover arming, one/two events per frame, holding,
+rearm and coincident events. The real-ROM bench pauses/drains before recording 24
+video/GGA fields, then compares them to an independent reconstruction from MAME
+writes. Its raster event inputs remain low; this is not a comparison of the games'
+interrupt timing or evidence of a full game boot.

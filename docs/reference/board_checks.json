@@ -3,30 +3,48 @@
     "case": "board_decode",
     "pass_marker": "BOARD_DECODE_PASS",
     "log": "debug\\baselines\\board_decode\\result.log",
-    "log_sha256": "17507d0cea54eb9782e0deeb68827a550e592d1fb5478add4d584e504654825c"
+    "log_sha256": "231d7e23f400e02266e3deea9329c1332d86a12592a3cecf2a5f333acd205131"
   },
   {
     "case": "board_bus",
     "pass_marker": "BOARD_BUS_PASS",
     "log": "debug\\baselines\\board_bus\\result.log",
-    "log_sha256": "ce429671d87aca853a565fdcb7567807ce6ced52a69da01d09c4c26ece2816c6"
+    "log_sha256": "c2194d020bff2c3d6ae8ff8077cc18c42ea19c8da9434e1395c08543d8ae86d3"
   },
   {
     "case": "board_maincpu",
     "pass_marker": "MAINCPU_PASS",
     "log": "debug\\baselines\\board_maincpu\\result.log",
-    "log_sha256": "35cec010488407703240eeeca2d81b7838392a491d77c5cdb25701376d9dcb6b"
+    "log_sha256": "2a5d10e1aaeca8b0b120b74d05649c9d440358c8e6f226044deb86b2af152422"
   },
   {
     "case": "board_t80_wrapper",
     "pass_marker": "T80_WRAPPER_PASS",
     "log": "debug\\baselines\\board_t80_wrapper\\result.log",
-    "log_sha256": "8c1563b29d8cd6b0c6febd9a50da775a18b5247652bd19687c60847117221ca9"
+    "log_sha256": "3bfe526af02024019c9749b09d284a77cd01846120fd99f8f3fd2f323e4cdd8f"
   },
   {
     "case": "board_memory",
     "pass_marker": "MEMORY_PASS",
     "log": "debug\\baselines\\board_memory\\result.log",
-    "log_sha256": "72ddd9c848bc8c91018eb10de00c18f04d8a887289739347d01fabcaa141a125"
+    "log_sha256": "76c3dc379fcb0e136346510ef3749ee26f2283624d92efe3e3cf60c22f386de4"
+  },
+  {
+    "case": "board_io",
+    "pass_marker": "IO_PASS",
+    "log": "debug\\baselines\\board_io\\result.log",
+    "log_sha256": "e2ce51143f43babb2e7bbd2d7a84672ad410102a94b349eccfd74d4a9c38340b"
+  },
+  {
+    "case": "board_irq",
+    "pass_marker": "IRQ_PASS",
+    "log": "debug\\baselines\\board_irq\\result.log",
+    "log_sha256": "3acdcede0a149171370db2099516f3f1a1826eec39d99865c8d608c7d5a83084"
+  },
+  {
+    "case": "board_cpu_irq",
+    "pass_marker": "CPU_IRQ_PASS",
+    "log": "debug\\baselines\\board_cpu_irq\\result.log",
+    "log_sha256": "a3b1d7d0558aa4a3a67566c92799366a0a88eee6aef50c9ed49457db7a63732e"
   }
 ]

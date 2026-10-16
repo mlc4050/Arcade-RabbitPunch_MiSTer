@@ -7,6 +7,8 @@ Status: CPU/JTFRAME baselines and first VHDL board interfaces pass; both develop
 MRAs are generated and their ROM streams match MAME. CPU integration diagnostics pass,
 all 52224 main RAM words pass read/write checks, and each game's first 10000 writes
 match MAME exactly using the VHDL memory backend in simulation.
+The VHDL board registers also match 24 state fields reconstructed from MAME writes.
+Level-1 IRQ/autovector handling passes a STOP/handler/RTE diagnostic through VHDL RAM.
 No complete game or playable RBF.
 The inherited template demo remains connected.
 

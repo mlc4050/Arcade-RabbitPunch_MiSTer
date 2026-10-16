@@ -10,6 +10,7 @@ module maincpu_tb;
     reg response_valid = 0;
     reg [15:0] response_data = 0;
     rabbitpunch_maincpu dut(
+        .i_interrupt_level1(1'b0), .o_interrupt_acknowledge(),
         .i_clk(clk),
         .i_reset(reset),
         .i_pause(pause),

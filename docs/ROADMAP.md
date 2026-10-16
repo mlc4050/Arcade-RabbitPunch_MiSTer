@@ -6,6 +6,8 @@ are now checked in. The shared ROM/control layout, VHDL address decoder and bus
 request adapter are implemented and tested. A descriptive fx68k adapter and CPU phase
 generator pass diagnostic tests. Five VHDL RAM banks pass full-address tests, and
 both real ROMs match MAME's first 10000 writes through that memory backend.
+Board I/O, GGA storage, sound mailbox interface and level-1 autovector handling
+pass directed tests; full raster and sound integration remain open.
 The complete game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
@@ -66,12 +68,16 @@ is excluded from the first scope. No remote repository has been created or publi
 - CPU integration diagnostic passes word/byte readback, 0/17/65-clock response delays,
   pause and reset replay. Real-ROM early-boot comparisons match the first 10000 writes
   for both games exactly using the actual VHDL RAM backend. ROM transport and board
-  I/O remain behavioral, interrupts are not wired, and
+  inputs remain behavioral; board I/O is VHDL, and
   this prefix does not establish a full boot. See BOARD_INTERFACE.md and reference/boot_checks.json.
 - Main RAM/ROM backend: five banks totaling 52224 words, byte strobes, synchronous
   CPU and read-only inspection ports, serialized external ROM handshake. Every RAM
   word and independent banks are checked (104486 assertions/checks). No CPU-reset
   RAM clear or request cancellation. Quartus inference/packing/timing remain open.
+- Board register/mailbox/GGA and IRQ scheduler tests pass. A real fx68k program
+  verifies STOP -> level-1 autovector -> stack -> handler -> RTE via VHDL RAM.
+  Boot comparison checks 24 I/O fields reconstructed from MAME writes. Physical
+  raster events are not generated in that bounded test yet.
 
 ## Component reuse candidates
 

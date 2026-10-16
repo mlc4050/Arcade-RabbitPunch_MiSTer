@@ -9,7 +9,7 @@ from coretools import core_root, modelsim_bin, NO_WINDOW
 from hwlock import require_no_jtag
 
 
-def run_case(name, sources, top, duration, marker, sim_args=()):
+def run_case(name, sources, top, duration, marker, sim_args=(), wall_timeout=90):
     require_no_jtag(f"Rabbit Punch baseline: {name}")
     root, tools = core_root(), modelsim_bin()
     run_dir = root / "debug/baselines" / name
@@ -23,7 +23,8 @@ def run_case(name, sources, top, duration, marker, sim_args=()):
 
     def command(exe, *args):
         result = subprocess.run([str(tools / (exe + ".exe")), *map(str, args)], cwd=run_dir,
-                                capture_output=True, text=True, timeout=90, **NO_WINDOW)
+                                capture_output=True, text=True,
+                                timeout=wall_timeout if exe == "vsim" else 90, **NO_WINDOW)
         output = result.stdout + result.stderr
         logs.append(output)
         (run_dir / "result.log").write_text("\n".join(logs), encoding="utf-8")

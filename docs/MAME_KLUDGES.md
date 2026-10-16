@@ -1,41 +1,18 @@
-# MAME kludges this core reproduces
+# MAME assumptions reproduced by this core
 
-This project follows MAME, including where MAME is wrong (ROADMAP, "Design decisions"), so the
-software model and the RTL reproduce MAME's guesses on purpose. This file lists each one that
-touches an in-scope set: where it is in MAME, what the core does, and what would settle the real
-behaviour.
+Reference: MAME 0.289, release commit
+`f34f02505e32c1993c6a782b6814232cbfc74e36`,
+`src/mame/vsystem/rpunch.cpp` and `vsystem_gga.cpp`.
+Both in-scope sets carry MACHINE_SUPPORTS_SAVE and MACHINE_NO_COCKTAIL.
+The absence of an imperfect-graphics flag does not establish physical video timing.
 
-It also records where a vendored, silicon-derived module disagrees with MAME and the module was
-kept (ROADMAP, "Where a vendored module and MAME disagree").
-
-This core's own approximations are not here; they are in `HACKS.md`.
-
-Source references are to `{{MAME_DRIVER_DIR}}/{{DRIVER_FILE}}` unless named. MAME commit:
-`{{MAME_COMMIT}}`.
-
-**Core column:** *copies* MAME; *differs* (and why); *n/a* (not in the core's scope);
-*not checked*.
-
-{{MAME_MACHINE_FLAGS_ONE_LINE}}
-<!-- e.g. "Every set is MACHINE_IMPERFECT_GRAPHICS." -->
-
-## {{SUBSYSTEM}}
-
-<!-- One section per subsystem: CPU and timing, Video, Sound, Protection, Inputs. -->
-
-| Kludge | MAME | Core | Would settle it |
+| Assumption | MAME source | Core behavior | Evidence needed for original hardware |
 |---|---|---|---|
-| {{SHORT_NAME_OR_MAME_QUOTE}} | `{{file}}:{{line}}`: {{what MAME does, quoting its own comment where it admits the guess}} | {{copies / differs: how / n/a}}, `{{core file or model function}}` | {{the measurement or capture that would answer it, or "—"}} |
+| GGA device is a skeleton | vsystem_gga.cpp description and write handler | rabbitpunch_io stores sixteen byte registers and a low-four-bit address latch | Chip documentation, netlist or PCB register tests |
+| Register 0b controls interrupt rate | rpunch_state::gga_data_w / crtc_interrupt_gen | rabbitpunch_irq waits for the next vblank, then holds level 1 once per frame, or twice for data c0, until CPU acknowledge | PCB interrupt timing versus GGA writes |
+| Synthetic raster configuration | rpunch machine configuration | No physical timing generator selected; the IRQ module accepts external vblank/half-frame events | Schematics/raw timing or measured PCB sync waveform |
+| Scroll byte-only writes ignored | rpunch_state::scrollreg_w | Decoder/I/O update scroll only for full-word writes and store the low nine bits | PCB tests of independent byte writes |
 
-<!-- Examples of the shape, from sibling cores:
-| "Tokkae shadow masking (INACCURATE)" | `konamigx_v.cpp`, primodes 4 and 5: a shadow's priority is raised to the highest priority of a layer that SHD_ON excludes | copies, `mixer_shadow_setup` | The K055555 SHD_ON behaviour on hardware (MAME calls it a HACK) |
-| Unhandled priority mask 0xc0: MAME draws `machine().rand()` pixels and pops a message | `ms32_v.cpp:522-526` | differs: not reproduced | — |
-| Watchdog not implemented | `jaleco_ms32_sysctrl.cpp:104` | copies (ignored) | — |
-| Equal z-code tie-break | No silicon source found; MAME draws back to front and skips when the stored z is lower | copies: the line buffer writes when (z, priority) is strictly lower, in RAM order | A PCB capture of two overlapping equal-z sprites |
--->
-
-## Vendored modules that disagree with MAME
-
-| Module | MAME says | The module does | Kept because | Would settle it |
-|---|---|---|---|---|
-| `{{module}}` | {{MAME behaviour, file:line}} | {{module behaviour, file:line}} | {{silicon-derived / upstream bench / measured}} | {{what would show which describes the chip}} |
+Core-specific incomplete work is tracked in HACKS.md. Sprite priority assumptions,
+bitmap composition and other graphics behavior must be recorded as those modules land.
+No vendored CPU disagreement is currently worked around in board RTL.
