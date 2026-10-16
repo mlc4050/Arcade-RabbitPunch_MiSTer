@@ -4,6 +4,8 @@ use ieee.numeric_std.all;
 
 -- CPU read/write port plus a read-only video/state inspection port, one clock.
 -- RAM contents are deliberately not reset. CPU writes define each byte independently.
+-- CPU read data is meaningful for reads only; mixed-port same-address collisions
+-- have no guaranteed value and must be avoided by video/state arbitration.
 entity rabbitpunch_ram16 is
     generic (sint_ADDRESS_BITS : positive := 13);
     port (
@@ -43,9 +45,10 @@ begin
                     if (iu2_cpu_bytes(0) = '1') then
                         su16_memory(to_integer(iux_cpu_address))(0) <= iu16_cpu_data(7 downto 0);
                     end if;
-                else
-                    su16_cpu_word <= su16_memory(to_integer(iux_cpu_address));
                 end if;
+                -- Keep this read on the write port's address/enable, including writes.
+                -- A separate read-only enable causes Quartus to replicate the array.
+                su16_cpu_word <= su16_memory(to_integer(iux_cpu_address));
             end if;
             if (i_view_enable = '1') then
                 su16_view_word <= su16_memory(to_integer(iux_view_address));
