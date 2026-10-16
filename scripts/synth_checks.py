@@ -22,6 +22,8 @@ CHECKS = {
     "tile_line": (16384, ("rabbitpunch_tiles", "rabbitpunch_tile_layer", "line_ram", "jtframe_draw")),
     "video": (32768, ("rabbitpunch_video", "rabbitpunch_tiles", "rabbitpunch_sprites",
                       "rabbitpunch_bitmap_pixel", "rabbitpunch_pixel_mixer", "jtframe_draw")),
+    "video_rgb": (32768, ("rabbitpunch_rgb_video", "rabbitpunch_video", "rabbitpunch_palette_pixel",
+                          "rabbitpunch_tiles", "rabbitpunch_sprites", "jtframe_draw")),
 }
 
 

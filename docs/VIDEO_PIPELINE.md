@@ -67,3 +67,36 @@ accesses still need to be connected to the board memory system before hardware.
 ./scripts/d_drive.ps1 scripts/build_staged.py --synth-check tile_line
 ./scripts/d_drive.ps1 scripts/build_staged.py --synth-check video
 ```
+
+## Isolated fitting
+
+The packed tile-line renderer fits at the 48 MHz evaluation constraint with
+202 ALMs, 302 registers and exactly two M10K blocks (16384 bits). The combined
+palette-index video pipeline fits with 506 ALMs, 864 registers and exactly
+four M10K blocks (32768 bits). All reported setup, hold and minimum-pulse checks
+are nonnegative, with no illegal clocks or unconstrained paths. Exact source
+commit, timing corners and resources are recorded in reference/tile_line_synth.json
+and reference/video_synth.json. These virtual-I/O fits do not establish the
+physical raster deadline or shared-SDRAM bandwidth.
+
+## Native RGB frontend
+
+`rabbitpunch_rgb_video.vhd` wraps the palette-index pipeline and
+`rabbitpunch_palette_pixel.vhd`. The caller supplies a fixed one-clock native
+palette RAM read port. RGB555 channels expand to eight bits by replicating the
+upper three bits; bit 15 is ignored. All stages use the same i_clk. Errors and
+coordinates are delayed to the RGB slot. RGB is registered four clocks after
+request acceptance; the scoreboard observes a five-clock sampled interval.
+There is no output backpressure and no frame buffer.
+
+The updated video bench loads actual native palette RAM as well as bitmap RAM.
+It writes the HDL's 24-bit RGB output directly to the comparison image; Python
+no longer translates palette indices to colors. The focused Rabio Lepus attract
+replay passes all 62208 pixels. The complete six-scene RGB regression and RGB
+wrapper fit are in progress at this checkpoint; the existing six-scene report
+above records the preceding palette-index pipeline result.
+
+`palette_pixel_tb.vhd` independently checks all 65536 RAM word values, all
+palette addresses, continuous traffic, gaps, coordinates, fixed latency and
+reset dropping an accepted in-flight pixel, followed by two fresh pixels.
+Its native RAM results are in reference/palette_pixel_checks.json.

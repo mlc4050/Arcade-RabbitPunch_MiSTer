@@ -1,0 +1,14 @@
+{
+  "case": "video_palette_pixel",
+  "pass_marker": "PALETTE_PIXEL_PASS",
+  "log": "debug\\baselines\\video_palette_pixel\\result.log",
+  "ram_values": 65536,
+  "post_reset_pixels": 2,
+  "source_sha256": {
+    "rtl/rabbitpunch_ram16.vhd": "3d7d435a69db34c53c30fe265f8b6a45be083f73542a37b30069c3b20b312199",
+    "rtl/rabbitpunch_palette_pixel.vhd": "9dda5fe21b2e6076308b0ec485d849d97136f4a76b05490fa5fc78d46db144bd",
+    "sim/video/palette_pixel_tb.vhd": "2f4c3591335d0fccfcfd021129c9d15c85f3bc1eda11a9347caa19ec8d1aee26"
+  },
+  "log_sha256": "1211a178111401caeb1e85d7a4b475d447183848f4794844a5c23acbe00d8586",
+  "ram_model": "altera_mf.altsyncram BIDIR_DUAL_PORT"
+}

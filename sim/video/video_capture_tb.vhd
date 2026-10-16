@@ -15,6 +15,7 @@ architecture test of video_capture_tb is
     constant C_TILE_ROM0 : t_unsigned_words := read_hex("tiles0.hex", 131072, 32);
     constant C_TILE_ROM1 : t_unsigned_words := read_hex("tiles1.hex", 131072, 32);
     constant C_BITMAP : t_unsigned_words := read_hex("bitmap.hex", 32768, 16);
+    constant C_PALETTE : t_unsigned_words := read_hex("palette.hex", 1024, 16);
     signal s_clk : std_logic := '0';
     signal s_reset : std_logic := '1';
     signal s_line_valid, s_bank : std_logic := '0';
@@ -42,14 +43,19 @@ architecture test of video_capture_tb is
     signal su9_pixel_x, su9_output_x : unsigned(8 downto 0) := (others => '0');
     signal su8_pixel_y, su8_output_y : unsigned(7 downto 0) := (others => '0');
     signal su16_pixel_flags : unsigned(15 downto 0) := (others => '0');
-    signal su10_output_index, su10_first_index : unsigned(9 downto 0);
+    signal s_palette_load, s_palette_read : std_logic := '0';
+    signal su10_palette_address : unsigned(9 downto 0);
+    signal su16_palette_data : unsigned(15 downto 0);
+    signal su8_red, su8_green, su8_blue : unsigned(7 downto 0);
+    signal su24_output_rgb, su24_first_rgb : unsigned(23 downto 0);
     signal s_record, s_expect_error : std_logic := '0';
     signal s_force_delay : std_logic := '0';
     signal sint_lines_done, sint_pixels, sint_max_cycles : natural := 0;
 begin
     s_clk <= not s_clk after 5 ns;
     su13_ram_addresses(0) <= "00" & su11_sprite_address;
-    dut : entity work.rabbitpunch_video
+    su24_output_rgb <= su8_red & su8_green & su8_blue;
+    dut : entity work.rabbitpunch_rgb_video
         port map (
             i_clk => s_clk,
             i_reset => s_reset,
@@ -95,7 +101,12 @@ begin
             o_pixel_error => s_output_error,
             ou9_pixel_x => su9_output_x,
             ou8_pixel_y => su8_output_y,
-            ou10_palette_index => su10_output_index
+            o_palette_ram_read_enable => s_palette_read,
+            ou10_palette_ram_word_address => su10_palette_address,
+            iu16_palette_ram_data => su16_palette_data,
+            ou8_red => su8_red,
+            ou8_green => su8_green,
+            ou8_blue => su8_blue
         );
     bitmap_ram : entity work.rabbitpunch_ram16
         generic map (sint_ADDRESS_BITS => 15)
@@ -110,6 +121,21 @@ begin
             i_view_enable => s_bitmap_read,
             iux_view_address => su15_bitmap_address,
             ou16_view_data => su16_bitmap_data
+        );
+
+    palette_ram : entity work.rabbitpunch_ram16
+        generic map (sint_ADDRESS_BITS => 10)
+        port map (
+            i_clk => s_clk,
+            i_cpu_enable => s_palette_load,
+            i_cpu_write => '1',
+            iux_cpu_address => su15_load_address(9 downto 0),
+            iu2_cpu_bytes => "11",
+            iu16_cpu_data => su16_load_data,
+            ou16_cpu_data => open,
+            i_view_enable => s_palette_read,
+            iux_view_address => su10_palette_address,
+            ou16_view_data => su16_palette_data
         );
 
     external_memory : process(s_clk)
@@ -199,7 +225,7 @@ begin
                 end if;
                 if (s_output_valid = '1' or s_output_error = '1') then
                     assert (vint_returned < vint_accepted) report "Unrequested video output" severity failure;
-                    assert (vint_clock - v_pipeline(vint_returned mod 8).accepted_clock = 3 and
+                    assert (vint_clock - v_pipeline(vint_returned mod 8).accepted_clock = 5 and
                         to_integer(su9_output_x) = v_pipeline(vint_returned mod 8).x and
                         to_integer(su8_output_y) = v_pipeline(vint_returned mod 8).y)
                         report "Video streaming latency/tag mismatch" severity failure;
@@ -221,10 +247,10 @@ begin
                 if (s_output_valid = '1' and s_record = '1') then
                     assert (to_integer(su9_output_x) = vint_pixels mod 288 + 8 and
                         to_integer(su8_output_y) = vint_pixels / 288) report "Video output pixel ordering mismatch" severity failure;
-                    write(v_line, to_hstring(su10_output_index));
+                    write(v_line, to_hstring(su24_output_rgb));
                     writeline(v_output, v_line);
                     if (vint_pixels = 0) then
-                        su10_first_index <= su10_output_index;
+                        su24_first_rgb <= su24_output_rgb;
                     end if;
                     vint_pixels := vint_pixels + 1;
                 end if;
@@ -269,6 +295,14 @@ begin
             s_pixel_valid <= '1';
         end procedure;
     begin
+        for vint_word in C_PALETTE'range loop
+            wait until falling_edge(s_clk);
+            s_palette_load <= '1';
+            su15_load_address <= to_unsigned(vint_word, 15);
+            su16_load_data <= C_PALETTE(vint_word);
+        end loop;
+        wait until falling_edge(s_clk);
+        s_palette_load <= '0';
         for vint_word in C_BITMAP'range loop
             wait until falling_edge(s_clk);
             s_load <= '1';
@@ -340,10 +374,10 @@ begin
         wait until falling_edge(s_clk);
         s_pixel_valid <= '0';
         wait until falling_edge(s_clk) and s_output_valid = '1';
-        assert (su10_output_index = su10_first_index and su9_output_x = 8 and su8_output_y = 0)
+        assert (su24_output_rgb = su24_first_rgb and su9_output_x = 8 and su8_output_y = 0)
             report "Post-reset video did not reproduce first pixel" severity failure;
         assert (sint_pixels = 62208) report "Video frame pixel count mismatch" severity failure;
-        report "VIDEO_CAPTURE_PASS: 62208 mixed pixels; max_cycles=" & integer'image(sint_max_cycles) &
+        report "VIDEO_CAPTURE_PASS: 62208 native RGB pixels; max_cycles=" & integer'image(sint_max_cycles) &
             "; streaming native scanout, tags and reset";
         std.env.finish;
         wait;

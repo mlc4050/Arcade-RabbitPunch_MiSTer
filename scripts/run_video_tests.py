@@ -4,6 +4,7 @@ import hashlib
 import json
 import re
 import struct
+from concurrent.futures import ThreadPoolExecutor
 from coretools import core_root
 from png_rgb import read_rgb, write_rgb
 from run_baselines import run_case
@@ -22,12 +23,10 @@ def main():
                "rtl/rabbitpunch_sprite_scan.vhd", "rtl/rabbitpunch_sprite_row.vhd",
                "rtl/rabbitpunch_sprite_line.vhd", "rtl/rabbitpunch_sprites.vhd",
                "rtl/rabbitpunch_bitmap_pixel.vhd", "rtl/rabbitpunch_video.vhd",
+               "rtl/rabbitpunch_palette_pixel.vhd", "rtl/rabbitpunch_rgb_video.vhd",
                "sim/video/tile_test_support.vhd", "sim/video/video_capture_tb.vhd"]
-    results = []
-    for fixture in json.loads((root / "scripts/mame/video_fixtures.json").read_text()):
+    def run_fixture(fixture):
         capture = root / fixture["capture"]
-        if args.only and capture.name != args.only:
-            continue
         name = "video_" + capture.name.replace("-", "_")
         directory = root / "debug/baselines" / name
         directory.mkdir(parents=True, exist_ok=True)
@@ -40,17 +39,15 @@ def main():
         settings.extend((registers[17] & 63, registers[19] & 63))
         (directory / "video_settings.hex").write_text("".join(f"{value:04x}\n" for value in settings), encoding="ascii")
         for filename, raw in (("spriteram.hex", (capture / "spriteram.bin").read_bytes()),
-                              ("bitmap.hex", (capture / "bitmap.bin").read_bytes())):
+                              ("bitmap.hex", (capture / "bitmap.bin").read_bytes()),
+                              ("palette.hex", (capture / "palette.bin").read_bytes())):
             (directory / filename).write_text("".join(f"{item[0]:04x}\n" for item in struct.iter_unpack(">H", raw)), encoding="ascii")
         graphics = (root / "debug/rom_regions" / fixture["set"] / "sprites.bin").read_bytes()
         (directory / "sprites.hex").write_text("".join(f"{item[0]:08x}\n" for item in struct.iter_unpack("<I", graphics)), encoding="ascii")
         result = run_case(name, sources, "video_capture_tb", "60 ms", "VIDEO_CAPTURE_PASS", wall_timeout=300)
-        indices = [int(line, 16) for line in (directory / "pixels.hex").read_text().splitlines()]
-        assert len(indices) == 62208
-        palette = struct.unpack(">1024H", (capture / "palette.bin").read_bytes())
-        colors = [bytes(((value >> shift & 31) << 3) | (value >> shift & 31) >> 2
-                        for shift in (10, 5, 0)) for value in palette]
-        actual = b"".join(colors[index] for index in indices)
+        pixels = [int(line, 16) for line in (directory / "pixels.hex").read_text().splitlines()]
+        assert len(pixels) == 62208
+        actual = b"".join(pixel.to_bytes(3, "big") for pixel in pixels)
         width, height, expected = read_rgb(capture / "reference.png")
         assert (width, height) == (288, 216)
         differing = sum(actual[offset:offset+3] != expected[offset:offset+3] for offset in range(0, len(actual), 3))
@@ -63,12 +60,18 @@ def main():
                       expected_rgb_sha256=hashlib.sha256(expected).hexdigest(), actual_rgb_sha256=hashlib.sha256(actual).hexdigest(),
                       source_sha256={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources},
                       log_sha256=hashlib.sha256((root / result["log"]).read_bytes()).hexdigest(),
-                      scope="Actual VHDL/JTFRAME tiles, sprites, native line/bitmap RAM, bitmap decode and mixer; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster")
-        results.append(result)
-        print(f"PASS {name}: all 62208 actual HDL mixed RGB pixels identical to MAME", flush=True)
+                      scope="Actual VHDL/JTFRAME tiles, sprites, native line/bitmap/palette RAM, bitmap decode, mixer and RGB555 expansion; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster")
+        print(f"PASS {name}: all 62208 actual HDL RGB pixels identical to MAME", flush=True)
+        return result
+    fixtures = json.loads((root / "scripts/mame/video_fixtures.json").read_text())
+    fixtures = [fixture for fixture in fixtures if not args.only or
+                (root / fixture["capture"]).name == args.only]
+    # Each fixture owns its simulator library, vectors, transcript and image.
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        results = list(pool.map(run_fixture, fixtures))
     if not results:
         raise SystemExit("No matching video fixture")
-    report = "debug/video_focused_checks.json" if args.only else "docs/reference/video_pipeline_checks.json"
+    report = f"debug/video_{args.only}_checks.json" if args.only else "docs/reference/video_pipeline_checks.json"
     (root / report).write_text(json.dumps(results, indent=2) + "\n", encoding="utf-8")
 
 
