@@ -14,6 +14,8 @@ The memory backend passes a standalone Cyclone V fit at the 48 MHz evaluation
 constraint: 102 M10K blocks, no duplicated RAM, positive timing in every corner.
 VHDL tilemap lookup and a JTFRAME row adapter now match both tile layers in
 all six reference scenes; sprites and the complete mixer/raster are still open.
+Their standalone fit also passes timing at the 48 MHz evaluation constraint,
+with 139 ALMs, 201 registers and no M10K blocks.
 The complete game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 

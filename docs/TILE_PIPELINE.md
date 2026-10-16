@@ -56,6 +56,11 @@ screenshots. Image storage used by the test tool is not part of the FPGA design.
 ```
 
 The standalone fit uses a 48 MHz evaluation constraint and virtual I/O. It is
-not a whole-core fit or a final board clock selection. Shared memory arbitration,
+not a whole-core fit or a final board clock selection. Commit d48e724 passes
+on 5CSEBA6U23I7 using 139 ALMs, 201 registers and zero M10K blocks. Worst setup
+slack is +10.265 ns and worst hold slack is +0.108 ns; every reported corner
+and pulse-width check passes, with no unconstrained paths. The lookup and
+JTFRAME drawer hierarchy survive synthesis. See reference/tiles_synth.json.
+Shared memory arbitration,
 continuous raster scheduling, sprite priority/mixing, final palette logic and
 dynamic CPU-write timing still need integration and verification.
