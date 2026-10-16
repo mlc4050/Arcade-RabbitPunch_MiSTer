@@ -1,0 +1,14 @@
+[
+  {
+    "case": "board_decode",
+    "pass_marker": "BOARD_DECODE_PASS",
+    "log": "debug\\baselines\\board_decode\\result.log",
+    "log_sha256": "6271d872e758f10cdd0a3e8347d707aa6bc685d265a3457796e072eb1019bf51"
+  },
+  {
+    "case": "board_bus",
+    "pass_marker": "BOARD_BUS_PASS",
+    "log": "debug\\baselines\\board_bus\\result.log",
+    "log_sha256": "59d690970e5fca9efe0e8f0b042c43627dddc97d1fbf748356c84a8086454d26"
+  }
+]

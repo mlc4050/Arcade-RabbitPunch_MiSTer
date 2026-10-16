@@ -2,7 +2,8 @@
 
 Approved by the user in the originating chat. Local framework bootstrap and source
 reference setup are complete. CPU/JTFRAME evaluation copies and initial baseline tests
-are now checked in; Rabbit Punch board RTL implementation has not started.
+are now checked in. The shared ROM/control layout, VHDL address decoder and bus
+request adapter are implemented and tested; the game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
 ## Goal and scope
@@ -53,6 +54,12 @@ is excluded from the first scope. No remote repository has been created or publi
   validation and actual Quartus fit remain open. Installed tools are not a game build.
 - Mixed-language sound and direct JTFRAME reuse are approved. New board-specific
   logic remains VHDL. Module selection and evidence are in FRAMEWORK_DECISION.md.
+- Development MRAs for both games are generated under releases/_dev. Their complete
+  0x210000-byte streams match independent source assembly and actual MAME-loaded ROM
+  regions; XML/DIP/button/version checks pass. See BOARD_INTERFACE.md and reference/mra_checks.json.
+- First clock-independent board interfaces pass: 67 decoder boundary/lane/mirror checks,
+  and bus transactions with delayed responses, held strobes and CPU-reset reply draining.
+  They are not connected to the MiSTer top-level or compiled into an RBF yet.
 
 ## Component reuse candidates
 

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='utf-8'?>
+<misterromdescription>
+    <name>Rabio Lepus (Japan)</name>
+    <setname>rabiolep</setname>
+    <rbf>RabbitPunch</rbf>
+    <mameversion>0289</mameversion>
+    <year>1987</year>
+    <manufacturer>V-System Co.</manufacturer>
+    <rotation>horizontal</rotation>
+    <players>2</players>
+    <about>Development ROM/control definition; no playable core release yet.</about>
+    <joystick ways="8" />
+    <rom index="0" zip="rabiolep.zip" md5="None">
+        <interleave output="16">
+            <part name="rl_e2.bin" crc="7d936a12" length="0x8000" map="01" />
+            <part name="rl_d2.bin" crc="d8d85429" length="0x8000" map="10" />
+        </interleave>
+        <interleave output="16">
+            <part name="rl_e4.bin" crc="5bfaee12" length="0x8000" map="01" />
+            <part name="rl_d4.bin" crc="e64216bf" length="0x8000" map="10" />
+        </interleave>
+        <part repeat="0x20000">00</part>
+        <part name="rl_f20.bin" crc="a6f50351" length="0x10000" />
+        <part name="rl_c13.bin" crc="7c8403b0" length="0x40000" />
+        <part name="rl_c10.bin" crc="312eb260" length="0x8000" />
+        <part name="rl_c12.bin" crc="bea85219" length="0x8000" />
+        <part repeat="0x10000">FF</part>
+        <part repeat="0x20000">FF</part>
+        <part name="rl_a10.bin" crc="c2a77619" length="0x40000" />
+        <part name="rl_a13.bin" crc="a39c2c16" length="0x8000" />
+        <part name="rl_a12.bin" crc="970b0e32" length="0x8000" />
+        <part repeat="0x30000">FF</part>
+        <interleave output="16">
+            <part name="rl_4g.bin" crc="c5cb4b7a" length="0x20000" map="01" />
+            <part name="rl_4h.bin" crc="8a4d3c99" length="0x20000" map="10" />
+        </interleave>
+        <interleave output="16">
+            <part name="rl_1g.bin" crc="74d41b2e" length="0x8000" map="01" />
+            <part name="rl_1h.bin" crc="7dcb32bb" length="0x8000" map="10" />
+        </interleave>
+        <interleave output="16">
+            <part name="rl_2g.bin" crc="744903b4" length="0x8000" map="01" />
+            <part name="rl_2h.bin" crc="09649e75" length="0x8000" map="10" />
+        </interleave>
+        <part repeat="0x20000">FF</part>
+        <part name="rl_f18.bin" crc="47840673" length="0x20000" />
+        <part repeat="0x20000">00</part>
+    </rom>
+    <switches default="00,00" base="0">
+        <dip name="Coin A" bits="0,3" ids="1C/1C,-,4C/5C,5C/6C,1C/6C,6C/4C,2C/3C,-,1C/2C,1C/3C,1C/4C,1C/5C,2C/1C,3C/1C,-,-" />
+        <dip name="Coin B" bits="4,7" ids="1C/1C,-,4C/5C,5C/6C,1C/6C,6C/4C,2C/3C,-,1C/2C,1C/3C,1C/4C,1C/5C,2C/1C,3C/1C,-,-" />
+        <dip name="Difficulty" bits="8,9" ids="Normal,Hard,Easy,Hardest" />
+        <dip name="Continues" bits="14" ids="On,Off" />
+        <dip name="Flip Screen" bits="15" ids="Off,On" />
+        <dip name="Lives" bits="10" ids="3,2" />
+        <dip name="Laser" bits="11" ids="Semi-Automatic,Manual" />
+        <dip name="Extended Play" bits="12" ids="500000 points,300000 points" />
+        <dip name="Demo Sounds" bits="13" ids="On,Off" />
+    </switches>
+    <buttons names="Missile,Punch,-,-,-,-,Start,Coin,Pause,Service,Test" count="2" />
+</misterromdescription>

@@ -1,0 +1,22 @@
+[
+  {
+    "set": "rabiolep",
+    "mameversion": "0289",
+    "bytes": 2162688,
+    "sha256": "f99fedd7cee90bf4dcc0fd4c6aeb27bcaedbf9f0e07061b12f441017b80c7386",
+    "source_and_listxml_checked": true,
+    "xml_vs_address_assembly": "identical",
+    "xml_vs_mame_regions": "identical",
+    "mra": "releases/_dev/Rabio Lepus (Japan).mra"
+  },
+  {
+    "set": "rpunch",
+    "mameversion": "0289",
+    "bytes": 2162688,
+    "sha256": "cf849688f863acfc771cfeca8e9812cbfee62d025966b997bdbf2f9efc5e3117",
+    "source_and_listxml_checked": true,
+    "xml_vs_address_assembly": "identical",
+    "xml_vs_mame_regions": "identical",
+    "mra": "releases/_dev/Rabbit Punch (US).mra"
+  }
+]

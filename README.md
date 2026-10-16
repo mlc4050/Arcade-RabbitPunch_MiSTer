@@ -3,8 +3,9 @@
 Early development for Video System's 1987 arcade hardware, using MAME's rpunch.cpp
 as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
 
-Status: framework bootstrapped; tools verified and first MAME reference captures taken.
-No game RTL or playable RBF. The inherited template demo remains connected.
+Status: CPU/JTFRAME baselines and first VHDL board interfaces pass; both development
+MRAs are generated and their ROM streams match MAME. No complete game or playable RBF.
+The inherited template demo remains connected.
 
 New board logic will use VHDL, with fx68k (SystemVerilog), T80 (VHDL), directly reused JTFRAME
 modules, and approved mixed-language sound/framework dependencies. Target: DE10-nano, Quartus Prime Lite 17.0.2, one
@@ -13,6 +14,7 @@ SDRAM module of at least 32 MB. Each set declares 0x210000 ROM bytes (2.0625 MiB
 See [ROADMAP](docs/ROADMAP.md), [hardware notes](docs/HARDWARE_NOTES.md), and
 [WORKFLOW](docs/WORKFLOW.md) for scope, evidence, and build coordination.
 Installed versions and baseline results are recorded in [TOOLCHAIN](docs/TOOLCHAIN.md).
+ROM/control definitions and board-interface tests are in [BOARD_INTERFACE](docs/BOARD_INTERFACE.md).
 
 ## Reference setup
 
