@@ -21,9 +21,15 @@ entity rabbitpunch_ram16 is
 end entity;
 
 architecture rtl of rabbitpunch_ram16 is
-    type ram_t is array (0 to 2**sint_ADDRESS_BITS-1) of unsigned(15 downto 0);
+    -- Separate bytes follow Quartus 17's byte-enabled RAM inference template.
+    type t_word is array (0 to 1) of unsigned(7 downto 0);
+    type ram_t is array (0 to 2**sint_ADDRESS_BITS-1) of t_word;
     signal su16_memory : ram_t;
+    signal su16_cpu_word : t_word;
+    signal su16_view_word : t_word;
 begin
+    ou16_cpu_data <= su16_cpu_word(1) & su16_cpu_word(0);
+    ou16_view_data <= su16_view_word(1) & su16_view_word(0);
     assert iux_cpu_address'length = sint_ADDRESS_BITS and iux_view_address'length = sint_ADDRESS_BITS
         report "RAM address ports must match sint_ADDRESS_BITS" severity failure;
     process(i_clk)
@@ -32,17 +38,17 @@ begin
             if (i_cpu_enable = '1') then
                 if (i_cpu_write = '1') then
                     if (iu2_cpu_bytes(1) = '1') then
-                        su16_memory(to_integer(iux_cpu_address))(15 downto 8) <= iu16_cpu_data(15 downto 8);
+                        su16_memory(to_integer(iux_cpu_address))(1) <= iu16_cpu_data(15 downto 8);
                     end if;
                     if (iu2_cpu_bytes(0) = '1') then
-                        su16_memory(to_integer(iux_cpu_address))(7 downto 0) <= iu16_cpu_data(7 downto 0);
+                        su16_memory(to_integer(iux_cpu_address))(0) <= iu16_cpu_data(7 downto 0);
                     end if;
                 else
-                    ou16_cpu_data <= su16_memory(to_integer(iux_cpu_address));
+                    su16_cpu_word <= su16_memory(to_integer(iux_cpu_address));
                 end if;
             end if;
             if (i_view_enable = '1') then
-                ou16_view_data <= su16_memory(to_integer(iux_view_address));
+                su16_view_word <= su16_memory(to_integer(iux_view_address));
             end if;
         end if;
     end process;
