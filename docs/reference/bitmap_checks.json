@@ -3,7 +3,7 @@
     "case": "video_bitmap",
     "pass_marker": "BITMAP_PASS",
     "log": "debug\\baselines\\video_bitmap\\result.log",
-    "log_sha256": "b7107694247c6846c8d496346b0c24ed07243d6aa488718b8b522b4c3a548a99"
+    "log_sha256": "a53a04def30bccc26de742831f9ddfde92c3d8cb5d5193b8ec62fe5f95ab15d0"
   },
   {
     "case": "bitmap_rabiolep_attract",
@@ -14,7 +14,7 @@
     "pixels": 62208,
     "bitmap_sha256": "7c2bbf50ae9e9a6240bbd26d5c673c2a6a94388c797c313fa5a1cf381336f4e4",
     "flags": "0800",
-    "log_sha256": "671aec70abcced6aa6daa4368e917088c3dc07f80afb2c56713b96f40d8c9abb"
+    "log_sha256": "06937e8417406a52884ab7c53fa50c92e7ce62c024d8aed6a59f8999d29f784c"
   },
   {
     "case": "bitmap_rpunch_attract",
@@ -25,7 +25,7 @@
     "pixels": 62208,
     "bitmap_sha256": "3ecb34e8f276ceb72a86daa58321d0800ad44681a5dbb593cab6fefe85fe472f",
     "flags": "0000",
-    "log_sha256": "58b24efc36560a21227b523837b89a6992dfad34c1ec6dc954dfcf0bfc40fddb"
+    "log_sha256": "dd44762777297f913cea9a10acc6798d74390dd99eef1edfb5b7c0363297ccb0"
   },
   {
     "case": "bitmap_rabiolep_play1000",
@@ -36,7 +36,7 @@
     "pixels": 62208,
     "bitmap_sha256": "0a9f1536b56af94d3bf3a0f4ccea198e8f66781472069e9f588ebe47080519f1",
     "flags": "0c00",
-    "log_sha256": "a4436542c53a93dbb4bac6ea58e9f7048e50ac76de0295f541c8fb17849e926a"
+    "log_sha256": "0b1d1e085b763adb16a16c17ebf0c9ef9e4529ea186045c0751cc010ad03fa9a"
   },
   {
     "case": "bitmap_rpunch_play1000",
@@ -47,7 +47,7 @@
     "pixels": 62208,
     "bitmap_sha256": "e08ee5935ac61db8a50e540a80e81b83f7630b442eefd9aed97cf650a1ac484f",
     "flags": "0800",
-    "log_sha256": "a8e9917f186fa87daf0ce856a50c3a0fed085f66a68b23faf5612752cad7a3cb"
+    "log_sha256": "83725465a0c6da023f19a45aea1dec442de5244cc8deae851e577ff2afed24eb"
   },
   {
     "case": "bitmap_rabiolep_play1800",
@@ -58,7 +58,7 @@
     "pixels": 62208,
     "bitmap_sha256": "91c01b8927769f8186dc85b1e581c0444aafd9c7be607522d36fadbb5e15fa29",
     "flags": "0000",
-    "log_sha256": "59d0fce379de3c48400634b8c53ff64b95b6bfc7b0abd725fea03c7b0dd3c2ad"
+    "log_sha256": "5bd79624173b2035add122e55c7ef2479c8dcab4a4a365410bea2e0e6e56a45a"
   },
   {
     "case": "bitmap_rpunch_play1800",
@@ -69,6 +69,6 @@
     "pixels": 62208,
     "bitmap_sha256": "afd4e788efa4f2082fbf980c984a147ec4c9988ee900ceb418e80f96cd21f0c3",
     "flags": "0000",
-    "log_sha256": "f384ed46d8452e03d5daaa6c87133efc781ef3612387ba9a63aea68abc38a540"
+    "log_sha256": "8480169636e73164fa0d54648338164e5e35ccf4c7a5f24a21e435bd230bb1e6"
   }
 ]

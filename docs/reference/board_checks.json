@@ -3,48 +3,48 @@
     "case": "board_decode",
     "pass_marker": "BOARD_DECODE_PASS",
     "log": "debug\\baselines\\board_decode\\result.log",
-    "log_sha256": "bb499c3be8381ff9958ca01b9e929576b0775632ede7d3bb86300653995afc01"
+    "log_sha256": "2ba0c6266b6687763869d1fd0fc0c4b2865429a52f42aa7d707cfc58a44f2d68"
   },
   {
     "case": "board_bus",
     "pass_marker": "BOARD_BUS_PASS",
     "log": "debug\\baselines\\board_bus\\result.log",
-    "log_sha256": "2c2a7c0fcb635ac5d826ba40d05b6c40e61cacc281be9075cd2d9f9ca3ee1bc7"
+    "log_sha256": "cd9f678aeb0ab77f935071e4643b025d79604e5186540bca20b2c3bd6a74a69d"
   },
   {
     "case": "board_maincpu",
     "pass_marker": "MAINCPU_PASS",
     "log": "debug\\baselines\\board_maincpu\\result.log",
-    "log_sha256": "c5cb059e08611d135f8ec7691cde6d821a4a350fa965d67b6b6ca4f0a8c673a7"
+    "log_sha256": "e58faf9e6b2f446202c5074961ff1592e292a417ac2ef920eca69f916da20759"
   },
   {
     "case": "board_t80_wrapper",
     "pass_marker": "T80_WRAPPER_PASS",
     "log": "debug\\baselines\\board_t80_wrapper\\result.log",
-    "log_sha256": "ac1c88c4d865a2e978c74e5a4bf708c36594b4a2b71f4083799e3098d9ef7c0b"
+    "log_sha256": "d4433a5ab2257245effec77fd7b19094e4c2d744f2146239a645a8c3899ddbaa"
   },
   {
     "case": "board_memory",
     "pass_marker": "MEMORY_PASS",
     "log": "debug\\baselines\\board_memory\\result.log",
-    "log_sha256": "ffed1d853722140fa9997618785f48e9427529454d996f0f24ed24665c766108"
+    "log_sha256": "7afc82cca58cd8a9a3ea21ca23530215b174d9a08c017302051319b970dcad7d"
   },
   {
     "case": "board_io",
     "pass_marker": "IO_PASS",
     "log": "debug\\baselines\\board_io\\result.log",
-    "log_sha256": "6e5242f7e8d8cda3cb5404eb9844a8f0745172e705b9ac498901bb8049156167"
+    "log_sha256": "eda9e33a2c81e99db50d0092424cac60b6dce4747dbbeb3388d5ee305c2c45cf"
   },
   {
     "case": "board_irq",
     "pass_marker": "IRQ_PASS",
     "log": "debug\\baselines\\board_irq\\result.log",
-    "log_sha256": "a9491074b4bdb9bb6a27126057e4674c02809d960fa12baea82b6a6d13db6638"
+    "log_sha256": "ea8d4f651e29bbcc5979eb657be7b07daa199ccfe5891641d751a4a6ee951a04"
   },
   {
     "case": "board_cpu_irq",
     "pass_marker": "CPU_IRQ_PASS",
     "log": "debug\\baselines\\board_cpu_irq\\result.log",
-    "log_sha256": "3b1fbf4974f3366b28ffcfd90604b9249a9e20d3e78f3528e3d72a94240613a1"
+    "log_sha256": "0c3acf5ea874fa9e66f30c07712921d2f7b43fc2b8e81c2c47bea223d5a0188f"
   }
 ]

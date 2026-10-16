@@ -56,8 +56,15 @@ def run_memory(stage, quartus_bin, stamp):
             timings.append({"type":kind[1].strip(),"slack_ns":float(slack[1])})
     if not timings or any(item["slack_ns"]<0 for item in timings):
         raise SystemExit(f"Memory timing not verified or negative: {timings}")
+    detail=(output/"memory_check.sta.rpt").read_text(encoding="utf-8",errors="replace")
+    coverage={name.strip():{"setup":int(setup),"hold":int(hold)}
+              for name,setup,hold in re.findall(
+                  r";\s*(Illegal Clocks|Unconstrained [^;]+?)\s*;\s*(\d+)\s*;\s*(\d+)\s*;",detail)}
+    if len(coverage)!=6 or any(count for row in coverage.values() for count in row.values()):
+        raise SystemExit(f"Illegal clocks or unconstrained timing paths: {coverage}")
     report={"commit":stamp.split()[0],"device":"5CSEBA6U23I7","project":"memory_check",
             "constraint_mhz":48,"seed":1,"memory_bits":835584,"timings":timings,
+            "timing_coverage":coverage,
             "fit_summary":fit.splitlines(),"log_sha256":hashlib.sha256(log_path.read_bytes()).hexdigest(),
             "scope":"Standalone memory block with virtual I/O; not a complete core or hardware release"}
     destination=core_root()/"debug/memory_synth.json"
