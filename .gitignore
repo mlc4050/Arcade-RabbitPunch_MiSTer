@@ -86,6 +86,7 @@ sta/
 
 # Local MiSTer connection settings
 mister.env
+.local/
 
 # Only a verified build belongs in releases/: git add -f releases/<name>.rbf
 releases/*.rbf

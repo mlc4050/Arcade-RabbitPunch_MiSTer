@@ -28,7 +28,7 @@ is excluded from the first scope. No remote repository has been created or publi
 
 ## Research status and open decisions
 
-- Local repository: `D:/git/MiSTer-CoreSkill/RabbitPunch-workspace/Arcade-RabbitPunch_MiSTer`,
+- Local repository: `D:/git/Arcade-RabbitPunch_MiSTer`,
   branch `develop`. Both Quartus revisions exist; template demo remains connected.
 - Pinned framework `9c8eadb40067c8ce3aef90899844f62d688ac73a`; comparison of sys
   against fetched source passes when ignoring checkout end-of-line differences.

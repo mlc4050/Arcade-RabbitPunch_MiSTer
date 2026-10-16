@@ -7,7 +7,7 @@
 | Quartus Prime Lite | D:/quartus/quartus/bin64/quartus_sh.exe | 17.0.2 Build 602 |
 | Cyclone V device files | D:/quartus/quartus/common/devinfo/cyclonev | Present; device elaboration/fitting not yet run |
 | ModelSim Altera Starter | D:/quartus/modelsim_ase/win32aloem/vsim.exe | 10.5b, 2016.10 |
-| MAME | ../tools/mame0289/mame.exe, relative to core root | 0.289 (mame0289) |
+| MAME | .local/tools/mame0289/mame.exe, relative to core root | 0.289 (mame0289) |
 
 Paths are configured in the local gitignored mister.env. No machine-wide PATH changes
 were made. The supplied self-extracting MAME package was extracted into the workspace,
@@ -31,9 +31,13 @@ boundary only, not game hardware. No FPGA compilation, fitting or RBF generation
 Executable: official Windows x64 0.289. Reference source snapshot: tag mame0289,
 commit f34f02505e32c1993c6a782b6814232cbfc74e36 (annotated tag object
 d0b7160e54874fa58f553614db373d73100d5ecb), exported from the user's local
-MAME git objects to ../reference/mame0289. Includes rpunch.cpp, vsystem_gga.cpp/.h,
+MAME git objects to .local/reference/mame0289. Includes rpunch.cpp, vsystem_gga.cpp/.h,
 ymopm.cpp/.h and upd7759.cpp/.h. The original MAME checkout remains unchanged.
 The active driver/device hashes are in reference/rom_manifest.json.
+
+The standalone core repository is D:/git/Arcade-RabbitPunch_MiSTer. The MAME executable
+and pinned reference source moved with it into gitignored .local/; the original
+D:/git/mame source checkout and downloaded installer remain in place.
 
 MAME -verifyroms reports rabiolep and rpunch [rabiolep] good: 2 sets checked, 2 OK.
 The DIP source parser now also recognizes the release driver's Continues and 4C_5C
