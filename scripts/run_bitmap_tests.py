@@ -30,7 +30,7 @@ def main():
                 expected.append(f"{index|((pen!=15)<<10):03x}")
         (run_dir/"bitmap_expected.hex").write_text("\n".join(expected)+"\n",encoding="ascii")
         result=run_case(name,["rtl/rabbitpunch_layout.vhd","rtl/rabbitpunch_decode.vhd",
-                        "rtl/rabbitpunch_ram16.vhd","rtl/rabbitpunch_memory.vhd","rtl/rabbitpunch_bitmap.vhd",
+                        "rtl/rabbitpunch_ram16.vhd","rtl/rabbitpunch_board_memory.vhd", "rtl/rabbitpunch_memory.vhd","rtl/rabbitpunch_bitmap.vhd",
                         "sim/board/bitmap_capture_tb.sv"],"bitmap_capture_tb","20 ms","BITMAP_CAPTURE_PASS")
         result.update(set=item["set"],capture=item["capture"],pixels=62208,
                       bitmap_sha256=hashlib.sha256(bitmap).hexdigest(),flags=f"{flags:04x}")

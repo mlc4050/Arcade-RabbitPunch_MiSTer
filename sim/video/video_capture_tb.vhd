@@ -3,6 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use std.textio.all;
 use work.tile_test_support.all;
+use work.rabbitpunch_layout.all;
 
 entity video_capture_tb is
 end entity;
@@ -23,29 +24,24 @@ architecture test of video_capture_tb is
     signal su9_line_y, su9_background_x, su9_background_y, su9_foreground_x, su9_foreground_y : unsigned(8 downto 0) := (others => '0');
     signal su6_count, su6_priority : unsigned(5 downto 0) := (others => '0');
     signal su16_flags : unsigned(15 downto 0) := (others => '0');
-    type t_ram_addresses is array (0 to 1) of unsigned(12 downto 0);
     type t_rom_addresses is array (0 to 1) of unsigned(16 downto 0);
-    type t_ram_words is array (0 to 1) of unsigned(15 downto 0);
     type t_rom_words is array (0 to 1) of unsigned(31 downto 0);
-    signal su2_ram_request, su2_rom_request : unsigned(1 downto 0);
-    signal su2_ram_valid, su2_rom_valid, su2_ram_pending, su2_rom_pending : unsigned(1 downto 0) := "00";
-    signal su13_ram_addresses : t_ram_addresses;
+    signal su2_rom_request : unsigned(1 downto 0);
+    signal su2_rom_valid, su2_rom_pending : unsigned(1 downto 0) := "00";
     signal su17_rom_addresses : t_rom_addresses;
-    signal su16_ram_words : t_ram_words := (others => (others => '0'));
     signal su32_rom_words : t_rom_words := (others => (others => '0'));
-    signal su11_sprite_address : unsigned(10 downto 0);
     signal s_rom_foreground : std_logic;
-    signal s_bitmap_read, s_load : std_logic := '0';
-    signal su15_bitmap_address, su15_load_address : unsigned(14 downto 0) := (others => '0');
-    signal su16_bitmap_data, su16_load_data : unsigned(15 downto 0) := (others => '0');
+    signal s_cpu_request, s_preload_done : std_logic := '0';
+    signal s_cpu_response : std_logic;
+    signal s_patch_request, s_patch_done : std_logic := '0';
+    signal su24_cpu_address : unsigned(23 downto 0) := (others => '0');
+    signal su16_cpu_data : unsigned(15 downto 0) := (others => '0');
+    signal sint_cpu_writes : natural := 0;
     signal s_pixel_valid, s_pixel_bank : std_logic := '0';
     signal s_pixel_ready, s_output_valid, s_output_error : std_logic;
     signal su9_pixel_x, su9_output_x : unsigned(8 downto 0) := (others => '0');
     signal su8_pixel_y, su8_output_y : unsigned(7 downto 0) := (others => '0');
     signal su16_pixel_flags : unsigned(15 downto 0) := (others => '0');
-    signal s_palette_load, s_palette_read : std_logic := '0';
-    signal su10_palette_address : unsigned(9 downto 0);
-    signal su16_palette_data : unsigned(15 downto 0);
     signal su8_red, su8_green, su8_blue : unsigned(7 downto 0);
     signal su24_output_rgb, su24_first_rgb : unsigned(23 downto 0);
     signal s_record, s_expect_error : std_logic := '0';
@@ -53,9 +49,8 @@ architecture test of video_capture_tb is
     signal sint_lines_done, sint_pixels, sint_max_cycles : natural := 0;
 begin
     s_clk <= not s_clk after 5 ns;
-    su13_ram_addresses(0) <= "00" & su11_sprite_address;
     su24_output_rgb <= su8_red & su8_green & su8_blue;
-    dut : entity work.rabbitpunch_rgb_video
+    dut : entity work.rabbitpunch_board_video
         port map (
             i_clk => s_clk,
             i_reset => s_reset,
@@ -71,14 +66,6 @@ begin
             iu9_foreground_scroll_y => su9_foreground_y,
             iu16_video_flags => su16_flags,
             o_line_done => s_line_done,
-            o_sprite_ram_request => su2_ram_request(0),
-            ou11_sprite_ram_word_address => su11_sprite_address,
-            i_sprite_ram_response_valid => su2_ram_valid(0),
-            iu16_sprite_ram_response_data => su16_ram_words(0),
-            o_tile_ram_request => su2_ram_request(1),
-            ou13_tile_ram_word_address => su13_ram_addresses(1),
-            i_tile_ram_response_valid => su2_ram_valid(1),
-            iu16_tile_ram_response_data => su16_ram_words(1),
             o_sprite_rom_request => su2_rom_request(0),
             ou17_sprite_rom_word_address => su17_rom_addresses(0),
             i_sprite_rom_response_valid => su2_rom_valid(0),
@@ -88,9 +75,6 @@ begin
             o_tile_rom_foreground => s_rom_foreground,
             i_tile_rom_response_valid => su2_rom_valid(1),
             iu32_tile_rom_response_data => su32_rom_words(1),
-            o_bitmap_ram_read_enable => s_bitmap_read,
-            ou15_bitmap_ram_word_address => su15_bitmap_address,
-            iu16_bitmap_ram_data => su16_bitmap_data,
             i_pixel_valid => s_pixel_valid,
             o_pixel_ready => s_pixel_ready,
             i_pixel_bank => s_pixel_bank,
@@ -101,75 +85,86 @@ begin
             o_pixel_error => s_output_error,
             ou9_pixel_x => su9_output_x,
             ou8_pixel_y => su8_output_y,
-            o_palette_ram_read_enable => s_palette_read,
-            ou10_palette_ram_word_address => su10_palette_address,
-            iu16_palette_ram_data => su16_palette_data,
             ou8_red => su8_red,
             ou8_green => su8_green,
-            ou8_blue => su8_blue
+            ou8_blue => su8_blue,
+            i_request => s_cpu_request,
+            i_request_write => '1',
+            iu24_request_address => su24_cpu_address,
+            iu16_request_data => su16_cpu_data,
+            iu2_request_bytes => "11",
+            o_request_supported => open,
+            o_response_valid => s_cpu_response,
+            ou16_response_data => open,
+            o_rom_request => open,
+            ou18_rom_byte_address => open,
+            i_rom_response_valid => '0',
+            iu16_rom_response_data => (others => '0'),
+            i_view_enable => '0',
+            iu5_view_target => TARGET_NONE,
+            iu15_view_word_address => (others => '0'),
+            o_view_valid => open,
+            ou16_view_data => open
         );
-    bitmap_ram : entity work.rabbitpunch_ram16
-        generic map (sint_ADDRESS_BITS => 15)
-        port map (
-            i_clk => s_clk,
-            i_cpu_enable => s_load,
-            i_cpu_write => '1',
-            iux_cpu_address => su15_load_address,
-            iu2_cpu_bytes => "11",
-            iu16_cpu_data => su16_load_data,
-            ou16_cpu_data => open,
-            i_view_enable => s_bitmap_read,
-            iux_view_address => su15_bitmap_address,
-            ou16_view_data => su16_bitmap_data
-        );
-
-    palette_ram : entity work.rabbitpunch_ram16
-        generic map (sint_ADDRESS_BITS => 10)
-        port map (
-            i_clk => s_clk,
-            i_cpu_enable => s_palette_load,
-            i_cpu_write => '1',
-            iux_cpu_address => su15_load_address(9 downto 0),
-            iu2_cpu_bytes => "11",
-            iu16_cpu_data => su16_load_data,
-            ou16_cpu_data => open,
-            i_view_enable => s_palette_read,
-            iux_view_address => su10_palette_address,
-            ou16_view_data => su16_palette_data
-        );
+    cpu_traffic : process
+        procedure write_word(vint_address : natural; vu16_data : unsigned(15 downto 0)) is
+            variable vint_wait : natural := 0;
+        begin
+            wait until falling_edge(s_clk);
+            s_cpu_request <= '1';
+            su24_cpu_address <= to_unsigned(vint_address, 24);
+            su16_cpu_data <= vu16_data;
+            wait until falling_edge(s_clk);
+            s_cpu_request <= '0';
+            while (s_cpu_response /= '1' and vint_wait < 100) loop
+                wait until falling_edge(s_clk);
+                vint_wait := vint_wait + 1;
+            end loop;
+            assert (s_cpu_response = '1') report "Board video CPU write timed out" severity failure;
+            wait until falling_edge(s_clk);
+        end procedure;
+        variable vint_writes : natural := 0;
+        variable v_patch_applied : boolean := false;
+    begin
+        for vint_word in C_SPRITES'range loop
+            write_word(16#60000# + vint_word * 2, C_SPRITES(vint_word));
+        end loop;
+        for vint_word in C_TILES'range loop
+            write_word(16#80000# + vint_word * 2, C_TILES(vint_word));
+        end loop;
+        for vint_word in C_BITMAP'range loop
+            write_word(16#40000# + vint_word * 2, C_BITMAP(vint_word));
+        end loop;
+        for vint_word in C_PALETTE'range loop
+            write_word(16#A0000# + vint_word * 2, C_PALETTE(vint_word));
+        end loop;
+        s_preload_done <= '1';
+        -- Competing CPU transactions use the real work-RAM bank throughout
+        -- render/scanout. This is transaction stimulus, not executing fx68k.
+        loop
+            if (s_patch_request = '1' and not v_patch_applied) then
+                -- X=8, Y=0 selects the high nibble of bitmap word 3.
+                -- Force pen 1 and make its palette entry green through CPU writes.
+                write_word(16#40006#, x"1FFF");
+                write_word(16#A0000# + (512 + to_integer(C_SETTINGS(0)(3 downto 0)) * 16 + 1) * 2, x"03E0");
+                v_patch_applied := true;
+                s_patch_done <= '1';
+            end if;
+            write_word(16#FC000# + (vint_writes mod 8192) * 2, to_unsigned(vint_writes mod 65536, 16));
+            vint_writes := vint_writes + 1;
+            sint_cpu_writes <= vint_writes;
+        end loop;
+    end process;
 
     external_memory : process(s_clk)
         type t_delays is array (0 to 1) of natural;
-        variable v_ram_delay, v_rom_delay : t_delays := (others => 0);
-        variable v_ram_address : t_ram_addresses;
+        variable v_rom_delay : t_delays := (others => 0);
         variable v_rom_address : t_rom_addresses;
         variable v_foreground : boolean;
     begin
         if (rising_edge(s_clk)) then
-            su2_ram_valid <= "00";
             su2_rom_valid <= "00";
             for vint_channel in 0 to 1 loop
-                if (su2_ram_request(vint_channel) = '1') then
-                    assert (su2_ram_pending(vint_channel) = '0') report "Overlapping video descriptor reads" severity failure;
-                    su2_ram_pending(vint_channel) <= '1';
-                    v_ram_address(vint_channel) := su13_ram_addresses(vint_channel);
-                    v_ram_delay(vint_channel) := delay_cycles(to_integer(su13_ram_addresses(vint_channel)));
-                    if (s_force_delay = '1') then
-                        v_ram_delay(vint_channel) := 20;
-                    end if;
-                elsif (su2_ram_pending(vint_channel) = '1') then
-                    if (v_ram_delay(vint_channel) = 0) then
-                        su2_ram_pending(vint_channel) <= '0';
-                        su2_ram_valid(vint_channel) <= '1';
-                        if (vint_channel = 0) then
-                            su16_ram_words(vint_channel) <= C_SPRITES(to_integer(v_ram_address(vint_channel)));
-                        else
-                            su16_ram_words(vint_channel) <= C_TILES(to_integer(v_ram_address(vint_channel)));
-                        end if;
-                    else
-                        v_ram_delay(vint_channel) := v_ram_delay(vint_channel) - 1;
-                    end if;
-                end if;
                 if (su2_rom_request(vint_channel) = '1') then
                     assert (su2_rom_pending(vint_channel) = '0') report "Overlapping video graphics reads" severity failure;
                     su2_rom_pending(vint_channel) <= '1';
@@ -295,22 +290,7 @@ begin
             s_pixel_valid <= '1';
         end procedure;
     begin
-        for vint_word in C_PALETTE'range loop
-            wait until falling_edge(s_clk);
-            s_palette_load <= '1';
-            su15_load_address <= to_unsigned(vint_word, 15);
-            su16_load_data <= C_PALETTE(vint_word);
-        end loop;
-        wait until falling_edge(s_clk);
-        s_palette_load <= '0';
-        for vint_word in C_BITMAP'range loop
-            wait until falling_edge(s_clk);
-            s_load <= '1';
-            su15_load_address <= to_unsigned(vint_word, 15);
-            su16_load_data <= C_BITMAP(vint_word);
-        end loop;
-        wait until falling_edge(s_clk);
-        s_load <= '0';
+        wait until falling_edge(s_clk) and s_preload_done = '1';
         s_reset <= '0';
         begin_line(0);
         wait until falling_edge(s_clk) and sint_lines_done = 1;
@@ -348,10 +328,10 @@ begin
         wait until falling_edge(s_clk);
         s_expect_error <= '0';
 
-        -- Reset with a scan and a pixel in flight, then re-render a known line.
+        -- Reset with a ROM fetch and a pixel in flight, then re-render a known line.
         s_force_delay <= '1';
         begin_line(0);
-        wait until falling_edge(s_clk) and su2_ram_pending /= "00";
+        wait until falling_edge(s_clk) and su2_rom_pending /= "00";
         set_pixel(8, 215, 1);
         wait until rising_edge(s_clk);
         assert (s_pixel_ready = '1') report "Reset pixel was not accepted" severity failure;
@@ -364,7 +344,7 @@ begin
         s_reset <= '0';
         s_force_delay <= '0';
         wait until falling_edge(s_clk) and s_line_ready = '1';
-        assert (su2_ram_pending = "00" and su2_rom_pending = "00")
+        assert (su2_rom_pending = "00")
             report "Video reset left external work pending" severity failure;
         begin_line(0);
         wait until falling_edge(s_clk) and sint_lines_done = 1;
@@ -376,9 +356,24 @@ begin
         wait until falling_edge(s_clk) and s_output_valid = '1';
         assert (su24_output_rgb = su24_first_rgb and su9_output_x = 8 and su8_output_y = 0)
             report "Post-reset video did not reproduce first pixel" severity failure;
+        -- Prove CPU writes change actual bitmap/palette scanout, rather than
+        -- merely exercising an unrelated work-RAM port during rendering.
+        s_patch_request <= '1';
+        wait until falling_edge(s_clk) and s_patch_done = '1';
+        s_patch_request <= '0';
+        set_pixel(8, 0, 0);
+        wait until rising_edge(s_clk);
+        assert (s_pixel_ready = '1') report "Live-update pixel not accepted" severity failure;
+        wait until falling_edge(s_clk);
+        s_pixel_valid <= '0';
+        wait until falling_edge(s_clk) and s_output_valid = '1';
+        assert (su24_output_rgb = x"00FF00" and su9_output_x = 8 and su8_output_y = 0)
+            report "CPU bitmap/palette writes did not change RGB scanout" severity failure;
+        assert (sint_cpu_writes > 1000) report "Concurrent CPU traffic missing" severity failure;
         assert (sint_pixels = 62208) report "Video frame pixel count mismatch" severity failure;
         report "VIDEO_CAPTURE_PASS: 62208 native RGB pixels; max_cycles=" & integer'image(sint_max_cycles) &
-            "; streaming native scanout, tags and reset";
+            "; cpu_writes=" & integer'image(sint_cpu_writes) &
+            "; shared board RAM, live bitmap/palette update, native scanout, tags and reset";
         std.env.finish;
         wait;
     end process;

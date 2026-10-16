@@ -8,6 +8,7 @@ set_global_assignment -name SEED 1
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_layout.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_decode.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_ram16.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_board_memory.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_memory.vhd
 set_global_assignment -name SDC_FILE memory_check.sdc
 # Virtual I/O keeps the block visible without requiring a complete MiSTer pinout.

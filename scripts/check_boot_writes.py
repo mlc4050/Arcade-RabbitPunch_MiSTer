@@ -81,7 +81,7 @@ def main():
         dip_default = int(dip_bytes[0], 16) | (int(dip_bytes[1], 16) << 8)
         run_case("boot_" + game, ["rtl/cpu/fx68k/fx68k.sv", "rtl/cpu/fx68k/fx68kAlu.sv",
                     "rtl/cpu/fx68k/uaddrPla.sv", "rtl/rabbitpunch_layout.vhd", "rtl/rabbitpunch_decode.vhd",
-                    "rtl/rabbitpunch_ram16.vhd", "rtl/rabbitpunch_memory.vhd", "rtl/rabbitpunch_bus.vhd",
+                    "rtl/rabbitpunch_ram16.vhd", "rtl/rabbitpunch_board_memory.vhd", "rtl/rabbitpunch_memory.vhd", "rtl/rabbitpunch_bus.vhd",
                     "rtl/rabbitpunch_fx68k.vhd", "rtl/rabbitpunch_maincpu.vhd", "rtl/rabbitpunch_io.vhd",
                     "rtl/rabbitpunch_irq.vhd", "sim/board/boot_writes_tb.sv"],
                  "boot_writes_tb", "100 ms", "BOOT_PREFIX_COMPLETE",
@@ -108,6 +108,8 @@ def main():
                         "mame_trace_sha256": hashlib.sha256((out / "mame_writes.txt").read_bytes()).hexdigest(),
                         "rtl_trace_sha256": hashlib.sha256((run_dir / "rtl_writes.txt").read_bytes()).hexdigest(),
                         "ram_model": "altera_mf.altsyncram BIDIR_DUAL_PORT",
+                        "board_memory_sha256": hashlib.sha256((root / "rtl/rabbitpunch_board_memory.vhd").read_bytes()).hexdigest(),
+                        "cpu_memory_adapter_sha256": hashlib.sha256((root / "rtl/rabbitpunch_memory.vhd").read_bytes()).hexdigest(),
                         "ram_wrapper_sha256": hashlib.sha256((root / "rtl/rabbitpunch_ram16.vhd").read_bytes()).hexdigest(),
                         "simulation_log_sha256": hashlib.sha256((run_dir / "result.log").read_bytes()).hexdigest(),
                         "dip_default": f"{dip_default:04x}",

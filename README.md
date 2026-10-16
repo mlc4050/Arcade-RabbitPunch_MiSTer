@@ -9,8 +9,9 @@ all 52224 main RAM words pass read/write checks, and each game's first 10000 wri
 match MAME exactly using the VHDL memory backend in simulation.
 The VHDL board registers also match 24 state fields reconstructed from MAME writes.
 Level-1 IRQ/autovector handling passes a STOP/handler/RTE diagnostic through VHDL RAM.
-The offline Python renderer matches six MAME frames; the VHDL bitmap-layer reader
-passes exhaustive and captured-state tests. Complete VHDL game video is not present.
+The logical VHDL video pipeline matches six MAME frames through native line,
+bitmap and palette RAM, with direct HDL RGB comparison and standalone timing closure.
+Shared CPU/video BRAM integration is in progress; physical raster and SDRAM remain open.
 No complete game or playable RBF.
 The inherited template demo remains connected.
 

@@ -47,6 +47,8 @@ every frame.
 
 | RGB wrapper error-valid/coordinate delay | rabbitpunch_rgb_video.vhd | Derived pixel metadata | Flush on restore | Aligns invalid line tags with native palette latency |
 
+| Held CPU write address/data/byte lanes | rabbitpunch_board_memory.vhd | 42 + shared target/FSM | Drain accepted write or capture pending fields | Preserved across video/CPU reset until a safe native RAM write slot |
+
 ## Chip state
 
 | Chip | Module | Addressable? | Tier | Note |

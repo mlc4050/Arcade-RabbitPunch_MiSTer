@@ -1,0 +1,14 @@
+{
+  "case": "board_memory_video",
+  "pass_marker": "BOARD_MEMORY_VIDEO_PASS",
+  "log": "debug\\baselines\\board_memory_video\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_layout.vhd": "a58ffaac82eee573a9925afacc8621f4b594a8818b56f924dbebb339ad04eac1",
+    "rtl/rabbitpunch_decode.vhd": "714221c080ccffed81a79b2bb51b057efa8b06533b2ab88dd2e4baa134b4cedb",
+    "rtl/rabbitpunch_ram16.vhd": "3d7d435a69db34c53c30fe265f8b6a45be083f73542a37b30069c3b20b312199",
+    "rtl/rabbitpunch_board_memory.vhd": "1b323002bbde1f18141d22e80e071c97f7e98bc5db6461ce66d107549c039d0e",
+    "sim/board/board_memory_video_tb.vhd": "ef5c5fe10fe754c4be12603c3519d489ead46421edbd19b8dcceada84bce63ae"
+  },
+  "log_sha256": "baab1c0ad0e96898a53c401527a966c1d353102093c6846040f37608bd7d8deb",
+  "scope": "Native BRAM access sharing at CPU transaction interface; no executing CPU, raster or SDRAM"
+}

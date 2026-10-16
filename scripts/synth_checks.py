@@ -24,6 +24,8 @@ CHECKS = {
                       "rabbitpunch_bitmap_pixel", "rabbitpunch_pixel_mixer", "jtframe_draw")),
     "video_rgb": (32768, ("rabbitpunch_rgb_video", "rabbitpunch_video", "rabbitpunch_palette_pixel",
                           "rabbitpunch_tiles", "rabbitpunch_sprites", "jtframe_draw")),
+    "board_video": (868352, ("rabbitpunch_board_video", "rabbitpunch_board_memory", "rabbitpunch_rgb_video",
+                            "bitmap", "sprites", "tiles", "palette", "work_ram", "jtframe_draw")),
 }
 
 

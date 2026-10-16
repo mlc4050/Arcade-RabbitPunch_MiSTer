@@ -16,7 +16,8 @@ def main():
     parser.add_argument("--only", help="capture directory basename for a focused replay")
     args = parser.parse_args()
     root = core_root()
-    sources = ["rtl/jtframe/jtframe_draw.v", "rtl/rabbitpunch_ram16.vhd",
+    sources = ["rtl/rabbitpunch_layout.vhd", "rtl/rabbitpunch_decode.vhd",
+               "rtl/jtframe/jtframe_draw.v", "rtl/rabbitpunch_ram16.vhd", "rtl/rabbitpunch_board_memory.vhd",
                "rtl/rabbitpunch_sprite_priority.vhd", "rtl/rabbitpunch_pixel_mixer.vhd",
                "rtl/rabbitpunch_tile_row.vhd", "rtl/rabbitpunch_tile_lookup.vhd",
                "rtl/rabbitpunch_tile_layer.vhd", "rtl/rabbitpunch_tiles.vhd",
@@ -24,6 +25,7 @@ def main():
                "rtl/rabbitpunch_sprite_line.vhd", "rtl/rabbitpunch_sprites.vhd",
                "rtl/rabbitpunch_bitmap_pixel.vhd", "rtl/rabbitpunch_video.vhd",
                "rtl/rabbitpunch_palette_pixel.vhd", "rtl/rabbitpunch_rgb_video.vhd",
+               "rtl/rabbitpunch_board_video.vhd",
                "sim/video/tile_test_support.vhd", "sim/video/video_capture_tb.vhd"]
     def run_fixture(fixture):
         capture = root / fixture["capture"]
@@ -44,7 +46,7 @@ def main():
             (directory / filename).write_text("".join(f"{item[0]:04x}\n" for item in struct.iter_unpack(">H", raw)), encoding="ascii")
         graphics = (root / "debug/rom_regions" / fixture["set"] / "sprites.bin").read_bytes()
         (directory / "sprites.hex").write_text("".join(f"{item[0]:08x}\n" for item in struct.iter_unpack("<I", graphics)), encoding="ascii")
-        result = run_case(name, sources, "video_capture_tb", "60 ms", "VIDEO_CAPTURE_PASS", wall_timeout=300)
+        result = run_case(name, sources, "video_capture_tb", "60 ms", "VIDEO_CAPTURE_PASS", wall_timeout=600)
         pixels = [int(line, 16) for line in (directory / "pixels.hex").read_text().splitlines()]
         assert len(pixels) == 62208
         actual = b"".join(pixel.to_bytes(3, "big") for pixel in pixels)
@@ -56,11 +58,12 @@ def main():
             raise SystemExit(f"{name}: {differing} mixed RGB pixels differ from MAME")
         transcript = (root / result["log"]).read_text(encoding="utf-8")
         result.update(set=fixture["set"], capture=fixture["capture"], pixels=62208, differing_pixels=0,
+                      concurrent_cpu_writes=int(re.search(r"cpu_writes=\s*(\d+)", transcript)[1]),
                       max_line_cycles=int(re.search(r"max_cycles=\s*(\d+)", transcript)[1]),
                       expected_rgb_sha256=hashlib.sha256(expected).hexdigest(), actual_rgb_sha256=hashlib.sha256(actual).hexdigest(),
                       source_sha256={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources},
                       log_sha256=hashlib.sha256((root / result["log"]).read_bytes()).hexdigest(),
-                      scope="Actual VHDL/JTFRAME tiles, sprites, native line/bitmap/palette RAM, bitmap decode, mixer and RGB555 expansion; static descriptors/independent ROM channels, no CPU/shared SDRAM/physical raster")
+                      scope="Actual VHDL/JTFRAME RGB rendering and shared native board RAM, CPU-interface fixture preload and concurrent work-RAM writes; static video contents/independent ROM channels, no CPU execution/shared SDRAM/physical raster")
         print(f"PASS {name}: all 62208 actual HDL RGB pixels identical to MAME", flush=True)
         return result
     fixtures = json.loads((root / "scripts/mame/video_fixtures.json").read_text())
