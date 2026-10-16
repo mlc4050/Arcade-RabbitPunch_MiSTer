@@ -53,3 +53,46 @@ debug/baselines/mixer_*/mixed.png.
 The synthesis-only priority_check harness places output registers after the two
 combinational modules to evaluate their timing at 48 MHz with virtual I/O. It
 does not prescribe the final video pipeline's register placement.
+
+The harness passes Quartus 17.0.2 fitting for commit e0ed3d6 on 5CSEBA6U23I7:
+69 ALMs, 27 output registers and zero block RAM/DSP. Worst setup slack is
++7.155 ns and worst hold slack is +0.129 ns. All corners and pulse-width
+checks pass, with zero illegal clocks/unconstrained paths. See
+reference/priority_synth.json. The registers belong to the evaluation harness.
+
+## Native sprite line RAM
+
+`rabbitpunch_sprite_line.vhd` now stores two 512-entry lines using the actual
+`rabbitpunch_ram16`/`altera_mf.altsyncram` wrapper, not a simulation substitute.
+Each 16-bit word contains occupancy, foreground tag, descriptor index and palette.
+The caller starts a chosen bank with a line-Y tag, waits for its 512-cycle clear,
+then streams candidates at up to one per clock. A finish strobe stops new input
+and drains the final update before the bank becomes readable. Line completion
+does not itself swap banks or choose a raster/snapshot policy.
+
+The active render bank's read port fetches the old entry; its write port commits
+the preceding candidate. Consecutive candidates for the same X use the complete
+just-written entry through a bypass and suppress the conflicting physical read.
+This avoids depending on undefined mixed-port read-during-write values. A losing
+or transparent candidate cannot erase an occupied entry. The inactive valid bank
+can be read concurrently, one pixel per clock, with valid and the saved line-Y tag.
+Read requests to an active or uninitialized bank are rejected through `o_view_ready`.
+
+Reset invalidates both banks and drops in-flight derived updates; it does not
+clear RAM in one cycle. Each new line explicitly clears all 512 entries before
+accepting candidates. `i_line_finish` must follow the last accepted candidate;
+asserting it stops candidate acceptance on that edge. There is no frame buffer.
+
+`sprite_line_tb.vhd` checks 33844 candidates and 37954 concurrent display reads
+against an independent word-array scoreboard, using the native vendor model.
+It checks every X, transparent pixels, ascending/descending index collisions,
+continuous same-X updates, deterministic random traffic, both banks reused,
+512-cycle clears, line tags, reset during clear and reset during an update.
+The final run has no simulation errors or warnings. Results are in
+reference/sprite_line_checks.json. This is a directed RAM/pipeline test;
+captured scan/draw-to-line-RAM integration and physical deadlines remain open.
+
+```powershell
+./scripts/d_drive.ps1 scripts/run_sprite_line_tests.py
+./scripts/d_drive.ps1 scripts/build_staged.py --synth-check sprite_line
+```

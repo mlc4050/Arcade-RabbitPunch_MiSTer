@@ -1,0 +1,8 @@
+{
+  "case": "video_sprite_line",
+  "pass_marker": "SPRITE_LINE_PASS",
+  "log": "debug\\baselines\\video_sprite_line\\result.log",
+  "log_sha256": "c4ff38a6a5fad8450a596ce31143a6fa39d7e42abac487869aad4f49b97f6408",
+  "ram_model": "altera_mf.altsyncram BIDIR_DUAL_PORT",
+  "scope": "Two native 512-entry sprite lines; synthetic candidates and concurrent opposite-bank reads; no integrated raster"
+}

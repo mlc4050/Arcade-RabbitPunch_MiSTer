@@ -37,6 +37,11 @@ JTFRAME drawer, requires zero block RAM, and applies the same timing and
 unconstrained-path gates. Reports use build/rtl/synth_check/sprites/ and
 debug/sprites_synth.json. A block fit does not establish scanline throughput.
 
+Further isolated targets are `sprite_scan` (candidate selector, zero RAM),
+`priority` (combinational arbitration/mixer with evaluation output registers,
+zero RAM) and `sprite_line` (two native sprite-line banks, 16384 RAM bits).
+They use the same staged 48 MHz timing and unconstrained-path gates.
+
 Three properties that must survive any port:
 
 - **Refuses a dirty tree.** "What was in that build?" has to be answerable.

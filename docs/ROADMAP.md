@@ -19,10 +19,12 @@ with 139 ALMs, 201 registers and no M10K blocks.
 Sprite row drawing now passes 30720 synthetic rows and all descriptor rows in
 six captured scenes, including flips, transparency, overlapped ROM fetching
 and reset draining. Scanline candidate selection now feeds that drawer correctly
-in directed stress tests and six static captures. Sprite line storage, priority/mixing,
-shared memory scheduling and physical line deadlines remain open. Combinational
+in directed stress tests and six static captures. Shared memory scheduling and
+physical line deadlines remain open. Combinational
 sprite arbitration and layer mixing pass directed tests and match six MAME
-screenshots with software-decoded layer stimulus; line-memory integration is open.
+screenshots with software-decoded layer stimulus. Two native sprite-line RAM banks
+pass directed clearing, collision/forwarding, concurrent display and reset tests;
+their integration with scan/draw and the mixer remains open.
 The complete game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 

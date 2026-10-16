@@ -16,6 +16,7 @@ CHECKS = {
     "sprites": (0, ("rabbitpunch_sprite_row", "jtframe_draw")),
     "sprite_scan": (0, ("rabbitpunch_sprite_scan",)),
     "priority": (0, ("rabbitpunch_sprite_priority", "rabbitpunch_pixel_mixer")),
+    "sprite_line": (16384, ("rabbitpunch_sprite_line", "rabbitpunch_sprite_priority", "line_ram")),
 }
 
 
