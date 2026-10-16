@@ -100,6 +100,28 @@ local function dump_sparse(name, tbl, size)
 end
 
 local done = false
+local coin_frame = tonumber(os.getenv("CORE_COIN") or "0")
+if coin_frame > 0 then
+    local function field(name)
+        for _, port in pairs(m.ioport.ports) do
+            if port.fields[name] then return port.fields[name] end
+        end
+        error("Missing scripted input: " .. name)
+    end
+    local coin = field(os.getenv("CORE_IN_COIN"))
+    local start = field(os.getenv("CORE_IN_START"))
+    local hold = field(os.getenv("CORE_IN_HOLD"))
+    local fire = field(os.getenv("CORE_IN_PULSE"))
+    emu.register_frame_done(guard("inputs", function()
+        local frame = m.screens[":screen"]:frame_number()
+        coin:set_value((frame >= coin_frame and frame < coin_frame+6) and 1 or 0)
+        start:set_value((frame >= coin_frame+90 and frame < coin_frame+96) and 1 or 0)
+        if frame >= coin_frame+96 then
+            hold:set_value(1)
+            fire:set_value(frame%20 < 4 and 1 or 0)
+        end
+    end))
+end
 core_subs[#core_subs + 1] = emu.add_machine_frame_notifier(guard("frame", function()
     if done then return end
     local scr = m.screens[":screen"]
@@ -120,6 +142,7 @@ core_subs[#core_subs + 1] = emu.add_machine_frame_notifier(guard("frame", functi
     f:write("mame ", emu.app_version(), "\n")
     f:write("frame ", tostring(scr:frame_number()), "\n")
     f:write("screen ", tostring(scr.width), "x", tostring(scr.height), "\n")
+    f:write("coin_frame ", tostring(coin_frame), "\n")
     f:close()
 
     print("CORE_CAPTURE_OK " .. OUT)

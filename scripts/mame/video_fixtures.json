@@ -1,0 +1,8 @@
+[
+  {"set": "rabiolep", "capture": "debug/rabiolep-attract"},
+  {"set": "rpunch", "capture": "debug/rpunch-attract"},
+  {"set": "rabiolep", "capture": "debug/rabiolep-play1000"},
+  {"set": "rpunch", "capture": "debug/rpunch-play1000"},
+  {"set": "rabiolep", "capture": "debug/rabiolep-play1800"},
+  {"set": "rpunch", "capture": "debug/rpunch-play1800"}
+]

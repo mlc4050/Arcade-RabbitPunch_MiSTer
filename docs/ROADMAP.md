@@ -8,6 +8,8 @@ generator pass diagnostic tests. Five VHDL RAM banks pass full-address tests, an
 both real ROMs match MAME's first 10000 writes through that memory backend.
 Board I/O, GGA storage, sound mailbox interface and level-1 autovector handling
 pass directed tests; full raster and sound integration remain open.
+An offline Python renderer matches six complete MAME images. The VHDL bitmap reader
+passes exhaustive coordinate checks and all visible bitmap pixels in those scenes.
 The complete game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
@@ -78,6 +80,10 @@ is excluded from the first scope. No remote repository has been created or publi
   verifies STOP -> level-1 autovector -> stack -> handler -> RTE via VHDL RAM.
   Boot comparison checks 24 I/O fields reconstructed from MAME writes. Physical
   raster events are not generated in that bounded test yet.
+- Video reference: six complete 288x216 images match MAME pixel for pixel in Python.
+  New VHDL bitmap fetch logic passes all 512x256 coordinates, palette banks,
+  transparency, delayed replies, reset draining and six captured RAM replays.
+  This is not complete VHDL video output. See VIDEO_REFERENCE.md.
 
 ## Component reuse candidates
 

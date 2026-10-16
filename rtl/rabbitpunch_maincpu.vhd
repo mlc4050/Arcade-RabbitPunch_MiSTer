@@ -41,12 +41,13 @@ begin
     s_memory_address_strobe_n <= s_address_strobe_n or s_interrupt_cycle;
     process(i_clk)
     begin
-        if rising_edge(i_clk) then
+        if (rising_edge(i_clk)) then
             o_interrupt_acknowledge <= '0';
-            if i_reset = '1' then s_interrupt_cycle_previous <= '0';
+            if (i_reset = '1') then
+                s_interrupt_cycle_previous <= '0';
             else
                 s_interrupt_cycle_previous <= s_interrupt_cycle;
-                if s_interrupt_cycle = '1' and s_interrupt_cycle_previous = '0' then
+                if (s_interrupt_cycle = '1' and s_interrupt_cycle_previous = '0') then
                     o_interrupt_acknowledge <= '1';
                 end if;
             end if;
@@ -59,11 +60,12 @@ begin
     s_enable_phase2 <= '1' when sint_phase_count = sint_PHASE_DIVIDER-1 and s_phase = '1' and s_frozen = '0' else '0';
     process(i_clk)
     begin
-        if rising_edge(i_clk) and s_frozen = '0' then
-            if sint_phase_count = sint_PHASE_DIVIDER-1 then
+        if (rising_edge(i_clk) and s_frozen = '0') then
+            if (sint_phase_count = sint_PHASE_DIVIDER-1) then
                 sint_phase_count <= 0;
                 s_phase <= not s_phase;
-            else sint_phase_count <= sint_phase_count + 1;
+            else
+                sint_phase_count <= sint_phase_count + 1;
             end if;
         end if;
     end process;

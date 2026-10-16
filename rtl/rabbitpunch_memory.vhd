@@ -29,8 +29,8 @@ entity rabbitpunch_memory is
 end entity;
 
 architecture rtl of rabbitpunch_memory is
-    type state_t is (idle, ram_reply, rom_reply);
-    signal s_state : state_t := idle;
+    type styp_state is (STATE_IDLE, STATE_RAM_REPLY, STATE_ROM_REPLY);
+    signal s_state : styp_state := STATE_IDLE;
     signal su5_target, su5_reply_target, su5_view_target : target_t;
     signal s_reply_write : std_logic;
     signal s_bitmap_enable, s_sprite_enable, s_tile_enable, s_palette_enable, s_work_enable : std_logic;
@@ -49,11 +49,11 @@ begin
     o_request_supported <= '1' when su5_target = TARGET_ROM or su5_target = TARGET_BITMAP or
         su5_target = TARGET_SPRITES or su5_target = TARGET_TILES or
         su5_target = TARGET_PALETTE or su5_target = TARGET_WORKRAM else '0';
-    s_bitmap_enable <= '1' when i_request = '1' and s_state = idle and su5_target = TARGET_BITMAP else '0';
-    s_sprite_enable <= '1' when i_request = '1' and s_state = idle and su5_target = TARGET_SPRITES else '0';
-    s_tile_enable <= '1' when i_request = '1' and s_state = idle and su5_target = TARGET_TILES else '0';
-    s_palette_enable <= '1' when i_request = '1' and s_state = idle and su5_target = TARGET_PALETTE else '0';
-    s_work_enable <= '1' when i_request = '1' and s_state = idle and su5_target = TARGET_WORKRAM else '0';
+    s_bitmap_enable <= '1' when i_request = '1' and s_state = STATE_IDLE and su5_target = TARGET_BITMAP else '0';
+    s_sprite_enable <= '1' when i_request = '1' and s_state = STATE_IDLE and su5_target = TARGET_SPRITES else '0';
+    s_tile_enable <= '1' when i_request = '1' and s_state = STATE_IDLE and su5_target = TARGET_TILES else '0';
+    s_palette_enable <= '1' when i_request = '1' and s_state = STATE_IDLE and su5_target = TARGET_PALETTE else '0';
+    s_work_enable <= '1' when i_request = '1' and s_state = STATE_IDLE and su5_target = TARGET_WORKRAM else '0';
     s_bitmap_view <= '1' when i_view_enable = '1' and iu5_view_target = TARGET_BITMAP else '0';
     s_sprite_view <= '1' when i_view_enable = '1' and iu5_view_target = TARGET_SPRITES else '0';
     s_tile_view <= '1' when i_view_enable = '1' and iu5_view_target = TARGET_TILES else '0';
@@ -93,29 +93,30 @@ begin
 
     process(i_clk)
     begin
-        if rising_edge(i_clk) then
+        if (rising_edge(i_clk)) then
             o_response_valid <= '0';
             o_rom_request <= '0';
             o_view_valid <= i_view_enable;
             su5_view_target <= iu5_view_target;
             case s_state is
-                when idle =>
-                    if i_request = '1' then
-                        if su5_target = TARGET_ROM then
+                when STATE_IDLE =>
+                    if (i_request = '1') then
+                        if (su5_target = TARGET_ROM) then
                             o_rom_request <= '1';
                             ou18_rom_byte_address <= iu24_request_address(17 downto 1) & '0';
-                            s_state <= rom_reply;
-                        elsif s_bitmap_enable = '1' or s_sprite_enable = '1' or s_tile_enable = '1' or
-                              s_palette_enable = '1' or s_work_enable = '1' then
+                            s_state <= STATE_ROM_REPLY;
+                        elsif (s_bitmap_enable = '1' or s_sprite_enable = '1' or s_tile_enable = '1' or
+                                s_palette_enable = '1' or s_work_enable = '1') then
                             su5_reply_target <= su5_target;
                             s_reply_write <= i_request_write;
-                            s_state <= ram_reply;
+                            s_state <= STATE_RAM_REPLY;
                         end if;
                     end if;
-                when ram_reply =>
+                when STATE_RAM_REPLY =>
                     o_response_valid <= '1';
-                    s_state <= idle;
-                    if s_reply_write = '1' then ou16_response_data <= (others => '0');
+                    s_state <= STATE_IDLE;
+                    if (s_reply_write = '1') then
+                        ou16_response_data <= (others => '0');
                     else
                         case su5_reply_target is
                             when TARGET_BITMAP => ou16_response_data <= su16_bitmap_data;
@@ -126,11 +127,11 @@ begin
                             when others => ou16_response_data <= (others => '1');
                         end case;
                     end if;
-                when rom_reply =>
-                    if i_rom_response_valid = '1' then
+                when STATE_ROM_REPLY =>
+                    if (i_rom_response_valid = '1') then
                         o_response_valid <= '1';
                         ou16_response_data <= iu16_rom_response_data;
-                        s_state <= idle;
+                        s_state <= STATE_IDLE;
                     end if;
             end case;
         end if;

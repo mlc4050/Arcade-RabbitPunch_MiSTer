@@ -1,0 +1,194 @@
+[
+  {
+    "set": "rabiolep",
+    "capture": "debug\\rabiolep-attract",
+    "pixels": 62208,
+    "differing_pixels": 0,
+    "state": {
+      "flags": "0800",
+      "scroll": [
+        0,
+        504,
+        0,
+        504
+      ],
+      "sprite_count": 54,
+      "sprite_priority": 54,
+      "layer_coverage": [
+        62208,
+        8365,
+        8,
+        745
+      ]
+    },
+    "expected_rgb_sha256": "94976b9cf7eb720b20a203e92518cbbdeb83b70fd6ee6dcf2dd3cbc8f1c0a77e",
+    "rendered_rgb_sha256": "94976b9cf7eb720b20a203e92518cbbdeb83b70fd6ee6dcf2dd3cbc8f1c0a77e",
+    "capture_sha256": {
+      "videoram.bin": "a319dc3a42ec7c001db6ae5e374fbf0d2628b70eaaeb8fd43651a3bfb79d1414",
+      "spriteram.bin": "007716298fe02f4bf69bfa43d7ecc89e2f0d64b7979fc39444b0113c3688a503",
+      "palette.bin": "8e99bc927782a0c419e83580980c367fe5cf56195c4c01961199f500e13e1cf4",
+      "bitmap.bin": "7c2bbf50ae9e9a6240bbd26d5c673c2a6a94388c797c313fa5a1cf381336f4e4",
+      "reg_vregs.bin": "6c8c1cc4b33ac91e576f8b3aeb49da92660a57a48f12bad82e81e4b6de747c9f"
+    }
+  },
+  {
+    "set": "rpunch",
+    "capture": "debug\\rpunch-attract",
+    "pixels": 62208,
+    "differing_pixels": 0,
+    "state": {
+      "flags": "0000",
+      "scroll": [
+        0,
+        52,
+        0,
+        235
+      ],
+      "sprite_count": 54,
+      "sprite_priority": 0,
+      "layer_coverage": [
+        62208,
+        46116,
+        2537,
+        1049
+      ]
+    },
+    "expected_rgb_sha256": "acc321ce586f2f9e9d9d122ad2b250432241d21cbe45a5f13a4b48cddf098927",
+    "rendered_rgb_sha256": "acc321ce586f2f9e9d9d122ad2b250432241d21cbe45a5f13a4b48cddf098927",
+    "capture_sha256": {
+      "videoram.bin": "84daafdfb9a5a8dd9f6c29506e2958208607e8196a4e5f125cf1fc9f33bec02c",
+      "spriteram.bin": "13f79f8fb360475b989cb02ced6e02b38c2c8ed8ccbd460c83150b542252ac24",
+      "palette.bin": "96229e910aaa64f6067adfd4e3240e221291f2fcbddcf066716a20eb2415eb0b",
+      "bitmap.bin": "3ecb34e8f276ceb72a86daa58321d0800ad44681a5dbb593cab6fefe85fe472f",
+      "reg_vregs.bin": "1be0ccd501ba66eacbcfa58e570b930da4dcd70975ace5da959ffb1c82686587"
+    }
+  },
+  {
+    "set": "rabiolep",
+    "capture": "debug\\rabiolep-play1000",
+    "pixels": 62208,
+    "differing_pixels": 0,
+    "state": {
+      "flags": "0c00",
+      "scroll": [
+        0,
+        504,
+        0,
+        504
+      ],
+      "sprite_count": 54,
+      "sprite_priority": 0,
+      "layer_coverage": [
+        62208,
+        6144,
+        5137,
+        204
+      ]
+    },
+    "expected_rgb_sha256": "841dcdc199a16536ba19a0abe7527ba10c09095a9504bbfc5606c67b8ff732ea",
+    "rendered_rgb_sha256": "841dcdc199a16536ba19a0abe7527ba10c09095a9504bbfc5606c67b8ff732ea",
+    "capture_sha256": {
+      "videoram.bin": "c6b32c964faa247c6a188222dc633fc4439ad16c6c094c5f6bd019374bb8caf0",
+      "spriteram.bin": "deacfdd70039240b10dac4369e948c9c7c9484c5e6ac7f3f4bd26395e5e86663",
+      "palette.bin": "ee511dfcbcc0c90773f6a038adc8f2c140cd3f18d266bd043bde05137cb0544b",
+      "bitmap.bin": "0a9f1536b56af94d3bf3a0f4ccea198e8f66781472069e9f588ebe47080519f1",
+      "reg_vregs.bin": "0756f6d0d15c9dd4f9d69caa1b386a026be3280aaff115d215b2e3991de016ed"
+    }
+  },
+  {
+    "set": "rpunch",
+    "capture": "debug\\rpunch-play1000",
+    "pixels": 62208,
+    "differing_pixels": 0,
+    "state": {
+      "flags": "0800",
+      "scroll": [
+        0,
+        504,
+        0,
+        504
+      ],
+      "sprite_count": 54,
+      "sprite_priority": 54,
+      "layer_coverage": [
+        62208,
+        0,
+        0,
+        3560
+      ]
+    },
+    "expected_rgb_sha256": "7591d96556ea597dcd734068b56f80e9433c3155d67e969c8904ec0d1885c0a5",
+    "rendered_rgb_sha256": "7591d96556ea597dcd734068b56f80e9433c3155d67e969c8904ec0d1885c0a5",
+    "capture_sha256": {
+      "videoram.bin": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "spriteram.bin": "443431a9e3c639306e0e7fcccb5c051f53d34f5ae0abb64c8c31ee425502f6f6",
+      "palette.bin": "bb93301acd277fc8412d1089d53d086652d36dd5f0ccf88a72d5187b76968300",
+      "bitmap.bin": "e08ee5935ac61db8a50e540a80e81b83f7630b442eefd9aed97cf650a1ac484f",
+      "reg_vregs.bin": "7fb4f53a5faffe3d8f548442e50c1f1c9081421dc4c4e10dc661be509257f162"
+    }
+  },
+  {
+    "set": "rabiolep",
+    "capture": "debug\\rabiolep-play1800",
+    "pixels": 62208,
+    "differing_pixels": 0,
+    "state": {
+      "flags": "0000",
+      "scroll": [
+        0,
+        17,
+        0,
+        93
+      ],
+      "sprite_count": 54,
+      "sprite_priority": 0,
+      "layer_coverage": [
+        62208,
+        46132,
+        1764,
+        1433
+      ]
+    },
+    "expected_rgb_sha256": "e5ba95510eba64a343c2c2c62692ab74b777bd9d193cdeea449758739df68694",
+    "rendered_rgb_sha256": "e5ba95510eba64a343c2c2c62692ab74b777bd9d193cdeea449758739df68694",
+    "capture_sha256": {
+      "videoram.bin": "041380f25fe1ee0c9ba0fcef125001f46f8f92d47d7feb4dad04cbf5aedba6b6",
+      "spriteram.bin": "8a9fb5885b52f8b027e5f90c28345c4de8519b618864e3d0cfe61fda443f118d",
+      "palette.bin": "6bbc510694e45bf4b74931fb924bf194eb38a4690d84be53f374ee57ebda29c3",
+      "bitmap.bin": "91c01b8927769f8186dc85b1e581c0444aafd9c7be607522d36fadbb5e15fa29",
+      "reg_vregs.bin": "f8935c37b5ad8ad5e2adc3575d598dca777eaa03fd406fbeebff16daa7e3d860"
+    }
+  },
+  {
+    "set": "rpunch",
+    "capture": "debug\\rpunch-play1800",
+    "pixels": 62208,
+    "differing_pixels": 0,
+    "state": {
+      "flags": "0000",
+      "scroll": [
+        0,
+        504,
+        0,
+        504
+      ],
+      "sprite_count": 54,
+      "sprite_priority": 0,
+      "layer_coverage": [
+        62208,
+        49917,
+        1787,
+        852
+      ]
+    },
+    "expected_rgb_sha256": "b8b173fcb9a9934c18ee55e70540f21a71253fbe99b47761a158031315de686b",
+    "rendered_rgb_sha256": "b8b173fcb9a9934c18ee55e70540f21a71253fbe99b47761a158031315de686b",
+    "capture_sha256": {
+      "videoram.bin": "7c5bf45dbb46c94803ce774cc9f5a0cda8af2772848b98a33a284833d4ca51c8",
+      "spriteram.bin": "130058def3902a6a2503ffc5d3ca61023436b3d069b63b733b7090f01a8bb56a",
+      "palette.bin": "7315d5f2a440c616e67c27243f754cf86b31b0683a558770345c955ebd2e4887",
+      "bitmap.bin": "afd4e788efa4f2082fbf980c984a147ec4c9988ee900ceb418e80f96cd21f0c3",
+      "reg_vregs.bin": "b416ebabd2d86aa7a7aec57e466248ed356c03b8af3d645ce0143368512abe63"
+    }
+  }
+]

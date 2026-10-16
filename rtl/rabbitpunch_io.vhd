@@ -62,12 +62,12 @@ begin
     o_sound_pending <= s_sound_pending;
     process(i_clk)
     begin
-        if rising_edge(i_clk) then
+        if (rising_edge(i_clk)) then
             o_response_valid <= '0';
             o_sound_command_write <= '0';
             o_gga_write <= '0';
             o_irq_configure <= '0';
-            if i_initialize = '1' then
+            if (i_initialize = '1') then
                 su8_gga <= (others => (others => '0'));
                 su4_gga_selected <= (others => '0');
                 s_sound_pending <= '0';
@@ -84,8 +84,10 @@ begin
                 ou8_gga_write_data <= (others => '0');
                 ou16_response_data <= (others => '1');
             else
-                if i_sound_command_read = '1' then s_sound_pending <= '0'; end if;
-                if i_request = '1' then
+                if (i_sound_command_read = '1') then
+                    s_sound_pending <= '0';
+                end if;
+                if (i_request = '1') then
                     o_response_valid <= '1';
                     ou16_response_data <= (others => '1');
                     case su5_target is
@@ -96,10 +98,10 @@ begin
                             ou16_response_data <= (others => '0');
                             ou16_response_data(0) <= s_sound_pending;
                         when TARGET_VIDEO_FLAGS =>
-                            if iu2_request_bytes(1) = '1' then
+                            if (iu2_request_bytes(1) = '1') then
                                 ou16_video_flags(15 downto 8) <= iu16_request_data(15 downto 8);
                             end if;
-                            if iu2_request_bytes(0) = '1' then
+                            if (iu2_request_bytes(0) = '1') then
                                 ou16_video_flags(7 downto 0) <= iu16_request_data(7 downto 0);
                             end if;
                         when TARGET_SCROLL =>
@@ -118,10 +120,13 @@ begin
                             o_gga_write <= '1';
                             ou4_gga_write_address <= su4_gga_selected;
                             ou8_gga_write_data <= iu16_request_data(7 downto 0);
-                            if su4_gga_selected = 11 then
+                            if (su4_gga_selected = 11) then
                                 o_irq_configure <= '1';
-                                if iu16_request_data(7 downto 0) = x"C0" then o_irq_twice_per_frame <= '1';
-                                else o_irq_twice_per_frame <= '0'; end if;
+                                if (iu16_request_data(7 downto 0) = x"C0") then
+                                    o_irq_twice_per_frame <= '1';
+                                else
+                                    o_irq_twice_per_frame <= '0';
+                                end if;
                             end if;
                         when TARGET_SOUND_COMMAND =>
                             ou8_sound_command <= iu16_request_data(7 downto 0);

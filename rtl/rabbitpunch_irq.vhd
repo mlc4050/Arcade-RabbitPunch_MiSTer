@@ -22,22 +22,24 @@ begin
     o_level1_pending <= s_pending;
     process(i_clk)
     begin
-        if rising_edge(i_clk) then
-            if i_initialize = '1' then
+        if (rising_edge(i_clk)) then
+            if (i_initialize = '1') then
                 s_enabled <= '0';
                 s_started <= '0';
                 s_twice <= '0';
                 s_pending <= '0';
             else
-                if i_acknowledge = '1' then s_pending <= '0'; end if;
-                if i_configure = '1' then
+                if (i_acknowledge = '1') then
+                    s_pending <= '0';
+                end if;
+                if (i_configure = '1') then
                     s_enabled <= '1';
                     s_started <= '0';
                     s_twice <= i_twice_per_frame;
-                elsif i_vblank_start = '1' and s_enabled = '1' then
+                elsif (i_vblank_start = '1' and s_enabled = '1') then
                     s_started <= '1';
                     s_pending <= '1';
-                elsif i_half_frame = '1' and s_started = '1' and s_twice = '1' then
+                elsif (i_half_frame = '1' and s_started = '1' and s_twice = '1') then
                     s_pending <= '1';
                 end if;
             end if;

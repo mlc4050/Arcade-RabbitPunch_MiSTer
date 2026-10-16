@@ -189,7 +189,11 @@ def main():
                          "setting is an error, never a silent default.")
     ap.add_argument("--keep-going", action="store_true",
                     help="do not delete a previous capture of the same name")
+    ap.add_argument("--coin", type=int, default=0,
+                    help="insert a coin at this frame, press Start 90 frames later, then hold/fire")
     a = ap.parse_args()
+    if a.coin and a.frame <= a.coin+96:
+        ap.error("gameplay capture must be after coin + 96 frames")
 
     mame_dir, exe = mame_paths()
     r = regions()
@@ -199,13 +203,19 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     seconds = a.seconds if a.seconds is not None else max(10, a.frame // 60 + 10)
 
-    extra = ["-seconds_to_run", str(seconds)]
+    extra = ["-seconds_to_run", str(seconds), "-nvram_directory", str(out/"nvram")]
     if a.dip:
         extra += ["-cfg_directory", seed_dips(exe, mame_dir, a.set, a.dip, out).as_posix()]
+    else:
+        extra += ["-cfg_directory", str(out/"cfg")]
     cmd = mame_cmd(exe, a.set, "capture.lua", mame_dir, extra)
     env = dict(os.environ, **lua_env(r), **lua_runner_env("capture.lua"),
                CORE_OUT=out.as_posix(), CORE_FRAME=str(a.frame),
-               CORE_READ=spec(r.get("read", {})), CORE_WTAP=spec(r.get("wtap", {})))
+               CORE_READ=spec(r.get("read", {})), CORE_WTAP=spec(r.get("wtap", {})),
+               CORE_COIN=str(a.coin), CORE_IN_COIN=r.get("inputs",{}).get("coin","Coin 1"),
+               CORE_IN_START=r.get("inputs",{}).get("start","1 Player Start"),
+               CORE_IN_HOLD=r.get("inputs",{}).get("hold","P1 Right"),
+               CORE_IN_PULSE=r.get("inputs",{}).get("pulse","P1 Button 1"))
     print(f"{a.set} frame {a.frame} -> {out}")
     p = subprocess.run(cmd, cwd=mame_dir, env=env, capture_output=True, text=True, **NO_WINDOW)
     blob = p.stdout + p.stderr

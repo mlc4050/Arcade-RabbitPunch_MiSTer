@@ -31,6 +31,8 @@ every frame.
 | Sound command and pending flag | rabbitpunch_io.vhd | 8 + 1 | Capture with sound CPU stopped; future coordinated state loader | generic_latch_8 state |
 | IRQ enabled / first-event state / frequency / pending | rabbitpunch_irq.vhd | 4 | Future explicit state loader | CRTC timer configuration and CPU HOLD_LINE |
 | CPU previous interrupt-acknowledge cycle | rabbitpunch_maincpu.vhd | 1 | Capture outside acknowledge cycle | Bus protocol edge detection |
+| Bitmap fetch FSM and X/Y/nibble/palette-bank metadata | rabbitpunch_bitmap.vhd | 2 logical + 9 + 8 + 2 + 4 | Future capture or drain before video restart | Pixel pipeline, no direct MAME saved state |
+| Bitmap request address and pixel output registers | rabbitpunch_bitmap.vhd | 15 + 9 + 8 + 10 + opacity/valid strobes | Drain/flush before video restart | Pixel pipeline |
 
 ## Chip state
 

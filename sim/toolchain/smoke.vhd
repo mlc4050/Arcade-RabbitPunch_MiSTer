@@ -16,10 +16,10 @@ architecture rtl of smoke_register is
 begin
     process(i_clk)
     begin
-        if rising_edge(i_clk) then
-            if i_reset = '1' then
+        if (rising_edge(i_clk)) then
+            if (i_reset = '1') then
                 ou8_data <= (others => '0');
-            elsif i_enable = '1' then
+            elsif (i_enable = '1') then
                 ou8_data <= iu8_data;
             end if;
         end if;

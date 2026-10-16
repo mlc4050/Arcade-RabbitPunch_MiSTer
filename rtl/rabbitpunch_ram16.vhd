@@ -28,20 +28,20 @@ begin
         report "RAM address ports must match sint_ADDRESS_BITS" severity failure;
     process(i_clk)
     begin
-        if rising_edge(i_clk) then
-            if i_cpu_enable = '1' then
-                if i_cpu_write = '1' then
-                    if iu2_cpu_bytes(1) = '1' then
+        if (rising_edge(i_clk)) then
+            if (i_cpu_enable = '1') then
+                if (i_cpu_write = '1') then
+                    if (iu2_cpu_bytes(1) = '1') then
                         su16_memory(to_integer(iux_cpu_address))(15 downto 8) <= iu16_cpu_data(15 downto 8);
                     end if;
-                    if iu2_cpu_bytes(0) = '1' then
+                    if (iu2_cpu_bytes(0) = '1') then
                         su16_memory(to_integer(iux_cpu_address))(7 downto 0) <= iu16_cpu_data(7 downto 0);
                     end if;
                 else
                     ou16_cpu_data <= su16_memory(to_integer(iux_cpu_address));
                 end if;
             end if;
-            if i_view_enable = '1' then
+            if (i_view_enable = '1') then
                 ou16_view_data <= su16_memory(to_integer(iux_view_address));
             end if;
         end if;

@@ -12,7 +12,8 @@ The absence of an imperfect-graphics flag does not establish physical video timi
 | Register 0b controls interrupt rate | rpunch_state::gga_data_w / crtc_interrupt_gen | rabbitpunch_irq waits for the next vblank, then holds level 1 once per frame, or twice for data c0, until CPU acknowledge | PCB interrupt timing versus GGA writes |
 | Synthetic raster configuration | rpunch machine configuration | No physical timing generator selected; the IRQ module accepts external vblank/half-frame events | Schematics/raw timing or measured PCB sync waveform |
 | Scroll byte-only writes ignored | rpunch_state::scrollreg_w | Decoder/I/O update scroll only for full-word writes and store the low nine bits | PCB tests of independent byte writes |
+| Guessed sprite/foreground priority split | rpunch_state::draw_sprites | Offline model copies the index-based mask and MAME's occupied-sprite priority pixels; tile/sprite RTL not implemented yet | PCB overlap tests including sprites behind foreground |
 
-Core-specific incomplete work is tracked in HACKS.md. Sprite priority assumptions,
-bitmap composition and other graphics behavior must be recorded as those modules land.
+Core-specific incomplete work is tracked in HACKS.md. Additional graphics behavior
+must be recorded as the hardware modules land.
 No vendored CPU disagreement is currently worked around in board RTL.
