@@ -11,7 +11,7 @@ package tile_test_support is
     function pen(vint_code, vint_row, vint_pixel, vint_foreground : natural) return natural;
     function packed_row(iu17_address : unsigned(16 downto 0);
                         vint_foreground : natural := 0) return unsigned;
-    impure function read_hex(v_filename : string; vint_count, vint_width : positive)
+    impure function read_hex(v_filename : string; vint_count : natural; vint_width : positive)
         return t_unsigned_words;
 end package;
 
@@ -55,7 +55,7 @@ package body tile_test_support is
         return vu32_result;
     end function;
 
-    impure function read_hex(v_filename : string; vint_count, vint_width : positive)
+    impure function read_hex(v_filename : string; vint_count : natural; vint_width : positive)
         return t_unsigned_words is
         file v_file : text open read_mode is v_filename;
         variable v_line : line;

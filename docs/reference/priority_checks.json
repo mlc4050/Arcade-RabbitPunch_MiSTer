@@ -1,0 +1,92 @@
+[
+  {
+    "case": "video_priority",
+    "pass_marker": "PRIORITY_PASS",
+    "log": "debug\\baselines\\video_priority\\result.log",
+    "log_sha256": "b61437a2bd18372a36f649255ac6e146799f8cc48b6a8b646e873af239dc786e"
+  },
+  {
+    "case": "mixer_rabiolep_attract",
+    "pass_marker": "MIXER_CAPTURE_PASS",
+    "log": "debug\\baselines\\mixer_rabiolep_attract\\result.log",
+    "set": "rabiolep",
+    "capture": "debug/rabiolep-attract",
+    "pixels": 62208,
+    "differing_pixels": 0,
+    "sprite_candidates": 5120,
+    "expected_rgb_sha256": "94976b9cf7eb720b20a203e92518cbbdeb83b70fd6ee6dcf2dd3cbc8f1c0a77e",
+    "actual_rgb_sha256": "94976b9cf7eb720b20a203e92518cbbdeb83b70fd6ee6dcf2dd3cbc8f1c0a77e",
+    "scope": "VHDL sprite arbitration and mixer; software-decoded layer/ROM stimulus; not integrated row engines or raster",
+    "log_sha256": "97dfb1bd2a17f989830f7b4db7e3006f6329d391cf8c872a5363730964560c92"
+  },
+  {
+    "case": "mixer_rpunch_attract",
+    "pass_marker": "MIXER_CAPTURE_PASS",
+    "log": "debug\\baselines\\mixer_rpunch_attract\\result.log",
+    "set": "rpunch",
+    "capture": "debug/rpunch-attract",
+    "pixels": 62208,
+    "differing_pixels": 0,
+    "sprite_candidates": 6272,
+    "expected_rgb_sha256": "acc321ce586f2f9e9d9d122ad2b250432241d21cbe45a5f13a4b48cddf098927",
+    "actual_rgb_sha256": "acc321ce586f2f9e9d9d122ad2b250432241d21cbe45a5f13a4b48cddf098927",
+    "scope": "VHDL sprite arbitration and mixer; software-decoded layer/ROM stimulus; not integrated row engines or raster",
+    "log_sha256": "0b63c8d31d3385c61c385755e2d780d38f9569c97b8009db480979052031af64"
+  },
+  {
+    "case": "mixer_rabiolep_play1000",
+    "pass_marker": "MIXER_CAPTURE_PASS",
+    "log": "debug\\baselines\\mixer_rabiolep_play1000\\result.log",
+    "set": "rabiolep",
+    "capture": "debug/rabiolep-play1000",
+    "pixels": 62208,
+    "differing_pixels": 0,
+    "sprite_candidates": 8554,
+    "expected_rgb_sha256": "841dcdc199a16536ba19a0abe7527ba10c09095a9504bbfc5606c67b8ff732ea",
+    "actual_rgb_sha256": "841dcdc199a16536ba19a0abe7527ba10c09095a9504bbfc5606c67b8ff732ea",
+    "scope": "VHDL sprite arbitration and mixer; software-decoded layer/ROM stimulus; not integrated row engines or raster",
+    "log_sha256": "4801e57f0d70f4e0fea928a786eee7eba1f014b403fa94ac36e8d51dd623ecd6"
+  },
+  {
+    "case": "mixer_rpunch_play1000",
+    "pass_marker": "MIXER_CAPTURE_PASS",
+    "log": "debug\\baselines\\mixer_rpunch_play1000\\result.log",
+    "set": "rpunch",
+    "capture": "debug/rpunch-play1000",
+    "pixels": 62208,
+    "differing_pixels": 0,
+    "sprite_candidates": 0,
+    "expected_rgb_sha256": "7591d96556ea597dcd734068b56f80e9433c3155d67e969c8904ec0d1885c0a5",
+    "actual_rgb_sha256": "7591d96556ea597dcd734068b56f80e9433c3155d67e969c8904ec0d1885c0a5",
+    "scope": "VHDL sprite arbitration and mixer; software-decoded layer/ROM stimulus; not integrated row engines or raster",
+    "log_sha256": "7fd5deade291a0401e54af0a30c6b0642472c92c9c8a16a5658d2ab69482d0f1"
+  },
+  {
+    "case": "mixer_rabiolep_play1800",
+    "pass_marker": "MIXER_CAPTURE_PASS",
+    "log": "debug\\baselines\\mixer_rabiolep_play1800\\result.log",
+    "set": "rabiolep",
+    "capture": "debug/rabiolep-play1800",
+    "pixels": 62208,
+    "differing_pixels": 0,
+    "sprite_candidates": 5124,
+    "expected_rgb_sha256": "e5ba95510eba64a343c2c2c62692ab74b777bd9d193cdeea449758739df68694",
+    "actual_rgb_sha256": "e5ba95510eba64a343c2c2c62692ab74b777bd9d193cdeea449758739df68694",
+    "scope": "VHDL sprite arbitration and mixer; software-decoded layer/ROM stimulus; not integrated row engines or raster",
+    "log_sha256": "2591bccf873b206fae008c1def47a92268e24841776fe1dae4b44297d28e844e"
+  },
+  {
+    "case": "mixer_rpunch_play1800",
+    "pass_marker": "MIXER_CAPTURE_PASS",
+    "log": "debug\\baselines\\mixer_rpunch_play1800\\result.log",
+    "set": "rpunch",
+    "capture": "debug/rpunch-play1800",
+    "pixels": 62208,
+    "differing_pixels": 0,
+    "sprite_candidates": 4615,
+    "expected_rgb_sha256": "b8b173fcb9a9934c18ee55e70540f21a71253fbe99b47761a158031315de686b",
+    "actual_rgb_sha256": "b8b173fcb9a9934c18ee55e70540f21a71253fbe99b47761a158031315de686b",
+    "scope": "VHDL sprite arbitration and mixer; software-decoded layer/ROM stimulus; not integrated row engines or raster",
+    "log_sha256": "20e9897c33f7c3cbe07fc3e4dae75ddae08820a4231c40ebef1c88c46bb5d0da"
+  }
+]

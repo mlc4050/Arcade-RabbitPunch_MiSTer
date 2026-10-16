@@ -106,6 +106,12 @@ include independently delayed RAM/ROM responders and simulated consumer stalls;
 they exclude line RAM clearing/writes, CPU traffic and shared SDRAM arbitration.
 They do not establish a physical scanline deadline or final timing margin.
 
+The selector alone also passes Quartus 17.0.2 synthesis/fitting at the 48 MHz
+evaluation clock: commit 86e7df5, 100 ALMs, 80 registers and zero block RAM/DSP.
+Worst setup slack is +10.535 ns and hold is +0.121 ns; every reported corner
+and pulse-width check passes, with no illegal clocks or unconstrained paths.
+See reference/sprite_scan_synth.json. This fit excludes the row drawer.
+
 ```powershell
 ./scripts/d_drive.ps1 scripts/run_sprite_scan_tests.py
 ./scripts/d_drive.ps1 scripts/run_sprite_scan_tests.py --draw

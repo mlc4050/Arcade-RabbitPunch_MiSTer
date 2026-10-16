@@ -159,7 +159,7 @@ def check_present(stage):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--synth-check", choices=["memory", "tiles", "sprites", "sprite_scan"],
+    ap.add_argument("--synth-check", choices=["memory", "tiles", "sprites", "sprite_scan", "priority"],
                     help="fit an isolated block from HEAD instead of the MiSTer core")
     ap.add_argument("--rev", help="Quartus revision (default: CORE_REV, else the one "
                                   ".qsf in the core root, else the .qpf's last)")

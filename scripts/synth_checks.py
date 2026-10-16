@@ -15,6 +15,7 @@ CHECKS = {
     "tiles": (0, ("rabbitpunch_tile_lookup", "rabbitpunch_tile_row", "jtframe_draw")),
     "sprites": (0, ("rabbitpunch_sprite_row", "jtframe_draw")),
     "sprite_scan": (0, ("rabbitpunch_sprite_scan",)),
+    "priority": (0, ("rabbitpunch_sprite_priority", "rabbitpunch_pixel_mixer")),
 }
 
 

@@ -20,7 +20,9 @@ Sprite row drawing now passes 30720 synthetic rows and all descriptor rows in
 six captured scenes, including flips, transparency, overlapped ROM fetching
 and reset draining. Scanline candidate selection now feeds that drawer correctly
 in directed stress tests and six static captures. Sprite line storage, priority/mixing,
-shared memory scheduling and physical line deadlines remain open.
+shared memory scheduling and physical line deadlines remain open. Combinational
+sprite arbitration and layer mixing pass directed tests and match six MAME
+screenshots with software-decoded layer stimulus; line-memory integration is open.
 The complete game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 

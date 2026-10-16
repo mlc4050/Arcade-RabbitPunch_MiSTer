@@ -53,6 +53,7 @@ every frame.
 |---|---|
 | ROM image and layout constants | Recreated from the selected MRA; no writable ROM state |
 | Address decoder | Combinational; derived from the CPU pins |
+| Sprite entry arbitration and pixel mixer | Combinational; no stored state. Future line RAM must store occupancy/index/palette/foreground tag separately |
 
 ## Frame alignment
 
