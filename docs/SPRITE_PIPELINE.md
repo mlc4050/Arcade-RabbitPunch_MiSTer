@@ -146,6 +146,21 @@ order and exactly two ROM reads per selected row. Renderer cycle measurements
 include line clear and final update completion, and exclude test readback time.
 These are not shared-SDRAM or physical scanline deadline tests.
 
+The controller passes every native line entry for both synthetic lists and all
+six captures, with whole-renderer reset and concurrent previous-bank display.
+Results are in reference/sprite_renderer_checks.json. The crowded list completes
+in at most 2582 clocks, including clear/final drain, or 53.79 microseconds at
+48 MHz. Unlike the earlier connected-primitives bench, this controller starts
+rows whenever its drawer/storage are ready rather than imposing extra consumer
+stall windows. Both use independent 0/3/11-cycle memory delays. These numbers
+exclude CPU/shared SDRAM contention and do not prove a physical line deadline.
+
+The combined renderer fit for f4f4e22 passes Quartus 17.0.2 on 5CSEBA6U23I7:
+272 ALMs, 386 registers, exactly two M10K blocks (16384 bits) and no DSP.
+Worst setup slack is +8.250 ns and hold is +0.152 ns. All corners and pulse-width
+checks pass with zero illegal clocks/unconstrained paths. See
+reference/sprite_renderer_synth.json. This remains a block fit, not the MiSTer core.
+
 ```powershell
 ./scripts/d_drive.ps1 scripts/run_sprite_scan_tests.py --line
 ./scripts/d_drive.ps1 scripts/run_sprite_scan_tests.py --renderer

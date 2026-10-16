@@ -27,7 +27,9 @@ screenshots with software-decoded layer stimulus. Two native sprite-line RAM ban
 pass directed clearing, collision/forwarding, concurrent display and reset tests.
 Connected scan/draw-to-native-line tests pass every line entry in synthetic
 stress cases and six captures. A logical-line controller now combines those
-blocks; whole-controller tests and its standalone fit are the next gates.
+blocks. Whole-controller tests pass both stress lists and all six captures,
+including concurrent display reads and global reset with RAM/ROM work pending;
+its combined standalone fit passes with two M10K blocks and positive timing.
 The tile/bitmap/mixer path and shared-memory/raster integration remain open.
 The complete game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).

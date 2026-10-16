@@ -80,7 +80,8 @@ scheduling and drawing also pass connected static-data tests; see SPRITE_PIPELIN
 Sprite arbitration and palette-index mixing now match the six full MAME screenshots
 with software-decoded layer stimulus; see VIDEO_PRIORITY.md for the scope.
 Native sprite line RAM also passes directed and captured scan/draw integration
-tests; the full logical-line controller is under verification. Integrated
+tests; the full logical-line controller also passes synthetic/captured lines,
+global reset and concurrent display, plus its combined Quartus fit. Integrated
 tile/bitmap/mixer/palette output, physical raster/PLL choices, complete-core
 fit and hardware verification remain open. Six matching scenes do not cover every
 register/flip/priority combination or establish a fully working game core.
