@@ -23,22 +23,22 @@ end entity;
 
 architecture rtl of rabbitpunch_bus is
     type state_t is (idle, waiting, complete, draining);
-    signal e_state : state_t := idle;
+    signal s_state : state_t := idle;
 begin
-    o_cpu_transfer_acknowledge_n <= '0' when e_state = complete and i_cpu_address_strobe_n = '0' and i_reset = '0' else '1';
+    o_cpu_transfer_acknowledge_n <= '0' when s_state = complete and i_cpu_address_strobe_n = '0' and i_reset = '0' else '1';
     process(i_clk)
     begin
         if rising_edge(i_clk) then
             o_request <= '0';
             if i_reset = '1' then
-                if (e_state = waiting or e_state = draining) and i_response_valid = '0' then
-                    e_state <= draining;
+                if (s_state = waiting or s_state = draining) and i_response_valid = '0' then
+                    s_state <= draining;
                 else
-                    e_state <= idle;
+                    s_state <= idle;
                 end if;
                 ou16_cpu_read_data <= (others => '1');
             else
-                case e_state is
+                case s_state is
                     when idle =>
                         if i_cpu_address_strobe_n = '0' and (i_cpu_upper_byte_strobe_n = '0' or i_cpu_lower_byte_strobe_n = '0') then
                             o_request <= '1';
@@ -46,20 +46,20 @@ begin
                             ou24_request_address <= iu23_cpu_word_address & '0';
                             ou16_request_data <= iu16_cpu_write_data;
                             ou2_request_bytes <= (not i_cpu_upper_byte_strobe_n) & (not i_cpu_lower_byte_strobe_n);
-                            e_state <= waiting;
+                            s_state <= waiting;
                         end if;
                     when waiting =>
                         if i_cpu_address_strobe_n = '1' then
-                            if i_response_valid = '1' then e_state <= idle;
-                            else e_state <= draining; end if;
+                            if i_response_valid = '1' then s_state <= idle;
+                            else s_state <= draining; end if;
                         elsif i_response_valid = '1' then
                             ou16_cpu_read_data <= iu16_response_data;
-                            e_state <= complete;
+                            s_state <= complete;
                         end if;
                     when complete =>
-                        if i_cpu_address_strobe_n = '1' then e_state <= idle; end if;
+                        if i_cpu_address_strobe_n = '1' then s_state <= idle; end if;
                     when draining =>
-                        if i_response_valid = '1' then e_state <= idle; end if;
+                        if i_response_valid = '1' then s_state <= idle; end if;
                 end case;
             end if;
         end if;

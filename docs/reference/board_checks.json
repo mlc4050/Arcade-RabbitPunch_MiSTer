@@ -3,18 +3,24 @@
     "case": "board_decode",
     "pass_marker": "BOARD_DECODE_PASS",
     "log": "debug\\baselines\\board_decode\\result.log",
-    "log_sha256": "1db6982ae015222ce3c8500c265ce3eba8b1c4034d3bbdfbdfe30d2bf75d2395"
+    "log_sha256": "81c4c6afbd047ad78de4abb9697ceefc3819683ded1e0d1b615afdad5f75b2c6"
   },
   {
     "case": "board_bus",
     "pass_marker": "BOARD_BUS_PASS",
     "log": "debug\\baselines\\board_bus\\result.log",
-    "log_sha256": "ab1ee61036d53354e56cbbfbf9c054335c5d9f6dd056aaa3d9e17811f2db32a3"
+    "log_sha256": "e3ea9f445a59b40de4d66e73a6b8870b22223f69be4b8fd5a38433cf30d10736"
   },
   {
     "case": "board_maincpu",
     "pass_marker": "MAINCPU_PASS",
     "log": "debug\\baselines\\board_maincpu\\result.log",
-    "log_sha256": "78b2ad3f11ec82eec848e99647c59b362ae042c9a9bec12ac781e0ff2d66678f"
+    "log_sha256": "1101f3d023df665b73845dafc5df33fac60888c9164bbf8466d93801023b6f2c"
+  },
+  {
+    "case": "board_t80_wrapper",
+    "pass_marker": "T80_WRAPPER_PASS",
+    "log": "debug\\baselines\\board_t80_wrapper\\result.log",
+    "log_sha256": "4fecdadb4a44e97a4bfeaa993fe35c16c6f56f1019121536504731cd1477e250"
   }
 ]

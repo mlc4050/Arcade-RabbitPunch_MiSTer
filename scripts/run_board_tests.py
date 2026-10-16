@@ -6,6 +6,8 @@ from run_baselines import run_case
 
 
 def main():
+    t80 = [f"rtl/cpu/t80/{name}.vhd" for name in
+           ("T80_Pack", "T80_Reg", "T80_MCode", "T80_ALU", "T80", "T80se")]
     results = [run_case("board_decode", ["rtl/rabbitpunch_layout.vhd", "rtl/rabbitpunch_decode.vhd",
                                       "sim/board/decode_tb.sv"],
                       "decode_tb", "1 us", "BOARD_DECODE_PASS"),
@@ -14,7 +16,9 @@ def main():
                run_case("board_maincpu", ["rtl/cpu/fx68k/fx68k.sv", "rtl/cpu/fx68k/fx68kAlu.sv",
                          "rtl/cpu/fx68k/uaddrPla.sv", "rtl/rabbitpunch_bus.vhd",
                          "rtl/rabbitpunch_fx68k.vhd", "rtl/rabbitpunch_maincpu.vhd", "sim/board/maincpu_tb.sv"],
-                        "maincpu_tb", "2 ms", "MAINCPU_PASS")]
+                        "maincpu_tb", "2 ms", "MAINCPU_PASS"),
+               run_case("board_t80_wrapper", t80 + ["rtl/rabbitpunch_t80.vhd", "sim/board/t80_wrapper_tb.sv"],
+                        "t80_wrapper_tb", "3 us", "T80_WRAPPER_PASS")]
     for result in results:
         result["log_sha256"] = hashlib.sha256((core_root() / result["log"]).read_bytes()).hexdigest()
     report = json.dumps(results, indent=2) + "\n"

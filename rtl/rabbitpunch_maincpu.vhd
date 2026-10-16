@@ -5,10 +5,15 @@ use ieee.numeric_std.all;
 -- 48 MHz evaluation clock: alternating phases every three clocks give 8 MHz.
 -- Memory latency becomes real 68000 wait states; phases are never accelerated.
 entity rabbitpunch_maincpu is
-    generic (sint_PHASE_DIVIDER : positive := 3);
+    generic (
+        sint_PHASE_DIVIDER : positive := 3
+    );
     port (
-        i_clk, i_reset, i_pause : in std_logic;
-        o_request, o_request_write : out std_logic;
+        i_clk : in std_logic;
+        i_reset : in std_logic;
+        i_pause : in std_logic;
+        o_request : out std_logic;
+        o_request_write : out std_logic;
         ou24_request_address : out unsigned(23 downto 0);
         ou16_request_data : out unsigned(15 downto 0);
         ou2_request_bytes : out unsigned(1 downto 0);

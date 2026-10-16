@@ -138,3 +138,11 @@ cache/user-base, pip cache and ModelSim configuration under this repository on D
 Each simulation uses its own D-drive work library and logs. The shared JTAG guard
 retains its machine-wide marker location so other repositories still coordinate;
 these simulation runs need no JTAG marker creation.
+
+`rabbitpunch_t80.vhd` provides the same descriptive boundary for the selected Z80
+core. Public address/data ports are unsigned; required conversions to the vendor's
+vector types occur only in its port map. The T80 wrapper regression runs the donor
+LD/memory-write/OUT/HALT program and checks the complete I/O address (4200), data
+(42), RAM write address (8000), and halt output. The wrapper is not connected to a
+sound board yet. Imported TG68K evaluation files and MiSTer sys sources remain intact.
+The mixed-language toolchain smoke-test VHDL also follows the same conventions.

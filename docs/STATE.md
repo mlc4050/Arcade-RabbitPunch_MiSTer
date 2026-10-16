@@ -25,7 +25,8 @@ every frame.
 | Chip | Module | Addressable? | Tier | Note |
 |---|---|---|---|---|
 | fx68k | rtl/cpu/fx68k, rabbitpunch_fx68k.vhd | No CPU register state port | CPU simulation integration | Adapter exposes descriptive bus pins; full CPU state capture remains open |
-| T80/JTFRAME evaluation copies | rtl/cpu/t80, rtl/jtframe | Not integrated | Evaluation | Not part of the game state yet |
+| T80 | rtl/cpu/t80, rabbitpunch_t80.vhd | No CPU register state port | Wrapper test | Descriptive unsigned interface tested; not connected to sound board |
+| JTFRAME evaluation copies | rtl/jtframe | Not integrated | Evaluation | Not part of the game state yet |
 
 ## Deliberately skipped
 

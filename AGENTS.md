@@ -15,5 +15,9 @@ unsigned signals use su<width>_; unsigned variables use vu<width>_. Integer/natu
 signals use sint_, integer/natural variables use vint_. Use descriptive adapter ports around
 vendor logic; keep vendor pin names only inside that translation boundary and
 explain cryptic signals there. Preserve unchanged third-party sources.
+These conventions apply to every VHDL file we author or maintain, including
+testbenches and packages. Wrap imported entry points used by our board logic;
+required vendor-type conversions stay inside that wrapper. Do not rename imported
+internal hierarchies or MiSTer sys sources for style cleanup.
 All generated work, caches, build outputs, logs and temporary files go on D:.
 Use scripts/d_drive.ps1 to launch Python tools with D-drive temporary/cache paths.
