@@ -16,7 +16,7 @@ The board-facing game interface and new hardware-specific logic remain VHDL.
 | Tile row fetching | Evaluate JTFRAME jtframe_tilemap/tilebuf interfaces against two 64x64 maps | Column-major VRAM decode, scroll and bank/palette register behavior |
 | RAM | Compatible JTFRAME dual-port RAM primitives | Board memory decode and state/debug access |
 | Clock enables and raster counters | JTFRAME fractional enables/vtimer where suitable | Measured clock ratios, blanking/sync parameters and board interrupts |
-| Main and sound CPUs | Existing TG68K/T80 kernels; assess wrapper fit separately | Board-specific bus and IRQ behavior |
+| Main and sound CPUs | fx68k and T80; selected after baseline comparison (BASELINES.md) | VHDL board bus and IRQ behavior |
 | MiSTer output, HPS and ROM transport | Existing template and selected transport modules | Board ROM routing, MRA/download contract and status/control wiring |
 
 The tilemap and raster rows are candidates, not claims that their generic defaults
@@ -44,8 +44,9 @@ JTFRAME primitive. MAME's incomplete GGA does not provide raw PCB timing.
 1. Record exact donor revision, local modifications, file hashes, licence and dependency
    closure in the vendored module directory. JTFRAME headers inspected state GPLv3+.
 2. Run available unmodified donor testbenches before adapting modules. The ModelSim
-   mixed-language installation check passes (TOOLCHAIN.md); no JTFRAME simulation or
-   synthesis has passed for this core yet.
+   mixed-language installation check passes (TOOLCHAIN.md). Initial row-drawer and
+   object-buffer checks now pass (BASELINES.md); tile fetching, full sprite scheduling
+   and synthesis remain unvalidated.
 3. Verify Rabbit Punch graphics bit order and row addressing before connecting memory.
    A 16-pixel generic row drawer and 4-bit ysub need mapping to 32-line sprites.
 4. Use MAME captures/write sweeps for snapshot timing and priority tests, including

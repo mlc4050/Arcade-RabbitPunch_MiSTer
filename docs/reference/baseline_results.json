@@ -1,0 +1,77 @@
+{
+  "vendor_manifest_sha256": "5541d6ea8df32d59597fa0431bc4c7c35741e987bf167b8e5d931cd2a7a918a3",
+  "checks": [
+    {
+      "case": "t80_donor",
+      "pass_marker": "PASS: T80se boots",
+      "log": "debug\\baselines\\t80_donor\\result.log",
+      "log_sha256": "83586a813012ddc2cdc05712c6a191e0506fd084e979a43d397eb80f86cf94a8",
+      "simulator_errors": 0,
+      "simulator_warnings": 13,
+      "classification": "baseline completed"
+    },
+    {
+      "case": "tg68k_donor",
+      "pass_marker": "REACHED END: BFEXTU result write observed",
+      "log": "debug\\baselines\\tg68k_donor\\result.log",
+      "log_sha256": "49b58e4e2eb0fdc277161d43684ec5830b34c233734782dfed53d558ebc100d0",
+      "simulator_errors": 0,
+      "simulator_warnings": 14,
+      "classification": "baseline completed"
+    },
+    {
+      "case": "jtframe_draw",
+      "pass_marker": "JTFRAME_DRAW_PASS",
+      "log": "debug\\baselines\\jtframe_draw\\result.log",
+      "log_sha256": "b2144f5756370d455d81012a9408019ca2567a0bdf105083f1fc5f9f1444f46d",
+      "simulator_errors": 0,
+      "simulator_warnings": 0,
+      "classification": "baseline completed"
+    },
+    {
+      "case": "tg68k_68000",
+      "pass_marker": "PASS: kernel boots, executes, and writes the right result",
+      "log": "debug\\baselines\\tg68k_68000\\result.log",
+      "log_sha256": "34d7a7b3d5c4bb4175248007aa1e2f852d54b2de1a7ecbd027083827f072baa4",
+      "simulator_errors": 0,
+      "simulator_warnings": 13,
+      "classification": "baseline completed"
+    },
+    {
+      "case": "tg68k_ccr",
+      "pass_marker": "PASS: ori and andi to CCR",
+      "log": "debug\\baselines\\tg68k_ccr\\result.log",
+      "log_sha256": "3256ca3d1249cd267f741d7ca92976aedd7c910006073a67dee8f57a73c5acca",
+      "simulator_errors": 0,
+      "simulator_warnings": 13,
+      "classification": "baseline completed"
+    },
+    {
+      "case": "tg68k_pace",
+      "pass_marker": "fetches of the nop: 10273, expected 10273",
+      "log": "debug\\baselines\\tg68k_pace\\result.log",
+      "log_sha256": "6ce51ccec766abd9d06640e3891da755c3ee6c0580a6fdec640b32a0b8109826",
+      "simulator_errors": 0,
+      "simulator_warnings": 13,
+      "classification": "timing measurement differs from 68000"
+    },
+    {
+      "case": "jtframe_buffer",
+      "pass_marker": "JTFRAME_BUFFER_PASS",
+      "log": "debug\\baselines\\jtframe_buffer\\result.log",
+      "log_sha256": "4f9d61793bf10a29e0a20d55be21ea06604dc5c670aaefe6661c2f16f1445239",
+      "simulator_errors": 0,
+      "simulator_warnings": 0,
+      "classification": "baseline completed"
+    },
+    {
+      "case": "fx68k_pace",
+      "pass_marker": "one iteration: 14 clocks (68000: 14)",
+      "log": "debug\\baselines\\fx68k_pace\\result.log",
+      "log_sha256": "65ec9b64be30c4cf4fd97d81bc8b54a7333ec93bd27f7d8a0100929ff8882b5b",
+      "simulator_errors": 0,
+      "simulator_warnings": 97683,
+      "classification": "baseline completed"
+    }
+  ]
+}

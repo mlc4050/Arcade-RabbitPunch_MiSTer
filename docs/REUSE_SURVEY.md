@@ -10,14 +10,15 @@ no new donor is validated or vendored by this survey.
 
 | Block | Local candidate | Integration still required |
 |---|---|---|
-| 68000 | Arcade-Seta_MiSTer/rtl/cpu/tg68k/ | VHDL board bus adapter, effective execution timing, interrupts, byte lanes |
+| 68000 | Arcade-Seta_MiSTer/rtl/cpu/fx68k/ | VHDL board bus adapter, phase enables, interrupts, byte lanes; selected over TG68K after measured timing test |
 | Z80 | Arcade-Psikyo_MiSTer/rtl/cpu/t80/ | VHDL sound address map, RAM, command and Yamaha IRQ merge |
 | YM2151 | Arcade-JalecoMS1BCD_MiSTer/rtl/third_party/jt51/hdl/ | Clock/enable phases, register bus, IRQ, audio level |
 | uPD7759 | Arcade-SystemC2_MiSTer/rtl/jt7759/hdl/; alternate SNK68/rtl/jt7759/hdl/ | Standalone mode, 128 KiB bank selection, reset/start, ROM handshake |
 | SDRAM | Arcade-Seta_MiSTer/rtl/memory/sdram/ | ROM client routing, priorities, load layout and measured deadlines |
 | MiSTer output/HPS | Already bootstrapped Template sys/ | Board wrapper and configuration; retain sys unchanged |
 
-TG68K and T80 are VHDL. JT51 and JT7759 are Verilog, explicitly permitted by the
+TG68K is retained as a VHDL evaluation copy; selected fx68k is SystemVerilog and T80
+is VHDL. JT51 and JT7759 are Verilog, explicitly permitted by the
 approved mixed-language approach. Their inspected headers state GPL-3.0-or-later;
 CPU provenance and memory provenance are linked in ROADMAP.md. Record exact donor
 revision, modifications and full dependency list before copying; run baseline tests.

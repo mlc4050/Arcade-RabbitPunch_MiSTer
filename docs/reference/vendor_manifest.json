@@ -1,0 +1,201 @@
+{
+  "donors": {
+    "seta": {
+      "directory": "Arcade-Seta_MiSTer",
+      "commit": "208dc11035f3c9356c5c1005c0005aad14e51239",
+      "selected_files_clean": true
+    },
+    "psikyo": {
+      "directory": "Arcade-Psikyo_MiSTer",
+      "commit": "e2f717e110f9c113e46d949072c81c4b5e966965",
+      "selected_files_clean": true
+    },
+    "gx": {
+      "directory": "Arcade-KonamiGX_MiSTer",
+      "commit": "89124d4f29e1d3f95557e5e5265efcbe9d0d7cb4",
+      "selected_files_clean": true
+    }
+  },
+  "files": [
+    {
+      "donor": "seta",
+      "source": "rtl/cpu/tg68k/TG68K_Pack.vhd",
+      "target": "rtl/cpu/tg68k/TG68K_Pack.vhd",
+      "sha256": "7cb63abfe750563cc547a31fc80dac31c684fc30e4968d3fa534c276b6c86f7c"
+    },
+    {
+      "donor": "seta",
+      "source": "rtl/cpu/tg68k/TG68K_ALU.vhd",
+      "target": "rtl/cpu/tg68k/TG68K_ALU.vhd",
+      "sha256": "fa46f7dc48459b2a1b1c6c4e9becd2f7eda8bc2844756e52911152bb9629e594"
+    },
+    {
+      "donor": "seta",
+      "source": "rtl/cpu/tg68k/TG68KdotC_Kernel.vhd",
+      "target": "rtl/cpu/tg68k/TG68KdotC_Kernel.vhd",
+      "sha256": "7788d15cf23a4f62392666764bc82b86ba6965f7f5321e8b0047b5013ef57038"
+    },
+    {
+      "donor": "seta",
+      "source": "rtl/cpu/tg68k/TG68K.vhd",
+      "target": "rtl/cpu/tg68k/TG68K.vhd",
+      "sha256": "a4877cb7013ec6eedb7558d45ebc9700085f5cb1f4e60ed210994d4fbd656876"
+    },
+    {
+      "donor": "seta",
+      "source": "rtl/cpu/tg68k/PROVENANCE.md",
+      "target": "rtl/cpu/tg68k/DONOR_NOTES.md",
+      "sha256": "b5ede570f97c9da3595f6b4af12a6913462885b0a108914f30d28df270307dab"
+    },
+    {
+      "donor": "psikyo",
+      "source": "rtl/cpu/t80/T80_Pack.vhd",
+      "target": "rtl/cpu/t80/T80_Pack.vhd",
+      "sha256": "f0e6aff273f25d904fd55e53372e44b52d07a82b8c6cb58fe73ea7fde06ec22d"
+    },
+    {
+      "donor": "psikyo",
+      "source": "rtl/cpu/t80/T80_Reg.vhd",
+      "target": "rtl/cpu/t80/T80_Reg.vhd",
+      "sha256": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783"
+    },
+    {
+      "donor": "psikyo",
+      "source": "rtl/cpu/t80/T80_MCode.vhd",
+      "target": "rtl/cpu/t80/T80_MCode.vhd",
+      "sha256": "d4f03ddd9693e341ace2a685153838aec39085826fd2f6128ece1a9f8852f02e"
+    },
+    {
+      "donor": "psikyo",
+      "source": "rtl/cpu/t80/T80_ALU.vhd",
+      "target": "rtl/cpu/t80/T80_ALU.vhd",
+      "sha256": "823a062b8be873505ac16e627351a5105101243a11483bf8f2446214893b739e"
+    },
+    {
+      "donor": "psikyo",
+      "source": "rtl/cpu/t80/T80.vhd",
+      "target": "rtl/cpu/t80/T80.vhd",
+      "sha256": "ba63aaa402eadfc0d47e59e9747c516a22b7454ad0b27430e99d968efcae6ec0"
+    },
+    {
+      "donor": "psikyo",
+      "source": "rtl/cpu/t80/T80se.vhd",
+      "target": "rtl/cpu/t80/T80se.vhd",
+      "sha256": "d528be5e4a75a8e45d1965740bcd6c77180bd54e1862b8e177bea8a432e58588"
+    },
+    {
+      "donor": "psikyo",
+      "source": "rtl/cpu/t80/PROVENANCE.md",
+      "target": "rtl/cpu/t80/DONOR_NOTES.md",
+      "sha256": "51ab9ddcdaa8838be73bac002f7977087eed4fc98bae33323d77b6a4ab5b21aa"
+    },
+    {
+      "donor": "gx",
+      "source": "rtl/jtframe/jtframe_obj_buffer.v",
+      "target": "rtl/jtframe/jtframe_obj_buffer.v",
+      "sha256": "3ea75f439a67b0f30ef48222d49bff86f496b0ab3d1f95d9931f08fa6a0f85f0"
+    },
+    {
+      "donor": "gx",
+      "source": "rtl/jtframe/jtframe_dual_ram.v",
+      "target": "rtl/jtframe/jtframe_dual_ram.v",
+      "sha256": "c92fbad5e7504cdb365ccde2f8d385f2154a89b4cae37d93230fcb3ee2971d13"
+    },
+    {
+      "donor": "gx",
+      "source": "rtl/jtframe/jtframe_draw_upstream_reference.v",
+      "target": "rtl/jtframe/jtframe_draw.v",
+      "sha256": "2c52e8735ddf3eb0925c42d8f893035fb4180ed69f61cd5eaa7120b519be8edc"
+    },
+    {
+      "donor": "gx",
+      "source": "rtl/jtframe/PROVENANCE.md",
+      "target": "rtl/jtframe/DONOR_NOTES.md",
+      "sha256": "8029639f918f507c2f6825e94d0a3f2698c9a18475ee731661fae337ac94d7a1"
+    },
+    {
+      "donor": "psikyo",
+      "source": "sim/tg68k_spike/tb_tg68k_boot.vhd",
+      "target": "sim/vendor/tg68k/tb_tg68k_boot.vhd",
+      "sha256": "53de29932fbf45f527985bb8193b8dcc5cb7efd4d9addaa5832ae9fac27012e0"
+    },
+    {
+      "donor": "psikyo",
+      "source": "sim/t80_spike/tb_t80_boot.vhd",
+      "target": "sim/vendor/t80/tb_t80_boot.vhd",
+      "sha256": "80be58950d77052dd4e4f9c8c22974b83bf48f237563cb8cd48743758e7ba3d8"
+    },
+    {
+      "donor": "seta",
+      "source": "sim/tg68k_smoke_tb/tb_tg68k_smoke.sv",
+      "target": "sim/vendor/tg68k/tb_tg68k_smoke.sv",
+      "sha256": "57fb442b444d9f84b8b255b144730715db2adc19e4f9285f6521b369cecf5e8a"
+    },
+    {
+      "donor": "seta",
+      "source": "sim/tg68k_ccr_tb/tb_tg68k_ccr.sv",
+      "target": "sim/vendor/tg68k/tb_tg68k_ccr.sv",
+      "sha256": "b05c4c4e012e96970ece63177b2dde3109932a047bf48c5d5becb359389dd915"
+    },
+    {
+      "donor": "seta",
+      "source": "sim/tg68k_pace_tb/tb_tg68k_pace.sv",
+      "target": "sim/vendor/tg68k/tb_tg68k_pace.sv",
+      "sha256": "d020da4834dcac7f2eb5e6de18335a6749c2527c1336f8c6b0fb10e312702ff7"
+    },
+    {
+      "donor": "seta",
+      "source": "rtl/cpu/fx68k/fx68k.sv",
+      "target": "rtl/cpu/fx68k/fx68k.sv",
+      "sha256": "846602cd0fc25a9eee04f641ba5e6fcfa05a80a1db417898040c78b1f7449a33"
+    },
+    {
+      "donor": "seta",
+      "source": "rtl/cpu/fx68k/fx68kAlu.sv",
+      "target": "rtl/cpu/fx68k/fx68kAlu.sv",
+      "sha256": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775"
+    },
+    {
+      "donor": "seta",
+      "source": "rtl/cpu/fx68k/uaddrPla.sv",
+      "target": "rtl/cpu/fx68k/uaddrPla.sv",
+      "sha256": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a"
+    },
+    {
+      "donor": "seta",
+      "source": "rtl/cpu/fx68k/microrom.mem",
+      "target": "rtl/cpu/fx68k/microrom.mem",
+      "sha256": "06b3325e369b5bbf9ed2ec76737fe19aea12573775858a4ca62b8e5bcc173d0a"
+    },
+    {
+      "donor": "seta",
+      "source": "rtl/cpu/fx68k/nanorom.mem",
+      "target": "rtl/cpu/fx68k/nanorom.mem",
+      "sha256": "46ef9dea89372021949a78674aa67cf46a485d9524e3df9655dabc5126170457"
+    },
+    {
+      "donor": "seta",
+      "source": "rtl/cpu/fx68k/LICENSE",
+      "target": "rtl/cpu/fx68k/LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "donor": "seta",
+      "source": "rtl/cpu/fx68k/README.md",
+      "target": "rtl/cpu/fx68k/README.md",
+      "sha256": "c96263ece59f55f759c046ca8027b67a6805e9cb31995f0a1bc175a826e15f96"
+    },
+    {
+      "donor": "seta",
+      "source": "rtl/cpu/fx68k/PROVENANCE.md",
+      "target": "rtl/cpu/fx68k/DONOR_NOTES.md",
+      "sha256": "8b564622d7c2ac4ed278faf46a502c9a63d82baa3c43ab39de47614314c46126"
+    },
+    {
+      "donor": "seta",
+      "source": "sim/fx68k_pace_tb/tb_fx68k_pace.sv",
+      "target": "sim/vendor/fx68k/tb_fx68k_pace.sv",
+      "sha256": "c5689b9a7aa037556ddd3011cadb64329cbb9c62b5531346957ab1c477a28199"
+    }
+  ]
+}

@@ -6,7 +6,7 @@ as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
 Status: framework bootstrapped; tools verified and first MAME reference captures taken.
 No game RTL or playable RBF. The inherited template demo remains connected.
 
-New board logic will use VHDL, with existing VHDL CPUs, directly reused JTFRAME
+New board logic will use VHDL, with fx68k (SystemVerilog), T80 (VHDL), directly reused JTFRAME
 modules, and approved mixed-language sound/framework dependencies. Target: DE10-nano, Quartus Prime Lite 17.0.2, one
 SDRAM module of at least 32 MB. Each set declares 0x210000 ROM bytes (2.0625 MiB).
 
@@ -32,7 +32,8 @@ interleave, explicit fills, and region flags. Physical video timing is unresolve
 Framework: MiSTer-devel/Template_MiSTer 9c8eadb40067c8ce3aef90899844f62d688ac73a.
 The sys directory is unchanged apart from Windows checkout line endings.
 Bootstrap tooling and workflows came from the local MiSTer-CoreSkill checkout.
-No CPU or sound dependency has been vendored into this core yet.
+CPU and initial JTFRAME evaluation sources are pinned with passing baseline checks;
+sound dependencies have not been vendored yet. See [BASELINES](docs/BASELINES.md).
 
 Codex assisted with research, documentation and reference tooling. Future RTL needs
 simulation, timing closure and board verification before release. No hardware

@@ -1,7 +1,8 @@
 # Rabbit Punch / Rabio Lepus MiSTer roadmap
 
 Approved by the user in the originating chat. Local framework bootstrap and source
-reference setup are complete; game RTL implementation has not started.
+reference setup are complete. CPU/JTFRAME evaluation copies and initial baseline tests
+are now checked in; Rabbit Punch board RTL implementation has not started.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
 ## Goal and scope
@@ -10,7 +11,9 @@ Build one DE10-nano core supporting `rabiolep` and `rpunch`, producing an RBF an
 for each game. New board logic, CPU bus adapters, graphics adapters, bitmap logic,
 registers and board tests will be VHDL. Directly reuse applicable JTFRAME tile/sprite,
 RAM and timing modules in their original HDL; the user explicitly approved this.
-Reuse VHDL TG68K.C and T80 CPUs rather than write CPUs.
+Reuse fx68k (SystemVerilog) for the main 68000 and T80 (VHDL) for the Z80. Initial
+TG68K.C evaluation passed functional tests but missed 68000 instruction timing;
+the directly compared fx68k baseline matches the tested loop (BASELINES.md).
 Proposed framework, SDRAM transport, and sound reuse are mixed-language dependencies;
 this proposal does not promise an entirely VHDL source tree. Retain MiSTer `sys/` unchanged.
 
@@ -43,7 +46,9 @@ is excluded from the first scope. No remote repository has been created or publi
 
 - Located board driver and GGA device; recorded local MAME HEAD and memory maps.
 - Counted declared/file-loaded ROM storage from both sets: 2.0625 / 1.3125 MiB each.
-- Found local reusable CPU and sound implementations and read their provenance/headers.
+- Pinned CPU/JTFRAME evaluation sources, ran unchanged donor CPU tests, and checked
+  JTFRAME row/buffer interfaces. Selected fx68k after measured timing comparison;
+  see BASELINES.md and reference/vendor_manifest.json. Sound modules remain candidates.
 - Physical sync timing, per-field write timing, continuous-play coverage, game CPU/RTL
   validation and actual Quartus fit remain open. Installed tools are not a game build.
 - Mixed-language sound and direct JTFRAME reuse are approved. New board-specific
@@ -60,7 +65,7 @@ unaltered baseline tests must be captured before accepting them.
 
 | Block | Candidate | Evidence / licence |
 |---|---|---|
-| 68000 | `D:/git/Arcade-Seta_MiSTer/rtl/cpu/tg68k/` | PROVENANCE.md; TobiFlex upstream ade33e396a1e647c2de9daf71ff9d5b3979639b2, inherited fixes; LGPLv3+; VHDL kernel in 68000 mode |
+| 68000 | `rtl/cpu/fx68k/`, from Seta | GPLv3; unchanged donor loop test matches 14 clocks; TG68K evaluation retained for comparison only |
 | Z80 | `D:/git/Arcade-Psikyo_MiSTer/rtl/cpu/t80/` | PROVENANCE.md; MiSTer T80 830fd0315f0af5cdbcb0e703f1cea3ce4e91f538; BSD-style; VHDL |
 | YM2151 | `D:/git/Arcade-JalecoMS1BCD_MiSTer/rtl/third_party/jt51/hdl/jt51.v` | Header GPLv3+; Verilog; exact donor version pending |
 | uPD7759 | `D:/git/Arcade-SystemC2_MiSTer/rtl/jt7759/hdl/jt7759.v` | Header GPLv3+; Verilog; standalone mode, bank/reset/start adaptation required |
@@ -144,7 +149,7 @@ arithmetic only: close the actual cycle budget once line period and controller c
    Exit: reproducible reference artifacts and resolved clock/memory budget.
 2. **CPU and bus.** Vendor CPUs with provenance and baseline tests; write VHDL decode,
    byte enables, ROM/RAM path, GGA register latch/IRQ model, sound latch, DIP/input ports,
-   reset and pause. Use TG68K kernel directly with a controlled bus adapter.
+   reset and pause. Use fx68k with a controlled VHDL bus adapter and phase enables.
    Exit: boot execution/state and peripheral accesses agree with MAME, with instruction
    and bus-cycle differences explained; standalone CPU synthesis closes timing.
 3. **Video.** Build a software renderer checked against MAME snapshots, then VHDL tile
