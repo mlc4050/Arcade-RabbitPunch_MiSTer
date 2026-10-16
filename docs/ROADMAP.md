@@ -12,7 +12,7 @@ and tests will be VHDL. Reuse VHDL TG68K.C and T80 CPUs rather than write CPUs.
 Proposed framework, SDRAM transport, and sound reuse are mixed-language dependencies;
 this proposal does not promise an entirely VHDL source tree. Retain MiSTer `sys/` unchanged.
 
-Target the user's one 256 MB SDRAM module, with ROM addresses entirely below 32 MiB.
+Target the user's one Mister Addons 128 MB SDRAM module, with ROM addresses entirely below 32 MiB.
 No second module and no game-data DDR3 access during gameplay are proposed.
 MiSTer framework video rotation/scaling may independently use HPS DDR3.
 Load-time DDR ROM staging is a later standard feature.

@@ -126,7 +126,7 @@ both YM outputs and sample output each have gain 0.50 in the MAME model.
 
 ## Feasibility and limitations
 
-User hardware: one 256 MB SDRAM module; no dual-SDRAM requirement. All game storage
+User-confirmed hardware: one Mister Addons 128 MB SDRAM module; no dual-SDRAM requirement. All game storage
 can live below 32 MiB, making physical high-address support unnecessary for this scope.
 Confirm the installed module/controller electrical compatibility during bring-up.
 ROM capacity is comfortable. CPU/video/sound resource fit and memory deadlines remain
