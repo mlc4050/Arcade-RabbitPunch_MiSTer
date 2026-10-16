@@ -29,8 +29,9 @@ sprite wins an overlap or whether a foreground tile hides a sprite.
 
 Reset suppresses output immediately, drops the partial row and drains any
 outstanding ROM reply before accepting a fresh row. There is no line RAM or
-frame RAM here. Physical raster, descriptor latching, candidate scheduling,
-shared SDRAM arbitration, sprite occupancy and final mixing remain open.
+frame RAM in this row adapter. Physical raster, original-board descriptor
+latching and shared SDRAM arbitration remain open. Scanline selection and
+sprite line storage are described below and in VIDEO_PRIORITY.md.
 In particular, a successful row test does not prove a whole scanline deadline.
 
 ## Verification
@@ -116,4 +117,37 @@ See reference/sprite_scan_synth.json. This fit excludes the row drawer.
 ./scripts/d_drive.ps1 scripts/run_sprite_scan_tests.py
 ./scripts/d_drive.ps1 scripts/run_sprite_scan_tests.py --draw
 ./scripts/d_drive.ps1 scripts/build_staged.py --synth-check sprite_scan
+```
+
+## Logical-line controller
+
+`rabbitpunch_sprites.vhd` connects selection, JTFRAME row drawing, priority and
+the two native line banks. It accepts a line command only while idle and after
+any reset-induced RAM/ROM drains have completed. It latches bank, Y, count,
+priority and flags, starts the clear and descriptor scan together, and holds
+the first candidate until line storage is ready. Later descriptor lookup can
+overlap drawing. The controller latches descriptor index at each row acceptance
+so subsequent scan activity cannot change the priority of pixels already drawing.
+
+Unlike the selector's `o_scan_done`, this controller's `o_line_done` waits for the
+final row and RAM update pipeline to finish, making the completed bank readable.
+The opposite valid bank can be read while this line is being built. This is
+a logical-line interface; it does not synthesize physical sync/pixel clocks or
+swap banks on a guessed raster event. Descriptor RAM must remain stable for
+the requested scan; CPU-write scheduling/latching still needs integration.
+
+`run_sprite_scan_tests.py --line` checks the connected primitives against every
+native line entry in two synthetic cases and six captures. The `--renderer`
+mode exercises the actual controller with continuous opposite-bank reads and
+reset during descriptor fetch, first graphics fetch and second graphics fetch,
+then verifies freshly cleared/re-rendered data. Both use the native RAM model,
+independently delayed descriptor/graphics responders, reference descriptor-read
+order and exactly two ROM reads per selected row. Renderer cycle measurements
+include line clear and final update completion, and exclude test readback time.
+These are not shared-SDRAM or physical scanline deadline tests.
+
+```powershell
+./scripts/d_drive.ps1 scripts/run_sprite_scan_tests.py --line
+./scripts/d_drive.ps1 scripts/run_sprite_scan_tests.py --renderer
+./scripts/d_drive.ps1 scripts/build_staged.py --synth-check sprite_renderer
 ```

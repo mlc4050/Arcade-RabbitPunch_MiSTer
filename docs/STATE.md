@@ -39,6 +39,7 @@ every frame.
 | Sprite row FSM, latched code/row/position/palette/flips/priority, last ROM address and planar word | rabbitpunch_sprite_row.vhd | Transport and row metadata | Drain ROM and finish/flush active row before capture | Derived sprite pipeline; source RAM and registers are saved separately |
 | Sprite scan FSM, line Y, current index, priority/palette bank and queued candidate metadata | rabbitpunch_sprite_scan.vhd | Transport and candidate metadata | Drain descriptor read and finish/flush queued candidate and drawer before capture | Derived line selection; no original-board list snapshot implemented |
 | Sprite line FSM, clear cursor, active bank, bank validity/line tags, staged candidate, forwarding entry and view response | rabbitpunch_sprite_line.vhd | Derived line/pipeline state | Finish/flush and re-render before video restart; no complete save interface | Line buffering and hazard bypass, not game-visible source RAM |
+| Sprite logical-line controller FSM, latched command, scan-finished flag and accepted draw index | rabbitpunch_sprites.vhd | Derived line-command state | Finish/flush whole renderer before capture and rebuild the line before output | Coordinates selector, row drawer and line storage; no PCB raster policy |
 
 ## Chip state
 

@@ -89,8 +89,16 @@ It checks every X, transparent pixels, ascending/descending index collisions,
 continuous same-X updates, deterministic random traffic, both banks reused,
 512-cycle clears, line tags, reset during clear and reset during an update.
 The final run has no simulation errors or warnings. Results are in
-reference/sprite_line_checks.json. This is a directed RAM/pipeline test;
-captured scan/draw-to-line-RAM integration and physical deadlines remain open.
+reference/sprite_line_checks.json. This is a directed RAM/pipeline test.
+
+Connected scan/draw tests now also write into the actual native line banks and
+compare every stored word, including unused/transparent positions, for both
+synthetic lists and all six captures. Results: reference/sprite_scan_line_checks.json.
+This checks 2764800 entries across eight cases. The crowded case takes 3291 clocks
+including line clearing and update draining, or 68.56 microseconds at the
+evaluation clock. This excludes shared SDRAM contention and is not a physical
+deadline proof. Continuous opposite-bank display and global-controller reset
+receive further tests in the complete renderer bench.
 
 The standalone native line-RAM fit for cf6032f passes Quartus 17.0.2 at the
 48 MHz evaluation clock: 139 ALMs, 106 registers and exactly two M10K blocks

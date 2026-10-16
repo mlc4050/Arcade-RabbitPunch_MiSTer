@@ -79,6 +79,8 @@ see SPRITE_PIPELINE.md for captured row checks and the standalone fit. Sprite li
 scheduling and drawing also pass connected static-data tests; see SPRITE_PIPELINE.md.
 Sprite arbitration and palette-index mixing now match the six full MAME screenshots
 with software-decoded layer stimulus; see VIDEO_PRIORITY.md for the scope.
-Actual line RAM, integrated mixer/palette pipeline, physical raster/PLL choices, complete-core
+Native sprite line RAM also passes directed and captured scan/draw integration
+tests; the full logical-line controller is under verification. Integrated
+tile/bitmap/mixer/palette output, physical raster/PLL choices, complete-core
 fit and hardware verification remain open. Six matching scenes do not cover every
 register/flip/priority combination or establish a fully working game core.

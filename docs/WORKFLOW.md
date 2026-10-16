@@ -40,7 +40,9 @@ debug/sprites_synth.json. A block fit does not establish scanline throughput.
 Further isolated targets are `sprite_scan` (candidate selector, zero RAM),
 `priority` (combinational arbitration/mixer with evaluation output registers,
 zero RAM) and `sprite_line` (two native sprite-line banks, 16384 RAM bits).
-They use the same staged 48 MHz timing and unconstrained-path gates.
+`sprite_renderer` fits the logical-line controller plus scan, drawer and native
+line banks together, also requiring 16384 RAM bits. They use the same staged
+48 MHz timing and unconstrained-path gates.
 
 Three properties that must survive any port:
 

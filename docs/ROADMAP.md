@@ -13,7 +13,8 @@ passes exhaustive coordinate checks and all visible bitmap pixels in those scene
 The memory backend passes a standalone Cyclone V fit at the 48 MHz evaluation
 constraint: 102 M10K blocks, no duplicated RAM, positive timing in every corner.
 VHDL tilemap lookup and a JTFRAME row adapter now match both tile layers in
-all six reference scenes; sprites and the complete mixer/raster are still open.
+all six reference scenes; sprite progress is described below, and the complete
+mixed video/raster path is still open.
 Their standalone fit also passes timing at the 48 MHz evaluation constraint,
 with 139 ALMs, 201 registers and no M10K blocks.
 Sprite row drawing now passes 30720 synthetic rows and all descriptor rows in
@@ -23,8 +24,11 @@ in directed stress tests and six static captures. Shared memory scheduling and
 physical line deadlines remain open. Combinational
 sprite arbitration and layer mixing pass directed tests and match six MAME
 screenshots with software-decoded layer stimulus. Two native sprite-line RAM banks
-pass directed clearing, collision/forwarding, concurrent display and reset tests;
-their integration with scan/draw and the mixer remains open.
+pass directed clearing, collision/forwarding, concurrent display and reset tests.
+Connected scan/draw-to-native-line tests pass every line entry in synthetic
+stress cases and six captures. A logical-line controller now combines those
+blocks; whole-controller tests and its standalone fit are the next gates.
+The tile/bitmap/mixer path and shared-memory/raster integration remain open.
 The complete game is not integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
