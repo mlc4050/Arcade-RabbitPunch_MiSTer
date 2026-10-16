@@ -51,7 +51,8 @@ architecture rtl of rabbitpunch_tile_row is
             hzoom : in unsigned(ZW-1 downto 0);
             hz_keep, hflip, vflip : in std_logic;
             pal : in unsigned(PW-5 downto 0);
-            rom_addr : out unsigned(CW+4 downto 0);
+            -- Match the foreign Verilog port indices as well as its width.
+            rom_addr : out unsigned(CW+6 downto 2);
             rom_cs : out std_logic;
             rom_ok : in std_logic;
             rom_data : in unsigned(31 downto 0);
@@ -69,7 +70,7 @@ architecture rtl of rabbitpunch_tile_row is
     signal su9_pixel_x, su9_buffer_address, su9_buffer_data : unsigned(8 downto 0);
     signal su9_pixel_y : unsigned(8 downto 0);
     signal su5_palette : unsigned(4 downto 0);
-    signal su19_draw_address : unsigned(18 downto 0);
+    signal su19_draw_address : unsigned(20 downto 2);
     signal su32_planar_data : unsigned(31 downto 0);
 begin
     o_row_ready <= '1' when styp_state = STATE_IDLE and i_reset = '0' else '0';
@@ -136,7 +137,7 @@ begin
                         if (s_rom_selected = '1') then
                             -- JTFRAME uses {code, half, row[3:0]}; an 8x8 tile
                             -- uses {code, row[2:0]} as its 32-bit word address.
-                            ou17_rom_word_address <= su19_draw_address(18 downto 5) & su19_draw_address(2 downto 0);
+                            ou17_rom_word_address <= su19_draw_address(20 downto 7) & su19_draw_address(4 downto 2);
                             o_rom_request <= '1';
                             styp_state <= STATE_WAITING;
                         end if;

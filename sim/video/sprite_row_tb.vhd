@@ -7,6 +7,33 @@ entity sprite_row_tb is
 end entity;
 
 architecture test of sprite_row_tb is
+    component rabbitpunch_sprite_row is
+        port (
+            i_clk : in std_logic;
+            i_reset : in std_logic;
+            i_row_valid : in std_logic;
+            o_row_ready : out std_logic;
+            iu11_sprite_code : in unsigned(10 downto 0);
+            iu5_sprite_row : in unsigned(4 downto 0);
+            iu9_pixel_x : in unsigned(8 downto 0);
+            iu9_pixel_y : in unsigned(8 downto 0);
+            iu4_palette : in unsigned(3 downto 0);
+            i_horizontal_flip : in std_logic;
+            i_vertical_flip : in std_logic;
+            i_behind_foreground : in std_logic;
+            o_rom_request : out std_logic;
+            ou17_rom_word_address : out unsigned(16 downto 0);
+            i_rom_response_valid : in std_logic;
+            iu32_rom_response_data : in unsigned(31 downto 0);
+            o_pixel_valid : out std_logic;
+            ou9_pixel_x : out unsigned(8 downto 0);
+            ou9_pixel_y : out unsigned(8 downto 0);
+            ou10_palette_index : out unsigned(9 downto 0);
+            o_opaque : out std_logic;
+            o_behind_foreground : out std_logic
+        );
+    end component;
+
     constant C_COUNT : t_unsigned_words := read_hex("count.hex", 1, 32);
     constant C_ROWS : t_unsigned_words := read_hex("rows.hex", to_integer(C_COUNT(0)), 64);
     constant C_EXPECTED : t_unsigned_words := read_hex("expected.hex", C_ROWS'length * 16, 10);
@@ -27,7 +54,7 @@ architecture test of sprite_row_tb is
     signal sint_case, sint_pixels, sint_requests, sint_total_pixels : natural := 0;
 begin
     s_clk <= not s_clk after 5 ns;
-    dut : entity work.rabbitpunch_sprite_row
+    dut : rabbitpunch_sprite_row
         port map (
             i_clk => s_clk,
             i_reset => s_reset,

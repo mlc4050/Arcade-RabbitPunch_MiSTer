@@ -67,3 +67,21 @@ The isolated board_video target requires 868352 RAM bits: the five source banks
 plus four line banks, with no duplicate source memory. This is still a virtual-I/O
 block, not a full MiSTer core. CPU transaction stimulus in the scene bench is not
 an executing fx68k; the boot replay separately exercises the real CPU adapter.
+
+## Foreign-port synthesis audit
+
+A review of constant-ROM-address warnings exposed a pre-existing tile/sprite
+adapter problem. The unchanged JTFRAME port is declared [CW+6:2] in Verilog.
+The old VHDL components declared the same width but indexed it CW+4 downto 0.
+RTL simulation mapped those ports positionally; Quartus synthesis retained a
+shifted/truncated connection. A Quartus-exported tile netlist fails the existing
+ROM-address assertion at 115 ns even though the RTL test passes. The adapter
+now preserves the vendor port indices exactly, including its internal wire,
+and translates to the descriptive zero-based external address explicitly.
+
+RTL tile and sprite regressions pass after the change. Synthesized-netlist
+checks reuse the existing VHDL testbenches through component binding, compiling
+only the exported netlist plus test support. Corrected netlist checks and the
+full shared-RAM RGB replays are pending at this checkpoint. Earlier RTL pixel
+comparisons remain valid simulation evidence; passing timing alone did not
+establish graphics-address functional equivalence in synthesis.

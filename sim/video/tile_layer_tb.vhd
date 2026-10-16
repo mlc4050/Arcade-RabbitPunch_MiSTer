@@ -9,6 +9,35 @@ entity tile_layer_tb is
 end entity;
 
 architecture test of tile_layer_tb is
+    component rabbitpunch_tile_layer is
+        port (
+            i_clk : in std_logic;
+            i_reset : in std_logic;
+            i_request_valid : in std_logic;
+            o_request_ready : out std_logic;
+            iu9_pixel_x : in unsigned(8 downto 0);
+            iu9_pixel_y : in unsigned(8 downto 0);
+            iu9_scroll_x : in unsigned(8 downto 0);
+            iu9_scroll_y : in unsigned(8 downto 0);
+            iu16_video_flags : in unsigned(15 downto 0);
+            i_foreground : in std_logic;
+            o_ram_request : out std_logic;
+            ou13_ram_word_address : out unsigned(12 downto 0);
+            i_ram_response_valid : in std_logic;
+            iu16_ram_response_data : in unsigned(15 downto 0);
+            o_rom_request : out std_logic;
+            ou17_rom_word_address : out unsigned(16 downto 0);
+            o_rom_foreground : out std_logic;
+            i_rom_response_valid : in std_logic;
+            iu32_rom_response_data : in unsigned(31 downto 0);
+            o_pixel_valid : out std_logic;
+            ou9_pixel_x : out unsigned(8 downto 0);
+            ou9_pixel_y : out unsigned(8 downto 0);
+            ou9_palette_index : out unsigned(8 downto 0);
+            o_opaque : out std_logic
+        );
+    end component;
+
     signal s_clk : std_logic := '0';
     signal s_reset : std_logic := '1';
     signal s_valid, s_foreground : std_logic := '0';
@@ -44,7 +73,7 @@ architecture test of tile_layer_tb is
     constant C_EXPECTED : t_unsigned_words := vectors("expected.hex", 124416, 10);
 begin
     s_clk <= not s_clk after 5 ns;
-    dut : entity work.rabbitpunch_tile_layer
+    dut : rabbitpunch_tile_layer
         port map (
             i_clk => s_clk,
             i_reset => s_reset,

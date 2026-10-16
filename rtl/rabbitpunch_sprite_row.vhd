@@ -53,7 +53,8 @@ architecture rtl of rabbitpunch_sprite_row is
             hzoom : in unsigned(ZW-1 downto 0);
             hz_keep, hflip, vflip : in std_logic;
             pal : in unsigned(PW-5 downto 0);
-            rom_addr : out unsigned(CW+4 downto 0);
+            -- Match the foreign Verilog port indices as well as its width.
+            rom_addr : out unsigned(CW+6 downto 2);
             rom_cs : out std_logic;
             rom_ok : in std_logic;
             rom_data : in unsigned(31 downto 0);
@@ -70,7 +71,7 @@ architecture rtl of rabbitpunch_sprite_row is
     signal su4_sprite_row, su4_palette : unsigned(3 downto 0);
     signal su9_pixel_x, su9_pixel_y, su9_buffer_address : unsigned(8 downto 0);
     signal su8_buffer_data : unsigned(7 downto 0);
-    signal su17_draw_address, su17_last_address : unsigned(16 downto 0);
+    signal su17_draw_address, su17_last_address : unsigned(18 downto 2);
     signal su32_planar_data : unsigned(31 downto 0);
 begin
     o_row_ready <= '1' when styp_state = STATE_IDLE and i_reset = '0' else '0';
@@ -142,8 +143,8 @@ begin
                     when STATE_FETCH =>
                         if (s_rom_selected = '1') then
                             -- Donor {code12,half,row4} -> ROM {code11,row5,half}.
-                            ou17_rom_word_address <= su17_draw_address(16 downto 5) &
-                                su17_draw_address(3 downto 0) & su17_draw_address(4);
+                            ou17_rom_word_address <= su17_draw_address(18 downto 7) &
+                                su17_draw_address(5 downto 2) & su17_draw_address(6);
                             su17_last_address <= su17_draw_address;
                             o_rom_request <= '1';
                             styp_state <= STATE_WAITING;
@@ -170,8 +171,8 @@ begin
                         elsif (s_rom_selected = '1' and su17_draw_address /= su17_last_address) then
                             -- The donor changes to the next half while emitting
                             -- the first: overlap its ROM wait with those pixels.
-                            ou17_rom_word_address <= su17_draw_address(16 downto 5) &
-                                su17_draw_address(3 downto 0) & su17_draw_address(4);
+                            ou17_rom_word_address <= su17_draw_address(18 downto 7) &
+                                su17_draw_address(5 downto 2) & su17_draw_address(6);
                             su17_last_address <= su17_draw_address;
                             s_rom_ready <= '0';
                             o_rom_request <= '1';
