@@ -7,8 +7,10 @@ Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES
 ## Goal and scope
 
 Build one DE10-nano core supporting `rabiolep` and `rpunch`, producing an RBF and an MRA
-for each game. New board logic, CPU bus adapters, tile/sprite/bitmap engines, registers,
-and tests will be VHDL. Reuse VHDL TG68K.C and T80 CPUs rather than write CPUs.
+for each game. New board logic, CPU bus adapters, graphics adapters, bitmap logic,
+registers and board tests will be VHDL. Directly reuse applicable JTFRAME tile/sprite,
+RAM and timing modules in their original HDL; the user explicitly approved this.
+Reuse VHDL TG68K.C and T80 CPUs rather than write CPUs.
 Proposed framework, SDRAM transport, and sound reuse are mixed-language dependencies;
 this proposal does not promise an entirely VHDL source tree. Retain MiSTer `sys/` unchanged.
 
@@ -42,8 +44,8 @@ is excluded from the first scope. No remote repository has been created or publi
 - Found local reusable CPU and sound implementations and read their provenance/headers.
 - Matching MAME executable, ROM availability, installed simulator/compiler paths,
   physical sync timing, measured write timing, and source-tree cleanliness remain open.
-- Resolve whether the user requires every game/sound module in VHDL before vendoring
-  Verilog sound modules. Proposed default is new VHDL board logic plus proven dependencies.
+- Mixed-language sound and direct JTFRAME reuse are approved. New board-specific
+  logic remains VHDL. Module selection and evidence are in FRAMEWORK_DECISION.md.
 
 ## Component reuse candidates
 
@@ -62,10 +64,11 @@ unaltered baseline tests must be captured before accepting them.
 | uPD7759 | `D:/git/Arcade-SystemC2_MiSTer/rtl/jt7759/hdl/jt7759.v` | Header GPLv3+; Verilog; standalone mode, bank/reset/start adaptation required |
 | SDRAM | `D:/git/Arcade-Seta_MiSTer/rtl/memory/sdram/` | PROVENANCE.md; GPLv3+ inherited transport; verify supported geometry and read-data fixes |
 | Framework | MiSTer-devel/Template_MiSTer | Fetch and pin at bootstrap; wrapper uses framework HDL; no sys edits |
-| Board video/GGA/bus | New VHDL | MAME behavioral reference; no certified board video RTL has been identified |
+| Tile/sprite primitives | Direct JTFRAME module reuse with VHDL board adapters | See FRAMEWORK_DECISION.md for candidate versions and test gates |
+| Board bitmap/mixer/GGA/bus | New VHDL | MAME behavioral reference; no certified board video RTL has been identified |
 
-For sprites, inspect standard JTFRAME object engines as pipeline references before
-writing the VHDL implementation. Verify licence obligations for any translated logic.
+For sprites, directly integrate suitable JTFRAME object engines through board-specific
+VHDL scheduling and graphics-address adapters. Verify licence obligations for reused logic.
 Provisional overall distribution licence: GPL-3.0-or-later, subject to full dependency audit.
 
 ### Additional examples from the user's meatsauce checkout
@@ -143,7 +146,8 @@ arithmetic only: close the actual cycle budget once line period and controller c
    Exit: boot execution/state and peripheral accesses agree with MAME, with instruction
    and bus-cycle differences explained; standalone CPU synthesis closes timing.
 3. **Video.** Build a software renderer checked against MAME snapshots, then VHDL tile
-   scrollers, sprite scanline pipeline, bitmap reader and palette/priority mixer.
+   adapters around reused JTFRAME tile/sprite primitives, a board sprite scheduler,
+   bitmap reader and palette/priority mixer.
    Bitmap image RAM is part of this board; do not add a full-frame compositing buffer.
    Select sprite/register snapshots only from measured write timing. Provide accessible
    state ports and document STATE.md from the first RAM.

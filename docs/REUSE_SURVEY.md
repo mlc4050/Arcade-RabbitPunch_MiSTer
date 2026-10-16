@@ -26,7 +26,11 @@ SystemC2's c2_system.sv instantiates JT7759 and its top-level describes the leve
 ROM request bridge. Inspect that bridge before copying a transport contract: jt7759's
 rom_cs is not necessarily a one-cycle request. Chip reuse does not remove bus validation.
 
-## Adapt proven video architecture and write board-specific VHDL
+## Direct JTFRAME reuse with board-specific VHDL adapters
+
+The user approved using Verilog JTFRAME directly. Tile/sprite modules need not be
+rewritten in VHDL; their board-facing address, register and scheduling adapters will
+be VHDL. See FRAMEWORK_DECISION.md for the selected integration approach.
 
 | New board block | Existing reference | Rabbit Punch differences to implement |
 |---|---|---|

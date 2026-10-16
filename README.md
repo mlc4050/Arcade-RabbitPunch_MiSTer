@@ -6,8 +6,8 @@ as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
 Status: framework bootstrapped, source research and reference tooling underway.
 No game RTL or playable RBF. The inherited template demo remains connected.
 
-New board logic will use VHDL, with existing VHDL CPUs and approved mixed-language
-sound/framework dependencies. Target: DE10-nano, Quartus Prime Lite 17.0.2, one
+New board logic will use VHDL, with existing VHDL CPUs, directly reused JTFRAME
+modules, and approved mixed-language sound/framework dependencies. Target: DE10-nano, Quartus Prime Lite 17.0.2, one
 SDRAM module of at least 32 MB. Each set declares 0x210000 ROM bytes (2.0625 MiB).
 
 See [ROADMAP](docs/ROADMAP.md), [hardware notes](docs/HARDWARE_NOTES.md), and
