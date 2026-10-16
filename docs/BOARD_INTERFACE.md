@@ -157,8 +157,10 @@ The CPU port reads or writes one word, with independent upper/lower byte enables
 There is no RAM clear loop or CPU-reset input. Accepted requests complete across
 CPU reset as required by the bus adapter. Writes acknowledge with zero data;
 read data is registered, then acknowledged on the following clock.
-The underlying RAM CPU read output also samples during writes so Quartus can
-share the read/write physical port; that value is not part of a write response.
+The RAM wrapper instantiates Quartus's `altsyncram` in `BIDIR_DUAL_PORT` mode:
+CPU read/write uses port A, and inspection/video reads use port B. Both use
+the same clock. Its public interface remains unsigned; vendor conversions are
+confined to this wrapper. ModelSim uses the installed `altera_mf` library.
 
 ROM requests expose a held, aligned 18-bit byte address and one request pulse.
 The external transport returns one valid/data response. No 68000 byte swapping is
