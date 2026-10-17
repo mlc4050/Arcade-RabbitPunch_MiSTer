@@ -52,3 +52,10 @@ middle and last word of every bank check both logical data and untouched nearby
 words. The same component-based VHDL bench is available through
 `run_netlist_tests.py memory` after the isolated memory fit, so synthesized
 configuration contents can be checked independently of the RTL primitive model.
+
+The combined logical-platform implementation at f6d5f7e passes every 48 MHz
+timing and coverage gate with configuration initialization enabled: worst setup
++3.142 ns, hold +0.109 ns, and unchanged 929387 RAM bits. See
+`reference/platform_synth.json`; private full reports are retained under
+`debug/fit_archive/platform_f6d5f7e/`. This virtual-I/O fit does not establish
+external SDRAM, PLL, pixel-clock or physical output timing.
