@@ -1,7 +1,8 @@
 # Provisional raster proposal — approval pending
 
-This is a reviewable bring-up option, not verified original-board timing and not
-an implemented clock/raster change. The approved ROADMAP.md requires unresolved
+The user approved proceeding provisionally and accepts MAME accuracy when no
+better evidence is available. Continue implementation without asking again.
+This plan does not claim verified original-board timing. The approved ROADMAP.md requires unresolved
 clock/raster decisions to close before dependent RTL. The alternative is to keep
 that gate until original-board measurements or a documented C7-01 timing model
 are available.
@@ -45,7 +46,7 @@ run continuous scanout with late-line/underflow detection and concurrent clients
 Render one line ahead into the existing two banks; add no full-frame buffer.
 Map visible x=0..287 to the renderer's MAME coordinates x=8..295, y=0..215.
 
-## If provisional bring-up is authorized
+## Authorized implementation
 
 Implement explicit, adjustable raster parameters and clock enables, then verify
 counter wraps, sync/blanking widths, line-bank ownership, output alignment,

@@ -7,8 +7,8 @@
     "rtl/rabbitpunch_ram16.vhd": "944818901a265eb00e376732c43da881745b6e020303bb907283f3a2aeb46beb",
     "debug/negative/board_without_bitmap_fill.vhd": "b104be0678bfc62f3f3e83c98047522f67227a1f039013f7b5535f62b3da745a",
     "rtl/rabbitpunch_memory.vhd": "848a5cebb1558b68de8d681e3a6b2a14a64890a22e9efe9c9d75203c2390e059",
-    "sim/memory/memory_powerup_tb.vhd": "aa02b546c0e7befcbecafcd5c2600f6af3d4201b03023cfec17547110fea84af"
+    "sim/memory/memory_powerup_tb.vhd": "7edba90d102bfdebd6553f79baf9d5d4e811d8a4500345e951c48166057ad741"
   },
   "log": "debug/baselines/memory_powerup_missing_bitmap_fill/result.log",
-  "log_sha256": "f3aa4e1ca34989431b9d026b2d222e569cf0291a4e1cf09e1299573a8c8e2f00"
+  "log_sha256": "eee7d506357d736670c560912ae91e323295f0dea2b1de2c9668a8f574c068c7"
 }

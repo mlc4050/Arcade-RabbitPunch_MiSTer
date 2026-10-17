@@ -6,7 +6,10 @@ use ieee.numeric_std.all;
 use work.rabbitpunch_layout.all;
 
 entity memory_powerup_tb is
-    generic (EVALUATION_BOUNDARY : boolean := false);
+    generic (
+        EVALUATION_BOUNDARY : boolean := false;
+        EXHAUSTIVE : boolean := true
+    );
 end entity;
 
 architecture test of memory_powerup_tb is
@@ -173,15 +176,17 @@ begin
         end procedure;
     begin
         report "MEMORY_POWERUP_START: checking configuration contents";
-        -- Every word is read through both interfaces before the first write.
+        -- Initial reads precede every write; netlist mode explicitly samples region edges.
         for vint_bank in 0 to 4 loop
             vu16_initial := x"0000";
             if (vint_bank = 0) then
                 vu16_initial := x"FFFF";
             end if;
             for vint_word in 0 to C_DEPTHS(vint_bank) - 1 loop
-                cpu_access(vint_bank, vint_word, '0', "11", x"0000", vu16_initial);
-                view_word(vint_bank, vint_word, vu16_initial);
+                if (EXHAUSTIVE or vint_word mod 256 = 0 or vint_word mod 256 = 255) then
+                    cpu_access(vint_bank, vint_word, '0', "11", x"0000", vu16_initial);
+                    view_word(vint_bank, vint_word, vu16_initial);
+                end if;
                 if (vint_word mod 4096 = 4095 or vint_word = C_DEPTHS(vint_bank) - 1) then
                     report "MEMORY_POWERUP_PROGRESS bank=" & integer'image(vint_bank) &
                         " words=" & integer'image(vint_word + 1);
@@ -214,7 +219,11 @@ begin
                 end if;
             end loop;
         end loop;
-        report "MEMORY_POWERUP_PASS: all 52224 words through CPU and view before writes; checks=" & integer'image(vint_checks);
+        if (EXHAUSTIVE) then
+            report "MEMORY_POWERUP_PASS: all 52224 words through CPU and view before writes; checks=" & integer'image(vint_checks);
+        else
+            report "MEMORY_POWERUP_PASS: first/last of every 256-word region through CPU and view before writes; checks=" & integer'image(vint_checks);
+        end if;
         std.env.finish;
         wait;
     end process;

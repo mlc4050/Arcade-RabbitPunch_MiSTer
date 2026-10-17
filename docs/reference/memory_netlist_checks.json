@@ -1,0 +1,18 @@
+{
+  "case": "gate_memory",
+  "pass_marker": "MEMORY_POWERUP_PASS",
+  "log": "debug\\baselines\\gate_memory\\result.log",
+  "commit": "fa445a9ae73f0eddcb64f1376417840b32b5c523",
+  "vectors_sha256": {},
+  "netlist_sha256": "56f5cf96993c465a1afa1c94d64530fca320cd7e038834993263dd758a214677",
+  "source_sha256": {
+    "debug/netlists/memory_fa445a9/memory_check.vo": "56f5cf96993c465a1afa1c94d64530fca320cd7e038834993263dd758a214677",
+    "rtl/rabbitpunch_layout.vhd": "28913c5c8d29e0aca34042db0f001e9e6a628b577ed2220af219c4e2fd86a968",
+    "sim/memory/memory_powerup_tb.vhd": "7edba90d102bfdebd6553f79baf9d5d4e811d8a4500345e951c48166057ad741"
+  },
+  "log_sha256": "3da4a832a2c3155de61dd1caafadb49f41aa51faa204ce0d2814fd0857eeadd2",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest; all five banks: first/last word of every 256-word region through both CPU and inspection, plus masked writes; full-address coverage is RTL only",
+  "memory_initialization_addresses": 408,
+  "memory_initialization_reads": 816,
+  "exhaustive": false
+}

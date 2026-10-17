@@ -70,7 +70,7 @@ corner. This result is retained under
 The isolated target now uses `memory_check.vhd`, with same-clock launch/capture
 registers on every client port and an explicit falling-edge synthetic tester
 contract in its SDC, matching the other evaluation blocks. Production
-`rabbitpunch_memory` and RAM behavior are unchanged. The exhaustive bench checks
+`rabbitpunch_memory` and RAM behavior are unchanged. The exhaustive RTL bench checks
 both direct and registered boundaries; netlist mode selects the registered
 component and accounts for the two added test-only boundary stages. No timing
 false paths or multicycle exceptions are used. Final board electrical timing
@@ -79,7 +79,7 @@ still requires the physical integration check.
 The corrected isolated target at fa445a9 passes all timing and coverage checks:
 835584 RAM bits, worst setup +6.462 ns and hold +0.186 ns. Reports are retained
 under `debug/fit_archive/memory_fa445a9/` and summarized in
-`reference/memory_synth.json`. The exhaustive synthesized-netlist simulation
+`reference/memory_synth.json`. The boundary-sampled synthesized-netlist simulation
 is tracked separately from this implementation result.
 
 An additional private negative control removes only the bitmap bank's FFFF
@@ -90,6 +90,17 @@ as the primitive defaults; see reference/ram_bank_initialization_negative.json.
 The initial synthesized-memory replay reached its 300-second real-time limit
 without an assertion failure. ModelSim Starter reports exceeding its recommended
 capacity; the partial log is retained under
-`debug/baselines/gate_memory_timeout_300/`. The active replay uses an explicit
-1200-second limit and progress markers. No netlist functional pass is claimed
-until that replay completes.
+`debug/baselines/gate_memory_timeout_300/`. A second exhaustive replay was stopped because the physical RAM models were
+too slow for a useful full-address sweep. Its incomplete scope and logs are
+retained under `debug/baselines/gate_memory_exhaustive_interrupted/`.
+
+The bounded netlist replay instead checks 408 addresses: first and last word
+of every 256-word region across all five banks, read through both CPU and
+inspection (816 initial-content reads), followed by masked writes at bank
+edges/midpoints. The exact sampled stimulus also passes against the RTL
+registered boundary (`reference/memory_powerup_boundary_sampled_checks.json`).
+Full 52,224-word coverage on both interfaces remains in the direct and
+registered RTL runs. These scopes must not be conflated. The sampled gate replay
+passes all 921 checks in 59.790 us of simulated time (146 seconds real time).
+See reference/memory_netlist_checks.json. This is functional simulation without
+SDF; routed timing is covered separately by the accepted TimeQuest fit.

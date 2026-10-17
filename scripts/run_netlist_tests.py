@@ -91,11 +91,14 @@ def main():
     libraries = [item for library in ("cyclonev_ver", "altera_ver", "altera_lnsim_ver", "lpm_ver", "sgate_ver")
                  for item in ("-L", library)]
     check = run_case(f"gate_{args.block}", sources, top, "60 ms", marker,
-                     sim_args=libraries + (["-gEVALUATION_BOUNDARY=true"] if args.block == "memory" else []), wall_timeout=args.wall_timeout)
+                     sim_args=libraries + (["-gEVALUATION_BOUNDARY=true", "-gEXHAUSTIVE=false"] if args.block == "memory" else []), wall_timeout=args.wall_timeout)
     check.update(commit=stamp, vectors_sha256=vectors, netlist_sha256=hashlib.sha256(netlist.read_bytes()).hexdigest(),
                  source_sha256={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources},
                  log_sha256=hashlib.sha256((root / check["log"]).read_bytes()).hexdigest(),
                  scope="Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest")
+    if args.block == "memory":
+        check.update(memory_initialization_addresses=408, memory_initialization_reads=816, exhaustive=False,
+                     scope=check["scope"] + "; all five banks: first/last word of every 256-word region through both CPU and inspection, plus masked writes; full-address coverage is RTL only")
     (root / f"docs/reference/{args.block}_netlist_checks.json").write_text(json.dumps(check, indent=2) + "\n", encoding="utf-8")
 
 

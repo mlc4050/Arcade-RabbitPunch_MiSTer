@@ -253,7 +253,10 @@ No hardware result is reported without a capture/log/probe; staged builds gate o
 
 The user approved this roadmap and the mixed-language reuse approach. That approval
 authorizes the local bootstrap and staged work above; it does not turn unresolved physical
-timing guesses into measurements. Close those decisions with evidence before the dependent RTL.
+timing guesses into measurements. Close those decisions with evidence before the dependent RTL, except for the
+provisional bring-up path the user subsequently authorized in
+PROVISIONAL_RASTER.md. MAME accuracy is accepted where better board evidence
+is unavailable; proceed without repeating this approval request.
 
 
 ## Recent integration milestones
