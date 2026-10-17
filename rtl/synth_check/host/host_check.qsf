@@ -6,6 +6,7 @@ set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
 set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
 set_global_assignment -name SEED 3
 set_global_assignment -name SYSTEMVERILOG_FILE ../../../sys/hps_io.sv
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_config.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_host.vhd
 set_global_assignment -name VHDL_FILE host_check.vhd
 set_global_assignment -name SDC_FILE host_check.sdc

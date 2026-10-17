@@ -9,7 +9,7 @@ from run_system_download_tests import system_sources
 
 
 def platform_sources():
-    return system_sources()[:-1]+['rtl/memory/ddram/ddram_phy.sv','rtl/memory/ddram/rom_loader.sv','rtl/rabbitpunch_ddr_copy.vhd','rtl/rabbitpunch_load_frontend.vhd','rtl/mame_keys.sv','rtl/rabbitpunch_keys.vhd','rtl/rabbitpunch_inputs.vhd','rtl/rabbitpunch_pause.vhd','rtl/rabbitpunch_controls.vhd','rtl/rabbitpunch_platform.vhd','sim/board/platform_tb.vhd']
+    return system_sources()[:-1]+['rtl/memory/ddram/ddram_phy.sv','rtl/memory/ddram/rom_loader.sv','rtl/rabbitpunch_ddr_copy.vhd','rtl/rabbitpunch_load_frontend.vhd','rtl/mame_keys.sv','rtl/rabbitpunch_keys.vhd','rtl/rabbitpunch_inputs.vhd','rtl/rabbitpunch_pause.vhd','rtl/rabbitpunch_controls.vhd','rtl/rabbitpunch_config.vhd','rtl/rabbitpunch_platform.vhd','sim/board/platform_tb.vhd']
 
 def main():
     root=core_root()

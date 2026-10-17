@@ -79,6 +79,8 @@ def main():
     if args.block == "rom_requests":
         sources += ["rtl/memory/sdram/sdram.sv", "rtl/rabbitpunch_sdram.vhd",
                     "sim/vendor/sdram/sdram_chip_model_wide.sv"]
+    if args.block == "host":
+        sources.append("rtl/rabbitpunch_config.vhd")
     sources.append(bench)
     libraries = [item for library in ("cyclonev_ver", "altera_ver", "altera_lnsim_ver", "lpm_ver", "sgate_ver")
                  for item in ("-L", library)]

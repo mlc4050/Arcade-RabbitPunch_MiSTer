@@ -42,3 +42,11 @@ platform_host_tb. Actual command strobes produce CPU-visible controls and DIPs,
 byte/DDR downloads and pause/reset/retry behavior. See PLATFORM.md and
 reference/platform_host_checks.json. The prototype configuration text remains
 unchanged; this is not final OSD or physical HPS bridge validation.
+
+
+Development configuration now lives in rabbitpunch_config.vhd: reset (bit 0),
+pause (bit 1), OSD pause (bit 2), and the exact padded MRA button names/slots.
+Reset precedes J1. The configuration version is v0.1-dev. Video/scaler/audio
+menu options wait for their physical shell connections. Native host readback
+and platform command tests must be refreshed for this configuration before
+it is considered verified; current earlier reports retain their exact commits.

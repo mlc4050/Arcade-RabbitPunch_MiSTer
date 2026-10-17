@@ -98,6 +98,7 @@ set_global_assignment -name VHDL_FILE ../../rabbitpunch_keys.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_inputs.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_pause.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_controls.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_config.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_platform.vhd
 set_global_assignment -name VHDL_FILE platform_check.vhd
 set_global_assignment -name SDC_FILE platform_check.sdc

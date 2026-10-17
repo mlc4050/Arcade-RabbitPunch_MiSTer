@@ -3,13 +3,14 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use work.rabbitpunch_config.all;
 
 -- Descriptive byte-wide boundary around the unchanged MiSTer host module.
 -- HPS_BUS retains all 46 native bit positions. Unused native disk/analog ports
 -- are omitted just as in the framework template; this boundary enables neither.
 entity rabbitpunch_host is
     generic (
-        CONFIG_STRING : string := "RabbitPunch;;R0,Reset;"
+        CONFIG_STRING : string := DEFAULT_CONFIG_STRING
     );
     port (
         i_clk : in std_logic;

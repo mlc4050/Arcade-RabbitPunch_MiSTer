@@ -4,6 +4,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.rabbitpunch_layout.all;
+use work.rabbitpunch_config.all;
 
 -- Logical MiSTer-facing platform. Native hps_io is an external boundary;
 -- physical PLL/raster/scanout and the shared DDR ownership mux remain external.
@@ -138,7 +139,7 @@ architecture rtl of rabbitpunch_platform is
     signal su16_word_data, su16_dips : unsigned(15 downto 0);
     signal su8_player1, su8_player2, su8_service : unsigned(7 downto 0);
 begin
-    s_game_reset <= i_framework_reset or iu128_status(0) or iu2_host_buttons(1) or s_frontend_error or s_system_error;
+    s_game_reset <= i_framework_reset or iu128_status(STATUS_RESET_BIT) or iu2_host_buttons(1) or s_frontend_error or s_system_error;
     s_controls_reset <= s_game_reset or s_downloading;
     o_downloading <= s_downloading;
     o_ddr_mode <= s_ddr_mode;
@@ -157,8 +158,8 @@ begin
             i_initialize => i_initialize,
             i_game_reset => s_controls_reset,
             i_osd_open => i_osd_open,
-            i_pause_on_osd => iu128_status(2),
-            i_debug_pause => i_debug_pause or iu128_status(1),
+            i_pause_on_osd => iu128_status(STATUS_OSD_PAUSE_BIT),
+            i_debug_pause => i_debug_pause or iu128_status(STATUS_PAUSE_BIT),
             i_state_pause => i_state_pause,
             iu32_joystick0 => iu32_joystick0,
             iu32_joystick1 => iu32_joystick1,

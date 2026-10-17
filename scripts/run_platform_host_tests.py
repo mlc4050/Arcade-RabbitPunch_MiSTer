@@ -15,7 +15,7 @@ if not (root / netlist).exists():
     raise SystemExit('Build the host target at the recorded host commit and run run_host_tests.py to regenerate its private functional netlist')
 if hashlib.sha256((root / netlist).read_bytes()).hexdigest() != reference['netlist_sha256']:
     raise SystemExit('Archived host netlist differs from the verified host netlist')
-for name in ('sys/hps_io.sv', 'rtl/rabbitpunch_host.vhd', 'rtl/synth_check/host/host_check.vhd'):
+for name in ('sys/hps_io.sv', 'rtl/rabbitpunch_host.vhd', 'rtl/rabbitpunch_config.vhd', 'rtl/synth_check/host/host_check.vhd'):
     expected = subprocess.run(['git', 'show', reference['commit'] + ':' + name], cwd=root,
                               capture_output=True, check=True, **NO_WINDOW).stdout
     if (root / name).read_bytes().replace(b'\r\n', b'\n') != expected.replace(b'\r\n', b'\n'):

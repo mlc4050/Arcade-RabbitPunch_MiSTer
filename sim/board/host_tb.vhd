@@ -4,6 +4,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use std.env.all;
+use work.rabbitpunch_config.all;
 
 entity host_tb is
 end entity;
@@ -36,7 +37,7 @@ architecture test of host_tb is
         i_file_wait : in std_logic
     );
     end component;
-    constant CONFIG : string := "RabbitPunch;;R0,Reset;";
+    constant CONFIG : string := DEFAULT_CONFIG_STRING;
     signal s_clk : std_logic := '0';
     signal su46_bus, su46_master : unsigned(45 downto 0) := (others => 'Z');
     signal su128_status : unsigned(127 downto 0);
