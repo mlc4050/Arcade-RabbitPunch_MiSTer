@@ -1,78 +1,31 @@
 # Rabbit Punch / Rabio Lepus MiSTer roadmap
 
-Approved by the user in the originating chat. Local framework bootstrap and source
-reference setup are complete. CPU/JTFRAME evaluation copies and initial baseline tests
-are now checked in. The shared ROM/control layout, VHDL address decoder and bus
-request adapter are implemented and tested. A descriptive fx68k adapter and CPU phase
-generator pass diagnostic tests. Five VHDL RAM banks pass full-address tests, and
-both real ROMs match MAME's first 10000 writes through that memory backend.
-Board I/O, GGA storage, sound mailbox interface and level-1 autovector handling
-pass directed tests; full raster and sound integration remain open.
-An offline Python renderer matches six complete MAME images. The VHDL bitmap reader
-passes exhaustive coordinate checks and all visible bitmap pixels in those scenes.
-The memory backend passes a standalone Cyclone V fit at the 48 MHz evaluation
-constraint: 102 M10K blocks, no duplicated RAM, positive timing in every corner.
-VHDL tilemap lookup and a JTFRAME row adapter now match both tile layers in
-all six reference scenes; sprite progress is described below, and the complete
-mixed video/raster path is still open.
-Their standalone fit also passes timing at the 48 MHz evaluation constraint,
-with 140 ALMs, 213 registers and no M10K blocks after the foreign-port fix.
-Sprite row drawing now passes 30720 synthetic rows and all descriptor rows in
-six captured scenes, including flips, transparency, overlapped ROM fetching
-and reset draining. Scanline candidate selection now feeds that drawer correctly
-in directed stress tests and six static captures. Shared memory scheduling and
-physical line deadlines remain open. Combinational
-sprite arbitration and layer mixing pass directed tests and match six MAME
-screenshots with software-decoded layer stimulus. Two native sprite-line RAM banks
-pass directed clearing, collision/forwarding, concurrent display and reset tests.
-Connected scan/draw-to-native-line tests pass every line entry in synthetic
-stress cases and six captures. A logical-line controller now combines those
-blocks. Whole-controller tests pass both stress lists and all six captures,
-including concurrent display reads and global reset with RAM/ROM work pending;
-its combined standalone fit passes with two M10K blocks and positive timing.
-Native packed tile-line storage and a fixed-rate bitmap reader are now connected
-to the sprite lines and mixer. The complete logical RGB pipeline matches all
-six MAME screenshots with actual HDL-generated layer pixels and native line/
-bitmap/palette RAM. Palette expansion passes all 65536 RAM values. Combined RGB
-fitting passes all corners with four M10K blocks and one clock domain. CPU/shared-
-memory integration is implemented and undergoing complete scene/timing verification;
-physical raster integration remains open. See BOARD_VIDEO_MEMORY.md and VIDEO_PIPELINE.md.
-The shared native RAM backend passes 849 directed CPU/video/inspection checks.
-Both 10000-write real-ROM CPU comparisons pass again after that refactor. A
-Quartus mixed-language port-index mismatch was found and corrected without
-editing JTFRAME: corrected tile and sprite synthesized netlists pass the existing
-VHDL functional tests. All six shared-RAM scenes now match all 373248 RGB
-pixels, with live CPU bitmap/palette updates, concurrent work-RAM writes and
-reset recovery. A registered evaluation boundary resolves the artificial direct
-virtual-input timing contract; the combined fit passes every corner at 48 MHz,
-with 106 M10K blocks. An unchanged configurable SDRAM controller and VHDL pulse
-adapter pass command-model tests, including byte masks, both chips, burst lanes
-and refresh cadence. ROM request mapping passes synthetic and controller/model
-integration tests. SDRAM implementation and synthesized command-model tests
-also pass, under explicitly synthetic external-pin timing assumptions. The
-complete renderer/shared SDRAM Rabbit Punch play1000 screenshot comparison
-passes with competing CPU ROM reads; Rabio Lepus attract also passes. Its worst
-line is 3806 clocks, with physical raster deadlines still unresolved. A tiny
-24-byte read-only ROM cache passes directed and synthesized-netlist tests;
-the busy captured scene passes every cached RGB pixel and reduces the worst
-line from 3806 to 1939 clocks. All six cached scenes now match 373248 RGB
-pixels; the largest line cost across those scenes is 2557 clocks (53.3 us at
-48 MHz). These are response-driven synthetic competing CPU ROM requests,
-not full executing gameplay or a proven physical line deadline.
-A connected production ROM subsystem with word loading and safe replacement
-image invalidation also passes implementation and synthesized-netlist checks.
-Both games match their first 10000 MAME writes and all 24 checked I/O fields
-through that cached SDRAM ROM path. A connected logical board now joins CPU, I/O,
-IRQ and shared-RAM video; both games pass 1000-write comparisons while logical
-lines render concurrently. Tests explicitly seed native model RAM to MAME-style
-zeros and check black palette output/tags in this early prefix. This is separate
-from the captured-scene graphics proofs. Connected-board implementation passes every timing corner at 48 MHz, with
-2962 ALMs, 112 M10K blocks, worst setup +6.808 ns and hold +0.115 ns under
-its documented logical-interface evaluation contract.
-Sequential image download control passes delayed-response and real SDRAM-model
-replacement tests plus implementation/timing checks. HPS/DDR staging is not
-connected yet. No complete game is running yet.
-Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
+Approved by the user in the originating chat. The core is in simulation and
+implementation bring-up; no complete game or playable RBF exists yet. The
+inherited MiSTer template demo remains connected at the framework top level.
+
+## Current verified status
+
+| Block | Evidence and scope |
+|---|---|
+| Reference and MRAs | Matching MAME 0.289 source/binary, validated ROM bytes and development MRAs for both games; complete 0x210000-byte ROM streams agree with MAME. |
+| CPU, bus and I/O | fx68k diagnostics, IRQ/autovector, pause/reset draining, native RAM and board I/O tests pass. Both games' first 10000 ordered writes and all 24 checked I/O fields match MAME through production cached SDRAM. |
+| Captured-state graphics | All six HDL RGB scenes match MAME through shared native RAM, ROM caches and the real SDRAM command model: 373248 identical pixels, concurrent synthetic CPU traffic, live bitmap/palette updates and reset recovery. Largest measured cached line cost is 2557 clocks, 53.3 us at 48 MHz; physical deadlines remain open. |
+| Executing CPU with logical video | Both games pass 1000-write boot comparisons while lines render. Rabio Lepus also passes 10000 writes with 526 lines; Rabbit Punch's 10000-write extension is running. This early prefix uses an explicit MAME-style zero RAM seed and black palette/tag checks, distinct from the captured graphics proof. |
+| Logical board implementation | CPU/I/O/IRQ/shared-RAM video together pass every reported 48 MHz timing corner: 2962 ALMs, 112 M10K blocks, worst setup +6.808 ns and hold +0.115 ns. Logical test boundaries are registered; final external pin timing is not established. |
+| ROM transport and image loading | SDRAM adapter, ROM mapper/cache and word loader pass directed, implementation and synthesized-netlist tests. Sequential download control passes delayed-response/error-recovery tests, real SDRAM image replacement and implementation timing. HPS/DDR staging remains unconnected. |
+| Connected logical system | Board, download control and cached SDRAM now connect. Three downloaded synthetic 68000 programs execute checked native-RAM writes, including hot-cache replacement, soft reset without reload, partial-image rejection and recovery. Combined-system implementation is running. |
+
+The system clock is still a 48 MHz evaluation constraint. Physical pixel clock,
+raster totals/blanking and SDRAM PLL/pin phase require evidence before dependent
+hardware integration. Sound, full game execution/play coverage, MiSTer HPS/DDR
+loading, output/features and hardware verification remain open.
+
+Evidence: [BOARD_INTEGRATION.md](BOARD_INTEGRATION.md),
+[SYSTEM_INTEGRATION.md](SYSTEM_INTEGRATION.md),
+[SDRAM_TRANSPORT.md](SDRAM_TRANSPORT.md), [DOWNLOAD.md](DOWNLOAD.md),
+[VIDEO_PIPELINE.md](VIDEO_PIPELINE.md) and reports under reference/.
+Hardware/source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
 ## Goal and scope
 

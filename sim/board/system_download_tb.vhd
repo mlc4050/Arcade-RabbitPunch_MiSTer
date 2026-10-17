@@ -233,8 +233,32 @@ begin
         s_game_reset <= '0';
         wait_writes(vint_before + 3);
         inspect_word;
+        -- An interrupted image must not restart the CPU on partially replaced ROM.
+        s_download <= '1';
+        if (s_word_ready /= '1') then
+            wait until s_word_ready = '1' for 10 us;
+        end if;
+        assert (s_word_ready = '1') report "Short-image stream never became ready" severity failure;
+        cycles(1);
+        su27_address <= (others => '0');
+        su16_data <= x"0F00";
+        s_word_valid <= '1';
+        cycles(1);
+        s_word_valid <= '0';
+        s_download <= '0';
+        wait until s_error = '1' for 10 us;
+        cycles(8);
+        assert (s_error = '1' and s_ready = '0' and s_image_valid = '0' and
+            s_loading = '0' and su27_loaded = 2 and sint_stream_words = 33)
+            report "Partial image did not hold the logical system reset" severity failure;
+        load_program(x"CAFE");
+        vint_before := sint_cpu_writes;
+        wait_writes(vint_before + 3);
+        inspect_word;
+        assert (sint_stream_words = 49 and s_error = '0')
+            report "Logical system did not recover from a partial image" severity failure;
         s_pause <= '1';
-        report "SYSTEM_DOWNLOAD_PASS images=2 stream_words=" & integer'image(sint_stream_words) &
+        report "SYSTEM_DOWNLOAD_PASS images=3 rejected_images=1 stream_words=" & integer'image(sint_stream_words) &
             " cpu_writes=" & integer'image(sint_cpu_writes);
         finish;
         wait;

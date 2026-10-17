@@ -42,8 +42,8 @@
     "rtl/rabbitpunch_board.vhd": "a564343adcfa5912032638cda338fc83e2bc52bd5d7da28d1370a44242ab7fc9",
     "rtl/rabbitpunch_download.vhd": "4c6f2c03657fca709454251ba13940113e59348c3236bb146d1eb9d5ba2150cb",
     "rtl/rabbitpunch_system.vhd": "fc764c3608f455d4f2d81b496f40c8f76f9cc9d9ac83e49eb8265537aa285d28",
-    "sim/board/system_download_tb.vhd": "b217b063abac02d727d64d6afceda0c82617f27f65a8d9e73c218cccb770dfdf"
+    "sim/board/system_download_tb.vhd": "a0051a70ca4487262fe2e069557e2ba44390004218ceaa9aa8ecf3b7a2732d64"
   },
-  "log_sha256": "a6d547b0ec2f3ef02453e3ea737ead02508d4a6a27d3ddebf7d6dd683ae090d1",
-  "scope": "Two synthetic 32-byte 68000 programs downloaded through production SDRAM; actual CPU writes and native RAM inspection, hot-cache image replacement and soft reset without reload; logical video idle, no HPS/DDR/PLL/raster/hardware proof"
+  "log_sha256": "5c6408024ac1dc54829e176bad13c8b518f7c33b03658f7d1e1abd2ba295ea3f",
+  "scope": "Three synthetic 32-byte 68000 program downloads and one rejected partial image through production SDRAM; actual CPU writes and native RAM inspection, hot-cache image replacement, soft reset without reload, partial-image reset hold and recovery; logical video idle, no HPS/DDR/PLL/raster/hardware proof"
 }

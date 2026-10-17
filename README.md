@@ -20,7 +20,11 @@ full raster scheduling and real-pin SDRAM timing remain open. The connected
 logical CPU/I/O/video board passes 1000-write MAME comparisons for both games
 while lines render; combined board placement/routing/timing passes at 48 MHz
 under documented evaluation-interface constraints.
-See [board integration](docs/BOARD_INTEGRATION.md) for exact test scope.
+The board, ROM subsystem and download control now form a connected logical
+system that executes downloaded synthetic 68000 diagnostics, including image
+replacement, soft reset and incomplete-download recovery.
+See [board integration](docs/BOARD_INTEGRATION.md) and
+[system integration](docs/SYSTEM_INTEGRATION.md) for exact test scope.
 No complete game or playable RBF.
 The inherited template demo remains connected.
 

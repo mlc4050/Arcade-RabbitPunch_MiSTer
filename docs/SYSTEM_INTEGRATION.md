@@ -21,12 +21,14 @@ The full default image size is ROM_IMAGE_SIZE. A size generic permits bounded
 synthetic diagnostic images in simulation; it does not change the ROM layout or
 an MRA. No real-game ROM bytes are contained in the diagnostic.
 
-run_system_download_tests.py downloads two 32-byte 68000 programs through real
+run_system_download_tests.py downloads three 32-byte 68000 programs through real
 SDRAM commands. Each repeatedly executes MOVE.W #value,$000fc000 then branches
 back. The first writes CAFE and the replacement writes BEEF, detecting stale
 cached program words. The test checks CPU write addresses/data/byte masks and
 pauses the CPU to read back native RAM. It also verifies that soft reset reruns
-the second program without another download. Logical video remains idle in this
+the second program without another download. A subsequent partial image holds
+the CPU in reset and reports an error; a final full image recovers and executes.
+Logical video remains idle in this
 reset/download-focused test; concurrent video and captured graphics have their
 separate regressions. reference/system_download_checks.json pins this proof.
 

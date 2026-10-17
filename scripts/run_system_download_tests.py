@@ -11,7 +11,7 @@ def main():
     result = run_case("system_download", sources, "system_download_tb", "1 ms", "SYSTEM_DOWNLOAD_PASS", wall_timeout=180)
     result.update(source_sha256={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources},
         log_sha256=hashlib.sha256((root / result["log"]).read_bytes()).hexdigest(),
-        scope="Two synthetic 32-byte 68000 programs downloaded through production SDRAM; actual CPU writes and native RAM inspection, hot-cache image replacement and soft reset without reload; logical video idle, no HPS/DDR/PLL/raster/hardware proof")
+        scope="Three synthetic 32-byte 68000 program downloads and one rejected partial image through production SDRAM; actual CPU writes and native RAM inspection, hot-cache image replacement, soft reset without reload, partial-image reset hold and recovery; logical video idle, no HPS/DDR/PLL/raster/hardware proof")
     (root / "docs/reference/system_download_checks.json").write_text(json.dumps(result, indent=2) + "\n")
 
 
