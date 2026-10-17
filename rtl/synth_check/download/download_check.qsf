@@ -1,0 +1,30 @@
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY download_check
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_layout.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_download.vhd
+set_global_assignment -name VHDL_FILE download_check.vhd
+set_global_assignment -name SDC_FILE download_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_download
+set_instance_assignment -name VIRTUAL_PIN ON -to i_word_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_word_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to iu27_word_byte_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_word_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_transport_idle
+set_instance_assignment -name VIRTUAL_PIN ON -to i_loader_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to i_loader_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_loading
+set_instance_assignment -name VIRTUAL_PIN ON -to o_loader_request
+set_instance_assignment -name VIRTUAL_PIN ON -to ou27_loader_byte_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_loader_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou2_loader_bytes[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_game_reset
+set_instance_assignment -name VIRTUAL_PIN ON -to o_image_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_error
+set_instance_assignment -name VIRTUAL_PIN ON -to o_done
+set_instance_assignment -name VIRTUAL_PIN ON -to ou27_bytes_loaded[*]

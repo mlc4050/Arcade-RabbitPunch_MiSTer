@@ -1,0 +1,33 @@
+[
+  {
+    "case": "download",
+    "pass_marker": "DOWNLOAD_PASS",
+    "log": "debug\\baselines\\download\\result.log",
+    "source_sha256": {
+      "rtl/rabbitpunch_layout.vhd": "a58ffaac82eee573a9925afacc8621f4b594a8818b56f924dbebb339ad04eac1",
+      "rtl/rabbitpunch_download.vhd": "4c6f2c03657fca709454251ba13940113e59348c3236bb146d1eb9d5ba2150cb",
+      "sim/memory/download_tb.vhd": "ab3653ff4195cf7b0331bf98932025d98950da1b0dc663d231db937df2c7167b"
+    },
+    "log_sha256": "79ab12a3691f3826fe33f449371513a516b7e4047283c41c61e3df8f28027811",
+    "scope": "16-byte test images with synthetic delayed/backpressured loader; no HPS/DDR or physical memory integration proof"
+  },
+  {
+    "case": "download_sdram",
+    "pass_marker": "DOWNLOAD_SDRAM_PASS",
+    "log": "debug\\baselines\\download_sdram\\result.log",
+    "source_sha256": {
+      "rtl/rabbitpunch_layout.vhd": "a58ffaac82eee573a9925afacc8621f4b594a8818b56f924dbebb339ad04eac1",
+      "rtl/rabbitpunch_download.vhd": "4c6f2c03657fca709454251ba13940113e59348c3236bb146d1eb9d5ba2150cb",
+      "rtl/rabbitpunch_sdram_types.vhd": "ef3d7e0bcb2b6522984ab20ae9e4464625d7a810e76307142fd3ef0a08115480",
+      "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+      "rtl/rabbitpunch_sdram.vhd": "06a3659bbbab5dde9ca7986c292883cabb09f42342af71163d446076fd22b766",
+      "rtl/rabbitpunch_rom_requests.vhd": "3a49b04bf3a3ac0981cc40dd1ba9b1b4e1790cd778b6c2d4e5de1c039863d4fa",
+      "rtl/rabbitpunch_rom_cache.vhd": "de28c8c49b0f691edf035d988c973414cfa9b03af92f0f3141c4a7c6279f279c",
+      "rtl/rabbitpunch_roms.vhd": "d327532342b4bd656d00d6dc5a5c43ba5c4c1e9929e18d1f4c066740f725a017",
+      "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
+      "sim/memory/download_sdram_tb.vhd": "484dcd98a249832cafa706a1462c0101d61d7fa03bff127c81ff4bce5696cdf1"
+    },
+    "log_sha256": "3c16b12dae0cfa18fb626d60d55d08c5dd52d8a3adb174ff38af9c9c0d5f5a2e",
+    "scope": "Two 16-byte images written through production ROM loader/cache/controller and SDRAM chip commands; 16 CPU readbacks verify byte order and replacement; no HPS/DDR/physical electrical timing proof"
+  }
+]

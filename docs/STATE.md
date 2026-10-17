@@ -121,3 +121,10 @@ The logical rabbitpunch_board integration adds wiring only. CPU, I/O, IRQ,
 renderer and shared native RAM retain the state and inspection restrictions
 listed above. Cold initialization and CPU/video reset remain separate inputs;
 CPU pause alone does not make video-owned inspection ports available.
+
+
+Download control owns an image-valid flag, loading/error flags, acknowledged byte
+count, latched pending word/address and transfer/drain FSM. This is load-time
+state independent of CPU/video reset. Do not capture/restore during an active
+image transfer; complete or reject and drain the image first. HPS/DDR staging
+state is not implemented yet.

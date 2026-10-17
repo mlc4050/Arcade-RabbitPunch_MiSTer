@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "download": (0, ("rabbitpunch_download",)),
     # Native RAM/lines 868352 + micro ROM 17*1024 + nano ROM 66*336.
     # Nano bits 2 and 23 are constant zero in the pinned donor and optimized out.
     "board": (907936, ("rabbitpunch_board", "rabbitpunch_maincpu", "fx68k", "rabbitpunch_io", "rabbitpunch_irq", "rabbitpunch_board_video", "jtframe_draw")),
@@ -101,7 +102,7 @@ def run_check(stage, quartus_bin, stamp, name):
     scope = ("Standalone board/video logic with same-clock launch/capture registers; "
              "synthetic virtual inputs change at half a clock period, outputs use zero delay; "
              "all DUT paths remain single-cycle timed, no false/multicycle paths; "
-             "not final MiSTer pin/PLL/SDRAM timing") if name in ("board_video", "board") else (
+             "not final MiSTer pin/PLL/SDRAM timing") if name in ("board_video", "board", "download") else (
              f"Standalone {name} block with virtual I/O; not a complete core or hardware release")
     if name in ("rom_requests", "rom_cache"):
         scope = "ROM request logic with wire-only port flattening and half-period synthetic virtual input timing; not a final core or external pin proof"
