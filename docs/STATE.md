@@ -229,3 +229,10 @@ Copy and direct-stream paths share one downstream ready/valid contract. A
 framework reset only gates starting a pending DDR transaction; it does not
 clear loader state or rearm a completed image. Errors remain latched until a
 fresh ROM transaction, with accepted word/read debt drained before release.
+
+
+Input state adds the downloaded 16-bit DIP word; only cold initialization clears
+it. Inherited per-key latches/toggle state retain held keyboard actions. Manual
+pause owns one latch and previous-button bit, separate from OSD/debug/state
+pause levels. Game reset clears manual pause while preserving DIP metadata.
+No full savestate restore path is added by these controls.

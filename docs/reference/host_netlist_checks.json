@@ -1,0 +1,14 @@
+{
+  "case": "gate_host",
+  "pass_marker": "HOST_PASS",
+  "log": "debug\\baselines\\gate_host\\result.log",
+  "commit": "ca18563ff551ca2f71bc3b8736855bbc4ea7ea9e",
+  "vectors_sha256": {},
+  "netlist_sha256": "5304445bc5add3181dd9e544f3af4021266f29e6e5f0036a47a7abb8e76962b2",
+  "source_sha256": {
+    "debug/netlists/host_ca18563/host_check.vo": "5304445bc5add3181dd9e544f3af4021266f29e6e5f0036a47a7abb8e76962b2",
+    "sim/board/host_tb.vhd": "eb88464873c6f34aa4e641caff2a40c15582a389198bf02ae0d02b02f19cb0ec"
+  },
+  "log_sha256": "da8ff62a7cbe747624a2b509383780ad261bd41ed3865a579fd3a20397256ce8",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
+}

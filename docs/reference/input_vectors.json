@@ -1,0 +1,732 @@
+[
+  {
+    "set": "rabiolep",
+    "mame_version": "0289",
+    "driver_sha256": "77d83ca4786d83fc2474e467f09a0fd15067ede165c2406825af8b0e132364bd",
+    "dips_default": 0,
+    "cases": [
+      {
+        "name": "idle",
+        "joy0": 0,
+        "joy1": 0,
+        "key": 4095,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p1_up",
+        "joy0": 8,
+        "joy1": 0,
+        "key": 373,
+        "pause": 0,
+        "player1": 1,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_up",
+        "joy0": 0,
+        "joy1": 8,
+        "key": 45,
+        "pause": 0,
+        "player1": 0,
+        "player2": 1,
+        "service": 0
+      },
+      {
+        "name": "p1_down",
+        "joy0": 4,
+        "joy1": 0,
+        "key": 370,
+        "pause": 0,
+        "player1": 2,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_down",
+        "joy0": 0,
+        "joy1": 4,
+        "key": 43,
+        "pause": 0,
+        "player1": 0,
+        "player2": 2,
+        "service": 0
+      },
+      {
+        "name": "p1_left",
+        "joy0": 2,
+        "joy1": 0,
+        "key": 363,
+        "pause": 0,
+        "player1": 4,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_left",
+        "joy0": 0,
+        "joy1": 2,
+        "key": 35,
+        "pause": 0,
+        "player1": 0,
+        "player2": 4,
+        "service": 0
+      },
+      {
+        "name": "p1_right",
+        "joy0": 1,
+        "joy1": 0,
+        "key": 372,
+        "pause": 0,
+        "player1": 8,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_right",
+        "joy0": 0,
+        "joy1": 1,
+        "key": 52,
+        "pause": 0,
+        "player1": 0,
+        "player2": 8,
+        "service": 0
+      },
+      {
+        "name": "p1_missile",
+        "joy0": 16,
+        "joy1": 0,
+        "key": 20,
+        "pause": 0,
+        "player1": 16,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_missile",
+        "joy0": 0,
+        "joy1": 16,
+        "key": 28,
+        "pause": 0,
+        "player1": 0,
+        "player2": 16,
+        "service": 0
+      },
+      {
+        "name": "p1_punch",
+        "joy0": 32,
+        "joy1": 0,
+        "key": 17,
+        "pause": 0,
+        "player1": 32,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_punch",
+        "joy0": 0,
+        "joy1": 32,
+        "key": 27,
+        "pause": 0,
+        "player1": 0,
+        "player2": 32,
+        "service": 0
+      },
+      {
+        "name": "service_p1",
+        "joy0": 8192,
+        "joy1": 0,
+        "key": 70,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 1
+      },
+      {
+        "name": "service_p2",
+        "joy0": 0,
+        "joy1": 8192,
+        "key": 70,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 1
+      },
+      {
+        "name": "test_p1",
+        "joy0": 16384,
+        "joy1": 0,
+        "key": 6,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 2
+      },
+      {
+        "name": "test_p2",
+        "joy0": 0,
+        "joy1": 16384,
+        "key": 6,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 2
+      },
+      {
+        "name": "coin1",
+        "joy0": 2048,
+        "joy1": 0,
+        "key": 46,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 16
+      },
+      {
+        "name": "coin2",
+        "joy0": 0,
+        "joy1": 2048,
+        "key": 54,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 8
+      },
+      {
+        "name": "start1",
+        "joy0": 1024,
+        "joy1": 0,
+        "key": 22,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 32
+      },
+      {
+        "name": "start2",
+        "joy0": 0,
+        "joy1": 1024,
+        "key": 30,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 64
+      },
+      {
+        "name": "pause_p1",
+        "joy0": 4096,
+        "joy1": 0,
+        "key": 77,
+        "pause": 1,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "pause_p2",
+        "joy0": 0,
+        "joy1": 4096,
+        "key": 77,
+        "pause": 1,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p1_padding1",
+        "joy0": 64,
+        "joy1": 0,
+        "key": 41,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_padding1",
+        "joy0": 0,
+        "joy1": 64,
+        "key": 21,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p1_padding2",
+        "joy0": 128,
+        "joy1": 0,
+        "key": 18,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_padding2",
+        "joy0": 0,
+        "joy1": 128,
+        "key": 29,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p1_padding3",
+        "joy0": 256,
+        "joy1": 0,
+        "key": 26,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_padding3",
+        "joy0": 0,
+        "joy1": 256,
+        "key": 36,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p1_padding4",
+        "joy0": 512,
+        "joy1": 0,
+        "key": 34,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_padding4",
+        "joy0": 0,
+        "joy1": 512,
+        "key": 4095,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "unused_service2",
+        "joy0": 0,
+        "joy1": 0,
+        "key": 69,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p1_diagonal",
+        "joy0": 25,
+        "joy1": 0,
+        "key": 4095,
+        "pause": 0,
+        "player1": 25,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "two_players",
+        "joy0": 25,
+        "joy1": 38,
+        "key": 4095,
+        "pause": 0,
+        "player1": 25,
+        "player2": 38,
+        "service": 0
+      },
+      {
+        "name": "both_buttons",
+        "joy0": 48,
+        "joy1": 0,
+        "key": 4095,
+        "pause": 0,
+        "player1": 48,
+        "player2": 0,
+        "service": 0
+      }
+    ],
+    "source_sha256": {
+      "scripts/mame/input_vectors.lua": "ceb129d212692bf4f5b6c6e4ecc18235174931b0a9d167cb490f428a23efee56",
+      "scripts/capture_input_vectors.py": "5f282d01ebdb2b45a921ac5ecb442f37db27b3407c63ce0530e73232e33a28d8"
+    },
+    "trace_sha256": "122d72cfe0023b412433bc04cda22805dc54fcca866db9c46b0db8993c50f6e2",
+    "log_sha256": "82e08ebef577ed042ac331108fb85eb7692cfd683f9e299c0b96c06a21c6f54f",
+    "scope": "Live MAME ioport values after scripted field overrides for both active-high player ports and SERVICE, low eight bits; MRA pad slots and default key codes identify each stimulus; no FPGA or physical controls proof"
+  },
+  {
+    "set": "rpunch",
+    "mame_version": "0289",
+    "driver_sha256": "77d83ca4786d83fc2474e467f09a0fd15067ede165c2406825af8b0e132364bd",
+    "dips_default": 8192,
+    "cases": [
+      {
+        "name": "idle",
+        "joy0": 0,
+        "joy1": 0,
+        "key": 4095,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p1_up",
+        "joy0": 8,
+        "joy1": 0,
+        "key": 373,
+        "pause": 0,
+        "player1": 1,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_up",
+        "joy0": 0,
+        "joy1": 8,
+        "key": 45,
+        "pause": 0,
+        "player1": 0,
+        "player2": 1,
+        "service": 0
+      },
+      {
+        "name": "p1_down",
+        "joy0": 4,
+        "joy1": 0,
+        "key": 370,
+        "pause": 0,
+        "player1": 2,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_down",
+        "joy0": 0,
+        "joy1": 4,
+        "key": 43,
+        "pause": 0,
+        "player1": 0,
+        "player2": 2,
+        "service": 0
+      },
+      {
+        "name": "p1_left",
+        "joy0": 2,
+        "joy1": 0,
+        "key": 363,
+        "pause": 0,
+        "player1": 4,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_left",
+        "joy0": 0,
+        "joy1": 2,
+        "key": 35,
+        "pause": 0,
+        "player1": 0,
+        "player2": 4,
+        "service": 0
+      },
+      {
+        "name": "p1_right",
+        "joy0": 1,
+        "joy1": 0,
+        "key": 372,
+        "pause": 0,
+        "player1": 8,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_right",
+        "joy0": 0,
+        "joy1": 1,
+        "key": 52,
+        "pause": 0,
+        "player1": 0,
+        "player2": 8,
+        "service": 0
+      },
+      {
+        "name": "p1_missile",
+        "joy0": 16,
+        "joy1": 0,
+        "key": 20,
+        "pause": 0,
+        "player1": 16,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_missile",
+        "joy0": 0,
+        "joy1": 16,
+        "key": 28,
+        "pause": 0,
+        "player1": 0,
+        "player2": 16,
+        "service": 0
+      },
+      {
+        "name": "p1_punch",
+        "joy0": 32,
+        "joy1": 0,
+        "key": 17,
+        "pause": 0,
+        "player1": 32,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_punch",
+        "joy0": 0,
+        "joy1": 32,
+        "key": 27,
+        "pause": 0,
+        "player1": 0,
+        "player2": 32,
+        "service": 0
+      },
+      {
+        "name": "service_p1",
+        "joy0": 8192,
+        "joy1": 0,
+        "key": 70,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 1
+      },
+      {
+        "name": "service_p2",
+        "joy0": 0,
+        "joy1": 8192,
+        "key": 70,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 1
+      },
+      {
+        "name": "test_p1",
+        "joy0": 16384,
+        "joy1": 0,
+        "key": 6,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 2
+      },
+      {
+        "name": "test_p2",
+        "joy0": 0,
+        "joy1": 16384,
+        "key": 6,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 2
+      },
+      {
+        "name": "coin1",
+        "joy0": 2048,
+        "joy1": 0,
+        "key": 46,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 16
+      },
+      {
+        "name": "coin2",
+        "joy0": 0,
+        "joy1": 2048,
+        "key": 54,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 8
+      },
+      {
+        "name": "start1",
+        "joy0": 1024,
+        "joy1": 0,
+        "key": 22,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 32
+      },
+      {
+        "name": "start2",
+        "joy0": 0,
+        "joy1": 1024,
+        "key": 30,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 64
+      },
+      {
+        "name": "pause_p1",
+        "joy0": 4096,
+        "joy1": 0,
+        "key": 77,
+        "pause": 1,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "pause_p2",
+        "joy0": 0,
+        "joy1": 4096,
+        "key": 77,
+        "pause": 1,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p1_padding1",
+        "joy0": 64,
+        "joy1": 0,
+        "key": 41,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_padding1",
+        "joy0": 0,
+        "joy1": 64,
+        "key": 21,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p1_padding2",
+        "joy0": 128,
+        "joy1": 0,
+        "key": 18,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_padding2",
+        "joy0": 0,
+        "joy1": 128,
+        "key": 29,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p1_padding3",
+        "joy0": 256,
+        "joy1": 0,
+        "key": 26,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_padding3",
+        "joy0": 0,
+        "joy1": 256,
+        "key": 36,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p1_padding4",
+        "joy0": 512,
+        "joy1": 0,
+        "key": 34,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p2_padding4",
+        "joy0": 0,
+        "joy1": 512,
+        "key": 4095,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "unused_service2",
+        "joy0": 0,
+        "joy1": 0,
+        "key": 69,
+        "pause": 0,
+        "player1": 0,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "p1_diagonal",
+        "joy0": 25,
+        "joy1": 0,
+        "key": 4095,
+        "pause": 0,
+        "player1": 25,
+        "player2": 0,
+        "service": 0
+      },
+      {
+        "name": "two_players",
+        "joy0": 25,
+        "joy1": 38,
+        "key": 4095,
+        "pause": 0,
+        "player1": 25,
+        "player2": 38,
+        "service": 0
+      },
+      {
+        "name": "both_buttons",
+        "joy0": 48,
+        "joy1": 0,
+        "key": 4095,
+        "pause": 0,
+        "player1": 48,
+        "player2": 0,
+        "service": 0
+      }
+    ],
+    "source_sha256": {
+      "scripts/mame/input_vectors.lua": "ceb129d212692bf4f5b6c6e4ecc18235174931b0a9d167cb490f428a23efee56",
+      "scripts/capture_input_vectors.py": "5f282d01ebdb2b45a921ac5ecb442f37db27b3407c63ce0530e73232e33a28d8"
+    },
+    "trace_sha256": "122d72cfe0023b412433bc04cda22805dc54fcca866db9c46b0db8993c50f6e2",
+    "log_sha256": "d06a2fafe4483497cc2035a1d71574f8d120f51241f383c6ed378471dd28ca9d",
+    "scope": "Live MAME ioport values after scripted field overrides for both active-high player ports and SERVICE, low eight bits; MRA pad slots and default key codes identify each stimulus; no FPGA or physical controls proof"
+  }
+]

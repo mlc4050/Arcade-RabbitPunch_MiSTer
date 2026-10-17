@@ -161,6 +161,30 @@ begin
             assert (su128_status(vint_word * 16 + 15 downto vint_word * 16) = 16#1000# + vint_word)
                 report "Host 128-bit status word ordering mismatch" severity failure;
         end loop;
+        uio_begin(5);
+        word(16#06#);
+        uio_end;
+        assert (su11_key(9 downto 0) = 16#206# and su11_key(10) = '1')
+            report "Native F2 key press flags/code mismatch" severity failure;
+        uio_begin(5);
+        word(16#F0#);
+        word(16#06#);
+        uio_end;
+        assert (su11_key(9 downto 0) = 16#006# and su11_key(10) = '0')
+            report "Native F2 key release/toggle mismatch" severity failure;
+        uio_begin(5);
+        word(16#E0#);
+        word(16#75#);
+        uio_end;
+        assert (su11_key(9 downto 0) = 16#375# and su11_key(10) = '1')
+            report "Native extended arrow press mismatch" severity failure;
+        uio_begin(5);
+        word(16#E0#);
+        word(16#F0#);
+        word(16#75#);
+        uio_end;
+        assert (su11_key(9 downto 0) = 16#175# and su11_key(10) = '0')
+            report "Native extended arrow release mismatch" severity failure;
         file_command(16#55#, 0);
         file_command(16#53#, 1);
         assert (s_download = '1' and su16_index = 0) report "Host did not start file download" severity failure;
@@ -178,7 +202,7 @@ begin
         cycles(4);
         file_command(16#53#, 0);
         assert (s_download = '0' and sint_writes = 8) report "Host download end or byte count mismatch" severity failure;
-        report "HOST_PASS native_hps_io=checked config_string=checked joystick_status_order=checked byte_download=8 wait_pin=checked";
+        report "HOST_PASS native_hps_io=checked config_string=checked joystick_status_order=checked byte_download=8 wait_pin=checked keyboard_press_release=checked";
         finish;
         wait;
     end process;

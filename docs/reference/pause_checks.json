@@ -1,0 +1,11 @@
+{
+  "case": "pause",
+  "pass_marker": "PAUSE_PASS",
+  "log": "debug\\baselines\\pause\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_pause.vhd": "eb03457d010dd4566bf4f379ac89269cbe72952cbb6d116970e79fbeb42c7bab",
+    "sim/board/pause_tb.vhd": "eca231c789954a1f7c4dea4e33e3eeefde990cbb27662d80175115f322ddc5d3"
+  },
+  "log_sha256": "7456649896cde3219a62b9b5828c8d5debdaf07afe1b6cacdf8db89513187062",
+  "scope": "Pause-request logic only: one user toggle per rising press, held key/release, optional OSD pause, independent debug/state pause owners and reset while held; no clock gate, CPU-drain or new physical controls proof"
+}

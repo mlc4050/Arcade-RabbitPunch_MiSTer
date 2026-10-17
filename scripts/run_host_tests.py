@@ -9,4 +9,7 @@ Build --synth-check host first. This does not simulate a replacement host model.
 import subprocess
 import sys
 from coretools import core_root, NO_WINDOW
-subprocess.run([sys.executable,str(core_root()/'scripts/run_netlist_tests.py'),'host'],check=True,**NO_WINDOW)
+result=subprocess.run([sys.executable,str(core_root()/'scripts/run_netlist_tests.py'),'host'],capture_output=True,text=True,**NO_WINDOW)
+print(result.stdout,end='')
+print(result.stderr,end='',file=sys.stderr)
+result.check_returncode()

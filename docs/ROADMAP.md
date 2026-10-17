@@ -259,3 +259,11 @@ and sample clients, with concurrent-client and image-replacement regressions.
 The complete system now passes downloaded 68000 commands through the sound latch,
 T80 IRQ/ack, banked sample playback and coordinated CPU pause;
 physical raster timing and final MiSTer integration remain open.
+
+
+Host/control milestone: the real unchanged hps_io wrapper passes Quartus fit
+and VHDL functional-netlist command/config/file/key tests despite the old
+ModelSim native-parser limitation. Automatic load frontend fit passes. The
+active-high board input mapper passes live MAME vectors for both sets, raw DIP
+metadata/default checks and composed pause-owner tests; controls fit is pending.
+See HOST_INTERFACE.md, CONTROLS.md and DDR_LOADING.md for exact boundaries.

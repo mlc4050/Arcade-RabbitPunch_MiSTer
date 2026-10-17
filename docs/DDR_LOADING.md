@@ -87,4 +87,5 @@ fx68k. Three 64-byte DDR images and one direct byte image execute checked
 CAFE/BEEF writes; a partial byte image holds reset and recovers into DDR loading.
 There are 129 accepted word transfers and 24 DDR reads. Audio/video are idle;
 this models HPS signals rather than instantiating real hps_io. Full-size frontend
-implementation is pending (reference/system_frontend_checks.json).
+implementation passes all reported 48 MHz corners: 294 ALMs, zero RAM,
+setup +5.860 ns / hold +0.136 ns (reference/load_frontend_synth.json) (reference/system_frontend_checks.json).

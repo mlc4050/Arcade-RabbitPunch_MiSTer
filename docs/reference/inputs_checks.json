@@ -1,0 +1,15 @@
+{
+  "case": "inputs",
+  "pass_marker": "INPUTS_PASS",
+  "log": "debug\\baselines\\inputs\\result.log",
+  "source_sha256": {
+    "rtl/mame_keys.sv": "c2d3d7fa4cefeebeaeba0e74b66f90fd0ee98b5ae33e4113e9eb1f3c66559edc",
+    "rtl/rabbitpunch_keys.vhd": "a6c44218c22b8b245272901ba6e2fc7cd7e784a2898c703e47872fc6ff6514c7",
+    "rtl/rabbitpunch_inputs.vhd": "a7c7ef8c8104b8cd0a5fa7c77dae7e6b29752d55af7b2a18ab897ebded25a776",
+    "sim/board/inputs_tb.vhd": "877aa71a02f9884c205166629e42e48662ab110ae7b283f2d3c7804a25e2bed0"
+  },
+  "vectors_sha256": "a55b65fd3a8063d06b4a01be7957f13ecfd30f56e2ded32fdf48413ffbfb1b04",
+  "reference_sha256": "f577500893a5358d81bf5bc7efc0aa4d6ffb48becf1dc47a6e47ae840243d0d3",
+  "log_sha256": "495d0f0d1581e76124ed11a659dcdfb869278ac079143705d17f996fbc20c0d9",
+  "scope": "Pad and inherited MAME-default key decoder mapped to actual live MAME active-high P1/P2/SERVICE vectors for both sets; exact MRA button slots, service/test distinction, reserved controls, event toggles and held-pad/key union; 512 raw DIP byte values, per-set MRA defaults, index/address/strobe filtering; no physical pad, pause latch, native HPS-to-system or game-play proof"
+}

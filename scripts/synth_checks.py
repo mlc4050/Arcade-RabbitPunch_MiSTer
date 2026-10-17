@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "controls": (0, ("rabbitpunch_controls", "rabbitpunch_inputs", "rabbitpunch_keys", "rabbitpunch_pause", "mame_keys")),
     "host": (0, ("host_check", "rabbitpunch_host", "hps_io")),
     "load_frontend": (0, ("rabbitpunch_load_frontend", "rabbitpunch_ddr_copy", "rom_loader", "ddram_phy")),
     "ddr_copy": (0, ("rabbitpunch_ddr_copy", "rom_loader", "ddram_phy")),
