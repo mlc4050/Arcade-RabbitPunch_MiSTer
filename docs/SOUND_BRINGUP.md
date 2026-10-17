@@ -135,5 +135,19 @@ pending. CPU/half-chip/chip enables are supplied by the caller, all on i_clk.
 Pause stops the CPU and drains its transaction while JT51 and ROM transport stay
 live. PCM remains raw two's-complement in unsigned buses. No ADPCM sound is
 mixed, and audio ROM transport is external; the main system does not instantiate
-this board yet. The connected native-RAM two-game startup regression and the
-full sound-board implementation target have been prepared; results are pending.
+this board yet. The connected native-RAM startup regression passes Rabio Lepus; Rabbit Punch
+and full sound-board implementation checks are running.
+
+
+sound_board_tb also runs a synthetic Z80 IM1 interrupt handler twice from
+command-pending IRQ. It checks FF interrupt acknowledge, command reads/acks,
+RETI/resume, correct native RAM storage/inspection and two continuing JT51
+sample-marker periods during each drained CPU pause. It uses initialized
+program state rather than the MAME CPU seed. Evidence: reference/sound_board_checks.json.
+
+The full sound-board resource gate includes native sound RAM plus seven RAMs
+Quartus infers from unchanged JT51 shift registers: 2048x8, 8x68, 4x21, 27x10,
+28x2, 32x45, 3x15 and 29x20, totaling 19403 bits. The first gate assumed only
+native sound RAM; the synthesis RAM summary identified the additional vendor
+state. The corrected gate checks each instance/geometry and rejects missing,
+duplicated or unexpected memories. No chip RTL or memory latency was changed.

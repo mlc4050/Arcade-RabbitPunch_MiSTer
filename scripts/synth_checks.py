@@ -11,7 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
-    "sound_board": (16384, ("rabbitpunch_sound_board", "rabbitpunch_soundcpu", "rabbitpunch_sound_bus", "rabbitpunch_ram8", "jt51")),
+    "sound_board": (19403, ("rabbitpunch_sound_board", "rabbitpunch_soundcpu", "rabbitpunch_sound_bus", "rabbitpunch_ram8", "jt51")),
     "soundcpu": (0, ("rabbitpunch_soundcpu", "rabbitpunch_z80", "T80se")),
     "system": (907936, ("rabbitpunch_system", "rabbitpunch_board", "fx68k", "rabbitpunch_roms", "rabbitpunch_download", "jtframe_draw")),
     "download": (0, ("rabbitpunch_download",)),
@@ -83,6 +83,31 @@ def run_check(stage, quartus_bin, stamp, name):
     hierarchy=(output/f"{project_name}.map.rpt").read_text(encoding="utf-8",errors="replace")
     if any(instance not in hierarchy for instance in required_instances):
         raise SystemExit("A required block disappeared during synthesis")
+    sound_memory = []
+    if name == "sound_board":
+        expected_sound_memory = {
+            "rabbitpunch_ram8:sound_ram": (2048, 8),
+            "jt51_sh:u_acc": (8, 68),
+            "jt51_sh:out_padding": (4, 21),
+            "jt51_sh:u_eg1sh": (27, 10),
+            "jt51_sh:u_statesh": (28, 2),
+            "jt51_sh:u_reg1op": (32, 45),
+            "altshift_taps:eg_VIII_rtl_0": (3, 15),
+            "jt51_sh:u_phsh": (29, 20),
+        }
+        for line in hierarchy.splitlines():
+            columns = [value.strip() for value in line.split(";")[1:-1]]
+            if len(columns) == 9 and columns[1] in ("M10K block", "AUTO"):
+                matches = [key for key in expected_sound_memory if key + "|" in columns[0]]
+                if len(matches) != 1:
+                    raise SystemExit(f"Unexpected sound memory: {columns[0]}")
+                key = matches[0]
+                depth, width = int(columns[3]), int(columns[4])
+                if (depth, width) != expected_sound_memory[key] or int(columns[7]) != depth * width:
+                    raise SystemExit(f"Sound memory geometry changed: {key}")
+                sound_memory.append(dict(instance=key, depth=depth, width=width, bits=depth*width))
+        if len(sound_memory) != len(expected_sound_memory) or len({row["instance"] for row in sound_memory}) != len(expected_sound_memory):
+            raise SystemExit("Sound memory missing or duplicated")
     summary=(output/f"{project_name}.sta.summary").read_text(encoding="utf-8",errors="replace")
     timings=[]
     for block in summary.split("\n\n"):
@@ -124,6 +149,8 @@ def run_check(stage, quartus_bin, stamp, name):
             "timing_coverage":coverage,
             "fit_summary":fit.splitlines(),"log_sha256":hashlib.sha256(log_path.read_bytes()).hexdigest(),
             "scope":scope}
+    if sound_memory:
+        report["sound_memory"] = sound_memory
     destination=core_root()/f"debug/{name}_synth.json"
     destination.parent.mkdir(parents=True,exist_ok=True)
     destination.write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
