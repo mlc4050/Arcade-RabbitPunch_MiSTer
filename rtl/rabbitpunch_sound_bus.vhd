@@ -91,7 +91,7 @@ begin
                             styp_state <= STATE_ROM_REQUEST;
                         else
                             o_response_valid <= '1';
-                            if (iu16_request_address = x"F000" or iu16_request_address = x"F001") then
+                            if (iu16_request_address = x"F001") then
                                 ou8_response_data <= iu8_ym_status;
                             elsif (iu16_request_address = x"F200") then
                                 ou8_response_data <= iu8_command;

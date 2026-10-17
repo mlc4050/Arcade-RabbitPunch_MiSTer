@@ -163,3 +163,9 @@ through the CPU and branches to failure unless the write was accepted. This
 caught the distinction between JT51's chip enable and register/busy P1 enable.
 Register write pulses are aligned with i_ym_half_enable; audio processing still
 receives both original chip enables. No vendor logic is changed.
+
+
+YM reads follow MAME 0.289's ymfm_opm.cpp: F000 is unused and returns FF;
+only F001 returns status. Both offsets accept their respective address/data
+writes. The map boundary test checks this distinction rather than exposing
+JT51's unqualified status output at both offsets.

@@ -146,7 +146,7 @@ begin
         end loop;
         transfer(0, '0', x"00", x"5A");
         transfer(16#EFFF#, '0', x"00", x"A5");
-        transfer(16#F000#, '0', x"00", x"A5");
+        transfer(16#F000#, '0', x"00", x"FF");
         transfer(16#F001#, '0', x"00", x"A5");
         transfer(16#F200#, '0', x"00", x"69");
         transfer(16#F000#, '1', x"14");
