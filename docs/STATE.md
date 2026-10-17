@@ -255,3 +255,9 @@ The standalone maintenance adapter owns a one-request FSM, byte-lane selector
 and held bus payload. Initialization drains outstanding memory debt before
 releasing pause and suppresses its stale client response. It adds no RAM and
 is not yet in the production bus path.
+
+
+The standalone bus owner adds one held packet/pending bit per requester and
+one active-owner FSM. Its all-idle output includes offered requests as well
+as pending/active debt; image replacement must consume that output when the
+owner is integrated. No reset cancels ownership or an accepted memory request.

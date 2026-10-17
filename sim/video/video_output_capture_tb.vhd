@@ -287,7 +287,7 @@ begin
                     write(v_line, to_hstring(su24_scan_rgb));
                     writeline(v_output, v_line);
                     if (vint_pixels = 0) then
-                        su24_first_rgb <= su24_output_rgb;
+                        su24_first_rgb <= su24_scan_rgb;
                     end if;
                     vint_pixels := vint_pixels + 1;
                 end if;
