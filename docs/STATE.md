@@ -177,3 +177,9 @@ ADPCM board-control adapter owns one bank bit, physical reset state, latched
 part of every exposed 18-bit sample ROM address. A future frontend must reject
 stale responses after address/bank changes; no frontend cache or queue is added
 by this adapter. No restore interface is implemented yet.
+
+
+rabbitpunch_audio adds no storage: it connects sound_board's ADPCM strobes/data
+to the sample controller. Program/sample transport, main command ownership and
+PCM mixing remain external. Pause drains the sound CPU while both chips keep
+running; this is a logical CPU-pause contract, not complete-system savestates.

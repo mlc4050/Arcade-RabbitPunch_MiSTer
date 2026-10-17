@@ -167,3 +167,23 @@ reference/adpcm_synth.json pins the commit and six zero-issue coverage categorie
 The same bank/reset/abort sequence passes the synthesized functional netlist
 (adpcm_netlist_checks.json), without the DUT RTL in that simulation. Evaluation
 boundary registers are accounted for; final external timing remains open.
+
+
+## Connected audio subsystem
+
+rabbitpunch_audio wires the logical sound board's F400/F600 strobes into the
+ADPCM board adapter. T80, native RAM, JT51 and JT7759 now share i_clk; the caller
+supplies CPU/YM/P1/640 kHz enables. Main-system command ownership stays outside.
+Program ROM has the pulse/ready/reply transport; sample ROM uses current full
+18-bit address-qualified valid data. No transport arbitration/cache or mixer
+is added by this wrapper. FM and 9-bit sample PCM remain separate raw signed
+bit patterns on unsigned buses.
+
+audio_tb executes a synthetic Z80 interrupt handler that reads/acknowledges each
+main command, stores it in native RAM, selects the sample bank through F400 and
+starts sample 0 through F600. Both banks produce complete nonzero PCM playback.
+CPU pause drains and permits RAM inspection while both sample playback and YM
+sample cadence continue. YM busy status readback and IM1/RETI also pass. Both
+ROM backends have delayed replies; this is not shared SDRAM or real game audio.
+Evidence: reference/audio_checks.json. A full logical-audio implementation
+target is prepared; results are pending.
