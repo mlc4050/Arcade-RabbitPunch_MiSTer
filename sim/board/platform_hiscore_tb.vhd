@@ -144,6 +144,7 @@ architecture test of platform_hiscore_tb is
     signal su16_file_index, su16_host_response, su16_menu_mask : unsigned(15 downto 0);
     signal su27_file_address : unsigned(26 downto 0);
     signal su8_file_data : unsigned(7 downto 0);
+    signal su16_file_return : unsigned(15 downto 0) := (others => '0');
     signal su16_native_data : unsigned(15 downto 0) := (others => '0');
     signal s_native_strobe, s_native_uio, s_native_file : std_logic := '0';
 begin
@@ -442,6 +443,8 @@ begin
                 s_native_file <= '1';
                 native_word(vint_command);
                 native_word(vint_data);
+                -- HPS response mux selects fp_dout only while FIO is selected.
+                su16_file_return <= su16_host_response;
                 s_native_file <= '0';
                 cycles(4);
             end if;
@@ -704,8 +707,9 @@ begin
                 end if;
                 if (HOST_NETLIST_MODE) then
                     native_file_command(16#54#, 0);
-                    assert (su16_host_response(7 downto 0) = vu8_expected)
-                        report "Native HPS score upload byte mismatch" severity failure;
+                    assert (su16_file_return(7 downto 0) = vu8_expected)
+                        report "Native HPS score upload byte " & integer'image(vint_byte) &
+                            " expected " & to_hstring(vu8_expected) & " received " & to_hstring(su16_file_return) severity failure;
                 else
                     assert (su8_upload_data = vu8_expected)
                         report "Full platform score upload byte mismatch" severity failure;
@@ -727,6 +731,11 @@ begin
         cycles(100);
         s_copy_initialize <= '0';
         cycles(4);
+        native_file_command(16#55#, 254);
+        native_file_command(16#53#, 1);
+        native_file_command(16#54#, 16#5A#);
+        native_file_command(16#54#, 16#A5#);
+        native_file_command(16#53#, 0);
         metadata_byte(0, 16#5A#);
         metadata_byte(1, 16#A5#);
         key_event(16#06#, true);

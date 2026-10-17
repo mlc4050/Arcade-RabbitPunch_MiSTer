@@ -6,7 +6,7 @@
     "rtl/cpu/fx68k/fx68k.sv": "846602cd0fc25a9eee04f641ba5e6fcfa05a80a1db417898040c78b1f7449a33",
     "rtl/cpu/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
     "rtl/cpu/fx68k/uaddrPla.sv": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a",
-    "rtl/rabbitpunch_layout.vhd": "8398f819f6fe5131deb44aaaf2f02cc796efae1550afe0c6c18cb41ad8a217d5",
+    "rtl/rabbitpunch_layout.vhd": "28913c5c8d29e0aca34042db0f001e9e6a628b577ed2220af219c4e2fd86a968",
     "rtl/rabbitpunch_decode.vhd": "c2ffd118ed681db262d7f82639d7011fa908ed88bf5e9206f3f5f1422f187a5e",
     "rtl/rabbitpunch_ram16.vhd": "7f740e02f07b244a8bd84721e763163495ec8a5c1936c06ab74d05e340816b50",
     "rtl/rabbitpunch_board_memory.vhd": "ceeaa5949e621fe31635a01d1e0db81040d69b8d8fb32470b9a5087a17d78a93",
@@ -101,14 +101,14 @@
     "rtl/rabbitpunch_inputs.vhd": "12390a74888d13c1f0c38d5e8d1f8ea5eff3673d225b5440e03a2b20b43e3630",
     "rtl/rabbitpunch_pause.vhd": "8bbbcd71a56ff3e30c898f61eed9ffa64909d3674767ee31de9ed017475d386c",
     "rtl/rabbitpunch_controls.vhd": "fc5a784432187c8ec72dc9a558f40db46c3f23beed00a7cbcc947e403094dd08",
-    "rtl/rabbitpunch_config.vhd": "1146e8e251886b662d0abbb94431672fcd23cbef8ae57f24a2a812573fd28083",
+    "rtl/rabbitpunch_config.vhd": "262cf96fa14d29bd37b057ef71d822f8e3e97eb1cda455d84b6284b34a2a416d",
     "rtl/rabbitpunch_hiscore.vhd": "deb3db4fcd55026b46ddb47e6a0713910c30f8ed3940adf4e5dcda1c6f879312",
     "rtl/rabbitpunch_hiscore_config.vhd": "fcb70ea11a4ea24040d0b1d09c7ceb1512e4527cfad06c316f3aea79ac614d6d",
     "rtl/rabbitpunch_hiscore_service.vhd": "4428ab8031e87adcc6ec81e781fd055d7bc93461cef11a6a6defa07e45bd5d2b",
     "rtl/rabbitpunch_maintenance_clients.vhd": "559976bd1124ea5ed26bf4f1ce5371d837dd126ad366acbe4ffbb8e8b8de548a",
-    "rtl/rabbitpunch_platform.vhd": "92bab9de2681e0c16042ac30f0c374ab72b41d7bf72420c59b096d59cdf834db",
+    "rtl/rabbitpunch_platform.vhd": "7960c3c761da77ec2bea55872e48057e28243cbebb7f42ae051c125b80887997",
     "sim/board/platform_tb.vhd": "e66ab8e153b337e24a4e5d8233c63f8d6f29785a4874c87e17dee7610492458f"
   },
-  "log_sha256": "6419085f88f1855b79ca1f2614a74fb7c532ef9d3835b767b8f737bad75bf05a",
+  "log_sha256": "79a0fe6456706f790999e133a0428703c48241029bc62903068dd7c53c7e77a8",
   "scope": "Logical platform with host byte/DDR frontend, controls, game system and actual fx68k/SDRAM/chip model: two 64-byte DDR programs, one direct byte program and rejected partial-image recovery; CPU reads both player/service ports and downloaded DIP word into native RAM, pad/keyboard/OSD pause, held-key reload and soft-reset DIP preservation. Host and DDR signals modeled; audio/video clocks idle; no physical raster/PLL/hps_io/DDR ownership proof"
 }

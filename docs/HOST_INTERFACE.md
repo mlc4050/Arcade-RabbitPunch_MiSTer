@@ -56,5 +56,5 @@ Upload request/index/data and native active/read flags are exposed through the
 unsigned wrapper. The verified pre-menu upload fit/test checks a 119-byte transfer
 from a synchronous read source, command boundaries and pending request rearming.
 The configuration now adds `H3O3,Autosave high scores,Off,On;` at status bit 3;
-the logical platform supplies menu-mask bit 3 until a valid profile exists. A
-refreshed native host fit/netlist test is required for this menu generation.
+the logical platform supplies menu-mask bit 3 until a valid profile exists. The refreshed native host fit and configuration/upload netlist test pass for
+this menu generation (reference/host_synth.json and host_netlist_checks.json).
