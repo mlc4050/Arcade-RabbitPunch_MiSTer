@@ -64,7 +64,7 @@ begin
     process(i_clk)
     begin
         if (rising_edge(i_clk)) then
-            o_response_valid <= '0';
+            o_response_valid <= i_request;
             o_sound_command_write <= '0';
             o_gga_write <= '0';
             o_irq_configure <= '0';

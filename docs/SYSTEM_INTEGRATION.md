@@ -94,3 +94,14 @@ and 4096 sound-CPU ordered writes for both sets against MAME through shared SDRA
 sound-register seeds, direct preloaded ROM plus 32-byte real header download,
 and idle logical video/raster retain the bounded scope of the earlier test.
 Both runs pass; this remains a bounded startup comparison rather than full game boot.
+
+
+Production maintenance now uses the ordinary work-RAM CPU port after both CPU
+adapters confirm pause and the main bus drains. The CPU path bypasses the owner
+when idle, retaining its request/reply edges. Full synthetic CPU tests consume
+restored bytes, preserve user pause, drain reset debt and replace images on
+queued I/O/ROM boundaries. Audio tests verify maintenance write/read during
+continued sample playback. Platform and native HPS command tests also pass.
+See MAINTENANCE.md and reference/system_maintenance_checks.json. Physical timing
+and HPS persistence remain separate; the new owner passes full-platform implementation; its real-ROM prefix
+comparison is being refreshed for this revision.

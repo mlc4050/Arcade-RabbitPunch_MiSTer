@@ -13,7 +13,7 @@ from hwlock import require_no_jtag
 CHECKS = {
     "maintenance": (0, ("rabbitpunch_maintenance",)),
     "video_output": (0, ("rabbitpunch_video_output",)),
-    "platform": (927339, ("rabbitpunch_platform", "rabbitpunch_controls", "rabbitpunch_load_frontend", "rabbitpunch_system", "fx68k", "T80se", "jt51", "jt7759", "rom_loader", "ddram_phy", "jtframe_draw")),
+    "platform": (927339, ("rabbitpunch_platform", "rabbitpunch_controls", "rabbitpunch_load_frontend", "rabbitpunch_system", "fx68k", "T80se", "jt51", "jt7759", "rom_loader", "ddram_phy", "jtframe_draw", "rabbitpunch_maintenance", "rabbitpunch_bus_owner")),
     "controls": (0, ("rabbitpunch_controls", "rabbitpunch_inputs", "rabbitpunch_keys", "rabbitpunch_pause", "mame_keys")),
     "host": (0, ("host_check", "rabbitpunch_host", "hps_io")),
     "load_frontend": (0, ("rabbitpunch_load_frontend", "rabbitpunch_ddr_copy", "rom_loader", "ddram_phy")),
@@ -24,11 +24,11 @@ CHECKS = {
     "adpcm": (0, ("rabbitpunch_adpcm", "rabbitpunch_upd7759", "jt7759_ctrl", "jt7759_adpcm")),
     "sound_board": (19403, ("rabbitpunch_sound_board", "rabbitpunch_soundcpu", "rabbitpunch_sound_bus", "rabbitpunch_ram8", "jt51")),
     "soundcpu": (0, ("rabbitpunch_soundcpu", "rabbitpunch_z80", "T80se")),
-    "system": (927339, ("rabbitpunch_system", "rabbitpunch_board", "fx68k", "rabbitpunch_roms", "rabbitpunch_download", "jtframe_draw", "rabbitpunch_audio", "T80se", "jt51", "jt7759", "rabbitpunch_audio_mixer")),
+    "system": (927339, ("rabbitpunch_system", "rabbitpunch_board", "fx68k", "rabbitpunch_roms", "rabbitpunch_download", "jtframe_draw", "rabbitpunch_audio", "T80se", "jt51", "jt7759", "rabbitpunch_audio_mixer", "rabbitpunch_maintenance", "rabbitpunch_bus_owner")),
     "download": (0, ("rabbitpunch_download",)),
     # Native RAM/lines 868352 + micro ROM 17*1024 + nano ROM 66*336.
     # Nano bits 2 and 23 are constant zero in the pinned donor and optimized out.
-    "board": (907936, ("rabbitpunch_board", "rabbitpunch_maincpu", "fx68k", "rabbitpunch_io", "rabbitpunch_irq", "rabbitpunch_board_video", "jtframe_draw")),
+    "board": (907936, ("rabbitpunch_board", "rabbitpunch_maincpu", "fx68k", "rabbitpunch_io", "rabbitpunch_irq", "rabbitpunch_board_video", "jtframe_draw", "rabbitpunch_maintenance", "rabbitpunch_bus_owner")),
     "roms": (0, ("rabbitpunch_roms", "rabbitpunch_rom_cache", "rabbitpunch_rom_requests", "rabbitpunch_sdram")),
     "rom_cache": (0, ("rabbitpunch_rom_cache",)),
     "rom_requests": (0, ("rabbitpunch_rom_requests",)),

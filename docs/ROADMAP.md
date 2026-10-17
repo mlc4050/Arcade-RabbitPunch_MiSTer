@@ -277,3 +277,14 @@ input/DIP reads, native RAM, pause/reload and partial-image recovery. The
 combined full-size platform fit passes all 48 MHz timing/coverage gates with
 927339 RAM bits; physical timing
 and actual MiSTer shell/DDR ownership remain open (PLATFORM.md).
+
+
+Production maintenance milestone: acknowledged byte access now joins both CPU
+pause adapters and the existing work-RAM port. The idle CPU bus bypasses packet
+storage; queued ownership includes all debt in ROM-load handoff. CPU-consumed
+restored bytes, independent user pause, reset/I/O/ROM boundaries, active audio
+maintenance and platform/native HPS regressions pass. The integrated owner's
+full-platform fit passes every 48 MHz timing/coverage gate with unchanged RAM;
+its full real-ROM startup comparison is next;
+pre-maintenance full startup results retain their exact source hashes. HPS
+high-score persistence remains open (MAINTENANCE.md, HISCORE.md).

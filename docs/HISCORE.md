@@ -21,8 +21,8 @@ use the selected set's length; treating the two score tables as identical
 would copy unrelated US RAM bytes.
 
 Existing work-RAM inspection can read the region while the main CPU is paused.
-There is no production maintenance write port or HPS score upload/restore path
-yet. Future restore must request pause, wait for CPU/bus drain, use masked RAM
+Production maintenance now provides acknowledged byte reads/writes through
+the existing work-RAM CPU port. The HPS score upload/restore path is still open. Future restore must request pause, wait for CPU/bus drain, use masked RAM
 writes without resetting memory, preserve neighboring bytes, and release pause
 only after accepted accesses complete. Score polling/load/save must be scoped
 per ROM generation and set; the existing host prototype disables uploads.
@@ -37,8 +37,8 @@ byte masks preserve the preceding byte and following word; reads return the
 correct lane. It holds pause through an accepted memory access even after the
 client ends its session. Initialization discards a pending client result only
 after draining its backend reply. Delays of 0..51 and 300 clocks are checked
-(reference/maintenance_checks.json). This is not connected to the production
-bus-owner mux or HPS score upload/restore path yet. No maintenance access
+(reference/maintenance_checks.json). It is now connected to the production
+bus owner; HPS score upload/restore remains separate (MAINTENANCE.md). No maintenance access
 bypasses the existing RAM port or adds pixel buffering.
 
 The inspected standard hiscore.v helpers use a configured pause-padding delay

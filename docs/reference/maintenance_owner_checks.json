@@ -3,12 +3,12 @@
   "pass_marker": "MAINTENANCE_OWNER_PASS",
   "log": "debug\\baselines\\maintenance_owner\\result.log",
   "source_sha256": {
-    "rtl/rabbitpunch_ram16.vhd": "3d7d435a69db34c53c30fe265f8b6a45be083f73542a37b30069c3b20b312199",
-    "rtl/rabbitpunch_maintenance.vhd": "dac3e1ba29d16a7a7024c3c8fe23a07baa4597c1d7e305b90a04ba5ae10911c0",
-    "rtl/rabbitpunch_bus_owner.vhd": "41501fd3e2c74d3f372199e0fc75b6d7049189f8906564f3a65c8ee2442ae309",
-    "sim/board/maintenance_owner_tb.vhd": "2a9fc95a8c3fe4da03319de0660640647bb6838ee1b4263d0381db7bb709fbb7"
+    "rtl/rabbitpunch_ram16.vhd": "7f740e02f07b244a8bd84721e763163495ec8a5c1936c06ab74d05e340816b50",
+    "rtl/rabbitpunch_maintenance.vhd": "19d90ccaf6c967a05b7c6964dceb46e34ba7945bf3ae3a9e30d7cade5c6c1268",
+    "rtl/rabbitpunch_bus_owner.vhd": "3bb5f2efb7da8141a317e8f2ade3e9f3b5e6796bfc5f990e7e44d8c2fcb4e6dc",
+    "sim/board/maintenance_owner_tb.vhd": "a9f6083d2de692646f7b30d92e7979e54013b5df99177ab24598bc46af27a539"
   },
   "vectors_sha256": "0492a1eb60fc9f655ebb77696edbe2dafa8de9fd43dfc63c240d4e65f3ceef04",
-  "log_sha256": "d0d43f4f8a7afc9594beda511de1ce6ecd828c13a4801467ec996e0acc9b3a28",
-  "scope": "Queued CPU/maintenance bus owner, byte adapter and native RAM, simultaneous late CPU request wins without losing maintenance, qualified replies: both live-MAME score-block geometries, modified interior values, exact byte lanes/neighbors, actual-pause and CPU-debt gates, 0..51/300-cycle backend acknowledgment delay and reset debt drain. No production bus-owner mux, executing CPU or HPS persistence integration"
+  "log_sha256": "019634f11e756820e804c6e95c3ff1dbb78b0c11c27d322db33bb6f870270908",
+  "scope": "Queued CPU/maintenance bus owner, byte adapter and native RAM, idle CPU pulse bypass with no extra request edge, simultaneous CPU priority, late CPU queued behind active maintenance, poisoned held payloads, explicit maintenance permission and qualified replies: both live-MAME score-block geometries, modified interior values, exact byte lanes/neighbors, actual-pause and CPU-debt gates, 0..51/300-cycle backend acknowledgment delay and reset debt drain. No production bus-owner mux, executing CPU or HPS persistence integration"
 }

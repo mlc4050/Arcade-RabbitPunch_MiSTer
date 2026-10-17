@@ -36,6 +36,16 @@ entity rabbitpunch_platform is
         o_ddr_owner : out std_logic;
         o_pause_request : out std_logic;
         o_user_paused : out std_logic;
+        i_maintenance_access : in std_logic := '0';
+        i_maintenance_valid : in std_logic := '0';
+        i_maintenance_write : in std_logic := '0';
+        iu14_maintenance_byte_address : in unsigned(13 downto 0) := (others => '0');
+        iu8_maintenance_data : in unsigned(7 downto 0) := (others => '0');
+        o_maintenance_ready : out std_logic;
+        o_maintenance_response_valid : out std_logic;
+        ou8_maintenance_response_data : out unsigned(7 downto 0);
+        o_maintenance_pause : out std_logic;
+
         ou8_player1 : out unsigned(7 downto 0);
         ou8_player2 : out unsigned(7 downto 0);
         ou8_service : out unsigned(7 downto 0);
@@ -214,6 +224,15 @@ begin
             i_game_reset => s_game_reset,
             i_pause => s_pause_request,
             o_paused => o_paused,
+            i_maintenance_access => i_maintenance_access,
+            i_maintenance_valid => i_maintenance_valid,
+            i_maintenance_write => i_maintenance_write,
+            iu14_maintenance_byte_address => iu14_maintenance_byte_address,
+            iu8_maintenance_data => iu8_maintenance_data,
+            o_maintenance_ready => o_maintenance_ready,
+            o_maintenance_response_valid => o_maintenance_response_valid,
+            ou8_maintenance_response_data => ou8_maintenance_response_data,
+            o_maintenance_pause => o_maintenance_pause,
             i_vblank_start => i_vblank_start,
             i_half_frame => i_half_frame,
             i_line_valid => i_line_valid,
