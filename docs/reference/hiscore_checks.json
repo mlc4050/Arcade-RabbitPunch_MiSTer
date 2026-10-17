@@ -1,0 +1,15 @@
+{
+  "case": "hiscore",
+  "pass_marker": "HISCORE_PASS",
+  "log": "debug\\baselines\\hiscore\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_ram8.vhd": "fd924b3eddbe1769b3e2dbd175e0f2a57629097ddba0dbd4cf295edfe81b3b39",
+    "rtl/rabbitpunch_ram16.vhd": "7f740e02f07b244a8bd84721e763163495ec8a5c1936c06ab74d05e340816b50",
+    "rtl/rabbitpunch_maintenance.vhd": "19d90ccaf6c967a05b7c6964dceb46e34ba7945bf3ae3a9e30d7cade5c6c1268",
+    "rtl/rabbitpunch_hiscore.vhd": "c38013fb5a99cd8819157671300b8d6f52a3374055029e8cf0325c6ef61ce3dd",
+    "sim/board/hiscore_tb.vhd": "6e8314476c8490cefb7a3a72e1c098b72dfdc18372314a79a3056402b5c6b6a9"
+  },
+  "vectors_sha256": "56c5bb10b5801c7e067a3a6770e4369431bac096d0f90be7ed958c3974b4af01",
+  "log_sha256": "4c782638440154d772081be2c0f166880ad1f17181a87377e9d58adc3f51f06a",
+  "scope": "Atomic saved-score banks with native dual-port RAM and production maintenance byte adapter, both captured MAME geometries. Backend pause confirmation and varying acknowledgment latency, initialization guards, changed saved guard bytes, exact restoration and neighbors, first run without a file, unchanged/changed captures, autosave request edges, malformed file rejection and reset debt. No HPS configuration parser, production platform composition or disk persistence claim."
+}

@@ -1,0 +1,38 @@
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY rabbitpunch_hiscore
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_ram8.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_hiscore.vhd
+set_global_assignment -name SDC_FILE hiscore_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_initialize
+set_instance_assignment -name VIRTUAL_PIN ON -to i_game_reset
+set_instance_assignment -name VIRTUAL_PIN ON -to i_profile_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to i_us_set
+set_instance_assignment -name VIRTUAL_PIN ON -to iu32_start_wait[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_check_wait[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_osd_open
+set_instance_assignment -name VIRTUAL_PIN ON -to i_autosave
+set_instance_assignment -name VIRTUAL_PIN ON -to i_dump_download
+set_instance_assignment -name VIRTUAL_PIN ON -to i_dump_write
+set_instance_assignment -name VIRTUAL_PIN ON -to i_dump_upload
+set_instance_assignment -name VIRTUAL_PIN ON -to iu27_dump_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_dump_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_dump_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_dump_wait
+set_instance_assignment -name VIRTUAL_PIN ON -to o_upload_request
+set_instance_assignment -name VIRTUAL_PIN ON -to o_initialized
+set_instance_assignment -name VIRTUAL_PIN ON -to o_saved_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_dirty
+set_instance_assignment -name VIRTUAL_PIN ON -to o_memory_access
+set_instance_assignment -name VIRTUAL_PIN ON -to o_memory_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_memory_write
+set_instance_assignment -name VIRTUAL_PIN ON -to ou14_memory_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_memory_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_memory_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to i_memory_response
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_memory_data[*]

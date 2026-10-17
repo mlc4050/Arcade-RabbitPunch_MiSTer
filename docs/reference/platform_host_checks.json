@@ -2,8 +2,8 @@
   "case": "platform_host",
   "pass_marker": "PLATFORM_HOST_PASS",
   "log": "debug\\baselines\\platform_host\\result.log",
-  "host_netlist_commit": "622ec8e9c348342e877cc5b8082fbffeb24d9666",
-  "host_netlist_sha256": "c31632f0c7b396c5bfff93963e4b8a4cda4b2324c84067479a8b3d228ec65a58",
+  "host_netlist_commit": "68f4a25d1dc39fdb87b3df5a95a46cd5c61ac123",
+  "host_netlist_sha256": "f2013260555c2d849549d42512137b225604a790889f4d33ef03f86640ed0626",
   "source_sha256": {
     "rtl/cpu/fx68k/fx68k.sv": "846602cd0fc25a9eee04f641ba5e6fcfa05a80a1db417898040c78b1f7449a33",
     "rtl/cpu/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
@@ -105,9 +105,9 @@
     "rtl/rabbitpunch_controls.vhd": "fc5a784432187c8ec72dc9a558f40db46c3f23beed00a7cbcc947e403094dd08",
     "rtl/rabbitpunch_config.vhd": "38a3213d84366b6c7d91cad2a948fd42ec90edcc3aa68c4bb577dd237295de84",
     "rtl/rabbitpunch_platform.vhd": "f502b172e64c8924faecfbe8cf007ff6ba6822048a86d69bf3b905f965a6d243",
-    "debug/netlists/host_622ec8e/host_check.vo": "c31632f0c7b396c5bfff93963e4b8a4cda4b2324c84067479a8b3d228ec65a58",
-    "sim/board/platform_host_tb.vhd": "58debe2139f9da5a1bd2b69afb4f85c5e03f24df42b443bd4ec7fb9ce45f0c81"
+    "debug/netlists/host_68f4a25/host_check.vo": "f2013260555c2d849549d42512137b225604a790889f4d33ef03f86640ed0626",
+    "sim/board/platform_host_tb.vhd": "7f86e3fb4f9f249cfe231bfa0515b9f7dc2baeccb73da3a2f6db5b3d1282f9e9"
   },
-  "log_sha256": "bc34cfa83f1561e7bf091e63997a49a1b99a07957b58db2358f35cb10a61eccf",
+  "log_sha256": "8acc87c1086f65fd7ea639f967da0300c7218f8f10ef62c569cf7c5924b0a125",
   "scope": "Native unchanged hps_io via checked Quartus functional netlist drives raw UIO/FIO command strobes into the RTL logical platform and actual fx68k/SDRAM/chip model: input/DIP CPU reads, DDR and byte loads, pause/reload/reset and partial-image recovery. Behavioral HPS master and DDR staging, audio/video idle; no physical ARM bridge, shared DDR mux, raster/PLL or electrical timing proof"
 }

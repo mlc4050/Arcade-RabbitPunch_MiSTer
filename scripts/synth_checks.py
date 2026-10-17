@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "hiscore": (2048, ("rabbitpunch_hiscore", "rabbitpunch_ram8")),
     "maintenance": (0, ("rabbitpunch_maintenance",)),
     "video_output": (0, ("rabbitpunch_video_output",)),
     "platform": (927339, ("rabbitpunch_platform", "rabbitpunch_controls", "rabbitpunch_load_frontend", "rabbitpunch_system", "fx68k", "T80se", "jt51", "jt7759", "rom_loader", "ddram_phy", "jtframe_draw", "rabbitpunch_maintenance", "rabbitpunch_bus_owner")),
