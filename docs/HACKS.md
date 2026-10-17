@@ -42,3 +42,15 @@ tell "never had it" from "had it and fixed it". Delete a row once nothing else r
 
 | What | Removed by | Replaced with |
 |---|---|---|
+
+
+## Sound startup comparison initial state
+
+MAME's defined Z80 reset registers differ from the unchanged T80 reset state.
+The strict 4096-write sound startup comparison explicitly seeds T80 through its
+existing simulation state-load input from captured MAME reset registers. This
+normalizes the test starting condition only. No production reset circuitry is
+changed; an unseeded Rabio Lepus diagnostic differed in four temporary stack
+bytes while matching every peripheral write. Sound memory replies in that test
+are behavioral, periodically delayed by 53 clocks; this is not original-board
+cycle timing or shared SDRAM bandwidth proof. See SOUND_BRINGUP.md.

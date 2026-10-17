@@ -145,3 +145,11 @@ The descriptive T80 adapter adds no state. Its enable directly controls CPU
 advancement; software pause must first drain/retain external bus transactions.
 T80 register/interrupt/machine-cycle state remains inside the unchanged CPU.
 A complete sound CPU capture/restore interface is not implemented.
+
+
+Sound CPU transaction adapter: styp_state tracks idle/waiting/completed/draining;
+latched request address/data/write and read reply persist while CPU enables
+stall. Pause drains an accepted response; reset drains before CPU restart.
+No runtime state-load interface is added. The T80 DIR input is used by simulator
+setup only to normalize the MAME comparison's initial CPU registers; no production
+savestate support is claimed. JT51's internal state remains vendor-owned.

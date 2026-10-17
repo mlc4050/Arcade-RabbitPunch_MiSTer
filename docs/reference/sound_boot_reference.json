@@ -1,0 +1,50 @@
+[
+  {
+    "set": "rabiolep",
+    "writes": 4096,
+    "writes_by_target": {
+      "f400": 1,
+      "ram": 3881,
+      "f000": 107,
+      "f001": 107
+    },
+    "command_events": [],
+    "mame_version": "0289",
+    "driver_sha256": "77d83ca4786d83fc2474e467f09a0fd15067ede165c2406825af8b0e132364bd",
+    "audiocpu_sha256": "6ae5a7e9ea5dbb3200acf686434585b013f681018b41c5eeb953fcb99c635bc8",
+    "trace": "debug\\sound_boot\\rabiolep\\sound_writes.txt",
+    "trace_sha256": "e6564402d7de348d70a59ec3b1896db949650123e546019a6fbb4f90cb0b1f7d",
+    "events_sha256": "1cf525cba100d3a28a393a40a4e70c02d5dd707efc76eda57c5d1598ef1db109",
+    "reset_state_sha256": "22be5825dcaca89601e81de46cfd3c5f0acaf8e628fc0e75a536442228fb7195",
+    "log_sha256": "3ec83c679fead492013d270feef0c61fd4add705a6bdc337884ca0bed79aa1ed",
+    "source_sha256": {
+      "scripts/mame/sound_boot.lua": "85ada2073fd58ee8c4c7c0f5b49d5255c71cad7d20a8eb37ef537739354382aa",
+      "scripts/capture_sound_boot.py": "fede8d9b9f284c1d5fd0fbd9d5aba44055562d9a097077f11394f0d40a1122ed"
+    },
+    "scope": "MAME audio-CPU ordered reset writes with real main CPU and sound devices; commands/ack reads indexed by preceding sound-write count; no waveform or FPGA comparison"
+  },
+  {
+    "set": "rpunch",
+    "writes": 4096,
+    "writes_by_target": {
+      "f400": 1,
+      "ram": 3881,
+      "f000": 107,
+      "f001": 107
+    },
+    "command_events": [],
+    "mame_version": "0289",
+    "driver_sha256": "77d83ca4786d83fc2474e467f09a0fd15067ede165c2406825af8b0e132364bd",
+    "audiocpu_sha256": "b36fb363df451c021a088dc930a2a41d8b53104334cb06b8966db604d3daa86b",
+    "trace": "debug\\sound_boot\\rpunch\\sound_writes.txt",
+    "trace_sha256": "80b1761eb0319bb8245f4692f0d4fa0a2c53f2f7dafe4703534a46dac89af43d",
+    "events_sha256": "1cf525cba100d3a28a393a40a4e70c02d5dd707efc76eda57c5d1598ef1db109",
+    "reset_state_sha256": "22be5825dcaca89601e81de46cfd3c5f0acaf8e628fc0e75a536442228fb7195",
+    "log_sha256": "3ec83c679fead492013d270feef0c61fd4add705a6bdc337884ca0bed79aa1ed",
+    "source_sha256": {
+      "scripts/mame/sound_boot.lua": "85ada2073fd58ee8c4c7c0f5b49d5255c71cad7d20a8eb37ef537739354382aa",
+      "scripts/capture_sound_boot.py": "fede8d9b9f284c1d5fd0fbd9d5aba44055562d9a097077f11394f0d40a1122ed"
+    },
+    "scope": "MAME audio-CPU ordered reset writes with real main CPU and sound devices; commands/ack reads indexed by preceding sound-write count; no waveform or FPGA comparison"
+  }
+]

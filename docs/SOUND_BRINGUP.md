@@ -59,3 +59,47 @@ MAME driver/device and the actual donor before connection.
 The sound ROM clients still need a verified path into shared SDRAM, with measured
 impact on line deadlines. Do not add a frame buffer or silently increase clocks
 to accommodate them.
+
+## Executing sound CPU and MAME startup reference
+
+rabbitpunch_soundcpu wraps the descriptive T80 adapter with one outstanding
+memory transaction. o_request pulses for one i_clk; the backend owes exactly
+one response, including writes. Address/write/data are latched. The CPU advances
+only at i_enable when the active memory cycle has completed. Refresh and Z80
+interrupt-acknowledge cycles are not memory requests; interrupt acknowledge
+supplies FF for the board's Z80 interrupt convention. No new clock is generated.
+Long backend replies stretch execution through clock enables; this is not proof
+of original Z80 bus timing or of the final SDRAM bandwidth budget.
+
+i_pause stops new transactions while an accepted reply drains, then o_paused
+asserts. The held completed read remains available on resume. Reset holds the
+CPU in reset until any old response drains, so it cannot become a new opcode.
+The backend must remain live during pause/reset. Diagnostic soundcpu_tb uses
+65-clock delayed replies, RAM readback, peripheral writes, pause mid-read,
+reset mid-read and replay. Evidence: reference/soundcpu_checks.json.
+
+capture_sound_boot.py installs MAME write/command taps before soft reset and
+captures both audio ROMs' first 4096 ordered writes. Each prefix contains 3881
+RAM writes, 107 YM2151 address/data pairs and one uPD control write; neither
+contains a main-CPU command or mailbox read. This is sound-board initialization,
+not an attract/game music capture. Lua subscriptions are retained globally and
+callback faults are propagated to the runner. Hashes: reference/sound_boot_reference.json.
+
+check_sound_boot.py executes the actual audio ROM using T80, actual JT51,
+behavioral ROM/RAM/peripheral decoding and periodic 53-clock delayed replies.
+Every one of 4096 writes matches MAME for each set. The simulation explicitly
+loads MAME's captured reset register state through the vendor's existing DIR
+state input after reset. It does not change the CPU's production reset behavior.
+MAME resets A=00/F=40 and general registers to defined values; native T80 resets
+A/F=FF and leaves its register RAM uninitialized. An initial unseeded Rabio
+Lepus run matched all peripheral writes but differed in four temporary stack
+bytes (one unknown). The strict seeded comparison normalizes that starting
+condition instead of masking any write differences. RAM is also explicitly
+zero-initialized in this behavioral fixture. Evidence: reference/sound_boot_checks.json.
+
+The startup test does not contain production sound RAM, ROM arbitration,
+uPD playback, main-board commands or final interrupt timing. JT51 keeps running
+while the CPU waits/pauses. Its register initialization is exercised, but no
+PCM waveform or audible game result is claimed. Native vendor sources remain
+unchanged. The new staged soundcpu fit target checks the transaction adapter
+and T80 only, with registered logical evaluation interfaces at 48 MHz.
