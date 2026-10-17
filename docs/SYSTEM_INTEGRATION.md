@@ -114,3 +114,12 @@ shared SDRAM transport/chip model. The transparent CPU bus owner preserves the
 expected sequence. Exact source hashes and private log hashes are recorded in
 reference/system_boot_10000_4096_maintenance_checks.json. This establishes the
 captured startup prefixes, not complete gameplay/audio or physical clock timing.
+
+
+Configuration-initialized RAM milestone: both real-ROM sets pass 10,000 main and
+4,096 sound ordered startup writes with no simulator deposits into native main,
+bitmap or sound RAM. See reference/system_boot_10000_4096_powerup_checks.json and
+RAM_POWERUP.md. This is still an idle-raster startup prefix, with MAME-normalized
+sound CPU registers and SDRAM ROM-model preload; it is not full gameplay or
+physical timing proof. Newly added provisional timing blocks are not in this
+run's source closure and will be integrated in the next step.

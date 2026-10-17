@@ -41,9 +41,12 @@ bitmap or sound RAM. Its short two-game startup check passes with production
 configuration initialization. Sound-CPU register normalization and direct SDRAM
 ROM-model preload remain explicit and separate test setup.
 
-The complete long startup comparison, six captured scenes, native score tests
-and new implementation evidence are recorded as they finish. A physical FPGA
-power-up measurement remains part of hardware bring-up.
+Both sets now pass the complete 10,000-main/4,096-sound ordered startup prefix
+without native-RAM simulator deposits (reference/system_boot_10000_4096_powerup_checks.json).
+The six captured RGB scenes remain pixel-identical to MAME. Native score-service
+and fitted-host persistence tests also pass with this RAM policy. The combined
+platform and isolated memory implementation checks pass; details follow below.
+A physical FPGA power-up check remains part of MiSTer bring-up.
 
 `run_memory_powerup_tests.py` additionally reads all 52,224 words of the five
 production banks through both CPU and inspection interfaces before the first

@@ -84,3 +84,12 @@ assertion/release and loss/recovery of the clock. It is cold initialization;
 game reset and pause do not reset the ROM transport/PLL. See
 reference/pll_checks.json. Next: scanline bank ownership and production timing
 connections, then the complete clock/SDRAM implementation.
+
+
+The standalone line scheduler now passes delayed/backpressured render tests:
+two four-line frames alternate banks without overwriting the active bank,
+startup stays blank until armed, late rows remain invalid until a later handoff,
+same-edge completion is eligible, and initialization flushes queued/active work.
+Only ownership/tags are added; tile/sprite pixels remain in the existing two
+banks. See reference/scanline_scheduler_checks.json. Continuous real-renderer
+scanout and CPU/audio contention tests follow production wiring.

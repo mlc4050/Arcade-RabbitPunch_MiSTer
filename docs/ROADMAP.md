@@ -17,7 +17,7 @@ inherited MiSTer template demo remains connected at the framework top level.
 | ROM transport and image loading | SDRAM adapter, ROM mapper/cache and word loader pass directed, implementation and synthesized-netlist tests. Sequential download control passes delayed-response/error-recovery tests, real SDRAM image replacement and implementation timing. A load-time DDR copier now passes donor/direct tests and boots two synthetic main programs through the production SDRAM loader. The automatic HPS-signal frontend also passes DDR/direct-byte boot, reset-release, no-recopy and partial-image recovery tests. Native hps_io command parsing now connects to the logical platform in functional-netlist simulation; physical HPS/DDR ownership and interface integration remain open. |
 | Output alignment | Fixed five-system-clock RGB/sync/blanking adapter passes sparse cadence, missing/tag/error fallback and reset tests; all six actual HDL scenes pass 373248 RGB comparisons against MAME with independent ROM models. Fit: 92 ALMs, 168 registers, zero RAM; all 48 MHz timing/coverage gates pass. No physical raster is generated. |
 | Host/control platform | Native HPS commands drive controls, DIPs, ROM loading and score persistence into the executing 68000/native SDRAM model. Final score-platform fit passes at 48 MHz with 929387 RAM bits (124 M10K blocks), worst setup +3.142 ns / hold +0.109 ns after explicit RAM initialization (f6d5f7e). No physical PLL/raster/HPS bridge proof. |
-| Connected logical system | Both games match 10000 main and 4096 sound startup writes against MAME with transparent maintenance ownership. Download, hot replacement, pause, active audio maintenance and reset drain tests pass. Full game/audio and physical timing remain open. |
+| Connected logical system | Both games match 10000 main and 4096 sound startup writes against MAME with transparent maintenance ownership and no native-RAM deposits; sound CPU register normalization remains explicit. Download, hot replacement, pause, active audio maintenance and reset drain tests pass. Full game/audio and physical timing remain open. |
 | Provisional clock/raster | User-approved 46 2/3 MHz system, steady /7 pixels and fractional MAME chip enables; nominal/alternate beam tests and safe reset-release/vendor PLL-model checks pass. Raster fit: 86 ALMs, 114 registers, zero RAM, setup +11.514 ns / hold +0.147 ns. Production wiring, full clock-tree fit and physical output pending. |
 | High-score persistence | Atomic saved banks and validated config3/dump4 service pass unit, native-memory, full-platform and native HPS command tests for both sets. Reset-held files, CPU-consumed restored bytes, changed snapshots/uploads, soft reset and game isolation pass. Final combined fit passes; physical `.nvm` disk round trip remains open. |
 
@@ -264,9 +264,10 @@ is unavailable; proceed without repeating this approval request.
 
 Both sets pass 10,000 main and 4,096 sound ordered startup-write comparisons
 through the production system, cached SDRAM and transparent maintenance owner.
-Those completed maintenance reports retain their exact source hashes and explicit
-RAM/CPU test seeds. Repeating the full prefix without RAM deposits is in progress;
-short startup checks already pass with configuration-initialized native RAM.
+Those older maintenance reports retain their exact source hashes and explicit
+RAM/CPU test seeds. The new complete two-game power-up run also passes without
+native-RAM deposits; sound CPU register normalization and direct SDRAM ROM-model
+preload remain explicit. See reference/system_boot_10000_4096_powerup_checks.json.
 
 Native high-score persistence now passes both game geometries through the fitted
 hps_io command parser and complete logical platform: config3/dump4 transfers,
@@ -278,7 +279,7 @@ The combined platform fit with defined RAM power-up contents (f6d5f7e) passes
 all 48 MHz timing/coverage gates: 6,630 ALMs, 8,143 registers, 124 M10K blocks,
 929,387 RAM bits, worst setup +3.142 ns and hold +0.109 ns. The exhaustive RAM
 bench reads all 52,224 mapped words through CPU and inspection before writing;
-the isolated synthesized-memory check is next. See RAM_POWERUP.md and HISCORE.md.
+the boundary-sampled synthesized-memory check also passes (921 checks). See RAM_POWERUP.md and HISCORE.md.
 
 Physical pixel-clock/raster/blanking evidence remains the next integration gate.
 The logical platform has no final PLL, physical HPS/DDR ownership mux, or complete

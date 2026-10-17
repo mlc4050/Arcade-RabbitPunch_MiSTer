@@ -293,3 +293,20 @@ other production word banks and byte RAM use zero. State view/maintenance APIs
 return logical values and need no format change. A raw vendor-memory dump of
 the bitmap must be decoded with FFFF. CPU/game reset does not clear these banks.
 See RAM_POWERUP.md for startup scope and tests.
+
+
+The provisional clock-enable generator adds a /7 pixel phase, modulo-35 main
+and sound accumulators, a sound half-rate phase bit and modulo-875 ADPCM
+accumulator. These advance on the system clock and are separate from user pause
+and game reset. The raster adds two nine-bit beam counters; it has no pixel RAM.
+The PLL/reset boundary adds three cold-initialization release registers. Its
+asynchronous assertion covers PLL clock loss; game reset does not reset the PLL.
+
+The scanline scheduler adds a t_state/styp_state request/render FSM, one held
+render bank/Y, two ready-bank bits and eight-bit row tags, display bank/valid,
+armed and sticky-underflow flags. It starts row zero during vertical blank and
+prepares each following visible row in the spare bank. A handoff consumes the
+ready tag before the next physical row. Late completion cannot switch banks
+mid-line. Initialization must also reset/drain the connected renderer before
+new requests; no extra line/frame pixel storage or full savestate interface is
+added. These blocks are standalone until production timing integration lands.
