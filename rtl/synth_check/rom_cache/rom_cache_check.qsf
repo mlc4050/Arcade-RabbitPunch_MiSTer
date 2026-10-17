@@ -1,0 +1,24 @@
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY rom_cache_check
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sdram_types.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_rom_cache.vhd
+set_global_assignment -name VHDL_FILE rom_cache_check.vhd
+set_global_assignment -name SDC_FILE rom_cache_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_invalidate
+set_instance_assignment -name VIRTUAL_PIN ON -to o_idle
+set_instance_assignment -name VIRTUAL_PIN ON -to iu3_requests[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou3_ready[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu81_byte_addresses[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou3_response_valid[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou192_read_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou3_backend_requests[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu3_backend_ready[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou81_backend_byte_addresses[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu3_backend_response_valid[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu192_backend_read_data[*]

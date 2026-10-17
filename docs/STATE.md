@@ -102,3 +102,10 @@ The read-only ROM requester also holds one pending/queued flag per client,
 aligned burst addresses, byte-lane offsets and response registers. It has no
 cache and no game-reset input; drain it together with the SDRAM adapter before
 capturing state or restarting a transaction stream.
+
+
+Optional last-burst ROM caches add three immutable eight-byte entries with full
+aligned addresses, valid bits and per-client miss states/requested addresses.
+A restore may invalidate these derived entries after draining transactions;
+there is no need to save immutable ROM data. Never invalidate or change images
+with pending cache/transport work. This state is independent of game reset.

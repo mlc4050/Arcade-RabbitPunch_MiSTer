@@ -1,0 +1,12 @@
+{
+  "case": "rom_cache",
+  "pass_marker": "ROM_CACHE_PASS",
+  "log": "debug\\baselines\\rom_cache\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_sdram_types.vhd": "ef3d7e0bcb2b6522984ab20ae9e4464625d7a810e76307142fd3ef0a08115480",
+    "rtl/rabbitpunch_rom_cache.vhd": "de28c8c49b0f691edf035d988c973414cfa9b03af92f0f3141c4a7c6279f279c",
+    "rtl/synth_check/rom_cache/rom_cache_check.vhd": "5122ba23a04fe6e2ef69d82a35be7aa1fd2ac8eb2113fc1838bd37f6568959df",
+    "sim/memory/rom_cache_tb.vhd": "66ae349684f856c1fc3ae152aa7dceaa8a39c0ea82417ca7fe5d2dd837ecb21f"
+  },
+  "log_sha256": "1ba2d08b5cd7bfdeaef771f92b1b9538495837f4812ba27ef86ecdec94327d2f"
+}

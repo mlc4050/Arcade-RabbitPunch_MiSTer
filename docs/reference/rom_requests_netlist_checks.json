@@ -1,0 +1,18 @@
+{
+  "case": "gate_rom_requests",
+  "pass_marker": "ROM_REQUESTS_PASS",
+  "log": "debug\\baselines\\gate_rom_requests\\result.log",
+  "commit": "45ed0497d60700d27b7243025590e92170df52d8",
+  "vectors_sha256": {},
+  "netlist_sha256": "67358b4adfa1b2df3c09b14c8ef3386cfc0fe501b994d1fdcdd3e5eec7e3cfe8",
+  "source_sha256": {
+    "debug/netlists/rom_requests_45ed049/rom_requests_check.vo": "67358b4adfa1b2df3c09b14c8ef3386cfc0fe501b994d1fdcdd3e5eec7e3cfe8",
+    "rtl/rabbitpunch_sdram_types.vhd": "ef3d7e0bcb2b6522984ab20ae9e4464625d7a810e76307142fd3ef0a08115480",
+    "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+    "rtl/rabbitpunch_sdram.vhd": "06a3659bbbab5dde9ca7986c292883cabb09f42342af71163d446076fd22b766",
+    "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
+    "sim/memory/rom_requests_tb.vhd": "3c6fbd7ecadb956c22d8adbd8936975b65e4255f57415b6aab3b122801e226a5"
+  },
+  "log_sha256": "ed40cb062584ee80111fe1b0294d0764869cb5d6c2655ecf91068429a68171d5",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
+}

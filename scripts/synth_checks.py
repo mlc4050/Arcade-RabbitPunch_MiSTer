@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "rom_cache": (0, ("rabbitpunch_rom_cache",)),
     "rom_requests": (0, ("rabbitpunch_rom_requests",)),
     "sdram": (0, ("rabbitpunch_sdram", "sdram:memory_controller")),
     "memory": (835584, ("bitmap", "sprites", "tiles", "palette", "work_ram")),
@@ -98,7 +99,7 @@ def run_check(stage, quartus_bin, stamp, name):
              "all DUT paths remain single-cycle timed, no false/multicycle paths; "
              "not final MiSTer pin/PLL/SDRAM timing") if name == "board_video" else (
              f"Standalone {name} block with virtual I/O; not a complete core or hardware release")
-    if name == "rom_requests":
+    if name in ("rom_requests", "rom_cache"):
         scope = "ROM request logic with wire-only port flattening and half-period synthetic virtual input timing; not a final core or external pin proof"
     if name == "sdram":
         scope = ("SDRAM adapter/controller with registered synthetic tester and hypothetical half-period DQ input timing; "

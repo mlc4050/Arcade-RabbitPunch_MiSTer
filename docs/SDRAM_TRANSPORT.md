@@ -84,4 +84,34 @@ are loaded directly into model memory through ModelSim's mem load command;
 physical loader writes are verified separately, so a successful screenshot must
 not be described as loader proof. The bench runs competing synthetic main-ROM
 reads and work-RAM writes, checking CPU byte order, complete RGB, scanline tags,
-streaming latency and reset draining. The first focused replay is in progress.
+streaming latency and reset draining. The Rabbit Punch play1000 replay passes every one of 62208 RGB pixels, with
+17256 checked competing CPU ROM reads and 129559 work-RAM writes. Reset draining,
+live bitmap/palette updates, tags and fixed pixel output latency also pass.
+The worst line is 3806 clocks (about 79.3 us at 48 MHz). This is throughput
+measurement under synthetic traffic, not an established physical deadline.
+reference/video_sdram_checks.json currently contains this one completed capture;
+it must not be presented as all six shared-SDRAM scenes. A Rabio Lepus replay
+is running separately.
+
+
+The ROM address/lane adapter also passes standalone Quartus implementation and
+its synthesized functional netlist passes all 288 delayed/backpressured replies
+in the VHDL scoreboard. Reports: reference/rom_requests_synth.json and
+reference/rom_requests_netlist_checks.json. No new state or latency is added by
+the wire-only flattening harness used for that proof.
+
+## Last-burst ROM cache
+
+rabbitpunch_rom_cache.vhd retains one eight-byte aligned ROM burst per client,
+24 data bytes total plus tags/valid bits. It is read-only and contains no pixels.
+It reuses adjacent graphics halves and the four 68000 words already returned by
+one SDRAM burst. Misses keep independent client requests pending until the
+backend accepts/responds; hits return registered data without SDRAM access.
+Game reset leaves immutable ROM cache entries valid. Image replacement must
+first drain all clients, then pulse invalidate before any new request.
+
+The directed test passes 438 replies using 51 backend fetches, with independent
+stalls, tag replacements, changed input pins and changed backing data after
+invalidation. This is synthetic hit/miss coverage, not a gameplay speed claim.
+The cache's implementation/netlist check and cached full-RGB comparison are next.
+A separate cached bench preserves the completed uncached timing baseline.
