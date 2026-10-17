@@ -221,3 +221,11 @@ previous-active flag. Native rom_loader owns the 64-bit granule, word index,
 byte offset and copy FSM; ddram_phy owns one outstanding external read. These
 are load-time transport state and must drain before ownership changes; neither
 is reset by a gameplay soft reset. No additional RAM or gameplay DDR use is added.
+
+
+The HPS-signal frontend owns its load-mode FSM, previous ROM-download flag,
+seen-write/error/mode bits, byte count, one held low byte and one pending word.
+Copy and direct-stream paths share one downstream ready/valid contract. A
+framework reset only gates starting a pending DDR transaction; it does not
+clear loader state or rearm a completed image. Errors remain latched until a
+fresh ROM transaction, with accepted word/read debt drained before release.

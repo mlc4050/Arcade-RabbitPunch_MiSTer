@@ -1,0 +1,140 @@
+{
+  "commit": "3ab0e6424e96b94958e3ca77e49642ea9aa5c07c",
+  "device": "5CSEBA6U23I7",
+  "project": "ddr_copy_check",
+  "constraint_mhz": 48,
+  "seed": 3,
+  "memory_bits": 0,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 8.269
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.306
+    },
+    {
+      "type": "Slow 1100mV 100C Model Recovery 'clk_sys'",
+      "slack_ns": 12.629
+    },
+    {
+      "type": "Slow 1100mV 100C Model Removal 'clk_sys'",
+      "slack_ns": 7.147
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.727
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 8.339
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.299
+    },
+    {
+      "type": "Slow 1100mV -40C Model Recovery 'clk_sys'",
+      "slack_ns": 12.884
+    },
+    {
+      "type": "Slow 1100mV -40C Model Removal 'clk_sys'",
+      "slack_ns": 6.884
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.579
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 9.214
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.163
+    },
+    {
+      "type": "Fast 1100mV 100C Model Recovery 'clk_sys'",
+      "slack_ns": 11.353
+    },
+    {
+      "type": "Fast 1100mV 100C Model Removal 'clk_sys'",
+      "slack_ns": 8.771
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.828
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 9.381
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.143
+    },
+    {
+      "type": "Fast 1100mV -40C Model Recovery 'clk_sys'",
+      "slack_ns": 11.395
+    },
+    {
+      "type": "Fast 1100mV -40C Model Removal 'clk_sys'",
+      "slack_ns": 8.789
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.828
+    }
+  ],
+  "timing_coverage": {
+    "Illegal Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Port Paths": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Port Paths": {
+      "setup": 0,
+      "hold": 0
+    }
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Sat Oct 17 01:06:46 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : ddr_copy_check",
+    "Top-level Entity Name : rabbitpunch_ddr_copy",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 162 / 41,910 ( < 1 % )",
+    "Total registers : 186",
+    "Total pins : 1 / 314 ( < 1 % )",
+    "Total virtual pins : 226",
+    "Total block memory bits : 0 / 5,662,720 ( 0 % )",
+    "Total RAM Blocks : 0 / 553 ( 0 % )",
+    "Total DSP Blocks : 0 / 112 ( 0 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 0 / 6 ( 0 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "log_sha256": "263ef8b6016cbd2a0fd6ae6e8753fc9ba06481f6050b5d1c71bb507ccc929c63",
+  "scope": "Standalone ddr_copy block with virtual I/O; not a complete core or hardware release"
+}

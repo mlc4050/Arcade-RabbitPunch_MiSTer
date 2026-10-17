@@ -47,4 +47,44 @@ paused, warm image replacement and soft reset without any DDR recopy pass.
 There are sixteen modeled DDR reads and sixty-four accepted stream words
 (reference/system_ddr_checks.json). Audio enables and logical video are idle.
 This is not an HPS trigger, a full-image bandwidth measurement, DDR electrical
-timing or a game boot. Standalone full-size copy implementation is pending.
+timing or a game boot. Standalone full-size copy implementation passes all reported 48 MHz corners
+with zero RAM, worst setup +8.269 ns and hold +0.143 ns
+(reference/ddr_copy_synth.json).
+
+
+## Automatic HPS-signal frontend
+
+rabbitpunch_load_frontend accepts the clock-domain signals that hps_io exports.
+Only index 0 arms a ROM transaction. The download-active output remains asserted
+through host transfer, reset-release waiting, and copying/draining. A transfer
+with byte-write pulses uses a one-word byte-pair buffer; low byte belongs to the
+even address. Addresses must be sequential and the final byte count exact.
+A first byte on the same edge as download rises is supported. Host wait includes
+the write pulse and occupied word credit; metadata indices are left unstalled.
+
+With no byte writes, the frontend waits until framework reset is released, then
+starts one DDR copy. Later soft-reset edges cannot recopy that image. Do not
+connect framework/game reset to the cold initialization input: byte streaming
+and copying must continue while gameplay is held reset. The receiving system
+uses frontend error OR framework reset as its game-reset input, in addition to
+its existing image-valid/download reset. A rejected/short transaction cannot
+release gameplay just because an old image once existed. Copy completion is
+still distinct from the downstream final write acknowledgment.
+
+An overlapping ROM transaction latches error and drains the old copy instead
+of canceling an owned DDR read. A fresh transaction after idle clears error and
+can recover. The frontend does not queue simultaneous image generations.
+The caller must arbitrate/own the DDR port for the entire copy; actual rotator
+sharing and hps_io wiring remain future platform work. Existing development
+MRAs have not been switched to DDR-address mode before that wiring exists.
+
+load_frontend_tb passes metadata filtering, reset-release gating, no reset-only
+copy, no soft-reset recopy, direct pairing/stalls, same-edge first byte, odd and
+nonsequential rejection, overlap drain and fresh recovery
+(reference/load_frontend_checks.json). system_frontend_tb connects the frontend
+to the native DDR copier, real production SDRAM download/cache/chip model and
+fx68k. Three 64-byte DDR images and one direct byte image execute checked
+CAFE/BEEF writes; a partial byte image holds reset and recovers into DDR loading.
+There are 129 accepted word transfers and 24 DDR reads. Audio/video are idle;
+this models HPS signals rather than instantiating real hps_io. Full-size frontend
+implementation is pending (reference/system_frontend_checks.json).

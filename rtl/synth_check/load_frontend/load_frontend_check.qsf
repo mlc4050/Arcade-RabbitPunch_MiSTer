@@ -1,0 +1,39 @@
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY rabbitpunch_load_frontend
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_layout.vhd
+set_global_assignment -name SYSTEMVERILOG_FILE ../../memory/ddram/ddram_phy.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../memory/ddram/rom_loader.sv
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_ddr_copy.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_load_frontend.vhd
+set_global_assignment -name SDC_FILE load_frontend_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_initialize
+set_instance_assignment -name VIRTUAL_PIN ON -to i_framework_reset
+set_instance_assignment -name VIRTUAL_PIN ON -to i_host_download
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_host_index[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_host_write
+set_instance_assignment -name VIRTUAL_PIN ON -to iu27_host_byte_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_host_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_host_wait
+set_instance_assignment -name VIRTUAL_PIN ON -to o_download_active
+set_instance_assignment -name VIRTUAL_PIN ON -to o_done
+set_instance_assignment -name VIRTUAL_PIN ON -to o_error
+set_instance_assignment -name VIRTUAL_PIN ON -to o_ddr_mode
+set_instance_assignment -name VIRTUAL_PIN ON -to o_word_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to i_word_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to ou27_word_byte_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_word_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_ddr_busy
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_ddr_burst_count[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou29_ddr_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu64_ddr_read_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_ddr_read_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_ddr_read
+set_instance_assignment -name VIRTUAL_PIN ON -to ou64_ddr_write_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_ddr_byte_enables[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_ddr_write
