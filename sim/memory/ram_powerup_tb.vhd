@@ -22,8 +22,8 @@ begin
     banks : for vint_bank in 0 to 2 generate
         ram : entity work.rabbitpunch_ram16
             generic map (
-                sint_ADDRESS_BITS => 8,
-                POWER_UP_WORD => C_INITIAL(vint_bank)
+                GINT_ADDRESS_BITS => 8,
+                GU16_POWER_UP_WORD => C_INITIAL(vint_bank)
             )
             port map (
                 i_clk => s_clk,
@@ -40,7 +40,7 @@ begin
     end generate;
     byte_ram : entity work.rabbitpunch_ram8
         generic map (
-            sint_ADDRESS_BITS => 8
+            GINT_ADDRESS_BITS => 8
         )
         port map (
             i_clk => s_clk,

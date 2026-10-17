@@ -5,7 +5,7 @@ use std.textio.all;
 use work.tile_test_support.all;
 
 entity tile_layer_tb is
-    generic (G_CAPTURE : boolean := false);
+    generic (GBOOL_CAPTURE : boolean := false);
 end entity;
 
 architecture test of tile_layer_tb is
@@ -60,7 +60,7 @@ architecture test of tile_layer_tb is
         return t_unsigned_words is
         variable v_empty : t_unsigned_words(0 to vint_count - 1)(vint_width - 1 downto 0);
     begin
-        if (G_CAPTURE) then
+        if (GBOOL_CAPTURE) then
             return read_hex(v_filename, vint_count, vint_width);
         end if;
         v_empty := (others => (others => '0'));
@@ -122,7 +122,7 @@ begin
                 if (vint_ram_delay = 0) then
                     s_ram_pending <= '0';
                     s_ram_valid <= '1';
-                    if (G_CAPTURE) then
+                    if (GBOOL_CAPTURE) then
                         su16_ram_data <= C_VRAM(to_integer(vu13_saved_ram_address));
                     else
                         su16_ram_data <= descriptor(to_integer(vu13_saved_ram_address));
@@ -148,9 +148,9 @@ begin
                 if (vint_rom_delay = 0) then
                     s_rom_pending <= '0';
                     s_rom_valid <= '1';
-                    if (G_CAPTURE and vint_saved_foreground = 1) then
+                    if (GBOOL_CAPTURE and vint_saved_foreground = 1) then
                         su32_rom_data <= C_TILES1(to_integer(vu17_saved_rom_address));
-                    elsif (G_CAPTURE) then
+                    elsif (GBOOL_CAPTURE) then
                         su32_rom_data <= C_TILES0(to_integer(vu17_saved_rom_address));
                     else
                         su32_rom_data <= packed_row(vu17_saved_rom_address, vint_saved_foreground);
@@ -186,7 +186,7 @@ begin
                 vint_pixels := 0;
             else
                 if (s_valid = '1' and s_ready = '1') then
-                    if (not G_CAPTURE) then
+                    if (not GBOOL_CAPTURE) then
                         assert (vint_accepted < 16384) report "Expected-row queue overflow" severity failure;
                         vint_sx := (to_integer(su9_x) + to_integer(su9_scroll_x)) mod 512;
                         vint_sy := (to_integer(su9_y) + to_integer(su9_scroll_y)) mod 512;
@@ -212,7 +212,7 @@ begin
                     vint_accepted := vint_accepted + 1;
                 end if;
                 if (s_ram_request = '1') then
-                    if (not G_CAPTURE) then
+                    if (not GBOOL_CAPTURE) then
                         assert (vint_ram_requests < vint_accepted) report "Unaccepted RAM request" severity failure;
                         assert (to_integer(su13_ram_address) = v_queue(vint_ram_requests).address)
                             report "Column-major tile address mismatch" severity failure;
@@ -220,7 +220,7 @@ begin
                     vint_ram_requests := vint_ram_requests + 1;
                 end if;
                 if (s_rom_request = '1') then
-                    if (not G_CAPTURE) then
+                    if (not GBOOL_CAPTURE) then
                         assert (vint_rom_requests < vint_accepted) report "Unaccepted ROM request" severity failure;
                         assert (to_integer(su17_rom_address) = v_queue(vint_rom_requests).code * 8 +
                             v_queue(vint_rom_requests).row and
@@ -230,7 +230,7 @@ begin
                     vint_rom_requests := vint_rom_requests + 1;
                 end if;
                 if (s_pixel_valid = '1') then
-                    if (G_CAPTURE) then
+                    if (GBOOL_CAPTURE) then
                         if (su9_pixel_x >= 8 and su9_pixel_x < 296 and su9_pixel_y < 216) then
                             vint_foreground := to_integer(su9_palette_index(8 downto 8));
                             vint_position := vint_foreground * 62208 + to_integer(su9_pixel_y) * 288 + to_integer(su9_pixel_x) - 8;
@@ -302,7 +302,7 @@ begin
             wait until falling_edge(s_clk);
         end loop;
         s_reset <= '0';
-        if (G_CAPTURE) then
+        if (GBOOL_CAPTURE) then
             for vint_foreground in 0 to 1 loop
                 vint_dx := to_integer(C_SETTINGS(vint_foreground * 2 + 2)) mod 512;
                 vint_dy := to_integer(C_SETTINGS(vint_foreground * 2 + 1)) mod 512;

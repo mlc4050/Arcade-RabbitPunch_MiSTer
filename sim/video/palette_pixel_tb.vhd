@@ -36,7 +36,7 @@ begin
             ou8_blue => su8_blue
         );
     palette_ram : entity work.rabbitpunch_ram16
-        generic map (sint_ADDRESS_BITS => 10)
+        generic map (GINT_ADDRESS_BITS => 10)
         port map (
             i_clk => s_clk,
             i_cpu_enable => s_load,

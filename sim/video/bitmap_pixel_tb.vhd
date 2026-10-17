@@ -39,7 +39,7 @@ begin
             ou10_palette_index => su10_output_index
         );
     bitmap_ram : entity work.rabbitpunch_ram16
-        generic map (sint_ADDRESS_BITS => 15)
+        generic map (GINT_ADDRESS_BITS => 15)
         port map (
             i_clk => s_clk,
             i_cpu_enable => s_load,

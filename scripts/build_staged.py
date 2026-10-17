@@ -49,7 +49,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from coretools import core_root, revision, quartus_bin   # noqa: E402
+from coretools import core_root, revision, quartus_bin, NO_WINDOW   # noqa: E402
 
 REV = None          # set in main() from --rev / coretools
 QUARTUS_BIN = None
@@ -62,7 +62,9 @@ QUARTUS_BIN = None
 # cannot catch that; presence is asserted separately. Add each name in the
 # commit that adds the module it names, so the gate grows with the design.
 REQUIRED_INSTANCES = (
-    "hps_io",        # the framework's HPS interface; present from the template on
+    "hps_io", "rabbitpunch_clocked_machine", "rabbitpunch_scanout",
+    "rabbitpunch_scanline_scheduler", "rabbitpunch_rom_cache", "fx68k",
+    "T80se", "jt51", "jt7759", "jtframe_draw", "rabbitpunch_hiscore_service",
     # "fx68k", "sdram", "arcade_video", "Hq2x", "screen_rotate_two", ...
 )
 
@@ -92,30 +94,42 @@ def run(cmd, **kw):
 
 
 def read_slacks(summary):
-    """Print every clock's setup slack; return the ones that fail.
+    """Require a timing summary and gate every reported check, including hold."""
+    path = Path(summary)
+    if not path.is_file():
+        raise SystemExit(f"Timing unverified: missing {path}")
+    text = path.read_text(errors="replace")
+    rows = []
+    for block in re.split(r"\n\s*\n", text):
+        kind = re.search(r"Type\s*:\s*(.+)", block)
+        slack = re.search(r"Slack\s*:\s*(-?[\d.]+)", block)
+        tns = re.search(r"TNS\s*:\s*(\S+)", block)
+        if kind and slack:
+            rows.append((kind[1].strip(), float(slack[1]), tns[1] if tns else "unknown"))
+    if not rows or not all(any(check in name for name, _, _ in rows)
+                           for check in ("Setup", "Hold", "Minimum Pulse Width")):
+        raise SystemExit("Timing unverified: setup, hold or minimum pulse width missing")
+    print(f"  {len(rows)} timing checks inspected, including setup/hold and pulse width")
+    return [(name[-100:], slack, tns) for name, slack, tns in rows if slack < 0]
 
-    All of them, not clk_sys alone: a violation on any clock is a violation,
-    and scripts/build.sh gates on exactly the same rule.
-    """
-    out = []
-    if not os.path.exists(summary):
-        print("no timing summary at %s -- treating as unverified" % summary)
-        return out
-    lines = open(summary, errors="replace").read().splitlines()
-    for i, ln in enumerate(lines):
-        if not ln.startswith("Type  : Setup ") or i + 2 >= len(lines):
-            continue
-        clk = ln.split("Setup ", 1)[1].strip().strip("'")
-        try:
-            slack = float(lines[i + 1].split(":", 1)[1])
-        except (IndexError, ValueError):
-            continue
-        tns = lines[i + 2].split(":", 1)[1].strip()
-        if "emu|pll" in clk:
-            print("worst clk_sys setup: Slack : %.3f / TNS   : %s" % (slack, tns))
-        if slack < 0:
-            out.append((clk[-58:], slack, tns))
-    return out
+
+def check_timing_coverage(report):
+    """Fail closed when illegal/unconstrained paths remain or the table is absent."""
+    path = Path(report)
+    if not path.is_file():
+        raise SystemExit(f"Timing coverage unverified: missing {path}")
+    rows = re.findall(r";\s*(Illegal Clocks|Unconstrained [^;]+?)\s*;\s*(\d+)\s*;\s*(\d+)\s*;",
+                      path.read_text(errors="replace"))
+    expected = {"Illegal Clocks", "Unconstrained Clocks", "Unconstrained Input Ports",
+                "Unconstrained Input Port Paths", "Unconstrained Output Ports",
+                "Unconstrained Output Port Paths"}
+    if {name.strip() for name, _, _ in rows} != expected:
+        raise SystemExit("Timing coverage unverified: expected all six coverage categories")
+    bad = [(name.strip(), int(setup), int(hold)) for name, setup, hold in rows
+           if int(setup) or int(hold)]
+    if bad:
+        raise SystemExit(f"Illegal clocks or unconstrained timing paths: {bad}")
+    print("  all six timing-coverage categories clear")
 
 
 def report_resources(stage):
@@ -151,15 +165,16 @@ def check_present(stage):
     except OSError:
         print("  (no fit report at %s -- cannot check)" % rpt)
         return []
-    missing = [n for n in REQUIRED_INSTANCES if n not in text]
-    for n in REQUIRED_INSTANCES:
+    required = REQUIRED_INSTANCES + (("rabbitpunch_debug", "altsource_probe") if REV.endswith("_stp") else ())
+    missing = [n for n in required if n not in text]
+    for n in required:
         print("  %-18s %s" % (n, "present" if n in text else "MISSING"))
     return missing
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--synth-check", choices=["raster", "hiscore_service", "hiscore", "maintenance", "video_output", "platform", "controls", "host", "load_frontend", "ddr_copy", "audio_mixer", "audio_rom_transport", "audio", "adpcm", "sound_board", "soundcpu", "memory", "tiles", "sprites", "sprite_scan", "priority", "sprite_line", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "download", "system", "sdram", "rom_requests", "rom_cache", "roms"],
+    ap.add_argument("--synth-check", choices=["clocked_machine", "machine", "raster", "hiscore_service", "hiscore", "maintenance", "video_output", "platform", "controls", "host", "load_frontend", "ddr_copy", "audio_mixer", "audio_rom_transport", "audio", "adpcm", "sound_board", "soundcpu", "memory", "tiles", "sprites", "sprite_scan", "priority", "sprite_line", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "download", "system", "sdram", "rom_requests", "rom_cache", "roms"],
                     help="fit an isolated block from HEAD instead of the MiSTer core")
     ap.add_argument("--rev", help="Quartus revision (default: CORE_REV, else the one "
                                   ".qsf in the core root, else the .qpf's last)")
@@ -236,6 +251,12 @@ def main():
         open(qsf, "w", encoding="utf-8", newline="\n").write(new)
         print("seed:   %d (stage only)" % args.seed)
 
+    if not args.synth_check:
+        # The value is part of this staged snapshot, never a guessed device identity.
+        qsf = Path(stage) / f"{REV}.qsf"
+        with qsf.open("a", encoding="utf-8", newline="\n") as output:
+            output.write(f"\nset_global_assignment -name VERILOG_MACRO \"RABBITPUNCH_BUILD_ID=32'h{head[:8]}\"\n")
+
     # THE SEED IS PART OF THE BUILD. Two .rbf files from the same commit at
     # different seeds are not interchangeable: one placement with every clock
     # positive has broken games on hardware where another (worse worst slack)
@@ -265,14 +286,23 @@ def main():
     log_path = os.path.join(stage, "q_staged.log")
     open(marker, "w").write(stamp)
     try:
+        # Keep Quartus caches/profile writes on D: as well as project scratch.
+        env = dict(os.environ)
+        scratch = Path(here) / ".local/quartus"
+        for key, folder in (("TEMP", "tmp"), ("TMP", "tmp"), ("TMPDIR", "tmp"),
+                            ("APPDATA", "appdata"), ("LOCALAPPDATA", "localappdata"),
+                            ("USERPROFILE", "profile")):
+            path = scratch / folder
+            path.mkdir(parents=True, exist_ok=True)
+            env[key] = str(path)
         with open(log_path, "w") as log:
-            subprocess.run([quartus, "--flow", "compile", REV, "-c", REV],
-                           cwd=stage, stdout=log, stderr=subprocess.STDOUT)
+            compile_run = subprocess.run([quartus, "--flow", "compile", REV, "-c", REV],
+                           cwd=stage, env=env, stdout=log, stderr=subprocess.STDOUT, **NO_WINDOW)
     finally:
         os.remove(marker)
 
     tail = open(log_path, errors="replace").read().splitlines()[-25:]
-    ok = any("Full Compilation was successful" in ln for ln in tail)
+    ok = compile_run.returncode == 0 and any("Full Compilation was successful" in ln for ln in tail)
     for ln in tail:
         if any(k in ln for k in ("successful", "Error", "Elapsed")):
             print(ln.strip())
@@ -290,6 +320,9 @@ def main():
 
     print("")
     print("==== timing ====")
+    if not ok:
+        sys.exit("BUILD FAILED -- see %s" % log_path)
+    check_timing_coverage(os.path.join(stage, "output_files", "%s.sta.rpt" % REV))
     violations = read_slacks(
         os.path.join(stage, "output_files", "%s.sta.summary" % REV))
 

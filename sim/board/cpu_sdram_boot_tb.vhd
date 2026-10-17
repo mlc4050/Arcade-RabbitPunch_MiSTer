@@ -7,8 +7,8 @@ use work.rabbitpunch_layout.all;
 
 entity cpu_sdram_boot_tb is
     generic (
-        WRITE_LIMIT : positive := 10000;
-        DIP_DEFAULT : natural := 0
+        GINT_WRITE_LIMIT : positive := 10000;
+        GINT_DIP_DEFAULT : natural := 0
     );
 end entity;
 
@@ -84,7 +84,7 @@ begin
             i_rom_response_valid => s_rom_valid,
             iu16_rom_response_data => su16_rom_data,
             i_view_enable => '0',
-            iu5_view_target => TARGET_NONE,
+            iu5_view_target => CU5_TARGET_NONE,
             iu15_view_word_address => (others => '0'),
             o_view_valid => open,
             ou16_view_data => open
@@ -103,7 +103,7 @@ begin
             iu8_player1 => (others => '0'),
             iu8_player2 => (others => '0'),
             iu8_service => (others => '0'),
-            iu16_dips => to_unsigned(DIP_DEFAULT, 16),
+            iu16_dips => to_unsigned(GINT_DIP_DEFAULT, 16),
             i_sound_command_read => '0',
             o_sound_command_write => open,
             ou8_sound_command => open,
@@ -226,7 +226,7 @@ begin
     stimulus : process
         file v_state : text open write_mode is "rtl_io_state.txt";
         variable v_line : line;
-        constant HEX_CHARACTERS : string := "0123456789abcdef";
+        constant CSTR_HEX_CHARACTERS : string := "0123456789abcdef";
         procedure state_word(v_name : string; vu_word : unsigned) is
         begin
             write(v_line, v_name & " " & to_hstring(resize(vu_word, 16)));
@@ -238,14 +238,14 @@ begin
             wait until falling_edge(s_clk);
         end loop;
         s_reset <= '0';
-        wait until sint_writes = WRITE_LIMIT;
+        wait until sint_writes = GINT_WRITE_LIMIT;
         wait until falling_edge(s_clk);
         s_pause <= '1';
         wait until s_paused = '1';
         for vint_wait in 0 to 2 loop
             wait until falling_edge(s_clk);
         end loop;
-        assert (sint_writes = WRITE_LIMIT and s_rom_idle = '1') report "CPU or ROM transport did not drain" severity failure;
+        assert (sint_writes = GINT_WRITE_LIMIT and s_rom_idle = '1') report "CPU or ROM transport did not drain" severity failure;
         state_word("flags", su16_flags);
         state_word("scroll0_y", su9_scroll0_y);
         state_word("scroll0_x", su9_scroll0_x);
@@ -258,7 +258,7 @@ begin
             wait until falling_edge(s_clk);
             su4_gga_view <= to_unsigned(vint_register, 4);
             wait for 1 ns;
-            state_word("gga0" & HEX_CHARACTERS(vint_register + 1), su8_gga_data);
+            state_word("gga0" & CSTR_HEX_CHARACTERS(vint_register + 1), su8_gga_data);
         end loop;
         file_close(v_state);
         report "CPU_SDRAM_BOOT_PASS writes=" & integer'image(sint_writes) & " reads=" & integer'image(sint_reads);

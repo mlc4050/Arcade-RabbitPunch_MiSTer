@@ -5,13 +5,13 @@
   "evaluation_boundary": false,
   "exhaustive": true,
   "source_sha256": {
-    "rtl/rabbitpunch_layout.vhd": "28913c5c8d29e0aca34042db0f001e9e6a628b577ed2220af219c4e2fd86a968",
-    "rtl/rabbitpunch_decode.vhd": "c2ffd118ed681db262d7f82639d7011fa908ed88bf5e9206f3f5f1422f187a5e",
-    "rtl/rabbitpunch_ram16.vhd": "944818901a265eb00e376732c43da881745b6e020303bb907283f3a2aeb46beb",
-    "rtl/rabbitpunch_board_memory.vhd": "2757fd9aaee28bf3b3418305c20c09604de4497633680f2b961208f98d8809b7",
+    "rtl/rabbitpunch_layout.vhd": "e375b766fa01bf4ae808ccc315f7629488a2dfa4db9e7c8a98f7da993adae14d",
+    "rtl/rabbitpunch_decode.vhd": "83bde9875e72c5588153e802f0c075627193cfd5202bd58d987549a461f82b5a",
+    "rtl/rabbitpunch_ram16.vhd": "74d32c1783ba829da369ad5520c9f24d5197c43052770fd2a22de07b50516acc",
+    "rtl/rabbitpunch_board_memory.vhd": "abfc16353dc426497519091854798359cdc6d0829c30df1ac13cdb5f52eaaba6",
     "rtl/rabbitpunch_memory.vhd": "848a5cebb1558b68de8d681e3a6b2a14a64890a22e9efe9c9d75203c2390e059",
-    "sim/memory/memory_powerup_tb.vhd": "7edba90d102bfdebd6553f79baf9d5d4e811d8a4500345e951c48166057ad741"
+    "sim/memory/memory_powerup_tb.vhd": "ed1bb523421c944576842a8ad7a25014e67dc99036288a678eff9d9e5820e5d2"
   },
-  "log_sha256": "7e31d0168fc94729fa12b83ae10b77cd6374801f0f48429292a0ba488a4bb2d6",
+  "log_sha256": "48e4254b4ceaabda9b4a42997eadf51a538801a07c459246b33bd3dc46233cd6",
   "scope": "All 52224 mapped RAM words read via CPU and inspection before any write; bitmap FFFF, other banks zero. Upper/lower masked writes at first/middle/last addresses preserve the other byte. No RAM deposits; no physical hardware measurement."
 }

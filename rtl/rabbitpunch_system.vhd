@@ -7,10 +7,13 @@ use work.rabbitpunch_layout.all;
 -- Physical raster/PLL and HPS/DDR streaming remain external interfaces.
 entity rabbitpunch_system is
     generic (
-        sint_IMAGE_BYTES : positive := ROM_IMAGE_SIZE
+        GINT_SDRAM_READ_CAPTURE_ADJUST : natural range 0 to 2 := 0;
+        GINT_IMAGE_BYTES : positive := CINT_ROM_IMAGE_SIZE;
+        GBOOL_EXTERNAL_PHASE_ENABLE : boolean := false
     );
     port (
         i_clk : in std_logic;
+        i_main_phase_enable : in std_logic := '0';
         i_initialize : in std_logic;
         i_game_reset : in std_logic;
         i_pause : in std_logic;
@@ -153,8 +156,12 @@ begin
     o_ready <= not s_board_reset;
     o_loading <= s_loading;
     board : entity work.rabbitpunch_board
+        generic map (
+            GBOOL_EXTERNAL_PHASE_ENABLE => GBOOL_EXTERNAL_PHASE_ENABLE
+        )
         port map (
             i_clk => i_clk,
+            i_main_phase_enable => i_main_phase_enable,
             i_initialize => i_initialize or s_download_reset,
             i_reset => s_board_reset,
             i_pause => i_pause,
@@ -298,6 +305,9 @@ begin
             ou8_debug_data => ou8_audio_debug_data
         );
     roms : entity work.rabbitpunch_roms
+        generic map (
+            GINT_SDRAM_READ_CAPTURE_ADJUST => GINT_SDRAM_READ_CAPTURE_ADJUST
+        )
         port map (
             i_clk => i_clk,
             i_initialize => i_initialize,
@@ -343,7 +353,7 @@ begin
             o_sdram_clock_enable => o_sdram_clock_enable
         );
     download : entity work.rabbitpunch_download
-        generic map (sint_IMAGE_BYTES => sint_IMAGE_BYTES)
+        generic map (GINT_IMAGE_BYTES => GINT_IMAGE_BYTES)
         port map (
             i_clk => i_clk,
             i_download => i_download,

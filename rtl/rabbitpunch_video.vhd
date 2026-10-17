@@ -114,8 +114,8 @@ begin
         );
     tiles : entity work.rabbitpunch_tiles
         generic map (
-            sint_FIRST_PIXEL => 8,
-            sint_LAST_PIXEL => 295
+            GINT_FIRST_PIXEL => 8,
+            GINT_LAST_PIXEL => 295
         )
         port map (
             i_clk => i_clk,

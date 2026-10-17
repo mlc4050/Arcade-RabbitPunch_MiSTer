@@ -91,7 +91,7 @@ begin
                     when STATE_IDLE =>
                         if (i_program_request = '1') then
                             su3_offsets(0) <= iu16_program_address(2 downto 0);
-                            su27_cache_addresses(0) <= to_unsigned(ROM_AUDIOCPU_BASE, 27) +
+                            su27_cache_addresses(0) <= to_unsigned(CINT_ROM_AUDIOCPU_BASE, 27) +
                                 resize(iu16_program_address(15 downto 3) & "000", 27);
                             styp_states(0) <= STATE_REQUEST;
                         end if;
@@ -111,7 +111,7 @@ begin
                         if (i_sample_request = '1' and s_sample_valid = '0') then
                             su3_offsets(1) <= iu18_sample_address(2 downto 0);
                             su18_requested_sample <= iu18_sample_address;
-                            su27_cache_addresses(1) <= to_unsigned(ROM_UPD_BASE, 27) +
+                            su27_cache_addresses(1) <= to_unsigned(CINT_ROM_UPD_BASE, 27) +
                                 resize(iu18_sample_address(17 downto 3) & "000", 27);
                             styp_states(1) <= STATE_REQUEST;
                         end if;

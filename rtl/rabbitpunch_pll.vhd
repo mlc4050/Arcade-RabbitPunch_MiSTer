@@ -10,7 +10,7 @@ use altera_lnsim.altera_lnsim_components.all;
 -- the external SDRAM clock pin; board processes use o_system_clk and enables.
 entity rabbitpunch_pll is
     generic (
-        SDRAM_PHASE_SHIFT : string := "10714 ps"
+        GSTR_SDRAM_PHASE_SHIFT : string := "10714 ps"
     );
     port (
         i_reference_clk : in std_logic;
@@ -39,7 +39,7 @@ begin
             phase_shift0 => "0 ps",
             duty_cycle0 => 50,
             output_clock_frequency1 => "46.666667 MHz",
-            phase_shift1 => SDRAM_PHASE_SHIFT,
+            phase_shift1 => GSTR_SDRAM_PHASE_SHIFT,
             duty_cycle1 => 50
         )
         port map (

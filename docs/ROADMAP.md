@@ -2,7 +2,8 @@
 
 Approved by the user in the originating chat. The core is in simulation and
 implementation bring-up; no complete game or playable RBF exists yet. The
-inherited MiSTer template demo remains connected at the framework top level.
+MiSTer framework boundary now points to the VHDL machine; full-shell
+implementation and hardware bring-up remain pending.
 
 ## Current verified status
 
@@ -18,7 +19,7 @@ inherited MiSTer template demo remains connected at the framework top level.
 | Output alignment | Fixed five-system-clock RGB/sync/blanking adapter passes sparse cadence, missing/tag/error fallback and reset tests; all six actual HDL scenes pass 373248 RGB comparisons against MAME with independent ROM models. Fit: 92 ALMs, 168 registers, zero RAM; all 48 MHz timing/coverage gates pass. No physical raster is generated. |
 | Host/control platform | Native HPS commands drive controls, DIPs, ROM loading and score persistence into the executing 68000/native SDRAM model. Final score-platform fit passes at 48 MHz with 929387 RAM bits (124 M10K blocks), worst setup +3.142 ns / hold +0.109 ns after explicit RAM initialization (f6d5f7e). No physical PLL/raster/HPS bridge proof. |
 | Connected logical system | Both games match 10000 main and 4096 sound startup writes against MAME with transparent maintenance ownership and no native-RAM deposits; sound CPU register normalization remains explicit. Download, hot replacement, pause, active audio maintenance and reset drain tests pass. Full game/audio and physical timing remain open. |
-| Provisional clock/raster | User-approved 46 2/3 MHz system, steady /7 pixels and fractional MAME chip enables; nominal/alternate beam tests and safe reset-release/vendor PLL-model checks pass. Raster fit: 86 ALMs, 114 registers, zero RAM, setup +11.514 ns / hold +0.147 ns. Production wiring, full clock-tree fit and physical output pending. |
+| Provisional clock/raster | User-approved 46 2/3 MHz system, steady /7 pixels and fractional chip enables; standalone raster/PLL-model/reset checks pass. Continuous controller passes 124416 synthetic RGB checks with intentional deadline failure and live-sync recovery. Connected machine passes CPU/download/pause/reset diagnostics with external CPU phases; Rabbit Punch attract scanout matches all 62208 MAME pixels without underflow (2576/3024-clock worst row); combined machine fit passes 48 MHz with setup +2.077 ns / hold +0.100 ns. MiSTer shell and physical clock tree remain open. |
 | High-score persistence | Atomic saved banks and validated config3/dump4 service pass unit, native-memory, full-platform and native HPS command tests for both sets. Reset-held files, CPU-consumed restored bytes, changed snapshots/uploads, soft reset and game isolation pass. Final combined fit passes; physical `.nvm` disk round trip remains open. |
 
 The system clock is still a 48 MHz evaluation constraint. Physical pixel clock,
@@ -281,6 +282,13 @@ all 48 MHz timing/coverage gates: 6,630 ALMs, 8,143 registers, 124 M10K blocks,
 bench reads all 52,224 mapped words through CPU and inspection before writing;
 the boundary-sampled synthesized-memory check also passes (921 checks). See RAM_POWERUP.md and HISCORE.md.
 
-Physical pixel-clock/raster/blanking evidence remains the next integration gate.
-The logical platform has no final PLL, physical HPS/DDR ownership mux, or complete
-MiSTer game top. No playable RBF or original-board timing proof is claimed.
+The continuous raster and PLL/reset machine are now wired into the MiSTer top.
+The isolated PLL-driven implementation 2374ddc passes setup (+2.141 ns), hold
+(+0.091 ns), all other reported corners and six coverage categories. Its fitted
+clock ratios produce nominal 46.6666667 MHz and a half-period SDRAM output.
+The external chip-clock simulation exposed and fixed an early read-capture window
+in the VHDL adapter; imported memory RTL remains unchanged. Rabbit Punch attract
+now matches all 62208 MAME pixels through that clock relationship, without
+underflow and within one row's budget. Full-shell fit, actual PCB pin timing,
+interactive gameplay and audible hardware output remain pending. No verified
+playable RBF or original-board timing proof is claimed.

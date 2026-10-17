@@ -24,9 +24,9 @@ def main():
         variant += "_sampled"
     sim_args = []
     if args.boundary:
-        sim_args.append("-gEVALUATION_BOUNDARY=true")
+        sim_args.append("-gGBOOL_EVALUATION_BOUNDARY=true")
     if args.sampled:
-        sim_args.append("-gEXHAUSTIVE=false")
+        sim_args.append("-gGBOOL_EXHAUSTIVE=false")
     hashes = {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in sources}
     result = run_case(variant, sources, "memory_powerup_tb", "10 ms",
                       "MEMORY_POWERUP_PASS", wall_timeout=300,

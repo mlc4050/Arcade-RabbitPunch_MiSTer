@@ -44,10 +44,10 @@ architecture rtl of rabbitpunch_rom_requests is
     signal su16_cpu_word : unsigned(15 downto 0);
 begin
     su3_incoming <= i_cpu_request & i_tile_request & i_sprite_request;
-    su27_incoming_addresses(0) <= to_unsigned(ROM_SPRITES_BASE, 27) + shift_left(resize(iu17_sprite_word_address, 27), 2);
-    su27_incoming_addresses(1) <= to_unsigned(ROM_TILES2_BASE, 27) + shift_left(resize(iu17_tile_word_address, 27), 2)
+    su27_incoming_addresses(0) <= to_unsigned(CINT_ROM_SPRITES_BASE, 27) + shift_left(resize(iu17_sprite_word_address, 27), 2);
+    su27_incoming_addresses(1) <= to_unsigned(CINT_ROM_TILES2_BASE, 27) + shift_left(resize(iu17_tile_word_address, 27), 2)
         when i_tile_foreground = '1' else
-        to_unsigned(ROM_TILES1_BASE, 27) + shift_left(resize(iu17_tile_word_address, 27), 2);
+        to_unsigned(CINT_ROM_TILES1_BASE, 27) + shift_left(resize(iu17_tile_word_address, 27), 2);
     su27_incoming_addresses(2) <= resize(iu18_cpu_byte_address, 27);
     ou27_backend_byte_addresses <= su27_addresses;
     ou3_backend_requests <= su3_queued and iu3_backend_ready;

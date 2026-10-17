@@ -11,7 +11,7 @@ def main():
     root = core_root()
     cases = [
         ("clock_enables", ["rtl/rabbitpunch_clock_enables.vhd", "sim/board/clock_enables_tb.vhd"], "clock_enables_tb", "CLOCK_ENABLES_PASS", ()),
-        ("raster_small", ["rtl/rabbitpunch_clock_enables.vhd", "rtl/rabbitpunch_raster.vhd", "sim/video/raster_tb.vhd"], "raster_tb", "RASTER_PASS", ("-gSMALL_MODE=true",)),
+        ("raster_small", ["rtl/rabbitpunch_clock_enables.vhd", "rtl/rabbitpunch_raster.vhd", "sim/video/raster_tb.vhd"], "raster_tb", "RASTER_PASS", ("-gGBOOL_SMALL_MODE=true",)),
         ("raster_nominal", ["rtl/rabbitpunch_clock_enables.vhd", "rtl/rabbitpunch_raster.vhd", "sim/video/raster_tb.vhd"], "raster_tb", "RASTER_PASS", ()),
     ]
     results = []

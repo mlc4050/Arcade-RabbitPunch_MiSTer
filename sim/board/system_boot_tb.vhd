@@ -9,9 +9,10 @@ use work.rabbitpunch_layout.all;
 
 entity system_boot_tb is
     generic (
-        MAIN_WRITE_LIMIT : positive := 2000;
-        SOUND_WRITE_LIMIT : positive := 256;
-        DIP_DEFAULT : natural := 0
+        GBOOL_PLL_CLOCK : boolean := false;
+        GINT_MAIN_WRITE_LIMIT : positive := 2000;
+        GINT_SOUND_WRITE_LIMIT : positive := 256;
+        GINT_DIP_DEFAULT : natural := 0
     );
 end entity;
 
@@ -28,7 +29,9 @@ architecture test of system_boot_tb is
             SDRAM_nCAS : in std_logic
         );
     end component;
-    signal s_clk : std_logic := '0';
+    signal s_reference_clk : std_logic := '0';
+    signal s_clk, s_chip_clk : std_logic := '0';
+    signal s_main_phase_enable, s_fractional_sound, s_fractional_ym, s_fractional_half, s_fractional_adpcm : std_logic;
     signal s_download, s_word_valid, s_pause, s_game_reset, s_view_enable : std_logic := '0';
     signal s_word_ready, s_ready, s_loading, s_image_valid, s_error, s_done, s_paused, s_view_valid : std_logic;
     signal s_cpu_request, s_cpu_write : std_logic;
@@ -53,10 +56,35 @@ architecture test of system_boot_tb is
     signal s_audio_view : std_logic := '0';
     signal sint_samples, sint_audio_commands : natural := 0;
 begin
-    s_clk <= not s_clk after 10417 ps;
-    s_enable <= '1' when sint_divider = 11 or sint_divider = 23 else '0';
-    s_half_enable <= '1' when sint_divider = 23 else '0';
-    s_adpcm_enable <= '1' when sint_adpcm_divider = 74 else '0';
+    s_reference_clk <= not s_reference_clk after 10 ns;
+    synthetic_clock : if (not GBOOL_PLL_CLOCK) generate
+        s_clk <= not s_clk after 10417 ps;
+        s_chip_clk <= s_clk;
+    end generate;
+    physical_clock : if (GBOOL_PLL_CLOCK) generate
+        pll : entity work.rabbitpunch_pll
+            port map (
+                i_reference_clk => s_reference_clk,
+                i_reset => '0',
+                o_system_clk => s_clk,
+                o_sdram_clk => s_chip_clk,
+                o_locked => open
+            );
+    end generate;
+    enables : entity work.rabbitpunch_clock_enables
+        port map (
+            i_clk => s_clk,
+            i_reset => '0',
+            o_pixel_enable => open,
+            o_main_phase_enable => s_main_phase_enable,
+            o_sound_cpu_enable => s_fractional_sound,
+            o_ym_enable => s_fractional_ym,
+            o_ym_half_enable => s_fractional_half,
+            o_adpcm_enable => s_fractional_adpcm
+        );
+    s_enable <= s_fractional_sound when GBOOL_PLL_CLOCK else '1' when sint_divider = 11 or sint_divider = 23 else '0';
+    s_half_enable <= s_fractional_half when GBOOL_PLL_CLOCK else '1' when sint_divider = 23 else '0';
+    s_adpcm_enable <= s_fractional_adpcm when GBOOL_PLL_CLOCK else '1' when sint_adpcm_divider = 74 else '0';
     cadence : process(s_clk)
     begin
         if (rising_edge(s_clk)) then
@@ -79,9 +107,14 @@ begin
         end if;
     end process;
     system : entity work.rabbitpunch_system
-        generic map (sint_IMAGE_BYTES => 32)
+        generic map (
+            GINT_IMAGE_BYTES => 32,
+            GBOOL_EXTERNAL_PHASE_ENABLE => GBOOL_PLL_CLOCK,
+            GINT_SDRAM_READ_CAPTURE_ADJUST => boolean'pos(GBOOL_PLL_CLOCK)
+        )
         port map (
             i_clk => s_clk,
+            i_main_phase_enable => s_main_phase_enable,
             i_initialize => '0',
             i_game_reset => s_game_reset,
             i_pause => not s_run,
@@ -106,14 +139,14 @@ begin
             ou8_green => open,
             ou8_blue => open,
             i_view_enable => s_view_enable,
-            iu5_view_target => TARGET_WORKRAM,
+            iu5_view_target => CU5_TARGET_WORKRAM,
             iu15_view_word_address => (others => '0'),
             o_view_valid => s_view_valid,
             ou16_view_data => su16_view_data,
             iu8_player1 => (others => '0'),
             iu8_player2 => (others => '0'),
             iu8_service => (others => '0'),
-            iu16_dips => to_unsigned(DIP_DEFAULT, 16),
+            iu16_dips => to_unsigned(GINT_DIP_DEFAULT, 16),
             i_sound_cpu_enable => s_enable and s_run,
             i_ym_enable => s_enable,
             i_ym_half_enable => s_half_enable,
@@ -176,7 +209,7 @@ begin
         );
     chip : sdram_chip_model_wide
         port map (
-            clk => s_clk,
+            clk => s_chip_clk,
             SDRAM_DQ => su16_dq,
             SDRAM_A => su13_sdram_address,
             SDRAM_BA => su2_bank,
@@ -197,7 +230,7 @@ begin
     begin
         if (rising_edge(s_clk)) then
             if (s_run = '1') then
-                if (s_cpu_request = '1' and s_cpu_write = '1' and vint_main < MAIN_WRITE_LIMIT) then
+                if (s_cpu_request = '1' and s_cpu_write = '1' and vint_main < GINT_MAIN_WRITE_LIMIT) then
                     hwrite(v_line, su24_cpu_address and x"0FFFFF");
                     write(v_line, string'(" "));
                     vu16_mask := (others => '0');
@@ -213,7 +246,7 @@ begin
                     writeline(main_trace, v_line);
                     vint_main := vint_main + 1;
                 end if;
-                if (s_audio_request = '1' and s_audio_write = '1' and vint_sound < SOUND_WRITE_LIMIT) then
+                if (s_audio_request = '1' and s_audio_write = '1' and vint_sound < GINT_SOUND_WRITE_LIMIT) then
                     hwrite(v_line, su16_audio_address);
                     write(v_line, string'(" "));
                     write(v_line, string'("FF "));
@@ -233,7 +266,7 @@ begin
                 else
                     vint_progress := vint_progress + 1;
                 end if;
-                if (vint_main = MAIN_WRITE_LIMIT and vint_sound = SOUND_WRITE_LIMIT) then
+                if (vint_main = GINT_MAIN_WRITE_LIMIT and vint_sound = GINT_SOUND_WRITE_LIMIT) then
                     report "SYSTEM_BOOT_PASS main_writes=" & integer'image(vint_main) &
                         " sound_writes=" & integer'image(vint_sound);
                     finish;

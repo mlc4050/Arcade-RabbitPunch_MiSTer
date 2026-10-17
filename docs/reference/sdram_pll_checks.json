@@ -1,0 +1,23 @@
+{
+  "case": "sdram_pll",
+  "pass_marker": "SDRAM_PASS",
+  "log": "debug\\baselines\\sdram_pll\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_sdram_types.vhd": "35c1406e611389f2ee18dd3da7b0805e389ac4b8bd763c8a603a691b5de66367",
+    "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+    "rtl/rabbitpunch_sdram.vhd": "272312140f432a65208cb0d18a9784271ea089be2ac124afcde235e14e10c86e",
+    "rtl/synth_check/sdram/sdram_check.vhd": "9655026e3a3dffdc0be5833e84fc4f931bee10d2c41a6cdf30e034e9d13a6fd5",
+    "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
+    "rtl/rabbitpunch_pll.vhd": "988e14413b0f965adc2ea6f35ebe87620bb1e01aa4a8bc48336c82194271283d",
+    "sim/memory/sdram_tb.vhd": "413d74001b24b2a56aa2456db1d7d6ad218e39022f19eb6cd3bf159330431db0"
+  },
+  "log_sha256": "adbec8ecbf526b4481f6d972f4b0988d3fd513e3fa8ff10379cd7dbb3dd98cb1",
+  "pll_clock": true,
+  "read_capture_adjust": 1,
+  "reinitialization_checked": true,
+  "checked_words": 372,
+  "writes": 63,
+  "refresh_commands": 35,
+  "max_refresh_gap": 324,
+  "scope": "Actual vendor PLL model at 46.6667 MHz with chip commands sampled on the half-period shifted external SDRAM clock; two chips, three clients, burst order, byte masks and refresh cadence; no analog/electrical or hardware timing proof"
+}

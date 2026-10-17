@@ -23,13 +23,14 @@ def main():
     parser.add_argument('--sound-writes', type=int, default=256)
     parser.add_argument('--variant', default='', help='Optional artifact label to retain distinct source-generation runs')
     parser.add_argument('--wall-timeout', type=int, default=900)
+    parser.add_argument("--pll-clock", action="store_true", help="Use production fractional enables and shifted SDRAM clock")
     args = parser.parse_args()
     if not 1 <= args.main_writes <= 10000 or not 1 <= args.sound_writes <= 4096:
         parser.error('Limits exceed the verified MAME startup prefixes')
     if args.variant and not re.fullmatch(r'[a-z0-9_]+', args.variant):
         parser.error('Variant must use lowercase letters, digits or underscores')
     root = core_root()
-    sources = system_sources()[:-1]+['sim/board/system_boot_tb.vhd']
+    sources = system_sources()[:-1]+['rtl/rabbitpunch_clock_enables.vhd','rtl/rabbitpunch_pll.vhd','sim/board/system_boot_tb.vhd']
     source_hashes = {name: sha(root/name) for name in sources}
     main_refs = {row['set']: row for row in json.loads((root/'docs/reference/boot_checks.json').read_text())}
     sound_refs = {row['set']: row for row in json.loads((root/'docs/reference/sound_boot_reference.json').read_text())}
@@ -46,6 +47,8 @@ def main():
         assert sha(main_trace)==main_refs[game]['mame_trace_sha256']
         assert sha(sound_trace)==sound_refs[game]['trace_sha256']
         case=f'system_boot_{game}_{args.main_writes}_{args.sound_writes}' + (f'_{args.variant}' if args.variant else '')
+        if args.pll_clock:
+            case += '_pll'
         out=root/'debug/baselines'/case
         out.mkdir(parents=True,exist_ok=True)
         memory=out/'rom_words.mti'
@@ -74,9 +77,9 @@ def main():
         setup=['run 1 ns',f'mem load -format mti -infile {{{memory.as_posix()}}} /system_boot_tb/chip/mem']
         # Board/sound RAM now initializes through its production altsyncram
         # configuration. Only the existing sound CPU register normalization remains.
-        setup += ['run 200 us',f"force -freeze {cpu}/DIR 212'h{packed:053x}",f'force -freeze {cpu}/DIRSet 1','run 21 ns',f'noforce {cpu}/DIRSet',f'noforce {cpu}/DIR','force -freeze /system_boot_tb/s_run 1']
+        setup += ['run 200 us',f"force -freeze {cpu}/DIR 212'h{packed:053x}",f'force -freeze {cpu}/DIRSet 1','run 43 ns' if args.pll_clock else 'run 21 ns',f'noforce {cpu}/DIRSet',f'noforce {cpu}/DIR','force -freeze /system_boot_tb/s_run 1']
         result=run_case(case,sources,'system_boot_tb','101 ms','SYSTEM_BOOT_PASS',wall_timeout=args.wall_timeout,
-            sim_args=(f'-gMAIN_WRITE_LIMIT={args.main_writes}',f'-gSOUND_WRITE_LIMIT={args.sound_writes}',f'-gDIP_DEFAULT={dips}'),setup_commands=tuple(setup))
+            sim_args=tuple([item for name in ('altera_lnsim_ver','altera_ver','lpm_ver') for item in ('-L',name)]+[f'-gGINT_MAIN_WRITE_LIMIT={args.main_writes}',f'-gGINT_SOUND_WRITE_LIMIT={args.sound_writes}',f'-gGINT_DIP_DEFAULT={dips}']+(['-gGBOOL_PLL_CLOCK=true'] if args.pll_clock else [])),setup_commands=tuple(setup))
         for name,reference,count in [('main',main_trace,args.main_writes),('sound',sound_trace,args.sound_writes)]:
             expected=[tuple(int(word,16) for word in line.split()) for line in reference.read_text().splitlines()][:count]
             actual=[tuple(int(word,16) for word in line.split()) for line in (out/f'rtl_{name}_writes.txt').read_text().splitlines()]
@@ -85,17 +88,20 @@ def main():
                 raise SystemExit(f'{game} {name} mismatch #{index}: MAME={expected[index:index+1]}, HDL={actual[index:index+1]}')
         assert source_hashes=={name:sha(root/name) for name in sources}, 'Sources changed during simulation'
         result.update(set=game,main_writes_compared=args.main_writes,sound_writes_compared=args.sound_writes,
+            pll_clock=args.pll_clock, sdram_read_capture_adjust=int(args.pll_clock),
             artifact_variant=args.variant, maintenance_bus_owner='rtl/rabbitpunch_bus_owner.vhd' in sources,ram_initialization='production configuration; no RAM deposits',
             source_sha256=source_hashes,rom_image_sha256=hashlib.sha256(image).hexdigest(),
             mame_main_trace_sha256=sha(main_trace),mame_sound_trace_sha256=sha(sound_trace),
             rtl_main_trace_sha256=sha(out/'rtl_main_writes.txt'),rtl_sound_trace_sha256=sha(out/'rtl_sound_writes.txt'),
             log_sha256=sha(root/result['log']),reset_state_sha256=sha(state_file),
-            scope='Both real-ROM CPUs in production logical system and shared SDRAM; independent ordered startup write-prefix comparisons, configuration-initialized native RAM without simulator deposits; MAME-normalized sound CPU registers; 32-byte real header downloaded into otherwise directly preloaded image; logical video/raster events idle, no cycle alignment/full-image load/game audio/hardware timing proof')
+            scope=('Vendor PLL system/shifted chip clocks with production fractional CPU/audio enables; ' if args.pll_clock else 'Legacy synthetic same-phase clocks; ') + 'Both real-ROM CPUs in production logical system and shared SDRAM; independent ordered startup write-prefix comparisons, configuration-initialized native RAM without simulator deposits; MAME-normalized sound CPU registers; 32-byte real header downloaded into otherwise directly preloaded image; logical video/raster events idle, no cycle alignment/full-image load/game audio/hardware timing proof')
         results.append(result)
         (root/f'debug/{case}_checks.json').write_text(json.dumps([result],indent=2)+'\n')
         print(f'PASS {game}: {args.main_writes} main and {args.sound_writes} sound writes match MAME',flush=True)
     if not args.only:
         filename = 'system_boot_checks.json' if (args.main_writes, args.sound_writes) == (2000, 256) else f'system_boot_{args.main_writes}_{args.sound_writes}_checks.json'
+        if args.pll_clock:
+            filename = filename.replace('_checks.json', '_pll_checks.json')
         (root/'docs/reference'/(filename.replace('_checks.json', f'_{args.variant}_checks.json') if args.variant else filename)).write_text(json.dumps(results,indent=2)+'\n')
 
 

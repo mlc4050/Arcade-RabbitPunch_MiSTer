@@ -9,7 +9,7 @@ use ieee.numeric_std.all;
 -- supplies per-set defaults (Japan 0000, US 2000); gameplay reset preserves them.
 entity rabbitpunch_inputs is
     generic (
-        DIP_DEFAULT : unsigned(15 downto 0) := x"0000"
+        GU16_DIP_DEFAULT : unsigned(15 downto 0) := x"0000"
     );
     port (
         i_clk : in std_logic;
@@ -32,7 +32,7 @@ end entity;
 architecture rtl of rabbitpunch_inputs is
     signal su32_keys0, su32_keys1, su32_actions0, su32_actions1 : unsigned(31 downto 0);
     signal su2_service_coins : unsigned(1 downto 0);
-    signal su16_dips : unsigned(15 downto 0) := DIP_DEFAULT;
+    signal su16_dips : unsigned(15 downto 0) := GU16_DIP_DEFAULT;
     function player_port(vu32_actions : unsigned(31 downto 0)) return unsigned is
         variable vu8_result : unsigned(7 downto 0) := (others => '0');
     begin
@@ -72,7 +72,7 @@ begin
     begin
         if (rising_edge(i_clk)) then
             if (i_initialize = '1') then
-                su16_dips <= DIP_DEFAULT;
+                su16_dips <= GU16_DIP_DEFAULT;
             elsif (i_file_write = '1') then
                 if (iu16_file_index = 254) then
                     if (iu27_file_byte_address = 0) then

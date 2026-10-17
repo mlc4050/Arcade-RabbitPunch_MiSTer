@@ -34,7 +34,7 @@ architecture test of download_sdram_tb is
 begin
     s_clk <= not s_clk after 10417 ps;
     download : entity work.rabbitpunch_download
-        generic map (sint_IMAGE_BYTES => 16)
+        generic map (GINT_IMAGE_BYTES => 16)
         port map (
             i_clk => s_clk,
             i_download => s_download,

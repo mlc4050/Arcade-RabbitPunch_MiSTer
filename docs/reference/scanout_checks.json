@@ -1,0 +1,15 @@
+{
+  "case": "scanout",
+  "pass_marker": "SCANOUT_PASS",
+  "log": "debug\\baselines\\scanout\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_clock_enables.vhd": "3c2356fb1fd0d45bd58e710b9fd0262cd6aa40f7081da6c6ae4bd9f22fe11a10",
+    "rtl/rabbitpunch_raster.vhd": "b7b15034d670a33be035264c58c42a679a6cdb728d5a54b0f3f677ea3105b402",
+    "rtl/rabbitpunch_scanline_scheduler.vhd": "402fb9a0e2dd4baa65ea36999e0dd5fdd696cfbf08b6cce4115c91eeff6ac002",
+    "rtl/rabbitpunch_video_output.vhd": "80580cd64347ba4c26ebe392dfcada4df2702a198a87669f951983dc6983dc57",
+    "rtl/rabbitpunch_scanout.vhd": "2cfed3756f3ca8597c89fc82a4a6510f64b630bcf144fbdb14f96f3f35e361f0",
+    "sim/video/scanout_tb.vhd": "206027a86cc3db9b9bf688853f173c19ffbd99b8a705427772c839babe9859af"
+  },
+  "log_sha256": "2bc9b82f63dfbbb112260b84520490f9dff00830633aa42b79a7ba58c925e77e",
+  "scope": "Continuous provisional raster/scheduler/output with 2557-cycle row and four-edge RGB models; 124416 synthetic RGB checks, deliberate 4000-cycle deadline violation, live sync through readiness loss/recovery; no actual graphics, CPU, SDRAM or hardware output proof"
+}

@@ -9,6 +9,7 @@ use work.rabbitpunch_sdram_types.all;
 -- o_idle is high; keep it asserted until the final loader reply is consumed.
 -- Word data uses raw stream byte lanes: low byte is the even byte address.
 entity rabbitpunch_roms is
+    generic (GINT_SDRAM_READ_CAPTURE_ADJUST : natural range 0 to 2 := 0);
     port (
         i_clk : in std_logic;
         i_initialize : in std_logic;
@@ -169,6 +170,9 @@ begin
             iu64_backend_read_data => su64_memory_data(2)
         );
     memory_transport : entity work.rabbitpunch_sdram
+        generic map (
+            GINT_READ_CAPTURE_ADJUST => GINT_SDRAM_READ_CAPTURE_ADJUST
+        )
         port map (
             i_clk => i_clk,
             i_initialize => i_initialize,
@@ -207,7 +211,7 @@ begin
             end if;
             if (i_loader_request = '1') then
                 assert (o_loader_ready = '1') report "Loader requested while not ready" severity failure;
-                assert (to_integer(iu27_loader_byte_address) < ROM_IMAGE_SIZE and iu2_loader_bytes /= "00")
+                assert (to_integer(iu27_loader_byte_address) < CINT_ROM_IMAGE_SIZE and iu2_loader_bytes /= "00")
                     report "Loader request outside selected image or empty byte mask" severity failure;
                 s_loader_pending <= '1';
             end if;

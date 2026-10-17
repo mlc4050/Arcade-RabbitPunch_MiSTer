@@ -1,0 +1,17 @@
+{
+  "checks": [
+    "valid_registered_packet",
+    "wrong_tag",
+    "wrong_layout",
+    "wrong_width",
+    "wrong_binary",
+    "unknown_instance",
+    "missing_requested_instance",
+    "read_only_clear",
+    "read_only_set",
+    "read_only_pulse"
+  ],
+  "decoded_fields": 31,
+  "source_sha256": "c110e0a2b68da3ce2df0d5999f0de27f226961c15936f11d49714f8b6a8525d9",
+  "scope": "Python-hosted Tcl decoder with mocked enumeration/read/session commands; valid bit ordering and fail-closed identity/layout/width/selection/read-only controls; no JTAG tool or hardware connection"
+}

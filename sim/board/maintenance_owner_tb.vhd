@@ -126,7 +126,7 @@ begin
     su2_ram_bytes <= "11" when s_prefill = '1' else su2_backend_bytes;
     su16_ram_write_data <= x"A55A" when s_prefill = '1' else su16_backend_data;
     ram : entity work.rabbitpunch_ram16
-        generic map (sint_ADDRESS_BITS => 13)
+        generic map (GINT_ADDRESS_BITS => 13)
         port map (
             i_clk => s_clk,
             i_cpu_enable => s_prefill or s_backend_request,

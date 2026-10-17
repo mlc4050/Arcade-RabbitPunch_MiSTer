@@ -14,7 +14,7 @@ architecture test of board_memory_video_tb is
     signal su2_bytes : unsigned(1 downto 0) := "11";
     signal s_supported, s_response : std_logic;
     signal s_inspect : std_logic := '0';
-    signal su5_inspect_target : target_t := TARGET_NONE;
+    signal su5_inspect_target : target_t := CU5_TARGET_NONE;
     signal su15_inspect_address : unsigned(14 downto 0) := (others => '0');
     signal s_inspect_valid, s_sprite_valid, s_tile_valid : std_logic;
     signal su16_inspect_data : unsigned(15 downto 0);
@@ -184,7 +184,7 @@ begin
         -- Inspection borrows a paused video bank and returns raw stored bytes.
         wait until falling_edge(s_clk);
         s_inspect <= '1';
-        su5_inspect_target <= TARGET_WORKRAM;
+        su5_inspect_target <= CU5_TARGET_WORKRAM;
         su15_inspect_address <= to_unsigned(3, 15);
         s_request <= '1';
         s_write <= '1';

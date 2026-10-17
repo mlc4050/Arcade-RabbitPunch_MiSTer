@@ -59,7 +59,9 @@ user's direction. Physical measurements can replace the provisional parameters
 without changing the render/memory architecture.
 
 The standalone VHDL clock-enable generator and adjustable raster are implemented
-but not yet connected to the production platform. Enable tests check 175065
+and connected to the production platform through rabbitpunch_machine. The
+MiSTer framework boundary now points to that machine; its full implementation
+and physical output remain unverified. Enable tests check 175065
 rational-cadence/reset conditions; raster tests cover two complete default frames
 (221184 beam pixels), a small odd-sized positive-sync case, sparse enables,
 coordinate offsets and reset while stopped. See reference/raster_checks.json.
@@ -71,7 +73,7 @@ under debug/fit_archive/raster_d23887d/. No playable RBF exists.
 The descriptive VHDL PLL wrapper now requests a 50 MHz input and two
 46.666667 MHz outputs. System logic uses output 0; output 1 provisionally shifts
 by 10714 ps (half a period) for the external SDRAM clock only. This is an initial
-controller bring-up choice, adjustable through SDRAM_PHASE_SHIFT. The installed
+controller bring-up choice, adjustable through GSTR_SDRAM_PHASE_SHIFT. The installed
 vendor PLL model passes lock/relock, 448 individual period/phase observations and
 two 224-period average-frequency checks. Its documented 10 ps synchronization
 drift is allowed per edge; the 4.8 us average span must remain within 20 ps.
@@ -93,3 +95,15 @@ same-edge completion is eligible, and initialization flushes queued/active work.
 Only ownership/tags are added; tile/sprite pixels remain in the existing two
 banks. See reference/scanline_scheduler_checks.json. Continuous real-renderer
 scanout and CPU/audio contention tests follow production wiring.
+
+The continuous scanout controller passes 124416 synthetic RGB checks, including
+an intentionally late row and readiness loss/recovery without stopping sync.
+The connected machine passes downloaded 68000 diagnostic programs with external
+fractional phases and continuous pixel cadence through loading, pause, reset,
+replacement and partial-image recovery. That short test ends before the first
+vertical interrupt/render window; it does not prove a complete executing frame.
+A separate static-MAME capture test drives the real graphics/ROM path at continuous
+raster cadence; Rabbit Punch attract passes all 62208 pixels with zero differences
+and no underflow. Maximum render cost is 2576 of 3024 system clocks per line.
+The combined machine fit passes all 48 MHz timing/coverage gates (+2.077 ns setup,
++0.100 ns hold); the clocked wrapper also passes vendor-model CPU/load tests. See MACHINE_INTEGRATION.md.

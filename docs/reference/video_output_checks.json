@@ -3,9 +3,9 @@
   "pass_marker": "VIDEO_OUTPUT_PASS",
   "log": "debug\\baselines\\video_output\\result.log",
   "source_sha256": {
-    "rtl/rabbitpunch_video_output.vhd": "17394dde74be3f64ae3611b83236ad2811f66bda7f895b84a163dd6572c65b7c",
-    "sim/video/video_output_tb.vhd": "332952a45a373f62ebbc0dadd9a099405c8d8f2fc7e0b28fb533161205671145"
+    "rtl/rabbitpunch_video_output.vhd": "d5ba7a9de6c1fabd9a8e11d8c5faaa2aeb7845d5c9c47256feb372c63e60e028",
+    "sim/video/video_output_tb.vhd": "45fceaaf04d611f295c3ce9beac73d6626fe8b103c7594ecfceeb97d665ec2a8"
   },
-  "log_sha256": "c7e603f6be6dd9ec2abcd0f1d50c1044f3e2d0a4b419a380170d1a3eeb215834",
-  "scope": "Fixed five-system-clock output delay against a four-edge behavioral RGB source: sparse pixel cadence, sync/blank metadata, missing response, mismatched coordinates, source error, not-ready black fallback, sticky fault and reset flush; no physical raster or native video latency proof"
+  "log_sha256": "debe823e5482dfc311b22b815cbc4cded3297f22fbe1ab7464aa227a2160df78",
+  "scope": "Fixed five-system-clock output delay against a four-edge behavioral RGB source: sparse pixel cadence, sync/blank metadata, missing response, mismatched coordinates, source error, not-ready black fallback, sticky fault, diagnostic-only clear with running sync, and reset flush; no physical raster or native video latency proof"
 }

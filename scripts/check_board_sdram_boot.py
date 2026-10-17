@@ -59,7 +59,7 @@ def main():
             f"mem load -filltype value -filldata 0 -fillradix hex /board_sdram_boot_tb/board/board_video/memory/{bank}/physical_ram/MEMORY/m_mem_data_{port}"
             for bank in ("bitmap", "sprites", "tiles", "palette", "work_ram") for port in ("a", "b")]
         result = run_case(case, sources, "board_sdram_boot_tb", "100 ms", "BOARD_SDRAM_BOOT_PASS",
-            sim_args=(f"-gWRITE_LIMIT={args.writes}", f"-gDIP_DEFAULT={dips}"), wall_timeout=1800,
+            sim_args=(f"-gGINT_WRITE_LIMIT={args.writes}", f"-gGINT_DIP_DEFAULT={dips}"), wall_timeout=1800,
             setup_commands=tuple(ram_seed_commands) + (f"mem load -format mti -infile {{{memory_file.as_posix()}}} /board_sdram_boot_tb/chip/mem",))
         actual = [tuple(int(word, 16) for word in line.split()) for line in (directory / "rtl_writes.txt").read_text().splitlines()]
         if actual != expected:

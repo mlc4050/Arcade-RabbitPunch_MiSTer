@@ -11,6 +11,7 @@ end entity;
 architecture test of video_output_tb is
     signal s_clk : std_logic := '0';
     signal s_reset : std_logic := '1';
+    signal s_clear_underflow : std_logic := '0';
     signal s_enable, s_active, s_hsync, s_vsync, s_hblank, s_vblank : std_logic := '0';
     signal s_request, s_ready, s_valid, s_error : std_logic := '0';
     signal su9_x, su9_rgb_x, su9_output_x : unsigned(8 downto 0) := (others => '0');
@@ -31,6 +32,7 @@ begin
         port map (
             i_clk => s_clk,
             i_reset => s_reset,
+            i_clear_underflow => s_clear_underflow,
             i_pixel_enable => s_enable,
             i_active => s_active,
             i_hsync => s_hsync,
@@ -182,6 +184,26 @@ begin
                 end if;
             end loop;
         end loop;
+        wait until falling_edge(s_clk);
+        s_clear_underflow <= '1';
+        s_enable <= '1';
+        s_active <= '0';
+        s_hsync <= '1';
+        s_vsync <= '0';
+        s_hblank <= '1';
+        s_vblank <= '0';
+        wait until rising_edge(s_clk);
+        wait for 1 ns;
+        assert (s_underflow = '0') report "Fault-only clear did not clear sticky underflow" severity failure;
+        wait until falling_edge(s_clk);
+        s_clear_underflow <= '0';
+        for vint_cycle in 1 to 8 loop
+            wait until rising_edge(s_clk);
+            wait for 1 ns;
+        end loop;
+        assert (s_output_enable = '1' and s_output_hsync = '1' and s_output_vsync = '0' and
+            s_output_hblank = '1' and s_output_vblank = '0' and s_underflow = '0')
+            report "Fault clear disturbed the running raster metadata" severity failure;
         reset_output;
         report "VIDEO_OUTPUT_PASS slots=420 fixed_delay=5 sync_blanking=checked missing_tag_error_backpressure=checked reset_flush=checked";
         finish;

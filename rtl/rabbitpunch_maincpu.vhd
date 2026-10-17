@@ -2,14 +2,17 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
--- 48 MHz evaluation clock: alternating phases every three clocks give 8 MHz.
+-- Legacy 48 MHz evaluation uses alternating phases every three clocks.
+-- Production may select a fractional phase pulse from the system enable generator.
 -- Memory latency becomes real 68000 wait states; phases are never accelerated.
 entity rabbitpunch_maincpu is
     generic (
-        sint_PHASE_DIVIDER : positive := 3
+        GINT_PHASE_DIVIDER : positive := 3;
+        GBOOL_EXTERNAL_PHASE_ENABLE : boolean := false
     );
     port (
         i_clk : in std_logic;
+        i_phase_enable : in std_logic := '0';
         i_reset : in std_logic;
         i_pause : in std_logic;
         i_interrupt_level1 : in std_logic := '0';
@@ -26,9 +29,9 @@ entity rabbitpunch_maincpu is
 end entity;
 
 architecture rtl of rabbitpunch_maincpu is
-    signal sint_phase_count : natural range 0 to sint_PHASE_DIVIDER-1 := 0;
+    signal sint_phase_count : natural range 0 to GINT_PHASE_DIVIDER-1 := 0;
     signal s_phase : std_logic := '0';
-    signal s_enable_phase1, s_enable_phase2, s_frozen : std_logic;
+    signal s_enable_phase1, s_enable_phase2, s_phase_advance, s_frozen : std_logic;
     signal s_address_strobe_n, s_upper_byte_strobe_n, s_lower_byte_strobe_n, s_read, s_transfer_acknowledge_n : std_logic;
     signal su23_word_address : unsigned(23 downto 1);
     signal su16_read_data, su16_write_data : unsigned(15 downto 0);
@@ -56,16 +59,24 @@ begin
     -- Finish the current bus cycle before stopping. Backend replies keep running.
     s_frozen <= '1' when i_pause = '1' and s_address_strobe_n = '1' and i_reset = '0' else '0';
     o_paused <= s_frozen;
-    s_enable_phase1 <= '1' when sint_phase_count = sint_PHASE_DIVIDER-1 and s_phase = '0' and s_frozen = '0' else '0';
-    s_enable_phase2 <= '1' when sint_phase_count = sint_PHASE_DIVIDER-1 and s_phase = '1' and s_frozen = '0' else '0';
+    s_phase_advance <= i_phase_enable when GBOOL_EXTERNAL_PHASE_ENABLE else
+        '1' when sint_phase_count = GINT_PHASE_DIVIDER - 1 else '0';
+    s_enable_phase1 <= '1' when s_phase_advance = '1' and s_phase = '0' and s_frozen = '0' else '0';
+    s_enable_phase2 <= '1' when s_phase_advance = '1' and s_phase = '1' and s_frozen = '0' else '0';
     process(i_clk)
     begin
         if (rising_edge(i_clk) and s_frozen = '0') then
-            if (sint_phase_count = sint_PHASE_DIVIDER-1) then
-                sint_phase_count <= 0;
-                s_phase <= not s_phase;
+            if (GBOOL_EXTERNAL_PHASE_ENABLE) then
+                if (i_phase_enable = '1') then
+                    s_phase <= not s_phase;
+                end if;
             else
-                sint_phase_count <= sint_phase_count + 1;
+                if (sint_phase_count = GINT_PHASE_DIVIDER-1) then
+                    sint_phase_count <= 0;
+                    s_phase <= not s_phase;
+                else
+                    sint_phase_count <= sint_phase_count + 1;
+                end if;
             end if;
         end if;
     end process;

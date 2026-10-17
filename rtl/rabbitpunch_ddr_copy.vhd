@@ -10,7 +10,7 @@ use work.rabbitpunch_layout.all;
 -- cancel an in-flight DDR read; game reset does not connect to this input.
 entity rabbitpunch_ddr_copy is
     generic (
-        sint_IMAGE_BYTES : positive := ROM_IMAGE_SIZE
+        GINT_IMAGE_BYTES : positive := CINT_ROM_IMAGE_SIZE
     );
     port (
         i_clk : in std_logic;
@@ -36,7 +36,7 @@ end entity;
 
 architecture rtl of rabbitpunch_ddr_copy is
     component rom_loader is
-        generic (LENGTH : integer := ROM_IMAGE_SIZE);
+        generic (LENGTH : integer := CINT_ROM_IMAGE_SIZE);
         port (
             clk : in std_logic;
             reset : in std_logic;
@@ -86,13 +86,13 @@ architecture rtl of rabbitpunch_ddr_copy is
     signal su25_native_word_address : unsigned(24 downto 0);
     signal su16_native_word_data : unsigned(15 downto 0);
 begin
-    assert (sint_IMAGE_BYTES mod 8 = 0 and sint_IMAGE_BYTES <= ROM_IMAGE_SIZE and sint_IMAGE_BYTES <= 16#2000000#)
+    assert (GINT_IMAGE_BYTES mod 8 = 0 and GINT_IMAGE_BYTES <= CINT_ROM_IMAGE_SIZE and GINT_IMAGE_BYTES <= 16#2000000#)
         report "DDR copy image must be eight-byte aligned and fit the unchanged donor address width" severity failure;
     s_active <= s_native_active or s_word_pending;
     o_active <= s_active;
     o_word_valid <= s_word_pending;
     copy_engine : rom_loader
-        generic map (LENGTH => sint_IMAGE_BYTES)
+        generic map (LENGTH => GINT_IMAGE_BYTES)
         port map (
             clk => i_clk,
             reset => i_initialize,

@@ -92,20 +92,20 @@ begin
                     o_response_valid <= '1';
                     ou16_response_data <= (others => '1');
                     case su5_target is
-                        when TARGET_P1 => ou16_response_data <= iu8_service & iu8_player1;
-                        when TARGET_P2 => ou16_response_data <= iu8_service & iu8_player2;
-                        when TARGET_DSW => ou16_response_data <= iu16_dips;
-                        when TARGET_SOUND_PENDING =>
+                        when CU5_TARGET_P1 => ou16_response_data <= iu8_service & iu8_player1;
+                        when CU5_TARGET_P2 => ou16_response_data <= iu8_service & iu8_player2;
+                        when CU5_TARGET_DSW => ou16_response_data <= iu16_dips;
+                        when CU5_TARGET_SOUND_PENDING =>
                             ou16_response_data <= (others => '0');
                             ou16_response_data(0) <= s_sound_pending;
-                        when TARGET_VIDEO_FLAGS =>
+                        when CU5_TARGET_VIDEO_FLAGS =>
                             if (iu2_request_bytes(1) = '1') then
                                 ou16_video_flags(15 downto 8) <= iu16_request_data(15 downto 8);
                             end if;
                             if (iu2_request_bytes(0) = '1') then
                                 ou16_video_flags(7 downto 0) <= iu16_request_data(7 downto 0);
                             end if;
-                        when TARGET_SCROLL =>
+                        when CU5_TARGET_SCROLL =>
                             case iu24_request_address(2 downto 1) is
                                 when "00" => ou9_scroll0_y <= iu16_request_data(8 downto 0);
                                 when "01" => ou9_scroll0_x <= iu16_request_data(8 downto 0);
@@ -113,10 +113,10 @@ begin
                                 when "11" => ou9_scroll1_x <= iu16_request_data(8 downto 0);
                                 when others => null;
                             end case;
-                        when TARGET_SPRITE_COUNT => ou6_sprite_count <= iu16_request_data(5 downto 0);
-                        when TARGET_SPRITE_PRIORITY => ou6_sprite_priority <= iu16_request_data(5 downto 0);
-                        when TARGET_GGA_SELECT => su4_gga_selected <= iu16_request_data(3 downto 0);
-                        when TARGET_GGA_DATA =>
+                        when CU5_TARGET_SPRITE_COUNT => ou6_sprite_count <= iu16_request_data(5 downto 0);
+                        when CU5_TARGET_SPRITE_PRIORITY => ou6_sprite_priority <= iu16_request_data(5 downto 0);
+                        when CU5_TARGET_GGA_SELECT => su4_gga_selected <= iu16_request_data(3 downto 0);
+                        when CU5_TARGET_GGA_DATA =>
                             su8_gga(to_integer(su4_gga_selected)) <= iu16_request_data(7 downto 0);
                             o_gga_write <= '1';
                             ou4_gga_write_address <= su4_gga_selected;
@@ -129,7 +129,7 @@ begin
                                     o_irq_twice_per_frame <= '0';
                                 end if;
                             end if;
-                        when TARGET_SOUND_COMMAND =>
+                        when CU5_TARGET_SOUND_COMMAND =>
                             ou8_sound_command <= iu16_request_data(7 downto 0);
                             s_sound_pending <= '1';
                             o_sound_command_write <= '1';

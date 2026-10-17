@@ -16,7 +16,7 @@ def main():
     results = []
     for wrapped in (False, True):
         result = run_case("jt51_wrapper" if wrapped else "jt51_baseline", sources, "jt51_baseline_tb", "1 ms",
-            "JT51_BASELINE_PASS", sim_args=(f"-gUSE_WRAPPER={'true' if wrapped else 'false'}",), wall_timeout=120)
+            "JT51_BASELINE_PASS", sim_args=(f"-gGBOOL_USE_WRAPPER={'true' if wrapped else 'false'}",), wall_timeout=120)
         result.update(source_sha256={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources},
             log_sha256=hashlib.sha256((root / result["log"]).read_bytes()).hexdigest(), wrapper=wrapped,
             scope="Unchanged JT51 baseline and descriptive VHDL wrapper: reset flags/explicitly muted PCM, 4 MHz enables, sample cadence, timer A/B flags and IRQ clearing; no keyed waveform/game audio or MAME trace comparison")

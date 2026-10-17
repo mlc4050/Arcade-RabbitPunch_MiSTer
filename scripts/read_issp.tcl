@@ -1,25 +1,55 @@
 # Read the core's debug probes over JTAG (In-System Sources and Probes).
 #
-#   python scripts/read_issp.py [instance] [clear] [set N] [pulse N]
+#   python scripts/read_issp.py RPUN
 #
 # SignalTap acquisition is GUI-only in Quartus Prime Lite 17.0 -- there are no
 # *signaltap* Tcl commands -- so ISSP is what a headless workflow can drive.
 #
 # The probe bus layout is defined where the bus is BUILT (the issp instance in
-# the top-level .sv), not here. Keep the field tables in step with it: a
+# rtl/rabbitpunch_debug.vhd), not here. Keep the field tables in step with it: a
 # silently shifted field decodes as plausible nonsense rather than as an error.
 #
-# Counters typically SATURATE and count per-cycle events, so they pin almost
-# immediately: `clear` first and read again for a rate.
+# Counters saturate at 32 bits and survive gameplay resets. Read twice for
+# activity deltas; configuration reload is the only reset. No source actions.
 
 # --- core-specific: edit for this core -------------------------------------
 # One table per ISSP instance id, {name lo hi format}; format is dec, sdec
 # (signed 16), hex or bit. Bit numbers index the probe bus as the RTL
 # concatenates it. Add an entry to the `switch` further down for each table.
-# By convention source bit 0 pulsed is the counter clear.
-set fields_F {
-    {frames           0  15 dec}
-    {pll_locked     127 127 bit}
+# This core exposes no source actions.
+# RPUN layout version 1: registered read-only packet, no counter-clear source.
+set fields_RPUN {
+    {core_tag              0  31 hex}
+    {build_id             32  63 hex}
+    {frames               64  95 dec}
+    {cpu_requests         96 127 dec}
+    {cpu_writes          128 159 dec}
+    {sound_requests      160 191 dec}
+    {visible_pixels      192 223 dec}
+    {last_write_address  224 247 hex}
+    {last_write_bytes    248 249 hex}
+    {last_write_data     256 271 hex}
+    {last_sound_address  288 303 hex}
+    {last_sound_data     304 311 hex}
+    {last_sound_write    312 312 bit}
+    {last_cpu_address    320 343 hex}
+    {last_cpu_write      344 344 bit}
+    {beam_x              352 360 dec}
+    {beam_y              361 369 dec}
+    {pll_locked          384 384 bit}
+    {ready               385 385 bit}
+    {loading             386 386 bit}
+    {downloading         387 387 bit}
+    {error               388 388 bit}
+    {underflow           389 389 bit}
+    {armed               390 390 bit}
+    {paused              391 391 bit}
+    {host_download       392 392 bit}
+    {adpcm_busy          393 393 bit}
+    {framework_reset     394 394 bit}
+    {audio_samples       416 447 dec}
+    {underflow_events    448 479 dec}
+    {layout_version      480 511 dec}
 }
 # ---------------------------------------------------------------------------
 
@@ -77,15 +107,22 @@ foreach a $argv {
 set idx [lindex [lindex $insts 0] 0]
 set inst_id [lindex [lindex $insts 0] 3]
 if {$want ne ""} {
+    set found 0
     foreach i $insts {
-        if {[lindex $i 3] eq $want} { set idx [lindex $i 0]; set inst_id $want }
+        if {[lindex $i 3] eq $want} { set idx [lindex $i 0]; set inst_id $want; set found 1 }
     }
+}
+
+if {$want ne "" && !$found} { puts "Requested instance '$want' was not found"; exit 1 }
+if {$do_clear || $set_val >= 0 || $pulse_val >= 0} {
+    puts "RPUN probes are read-only; source writes and counter clearing are unsupported"
+    exit 1
 }
 
 # The field table belongs to the INSTANCE. An unrecognised id stops rather
 # than guesses.
 switch -- $inst_id {
-    F       { set fields $fields_F }
+    RPUN    { set fields $fields_RPUN }
     default {
         puts "instance id '$inst_id' has no field table -- add one before reading it"
         exit 1
@@ -95,6 +132,11 @@ puts "decoding instance $inst_id"
 
 start_insystem_source_probe -device_name $dev -hardware_name $hw
 set raw [read_probe_data -instance_index $idx]
+if {![regexp {^[01]+$} $raw] || [string length $raw] != 512 || [bits_to_int $raw 0 31] != 0x5250554E || [bits_to_int $raw 480 511] != 1} {
+    end_insystem_source_probe
+    puts "Probe identity, width or layout mismatch; refusing to decode"
+    exit 1
+}
 puts "raw ([string length $raw] bits): $raw"
 puts ""
 
@@ -107,20 +149,6 @@ foreach f $fields {
         bit  { puts [format "  %-16s %s"     $name [expr {$v ? "yes" : "no"}]] }
         default { puts [format "  %-16s %d"  $name $v] }
     }
-}
-
-# write_source_data takes a BINARY STRING unless -value_in_hex is given; a
-# decimal "8" is silently rejected. Every write goes through this, in hex.
-proc write_src {idx v} { write_source_data -instance_index $idx -value [format %X $v] -value_in_hex }
-if {$set_val >= 0}   { write_src $idx $set_val;   puts "source set to $set_val (reads back 0x[read_source_data -instance_index $idx -value_in_hex])" }
-if {$pulse_val >= 0} { write_src $idx $pulse_val; write_src $idx 0; puts "source pulsed $pulse_val" }
-
-if {$do_clear} {
-    # Source bit 0 is the counter clear, by convention; the counters are
-    # deliberately not reset by the core's own reset.
-    write_src $idx 1
-    write_src $idx 0
-    puts "\ncounters cleared"
 }
 
 end_insystem_source_probe

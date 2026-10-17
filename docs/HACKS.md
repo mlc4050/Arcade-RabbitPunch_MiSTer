@@ -62,3 +62,13 @@ configuration-time contents, with transparent-15 packed bitmap words and zero
 ordinary RAM matching MAME. No game-reset clear sweep is introduced.
 RAM_POWERUP.md and reference/ram_powerup_checks.json record the contract;
 physical board startup verification remains open.
+
+## First physical-shell prototype
+
+The framework boundary is being connected for first hardware bring-up. It exposes
+the native 288x216 raster and signed mono audio. Forced scandoubling, CRT Adjust,
+HDMI rotation/flip and expanded video/audio OSD options are still unconnected;
+this is not the final standard-feature set. The framework HDMI scaler remains
+available. DDR currently has only the load-time copier as a client; introducing a
+rotator requires an ownership mux and contention verification before use. No game
+ROM fetch uses DDR during play. Physical output and audible game audio are untested.
