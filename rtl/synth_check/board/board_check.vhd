@@ -10,6 +10,18 @@ entity board_check is
         i_reset : in std_logic;
         i_pause : in std_logic;
         o_paused : out std_logic;
+        i_maintenance_access : in std_logic := '0';
+        i_maintenance_valid : in std_logic := '0';
+        i_maintenance_write : in std_logic := '0';
+        iu14_maintenance_byte_address : in unsigned(13 downto 0) := (others => '0');
+        iu8_maintenance_data : in unsigned(7 downto 0) := (others => '0');
+        o_maintenance_ready : out std_logic;
+        o_maintenance_response_valid : out std_logic;
+        ou8_maintenance_response_data : out unsigned(7 downto 0);
+        o_maintenance_pause : out std_logic;
+        i_maintenance_permitted : in std_logic := '1';
+        o_transport_idle : out std_logic;
+
         i_vblank_start : in std_logic;
         i_half_frame : in std_logic;
         i_line_valid : in std_logic;
@@ -145,10 +157,32 @@ architecture evaluation of board_check is
     signal su24_boundary_ou24_cpu_request_address : unsigned(23 downto 0) := (others => '0');
     signal su16_boundary_ou16_cpu_request_data : unsigned(15 downto 0) := (others => '0');
     signal su2_boundary_ou2_cpu_request_bytes : unsigned(1 downto 0) := (others => '0');
+    signal s_boundary_i_maintenance_access : std_logic := '0';
+    signal s_boundary_i_maintenance_valid : std_logic := '0';
+    signal s_boundary_i_maintenance_write : std_logic := '0';
+    signal su14_boundary_iu14_maintenance_byte_address : unsigned(13 downto 0) := (others => '0');
+    signal su8_boundary_iu8_maintenance_data : unsigned(7 downto 0) := (others => '0');
+    signal s_boundary_o_maintenance_ready : std_logic := '0';
+    signal s_boundary_o_maintenance_response_valid : std_logic := '0';
+    signal su8_boundary_ou8_maintenance_response_data : unsigned(7 downto 0) := (others => '0');
+    signal s_boundary_o_maintenance_pause : std_logic := '0';
+    signal s_boundary_i_maintenance_permitted : std_logic := '0';
+    signal s_boundary_o_transport_idle : std_logic := '0';
 begin
     boundary : process(i_clk)
     begin
         if (rising_edge(i_clk)) then
+            s_boundary_i_maintenance_access <= i_maintenance_access;
+            s_boundary_i_maintenance_valid <= i_maintenance_valid;
+            s_boundary_i_maintenance_write <= i_maintenance_write;
+            su14_boundary_iu14_maintenance_byte_address <= iu14_maintenance_byte_address;
+            su8_boundary_iu8_maintenance_data <= iu8_maintenance_data;
+            o_maintenance_ready <= s_boundary_o_maintenance_ready;
+            o_maintenance_response_valid <= s_boundary_o_maintenance_response_valid;
+            ou8_maintenance_response_data <= su8_boundary_ou8_maintenance_response_data;
+            o_maintenance_pause <= s_boundary_o_maintenance_pause;
+            s_boundary_i_maintenance_permitted <= i_maintenance_permitted;
+            o_transport_idle <= s_boundary_o_transport_idle;
             s_boundary_i_initialize <= i_initialize;
             s_boundary_i_reset <= i_reset;
             s_boundary_i_pause <= i_pause;
@@ -225,6 +259,17 @@ begin
             i_reset => s_boundary_i_reset,
             i_pause => s_boundary_i_pause,
             o_paused => s_boundary_o_paused,
+            i_maintenance_access => s_boundary_i_maintenance_access,
+            i_maintenance_valid => s_boundary_i_maintenance_valid,
+            i_maintenance_write => s_boundary_i_maintenance_write,
+            iu14_maintenance_byte_address => su14_boundary_iu14_maintenance_byte_address,
+            iu8_maintenance_data => su8_boundary_iu8_maintenance_data,
+            o_maintenance_ready => s_boundary_o_maintenance_ready,
+            o_maintenance_response_valid => s_boundary_o_maintenance_response_valid,
+            ou8_maintenance_response_data => su8_boundary_ou8_maintenance_response_data,
+            o_maintenance_pause => s_boundary_o_maintenance_pause,
+            i_maintenance_permitted => s_boundary_i_maintenance_permitted,
+            o_transport_idle => s_boundary_o_transport_idle,
             i_vblank_start => s_boundary_i_vblank_start,
             i_half_frame => s_boundary_i_half_frame,
             i_line_valid => s_boundary_i_line_valid,

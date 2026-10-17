@@ -4,6 +4,7 @@
 import argparse
 import hashlib
 import json
+import re
 import struct
 import xml.etree.ElementTree as ET
 from coretools import core_root
@@ -20,10 +21,13 @@ def main():
     parser.add_argument('--only', choices=('rabiolep', 'rpunch'))
     parser.add_argument('--main-writes', type=int, default=2000)
     parser.add_argument('--sound-writes', type=int, default=256)
+    parser.add_argument('--variant', default='', help='Optional artifact label to retain distinct source-generation runs')
     parser.add_argument('--wall-timeout', type=int, default=900)
     args = parser.parse_args()
     if not 1 <= args.main_writes <= 10000 or not 1 <= args.sound_writes <= 4096:
         parser.error('Limits exceed the verified MAME startup prefixes')
+    if args.variant and not re.fullmatch(r'[a-z0-9_]+', args.variant):
+        parser.error('Variant must use lowercase letters, digits or underscores')
     root = core_root()
     sources = system_sources()[:-1]+['sim/board/system_boot_tb.vhd']
     source_hashes = {name: sha(root/name) for name in sources}
@@ -41,7 +45,7 @@ def main():
         sound_trace=root/sound_refs[game]['trace']
         assert sha(main_trace)==main_refs[game]['mame_trace_sha256']
         assert sha(sound_trace)==sound_refs[game]['trace_sha256']
-        case=f'system_boot_{game}_{args.main_writes}_{args.sound_writes}'
+        case=f'system_boot_{game}_{args.main_writes}_{args.sound_writes}' + (f'_{args.variant}' if args.variant else '')
         out=root/'debug/baselines'/case
         out.mkdir(parents=True,exist_ok=True)
         memory=out/'rom_words.mti'
@@ -81,6 +85,7 @@ def main():
                 raise SystemExit(f'{game} {name} mismatch #{index}: MAME={expected[index:index+1]}, HDL={actual[index:index+1]}')
         assert source_hashes=={name:sha(root/name) for name in sources}, 'Sources changed during simulation'
         result.update(set=game,main_writes_compared=args.main_writes,sound_writes_compared=args.sound_writes,
+            artifact_variant=args.variant, maintenance_bus_owner='rtl/rabbitpunch_bus_owner.vhd' in sources,
             source_sha256=source_hashes,rom_image_sha256=hashlib.sha256(image).hexdigest(),
             mame_main_trace_sha256=sha(main_trace),mame_sound_trace_sha256=sha(sound_trace),
             rtl_main_trace_sha256=sha(out/'rtl_main_writes.txt'),rtl_sound_trace_sha256=sha(out/'rtl_sound_writes.txt'),
@@ -91,7 +96,7 @@ def main():
         print(f'PASS {game}: {args.main_writes} main and {args.sound_writes} sound writes match MAME',flush=True)
     if not args.only:
         filename = 'system_boot_checks.json' if (args.main_writes, args.sound_writes) == (2000, 256) else f'system_boot_{args.main_writes}_{args.sound_writes}_checks.json'
-        (root/'docs/reference'/filename).write_text(json.dumps(results,indent=2)+'\n')
+        (root/'docs/reference'/(filename.replace('_checks.json', f'_{args.variant}_checks.json') if args.variant else filename)).write_text(json.dumps(results,indent=2)+'\n')
 
 
 if __name__=='__main__':

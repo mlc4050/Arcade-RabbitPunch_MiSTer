@@ -94,3 +94,14 @@ and 4096 sound-CPU ordered writes against MAME through shared SDRAM
 sound-register seeds, direct preloaded ROM plus 32-byte real header download,
 and idle logical video/raster retain the bounded scope of the earlier test.
 Rabbit Punch's equivalent run is still in progress; this is not full game boot.
+
+
+Production maintenance now uses the ordinary work-RAM CPU port after both CPU
+adapters confirm pause and the main bus drains. The CPU path bypasses the owner
+when idle, retaining its request/reply edges. Full synthetic CPU tests consume
+restored bytes, preserve user pause, drain reset debt and replace images on
+queued I/O/ROM boundaries. Audio tests verify maintenance write/read during
+continued sample playback. Platform and native HPS command tests also pass.
+See MAINTENANCE.md and reference/system_maintenance_checks.json. Physical timing
+and HPS persistence remain separate; the new owner needs its own implementation
+and real-ROM prefix verification before those are claimed for this revision.

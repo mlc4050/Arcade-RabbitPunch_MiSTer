@@ -4,9 +4,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
--- One queued pulse per client, one physical transaction. A late already-issued
--- CPU request wins ahead of maintenance, even when both arrive together.
--- No gameplay reset: all accepted requests and replies retain their owner.
+-- One queued pulse per client and one physical transaction. The CPU has
+-- priority when selecting the next owner; its idle request keeps the original
+-- edge. No gameplay reset cancels an accepted request or its reply owner.
 entity rabbitpunch_bus_owner is
     port (
         i_clk : in std_logic;
@@ -47,7 +47,10 @@ architecture rtl of rabbitpunch_bus_owner is
     signal su24_address : t_addresses;
     signal su16_data : t_data;
     signal su2_bytes : t_bytes;
-    signal s_owner : std_logic := '0';
+    signal s_owner, s_issue, s_issue_owner, s_direct_cpu, s_selected_write, s_held_write : std_logic := '0';
+    signal su24_selected_address, su24_held_address : unsigned(23 downto 0);
+    signal su16_selected_data, su16_held_data : unsigned(15 downto 0);
+    signal su2_selected_bytes, su2_held_bytes : unsigned(1 downto 0);
 begin
     o_idle <= '1' when styp_state = STATE_IDLE and su2_pending = "00" and
         i_cpu_request = '0' and i_maintenance_request = '0' else '0';
@@ -57,21 +60,61 @@ begin
     o_maintenance_response_valid <= i_backend_response_valid when styp_state = STATE_WAITING and s_owner = '1' else '0';
     ou16_cpu_response_data <= iu16_backend_response_data;
     ou16_maintenance_response_data <= iu16_backend_response_data;
+    o_backend_request <= s_issue;
+    o_backend_write <= s_selected_write;
+    ou24_backend_address <= su24_selected_address;
+    ou16_backend_data <= su16_selected_data;
+    ou2_backend_bytes <= su2_selected_bytes;
+    -- Preserve the original CPU request edge when no transaction is active.
+    -- Only contended requests need packet storage.
+    select_request : process(all)
+    begin
+        s_issue <= '0';
+        s_issue_owner <= '0';
+        s_direct_cpu <= '0';
+        s_selected_write <= s_held_write;
+        su24_selected_address <= su24_held_address;
+        su16_selected_data <= su16_held_data;
+        su2_selected_bytes <= su2_held_bytes;
+        if (styp_state = STATE_IDLE) then
+            if (su2_pending(0) = '1') then
+                s_issue <= '1';
+                s_selected_write <= su2_write(0);
+                su24_selected_address <= su24_address(0);
+                su16_selected_data <= su16_data(0);
+                su2_selected_bytes <= su2_bytes(0);
+            elsif (i_cpu_request = '1') then
+                s_issue <= '1';
+                s_direct_cpu <= '1';
+                s_selected_write <= i_cpu_write;
+                su24_selected_address <= iu24_cpu_address;
+                su16_selected_data <= iu16_cpu_data;
+                su2_selected_bytes <= iu2_cpu_bytes;
+            elsif (su2_pending(1) = '1' and i_maintenance_allowed = '1') then
+                s_issue <= '1';
+                s_issue_owner <= '1';
+                s_selected_write <= su2_write(1);
+                su24_selected_address <= su24_address(1);
+                su16_selected_data <= su16_data(1);
+                su2_selected_bytes <= su2_bytes(1);
+            end if;
+        end if;
+    end process;
     process(i_clk)
-        variable vint_owner : integer range -1 to 1;
     begin
         if (rising_edge(i_clk)) then
-            o_backend_request <= '0';
             assert (i_backend_response_valid /= '1' or styp_state = STATE_WAITING)
                 report "Shared bus received an unowned reply" severity failure;
             if (i_cpu_request = '1') then
                 assert (su2_pending(0) = '0' and not (styp_state = STATE_WAITING and s_owner = '0'))
                     report "CPU exceeded one outstanding shared-bus credit" severity failure;
-                su2_pending(0) <= '1';
-                su2_write(0) <= i_cpu_write;
-                su24_address(0) <= iu24_cpu_address;
-                su16_data(0) <= iu16_cpu_data;
-                su2_bytes(0) <= iu2_cpu_bytes;
+                if (s_direct_cpu = '0') then
+                    su2_pending(0) <= '1';
+                    su2_write(0) <= i_cpu_write;
+                    su24_address(0) <= iu24_cpu_address;
+                    su16_data(0) <= iu16_cpu_data;
+                    su2_bytes(0) <= iu2_cpu_bytes;
+                end if;
             end if;
             if (i_maintenance_request = '1') then
                 assert (su2_pending(1) = '0' and not (styp_state = STATE_WAITING and s_owner = '1'))
@@ -84,23 +127,16 @@ begin
             end if;
             case styp_state is
                 when STATE_IDLE =>
-                    vint_owner := -1;
-                    if (su2_pending(0) = '1') then
-                        vint_owner := 0;
-                    elsif (i_cpu_request = '0' and su2_pending(1) = '1' and i_maintenance_allowed = '1') then
-                        vint_owner := 1;
-                    end if;
-                    if (vint_owner >= 0) then
-                        o_backend_request <= '1';
-                        o_backend_write <= su2_write(vint_owner);
-                        ou24_backend_address <= su24_address(vint_owner);
-                        ou16_backend_data <= su16_data(vint_owner);
-                        ou2_backend_bytes <= su2_bytes(vint_owner);
-                        su2_pending(vint_owner) <= '0';
-                        if (vint_owner = 0) then
-                            s_owner <= '0';
-                        else
-                            s_owner <= '1';
+                    if (s_issue = '1') then
+                        s_owner <= s_issue_owner;
+                        s_held_write <= s_selected_write;
+                        su24_held_address <= su24_selected_address;
+                        su16_held_data <= su16_selected_data;
+                        su2_held_bytes <= su2_selected_bytes;
+                        if (s_issue_owner = '1') then
+                            su2_pending(1) <= '0';
+                        elsif (s_direct_cpu = '0') then
+                            su2_pending(0) <= '0';
                         end if;
                         styp_state <= STATE_WAITING;
                     end if;

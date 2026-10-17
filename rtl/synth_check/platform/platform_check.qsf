@@ -34,6 +34,8 @@ set_global_assignment -name VHDL_FILE ../../rabbitpunch_fx68k.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_maincpu.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_io.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_irq.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_maintenance.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_bus_owner.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_board.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_sdram_types.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_sdram.vhd
@@ -244,3 +246,13 @@ set_instance_assignment -name VIRTUAL_PIN ON -to o_done
 set_instance_assignment -name VIRTUAL_PIN ON -to ou27_bytes_loaded[*]
 set_instance_assignment -name VIRTUAL_PIN ON -to o_ready
 set_instance_assignment -name VIRTUAL_PIN ON -to o_loading
+
+set_instance_assignment -name VIRTUAL_PIN ON -to i_maintenance_access
+set_instance_assignment -name VIRTUAL_PIN ON -to i_maintenance_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to i_maintenance_write
+set_instance_assignment -name VIRTUAL_PIN ON -to iu14_maintenance_byte_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_maintenance_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_maintenance_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to o_maintenance_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_maintenance_response_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_maintenance_pause

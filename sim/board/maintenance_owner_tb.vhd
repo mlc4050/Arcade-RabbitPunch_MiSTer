@@ -38,7 +38,8 @@ architecture test of maintenance_owner_tb is
     signal su24_cpu_address : unsigned(23 downto 0) := x"0FC000";
     signal su16_cpu_data : unsigned(15 downto 0) := x"A1B2";
     signal su2_cpu_bytes : unsigned(1 downto 0) := "11";
-    signal s_race : std_logic := '0';
+    signal s_owner_idle : std_logic;
+    signal s_race, s_clear_race, s_reverse_order : std_logic := '0';
     signal su2_race_seen : unsigned(1 downto 0) := "00";
 begin
     s_clk <= not s_clk after 5 ns;
@@ -75,7 +76,7 @@ begin
             iu16_cpu_data => su16_cpu_data,
             iu2_cpu_bytes => su2_cpu_bytes,
             o_cpu_idle => s_cpu_idle,
-            o_idle => open,
+            o_idle => s_owner_idle,
             o_cpu_response_valid => s_cpu_response,
             ou16_cpu_response_data => open,
             i_maintenance_allowed => s_paused and s_allow_maintenance,
@@ -98,12 +99,26 @@ begin
     begin
         if (rising_edge(s_clk)) then
             if (s_cpu_response = '1') then
-                assert (s_race = '1' and su2_race_seen = "00") report "CPU response leaked from maintenance or lost priority" severity failure;
-                su2_race_seen(0) <= '1';
+                if (s_reverse_order = '0') then
+                    assert (s_race = '1' and su2_race_seen = "00") report "CPU response leaked from maintenance or lost priority" severity failure;
+                    su2_race_seen(0) <= '1';
+                else
+                    assert (s_race = '1' and su2_race_seen = "01") report "Queued late CPU response preceded active maintenance" severity failure;
+                    su2_race_seen(1) <= '1';
+                end if;
             end if;
             if (s_race = '1' and s_response = '1') then
-                assert (su2_race_seen = "01" and su8_response = x"5A") report "Queued maintenance reply lost its data/owner" severity failure;
-                su2_race_seen(1) <= '1';
+                assert (su8_response = x"5A") report "Queued maintenance reply lost its data" severity failure;
+                if (s_reverse_order = '0') then
+                    assert (su2_race_seen = "01") report "Maintenance bypassed simultaneous CPU priority" severity failure;
+                    su2_race_seen(1) <= '1';
+                else
+                    assert (su2_race_seen = "00") report "Maintenance response owner/order mismatch" severity failure;
+                    su2_race_seen(0) <= '1';
+                end if;
+            end if;
+            if (s_clear_race = '1') then
+                su2_race_seen <= "00";
             end if;
         end if;
     end process;
@@ -130,11 +145,21 @@ begin
     begin
         if (rising_edge(s_clk)) then
             s_backend_response <= '0';
+            if (s_cpu_request = '1' or s_bus_request = '1' or s_inflight = '1') then
+                assert (s_owner_idle = '0') report "Owner idle omitted offered or active work" severity failure;
+            end if;
+            if (s_backend_response = '1') then
+                if (su24_backend_address <= 16#FC002#) then
+                    assert (s_cpu_response = '1' and s_bus_response = '0') report "CPU response was delayed or misrouted" severity failure;
+                else
+                    assert (s_bus_response = '1' and s_cpu_response = '0') report "Maintenance response was delayed or misrouted" severity failure;
+                end if;
+            end if;
             if (s_backend_request = '1') then
                 assert (not v_pending and s_paused = '1' and s_pause = '1' and s_bus_idle = '1')
                     report "Maintenance borrowed RAM before confirmed pause/drain" severity failure;
                 assert (su24_backend_address >= 16#FC000# and su24_backend_address <= 16#FFFFE# and su24_backend_address(0) = '0' and
-                    (su2_backend_bytes = "10" or su2_backend_bytes = "01" or (su24_backend_address = 16#FC000# and su2_backend_bytes = "11")))
+                    (su2_backend_bytes = "10" or su2_backend_bytes = "01" or (su24_backend_address <= 16#FC002# and su2_backend_bytes = "11")))
                     report "Maintenance address/lane/data contract mismatch" severity failure;
                 v_pending := true;
                 vint_delay := sint_delay;
@@ -223,6 +248,9 @@ begin
                 cycles(1);
                 s_byte_valid <= '0';
                 s_cpu_request <= '1';
+                wait for 1 ns;
+                assert (s_backend_request = '1' and su24_backend_address = 16#FC000# and su16_backend_data = x"A1B2")
+                    report "Idle CPU path acquired an extra registered request delay" severity failure;
                 cycles(1);
                 s_cpu_request <= '0';
                 su24_cpu_address <= (others => '1');
@@ -232,7 +260,7 @@ begin
                 assert (su2_race_seen = "01") report "Queued maintenance blocked the last CPU transaction" severity failure;
                 for vint_cycle in 1 to 20 loop
                     cycles(1);
-                    assert (su2_race_seen = "01" and s_response = '0' and s_pause = '1')
+                    assert (su2_race_seen = "01" and s_response = '0' and s_pause = '1' and s_owner_idle = '0')
                         report "Maintenance issued before owner permission" severity failure;
                 end loop;
                 s_allow_maintenance <= '1';
@@ -243,6 +271,35 @@ begin
                 su13_view_address <= (others => '0');
                 cycles(3);
                 assert (su16_view_data = x"A1B2") report "Late CPU write was not preserved in native RAM" severity failure;
+                s_clear_race <= '1';
+                cycles(2);
+                s_clear_race <= '0';
+                s_reverse_order <= '1';
+                s_race <= '1';
+                sint_delay <= 51;
+                s_byte_write <= '0';
+                s_byte_valid <= '1';
+                cycles(1);
+                s_byte_valid <= '0';
+                wait until s_inflight = '1' for 10 us;
+                assert (s_inflight = '1') report "Reverse-order test did not start maintenance" severity failure;
+                cycles(1);
+                su24_cpu_address <= x"0FC002";
+                su16_cpu_data <= x"C3D4";
+                su2_cpu_bytes <= "11";
+                s_cpu_request <= '1';
+                cycles(1);
+                s_cpu_request <= '0';
+                su24_cpu_address <= (others => '1');
+                su16_cpu_data <= (others => '1');
+                su2_cpu_bytes <= "00";
+                wait until su2_race_seen = "11" for 10 us;
+                assert (su2_race_seen = "11") report "CPU pulse queued behind maintenance was lost" severity failure;
+                cycles(2);
+                s_race <= '0';
+                su13_view_address <= to_unsigned(1, 13);
+                cycles(3);
+                assert (su16_view_data = x"C3D4") report "Queued CPU payload changed before RAM issue" severity failure;
             end if;
             -- Real MAME block bytes with deterministic interior changes stand in
             -- for a saved score file; sentinel bytes retain their captured values.
@@ -286,9 +343,9 @@ begin
         end loop;
         wait until s_idle = '1' for 10 us;
         cycles(2);
-        assert (s_idle = '1' and s_pause = '0' and s_response = '0' and sint_requests = vint_before + 1)
+        assert (s_idle = '1' and s_owner_idle = '1' and s_pause = '0' and s_response = '0' and sint_requests = vint_before + 1)
             report "Maintenance did not finish one owned request after reset" severity failure;
-        report "MAINTENANCE_OWNER_PASS score_bytes=234 native_masked_write_read=checked pause_and_debt=checked neighbors=preserved delayed_response_reset_drain=checked";
+        report "MAINTENANCE_OWNER_PASS cpu_idle_bypass=checked both_queue_orders=checked score_bytes=234 native_masked_write_read=checked pause_and_debt=checked neighbors=preserved delayed_response_reset_drain=checked";
         finish;
         wait;
     end process;

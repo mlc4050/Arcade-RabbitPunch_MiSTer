@@ -21,9 +21,29 @@ completion, checks both replies and the preserved CPU write, then repeats both
 score-block transfers and reset-drain checks
 (reference/maintenance_owner_checks.json).
 
-These modules are not in the production board yet. Integration must include
-all owner queue/active/offered work in ROM-load idle, and must acknowledge
-already-issued board I/O requests even while resetting their side effects.
-The current I/O initialize branch suppresses responses, so a delayed accepted
-request cannot simply be forwarded into that branch. Production integration
-needs directed reset/load tests before use. HPS persistence remains separate.
+The board, complete system and logical platform now expose maintenance byte
+access. The board's pause request also pauses the sound CPU; maintenance ready
+waits for both CPU adapters plus drained main-bus ownership. Ordinary CPU
+requests bypass the owner on their original edge when the bus is free, and
+replies remain combinationally qualified by owner. Contention alone uses packet
+queues. Directed tests verify that request/reply edges are preserved, both
+contention orders complete, poisoned source pins cannot change queued data,
+and all-idle includes queued, active and currently offered work.
+
+System download waits for both ROM transport and board-owner idle. Reset-time
+I/O clears its side effects while still acknowledging an already-issued
+request with FF read data, allowing the old owner to drain. The executing-CPU
+diagnostic consumes maintained A511/3311 words, preserves independent user
+pause, checks both byte lanes and the end of work RAM, cancels a client result
+without canceling backend debt, and replaces images on offered I/O writes and
+ROM fetches (reference/system_maintenance_checks.json). Without the I/O ack fix
+the diagnostic stalls image loading; the private negative control is in
+debug/baselines/system_maintenance_unfixed_io/result.log. The earlier queued-
+CPU prototype also exposed the need to count queue debt at ROM handoff; the
+final CPU bypass removes its ordinary-path request delay.
+
+The audio regression also performs maintenance write/read while a sample is
+playing: both CPUs pause while ADPCM and YM cadence continue. Platform controls,
+DIP, byte/DDR and native HPS protocol regressions pass with the integrated owner.
+Full-platform implementation is pending. These interfaces provide access for
+persistence/state tooling, but HPS score upload/restore is not implemented.

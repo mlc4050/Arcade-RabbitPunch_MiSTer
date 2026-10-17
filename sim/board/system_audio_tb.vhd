@@ -46,6 +46,9 @@ architecture test of system_audio_tb is
     signal su8_audio_data, su8_audio_view_data : unsigned(7 downto 0);
     signal s_audio_view : std_logic := '0';
     signal sint_samples, sint_audio_commands : natural := 0;
+    signal s_maintenance_access, s_maintenance_valid, s_maintenance_write : std_logic := '0';
+    signal s_maintenance_ready, s_maintenance_response : std_logic;
+    signal su8_maintenance_response : unsigned(7 downto 0);
 begin
     s_clk <= not s_clk after 10417 ps;
     s_enable <= '1' when sint_divider = 11 or sint_divider = 23 else '0';
@@ -84,6 +87,15 @@ begin
             i_game_reset => s_game_reset,
             i_pause => s_pause,
             o_paused => s_paused,
+            i_maintenance_access => s_maintenance_access,
+            i_maintenance_valid => s_maintenance_valid,
+            i_maintenance_write => s_maintenance_write,
+            iu14_maintenance_byte_address => to_unsigned(16#200#, 14),
+            iu8_maintenance_data => x"5A",
+            o_maintenance_ready => s_maintenance_ready,
+            o_maintenance_response_valid => s_maintenance_response,
+            ou8_maintenance_response_data => su8_maintenance_response,
+            o_maintenance_pause => open,
             i_vblank_start => '0',
             i_half_frame => '0',
             i_line_valid => '0',
@@ -276,11 +288,39 @@ begin
             if (v_abort) then
                 return;
             end if;
-            s_pause <= '1';
+            if (vint_count = 2) then
+                s_maintenance_access <= '1';
+            else
+                s_pause <= '1';
+            end if;
             if (s_paused /= '1') then
                 wait until s_paused = '1' for 20 us;
             end if;
             assert (s_paused = '1') report "Both CPUs did not pause/drain" severity failure;
+            if (vint_count = 2) then
+                if (s_maintenance_ready /= '1') then
+                    wait until s_maintenance_ready = '1' for 20 us;
+                end if;
+                assert (s_maintenance_ready = '1' and s_adpcm_busy = '1')
+                    report "Maintenance did not acquire both CPUs during active sample playback" severity failure;
+                for vint_access in 0 to 1 loop
+                    cycles(1);
+                    if (vint_access = 0) then
+                        s_maintenance_write <= '1';
+                    else
+                        s_maintenance_write <= '0';
+                    end if;
+                    s_maintenance_valid <= '1';
+                    cycles(1);
+                    s_maintenance_valid <= '0';
+                    wait until s_maintenance_response = '1' for 20 us;
+                    assert (s_maintenance_response = '1') report "Maintenance stalled audio playback" severity failure;
+                    if (vint_access = 1) then
+                        assert (su8_maintenance_response = x"5A") report "Maintenance RAM round-trip failed during sound playback" severity failure;
+                    end if;
+                    cycles(2);
+                end loop;
+            end if;
             cycles(3);
             s_audio_view <= '1';
             cycles(3);
@@ -294,6 +334,7 @@ begin
             assert (sint_samples >= vint_samples_before + 2 and sint_audio_commands = vint_count)
                 report "Pause stopped YM cadence or allowed extra commands" severity failure;
             s_pause <= '0';
+            s_maintenance_access <= '0';
             cycles(2);
         end procedure;
     begin
@@ -305,7 +346,7 @@ begin
         playback(x"0043", 4);
         assert (sint_stream_words = 64 and s_error = '0')
             report "Audio system replacement downloads failed" severity failure;
-        report "SYSTEM_AUDIO_PASS images=4 main_commands=4 sound_commands=4 download_aborts_active_sample=checked native_sound_ram=checked paused_playback=checked";
+        report "SYSTEM_AUDIO_PASS images=4 main_commands=4 sound_commands=4 download_aborts_active_sample=checked native_sound_ram=checked paused_playback=checked maintenance_pause=checked";
         finish;
         wait;
     end process;

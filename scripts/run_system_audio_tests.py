@@ -31,7 +31,7 @@ def main():
         fixture_source_sha256=hashlib.sha256((root/'sim/sound/audio_sdram_tb.vhd').read_bytes()).hexdigest(),
         synthetic_image_sha256=hashlib.sha256(image).hexdigest(),
         log_sha256=hashlib.sha256((root/result['log']).read_bytes()).hexdigest(),
-        scope='Production logical system with executing fx68k/T80, native main/sound RAM, JT51/JT7759 and shared cached SDRAM: four downloaded 32-byte main diagnostics send commands through the internal sound latch/IRQ/ack, trigger both synthetic sample banks and verify sound RAM plus continued playback/cadence during coordinated CPU pause, replacement during nonzero PCM aborts/mutes playback and recovers; defined mixed PCM and Yamaha startup qualification; sound/sample regions directly preloaded, logical video idle; no real game audio/full image loader/HPS/PLL/raster/electrical proof')
+        scope='Production logical system with executing fx68k/T80, native main/sound RAM, JT51/JT7759 and shared cached SDRAM: four downloaded 32-byte main diagnostics send commands through the internal sound latch/IRQ/ack, trigger both synthetic sample banks and verify sound RAM plus continued playback/cadence during coordinated CPU pause, maintenance byte write/read while both CPUs are paused with sample playback continuing, replacement during nonzero PCM aborts/mutes playback and recovers; defined mixed PCM and Yamaha startup qualification; sound/sample regions directly preloaded, logical video idle; no real game audio/full image loader/HPS/PLL/raster/electrical proof')
     (root/'docs/reference/system_audio_checks.json').write_text(json.dumps(result, indent=2)+'\n')
 
 

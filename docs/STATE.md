@@ -261,3 +261,12 @@ The standalone bus owner adds one held packet/pending bit per requester and
 one active-owner FSM. Its all-idle output includes offered requests as well
 as pending/active debt; image replacement must consume that output when the
 owner is integrated. No reset cancels ownership or an accepted memory request.
+
+
+Maintenance is now connected through board/system/platform. Its pause joins
+the main and sound adapters, and ready waits for both to drain. ROM generation
+handoff also waits for all board-owner packets, including currently offered
+requests. The idle CPU path bypasses packet storage; selected backend payload
+is held for the reply. Reset clears I/O effects but acknowledges accepted I/O
+so no owner debt is stranded. HPS persistence/restore orchestration is not yet
+connected.

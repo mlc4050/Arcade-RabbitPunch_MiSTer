@@ -15,6 +15,16 @@ entity rabbitpunch_system is
         i_game_reset : in std_logic;
         i_pause : in std_logic;
         o_paused : out std_logic;
+        i_maintenance_access : in std_logic := '0';
+        i_maintenance_valid : in std_logic := '0';
+        i_maintenance_write : in std_logic := '0';
+        iu14_maintenance_byte_address : in unsigned(13 downto 0) := (others => '0');
+        iu8_maintenance_data : in unsigned(7 downto 0) := (others => '0');
+        o_maintenance_ready : out std_logic;
+        o_maintenance_response_valid : out std_logic;
+        ou8_maintenance_response_data : out unsigned(7 downto 0);
+        o_maintenance_pause : out std_logic;
+
         i_vblank_start : in std_logic;
         i_half_frame : in std_logic;
         i_line_valid : in std_logic;
@@ -128,6 +138,7 @@ architecture rtl of rabbitpunch_system is
     signal su16_audio_address : unsigned(15 downto 0);
     signal su18_sample_address : unsigned(17 downto 0);
     signal su8_audio_data, su8_sample_data : unsigned(7 downto 0);
+    signal s_board_idle, s_maintenance_pause : std_logic;
 begin
     ou16_left_pcm <= su16_fm_left;
     ou16_right_pcm <= su16_fm_right;
@@ -136,6 +147,7 @@ begin
     o_paused <= s_main_paused and s_audio_paused;
     ou8_sound_command <= su8_sound_command;
     o_sound_pending <= s_sound_pending;
+    o_maintenance_pause <= s_maintenance_pause;
     s_board_reset <= i_initialize or i_game_reset or s_download_reset or not s_rom_ready;
     o_ready <= not s_board_reset;
     o_loading <= s_loading;
@@ -146,6 +158,17 @@ begin
             i_reset => s_board_reset,
             i_pause => i_pause,
             o_paused => s_main_paused,
+            i_maintenance_access => i_maintenance_access,
+            i_maintenance_valid => i_maintenance_valid,
+            i_maintenance_write => i_maintenance_write,
+            iu14_maintenance_byte_address => iu14_maintenance_byte_address,
+            iu8_maintenance_data => iu8_maintenance_data,
+            o_maintenance_ready => o_maintenance_ready,
+            o_maintenance_response_valid => o_maintenance_response_valid,
+            ou8_maintenance_response_data => ou8_maintenance_response_data,
+            o_maintenance_pause => s_maintenance_pause,
+            i_maintenance_permitted => s_audio_paused,
+            o_transport_idle => s_board_idle,
             i_vblank_start => i_vblank_start,
             i_half_frame => i_half_frame,
             i_line_valid => i_line_valid,
@@ -245,7 +268,7 @@ begin
             i_ym_enable => i_ym_enable,
             i_ym_half_enable => i_ym_half_enable,
             i_adpcm_enable => i_adpcm_enable,
-            i_pause => i_pause,
+            i_pause => i_pause or s_maintenance_pause,
             o_paused => s_audio_paused,
             iu8_command => su8_sound_command,
             i_command_pending => s_sound_pending,
@@ -326,7 +349,7 @@ begin
             o_word_ready => o_word_ready,
             iu27_word_byte_address => iu27_word_byte_address,
             iu16_word_data => iu16_word_data,
-            i_transport_idle => s_rom_idle,
+            i_transport_idle => s_rom_idle and s_board_idle,
             i_loader_ready => s_loader_ready,
             i_loader_response_valid => s_loader_valid,
             o_loading => s_loading,
