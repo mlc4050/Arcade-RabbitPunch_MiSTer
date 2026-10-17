@@ -79,3 +79,5 @@ set_instance_assignment -name VIRTUAL_PIN ON -to iu5_view_target[*]
 set_instance_assignment -name VIRTUAL_PIN ON -to iu15_view_word_address[*]
 set_instance_assignment -name VIRTUAL_PIN ON -to o_view_valid
 set_instance_assignment -name VIRTUAL_PIN ON -to ou16_view_data[*]
+set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL MAXIMUM
+set_global_assignment -name ECO_OPTIMIZE_TIMING ON

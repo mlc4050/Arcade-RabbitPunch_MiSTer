@@ -52,7 +52,7 @@ Results and source hashes: reference/board_memory_video_checks.json.
 Existing board diagnostics also pass through the compatibility adapter, including
 all 52224 RAM words, bank isolation, byte lanes, mirrors, inspection, delayed ROM,
 CPU pause/reset and IRQ/autovector handling. The real-ROM 10000-write boot replays
-for both games are rerunning at this checkpoint.
+for both games pass again, including 24 reconstructed board I/O fields each.
 
 The scene bench now preloads actual shared board RAM through CPU transactions,
 then issues continuous work-RAM writes while rendering and scanning out. It also
@@ -81,8 +81,10 @@ and translates to the descriptive zero-based external address explicitly.
 
 RTL tile and sprite regressions pass after the change. Synthesized-netlist
 checks reuse the existing VHDL testbenches through component binding, compiling
-only the exported netlist plus test support. The corrected tile netlist passes all 8256 queued rows and 66048 pixels. Sprite
-netlist checks and full shared-RAM RGB replays remain pending at this checkpoint. Earlier RTL pixel
+only the exported netlist plus test support. The corrected tile netlist passes all 8256 queued rows and 66048 pixels. The
+corrected sprite netlist passes 30724 rows including reset recovery, with 491589
+checked pixel events. Both pass implementation and timing without constant
+graphics-address warnings. Full shared-RAM RGB replays remain in progress. Earlier RTL pixel
 comparisons remain valid simulation evidence; passing timing alone did not
 establish graphics-address functional equivalence in synthesis.
 
@@ -91,3 +93,22 @@ The corrected combined board/video seed-2 implementation was rejected for
 state at the slow 1100 mV/-40 C corner. Setup passes. The evaluation project
 now pins seed 3 for a fresh placement, with the same RTL and constraints.
 The timing gates remain strict; a successful fit must pass every corner.
+
+## Replay diagnostics
+
+The first parallel shared-RAM run exceeded its 600-second wall-clock guard in
+Rabbit Punch play1000. The focused serial rerun completes in about 263 seconds,
+with all 62208 RGB pixels identical and 83832 competing work-RAM writes; its
+live bitmap/palette update and reset checks pass. Remaining scenes now run
+serially. The simulator's Starter capacity warning is expected for this design;
+progress.txt records simulated time, completed lines/pixels and CPU writes. A
+20000-clock no-progress guard detects a pipeline stall separately from slow wall
+time. Timeout paths retain the partial transcript. The known numeric_std warnings
+at time zero occur while the inactive backend's combinational target settles;
+they are not valid-data comparison failures. Tests do not suppress warnings.
+
+Seed 3 also failed hold (-0.113 ns worst). The fitted settings report already
+shows Optimize Hold Timing = All Paths and Multi-Corner Timing = On, so adding
+those assignments would be ineffective. The evaluation project retains seed 3
+and requests maximum router timing optimization plus timing ECO optimization.
+RTL, clock period, I/O constraints and strict timing gates are unchanged.

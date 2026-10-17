@@ -16,7 +16,7 @@ VHDL tilemap lookup and a JTFRAME row adapter now match both tile layers in
 all six reference scenes; sprite progress is described below, and the complete
 mixed video/raster path is still open.
 Their standalone fit also passes timing at the 48 MHz evaluation constraint,
-with 139 ALMs, 201 registers and no M10K blocks.
+with 140 ALMs, 213 registers and no M10K blocks after the foreign-port fix.
 Sprite row drawing now passes 30720 synthetic rows and all descriptor rows in
 six captured scenes, including flips, transparency, overlapped ROM fetching
 and reset draining. Scanline candidate selection now feeds that drawer correctly
@@ -35,8 +35,17 @@ to the sprite lines and mixer. The complete logical RGB pipeline matches all
 six MAME screenshots with actual HDL-generated layer pixels and native line/
 bitmap/palette RAM. Palette expansion passes all 65536 RAM values. Combined RGB
 fitting passes all corners with four M10K blocks and one clock domain. CPU/shared-
-memory and physical raster integration remain open; see VIDEO_PIPELINE.md for scope.
-The complete game is not integrated/running yet.
+memory integration is implemented and undergoing complete scene/timing verification;
+physical raster integration remains open. See BOARD_VIDEO_MEMORY.md and VIDEO_PIPELINE.md.
+The shared native RAM backend passes 849 directed CPU/video/inspection checks.
+Both 10000-write real-ROM CPU comparisons pass again after that refactor. A
+Quartus mixed-language port-index mismatch was found and corrected without
+editing JTFRAME: corrected tile and sprite synthesized netlists pass the existing
+VHDL functional tests. The focused Rabbit Punch play1000 shared-RAM scene now
+matches every RGB pixel and passes a live CPU bitmap/palette update. Remaining
+scene replays run serially; the corrected combined implementation is retrying
+placement after a small virtual-reset input hold failure. No complete game is
+integrated/running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
 ## Goal and scope

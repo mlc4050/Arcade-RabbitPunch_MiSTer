@@ -8,11 +8,11 @@ every frame.
 
 | Region | RTL | Width x depth | Bytes | Save? |
 |---|---|---|---|---|
-| Bitmap | rabbitpunch_memory / rabbitpunch_ram16 | 16 x 32768 | 65536 | Yes; read-only view port, restore through paused CPU request port |
-| Sprites | rabbitpunch_memory / rabbitpunch_ram16 | 16 x 2048 | 4096 | Yes; same access paths |
-| Tilemaps | rabbitpunch_memory / rabbitpunch_ram16 | 16 x 8192 | 16384 | Yes; same access paths |
-| Palette | rabbitpunch_memory / rabbitpunch_ram16 | 16 x 1024 | 2048 | Yes; same access paths |
-| Main work | rabbitpunch_memory / rabbitpunch_ram16 | 16 x 8192 | 16384 | Yes; same access paths |
+| Bitmap | rabbitpunch_board_memory / rabbitpunch_ram16 | 16 x 32768 | 65536 | Yes; read-only view port, restore through paused CPU request port |
+| Sprites | rabbitpunch_board_memory / rabbitpunch_ram16 | 16 x 2048 | 4096 | Yes; same access paths |
+| Tilemaps | rabbitpunch_board_memory / rabbitpunch_ram16 | 16 x 8192 | 16384 | Yes; same access paths |
+| Palette | rabbitpunch_board_memory / rabbitpunch_ram16 | 16 x 1024 | 2048 | Yes; same access paths |
+| Main work | rabbitpunch_board_memory / rabbitpunch_ram16 | 16 x 8192 | 16384 | Yes; same access paths |
 | Sprite line banks | rabbitpunch_sprite_line / rabbitpunch_ram16 | 2 x 16 x 512 | 2048 | Derived pixels and occupancy/index/tag; finish/flush and re-render before resuming video, or capture both banks with scheduler phase |
 | Packed tile line banks | rabbitpunch_tiles / rabbitpunch_ram16 | 2 x 16 x 512 | 2048 | Derived BG0/FG pixels; finish/flush and re-render, or capture banks and scheduler phase |
 
@@ -27,7 +27,7 @@ every frame.
 | CPU phase divider count and phase | rabbitpunch_maincpu.vhd | ceil(log2(PHASE_DIVIDER)) + 1 | Future, together with CPU | CPU clock phase |
 | Memory backend FSM / target / write flag | rabbitpunch_memory.vhd | 2 logical + 5 + 1 | Capture at idle boundary | Transport |
 | ROM request address and response holding data | rabbitpunch_memory.vhd | 18 + 16 | Capture at idle boundary | Transport |
-| Inspection target, valid and per-bank read holding data | rabbitpunch_memory / rabbitpunch_ram16 | Derived pipeline state | Discard only when inspection idle | Debug/video port pipeline |
+| Inspection target, valid and per-bank read holding data | rabbitpunch_board_memory / rabbitpunch_ram16 | Derived pipeline state | Discard only when inspection idle | Debug/video port pipeline |
 | Video flags / scroll registers / sprite count and priority | rabbitpunch_io.vhd | 16 + 36 + 12 | Read through explicit outputs; restore through CPU write path | m_videoflags, tilemap scroll, m_sprite_num, m_sprite_pri |
 | GGA register file and selected index | rabbitpunch_io.vhd | 128 + 4 | Indexed GGA view; restore through select/data writes | GGA m_regs / m_address_latch |
 | Sound command and pending flag | rabbitpunch_io.vhd | 8 + 1 | Capture with sound CPU stopped; future coordinated state loader | generic_latch_8 state |
