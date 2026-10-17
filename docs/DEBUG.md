@@ -44,3 +44,10 @@ counter width generic exercises saturation quickly; hardware retains 32 bits.
 Evidence: reference/debug_checks.json (VHDL behavior) and
 reference/debug_decode_checks.json (mocked Tcl transport). No hardware results
 are claimed by either report.
+
+Quartus 17's altsource_probe supports at most 511 probe bits. The initial
+512-bit instrumented build was rejected at elaboration, before fitting; it is
+archived under debug/fit_archive/full_shell_1693628_probe_width_rejected/.
+The unused top bit was removed. Layout version occupies bits 480..510; all
+other field positions remain unchanged. VHDL and decoder tests are rerun for
+the exact hardware width, and malformed-width packets remain rejected.

@@ -324,6 +324,6 @@ that timing boundary rather than independently restoring only one of them.
 The instrumented revision adds read-only rabbitpunch_debug telemetry, separate
 from emulated game state: seven saturating 32-bit counters, last main request,
 last main write/data/byte mask, last sound request/data, sampled beam/status and
-a registered 512-bit packet with core/build/layout identity. Counters have only
+a registered 511-bit packet with core/build/layout identity. Counters have only
 configuration-time initialization and survive gameplay/PLL reset. This telemetry
 is not a savestate and is omitted from the release revision. See DEBUG.md.

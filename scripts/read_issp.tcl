@@ -49,7 +49,7 @@ set fields_RPUN {
     {framework_reset     394 394 bit}
     {audio_samples       416 447 dec}
     {underflow_events    448 479 dec}
-    {layout_version      480 511 dec}
+    {layout_version      480 510 dec}
 }
 # ---------------------------------------------------------------------------
 
@@ -132,7 +132,7 @@ puts "decoding instance $inst_id"
 
 start_insystem_source_probe -device_name $dev -hardware_name $hw
 set raw [read_probe_data -instance_index $idx]
-if {![regexp {^[01]+$} $raw] || [string length $raw] != 512 || [bits_to_int $raw 0 31] != 0x5250554E || [bits_to_int $raw 480 511] != 1} {
+if {![regexp {^[01]+$} $raw] || [string length $raw] != 511 || [bits_to_int $raw 0 31] != 0x5250554E || [bits_to_int $raw 480 510] != 1} {
     end_insystem_source_probe
     puts "Probe identity, width or layout mismatch; refusing to decode"
     exit 1

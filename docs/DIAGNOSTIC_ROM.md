@@ -23,8 +23,7 @@ white stripe's palette entry to red. No sound-chip exercise is included.
 run_diagnostic_rom_tests.py executes the program on the unchanged fx68k with
 delayed behavioral bus replies. The 64-word bounded test passes both normal and
 corrupted-ROM branches, including exact sequential bitmap writes and input/DIP
-copies. The full 32768-word positive case also passes; its negative companion is
-running. These tests validate instruction encoding/control flow and bus accesses,
+copies. Both complete 32768-word cases also pass (reference/diagnostic_rom_full_checks.json). These tests validate instruction encoding/control flow and bus accesses,
 not the native RAM/controller, visible RGB, full SDRAM capacity or hardware pins.
 The full RGB image remains unverified until a native-renderer or board capture.
 

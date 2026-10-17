@@ -3,9 +3,9 @@
   "pass_marker": "DEBUG_PASS",
   "log": "debug\\baselines\\debug\\result.log",
   "source_sha256": {
-    "rtl/rabbitpunch_debug.vhd": "a446e81e97a2fcc0ebe68ebb1193b89f2627c4817ee674ea38ccaa0b7474b4e3",
-    "sim/board/debug_tb.vhd": "21139018aabeddd1c6c37460c20eeff67c47936df0bcd27e291361d5b7a5bb04"
+    "rtl/rabbitpunch_debug.vhd": "cc1bffeb530102511c0f4e5cff34d1bb1c310e792967154f45e7775ed49ef643",
+    "sim/board/debug_tb.vhd": "175af9f1f3f6cb49fe61fbd833f736c848669c4564b8353893d7bea699b26deb"
   },
-  "log_sha256": "f5b6d2a26f0a674f438851407ba51ab9c9801c8f713411b6872e0d2022592ea7",
+  "log_sha256": "14ee6fae4cd37802b62aab7b5033d0b0517875a91b8ff89dad6133609b231f0f",
   "scope": "Read-only registered identity/status/address packet, enabled frame/pixel counting, separate CPU request/write events, sound/sample events, underflow edges and reduced-width saturation; JTAG IP disabled, no physical probe claim"
 }
