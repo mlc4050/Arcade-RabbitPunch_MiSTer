@@ -44,3 +44,11 @@ ROM-model preload remain explicit and separate test setup.
 The complete long startup comparison, six captured scenes, native score tests
 and new implementation evidence are recorded as they finish. A physical FPGA
 power-up measurement remains part of hardware bring-up.
+
+`run_memory_powerup_tests.py` additionally reads all 52,224 words of the five
+production banks through both CPU and inspection interfaces before the first
+write (104,448 initial-content checks). Separate byte writes at the first,
+middle and last word of every bank check both logical data and untouched nearby
+words. The same component-based VHDL bench is available through
+`run_netlist_tests.py memory` after the isolated memory fit, so synthesized
+configuration contents can be checked independently of the RTL primitive model.

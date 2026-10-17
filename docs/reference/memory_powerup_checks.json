@@ -1,0 +1,15 @@
+{
+  "case": "memory_powerup",
+  "pass_marker": "MEMORY_POWERUP_PASS",
+  "log": "debug\\baselines\\memory_powerup\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_layout.vhd": "28913c5c8d29e0aca34042db0f001e9e6a628b577ed2220af219c4e2fd86a968",
+    "rtl/rabbitpunch_decode.vhd": "c2ffd118ed681db262d7f82639d7011fa908ed88bf5e9206f3f5f1422f187a5e",
+    "rtl/rabbitpunch_ram16.vhd": "944818901a265eb00e376732c43da881745b6e020303bb907283f3a2aeb46beb",
+    "rtl/rabbitpunch_board_memory.vhd": "2757fd9aaee28bf3b3418305c20c09604de4497633680f2b961208f98d8809b7",
+    "rtl/rabbitpunch_memory.vhd": "848a5cebb1558b68de8d681e3a6b2a14a64890a22e9efe9c9d75203c2390e059",
+    "sim/memory/memory_powerup_tb.vhd": "5a6d5580edf823ee54f00064eb50061ea925e505b8704308fe073585a245d37f"
+  },
+  "log_sha256": "5f0c3e9b2014a20ce1e18afac3be3f0dc5d20df36f249c8b3e520cd96733091d",
+  "scope": "All 52224 mapped RAM words read via CPU and inspection before any write; bitmap FFFF, other banks zero. Upper/lower masked writes at first/middle/last addresses preserve the other byte. No RAM deposits; no physical hardware measurement."
+}
