@@ -34,7 +34,12 @@ architecture test of platform_host_tb is
         o_file_write : out std_logic;
         ou27_file_byte_address : out unsigned(26 downto 0);
         ou8_file_data : out unsigned(7 downto 0);
-        i_file_wait : in std_logic
+        i_file_wait : in std_logic;
+        i_file_upload_request : in std_logic := '0';
+        iu8_file_upload_index : in unsigned(7 downto 0) := (others => '0');
+        iu8_file_upload_data : in unsigned(7 downto 0) := (others => '0');
+        o_file_upload : out std_logic;
+        o_file_read : out std_logic
     );
     end component;
     signal su46_bus, su46_master : unsigned(45 downto 0) := (others => 'Z');
@@ -147,7 +152,9 @@ begin
             o_file_write => s_host_write,
             ou27_file_byte_address => su27_host_address,
             ou8_file_data => su8_host_data,
-            i_file_wait => s_host_wait
+            i_file_wait => s_host_wait,
+            o_file_upload => open,
+            o_file_read => open
         );
     s_clk <= not s_clk after 10417 ps;
     s_ddr_busy <= '1' when sint_cycles mod 23 < 7 else '0';

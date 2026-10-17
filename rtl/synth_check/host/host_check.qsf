@@ -33,3 +33,8 @@ set_instance_assignment -name VIRTUAL_PIN ON -to o_file_write
 set_instance_assignment -name VIRTUAL_PIN ON -to ou27_file_byte_address[*]
 set_instance_assignment -name VIRTUAL_PIN ON -to ou8_file_data[*]
 set_instance_assignment -name VIRTUAL_PIN ON -to i_file_wait
+set_instance_assignment -name VIRTUAL_PIN ON -to i_file_upload_request
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_file_upload_index[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_file_upload_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_file_upload
+set_instance_assignment -name VIRTUAL_PIN ON -to o_file_read
