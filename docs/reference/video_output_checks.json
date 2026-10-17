@@ -1,0 +1,11 @@
+{
+  "case": "video_output",
+  "pass_marker": "VIDEO_OUTPUT_PASS",
+  "log": "debug\\baselines\\video_output\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_video_output.vhd": "17394dde74be3f64ae3611b83236ad2811f66bda7f895b84a163dd6572c65b7c",
+    "sim/video/video_output_tb.vhd": "332952a45a373f62ebbc0dadd9a099405c8d8f2fc7e0b28fb533161205671145"
+  },
+  "log_sha256": "c7e603f6be6dd9ec2abcd0f1d50c1044f3e2d0a4b419a380170d1a3eeb215834",
+  "scope": "Fixed five-system-clock output delay against a four-edge behavioral RGB source: sparse pixel cadence, sync/blank metadata, missing response, mismatched coordinates, source error, not-ready black fallback, sticky fault and reset flush; no physical raster or native video latency proof"
+}

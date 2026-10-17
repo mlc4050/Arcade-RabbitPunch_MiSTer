@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "video_output": (0, ("rabbitpunch_video_output",)),
     "platform": (927339, ("rabbitpunch_platform", "rabbitpunch_controls", "rabbitpunch_load_frontend", "rabbitpunch_system", "fx68k", "T80se", "jt51", "jt7759", "rom_loader", "ddram_phy", "jtframe_draw")),
     "controls": (0, ("rabbitpunch_controls", "rabbitpunch_inputs", "rabbitpunch_keys", "rabbitpunch_pause", "mame_keys")),
     "host": (0, ("host_check", "rabbitpunch_host", "hps_io")),
