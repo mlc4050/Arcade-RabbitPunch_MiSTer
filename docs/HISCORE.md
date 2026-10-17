@@ -25,7 +25,7 @@ Production maintenance now provides acknowledged byte reads/writes through
 the existing work-RAM CPU port. The HPS score service now requests pause, waits for CPU/bus drain, and uses masked RAM
 writes without resetting memory, preserves neighboring bytes, and releases pause
 only after accepted accesses complete. Score polling/load/save is scoped
-per ROM generation and set. The host boundary exposes uploads; platform persistence composition is still pending.
+per ROM generation and set. The host boundary and logical platform now connect uploads and restoration; physical MiSTer disk testing remains pending.
 The reference capture itself does not establish persistence; HDL checks are listed below.
 
 
@@ -141,3 +141,23 @@ It checks CPU-consumed restored bytes, external maintenance arbitration, changed
 OSD snapshots, uploads, soft-reset restore, ROM-generation isolation and preserved
 DIP state. Native HPS strobe-to-file behavior and the physical `.nvm` disk round
 trip are separate evidence boundaries.
+
+
+Native HPS composition now passes `run_platform_hiscore_tests.py --host-netlist`
+for both sets (reference/platform_hiscore_host_checks.json). It sends actual
+FIO55/FIO53/FIO54 command strobes through the checked Quartus hps_io netlist,
+loads ROM0/DIPs/config3/dump4, verifies the executing CPU's restored word, polls
+UIO3C for the autosave request and reads all score bytes through native uploads.
+UIO2E verifies menu masking before/after a valid profile. Configuration readback,
+standalone 119-byte upload and prior connected controls/download tests pass too.
+HPS bus responses are sampled while their channel is selected; test-master
+strobes span an accepting clock edge even when called after a registered event.
+
+Main_MiSTer's [menu implementation](https://github.com/MiSTer-devel/Main_MiSTer/blob/master/menu.cpp)
+checks pending arcade uploads in MENU_SAVE_CHECK on entry to the normal core or
+core-selection menu; Save settings also calls arcade_nvm_save. The native request
+is a latch in unchanged hps_io, consumed by a UIO3C poll. Generation clearing in
+the score service prevents retained score bytes crossing games. Physical menu
+behavior, unusually early exit before initialization, and disk-file persistence
+still require the final MiSTer shell/hardware test; the simulation does not run
+the ARM menu software.

@@ -298,3 +298,11 @@ ROM-generation isolation. Development MRAs contain correct per-set nvram sizes
 and standard configuration while retaining identical ROM0 images against MAME.
 Refreshed combined fit/native host-menu proof and physical disk persistence
 remain pending. See HISCORE.md for exact scope and references.
+
+
+Native persistence command milestone: both game profiles now pass the complete
+fitted hps_io-to-logical-platform test, including UIO3C save polling, native
+config3/dump4 transfers, CPU-restored word, score uploads and menu-mask readback.
+The refreshed host menu fit passes all 48 MHz timing/coverage checks. The new
+full-platform implementation check is running; physical `.nvm`/`.dip` round trips
+remain part of later hardware testing.

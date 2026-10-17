@@ -1366,3 +1366,14 @@ immediately caught Z-valued readback in the first wrapper attempt. Passing the
 physical command/data interface through unchanged restores RTL and synthesized
 netlist agreement. Evidence: reference/sdram_netlist_checks.json; same VHDL
 scoreboard checks 60 writes and 360 read words through the exported netlist.
+
+
+### [RabbitPunch] Sample native host responses while their channel is selected
+
+The native HPS return mux selects file response data only while the FIO channel
+is selected. A test helper that deselects before checking samples the other
+channel and can report false upload corruption. Capture the return before
+releasing selection. Likewise, a helper called after a registered event must
+align its strobe to span an accepting clock edge, rather than dropping it at the
+next falling edge before any receiver edge occurs. Evidence: the native
+platform_hiscore_tb upload and autosave-poll checks, which now pass both sets.

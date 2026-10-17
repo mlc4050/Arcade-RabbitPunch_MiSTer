@@ -430,6 +430,9 @@ begin
         end procedure;
         procedure native_word(vint_data : natural) is
         begin
+            -- Callers may wake on a registered event at a rising edge.
+            -- Align before asserting a strobe so it spans an accepting edge.
+            cycles(1);
             su16_native_data <= to_unsigned(vint_data, 16);
             s_native_strobe <= '1';
             cycles(1);
