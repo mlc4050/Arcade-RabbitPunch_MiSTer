@@ -282,6 +282,13 @@ all 48 MHz timing/coverage gates: 6,630 ALMs, 8,143 registers, 124 M10K blocks,
 bench reads all 52,224 mapped words through CPU and inspection before writing;
 the boundary-sampled synthesized-memory check also passes (921 checks). See RAM_POWERUP.md and HISCORE.md.
 
-Physical pixel-clock/raster/blanking evidence remains the next integration gate.
-The logical platform has no final PLL, physical HPS/DDR ownership mux, or complete
-MiSTer game top. No playable RBF or original-board timing proof is claimed.
+The continuous raster and PLL/reset machine are now wired into the MiSTer top.
+The isolated PLL-driven implementation 2374ddc passes setup (+2.141 ns), hold
+(+0.091 ns), all other reported corners and six coverage categories. Its fitted
+clock ratios produce nominal 46.6666667 MHz and a half-period SDRAM output.
+The external chip-clock simulation exposed and fixed an early read-capture window
+in the VHDL adapter; imported memory RTL remains unchanged. Rabbit Punch attract
+now matches all 62208 MAME pixels through that clock relationship, without
+underflow and within one row's budget. Full-shell fit, actual PCB pin timing,
+interactive gameplay and audible hardware output remain pending. No verified
+playable RBF or original-board timing proof is claimed.

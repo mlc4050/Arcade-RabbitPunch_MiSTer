@@ -2,8 +2,8 @@
 
 `rabbitpunch_machine` connects the existing platform to the provisional continuous
 scanout controller on one system clock. It is a production VHDL integration layer,
-not yet the MiSTer framework top. The inherited demo remains connected in the RBF
-project until the physical shell, PLL and DDR ownership mux are integrated.
+now connected to the MiSTer boundary through the PLL/reset wrapper. The full-shell
+implementation and external pin timing remain unverified.
 
 The scanout controller supplies the fractional main CPU phase, Z80/YM/ADPCM enables,
 vblank/half-frame interrupts, one-row-ahead render requests and tagged pixel reads.
@@ -39,7 +39,8 @@ Verification so far:
   debug/fit_archive/machine_ccb6fa8/.
 - The clocked-machine wrapper passes the same downloaded-program diagnostics
   using the installed vendor PLL model and production reset-release boundary.
-  Fitted PLL counters/phase and physical SDRAM timing remain unverified.
+  Fitted PLL counters/phase now pass the isolated implementation check below;
+  physical PCB timing remains unverified.
 
 Reports live in `docs/reference/`; private simulator logs/images and fit archives
 live under `debug/`. Standalone PLL-model checks do not prove fitted clock counters,
@@ -50,8 +51,8 @@ all-authored-source compile audit covers 173 VHDL files; it is compile coverage,
 not execution of all benches. Raster/enable, CPU-phase, PLL-driven machine and
 RAM startup checks are rerun after the rename. Both regenerated MRAs still match
 all 0x210000 bytes against independent assembly and actual MAME-loaded regions.
-The cached native-host netlist must be regenerated because its checked wrapper
-source names changed; its source guard stays enabled.
+The renamed native-host netlist was regenerated and verified; its source guard
+stays enabled.
 
 The renamed native-host boundary now passes a fresh Quartus fit/netlist test,
 raw-command platform loading/control tests and both profiles' native score-file
@@ -79,7 +80,9 @@ The corrected PLL/chip-clock test passes 372 word checks, 63 transactions, both
 chips/three clients, byte masks, refresh and reinitialization preserving data.
 The clocked CPU/download machine also passes with the chip actually clocked from
 the shifted PLL output. Continuous MAME graphics with that same clock relationship
-is running. These are command-model proofs, not PCB setup/hold measurements.
+passes for Rabbit Punch attract: 62208 exact pixels, no underflow, worst row
+2484 of 3024 clocks. Additional gameplay cases are running. These are command-model
+proofs, not PCB setup/hold measurements.
 
 Clock-tree fit 02d3b39 was rejected for a 3.3 V clock output mixed with the
 standalone project's default 2.5 V SDRAM-bank I/O. Its target commit was reverted
@@ -92,9 +95,22 @@ gate because the exported SDRAM clock pin was not declared as a generated clock.
 That target was reverted in bcf5e36 and archived under
 `debug/fit_archive/clocked_machine_b2d5328_unconstrained/`. Private-database analysis
 of the explicit exported-clock constraint reports zero in all six categories.
-The next committed implementation will rerun every timing gate. Clock inspection
+The corrected implementation 2374ddc passes every timing gate. Clock inspection
 includes the internal PLL VCO and exported clock as distinct hard-block/pin roles;
 TimeQuest's register counts include those endpoints, so the validator checks their
 exact expected counts instead of treating them as extra functional logic domains.
 The fitted integer ratios are 42/5 for the VCO and /9 for each output, giving the
 nominal 46.6666667 MHz; the displayed timing periods are truncated to picoseconds.
+
+The accepted clocked-machine fit at 2374ddc uses 6703 ALMs, 8373 registers,
+124 M10K blocks and one PLL. Worst setup is +2.141 ns; worst hold is +0.091 ns.
+All reported timing corners and six coverage categories pass. The fitted VCO
+and output dividers, half-period SDRAM phase and exported clock are checked.
+This isolated target has hypothetical external I/O budgets, not final board
+pin timing. Evidence: reference/clocked_machine_synth.json and
+debug/fit_archive/clocked_machine_2374ddc/.
+
+Both real-ROM CPUs also pass short 32-main/8-sound ordered MAME startup comparisons
+using the vendor PLL, shifted SDRAM chip clock, early runtime read window and
+production fractional enables. Larger prefixes are running; raster events stay
+idle in this CPU-specific bench, so it does not prove interactive gameplay.
