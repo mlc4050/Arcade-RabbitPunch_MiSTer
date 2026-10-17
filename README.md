@@ -16,7 +16,10 @@ bitmap/palette updates, with all-corner implementation timing closure. A full
 Rabbit Punch scene also matches through the actual shared SDRAM controller/model
 with competing CPU ROM reads. SDRAM, ROM mapping and tiny ROM burst caches pass
 separate implementation and synthesized-netlist tests. Physical raster/PLL,
-complete CPU/video integration and real-pin SDRAM timing remain open.
+full raster scheduling and real-pin SDRAM timing remain open. The connected
+logical CPU/I/O/video board passes 1000-write MAME comparisons for both games
+while lines render; its combined implementation check is running.
+See [board integration](docs/BOARD_INTEGRATION.md) for exact test scope.
 No complete game or playable RBF.
 The inherited template demo remains connected.
 

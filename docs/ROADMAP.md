@@ -58,7 +58,13 @@ the busy captured scene passes every cached RGB pixel and reduces the worst
 line from 3806 to 1939 clocks. The remaining five cached scenes run serially.
 A connected production ROM subsystem with word loading and safe replacement
 image invalidation also passes implementation and synthesized-netlist checks.
-Executing-CPU boot comparison through this memory path is next. No complete game is running yet.
+Executing Rabio Lepus matches its first 10000 MAME writes through that ROM path;
+Rabbit Punch is still running. A connected logical board now joins CPU, I/O,
+IRQ and shared-RAM video; both games pass 1000-write comparisons while logical
+lines render concurrently. Tests explicitly seed native model RAM to MAME-style
+zeros and check black palette output/tags in this early prefix. This is separate
+from the captured-scene graphics proofs. Connected-board implementation is running.
+No complete game is running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
 ## Goal and scope
