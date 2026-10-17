@@ -1,0 +1,20 @@
+{
+  "case": "gate_sprites",
+  "pass_marker": "SPRITE_ROW_PASS",
+  "log": "debug\\baselines\\gate_sprites\\result.log",
+  "commit": "fb188a1df4803322e12fe10f6a00205a6cc3ec26",
+  "vectors_sha256": {
+    "count.hex": "1d40cf24a4c8534224353bdd91a404cd934ca086a312ba42a1f12babddea4748",
+    "rows.hex": "3bf875733d3993916a61caa6efb522b888d5a98b4c813b1cb033799a13f7c9d5",
+    "expected.hex": "efb4c4f50fc1e546cad04b364a5bc8fe02736a328b63c4f21f05404b3204e596",
+    "sprites.hex": "3e655cee0f2cdc15ccc5f246a5056fd268da02ca0fa89a2cdca63a2af4ee3f2e"
+  },
+  "netlist_sha256": "5d7cb480cd4739b0ca8533488bb70169edaf111cb44d873219ca04799865c67e",
+  "source_sha256": {
+    "debug/netlists/sprites_fb188a1/sprites_check.vo": "5d7cb480cd4739b0ca8533488bb70169edaf111cb44d873219ca04799865c67e",
+    "sim/video/tile_test_support.vhd": "8bc2eeaa799428b1fd7aa58e1a1ecee011d524133be591424402d17ededa7e24",
+    "sim/video/sprite_row_tb.vhd": "c32ab59ba8171478f5a54c18390bc196c79e114377c0fd88ddec3e242a57c7a2"
+  },
+  "log_sha256": "6f697cc3076d510b531d70fc52f95bbae2230aa71419ae46e5851c3668251e30",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
+}

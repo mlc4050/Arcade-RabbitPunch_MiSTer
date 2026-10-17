@@ -1,5 +1,5 @@
 {
-  "commit": "2f886cbdf7c92c8399e068a70bcecd32f3c68862",
+  "commit": "fb188a1df4803322e12fe10f6a00205a6cc3ec26",
   "device": "5CSEBA6U23I7",
   "project": "sprites_check",
   "constraint_mhz": 48,
@@ -8,51 +8,51 @@
   "timings": [
     {
       "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 10.788
+      "slack_ns": 11.013
     },
     {
       "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.313
+      "slack_ns": 0.308
     },
     {
       "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.731
+      "slack_ns": 9.73
     },
     {
       "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 11.767
+      "slack_ns": 11.303
     },
     {
       "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.187
+      "slack_ns": 0.263
     },
     {
       "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.575
+      "slack_ns": 9.578
     },
     {
       "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 13.514
+      "slack_ns": 13.954
     },
     {
       "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.17
+      "slack_ns": 0.171
     },
     {
       "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.823
+      "slack_ns": 9.829
     },
     {
       "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 15.376
+      "slack_ns": 15.707
     },
     {
       "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.146
+      "slack_ns": 0.149
     },
     {
       "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.827
+      "slack_ns": 9.83
     }
   ],
   "timing_coverage": {
@@ -82,15 +82,15 @@
     }
   },
   "fit_summary": [
-    "Fitter Status : Successful - Fri Oct 16 08:13:37 2026",
+    "Fitter Status : Successful - Fri Oct 16 19:47:47 2026",
     "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
     "Revision Name : sprites_check",
     "Top-level Entity Name : rabbitpunch_sprite_row",
     "Family : Cyclone V",
     "Device : 5CSEBA6U23I7",
     "Timing Models : Final",
-    "Logic utilization (in ALMs) : 116 / 41,910 ( < 1 % )",
-    "Total registers : 170",
+    "Logic utilization (in ALMs) : 118 / 41,910 ( < 1 % )",
+    "Total registers : 179",
     "Total pins : 1 / 314 ( < 1 % )",
     "Total virtual pins : 126",
     "Total block memory bits : 0 / 5,662,720 ( 0 % )",
@@ -103,6 +103,6 @@
     "Total PLLs : 0 / 6 ( 0 % )",
     "Total DLLs : 0 / 4 ( 0 % )"
   ],
-  "log_sha256": "8a6d047fd37fc3c7e74328de0bbe95c51965e30fae7150909d8312cb2f015bb7",
+  "log_sha256": "606fc4651f50fe008854d3c567832ccede04ea68e1ba53ec1f7db5259a6e67fe",
   "scope": "Standalone sprites block with virtual I/O; not a complete core or hardware release"
 }
