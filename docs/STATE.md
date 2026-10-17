@@ -249,3 +249,9 @@ The output adapter owns five stages of enable/active/sync/blanking/accepted
 metadata and coordinates, output RGB/control registers, and one sticky
 underflow flag. Reset flushes all stages. They are ordinary registers (zero
 RAM in Quartus), no line/frame pixel storage or additional clock domain.
+
+
+The standalone maintenance adapter owns a one-request FSM, byte-lane selector
+and held bus payload. Initialization drains outstanding memory debt before
+releasing pause and suppresses its stale client response. It adds no RAM and
+is not yet in the production bus path.

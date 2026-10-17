@@ -27,3 +27,21 @@ writes without resetting memory, preserve neighboring bytes, and release pause
 only after accepted accesses complete. Score polling/load/save must be scoped
 per ROM generation and set; the existing host prototype disables uploads.
 This reference does not claim persistence is implemented or verified in HDL.
+
+
+The standalone rabbitpunch_maintenance byte adapter now passes actual native
+RAM tests for both geometries using captured MAME bytes with deterministic
+interior changes to stand in for a saved file. It waits for both confirmed CPU
+pause and an externally asserted drained bus before accepting work. Big-endian
+byte masks preserve the preceding byte and following word; reads return the
+correct lane. It holds pause through an accepted memory access even after the
+client ends its session. Initialization discards a pending client result only
+after draining its backend reply. Delays of 0..51 and 300 clocks are checked
+(reference/maintenance_checks.json). This is not connected to the production
+bus-owner mux or HPS score upload/restore path yet. No maintenance access
+bypasses the existing RAM port or adds pixel buffering.
+
+The inspected standard hiscore.v helpers use a configured pause-padding delay
+rather than a transaction-ready handshake. That contract cannot directly drive
+our delayed CPU-bus interface. Any future wrapper must preserve confirmed pause
+and byte access acknowledgment; a fixed padding count is not an acknowledgment.

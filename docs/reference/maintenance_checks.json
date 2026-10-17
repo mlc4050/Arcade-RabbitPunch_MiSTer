@@ -1,0 +1,13 @@
+{
+  "case": "maintenance",
+  "pass_marker": "MAINTENANCE_PASS",
+  "log": "debug\\baselines\\maintenance\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_ram16.vhd": "3d7d435a69db34c53c30fe265f8b6a45be083f73542a37b30069c3b20b312199",
+    "rtl/rabbitpunch_maintenance.vhd": "dac3e1ba29d16a7a7024c3c8fe23a07baa4597c1d7e305b90a04ba5ae10911c0",
+    "sim/board/maintenance_tb.vhd": "52b0b6477eeba311dc6291a0389140f2fc3a59baf4620cff99acb2850898d9db"
+  },
+  "vectors_sha256": "0492a1eb60fc9f655ebb77696edbe2dafa8de9fd43dfc63c240d4e65f3ceef04",
+  "log_sha256": "43d8bf4f541d55d3ea814a12fc55dc92797dcc7c66c707470f79035b37cc9354",
+  "scope": "Standalone maintenance byte adapter and native RAM: both live-MAME score-block geometries, modified interior values, exact byte lanes/neighbors, actual-pause and CPU-debt gates, 0..51/300-cycle backend acknowledgment delay and reset debt drain. No production bus-owner mux, executing CPU or HPS persistence integration"
+}
