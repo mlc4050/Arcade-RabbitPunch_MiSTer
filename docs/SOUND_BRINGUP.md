@@ -135,8 +135,11 @@ pending. CPU/half-chip/chip enables are supplied by the caller, all on i_clk.
 Pause stops the CPU and drains its transaction while JT51 and ROM transport stay
 live. PCM remains raw two's-complement in unsigned buses. No ADPCM sound is
 mixed, and audio ROM transport is external; the main system does not instantiate
-this board yet. The connected native-RAM startup regression passes Rabio Lepus; Rabbit Punch
-and full sound-board implementation checks are running.
+this board yet. The connected native-RAM startup regression passes all 4096 ordered writes
+for both games: reference/sound_board_boot_checks.json. It uses the same
+explicitly captured MAME CPU reset seed and MAME-style native RAM zeros as the
+earlier startup fixture; production RAM remains uninitialized. The full
+sound-board implementation gate is being checked.
 
 
 sound_board_tb also runs a synthetic Z80 IM1 interrupt handler twice from

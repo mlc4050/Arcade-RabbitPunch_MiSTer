@@ -88,11 +88,11 @@ def run_check(stage, quartus_bin, stamp, name):
         expected_sound_memory = {
             "rabbitpunch_ram8:sound_ram": (2048, 8),
             "jt51_sh:u_acc": (8, 68),
-            "jt51_sh:out_padding": (4, 21),
+            "jt51_sh:out_padding": (3, 15),
             "jt51_sh:u_eg1sh": (27, 10),
             "jt51_sh:u_statesh": (28, 2),
             "jt51_sh:u_reg1op": (32, 45),
-            "altshift_taps:eg_VIII_rtl_0": (3, 15),
+            "altshift_taps:eg_VIII_rtl_0": (4, 21),
             "jt51_sh:u_phsh": (29, 20),
         }
         for line in hierarchy.splitlines():
