@@ -153,3 +153,11 @@ stall. Pause drains an accepted response; reset drains before CPU restart.
 No runtime state-load interface is added. The T80 DIR input is used by simulator
 setup only to normalize the MAME comparison's initial CPU registers; no production
 savestate support is claimed. JT51's internal state remains vendor-owned.
+
+
+Native sound RAM contains 2048 bytes, exposed through the read-only sound-board
+inspection address/data port only after o_paused. It has no reset clear or
+restore writer. The sound bus owns an outstanding ROM address, YM write
+address/data and transaction state; it deliberately remains live during CPU
+reset/pause to finish the request owed by soundcpu. The main board remains the
+owner of command byte/pending state. ADPCM strobes are not chip state or audio.

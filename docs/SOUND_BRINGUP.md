@@ -109,3 +109,31 @@ zero block RAM, worst setup +5.642 ns and hold +0.156 ns.
 reference/soundcpu_synth.json pins the staged commit and six zero-issue timing
 coverage categories. This checks T80 and the transaction adapter; JT51 and the
 future native sound RAM/backend are outside that fit.
+
+## Native sound backend and logical sound board
+
+rabbitpunch_sound_bus implements the pinned sound map: ROM 0000-EFFF,
+YM2151 F000/F001, command read/ack F200, ADPCM control F400 and command F600,
+and native 2 KiB RAM F800-FFFF. Unmapped reads return FF and unmapped/ROM
+writes have no device effect. One request pulse receives one reply. ROM
+request/address hold until ready, followed by a separate response. YM writes
+hold until one chip enable; they are not repeated on subsequent enables.
+The two ADPCM outputs are byte strobes for a future chip adapter, not playback.
+
+rabbitpunch_ram8 uses explicit native M10K dual ports, both driven by i_clk.
+RAM is not reset. The inspection port is read-only; sound_board permits it only
+when the sound CPU has drained into pause. CPU writes and inspection must not
+collide. sound_bus_tb initializes every byte by ordinary writes before checking
+all 2048 CPU reads and all 2048 inspection reads; it also verifies peripheral
+boundaries, exact strobes, 17-clock ROM backpressure and 53-clock response delay.
+Evidence: reference/sound_bus_checks.json.
+
+rabbitpunch_sound_board connects the transaction CPU, native backend and JT51.
+The main board still owns the existing command latch/pending flag; command reads
+return its byte and pulse its acknowledgement. Z80 IRQ is YM IRQ OR command
+pending. CPU/half-chip/chip enables are supplied by the caller, all on i_clk.
+Pause stops the CPU and drains its transaction while JT51 and ROM transport stay
+live. PCM remains raw two's-complement in unsigned buses. No ADPCM sound is
+mixed, and audio ROM transport is external; the main system does not instantiate
+this board yet. The connected native-RAM two-game startup regression and the
+full sound-board implementation target have been prepared; results are pending.
