@@ -115,3 +115,14 @@ using the vendor PLL, shifted SDRAM chip clock, early runtime read window and
 production fractional enables. Both games also pass 2000 main and 256 sound ordered writes
 (reference/system_boot_pll_phase_boot_checks.json). Raster events stay
 idle in this CPU-specific bench, so it does not prove interactive gameplay.
+
+Full-shell fit 660a45a is rejected: 13551 ALMs, 166 M10Ks, positive hold, but
+-4.338 ns setup on all sixteen SDRAM DQ inputs and inherited framework pin
+coverage gaps. The worst internal game setup path is +4.823 ns at 100 C slow.
+DQ inputs are already packed in I/O cells; the forwarded clock's insertion
+delay consumes the initial half-period read window. The next physical-shell
+candidate uses 5357 ps (quarter-period), with runtime read adjustment one.
+Low-level SDRAM and clocked-machine diagnostics are rerun for that phase.
+Historical half-period graphics proofs retain their exact source/phase scope.
+See SDRAM_PIN_TIMING.md for the bounded, source-locked treatment of inherited
+framework peripheral I/O and the distinction from fully timed SDRAM/game paths.

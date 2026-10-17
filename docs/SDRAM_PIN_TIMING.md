@@ -1,7 +1,7 @@
 # Prototype SDRAM pin timing
 
 The first physical shell uses a 50 MHz reference, 46.6667 MHz system clock and
-half-period-shifted external SDRAM clock. The controller uses CAS latency two.
+quarter-period-shifted external SDRAM clock. The controller uses CAS latency two.
 `GINT_SDRAM_READ_CAPTURE_ADJUST=1` selects the earlier runtime capture; the adapter
 keeps that input zero during controller initialization. Same-phase logical tests
 retain zero. Changing clock phase requires rechecking the read-window selection.
@@ -25,3 +25,28 @@ DQ input register in I/O cells, fitted PLL period/phase and SDRAM I/O standards.
 Hardware pattern tests, phase-margin checks and actual ROM/video bring-up remain
 necessary; a command model cannot establish electrical timing. The prototype is
 not a verified release until these hardware checks pass.
+
+The first full-shell fit (660a45a) fails at the SDRAM input boundary: all 16
+DQ inputs have setup violations, worst -4.338 ns, despite confirmed I/O input
+register packing. The forwarded clock pin has about 5.2 ns more insertion delay
+than the system capture clock. Internal game paths pass (+4.823 ns worst at the
+100 C slow corner); this failure is the external clock relationship. The initial
+10714 ps phase is rejected for this physical shell.
+
+A 5357 ps (quarter-period) phase is the next candidate. Holding measured insertion/routing fixed,
+the old input setup slack improves by 5.357 ns and output setup worsens by the
+same amount, projecting about +1.019/+0.801 ns respectively. Those are sensitivity
+estimates, not a fitted result. Re-run real PLL/chip-clock tests and full
+placement/routing/timing before accepting this choice. The low-level PLL default
+remains 10714 ps for historical tests; the production clocked-machine wrapper
+explicitly selects 5357 ps.
+
+The inherited MiSTer SDC leaves four peripheral input pins and fifty output pins
+untimed (HDMI video/audio, I2C, LEDs and multiplexed SD/user ports). They are
+classified separately in scripts/framework_timing_scope.json, locked to unchanged
+sys_top.v/sys_top.sdc hashes, exact allowed port names and bounded path counts.
+The full-build gate rejects new untimed pins, any illegal/unconstrained clock,
+any increased path count and every reported negative slack. The independent
+block gates still require zero in all six coverage categories. No broad false
+paths were added to make this pass; HDMI/peripheral electrical margins remain
+outside the full-build timing claim. The raw counts remain in the output report.

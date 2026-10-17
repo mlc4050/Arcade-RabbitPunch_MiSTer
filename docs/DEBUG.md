@@ -3,7 +3,7 @@
 The instrumented RabbitPunch_stp revision includes rabbitpunch_debug; the release
 revision omits its instance. This is VHDL instrumentation with one system-clock
 process and no signals that control the game. Its counter/packet bench passes;
-the Tcl field decoder passes valid and deliberately malformed input tests without
+the Tcl field decoder and one-line Python reader pass valid and deliberately malformed input tests without
 opening JTAG. Fitted probe presence and actual hardware reads remain unverified.
 
 Use scripts/read_issp.py RPUN through scripts/d_drive.ps1 when all compilation and

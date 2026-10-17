@@ -1,6 +1,7 @@
 {
   "checks": [
     "valid_registered_packet",
+    "one_line_parser_identity_guards",
     "wrong_tag",
     "wrong_layout",
     "wrong_width",
@@ -12,6 +13,9 @@
     "read_only_pulse"
   ],
   "decoded_fields": 31,
-  "source_sha256": "c110e0a2b68da3ce2df0d5999f0de27f226961c15936f11d49714f8b6a8525d9",
+  "source_sha256": {
+    "scripts/read_issp.tcl": "c110e0a2b68da3ce2df0d5999f0de27f226961c15936f11d49714f8b6a8525d9",
+    "scripts/probe.py": "64c1443546b9aa24b19684d263f68e7948a7606c6319abd126a3960a9d4d004c"
+  },
   "scope": "Python-hosted Tcl decoder with mocked enumeration/read/session commands; valid bit ordering and fail-closed identity/layout/width/selection/read-only controls; no JTAG tool or hardware connection"
 }

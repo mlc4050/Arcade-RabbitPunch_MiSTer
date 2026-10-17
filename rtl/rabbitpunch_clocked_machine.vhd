@@ -11,7 +11,7 @@ use work.rabbitpunch_config.all;
 entity rabbitpunch_clocked_machine is
     generic (
         GINT_SDRAM_READ_CAPTURE_ADJUST : natural range 0 to 2 := 1;
-        GSTR_SDRAM_PHASE_SHIFT : string := "10714 ps";
+        GSTR_SDRAM_PHASE_SHIFT : string := "5357 ps";
         GINT_IMAGE_BYTES : positive := CINT_ROM_IMAGE_SIZE;
         GU16_DIP_DEFAULT : unsigned(15 downto 0) := x"0000"
     );

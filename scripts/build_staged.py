@@ -42,6 +42,8 @@ see uncommitted work and are willing to leave the tree alone.
 """
 import argparse
 import datetime
+import hashlib
+import json
 import os
 import re
 import subprocess
@@ -113,7 +115,7 @@ def read_slacks(summary):
     return [(name[-100:], slack, tns) for name, slack, tns in rows if slack < 0]
 
 
-def check_timing_coverage(report):
+def check_timing_coverage(report, framework_scope=None, stage=None):
     """Fail closed when illegal/unconstrained paths remain or the table is absent."""
     path = Path(report)
     if not path.is_file():
@@ -127,9 +129,50 @@ def check_timing_coverage(report):
         raise SystemExit("Timing coverage unverified: expected all six coverage categories")
     bad = [(name.strip(), int(setup), int(hold)) for name, setup, hold in rows
            if int(setup) or int(hold)]
-    if bad:
+    if bad and framework_scope is not None:
+        # Retain inherited framework I/O gaps as visible, source-locked scope.
+        # Never turn these into broad false paths or exempt clocks/core/SDRAM.
+        if stage is None:
+            raise SystemExit("Framework coverage scope requires the fitted stage")
+        scope = json.loads(Path(framework_scope).read_text())
+        for name, expected_hash in scope["source_sha256"].items():
+            actual = hashlib.sha256((Path(stage) / name).read_text().encode()).hexdigest()
+            if actual != expected_hash:
+                raise SystemExit(f"Framework timing scope source changed: {name}")
+        if any("Clocks" in name for name, _, _ in bad):
+            raise SystemExit(f"Illegal or unconstrained clocks: {bad}")
+        ports = {"inputs": set(), "outputs": set()}
+        direction = None
+        for line in path.read_text(errors="replace").splitlines():
+            if re.match(r"^;\s*Unconstrained Input Ports\s*;", line):
+                direction = "inputs"
+            elif re.match(r"^;\s*Unconstrained Output Ports\s*;", line):
+                direction = "outputs"
+            match = re.match(r"^;\s*([^;]+?)\s*;\s*(No (?:input|output) delay[^;]+|Partially constrained)\s*;", line)
+            if match and direction:
+                ports[direction].add(match[1].strip())
+        for key in ports:
+            allowed = set(scope["input_ports" if key == "inputs" else "output_ports"])
+            if not ports[key] or not ports[key] <= allowed:
+                raise SystemExit(f"Unexpected untimed {key}: {sorted(ports[key] - allowed)}")
+        categories = {name.strip(): (int(setup), int(hold)) for name, setup, hold in rows}
+        for label, key in (("Input", "inputs"), ("Output", "outputs")):
+            count = len(ports[key])
+            if categories[f"Unconstrained {label} Ports"] != (count, count):
+                raise SystemExit(f"Untimed {key} count disagrees with enumerated framework ports")
+            setup, hold = categories[f"Unconstrained {label} Port Paths"]
+            if (setup > scope["maximum_unconstrained_paths"][f"setup_{label.lower()}"] or
+                    hold > scope["maximum_unconstrained_paths"][f"hold_{label.lower()}"]):
+                raise SystemExit(f"Framework untimed path count increased: {label}")
+        destination = Path(stage) / "output_files/framework_timing_scope.json"
+        destination.write_text(json.dumps(dict(scope=scope["scope"], input_ports=sorted(ports["inputs"]),
+            output_ports=sorted(ports["outputs"]), raw_coverage=categories), indent=2) + "\n")
+        print(f"  clocks/core/SDRAM covered; inherited framework pin gaps retained: {len(ports['inputs'])} inputs, {len(ports['outputs'])} outputs")
+        print("  HDMI/audio/SD/I2C peripheral electrical timing is outside this scoped gate")
+    elif bad:
         raise SystemExit(f"Illegal clocks or unconstrained timing paths: {bad}")
-    print("  all six timing-coverage categories clear")
+    else:
+        print("  all six timing-coverage categories clear")
 
 
 def report_resources(stage):
@@ -322,7 +365,8 @@ def main():
     print("==== timing ====")
     if not ok:
         sys.exit("BUILD FAILED -- see %s" % log_path)
-    check_timing_coverage(os.path.join(stage, "output_files", "%s.sta.rpt" % REV))
+    check_timing_coverage(os.path.join(stage, "output_files", "%s.sta.rpt" % REV),
+                          Path(stage) / "scripts/framework_timing_scope.json", stage)
     violations = read_slacks(
         os.path.join(stage, "output_files", "%s.sta.summary" % REV))
 

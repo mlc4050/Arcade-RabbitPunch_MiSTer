@@ -67,10 +67,26 @@
     {
       "case": "empty_coverage",
       "rejected": true
+    },
+    {
+      "case": "explicit_inherited_framework_scope",
+      "rejected": false
+    },
+    {
+      "case": "reject_untimed_sdram_pin",
+      "rejected": true
+    },
+    {
+      "case": "reject_increased_framework_path_count",
+      "rejected": true
+    },
+    {
+      "case": "reject_changed_framework_source",
+      "rejected": true
     }
   ],
   "reference_summary_sha256": "176d7c808c09cfe3c7248b00dc5683e0f895a612e95ebb44e8c82adff3756a41",
   "reference_coverage_sha256": "e636dede4cf09d0c26c66c482038c6af8915d896f3fa53b74f73de5dc816dc61",
-  "script_sha256": "a171d2e5136ff0c09784f126569845c82d06e4dcaa6d5323bae6fc53a86c8e03",
+  "script_sha256": "6e85a277518f341f73150ff8d09affc145979a2b5389ad863a28973920749c32",
   "scope": "Real accepted Quartus report plus controlled missing/negative timing and coverage mutations; no compile or hardware claim"
 }

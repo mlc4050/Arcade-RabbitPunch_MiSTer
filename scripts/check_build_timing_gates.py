@@ -52,6 +52,37 @@ for category in ('Illegal Clocks', 'Unconstrained Clocks', 'Unconstrained Input 
     expect('hold_coverage_' + category.replace(' ', '_'), lambda: build_staged.check_timing_coverage(path), True)
 missing = scratch / 'empty.rpt';missing.write_text('')
 expect('empty_coverage', lambda: build_staged.check_timing_coverage(missing), True)
+# Full-shell scope remains explicit: all clocks timed, no SDRAM exception,
+# inherited framework pin names/counts and unchanged sources are required.
+import shutil
+full_report = root / 'debug/fit_archive/full_shell_660a45a_phase10714_rejected/RabbitPunch.sta.rpt'
+if full_report.exists():
+    scope_file = root / 'scripts/framework_timing_scope.json'
+    scope = json.loads(scope_file.read_text())
+    stage = scratch / 'framework_stage'
+    (stage / 'output_files').mkdir(parents=True, exist_ok=True)
+    for name in scope['source_sha256']:
+        target = stage / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(root / name, target)
+    expect('explicit_inherited_framework_scope',
+           lambda: build_staged.check_timing_coverage(full_report, scope_file, stage), False)
+    changed = scratch / 'unexpected_sdram_input.rpt'
+    changed.write_text(full_report.read_text().replace('HDMI_TX_INT', 'SDRAM_DQ[0]'))
+    expect('reject_untimed_sdram_pin',
+           lambda: build_staged.check_timing_coverage(changed, scope_file, stage), True)
+    changed = scratch / 'extra_framework_paths.rpt'
+    text, count = re.subn(r'(;\s*Unconstrained Input Port Paths\s*;\s*)14(\s*;)',
+                           r'\g<1>15\g<2>', full_report.read_text(), count=1)
+    assert count == 1
+    changed.write_text(text)
+    expect('reject_increased_framework_path_count',
+           lambda: build_staged.check_timing_coverage(changed, scope_file, stage), True)
+    source = stage / 'sys/sys_top.v'
+    source.write_text(source.read_text() + '\n// changed fixture\n')
+    expect('reject_changed_framework_source',
+           lambda: build_staged.check_timing_coverage(full_report, scope_file, stage), True)
+
 result = dict(checks=checks, reference_summary_sha256=hashlib.sha256(summary.read_bytes()).hexdigest(),
               reference_coverage_sha256=hashlib.sha256(report.read_bytes()).hexdigest(),
               script_sha256=hashlib.sha256((root / 'scripts/build_staged.py').read_bytes()).hexdigest(),

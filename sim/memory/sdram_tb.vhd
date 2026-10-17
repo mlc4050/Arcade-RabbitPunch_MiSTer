@@ -9,12 +9,14 @@ use work.rabbitpunch_sdram_types.all;
 entity sdram_tb is
     generic (
         GBOOL_PLL_CLOCK : boolean := false;
+        GINT_SDRAM_PHASE_PS : natural := 10714;
         GINT_READ_CAPTURE_ADJUST : natural range 0 to 2 := 1
     );
 end entity;
 
 architecture test of sdram_tb is
     component rabbitpunch_pll is
+        generic (GSTR_SDRAM_PHASE_SHIFT : string := "10714 ps");
         port (
             i_reference_clk : in std_logic;
             i_reset : in std_logic;
@@ -119,6 +121,9 @@ begin
     end generate;
     physical_clock : if (GBOOL_PLL_CLOCK) generate
         pll : rabbitpunch_pll
+            generic map (
+                GSTR_SDRAM_PHASE_SHIFT => integer'image(GINT_SDRAM_PHASE_PS) & " ps"
+            )
             port map (
                 i_reference_clk => s_reference_clk,
                 i_reset => '0',

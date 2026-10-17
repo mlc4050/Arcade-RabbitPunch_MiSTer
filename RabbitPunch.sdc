@@ -8,12 +8,12 @@ set shifted_sources [list]
 foreach_in_collection clock $game_clocks {
     set period [get_clock_info -period $clock]
     set edges [get_clock_info -waveform $clock]
-    if {$period > 21.42 && $period < 21.44 && abs([lindex $edges 0] - 10.714286) < 0.03} {
+    if {$period > 21.42 && $period < 21.44 && abs([lindex $edges 0] - 5.357) < 0.03} {
         lappend shifted_sources [get_clock_info -targets $clock]
     }
 }
 if {[llength $shifted_sources] != 1} {
-    error "Expected one half-period SDRAM PLL output; clock plan is unverified"
+    error "Expected one 5.357 ns SDRAM PLL output; clock plan is unverified"
 }
 create_generated_clock -name sdram_pin -source [lindex $shifted_sources 0] \
     -divide_by 1 [get_ports SDRAM_CLK]
