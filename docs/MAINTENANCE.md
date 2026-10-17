@@ -45,5 +45,7 @@ final CPU bypass removes its ordinary-path request delay.
 The audio regression also performs maintenance write/read while a sample is
 playing: both CPUs pause while ADPCM and YM cadence continue. Platform controls,
 DIP, byte/DDR and native HPS protocol regressions pass with the integrated owner.
-Full-platform implementation is pending. These interfaces provide access for
+Full-platform implementation passes all reported 48 MHz timing and six coverage
+gates with 6431 ALMs, 7832 registers and unchanged 927339 RAM bits
+(reference/platform_synth.json); worst setup +2.885 ns, hold +0.082 ns. These interfaces provide access for
 persistence/state tooling, but HPS score upload/restore is not implemented.

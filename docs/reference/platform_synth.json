@@ -1,5 +1,5 @@
 {
-  "commit": "cfa0a2e10d755c7899b7eab5301ef63a6534f4dc",
+  "commit": "8e608a33b17120a2131a1cf42f4e48e58d7539e0",
   "device": "5CSEBA6U23I7",
   "project": "platform_check",
   "constraint_mhz": 48,
@@ -8,59 +8,59 @@
   "timings": [
     {
       "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 3.832
+      "slack_ns": 3.845
     },
     {
       "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.196
+      "slack_ns": 0.254
     },
     {
       "type": "Slow 1100mV 100C Model Recovery 'clk_sys'",
-      "slack_ns": 11.451
+      "slack_ns": 10.464
     },
     {
       "type": "Slow 1100mV 100C Model Removal 'clk_sys'",
-      "slack_ns": 1.206
+      "slack_ns": 1.156
     },
     {
       "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.06
+      "slack_ns": 9.059
     },
     {
       "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 2.835
+      "slack_ns": 2.885
     },
     {
       "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.164
+      "slack_ns": 0.242
     },
     {
       "type": "Slow 1100mV -40C Model Recovery 'clk_sys'",
-      "slack_ns": 11.686
+      "slack_ns": 10.774
     },
     {
       "type": "Slow 1100mV -40C Model Removal 'clk_sys'",
-      "slack_ns": 1.103
+      "slack_ns": 1.069
     },
     {
       "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 8.975
+      "slack_ns": 8.968
     },
     {
       "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 7.586
+      "slack_ns": 7.771
     },
     {
       "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.124
+      "slack_ns": 0.138
     },
     {
       "type": "Fast 1100mV 100C Model Recovery 'clk_sys'",
-      "slack_ns": 15.526
+      "slack_ns": 14.949
     },
     {
       "type": "Fast 1100mV 100C Model Removal 'clk_sys'",
-      "slack_ns": 0.606
+      "slack_ns": 0.581
     },
     {
       "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
@@ -68,19 +68,19 @@
     },
     {
       "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 7.841
+      "slack_ns": 8.022
     },
     {
       "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.091
+      "slack_ns": 0.082
     },
     {
       "type": "Fast 1100mV -40C Model Recovery 'clk_sys'",
-      "slack_ns": 16.374
+      "slack_ns": 15.91
     },
     {
       "type": "Fast 1100mV -40C Model Removal 'clk_sys'",
-      "slack_ns": 0.49
+      "slack_ns": 0.494
     },
     {
       "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
@@ -114,17 +114,17 @@
     }
   },
   "fit_summary": [
-    "Fitter Status : Successful - Sat Oct 17 02:00:18 2026",
+    "Fitter Status : Successful - Sat Oct 17 08:39:08 2026",
     "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
     "Revision Name : platform_check",
     "Top-level Entity Name : platform_check",
     "Family : Cyclone V",
     "Device : 5CSEBA6U23I7",
     "Timing Models : Final",
-    "Logic utilization (in ALMs) : 6,397 / 41,910 ( 15 % )",
-    "Total registers : 7592",
+    "Logic utilization (in ALMs) : 6,431 / 41,910 ( 15 % )",
+    "Total registers : 7832",
     "Total pins : 39 / 314 ( 12 % )",
-    "Total virtual pins : 891",
+    "Total virtual pins : 927",
     "Total block memory bits : 927,339 / 5,662,720 ( 16 % )",
     "Total RAM Blocks : 123 / 553 ( 22 % )",
     "Total DSP Blocks : 1 / 112 ( < 1 % )",
@@ -135,7 +135,7 @@
     "Total PLLs : 0 / 6 ( 0 % )",
     "Total DLLs : 0 / 4 ( 0 % )"
   ],
-  "log_sha256": "f8959c6ef09b3c5bda246b41578e5b059e5b58c0914e938022c0dade26a2d45a",
+  "log_sha256": "d4b30c62075673ca748be79a3d3ed06bc89ed8d7761923005302ae36f6ed5a40",
   "scope": "Logical controls/pause, host-signal DDR/byte load frontend and complete CPU/audio/video/SDRAM system; registered logical test boundaries, direct SDRAM pins and hypothetical half-period external tester; no native HPS wrapper/DDR ownership mux, final PLL/raster or PCB electrical timing proof",
   "sound_memory": [
     {

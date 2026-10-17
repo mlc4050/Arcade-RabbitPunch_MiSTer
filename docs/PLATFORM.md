@@ -31,15 +31,16 @@ not changed into a playable core by this logical integration. Development MRAs
 remain byte-stream mode until physical DDR wiring is complete.
 
 
-Full-size production logical-platform implementation passes all reported
-48 MHz timing corners and all six coverage gates (reference/platform_synth.json,
-commit cfa0a2e): 6397 ALMs, 7592 registers and 927339 block RAM bits. Worst
-reported setup is +2.835 ns and hold +0.091 ns; recovery/removal are positive.
-The expected eight sound RAM geometries and required CPU/video/loader hierarchy
-survive synthesis. This fit uses registered logical test boundaries and direct
-SDRAM pins with hypothetical half-period input timing, not a physical PLL or
-external memory timing signoff.
-
+Full-size production logical-platform implementation, including paused
+maintenance and the transparent idle CPU owner, passes all reported 48 MHz
+timing corners and all six coverage gates (reference/platform_synth.json,
+commit 8e608a3): 6431 ALMs, 7832 registers, 123 RAM blocks and
+927339 RAM bits. Worst reported setup is +2.885 ns and hold +0.082 ns;
+all other reported checks are nonnegative. The eight expected sound RAM
+geometries and required CPU/video/loader/maintenance hierarchy survive
+synthesis. Registered logical test boundaries and direct SDRAM pins use
+hypothetical half-period external input timing; final PLL/raster and PCB
+memory timing remain unproven.
 
 Native host integration also passes (reference/platform_host_checks.json).
 platform_host_tb drives actual UIO/FIO command strobes into the verified
