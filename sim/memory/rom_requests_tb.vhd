@@ -9,6 +9,30 @@ entity rom_requests_tb is
 end entity;
 
 architecture test of rom_requests_tb is
+    component rom_requests_check is
+        port (
+            i_clk : in std_logic;
+            i_sprite_request : in std_logic;
+            iu17_sprite_word_address : in unsigned(16 downto 0);
+            o_sprite_response_valid : out std_logic;
+            ou32_sprite_response_data : out unsigned(31 downto 0);
+            i_tile_request : in std_logic;
+            iu17_tile_word_address : in unsigned(16 downto 0);
+            i_tile_foreground : in std_logic;
+            o_tile_response_valid : out std_logic;
+            ou32_tile_response_data : out unsigned(31 downto 0);
+            i_cpu_request : in std_logic;
+            iu18_cpu_byte_address : in unsigned(17 downto 0);
+            o_cpu_response_valid : out std_logic;
+            ou16_cpu_response_data : out unsigned(15 downto 0);
+            o_idle : out std_logic;
+            ou3_backend_requests : out unsigned(2 downto 0);
+            iu3_backend_ready : in unsigned(2 downto 0);
+            ou81_backend_byte_addresses : out unsigned(80 downto 0);
+            iu3_backend_response_valid : in unsigned(2 downto 0);
+            iu192_backend_read_data : in unsigned(191 downto 0)
+        );
+    end component;
     signal s_clk : std_logic := '0';
     signal s_sprite_request, s_tile_request, s_cpu_request : std_logic := '0';
     signal su17_sprite_address, su17_tile_address : unsigned(16 downto 0) := (others => '0');
@@ -20,6 +44,7 @@ architecture test of rom_requests_tb is
     signal su3_requests, su3_ready : unsigned(2 downto 0);
     signal su3_valid : unsigned(2 downto 0) := "000";
     signal su27_addresses : t_sdram_addresses;
+    signal su81_addresses : unsigned(80 downto 0);
     signal su64_data : t_sdram_read_data := (others => (others => '0'));
     type t_test_addresses is array (natural range <>) of natural;
     constant GRAPHICS_ADDRESSES : t_test_addresses := (0, 1, 2, 3, 127, 128, 511, 512, 65535, 65536, 131070, 131071);
@@ -34,7 +59,7 @@ architecture test of rom_requests_tb is
     end function;
 begin
     s_clk <= not s_clk after 10 ns;
-    dut : entity work.rabbitpunch_rom_requests
+    dut : rom_requests_check
         port map (
             i_clk => s_clk,
             i_sprite_request => s_sprite_request,
@@ -53,11 +78,14 @@ begin
             o_idle => s_idle,
             ou3_backend_requests => su3_requests,
             iu3_backend_ready => su3_ready,
-            ou27_backend_byte_addresses => su27_addresses,
+            ou81_backend_byte_addresses => su81_addresses,
             iu3_backend_response_valid => su3_valid,
-            iu64_backend_read_data => su64_data
+            iu192_backend_read_data => su64_data(2) & su64_data(1) & su64_data(0)
         );
 
+    addresses : for gint_client in 0 to 2 generate
+        su27_addresses(gint_client) <= su81_addresses(gint_client * 27 + 26 downto gint_client * 27);
+    end generate;
     synthetic_backend : if (not USE_PIN_BACKEND) generate
         s_loaded <= '1';
     process(s_clk)

@@ -7,7 +7,7 @@ root = core_root()
 sources = ["rtl/rabbitpunch_layout.vhd", "rtl/rabbitpunch_sdram_types.vhd",
            "rtl/memory/sdram/sdram.sv", "rtl/rabbitpunch_sdram.vhd",
            "sim/vendor/sdram/sdram_chip_model_wide.sv",
-           "rtl/rabbitpunch_rom_requests.vhd", "sim/memory/rom_requests_tb.vhd"]
+           "rtl/rabbitpunch_rom_requests.vhd", "rtl/synth_check/rom_requests/rom_requests_check.vhd", "sim/memory/rom_requests_tb.vhd"]
 results = []
 for pin_backend in (False, True):
     case = "rom_requests_pin" if pin_backend else "rom_requests"

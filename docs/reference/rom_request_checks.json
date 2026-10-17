@@ -10,9 +10,10 @@
       "rtl/rabbitpunch_sdram.vhd": "06a3659bbbab5dde9ca7986c292883cabb09f42342af71163d446076fd22b766",
       "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
       "rtl/rabbitpunch_rom_requests.vhd": "3a49b04bf3a3ac0981cc40dd1ba9b1b4e1790cd778b6c2d4e5de1c039863d4fa",
-      "sim/memory/rom_requests_tb.vhd": "6e20465d3c318192609a9723fa1ec1033b49905e7be89cd6f1b5a906204e620e"
+      "rtl/synth_check/rom_requests/rom_requests_check.vhd": "ea30e68163cbcb2d6f7a22ff5ead6f6206df28b15ba78a4221afa1ba95ae2ff9",
+      "sim/memory/rom_requests_tb.vhd": "3c6fbd7ecadb956c22d8adbd8936975b65e4255f57415b6aab3b122801e226a5"
     },
-    "log_sha256": "74569cc92438d0ef2837d9ddf848ab6c91335518b05fd77d2a0562535517eca7",
+    "log_sha256": "c2ff37e2227d8b3531dc93df02636a396462b2168b0e758fd3bcc9ecb6184907",
     "scope": "Synthetic byte-address-dependent data with delayed/backpressured burst clients; region offsets, banks, word lanes and CPU endian assembly; no analog timing or full-game proof"
   },
   {
@@ -26,9 +27,10 @@
       "rtl/rabbitpunch_sdram.vhd": "06a3659bbbab5dde9ca7986c292883cabb09f42342af71163d446076fd22b766",
       "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
       "rtl/rabbitpunch_rom_requests.vhd": "3a49b04bf3a3ac0981cc40dd1ba9b1b4e1790cd778b6c2d4e5de1c039863d4fa",
-      "sim/memory/rom_requests_tb.vhd": "6e20465d3c318192609a9723fa1ec1033b49905e7be89cd6f1b5a906204e620e"
+      "rtl/synth_check/rom_requests/rom_requests_check.vhd": "ea30e68163cbcb2d6f7a22ff5ead6f6206df28b15ba78a4221afa1ba95ae2ff9",
+      "sim/memory/rom_requests_tb.vhd": "3c6fbd7ecadb956c22d8adbd8936975b65e4255f57415b6aab3b122801e226a5"
     },
-    "log_sha256": "721b5b282b9d20cf6b0e2431b6e41fe0af2b75b0756088ae0e3cb730a5d77845",
+    "log_sha256": "f7b2eba7f744672d8b249b5f57882b9ccc27ee3c4401acade40dbe23cecfc6b7",
     "scope": "Synthetic byte-address-dependent data with actual SDRAM controller and command model; region offsets, banks, word lanes and CPU endian assembly; no analog timing or full-game proof"
   }
 ]
