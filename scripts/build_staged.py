@@ -49,7 +49,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from coretools import core_root, revision, quartus_bin   # noqa: E402
+from coretools import core_root, revision, quartus_bin, NO_WINDOW   # noqa: E402
 
 REV = None          # set in main() from --rev / coretools
 QUARTUS_BIN = None
@@ -94,30 +94,42 @@ def run(cmd, **kw):
 
 
 def read_slacks(summary):
-    """Print every clock's setup slack; return the ones that fail.
+    """Require a timing summary and gate every reported check, including hold."""
+    path = Path(summary)
+    if not path.is_file():
+        raise SystemExit(f"Timing unverified: missing {path}")
+    text = path.read_text(errors="replace")
+    rows = []
+    for block in re.split(r"\n\s*\n", text):
+        kind = re.search(r"Type\s*:\s*(.+)", block)
+        slack = re.search(r"Slack\s*:\s*(-?[\d.]+)", block)
+        tns = re.search(r"TNS\s*:\s*(\S+)", block)
+        if kind and slack:
+            rows.append((kind[1].strip(), float(slack[1]), tns[1] if tns else "unknown"))
+    if not rows or not all(any(check in name for name, _, _ in rows)
+                           for check in ("Setup", "Hold", "Minimum Pulse Width")):
+        raise SystemExit("Timing unverified: setup, hold or minimum pulse width missing")
+    print(f"  {len(rows)} timing checks inspected, including setup/hold and pulse width")
+    return [(name[-100:], slack, tns) for name, slack, tns in rows if slack < 0]
 
-    All of them, not clk_sys alone: a violation on any clock is a violation,
-    and scripts/build.sh gates on exactly the same rule.
-    """
-    out = []
-    if not os.path.exists(summary):
-        print("no timing summary at %s -- treating as unverified" % summary)
-        return out
-    lines = open(summary, errors="replace").read().splitlines()
-    for i, ln in enumerate(lines):
-        if not ln.startswith("Type  : Setup ") or i + 2 >= len(lines):
-            continue
-        clk = ln.split("Setup ", 1)[1].strip().strip("'")
-        try:
-            slack = float(lines[i + 1].split(":", 1)[1])
-        except (IndexError, ValueError):
-            continue
-        tns = lines[i + 2].split(":", 1)[1].strip()
-        if "emu|pll" in clk:
-            print("worst clk_sys setup: Slack : %.3f / TNS   : %s" % (slack, tns))
-        if slack < 0:
-            out.append((clk[-58:], slack, tns))
-    return out
+
+def check_timing_coverage(report):
+    """Fail closed when illegal/unconstrained paths remain or the table is absent."""
+    path = Path(report)
+    if not path.is_file():
+        raise SystemExit(f"Timing coverage unverified: missing {path}")
+    rows = re.findall(r";\s*(Illegal Clocks|Unconstrained [^;]+?)\s*;\s*(\d+)\s*;\s*(\d+)\s*;",
+                      path.read_text(errors="replace"))
+    expected = {"Illegal Clocks", "Unconstrained Clocks", "Unconstrained Input Ports",
+                "Unconstrained Input Port Paths", "Unconstrained Output Ports",
+                "Unconstrained Output Port Paths"}
+    if {name.strip() for name, _, _ in rows} != expected:
+        raise SystemExit("Timing coverage unverified: expected all six coverage categories")
+    bad = [(name.strip(), int(setup), int(hold)) for name, setup, hold in rows
+           if int(setup) or int(hold)]
+    if bad:
+        raise SystemExit(f"Illegal clocks or unconstrained timing paths: {bad}")
+    print("  all six timing-coverage categories clear")
 
 
 def report_resources(stage):
@@ -267,14 +279,23 @@ def main():
     log_path = os.path.join(stage, "q_staged.log")
     open(marker, "w").write(stamp)
     try:
+        # Keep Quartus caches/profile writes on D: as well as project scratch.
+        env = dict(os.environ)
+        scratch = Path(here) / ".local/quartus"
+        for key, folder in (("TEMP", "tmp"), ("TMP", "tmp"), ("TMPDIR", "tmp"),
+                            ("APPDATA", "appdata"), ("LOCALAPPDATA", "localappdata"),
+                            ("USERPROFILE", "profile")):
+            path = scratch / folder
+            path.mkdir(parents=True, exist_ok=True)
+            env[key] = str(path)
         with open(log_path, "w") as log:
-            subprocess.run([quartus, "--flow", "compile", REV, "-c", REV],
-                           cwd=stage, stdout=log, stderr=subprocess.STDOUT)
+            compile_run = subprocess.run([quartus, "--flow", "compile", REV, "-c", REV],
+                           cwd=stage, env=env, stdout=log, stderr=subprocess.STDOUT, **NO_WINDOW)
     finally:
         os.remove(marker)
 
     tail = open(log_path, errors="replace").read().splitlines()[-25:]
-    ok = any("Full Compilation was successful" in ln for ln in tail)
+    ok = compile_run.returncode == 0 and any("Full Compilation was successful" in ln for ln in tail)
     for ln in tail:
         if any(k in ln for k in ("successful", "Error", "Elapsed")):
             print(ln.strip())
@@ -292,6 +313,9 @@ def main():
 
     print("")
     print("==== timing ====")
+    if not ok:
+        sys.exit("BUILD FAILED -- see %s" % log_path)
+    check_timing_coverage(os.path.join(stage, "output_files", "%s.sta.rpt" % REV))
     violations = read_slacks(
         os.path.join(stage, "output_files", "%s.sta.summary" % REV))
 
