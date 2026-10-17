@@ -35,3 +35,10 @@ arrow press/release flags and event toggles also pass
 (reference/host_netlist_checks.json). This is not a physical ARM bridge or a
 native-RTL ModelSim pass. File-trigger and whole-system tests are separately
 scoped in DDR_LOADING.md.
+
+
+The native host functional netlist is now connected to the logical platform in
+platform_host_tb. Actual command strobes produce CPU-visible controls and DIPs,
+byte/DDR downloads and pause/reset/retry behavior. See PLATFORM.md and
+reference/platform_host_checks.json. The prototype configuration text remains
+unchanged; this is not final OSD or physical HPS bridge validation.

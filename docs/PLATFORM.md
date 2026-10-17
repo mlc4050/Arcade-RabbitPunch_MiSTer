@@ -29,3 +29,24 @@ Physical PLL, raster/scanout, actual HPS bridge/rotator ownership and external
 memory electrical timing remain outside this module. The inherited demo top is
 not changed into a playable core by this logical integration. Development MRAs
 remain byte-stream mode until physical DDR wiring is complete.
+
+
+Full-size production logical-platform implementation passes all reported
+48 MHz timing corners and all six coverage gates (reference/platform_synth.json,
+commit cfa0a2e): 6397 ALMs, 7592 registers and 927339 block RAM bits. Worst
+reported setup is +2.835 ns and hold +0.091 ns; recovery/removal are positive.
+The expected eight sound RAM geometries and required CPU/video/loader hierarchy
+survive synthesis. This fit uses registered logical test boundaries and direct
+SDRAM pins with hypothetical half-period input timing, not a physical PLL or
+external memory timing signoff.
+
+
+Native host integration also passes (reference/platform_host_checks.json).
+platform_host_tb drives actual UIO/FIO command strobes into the verified
+Quartus functional netlist of unchanged hps_io/rabbitpunch_host/host_check, then
+connects its decoded outputs to the RTL platform. It repeats the CPU-visible
+input/DIP/RAM, DDR/byte load, pause/reload/reset and partial-image recovery
+checks. HPS wait is obeyed before command strobes. This avoids ModelSim 10.5b's
+native hps_io parser limitation without replacing the host with a behavioral
+parser. The runner verifies the archived netlist hash and matching committed
+host sources. There is no SDF or physical ARM bridge in this test.

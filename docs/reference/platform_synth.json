@@ -1,0 +1,190 @@
+{
+  "commit": "cfa0a2e10d755c7899b7eab5301ef63a6534f4dc",
+  "device": "5CSEBA6U23I7",
+  "project": "platform_check",
+  "constraint_mhz": 48,
+  "seed": 3,
+  "memory_bits": 927339,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 3.832
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.196
+    },
+    {
+      "type": "Slow 1100mV 100C Model Recovery 'clk_sys'",
+      "slack_ns": 11.451
+    },
+    {
+      "type": "Slow 1100mV 100C Model Removal 'clk_sys'",
+      "slack_ns": 1.206
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.06
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 2.835
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.164
+    },
+    {
+      "type": "Slow 1100mV -40C Model Recovery 'clk_sys'",
+      "slack_ns": 11.686
+    },
+    {
+      "type": "Slow 1100mV -40C Model Removal 'clk_sys'",
+      "slack_ns": 1.103
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 8.975
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 7.586
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.124
+    },
+    {
+      "type": "Fast 1100mV 100C Model Recovery 'clk_sys'",
+      "slack_ns": 15.526
+    },
+    {
+      "type": "Fast 1100mV 100C Model Removal 'clk_sys'",
+      "slack_ns": 0.606
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.206
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 7.841
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.091
+    },
+    {
+      "type": "Fast 1100mV -40C Model Recovery 'clk_sys'",
+      "slack_ns": 16.374
+    },
+    {
+      "type": "Fast 1100mV -40C Model Removal 'clk_sys'",
+      "slack_ns": 0.49
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.195
+    }
+  ],
+  "timing_coverage": {
+    "Illegal Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Port Paths": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Port Paths": {
+      "setup": 0,
+      "hold": 0
+    }
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Sat Oct 17 02:00:18 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : platform_check",
+    "Top-level Entity Name : platform_check",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 6,397 / 41,910 ( 15 % )",
+    "Total registers : 7592",
+    "Total pins : 39 / 314 ( 12 % )",
+    "Total virtual pins : 891",
+    "Total block memory bits : 927,339 / 5,662,720 ( 16 % )",
+    "Total RAM Blocks : 123 / 553 ( 22 % )",
+    "Total DSP Blocks : 1 / 112 ( < 1 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 0 / 6 ( 0 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "log_sha256": "f8959c6ef09b3c5bda246b41578e5b059e5b58c0914e938022c0dade26a2d45a",
+  "scope": "Logical controls/pause, host-signal DDR/byte load frontend and complete CPU/audio/video/SDRAM system; registered logical test boundaries, direct SDRAM pins and hypothetical half-period external tester; no native HPS wrapper/DDR ownership mux, final PLL/raster or PCB electrical timing proof",
+  "sound_memory": [
+    {
+      "instance": "rabbitpunch_ram8:sound_ram",
+      "depth": 2048,
+      "width": 8,
+      "bits": 16384
+    },
+    {
+      "instance": "jt51_sh:u_acc",
+      "depth": 8,
+      "width": 68,
+      "bits": 544
+    },
+    {
+      "instance": "altshift_taps:eg_VIII_rtl_0",
+      "depth": 4,
+      "width": 21,
+      "bits": 84
+    },
+    {
+      "instance": "jt51_sh:u_eg1sh",
+      "depth": 27,
+      "width": 10,
+      "bits": 270
+    },
+    {
+      "instance": "jt51_sh:u_statesh",
+      "depth": 28,
+      "width": 2,
+      "bits": 56
+    },
+    {
+      "instance": "jt51_sh:u_reg1op",
+      "depth": 32,
+      "width": 45,
+      "bits": 1440
+    },
+    {
+      "instance": "jt51_sh:out_padding",
+      "depth": 3,
+      "width": 15,
+      "bits": 45
+    },
+    {
+      "instance": "jt51_sh:u_phsh",
+      "depth": 29,
+      "width": 20,
+      "bits": 580
+    }
+  ]
+}
