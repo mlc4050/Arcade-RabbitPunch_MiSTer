@@ -2,15 +2,15 @@
   "case": "gate_roms",
   "pass_marker": "ROMS_PASS",
   "log": "debug\\baselines\\gate_roms\\result.log",
-  "commit": "08af6d0792af040ab82eaa73a54dfe1d3b5c2d0c",
+  "commit": "780fdda6aa8c2763fca1f69aa000040529fb21ee",
   "vectors_sha256": {},
-  "netlist_sha256": "d5c7bca45e703e57365f3d30e1a7cbaa86bc2af379dfba128d56e91c6e9398ac",
+  "netlist_sha256": "ecdcfaaf307a4cb8f0cd5024f60278b925bdd5b008f2b0958e3d12ea78be13fa",
   "source_sha256": {
-    "debug/netlists/roms_08af6d0/roms_check.vo": "d5c7bca45e703e57365f3d30e1a7cbaa86bc2af379dfba128d56e91c6e9398ac",
+    "debug/netlists/roms_780fdda/roms_check.vo": "ecdcfaaf307a4cb8f0cd5024f60278b925bdd5b008f2b0958e3d12ea78be13fa",
     "rtl/rabbitpunch_sdram_types.vhd": "ef3d7e0bcb2b6522984ab20ae9e4464625d7a810e76307142fd3ef0a08115480",
     "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
-    "sim/memory/roms_tb.vhd": "b011582395e1a95f7d90c341082e085d04e95717d0a0e3a9487da9a6d3ed3200"
+    "sim/memory/roms_tb.vhd": "eaca61cef24034f804d75ecdd70a99ac501b650c4fe4203680bbac956b0fb010"
   },
-  "log_sha256": "d6ccb8a8f550ed85dc595577b4b26753aaa0bdadfedb1535e1e336a1b96bd07d",
+  "log_sha256": "3131159bcccd12b8bab6db06fc58970e783aac3568d0f045c35b1e2a132302c1",
   "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
 }

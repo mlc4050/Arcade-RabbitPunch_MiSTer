@@ -79,3 +79,8 @@ mono output zero, and playback tests require defined output bits with no mixer
 arithmetic warnings. Final fixture/RTL hashes are in the corresponding reports.
 The 2000/256 real-ROM proof predates mono output; its exact sources are pinned in
 reference/system_boot_checks.json, independently of the synthetic playback tests.
+
+
+Final-wiring startup smoke checks for both games pass 32 main and eight sound
+writes after the loader-idle and mono/startup changes. These supplement the
+larger pre-mixer comparison (reference/system_boot_32_8_checks.json).

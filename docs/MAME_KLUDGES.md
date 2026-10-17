@@ -17,3 +17,16 @@ The absence of an imperfect-graphics flag does not establish physical video timi
 Core-specific incomplete work is tracked in HACKS.md. Additional graphics behavior
 must be recorded as the hardware modules land.
 No vendored CPU disagreement is currently worked around in board RTL.
+
+
+## Native uPD7759 decoder saturation
+
+The pinned MAME 0.289 upd7759.cpp update_adpcm adds its table delta to m_sample
+without a nine-bit clamp. The unchanged JT7759 decoder instead saturates each
+update to -256..255. Every one of their 256 step entries and state transitions
+agrees in the shared range; adpcm_decode_tb checks actual decoded values there
+and tests native saturation separately. Preserve the selected vendor behavior;
+no patch is applied to make artificial overflowing streams match MAME. Original
+DAC overflow behavior and any effect on these games remain unmeasured. This is
+a known reference difference, not a claim that MAME or the donor has been proved
+correct on physical hardware. Evidence: reference/adpcm_decode_checks.json.

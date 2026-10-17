@@ -277,3 +277,22 @@ coordinated pause and mixed-output mute. Defined-bit assertions and absence of
 mixer arithmetic warnings also pass. The loader ownership-idle fix excludes
 currently offered requests, preventing acceptance and image invalidation on the
 same edge. Disabled audio enables hold mono at zero through download and reset.
+
+
+## ADPCM decoded-value reference
+
+adpcm_decode_tb exercises the unchanged native nibble decoder. All 256
+state/nibble combinations match the exact MAME 0.289 step/state tables while
+the sample stays in nine-bit range. Balanced state walks reach every state
+without clipping, so this compares actual native output values rather than
+only checking nonzero playback. There are 2208 checked nibble updates including
+walks and separate positive/negative native saturation sequences, plus enable
+hold and reset checks. reference/adpcm_decode_checks.json pins the MAME source,
+vectors and unchanged vendor source hashes. This does not compare full-chip
+stream timing, resampling or game audio. MAME update_adpcm has no nine-bit sample
+clamp; the reused decoder saturates. That difference is explicit in MAME_KLUDGES.md.
+
+The final ROM idle fix also passes the refreshed standalone fit and functional
+netlist tests: 810 ALMs, 1872 registers, zero block RAM, worst setup +6.144 ns
+and hold +0.156 ns at 48 MHz. Final-wiring 32/8 main/sound boot smoke comparisons
+pass for both sets (reference/system_boot_32_8_checks.json).

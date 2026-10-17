@@ -1,0 +1,15 @@
+{
+  "case": "adpcm_decode",
+  "pass_marker": "ADPCM_DECODE_PASS",
+  "log": "debug\\baselines\\adpcm_decode\\result.log",
+  "source_sha256": {
+    "rtl/sound/jt7759/hdl/jt7759_adpcm.v": "41d795e33e2085d3d07ee0acab23e85f495f3766e61bd91f177c46e84072380d",
+    "sim/sound/adpcm_decode_tb.vhd": "f7cfd85de025fecc3f5c6efc0f62de303a508f57dd311344f1ff3a62c4ac658e"
+  },
+  "mame_version": "0.289",
+  "mame_source": "src/devices/sound/upd7759.cpp",
+  "mame_source_sha256": "d3b1989df8a94a0ab5b5b48bfdefd495f6599415f0a1b78f98151f0d5ef6f99e",
+  "vectors_sha256": "7f9198e41b17e6e3dbb1fc8339856338bb245e2f39c9a3b7f62adce1b86f72c8",
+  "log_sha256": "dd90622ef96fa742cd7549f16730d36f7aea2625818415fdff096d22d2f4af0d",
+  "scope": "Unchanged native JT7759 nibble decoder: all 256 state/nibble cases agree with pinned MAME deltas/state transitions while sample remains in nine-bit range; native positive/negative saturation tested separately because MAME update_adpcm does not clamp there; disabled-enable hold and reset; no whole-chip stream timing or resampled game waveform proof"
+}
