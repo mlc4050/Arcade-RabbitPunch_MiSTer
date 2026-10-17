@@ -5,20 +5,20 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity raster_tb is
-    generic (SMALL_MODE : boolean := false);
+    generic (GBOOL_SMALL_MODE : boolean := false);
 end entity;
 
 architecture test of raster_tb is
     function choose(vint_nominal, vint_small : natural) return natural is
     begin
-        if (SMALL_MODE) then
+        if (GBOOL_SMALL_MODE) then
             return vint_small;
         end if;
         return vint_nominal;
     end function;
     function sync_active return std_logic is
     begin
-        if (SMALL_MODE) then
+        if (GBOOL_SMALL_MODE) then
             return '1';
         end if;
         return '0';
@@ -30,18 +30,18 @@ architecture test of raster_tb is
         end if;
         return '0';
     end function;
-    constant C_HTOTAL : positive := choose(432, 19);
-    constant C_HSTART : natural := choose(0, 2);
-    constant C_HWIDTH : positive := choose(288, 7);
-    constant C_HSYNC_START : natural := choose(352, 12);
-    constant C_HSYNC_END : positive := choose(392, 16);
-    constant C_VTOTAL : positive := choose(256, 9);
-    constant C_VSTART : natural := choose(0, 1);
-    constant C_VHEIGHT : positive := choose(216, 4);
-    constant C_VSYNC_START : natural := choose(232, 6);
-    constant C_VSYNC_END : positive := choose(240, 8);
-    constant C_XOFFSET : natural := choose(8, 3);
-    constant C_YOFFSET : natural := choose(0, 2);
+    constant CINT_HTOTAL : positive := choose(432, 19);
+    constant CINT_HSTART : natural := choose(0, 2);
+    constant CINT_HWIDTH : positive := choose(288, 7);
+    constant CINT_HSYNC_START : natural := choose(352, 12);
+    constant CINT_HSYNC_END : positive := choose(392, 16);
+    constant CINT_VTOTAL : positive := choose(256, 9);
+    constant CINT_VSTART : natural := choose(0, 1);
+    constant CINT_VHEIGHT : positive := choose(216, 4);
+    constant CINT_VSYNC_START : natural := choose(232, 6);
+    constant CINT_VSYNC_END : positive := choose(240, 8);
+    constant CINT_XOFFSET : natural := choose(8, 3);
+    constant CINT_YOFFSET : natural := choose(0, 2);
     constant C_SYNC_ACTIVE : std_logic := sync_active;
     signal s_clk : std_logic := '0';
     signal s_reset : std_logic := '1';
@@ -66,20 +66,20 @@ begin
         );
     dut : entity work.rabbitpunch_raster
         generic map (
-            sint_HORIZONTAL_TOTAL => C_HTOTAL,
-            sint_HORIZONTAL_VISIBLE_START => C_HSTART,
-            sint_HORIZONTAL_VISIBLE_WIDTH => C_HWIDTH,
-            sint_HORIZONTAL_SYNC_START => C_HSYNC_START,
-            sint_HORIZONTAL_SYNC_END => C_HSYNC_END,
-            sint_VERTICAL_TOTAL => C_VTOTAL,
-            sint_VERTICAL_VISIBLE_START => C_VSTART,
-            sint_VERTICAL_VISIBLE_HEIGHT => C_VHEIGHT,
-            sint_VERTICAL_SYNC_START => C_VSYNC_START,
-            sint_VERTICAL_SYNC_END => C_VSYNC_END,
-            sint_RENDER_X_OFFSET => C_XOFFSET,
-            sint_RENDER_Y_OFFSET => C_YOFFSET,
-            s_HORIZONTAL_SYNC_ACTIVE => C_SYNC_ACTIVE,
-            s_VERTICAL_SYNC_ACTIVE => C_SYNC_ACTIVE
+            GINT_HORIZONTAL_TOTAL => CINT_HTOTAL,
+            GINT_HORIZONTAL_VISIBLE_START => CINT_HSTART,
+            GINT_HORIZONTAL_VISIBLE_WIDTH => CINT_HWIDTH,
+            GINT_HORIZONTAL_SYNC_START => CINT_HSYNC_START,
+            GINT_HORIZONTAL_SYNC_END => CINT_HSYNC_END,
+            GINT_VERTICAL_TOTAL => CINT_VTOTAL,
+            GINT_VERTICAL_VISIBLE_START => CINT_VSTART,
+            GINT_VERTICAL_VISIBLE_HEIGHT => CINT_VHEIGHT,
+            GINT_VERTICAL_SYNC_START => CINT_VSYNC_START,
+            GINT_VERTICAL_SYNC_END => CINT_VSYNC_END,
+            GINT_RENDER_X_OFFSET => CINT_XOFFSET,
+            GINT_RENDER_Y_OFFSET => CINT_YOFFSET,
+            G_HORIZONTAL_SYNC_ACTIVE => C_SYNC_ACTIVE,
+            G_VERTICAL_SYNC_ACTIVE => C_SYNC_ACTIVE
         )
         port map (
             i_clk => s_clk,
@@ -107,10 +107,10 @@ begin
         variable v_horizontal_active, v_vertical_active, v_hsync_active, v_vsync_active : boolean;
         procedure check_beam is
         begin
-            v_horizontal_active := vint_x >= C_HSTART and vint_x < C_HSTART + C_HWIDTH;
-            v_vertical_active := vint_y >= C_VSTART and vint_y < C_VSTART + C_VHEIGHT;
-            v_hsync_active := vint_x >= C_HSYNC_START and vint_x < C_HSYNC_END;
-            v_vsync_active := vint_y >= C_VSYNC_START and vint_y < C_VSYNC_END;
+            v_horizontal_active := vint_x >= CINT_HSTART and vint_x < CINT_HSTART + CINT_HWIDTH;
+            v_vertical_active := vint_y >= CINT_VSTART and vint_y < CINT_VSTART + CINT_VHEIGHT;
+            v_hsync_active := vint_x >= CINT_HSYNC_START and vint_x < CINT_HSYNC_END;
+            v_vsync_active := vint_y >= CINT_VSYNC_START and vint_y < CINT_VSYNC_END;
             assert (su9_horizontal = vint_x and su9_vertical = vint_y)
                 report "Beam counter changed without enable or wrapped incorrectly" severity failure;
             assert (s_active = logic(v_horizontal_active and v_vertical_active) and
@@ -119,13 +119,13 @@ begin
             assert ((s_hsync = C_SYNC_ACTIVE) = v_hsync_active and (s_vsync = C_SYNC_ACTIVE) = v_vsync_active)
                 report "Raster sync window or polarity mismatch" severity failure;
             if (v_horizontal_active) then
-                assert (su9_x = vint_x - C_HSTART + C_XOFFSET)
+                assert (su9_x = vint_x - CINT_HSTART + CINT_XOFFSET)
                     report "Horizontal render coordinate mismatch" severity failure;
             else
                 assert (su9_x = 0) report "Blank horizontal coordinate not cleared" severity failure;
             end if;
             if (v_vertical_active) then
-                assert (su8_y = vint_y - C_VSTART + C_YOFFSET)
+                assert (su8_y = vint_y - CINT_VSTART + CINT_YOFFSET)
                     report "Vertical render coordinate mismatch" severity failure;
             else
                 assert (su8_y = 0) report "Blank vertical coordinate not cleared" severity failure;
@@ -133,16 +133,16 @@ begin
             assert (s_line_start = logic(s_pixel_enable = '1' and vint_x = 0) and
                 s_visible_line_start = logic(s_pixel_enable = '1' and vint_x = 0 and v_vertical_active) and
                 s_frame_start = logic(s_pixel_enable = '1' and vint_x = 0 and vint_y = 0) and
-                s_vblank_start = logic(s_pixel_enable = '1' and vint_x = 0 and vint_y = (C_VSTART + C_VHEIGHT) mod C_VTOTAL) and
+                s_vblank_start = logic(s_pixel_enable = '1' and vint_x = 0 and vint_y = (CINT_VSTART + CINT_VHEIGHT) mod CINT_VTOTAL) and
                 s_half_frame = logic(s_pixel_enable = '1' and vint_x = 0 and vint_y =
-                    (C_VSTART + C_VHEIGHT + C_VTOTAL / 2) mod C_VTOTAL))
+                    (CINT_VSTART + CINT_VHEIGHT + CINT_VTOTAL / 2) mod CINT_VTOTAL))
                 report "Raster event repeated between enables or used wrong line" severity failure;
         end procedure;
         procedure advance_beam is
         begin
-            if (vint_x = C_HTOTAL - 1) then
+            if (vint_x = CINT_HTOTAL - 1) then
                 vint_x := 0;
-                if (vint_y = C_VTOTAL - 1) then
+                if (vint_y = CINT_VTOTAL - 1) then
                     vint_y := 0;
                     vint_frames := vint_frames + 1;
                 else
@@ -175,8 +175,8 @@ begin
             end if;
             vint_cycles := vint_cycles + 1;
         end loop;
-        assert (vint_pixels = 2 * C_HTOTAL * C_VTOTAL and vint_active_pixels = 2 * C_HWIDTH * C_VHEIGHT and
-            vint_lines = 2 * C_VTOTAL and vint_visible_lines = 2 * C_VHEIGHT and
+        assert (vint_pixels = 2 * CINT_HTOTAL * CINT_VTOTAL and vint_active_pixels = 2 * CINT_HWIDTH * CINT_VHEIGHT and
+            vint_lines = 2 * CINT_VTOTAL and vint_visible_lines = 2 * CINT_VHEIGHT and
             vint_frame_events = 2 and vint_vblank_events = 2 and vint_half_events = 2)
             report "Raster frame totals or interrupt cadence mismatch" severity failure;
         -- Stop mid-line, then reset while the pixel enable is held off.

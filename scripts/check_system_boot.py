@@ -76,7 +76,7 @@ def main():
         # configuration. Only the existing sound CPU register normalization remains.
         setup += ['run 200 us',f"force -freeze {cpu}/DIR 212'h{packed:053x}",f'force -freeze {cpu}/DIRSet 1','run 21 ns',f'noforce {cpu}/DIRSet',f'noforce {cpu}/DIR','force -freeze /system_boot_tb/s_run 1']
         result=run_case(case,sources,'system_boot_tb','101 ms','SYSTEM_BOOT_PASS',wall_timeout=args.wall_timeout,
-            sim_args=(f'-gMAIN_WRITE_LIMIT={args.main_writes}',f'-gSOUND_WRITE_LIMIT={args.sound_writes}',f'-gDIP_DEFAULT={dips}'),setup_commands=tuple(setup))
+            sim_args=(f'-gGINT_MAIN_WRITE_LIMIT={args.main_writes}',f'-gGINT_SOUND_WRITE_LIMIT={args.sound_writes}',f'-gGINT_DIP_DEFAULT={dips}'),setup_commands=tuple(setup))
         for name,reference,count in [('main',main_trace,args.main_writes),('sound',sound_trace,args.sound_writes)]:
             expected=[tuple(int(word,16) for word in line.split()) for line in reference.read_text().splitlines()][:count]
             actual=[tuple(int(word,16) for word in line.split()) for line in (out/f'rtl_{name}_writes.txt').read_text().splitlines()]

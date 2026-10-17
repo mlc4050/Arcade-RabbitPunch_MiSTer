@@ -77,7 +77,7 @@ def main():
                  f'noforce {cpu}/DIRSet', f'noforce {cpu}/DIR',
                  'force -freeze /sound_sdram_boot_tb/s_run 1')
         result = run_case(case, sources, 'sound_sdram_boot_tb', '101 ms', 'SOUND_SDRAM_BOOT_PASS',
-                          sim_args=(f'-gWRITE_LIMIT={args.writes}',), wall_timeout=args.wall_timeout,
+                          sim_args=(f'-gGINT_WRITE_LIMIT={args.writes}',), wall_timeout=args.wall_timeout,
                           setup_commands=setup)
         actual = [tuple(int(word, 16) for word in line.split()) for line in (out/'rtl_sound_writes.txt').read_text().splitlines()]
         if actual != expected:

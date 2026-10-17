@@ -32,7 +32,7 @@ begin
     s_render_ready <= not s_mock_busy and not s_block_ready;
     dut : entity work.rabbitpunch_scanline_scheduler
         generic map (
-            sint_VISIBLE_LINES => 4
+            GINT_VISIBLE_LINES => 4
         )
         port map (
             i_clk => s_clk,

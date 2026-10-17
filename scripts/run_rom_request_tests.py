@@ -12,7 +12,7 @@ results = []
 for pin_backend in (False, True):
     case = "rom_requests_pin" if pin_backend else "rom_requests"
     result = run_case(case, sources, "rom_requests_tb", "1 ms", "ROM_REQUESTS_PASS",
-                      sim_args=("-gUSE_PIN_BACKEND=true",) if pin_backend else ())
+                      sim_args=("-gGBOOL_USE_PIN_BACKEND=true",) if pin_backend else ())
     results.append(result)
 for result in results:
     result["source_sha256"] = {path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources}

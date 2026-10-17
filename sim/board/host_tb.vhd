@@ -42,7 +42,7 @@ architecture test of host_tb is
         o_file_read : out std_logic
     );
     end component;
-    constant CONFIG : string := DEFAULT_CONFIG_STRING;
+    constant CSTR_CONFIG : string := CSTR_DEFAULT_CONFIG_STRING;
     signal s_clk : std_logic := '0';
     signal su46_bus, su46_master : unsigned(45 downto 0) := (others => 'Z');
     signal su128_status : unsigned(127 downto 0);
@@ -153,9 +153,9 @@ begin
         cycles(5);
         assert (su46_bus(32) = '0') report "Host wrapper unexpectedly enabled wide file mode" severity failure;
         uio_begin(16#14#);
-        for vint_char in CONFIG'range loop
+        for vint_char in CSTR_CONFIG'range loop
             word(0);
-            assert (su46_bus(7 downto 0) = character'pos(CONFIG(vint_char)))
+            assert (su46_bus(7 downto 0) = character'pos(CSTR_CONFIG(vint_char)))
                 report "Host configuration string generic/byte order mismatch" severity failure;
         end loop;
         uio_end;

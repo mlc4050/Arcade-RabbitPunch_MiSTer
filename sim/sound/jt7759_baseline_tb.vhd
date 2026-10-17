@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 use std.env.all;
 
 entity jt7759_baseline_tb is
-    generic (USE_WRAPPER : boolean := false);
+    generic (GBOOL_USE_WRAPPER : boolean := false);
 end entity;
 
 architecture test of jt7759_baseline_tb is
@@ -74,7 +74,7 @@ begin
             end if;
         end if;
     end process;
-    native_chip : if (not USE_WRAPPER) generate
+    native_chip : if (not GBOOL_USE_WRAPPER) generate
         chip : jt7759
             port map (
                 rst => s_reset,
@@ -94,7 +94,7 @@ begin
                 sound => su9_sound
             );
     end generate;
-    wrapped_chip : if (USE_WRAPPER) generate
+    wrapped_chip : if (GBOOL_USE_WRAPPER) generate
         s_busy_n <= not s_wrapper_busy;
         chip : entity work.rabbitpunch_upd7759
             port map (

@@ -11,9 +11,9 @@ use work.rabbitpunch_config.all;
 -- i_initialize is cold transport initialization, never the gameplay reset.
 entity rabbitpunch_platform is
     generic (
-        sint_IMAGE_BYTES : positive := ROM_IMAGE_SIZE;
-        DIP_DEFAULT : unsigned(15 downto 0) := x"0000";
-        EXTERNAL_PHASE_ENABLE : boolean := false
+        GINT_IMAGE_BYTES : positive := CINT_ROM_IMAGE_SIZE;
+        GU16_DIP_DEFAULT : unsigned(15 downto 0) := x"0000";
+        GBOOL_EXTERNAL_PHASE_ENABLE : boolean := false
     );
     port (
         i_clk : in std_logic;
@@ -171,7 +171,7 @@ begin
     o_hiscore_enabled <= s_score_enabled;
     ou16_host_menu_mask <= to_unsigned(8, 16) when s_score_enabled = '0' else to_unsigned(0, 16);
     o_host_wait <= s_load_wait or s_score_wait;
-    s_game_reset <= i_framework_reset or iu128_status(STATUS_RESET_BIT) or iu2_host_buttons(1) or s_frontend_error or s_system_error;
+    s_game_reset <= i_framework_reset or iu128_status(CINT_STATUS_RESET_BIT) or iu2_host_buttons(1) or s_frontend_error or s_system_error;
     s_controls_reset <= s_game_reset or s_downloading;
     o_downloading <= s_downloading;
     o_ddr_mode <= s_ddr_mode;
@@ -184,14 +184,14 @@ begin
     ou8_service <= su8_service;
     ou16_dips <= su16_dips;
     controls : entity work.rabbitpunch_controls
-        generic map (DIP_DEFAULT => DIP_DEFAULT)
+        generic map (GU16_DIP_DEFAULT => GU16_DIP_DEFAULT)
         port map (
             i_clk => i_clk,
             i_initialize => i_initialize,
             i_game_reset => s_controls_reset,
             i_osd_open => i_osd_open,
-            i_pause_on_osd => iu128_status(STATUS_OSD_PAUSE_BIT),
-            i_debug_pause => i_debug_pause or iu128_status(STATUS_PAUSE_BIT),
+            i_pause_on_osd => iu128_status(CINT_STATUS_OSD_PAUSE_BIT),
+            i_debug_pause => i_debug_pause or iu128_status(CINT_STATUS_PAUSE_BIT),
             i_state_pause => i_state_pause,
             iu32_joystick0 => iu32_joystick0,
             iu32_joystick1 => iu32_joystick1,
@@ -208,7 +208,7 @@ begin
             o_user_paused => o_user_paused
         );
     load_frontend : entity work.rabbitpunch_load_frontend
-        generic map (sint_IMAGE_BYTES => sint_IMAGE_BYTES)
+        generic map (GINT_IMAGE_BYTES => GINT_IMAGE_BYTES)
         port map (
             i_clk => i_clk,
             i_initialize => i_initialize,
@@ -244,7 +244,7 @@ begin
             i_initialize => i_initialize,
             i_game_reset => s_game_reset or s_downloading,
             i_osd_open => i_osd_open,
-            i_autosave => iu128_status(STATUS_HISCORE_AUTOSAVE_BIT),
+            i_autosave => iu128_status(CINT_STATUS_HISCORE_AUTOSAVE_BIT),
             i_download => i_host_download,
             i_upload => i_host_upload,
             iu16_file_index => iu16_host_index,
@@ -302,8 +302,8 @@ begin
         );
     system : entity work.rabbitpunch_system
         generic map (
-            sint_IMAGE_BYTES => sint_IMAGE_BYTES,
-            EXTERNAL_PHASE_ENABLE => EXTERNAL_PHASE_ENABLE
+            GINT_IMAGE_BYTES => GINT_IMAGE_BYTES,
+            GBOOL_EXTERNAL_PHASE_ENABLE => GBOOL_EXTERNAL_PHASE_ENABLE
         )
         port map (
             i_clk => i_clk,

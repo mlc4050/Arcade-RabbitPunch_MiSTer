@@ -87,10 +87,10 @@ begin
                     vint_address := to_integer(su27_addresses(vint_client));
                     assert (vint_address mod 8 = 0) report "Audio burst address was not aligned" severity failure;
                     if (vint_client = 0) then
-                        assert (vint_address >= ROM_AUDIOCPU_BASE and vint_address < ROM_AUDIOCPU_BASE + ROM_AUDIOCPU_SIZE)
+                        assert (vint_address >= CINT_ROM_AUDIOCPU_BASE and vint_address < CINT_ROM_AUDIOCPU_BASE + CINT_ROM_AUDIOCPU_SIZE)
                             report "Sound CPU ROM mapped outside its image region" severity failure;
                     else
-                        assert (vint_address >= ROM_UPD_BASE and vint_address < ROM_UPD_BASE + ROM_UPD_SIZE)
+                        assert (vint_address >= CINT_ROM_UPD_BASE and vint_address < CINT_ROM_UPD_BASE + CINT_ROM_UPD_SIZE)
                             report "Sample ROM mapped outside its image region" severity failure;
                     end if;
                     v_words(vint_client) := burst_value(su27_addresses(vint_client), sint_version);
@@ -106,7 +106,7 @@ begin
     begin
         if (rising_edge(s_clk)) then
             if (s_sample_valid = '1') then
-                assert (s_sample_request = '1' and su8_sample_data = byte_value(ROM_UPD_BASE + to_integer(su18_sample_address), sint_version))
+                assert (s_sample_request = '1' and su8_sample_data = byte_value(CINT_ROM_UPD_BASE + to_integer(su18_sample_address), sint_version))
                     report "Sample ROM exposed stale data after address/bank change" severity failure;
             end if;
         end if;
@@ -128,7 +128,7 @@ begin
             if (s_program_valid /= '1') then
                 wait until s_program_valid = '1' for 100 us;
             end if;
-            assert (s_program_valid = '1' and su8_program_data = byte_value(ROM_AUDIOCPU_BASE + vint_address, sint_version))
+            assert (s_program_valid = '1' and su8_program_data = byte_value(CINT_ROM_AUDIOCPU_BASE + vint_address, sint_version))
                 report "Sound program byte/latching mismatch" severity failure;
             wait until falling_edge(s_clk);
         end procedure;
@@ -141,7 +141,7 @@ begin
             if (s_sample_valid /= '1') then
                 wait until s_sample_valid = '1' for 100 us;
             end if;
-            assert (s_sample_valid = '1' and su8_sample_data = byte_value(ROM_UPD_BASE + vint_address, sint_version))
+            assert (s_sample_valid = '1' and su8_sample_data = byte_value(CINT_ROM_UPD_BASE + vint_address, sint_version))
                 report "Sample byte/cache lane mismatch" severity failure;
             wait until falling_edge(s_clk);
         end procedure;
@@ -176,7 +176,7 @@ begin
         for vint_cycle in 1 to 1000 loop
             wait until falling_edge(s_clk);
             if (s_program_valid = '1') then
-                assert (su8_program_data = byte_value(ROM_AUDIOCPU_BASE + 16#4050#, sint_version))
+                assert (su8_program_data = byte_value(CINT_ROM_AUDIOCPU_BASE + 16#4050#, sint_version))
                     report "Concurrent sound program miss data changed" severity failure;
                 v_program_seen := true;
             end if;

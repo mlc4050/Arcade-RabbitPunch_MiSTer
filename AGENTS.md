@@ -40,3 +40,9 @@ implementing, testing and recording evidence without routine confirmation or a
 plan-only stopping point. Stop only on completion, explicit user direction, usage
 limits or a genuine blocker requiring unavailable input/permission. Follow the
 continuation rule in D:/git/MiSTer-CoreSkill/mister-arcade-core/SKILL.md.
+
+Generic and constant names are uppercase and type-prefixed: GBOOL_/CBOOL_
+for boolean, GINT_/CINT_ for integer/natural/positive, GU<width>_/CU<width>_
+for sized unsigned, GUX_/CUX_ for unconstrained unsigned, GSTR_/CSTR_ for
+string and G_/C_ for single-bit std_logic. Named generic maps follow the same
+names. Imported component formal names remain unchanged at their wrappers.

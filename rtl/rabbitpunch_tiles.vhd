@@ -7,8 +7,8 @@ use ieee.numeric_std.all;
 -- the line becomes readable, so no startup contents or bulk clear are needed.
 entity rabbitpunch_tiles is
     generic (
-        sint_FIRST_PIXEL : natural := 0;
-        sint_LAST_PIXEL : natural := 511
+        GINT_FIRST_PIXEL : natural := 0;
+        GINT_LAST_PIXEL : natural := 511
     );
     port (
         i_clk : in std_logic;
@@ -69,7 +69,7 @@ architecture rtl of rabbitpunch_tiles is
         return 0;
     end function;
 begin
-    assert (sint_FIRST_PIXEL <= sint_LAST_PIXEL and sint_LAST_PIXEL < 512)
+    assert (GINT_FIRST_PIXEL <= GINT_LAST_PIXEL and GINT_LAST_PIXEL < 512)
         report "Tile line window must be within logical X 0..511" severity failure;
     o_line_ready <= '1' when styp_state = STATE_IDLE and s_request_ready = '1' and
         s_ram_pending = '0' and s_rom_pending = '0' and i_reset = '0' else '0';
@@ -77,7 +77,7 @@ begin
     o_rom_request <= s_rom_request;
     s_request_valid <= '1' when styp_state = STATE_DRAW and s_requests_done = '0' and i_reset = '0' else '0';
     s_view_ready <= '1' when i_reset = '0' and su2_bank_valid(bank_number(i_view_bank)) = '1' and
-        iu9_view_x >= sint_FIRST_PIXEL and iu9_view_x <= sint_LAST_PIXEL and
+        iu9_view_x >= GINT_FIRST_PIXEL and iu9_view_x <= GINT_LAST_PIXEL and
         (styp_state = STATE_IDLE or i_view_bank /= s_render_bank) else '0';
     o_view_ready <= s_view_ready;
     s_view_accept <= i_view_enable and s_view_ready;
@@ -128,7 +128,7 @@ begin
     end process;
     banks : for vint_bank in 0 to 1 generate
         line_ram : entity work.rabbitpunch_ram16
-            generic map (sint_ADDRESS_BITS => 9)
+            generic map (GINT_ADDRESS_BITS => 9)
             port map (
                 i_clk => i_clk,
                 i_cpu_enable => su2_write_enable(vint_bank),
@@ -186,7 +186,7 @@ begin
                             su16_flags <= iu16_video_flags;
                             s_foreground <= '0';
                             s_requests_done <= '0';
-                            su9_next_x <= to_unsigned(sint_FIRST_PIXEL, 9);
+                            su9_next_x <= to_unsigned(GINT_FIRST_PIXEL, 9);
                             su7_rows_issued <= (others => '0');
                             su10_pixels_written <= (others => '0');
                             styp_state <= STATE_DRAW;
@@ -197,7 +197,7 @@ begin
                             vu10_next_x := ('0' & su9_next_x) + 8 - resize(vu9_source_x(2 downto 0), 10);
                             su9_next_x <= vu10_next_x(8 downto 0);
                             su7_rows_issued <= su7_rows_issued + 1;
-                            if (vu10_next_x > sint_LAST_PIXEL) then
+                            if (vu10_next_x > GINT_LAST_PIXEL) then
                                 s_requests_done <= '1';
                             end if;
                         end if;
@@ -208,7 +208,7 @@ begin
                             if (s_foreground = '0') then
                                 s_foreground <= '1';
                                 s_requests_done <= '0';
-                                su9_next_x <= to_unsigned(sint_FIRST_PIXEL, 9);
+                                su9_next_x <= to_unsigned(GINT_FIRST_PIXEL, 9);
                                 su7_rows_issued <= (others => '0');
                                 su10_pixels_written <= (others => '0');
                             else

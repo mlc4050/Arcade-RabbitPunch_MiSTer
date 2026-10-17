@@ -12,7 +12,7 @@ results = []
 for name, generic in [("maincpu_fractional_phase", "true"), ("maincpu_legacy_phase", "false")]:
     hashes = {path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources}
     result = run_case(name, sources, "maincpu_phase_tb", "3 ms", "MAINCPU_PHASE_PASS",
-                      sim_args=(f"-gEXTERNAL_PHASE_ENABLE={generic}",), wall_timeout=180)
+                      sim_args=(f"-gGBOOL_EXTERNAL_PHASE_ENABLE={generic}",), wall_timeout=180)
     assert hashes == {path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources}
     result.update(external_phase_enable=generic == "true", source_sha256=hashes,
                   log_sha256=hashlib.sha256((root / result["log"]).read_bytes()).hexdigest(),

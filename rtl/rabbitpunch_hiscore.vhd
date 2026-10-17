@@ -91,7 +91,7 @@ begin
     su8_store_data <= iu8_dump_data when s_valid_download_byte = '1' else iu8_memory_data;
     buffers : entity work.rabbitpunch_ram8
         generic map (
-            sint_ADDRESS_BITS => 8
+            GINT_ADDRESS_BITS => 8
         )
         port map (
             i_clk => i_clk,

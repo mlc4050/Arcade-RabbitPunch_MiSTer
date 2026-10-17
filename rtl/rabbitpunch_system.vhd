@@ -7,8 +7,8 @@ use work.rabbitpunch_layout.all;
 -- Physical raster/PLL and HPS/DDR streaming remain external interfaces.
 entity rabbitpunch_system is
     generic (
-        sint_IMAGE_BYTES : positive := ROM_IMAGE_SIZE;
-        EXTERNAL_PHASE_ENABLE : boolean := false
+        GINT_IMAGE_BYTES : positive := CINT_ROM_IMAGE_SIZE;
+        GBOOL_EXTERNAL_PHASE_ENABLE : boolean := false
     );
     port (
         i_clk : in std_logic;
@@ -156,7 +156,7 @@ begin
     o_loading <= s_loading;
     board : entity work.rabbitpunch_board
         generic map (
-            EXTERNAL_PHASE_ENABLE => EXTERNAL_PHASE_ENABLE
+            GBOOL_EXTERNAL_PHASE_ENABLE => GBOOL_EXTERNAL_PHASE_ENABLE
         )
         port map (
             i_clk => i_clk,
@@ -349,7 +349,7 @@ begin
             o_sdram_clock_enable => o_sdram_clock_enable
         );
     download : entity work.rabbitpunch_download
-        generic map (sint_IMAGE_BYTES => sint_IMAGE_BYTES)
+        generic map (GINT_IMAGE_BYTES => GINT_IMAGE_BYTES)
         port map (
             i_clk => i_clk,
             i_download => i_download,

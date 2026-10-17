@@ -5,7 +5,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity maincpu_phase_tb is
-    generic (EXTERNAL_PHASE_ENABLE : boolean := true);
+    generic (GBOOL_EXTERNAL_PHASE_ENABLE : boolean := true);
 end entity;
 
 architecture test of maincpu_phase_tb is
@@ -96,7 +96,7 @@ begin
         );
     dut : entity work.rabbitpunch_maincpu
         generic map (
-            EXTERNAL_PHASE_ENABLE => EXTERNAL_PHASE_ENABLE
+            GBOOL_EXTERNAL_PHASE_ENABLE => GBOOL_EXTERNAL_PHASE_ENABLE
         )
         port map (
             i_clk => s_clk,

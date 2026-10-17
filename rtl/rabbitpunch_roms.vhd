@@ -207,7 +207,7 @@ begin
             end if;
             if (i_loader_request = '1') then
                 assert (o_loader_ready = '1') report "Loader requested while not ready" severity failure;
-                assert (to_integer(iu27_loader_byte_address) < ROM_IMAGE_SIZE and iu2_loader_bytes /= "00")
+                assert (to_integer(iu27_loader_byte_address) < CINT_ROM_IMAGE_SIZE and iu2_loader_bytes /= "00")
                     report "Loader request outside selected image or empty byte mask" severity failure;
                 s_loader_pending <= '1';
             end if;

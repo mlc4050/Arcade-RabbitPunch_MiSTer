@@ -7,8 +7,8 @@ use work.rabbitpunch_layout.all;
 
 entity memory_powerup_tb is
     generic (
-        EVALUATION_BOUNDARY : boolean := false;
-        EXHAUSTIVE : boolean := true
+        GBOOL_EVALUATION_BOUNDARY : boolean := false;
+        GBOOL_EXHAUSTIVE : boolean := true
     );
 end entity;
 
@@ -65,16 +65,16 @@ architecture test of memory_powerup_tb is
     signal su16_data : unsigned(15 downto 0) := (others => '0');
     signal su16_response, su16_view_data : unsigned(15 downto 0);
     signal su2_bytes : unsigned(1 downto 0) := "11";
-    signal su5_target : target_t := TARGET_NONE;
+    signal su5_target : target_t := CU5_TARGET_NONE;
     signal su15_word : unsigned(14 downto 0) := (others => '0');
     type t_naturals is array (0 to 4) of natural;
     type t_targets is array (0 to 4) of target_t;
     constant C_BASES : t_naturals := (16#40000#, 16#60000#, 16#80000#, 16#A0000#, 16#FC000#);
     constant C_DEPTHS : t_naturals := (32768, 2048, 8192, 1024, 8192);
-    constant C_TARGETS : t_targets := (TARGET_BITMAP, TARGET_SPRITES, TARGET_TILES, TARGET_PALETTE, TARGET_WORKRAM);
+    constant C_TARGETS : t_targets := (CU5_TARGET_BITMAP, CU5_TARGET_SPRITES, CU5_TARGET_TILES, CU5_TARGET_PALETTE, CU5_TARGET_WORKRAM);
 begin
     s_clk <= not s_clk after 5 ns;
-    direct_memory : if (not EVALUATION_BOUNDARY) generate
+    direct_memory : if (not GBOOL_EVALUATION_BOUNDARY) generate
         dut : rabbitpunch_memory
             port map (
                 i_clk => s_clk,
@@ -97,7 +97,7 @@ begin
                 ou16_view_data => su16_view_data
             );
     end generate;
-    registered_memory : if (EVALUATION_BOUNDARY) generate
+    registered_memory : if (GBOOL_EVALUATION_BOUNDARY) generate
         dut : memory_check
             port map (
                 i_clk => s_clk,
@@ -135,7 +135,7 @@ begin
             su2_bytes <= vu2_lanes;
             wait until falling_edge(s_clk);
             s_request <= '0';
-            if (EVALUATION_BOUNDARY) then
+            if (GBOOL_EVALUATION_BOUNDARY) then
                 wait until falling_edge(s_clk);
             end if;
             assert (s_supported = '1' and s_rom_request = '0')
@@ -144,7 +144,7 @@ begin
                 wait until falling_edge(s_clk);
                 vint_age := vint_age + 1;
             end loop;
-            assert (s_response = '1' and vint_age = 1 + boolean'pos(EVALUATION_BOUNDARY))
+            assert (s_response = '1' and vint_age = 1 + boolean'pos(GBOOL_EVALUATION_BOUNDARY))
                 report "Unexpected RAM response latency" severity failure;
             if (v_write = '0') then
                 assert (su16_response = vu16_expected)
@@ -161,7 +161,7 @@ begin
             s_view <= '1';
             su5_target <= C_TARGETS(vint_bank);
             su15_word <= to_unsigned(vint_word, 15);
-            for vint_cycle in 1 to 1 + 2 * boolean'pos(EVALUATION_BOUNDARY) loop
+            for vint_cycle in 1 to 1 + 2 * boolean'pos(GBOOL_EVALUATION_BOUNDARY) loop
                 wait until falling_edge(s_clk);
             end loop;
             assert (s_view_valid = '1' and su16_view_data = vu16_expected)
@@ -169,7 +169,7 @@ begin
                     " word=" & integer'image(vint_word) severity failure;
             vint_checks := vint_checks + 1;
             s_view <= '0';
-            for vint_cycle in 1 to 1 + 2 * boolean'pos(EVALUATION_BOUNDARY) loop
+            for vint_cycle in 1 to 1 + 2 * boolean'pos(GBOOL_EVALUATION_BOUNDARY) loop
                 wait until falling_edge(s_clk);
             end loop;
             assert (s_view_valid = '0') report "View valid failed to clear" severity failure;
@@ -183,7 +183,7 @@ begin
                 vu16_initial := x"FFFF";
             end if;
             for vint_word in 0 to C_DEPTHS(vint_bank) - 1 loop
-                if (EXHAUSTIVE or vint_word mod 256 = 0 or vint_word mod 256 = 255) then
+                if (GBOOL_EXHAUSTIVE or vint_word mod 256 = 0 or vint_word mod 256 = 255) then
                     cpu_access(vint_bank, vint_word, '0', "11", x"0000", vu16_initial);
                     view_word(vint_bank, vint_word, vu16_initial);
                 end if;
@@ -219,7 +219,7 @@ begin
                 end if;
             end loop;
         end loop;
-        if (EXHAUSTIVE) then
+        if (GBOOL_EXHAUSTIVE) then
             report "MEMORY_POWERUP_PASS: all 52224 words through CPU and view before writes; checks=" & integer'image(vint_checks);
         else
             report "MEMORY_POWERUP_PASS: first/last of every 256-word region through CPU and view before writes; checks=" & integer'image(vint_checks);

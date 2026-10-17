@@ -44,3 +44,11 @@ Verification so far:
 Reports live in `docs/reference/`; private simulator logs/images and fit archives
 live under `debug/`. Standalone PLL-model checks do not prove fitted clock counters,
 external SDRAM phase or final MiSTer pin timing. Those remain implementation gates.
+
+Generic/constant names now use the user's uppercase type/width prefixes. The
+all-authored-source compile audit covers 173 VHDL files; it is compile coverage,
+not execution of all benches. Raster/enable, CPU-phase, PLL-driven machine and
+RAM startup checks are rerun after the rename. Both regenerated MRAs still match
+all 0x210000 bytes against independent assembly and actual MAME-loaded regions.
+The cached native-host netlist must be regenerated because its checked wrapper
+source names changed; its source guard stays enabled.

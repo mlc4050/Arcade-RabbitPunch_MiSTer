@@ -38,7 +38,7 @@ begin
     s_ddr_busy <= '1' when sint_cycles < 24 or sint_cycles mod 19 < 5 else '0';
     s_word_ready <= '1' when s_initialize = '0' and sint_cycles mod 11 >= 7 else '0';
     dut : entity work.rabbitpunch_load_frontend
-        generic map (sint_IMAGE_BYTES => 64)
+        generic map (GINT_IMAGE_BYTES => 64)
         port map (
             i_clk => s_clk,
             i_initialize => s_initialize,

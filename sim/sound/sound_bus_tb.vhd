@@ -106,7 +106,7 @@ begin
     stimulus : process
         procedure transfer(constant vint_address : natural; constant v_write : std_logic;
                            constant vu8_data : unsigned(7 downto 0);
-                           constant vu8_expected : unsigned(7 downto 0) := x"FF") is
+                           constant CU8_VU8_EXPECTED : unsigned(7 downto 0) := x"FF") is
             variable v_seen : boolean;
         begin
             wait until falling_edge(s_clk);
@@ -126,7 +126,7 @@ begin
             end loop;
             assert (v_seen) report "Sound bus transaction timed out" severity failure;
             if (v_write = '0') then
-                assert (su8_reply = vu8_expected) report "Sound bus read data mismatch at " & integer'image(vint_address) severity failure;
+                assert (su8_reply = CU8_VU8_EXPECTED) report "Sound bus read data mismatch at " & integer'image(vint_address) severity failure;
             end if;
             wait until falling_edge(s_clk);
             assert (s_response = '0') report "Sound bus duplicated reply" severity failure;

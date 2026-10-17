@@ -75,7 +75,7 @@ begin
     s_clk <= not s_clk after 10417 ps;
     s_ddr_busy <= '1' when sint_cycles mod 23 < 7 else '0';
     copy_from_ddr : entity work.rabbitpunch_load_frontend
-        generic map (sint_IMAGE_BYTES => 64)
+        generic map (GINT_IMAGE_BYTES => 64)
         port map (
             i_clk => s_clk,
             i_initialize => s_copy_initialize,
@@ -138,7 +138,7 @@ begin
         end if;
     end process;
     system : entity work.rabbitpunch_system
-        generic map (sint_IMAGE_BYTES => 64)
+        generic map (GINT_IMAGE_BYTES => 64)
         port map (
             i_clk => s_clk,
             i_initialize => '0',
@@ -165,7 +165,7 @@ begin
             ou8_green => open,
             ou8_blue => open,
             i_view_enable => s_view_enable,
-            iu5_view_target => TARGET_WORKRAM,
+            iu5_view_target => CU5_TARGET_WORKRAM,
             iu15_view_word_address => (others => '0'),
             o_view_valid => s_view_valid,
             ou16_view_data => su16_view_data,

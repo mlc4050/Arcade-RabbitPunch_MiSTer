@@ -26,7 +26,7 @@ sources = ['rtl/rabbitpunch_ram8.vhd', 'rtl/rabbitpunch_ram16.vhd',
     'rtl/rabbitpunch_maintenance.vhd', 'rtl/rabbitpunch_hiscore.vhd',
     'rtl/rabbitpunch_hiscore_config.vhd', 'rtl/rabbitpunch_hiscore_service.vhd', 'sim/board/hiscore_tb.vhd']
 result = run_case(case, sources, 'hiscore_tb', '5 ms', 'HISCORE_PASS',
-    sim_args=['-gSERVICE_MODE=true'] if args.service else [])
+    sim_args=['-gGBOOL_SERVICE_MODE=true'] if args.service else [])
 result.update(source_sha256={name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in sources},
     vectors_sha256=hashlib.sha256((out / 'scores.hex').read_bytes()).hexdigest(),
     log_sha256=hashlib.sha256((root / result['log']).read_bytes()).hexdigest(),

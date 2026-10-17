@@ -48,7 +48,7 @@ if args.host_netlist:
         if (root/name).read_bytes().replace(b'\r\n',b'\n')!=expected.replace(b'\r\n',b'\n'):
             raise SystemExit('Host source changed since verified netlist: '+name)
     sources.insert(-1,netlist)
-    sim_args=['-gHOST_NETLIST_MODE=true']+[item for name in ('cyclonev_ver','altera_ver','altera_lnsim_ver','lpm_ver','sgate_ver') for item in ('-L',name)]
+    sim_args=['-gGBOOL_HOST_NETLIST_MODE=true']+[item for name in ('cyclonev_ver','altera_ver','altera_lnsim_ver','lpm_ver','sgate_ver') for item in ('-L',name)]
     host_proof={'host_netlist_commit':reference['commit'],'host_netlist_sha256':reference['netlist_sha256']}
 result=run_case(case,sources,'platform_hiscore_tb','3 ms','PLATFORM_HISCORE_PASS',sim_args=sim_args,wall_timeout=300)
 result.update(**host_proof,metadata=metadata_reference,metadata_sha256=hashlib.sha256((out/'metadata.hex').read_bytes()).hexdigest(),

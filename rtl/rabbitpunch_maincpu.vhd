@@ -7,8 +7,8 @@ use ieee.numeric_std.all;
 -- Memory latency becomes real 68000 wait states; phases are never accelerated.
 entity rabbitpunch_maincpu is
     generic (
-        sint_PHASE_DIVIDER : positive := 3;
-        EXTERNAL_PHASE_ENABLE : boolean := false
+        GINT_PHASE_DIVIDER : positive := 3;
+        GBOOL_EXTERNAL_PHASE_ENABLE : boolean := false
     );
     port (
         i_clk : in std_logic;
@@ -29,7 +29,7 @@ entity rabbitpunch_maincpu is
 end entity;
 
 architecture rtl of rabbitpunch_maincpu is
-    signal sint_phase_count : natural range 0 to sint_PHASE_DIVIDER-1 := 0;
+    signal sint_phase_count : natural range 0 to GINT_PHASE_DIVIDER-1 := 0;
     signal s_phase : std_logic := '0';
     signal s_enable_phase1, s_enable_phase2, s_phase_advance, s_frozen : std_logic;
     signal s_address_strobe_n, s_upper_byte_strobe_n, s_lower_byte_strobe_n, s_read, s_transfer_acknowledge_n : std_logic;
@@ -59,19 +59,19 @@ begin
     -- Finish the current bus cycle before stopping. Backend replies keep running.
     s_frozen <= '1' when i_pause = '1' and s_address_strobe_n = '1' and i_reset = '0' else '0';
     o_paused <= s_frozen;
-    s_phase_advance <= i_phase_enable when EXTERNAL_PHASE_ENABLE else
-        '1' when sint_phase_count = sint_PHASE_DIVIDER - 1 else '0';
+    s_phase_advance <= i_phase_enable when GBOOL_EXTERNAL_PHASE_ENABLE else
+        '1' when sint_phase_count = GINT_PHASE_DIVIDER - 1 else '0';
     s_enable_phase1 <= '1' when s_phase_advance = '1' and s_phase = '0' and s_frozen = '0' else '0';
     s_enable_phase2 <= '1' when s_phase_advance = '1' and s_phase = '1' and s_frozen = '0' else '0';
     process(i_clk)
     begin
         if (rising_edge(i_clk) and s_frozen = '0') then
-            if (EXTERNAL_PHASE_ENABLE) then
+            if (GBOOL_EXTERNAL_PHASE_ENABLE) then
                 if (i_phase_enable = '1') then
                     s_phase <= not s_phase;
                 end if;
             else
-                if (sint_phase_count = sint_PHASE_DIVIDER-1) then
+                if (sint_phase_count = GINT_PHASE_DIVIDER-1) then
                     sint_phase_count <= 0;
                     s_phase <= not s_phase;
                 else

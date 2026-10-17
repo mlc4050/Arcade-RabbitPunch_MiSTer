@@ -7,7 +7,7 @@ use std.env.all;
 use std.textio.all;
 
 entity sound_sdram_boot_tb is
-    generic (WRITE_LIMIT : positive := 4096);
+    generic (GINT_WRITE_LIMIT : positive := 4096);
 end entity;
 
 architecture test of sound_sdram_boot_tb is
@@ -355,8 +355,8 @@ begin
         s_main_run <= '1';
         s_traffic_run <= '1';
         -- The runner loads captured MAME CPU state while s_run holds CEN low.
-        wait until sint_writes = WRITE_LIMIT for 100 ms;
-        assert (sint_writes = WRITE_LIMIT) report "Sound SDRAM boot write limit not reached" severity failure;
+        wait until sint_writes = GINT_WRITE_LIMIT for 100 ms;
+        assert (sint_writes = GINT_WRITE_LIMIT) report "Sound SDRAM boot write limit not reached" severity failure;
         wait until falling_edge(s_clk);
         s_pause <= '1';
         s_main_run <= '0';
@@ -370,7 +370,7 @@ begin
         assert (s_paused = '1' and s_transport_idle = '1' and su3_sdram_ready = "111")
             report "Sound SDRAM boot did not drain" severity failure;
         wait for 2 us;
-        assert (sint_writes = WRITE_LIMIT and s_adpcm_busy = '0' and su9_adpcm_pcm = 0)
+        assert (sint_writes = GINT_WRITE_LIMIT and s_adpcm_busy = '0' and su9_adpcm_pcm = 0)
             report "Sound SDRAM boot changed after pause or unexpectedly started a sample" severity failure;
         report "SOUND_SDRAM_BOOT_PASS writes=" & integer'image(sint_writes) &
             " main_bursts=" & integer'image(sint_main_reads) &

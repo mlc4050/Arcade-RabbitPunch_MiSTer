@@ -5,7 +5,7 @@ use std.env.all;
 use work.rabbitpunch_sdram_types.all;
 
 entity rom_requests_tb is
-    generic (USE_PIN_BACKEND : boolean := false);
+    generic (GBOOL_USE_PIN_BACKEND : boolean := false);
 end entity;
 
 architecture test of rom_requests_tb is
@@ -86,7 +86,7 @@ begin
     addresses : for gint_client in 0 to 2 generate
         su27_addresses(gint_client) <= su81_addresses(gint_client * 27 + 26 downto gint_client * 27);
     end generate;
-    synthetic_backend : if (not USE_PIN_BACKEND) generate
+    synthetic_backend : if (not GBOOL_USE_PIN_BACKEND) generate
         s_loaded <= '1';
     process(s_clk)
         variable vint_wait : t_counts := (others => 0);
@@ -123,7 +123,7 @@ begin
     su3_ready(2) <= '1' when sint_cycle > 20 and sint_cycle mod 5 < 2 else '0';
     end generate;
 
-    pin_backend : if (USE_PIN_BACKEND) generate
+    pin_backend : if (GBOOL_USE_PIN_BACKEND) generate
         component sdram_chip_model_wide is
             port (
                 clk : in std_logic;

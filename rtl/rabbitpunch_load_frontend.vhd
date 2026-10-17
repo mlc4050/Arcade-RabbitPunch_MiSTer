@@ -11,7 +11,7 @@ use work.rabbitpunch_layout.all;
 -- and uses the downstream image-valid/drained status before running the board.
 entity rabbitpunch_load_frontend is
     generic (
-        sint_IMAGE_BYTES : positive := ROM_IMAGE_SIZE
+        GINT_IMAGE_BYTES : positive := CINT_ROM_IMAGE_SIZE
     );
     port (
         i_clk : in std_logic;
@@ -72,7 +72,7 @@ begin
     ou27_word_byte_address <= su27_copy_address when s_copy_selected = '1' else su27_word_address;
     ou16_word_data <= su16_copy_data when s_copy_selected = '1' else su16_word_data;
     ddr_copy : entity work.rabbitpunch_ddr_copy
-        generic map (sint_IMAGE_BYTES => sint_IMAGE_BYTES)
+        generic map (GINT_IMAGE_BYTES => GINT_IMAGE_BYTES)
         port map (
             i_clk => i_clk,
             i_initialize => i_initialize,
@@ -129,7 +129,7 @@ begin
                             if (s_seen_write = '0') then
                                 s_ddr_mode <= '1';
                                 styp_state <= STATE_WAIT_RELEASE;
-                            elsif (su27_next_byte = sint_IMAGE_BYTES and su27_next_byte(0) = '0') then
+                            elsif (su27_next_byte = GINT_IMAGE_BYTES and su27_next_byte(0) = '0') then
                                 styp_state <= STATE_BYTE_DRAIN;
                             else
                                 s_error <= '1';
@@ -167,7 +167,7 @@ begin
                 -- The first byte is allowed on the same edge as download rises.
                 if ((styp_state = STATE_HOST or v_start) and s_host_rom = '1' and i_host_write = '1') then
                     s_seen_write <= '1';
-                    if (s_word_pending = '1' or iu27_host_byte_address /= vu27_count or vu27_count >= sint_IMAGE_BYTES) then
+                    if (s_word_pending = '1' or iu27_host_byte_address /= vu27_count or vu27_count >= GINT_IMAGE_BYTES) then
                         s_error <= '1';
                         styp_state <= STATE_ERROR_DRAIN;
                     else

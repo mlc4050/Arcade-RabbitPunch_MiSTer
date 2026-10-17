@@ -21,7 +21,7 @@ NAMES = {"rabiolep": "Rabio Lepus (Japan)", "rpunch": "Rabbit Punch (US)"}
 def layout():
     text = (core_root() / "rtl/rabbitpunch_layout.vhd").read_text()
     values = {k: int(v, 16) for k, v in re.findall(
-        r"constant\s+(ROM_\w+)\s*:\s*natural\s*:=\s*16#([0-9a-fA-F]+)#", text)}
+        r"constant\s+CINT_(ROM_\w+)\s*:\s*natural\s*:=\s*16#([0-9a-fA-F]+)#", text)}
     cursor = 0
     for tag in REGIONS:
         if values[f"ROM_{tag.upper()}_BASE"] != cursor:
@@ -35,7 +35,7 @@ def layout():
 def button_names():
     text = (core_root() / "rtl/rabbitpunch_layout.vhd").read_text()
     slots = {name: int(value) for name, value in re.findall(
-        r"constant\s+JOY_(\w+)\s*:\s*natural\s*:=\s*(\d+)", text)}
+        r"constant\s+CINT_JOY_(\w+)\s*:\s*natural\s*:=\s*(\d+)", text)}
     labels = {"MISSILE": "Missile", "SHOOT": "Shoot", "START": "Start", "COIN": "Coin",
               "PAUSE": "Pause", "SERVICE": "Service", "TEST": "Test"}
     if set(slots) != set(labels) or len(set(slots.values())) != len(slots) or min(slots.values()) < 4:

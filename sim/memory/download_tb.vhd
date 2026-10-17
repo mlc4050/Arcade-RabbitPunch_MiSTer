@@ -24,7 +24,7 @@ begin
     s_idle <= s_idle_allow and not s_pending;
     s_loader_ready <= s_loading and s_accept_allow and not s_pending;
     dut : entity work.rabbitpunch_download
-        generic map (sint_IMAGE_BYTES => 16)
+        generic map (GINT_IMAGE_BYTES => 16)
         port map (
             i_clk => s_clk,
             i_download => s_download,

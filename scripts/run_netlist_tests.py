@@ -91,7 +91,7 @@ def main():
     libraries = [item for library in ("cyclonev_ver", "altera_ver", "altera_lnsim_ver", "lpm_ver", "sgate_ver")
                  for item in ("-L", library)]
     check = run_case(f"gate_{args.block}", sources, top, "60 ms", marker,
-                     sim_args=libraries + (["-gEVALUATION_BOUNDARY=true", "-gEXHAUSTIVE=false"] if args.block == "memory" else []), wall_timeout=args.wall_timeout)
+                     sim_args=libraries + (["-gGBOOL_EVALUATION_BOUNDARY=true", "-gGBOOL_EXHAUSTIVE=false"] if args.block == "memory" else []), wall_timeout=args.wall_timeout)
     check.update(commit=stamp, vectors_sha256=vectors, netlist_sha256=hashlib.sha256(netlist.read_bytes()).hexdigest(),
                  source_sha256={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources},
                  log_sha256=hashlib.sha256((root / check["log"]).read_bytes()).hexdigest(),

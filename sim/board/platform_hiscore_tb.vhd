@@ -8,7 +8,7 @@ use std.textio.all;
 use work.rabbitpunch_layout.all;
 
 entity platform_hiscore_tb is
-    generic (HOST_NETLIST_MODE : boolean := false);
+    generic (GBOOL_HOST_NETLIST_MODE : boolean := false);
 end entity;
 
 architecture test of platform_hiscore_tb is
@@ -148,7 +148,7 @@ architecture test of platform_hiscore_tb is
     signal su16_native_data : unsigned(15 downto 0) := (others => '0');
     signal s_native_strobe, s_native_uio, s_native_file : std_logic := '0';
 begin
-    direct_host : if (not HOST_NETLIST_MODE) generate
+    direct_host : if (not GBOOL_HOST_NETLIST_MODE) generate
         s_file_download <= s_host_download;
         s_file_write <= s_host_write;
         s_file_upload <= s_host_upload;
@@ -156,7 +156,7 @@ begin
         su27_file_address <= su27_host_address;
         su8_file_data <= su8_host_data;
     end generate;
-    native_host : if (HOST_NETLIST_MODE) generate
+    native_host : if (GBOOL_HOST_NETLIST_MODE) generate
         host : host_check
             port map (
                 i_clk => s_clk,
@@ -225,7 +225,7 @@ begin
         end if;
     end process;
     system : entity work.rabbitpunch_platform
-        generic map (sint_IMAGE_BYTES => 64)
+        generic map (GINT_IMAGE_BYTES => 64)
         port map (
             i_clk => s_clk,
             i_initialize => s_copy_initialize,
@@ -299,7 +299,7 @@ begin
             ou8_green => open,
             ou8_blue => open,
             i_view_enable => s_view_enable,
-            iu5_view_target => TARGET_WORKRAM,
+            iu5_view_target => CU5_TARGET_WORKRAM,
             iu15_view_word_address => su15_view_address,
             o_view_valid => s_view_valid,
             ou16_view_data => su16_view_data,
@@ -441,7 +441,7 @@ begin
         end procedure;
         procedure native_file_command(vint_command, vint_data : natural) is
         begin
-            if (HOST_NETLIST_MODE) then
+            if (GBOOL_HOST_NETLIST_MODE) then
                 cycles(1);
                 s_native_file <= '1';
                 native_word(vint_command);
@@ -455,7 +455,7 @@ begin
         procedure check_menu(vint_mask : natural) is
         begin
             assert (su16_menu_mask = vint_mask) report "Score menu visibility differs from profile validity" severity failure;
-            if (HOST_NETLIST_MODE) then
+            if (GBOOL_HOST_NETLIST_MODE) then
                 s_native_uio <= '1';
                 native_word(16#2E#);
                 native_word(0);
@@ -708,7 +708,7 @@ begin
                 if (v_modified) then
                     vu8_expected := vu8_expected xor x"5A";
                 end if;
-                if (HOST_NETLIST_MODE) then
+                if (GBOOL_HOST_NETLIST_MODE) then
                     native_file_command(16#54#, 0);
                     assert (su16_file_return(7 downto 0) = vu8_expected)
                         report "Native HPS score upload byte " & integer'image(vint_byte) &
@@ -788,7 +788,7 @@ begin
             end if;
             assert (sint_upload_requests = vint_notices + 1 and s_score_dirty = '1' and s_user_paused = '0')
                 report "Platform autosave/pause wiring mismatch" severity failure;
-            if (HOST_NETLIST_MODE) then
+            if (GBOOL_HOST_NETLIST_MODE) then
                 s_native_uio <= '1';
                 native_word(16#3C#);
                 assert (su16_host_response = x"0401")
@@ -813,7 +813,7 @@ begin
         end loop;
         assert (s_error = '0' and su16_dips = x"A55A")
             report "Score persistence disturbed image or DIP state" severity failure;
-        report "PLATFORM_HISCORE_PASS sets=2 executing_cpu=checked shared_sdram=checked config3_dump4=checked restore_echo=checked external_client_arbitration=checked osd_autosave=checked upload_bytes=234 soft_reset_restore=checked rom_generation_isolation=checked dips_preserved=checked menu_visibility=checked reset_held_file_load=checked host_netlist=" & boolean'image(HOST_NETLIST_MODE);
+        report "PLATFORM_HISCORE_PASS sets=2 executing_cpu=checked shared_sdram=checked config3_dump4=checked restore_echo=checked external_client_arbitration=checked osd_autosave=checked upload_bytes=234 soft_reset_restore=checked rom_generation_isolation=checked dips_preserved=checked menu_visibility=checked reset_held_file_load=checked host_netlist=" & boolean'image(GBOOL_HOST_NETLIST_MODE);
         finish;
         wait;
     end process;

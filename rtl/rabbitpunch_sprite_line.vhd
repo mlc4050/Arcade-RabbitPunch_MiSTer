@@ -130,7 +130,7 @@ begin
 
     banks : for vint_bank in 0 to 1 generate
         line_ram : entity work.rabbitpunch_ram16
-            generic map (sint_ADDRESS_BITS => 9)
+            generic map (GINT_ADDRESS_BITS => 9)
             port map (
                 i_clk => i_clk,
                 i_cpu_enable => su2_write_enable(vint_bank),

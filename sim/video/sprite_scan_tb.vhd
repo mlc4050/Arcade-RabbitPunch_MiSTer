@@ -5,8 +5,8 @@ use work.tile_test_support.all;
 
 entity sprite_scan_tb is
     generic (
-        G_DRAW : boolean := false;
-        G_LINE : boolean := false
+        GBOOL_DRAW : boolean := false;
+        GBOOL_LINE : boolean := false
     );
 end entity;
 
@@ -21,7 +21,7 @@ architecture test of sprite_scan_tb is
         return t_unsigned_words is
         variable v_empty : t_unsigned_words(0 to vint_count - 1)(vint_width - 1 downto 0);
     begin
-        if (G_DRAW) then
+        if (GBOOL_DRAW) then
             return read_hex(v_filename, vint_count, vint_width);
         end if;
         v_empty := (others => (others => '0'));
@@ -32,7 +32,7 @@ architecture test of sprite_scan_tb is
     impure function line_vectors return t_unsigned_words is
         variable v_empty : t_unsigned_words(0 to 0)(15 downto 0) := (others => (others => '0'));
     begin
-        if (G_LINE) then
+        if (GBOOL_LINE) then
             return read_hex("line_entries.hex", C_LINES'length * 512, 16);
         end if;
         return v_empty;
@@ -71,8 +71,8 @@ begin
     s_clk <= not s_clk after 5 ns;
     su64_actual <= to_unsigned(0, 17) & s_behind & s_vertical_flip & s_horizontal_flip &
         su4_palette & su9_y & su9_x & su5_row & su11_code & su6_index;
-    s_row_ready <= s_consumer_ready and s_draw_ready and s_line_candidate_ready when G_DRAW else s_consumer_ready;
-    drawing : if G_DRAW generate
+    s_row_ready <= s_consumer_ready and s_draw_ready and s_line_candidate_ready when GBOOL_DRAW else s_consumer_ready;
+    drawing : if GBOOL_DRAW generate
         drawer : entity work.rabbitpunch_sprite_row
             port map (
                 i_clk => s_clk,
@@ -122,7 +122,7 @@ begin
             end if;
         end process;
     end generate;
-    line_storage : if G_LINE generate
+    line_storage : if GBOOL_LINE generate
         line_ram : entity work.rabbitpunch_sprite_line
             port map (
                 i_clk => s_clk,
@@ -292,7 +292,7 @@ begin
                         vint_max_cycles := vint_cycles;
                     end if;
                 end if;
-                if (G_DRAW and s_pixel_valid = '1') then
+                if (GBOOL_DRAW and s_pixel_valid = '1') then
                     vint_draw_row := vint_row_offset + vint_draw_pixels / 16;
                     vint_pixel := vint_draw_pixels mod 16;
                     assert (vint_draw_row < vint_row_end) report "Extra scan/draw pixel" severity failure;
@@ -348,11 +348,11 @@ begin
                 wait until falling_edge(s_clk) and s_scan_done = '1';
             end if;
             wait until falling_edge(s_clk);
-            if (G_DRAW) then
+            if (GBOOL_DRAW) then
                 wait until falling_edge(s_clk) and s_draw_ready = '1';
                 assert (sint_draw_pixels = sint_rows * 16)
                     report "Incomplete integrated scan/draw line" severity failure;
-                if (G_LINE) then
+                if (GBOOL_LINE) then
                     wait until falling_edge(s_clk) and s_line_candidate_ready = '1';
                     s_line_finish <= '1';
                     wait until falling_edge(s_clk);
@@ -363,7 +363,7 @@ begin
                 if (sint_cycles > vint_max_completed_cycles) then
                     vint_max_completed_cycles := sint_cycles;
                 end if;
-                if (G_LINE) then
+                if (GBOOL_LINE) then
                     for vint_x in 0 to 511 loop
                         s_view_enable <= '1';
                         su9_view_x <= to_unsigned(vint_x, 9);
@@ -399,7 +399,7 @@ begin
         for vint_case in C_LINES'range loop
             trial(vint_case);
         end loop;
-        if (not G_DRAW) then
+        if (not GBOOL_DRAW) then
             for vint_request in 1 to 3 loop
                 begin_line(0);
                 wait until falling_edge(s_clk) and sint_requests = vint_request and s_pending = '1';
@@ -415,10 +415,10 @@ begin
             reset_and_drain;
             trial(0);
         end if;
-        if (G_LINE) then
+        if (GBOOL_LINE) then
             report "SPRITE_SCAN_LINE_PASS: " & integer'image(vint_trials) &
                 " scans; max_cycles=" & integer'image(vint_max_completed_cycles) & "; every native line entry identical";
-        elsif (G_DRAW) then
+        elsif (GBOOL_DRAW) then
             report "SPRITE_SCAN_DRAW_PASS: " & integer'image(vint_trials) &
                 " scans; max_cycles=" & integer'image(vint_max_completed_cycles) & "; all selected row pixels identical";
         else

@@ -5,7 +5,7 @@ use std.textio.all;
 use std.env.all;
 
 entity sound_board_boot_tb is
-    generic (WRITE_LIMIT : positive := 4096);
+    generic (GINT_WRITE_LIMIT : positive := 4096);
 end entity;
 
 architecture test of sound_board_boot_tb is
@@ -128,15 +128,15 @@ begin
         wait for 2 us;
         wait until falling_edge(s_clk);
         s_reset <= '0';
-        wait until sint_writes = WRITE_LIMIT for 100 ms;
-        assert (sint_writes = WRITE_LIMIT) report "Sound startup write limit not reached" severity failure;
+        wait until sint_writes = GINT_WRITE_LIMIT for 100 ms;
+        assert (sint_writes = GINT_WRITE_LIMIT) report "Sound startup write limit not reached" severity failure;
         wait until falling_edge(s_clk);
         s_pause <= '1';
         wait until s_paused = '1' for 10 us;
         assert (s_paused = '1' and sint_delayed_reads > 0)
             report "Sound startup did not pause/drain delayed requests" severity failure;
         wait for 2 us;
-        assert (sint_writes = WRITE_LIMIT) report "Sound CPU wrote after pause" severity failure;
+        assert (sint_writes = GINT_WRITE_LIMIT) report "Sound CPU wrote after pause" severity failure;
         report "SOUND_BOARD_BOOT_PASS writes=" & integer'image(sint_writes) &
             " delayed_transactions=" & integer'image(sint_delayed_reads);
         finish;

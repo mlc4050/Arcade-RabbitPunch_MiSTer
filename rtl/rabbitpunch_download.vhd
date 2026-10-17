@@ -7,7 +7,7 @@ use work.rabbitpunch_layout.all;
 -- A word is accepted only on valid/ready. The memory transport remains live.
 entity rabbitpunch_download is
     generic (
-        sint_IMAGE_BYTES : positive := ROM_IMAGE_SIZE
+        GINT_IMAGE_BYTES : positive := CINT_ROM_IMAGE_SIZE
     );
     port (
         i_clk : in std_logic;
@@ -40,7 +40,7 @@ architecture rtl of rabbitpunch_download is
     signal s_loading, s_image_valid, s_error : std_logic := '0';
     signal su27_bytes_loaded : unsigned(26 downto 0) := (others => '0');
 begin
-    assert (sint_IMAGE_BYTES mod 2 = 0 and sint_IMAGE_BYTES <= ROM_IMAGE_SIZE)
+    assert (GINT_IMAGE_BYTES mod 2 = 0 and GINT_IMAGE_BYTES <= CINT_ROM_IMAGE_SIZE)
         report "Download size must be an even, bounded raw image" severity failure;
     o_loading <= s_loading;
     o_image_valid <= s_image_valid;
@@ -49,7 +49,7 @@ begin
     ou27_bytes_loaded <= su27_bytes_loaded;
     ou2_loader_bytes <= "11";
     o_word_ready <= '1' when styp_state = STATE_LOAD_IDLE and i_download = '1' and
-        su27_bytes_loaded < sint_IMAGE_BYTES else '0';
+        su27_bytes_loaded < GINT_IMAGE_BYTES else '0';
     process(i_clk)
     begin
         if (rising_edge(i_clk)) then
@@ -72,7 +72,7 @@ begin
                     end if;
                 when STATE_LOAD_IDLE =>
                     if (i_download = '0') then
-                        if (su27_bytes_loaded = sint_IMAGE_BYTES) then
+                        if (su27_bytes_loaded = GINT_IMAGE_BYTES) then
                             styp_state <= STATE_FINISH_DRAIN;
                         else
                             s_error <= '1';

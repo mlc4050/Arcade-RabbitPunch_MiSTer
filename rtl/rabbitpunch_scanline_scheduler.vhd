@@ -9,7 +9,7 @@ use ieee.numeric_std.all;
 -- selection settles before the next visible pixel. No pixel memory is added.
 entity rabbitpunch_scanline_scheduler is
     generic (
-        sint_VISIBLE_LINES : positive := 216
+        GINT_VISIBLE_LINES : positive := 216
     );
     port (
         i_clk : in std_logic;
@@ -48,7 +48,7 @@ architecture rtl of rabbitpunch_scanline_scheduler is
         return 0;
     end function;
 begin
-    assert (sint_VISIBLE_LINES <= 256) report "Visible line count exceeds render coordinate width" severity failure;
+    assert (GINT_VISIBLE_LINES <= 256) report "Visible line count exceeds render coordinate width" severity failure;
     o_render_valid <= '1' when styp_state = STATE_REQUEST and i_initialize = '0' else '0';
     o_render_bank <= s_render_bank;
     ou9_render_y <= resize(su8_render_y, 9);
@@ -105,7 +105,7 @@ begin
                         v_found := false;
                         for vint_bank in 0 to 1 loop
                             if (not v_found and vu2_ready_banks(vint_bank) = '1' and
-                                vu8_ready_y(vint_bank) = iu8_next_line_y and iu8_next_line_y < sint_VISIBLE_LINES) then
+                                vu8_ready_y(vint_bank) = iu8_next_line_y and iu8_next_line_y < GINT_VISIBLE_LINES) then
                                 v_found := true;
                                 v_display_valid := '1';
                                 if (vint_bank = 0) then
@@ -128,7 +128,7 @@ begin
                     s_armed <= '1';
                     v_prepare := true;
                 elsif (i_visible_line_start = '1' and s_armed = '1' and
-                    iu8_visible_line_y < sint_VISIBLE_LINES - 1) then
+                    iu8_visible_line_y < GINT_VISIBLE_LINES - 1) then
                     vu8_prepare_y := iu8_visible_line_y + 1;
                     v_prepare := true;
                 end if;

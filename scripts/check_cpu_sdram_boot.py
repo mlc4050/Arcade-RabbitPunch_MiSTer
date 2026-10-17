@@ -51,7 +51,7 @@ def main():
         dip_bytes = mra.find("switches").get("default").split(",")
         dips = int(dip_bytes[0], 16) | (int(dip_bytes[1], 16) << 8)
         result = run_case(case, sources, "cpu_sdram_boot_tb", "100 ms", "CPU_SDRAM_BOOT_PASS",
-            sim_args=(f"-gWRITE_LIMIT={args.writes}", f"-gDIP_DEFAULT={dips}"), wall_timeout=900,
+            sim_args=(f"-gGINT_WRITE_LIMIT={args.writes}", f"-gGINT_DIP_DEFAULT={dips}"), wall_timeout=900,
             setup_commands=(f"mem load -format mti -infile {{{memory_file.as_posix()}}} /cpu_sdram_boot_tb/chip/mem",))
         actual = [tuple(int(word, 16) for word in line.split()) for line in (directory / "rtl_writes.txt").read_text().splitlines()]
         if actual != expected:

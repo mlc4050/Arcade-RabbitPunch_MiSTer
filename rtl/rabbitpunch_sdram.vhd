@@ -10,9 +10,9 @@ use work.rabbitpunch_sdram_types.all;
 -- The physical SDRAM clock is generated separately at the MiSTer top level.
 entity rabbitpunch_sdram is
     generic (
-        REFRESH_INTERVAL_CYCLES : positive := 160;
-        POWERUP_WAIT_CYCLES : positive := 6000;
-        INITIALIZE_WAIT_CYCLES : positive := 1024
+        GINT_REFRESH_INTERVAL_CYCLES : positive := 160;
+        GINT_POWERUP_WAIT_CYCLES : positive := 6000;
+        GINT_INITIALIZE_WAIT_CYCLES : positive := 1024
     );
     port (
         i_clk : in std_logic;
@@ -86,7 +86,7 @@ architecture rtl of rabbitpunch_sdram is
     end component;
     type t_state is (STATE_POWER_WAIT, STATE_INITIALIZE_WAIT, STATE_RUNNING);
     signal styp_state : t_state := STATE_POWER_WAIT;
-    signal sint_wait : natural range 0 to POWERUP_WAIT_CYCLES + INITIALIZE_WAIT_CYCLES := 0;
+    signal sint_wait : natural range 0 to GINT_POWERUP_WAIT_CYCLES + GINT_INITIALIZE_WAIT_CYCLES := 0;
     signal s_vendor_initialize : std_logic := '1';
     signal su3_pending, su3_request_toggle, su3_acknowledge : unsigned(2 downto 0) := (others => '0');
     signal su3_write_low, su3_write_high : unsigned(2 downto 0) := (others => '0');
@@ -94,13 +94,13 @@ architecture rtl of rabbitpunch_sdram is
     signal su16_write_data : t_sdram_write_data := (others => (others => '0'));
     signal su64_read_data : t_sdram_read_data;
 begin
-    assert (REFRESH_INTERVAL_CYCLES <= 1023) report "Refresh interval exceeds donor counter" severity failure;
+    assert (GINT_REFRESH_INTERVAL_CYCLES <= 1023) report "Refresh interval exceeds donor counter" severity failure;
     o_initialized <= '1' when styp_state = STATE_RUNNING and i_initialize = '0' else '0';
     ou3_ready <= not su3_pending when styp_state = STATE_RUNNING and i_initialize = '0' else "000";
 
     memory_controller : sdram
         generic map (
-            RFS_INTERVAL => to_unsigned(REFRESH_INTERVAL_CYCLES, 10)
+            RFS_INTERVAL => to_unsigned(GINT_REFRESH_INTERVAL_CYCLES, 10)
         )
         port map (
             SDRAM_DQ => iou16_sdram_data,
@@ -160,7 +160,7 @@ begin
             else
                 case styp_state is
                     when STATE_POWER_WAIT =>
-                        if (sint_wait = POWERUP_WAIT_CYCLES - 1) then
+                        if (sint_wait = GINT_POWERUP_WAIT_CYCLES - 1) then
                             sint_wait <= 0;
                             s_vendor_initialize <= '0';
                             styp_state <= STATE_INITIALIZE_WAIT;
@@ -168,7 +168,7 @@ begin
                             sint_wait <= sint_wait + 1;
                         end if;
                     when STATE_INITIALIZE_WAIT =>
-                        if (sint_wait = INITIALIZE_WAIT_CYCLES - 1) then
+                        if (sint_wait = GINT_INITIALIZE_WAIT_CYCLES - 1) then
                             styp_state <= STATE_RUNNING;
                             sint_wait <= 0;
                         else

@@ -161,7 +161,7 @@ begin
             i_rom_response_valid => '0',
             iu16_rom_response_data => (others => '0'),
             i_view_enable => '0',
-            iu5_view_target => TARGET_NONE,
+            iu5_view_target => CU5_TARGET_NONE,
             iu15_view_word_address => (others => '0'),
             o_view_valid => open,
             ou16_view_data => open

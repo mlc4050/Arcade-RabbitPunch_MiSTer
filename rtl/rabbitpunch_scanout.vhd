@@ -8,15 +8,15 @@ use ieee.numeric_std.all;
 -- RGB output. Game reset/loading blank RGB without stopping clocks or sync.
 entity rabbitpunch_scanout is
     generic (
-        sint_HORIZONTAL_TOTAL : positive := 432;
-        sint_VISIBLE_WIDTH : positive := 288;
-        sint_HORIZONTAL_SYNC_START : natural := 352;
-        sint_HORIZONTAL_SYNC_END : positive := 392;
-        sint_VERTICAL_TOTAL : positive := 256;
-        sint_VISIBLE_LINES : positive := 216;
-        sint_VERTICAL_SYNC_START : natural := 232;
-        sint_VERTICAL_SYNC_END : positive := 240;
-        sint_RENDER_X_OFFSET : natural := 8
+        GINT_HORIZONTAL_TOTAL : positive := 432;
+        GINT_VISIBLE_WIDTH : positive := 288;
+        GINT_HORIZONTAL_SYNC_START : natural := 352;
+        GINT_HORIZONTAL_SYNC_END : positive := 392;
+        GINT_VERTICAL_TOTAL : positive := 256;
+        GINT_VISIBLE_LINES : positive := 216;
+        GINT_VERTICAL_SYNC_START : natural := 232;
+        GINT_VERTICAL_SYNC_END : positive := 240;
+        GINT_RENDER_X_OFFSET : natural := 8
     );
     port (
         i_clk : in std_logic;
@@ -74,9 +74,9 @@ architecture rtl of rabbitpunch_scanout is
 begin
     s_video_initialize <= i_initialize or not i_game_ready;
     s_active <= s_raster_active and s_armed and i_game_ready;
-    s_line_handoff <= s_pixel_enable when su9_horizontal = sint_HORIZONTAL_TOTAL - 1 else '0';
-    su9_next_vertical <= (others => '0') when su9_vertical = sint_VERTICAL_TOTAL - 1 else su9_vertical + 1;
-    s_next_visible <= '1' when su9_next_vertical < sint_VISIBLE_LINES else '0';
+    s_line_handoff <= s_pixel_enable when su9_horizontal = GINT_HORIZONTAL_TOTAL - 1 else '0';
+    su9_next_vertical <= (others => '0') when su9_vertical = GINT_VERTICAL_TOTAL - 1 else su9_vertical + 1;
+    s_next_visible <= '1' when su9_next_vertical < GINT_VISIBLE_LINES else '0';
     o_vblank_start <= s_vblank_start and i_game_ready;
     o_half_frame <= s_half_frame and i_game_ready;
     o_pixel_valid <= s_pixel_request and s_display_valid;
@@ -101,15 +101,15 @@ begin
         );
     raster : entity work.rabbitpunch_raster
         generic map (
-            sint_HORIZONTAL_TOTAL => sint_HORIZONTAL_TOTAL,
-            sint_HORIZONTAL_VISIBLE_WIDTH => sint_VISIBLE_WIDTH,
-            sint_HORIZONTAL_SYNC_START => sint_HORIZONTAL_SYNC_START,
-            sint_HORIZONTAL_SYNC_END => sint_HORIZONTAL_SYNC_END,
-            sint_VERTICAL_TOTAL => sint_VERTICAL_TOTAL,
-            sint_VERTICAL_VISIBLE_HEIGHT => sint_VISIBLE_LINES,
-            sint_VERTICAL_SYNC_START => sint_VERTICAL_SYNC_START,
-            sint_VERTICAL_SYNC_END => sint_VERTICAL_SYNC_END,
-            sint_RENDER_X_OFFSET => sint_RENDER_X_OFFSET
+            GINT_HORIZONTAL_TOTAL => GINT_HORIZONTAL_TOTAL,
+            GINT_HORIZONTAL_VISIBLE_WIDTH => GINT_VISIBLE_WIDTH,
+            GINT_HORIZONTAL_SYNC_START => GINT_HORIZONTAL_SYNC_START,
+            GINT_HORIZONTAL_SYNC_END => GINT_HORIZONTAL_SYNC_END,
+            GINT_VERTICAL_TOTAL => GINT_VERTICAL_TOTAL,
+            GINT_VERTICAL_VISIBLE_HEIGHT => GINT_VISIBLE_LINES,
+            GINT_VERTICAL_SYNC_START => GINT_VERTICAL_SYNC_START,
+            GINT_VERTICAL_SYNC_END => GINT_VERTICAL_SYNC_END,
+            GINT_RENDER_X_OFFSET => GINT_RENDER_X_OFFSET
         )
         port map (
             i_clk => i_clk,
@@ -132,7 +132,7 @@ begin
         );
     scheduler : entity work.rabbitpunch_scanline_scheduler
         generic map (
-            sint_VISIBLE_LINES => sint_VISIBLE_LINES
+            GINT_VISIBLE_LINES => GINT_VISIBLE_LINES
         )
         port map (
             i_clk => i_clk,

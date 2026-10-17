@@ -9,9 +9,9 @@ use work.rabbitpunch_layout.all;
 
 entity system_boot_tb is
     generic (
-        MAIN_WRITE_LIMIT : positive := 2000;
-        SOUND_WRITE_LIMIT : positive := 256;
-        DIP_DEFAULT : natural := 0
+        GINT_MAIN_WRITE_LIMIT : positive := 2000;
+        GINT_SOUND_WRITE_LIMIT : positive := 256;
+        GINT_DIP_DEFAULT : natural := 0
     );
 end entity;
 
@@ -79,7 +79,7 @@ begin
         end if;
     end process;
     system : entity work.rabbitpunch_system
-        generic map (sint_IMAGE_BYTES => 32)
+        generic map (GINT_IMAGE_BYTES => 32)
         port map (
             i_clk => s_clk,
             i_initialize => '0',
@@ -106,14 +106,14 @@ begin
             ou8_green => open,
             ou8_blue => open,
             i_view_enable => s_view_enable,
-            iu5_view_target => TARGET_WORKRAM,
+            iu5_view_target => CU5_TARGET_WORKRAM,
             iu15_view_word_address => (others => '0'),
             o_view_valid => s_view_valid,
             ou16_view_data => su16_view_data,
             iu8_player1 => (others => '0'),
             iu8_player2 => (others => '0'),
             iu8_service => (others => '0'),
-            iu16_dips => to_unsigned(DIP_DEFAULT, 16),
+            iu16_dips => to_unsigned(GINT_DIP_DEFAULT, 16),
             i_sound_cpu_enable => s_enable and s_run,
             i_ym_enable => s_enable,
             i_ym_half_enable => s_half_enable,
@@ -197,7 +197,7 @@ begin
     begin
         if (rising_edge(s_clk)) then
             if (s_run = '1') then
-                if (s_cpu_request = '1' and s_cpu_write = '1' and vint_main < MAIN_WRITE_LIMIT) then
+                if (s_cpu_request = '1' and s_cpu_write = '1' and vint_main < GINT_MAIN_WRITE_LIMIT) then
                     hwrite(v_line, su24_cpu_address and x"0FFFFF");
                     write(v_line, string'(" "));
                     vu16_mask := (others => '0');
@@ -213,7 +213,7 @@ begin
                     writeline(main_trace, v_line);
                     vint_main := vint_main + 1;
                 end if;
-                if (s_audio_request = '1' and s_audio_write = '1' and vint_sound < SOUND_WRITE_LIMIT) then
+                if (s_audio_request = '1' and s_audio_write = '1' and vint_sound < GINT_SOUND_WRITE_LIMIT) then
                     hwrite(v_line, su16_audio_address);
                     write(v_line, string'(" "));
                     write(v_line, string'("FF "));
@@ -233,7 +233,7 @@ begin
                 else
                     vint_progress := vint_progress + 1;
                 end if;
-                if (vint_main = MAIN_WRITE_LIMIT and vint_sound = SOUND_WRITE_LIMIT) then
+                if (vint_main = GINT_MAIN_WRITE_LIMIT and vint_sound = GINT_SOUND_WRITE_LIMIT) then
                     report "SYSTEM_BOOT_PASS main_writes=" & integer'image(vint_main) &
                         " sound_writes=" & integer'image(vint_sound);
                     finish;

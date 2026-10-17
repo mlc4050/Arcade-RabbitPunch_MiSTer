@@ -11,7 +11,7 @@ use altera_mf.altera_mf_components.all;
 -- CPU read data is meaningful for reads only; mixed-port same-address collisions
 -- have no guaranteed value and must be avoided by sound/state arbitration.
 entity rabbitpunch_ram8 is
-    generic (sint_ADDRESS_BITS : positive := 11);
+    generic (GINT_ADDRESS_BITS : positive := 11);
     port (
         i_clk : in std_logic;
         i_cpu_enable : in std_logic;
@@ -30,7 +30,7 @@ architecture rtl of rabbitpunch_ram8 is
     signal s_cpu_write_enable : std_logic;
     signal s_cpu_read_enable : std_logic;
 begin
-    assert iux_cpu_address'length = sint_ADDRESS_BITS and iux_view_address'length = sint_ADDRESS_BITS
+    assert iux_cpu_address'length = GINT_ADDRESS_BITS and iux_view_address'length = GINT_ADDRESS_BITS
         report "RAM address ports must match sint_ADDRESS_BITS" severity failure;
     s_cpu_write_enable <= i_cpu_enable and i_cpu_write;
     s_cpu_read_enable <= i_cpu_enable and not i_cpu_write;
@@ -43,11 +43,11 @@ begin
             operation_mode => "BIDIR_DUAL_PORT",
             ram_block_type => "M10K",
             width_a => 8,
-            widthad_a => sint_ADDRESS_BITS,
-            numwords_a => 2**sint_ADDRESS_BITS,
+            widthad_a => GINT_ADDRESS_BITS,
+            numwords_a => 2**GINT_ADDRESS_BITS,
             width_b => 8,
-            widthad_b => sint_ADDRESS_BITS,
-            numwords_b => 2**sint_ADDRESS_BITS,
+            widthad_b => GINT_ADDRESS_BITS,
+            numwords_b => 2**GINT_ADDRESS_BITS,
             width_byteena_a => 1,
             width_byteena_b => 1,
             byte_size => 8,

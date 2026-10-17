@@ -6,7 +6,7 @@ use ieee.numeric_std.all;
 
 entity rabbitpunch_controls is
     generic (
-        DIP_DEFAULT : unsigned(15 downto 0) := x"0000"
+        GU16_DIP_DEFAULT : unsigned(15 downto 0) := x"0000"
     );
     port (
         i_clk : in std_logic;
@@ -36,7 +36,7 @@ architecture rtl of rabbitpunch_controls is
     signal s_pause_pressed : std_logic;
 begin
     inputs : entity work.rabbitpunch_inputs
-        generic map (DIP_DEFAULT => DIP_DEFAULT)
+        generic map (GU16_DIP_DEFAULT => GU16_DIP_DEFAULT)
         port map (
             i_clk => i_clk,
             i_initialize => i_initialize,

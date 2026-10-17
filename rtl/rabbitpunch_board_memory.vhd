@@ -45,12 +45,12 @@ end entity;
 architecture rtl of rabbitpunch_board_memory is
     type t_state is (STATE_IDLE, STATE_WAIT_WRITE_SLOT, STATE_RAM_REPLY, STATE_ROM_REPLY);
     signal styp_state : t_state := STATE_IDLE;
-    signal su5_target, su5_reply_target, su5_view_target : target_t := TARGET_NONE;
+    signal su5_target, su5_reply_target, su5_view_target : target_t := CU5_TARGET_NONE;
     signal s_reply_write, s_access_write, s_cpu_issue, s_write_collision : std_logic;
     signal su24_access_address, su24_pending_address : unsigned(23 downto 0) := (others => '0');
     signal su16_access_data, su16_pending_data : unsigned(15 downto 0);
     signal su2_access_bytes, su2_pending_bytes : unsigned(1 downto 0);
-    signal su5_access_target : target_t := TARGET_NONE;
+    signal su5_access_target : target_t := CU5_TARGET_NONE;
     signal su15_bitmap_address : unsigned(14 downto 0) := (others => '0');
     signal su11_sprite_address : unsigned(10 downto 0) := (others => '0');
     signal su13_tile_address : unsigned(12 downto 0) := (others => '0');
@@ -70,9 +70,9 @@ begin
             i_lower_byte_strobe_n => not iu2_request_bytes(0),
             ou5_target => su5_target
         );
-    o_request_supported <= '1' when i_request = '1' and (su5_target = TARGET_ROM or su5_target = TARGET_BITMAP or
-        su5_target = TARGET_SPRITES or su5_target = TARGET_TILES or
-        su5_target = TARGET_PALETTE or su5_target = TARGET_WORKRAM) else '0';
+    o_request_supported <= '1' when i_request = '1' and (su5_target = CU5_TARGET_ROM or su5_target = CU5_TARGET_BITMAP or
+        su5_target = CU5_TARGET_SPRITES or su5_target = CU5_TARGET_TILES or
+        su5_target = CU5_TARGET_PALETTE or su5_target = CU5_TARGET_WORKRAM) else '0';
     -- Pending writes retain their request even when the CPU request pulse ends.
     su24_access_address <= su24_pending_address when styp_state = STATE_WAIT_WRITE_SLOT else iu24_request_address;
     su16_access_data <= su16_pending_data when styp_state = STATE_WAIT_WRITE_SLOT else iu16_request_data;
@@ -81,20 +81,20 @@ begin
     s_access_write <= '1' when styp_state = STATE_WAIT_WRITE_SLOT else i_request_write;
     s_cpu_issue <= '1' when s_write_collision = '0' and
         ((styp_state = STATE_IDLE and i_request = '1') or styp_state = STATE_WAIT_WRITE_SLOT) else '0';
-    s_bitmap_enable <= '1' when s_cpu_issue = '1' and su5_access_target = TARGET_BITMAP else '0';
-    s_sprite_enable <= '1' when s_cpu_issue = '1' and su5_access_target = TARGET_SPRITES else '0';
-    s_tile_enable <= '1' when s_cpu_issue = '1' and su5_access_target = TARGET_TILES else '0';
-    s_palette_enable <= '1' when s_cpu_issue = '1' and su5_access_target = TARGET_PALETTE else '0';
-    s_work_enable <= '1' when s_cpu_issue = '1' and su5_access_target = TARGET_WORKRAM else '0';
-    s_inspect_bitmap <= '1' when i_view_enable = '1' and iu5_view_target = TARGET_BITMAP else '0';
-    s_inspect_sprite <= '1' when i_view_enable = '1' and iu5_view_target = TARGET_SPRITES else '0';
-    s_inspect_tile <= '1' when i_view_enable = '1' and iu5_view_target = TARGET_TILES else '0';
-    s_inspect_palette <= '1' when i_view_enable = '1' and iu5_view_target = TARGET_PALETTE else '0';
+    s_bitmap_enable <= '1' when s_cpu_issue = '1' and su5_access_target = CU5_TARGET_BITMAP else '0';
+    s_sprite_enable <= '1' when s_cpu_issue = '1' and su5_access_target = CU5_TARGET_SPRITES else '0';
+    s_tile_enable <= '1' when s_cpu_issue = '1' and su5_access_target = CU5_TARGET_TILES else '0';
+    s_palette_enable <= '1' when s_cpu_issue = '1' and su5_access_target = CU5_TARGET_PALETTE else '0';
+    s_work_enable <= '1' when s_cpu_issue = '1' and su5_access_target = CU5_TARGET_WORKRAM else '0';
+    s_inspect_bitmap <= '1' when i_view_enable = '1' and iu5_view_target = CU5_TARGET_BITMAP else '0';
+    s_inspect_sprite <= '1' when i_view_enable = '1' and iu5_view_target = CU5_TARGET_SPRITES else '0';
+    s_inspect_tile <= '1' when i_view_enable = '1' and iu5_view_target = CU5_TARGET_TILES else '0';
+    s_inspect_palette <= '1' when i_view_enable = '1' and iu5_view_target = CU5_TARGET_PALETTE else '0';
     s_bitmap_view <= s_inspect_bitmap or i_bitmap_read_enable;
     s_sprite_view <= s_inspect_sprite or i_sprite_request;
     s_tile_view <= s_inspect_tile or i_tile_request;
     s_palette_view <= s_inspect_palette or i_palette_read_enable;
-    s_work_view <= '1' when i_view_enable = '1' and iu5_view_target = TARGET_WORKRAM else '0';
+    s_work_view <= '1' when i_view_enable = '1' and iu5_view_target = CU5_TARGET_WORKRAM else '0';
     su15_bitmap_address <= iu15_view_word_address when s_inspect_bitmap = '1' else iu15_bitmap_word_address;
     su11_sprite_address <= iu15_view_word_address(10 downto 0) when s_inspect_sprite = '1' else iu11_sprite_word_address;
     su13_tile_address <= iu15_view_word_address(12 downto 0) when s_inspect_tile = '1' else iu13_tile_word_address;
@@ -107,16 +107,16 @@ begin
     -- Mixed-port same-word read/write values are undefined in the RAM primitive.
     -- Video/inspection reads win; CPU acknowledgment waits for a safe write slot.
     s_write_collision <= '1' when s_access_write = '1' and
-        ((su5_access_target = TARGET_BITMAP and s_bitmap_view = '1' and su24_access_address(15 downto 1) = su15_bitmap_address) or
-         (su5_access_target = TARGET_SPRITES and s_sprite_view = '1' and su24_access_address(11 downto 1) = su11_sprite_address) or
-         (su5_access_target = TARGET_TILES and s_tile_view = '1' and su24_access_address(13 downto 1) = su13_tile_address) or
-         (su5_access_target = TARGET_PALETTE and s_palette_view = '1' and su24_access_address(10 downto 1) = su10_palette_address) or
-         (su5_access_target = TARGET_WORKRAM and s_work_view = '1' and su24_access_address(13 downto 1) = iu15_view_word_address(12 downto 0))) else '0';
+        ((su5_access_target = CU5_TARGET_BITMAP and s_bitmap_view = '1' and su24_access_address(15 downto 1) = su15_bitmap_address) or
+         (su5_access_target = CU5_TARGET_SPRITES and s_sprite_view = '1' and su24_access_address(11 downto 1) = su11_sprite_address) or
+         (su5_access_target = CU5_TARGET_TILES and s_tile_view = '1' and su24_access_address(13 downto 1) = su13_tile_address) or
+         (su5_access_target = CU5_TARGET_PALETTE and s_palette_view = '1' and su24_access_address(10 downto 1) = su10_palette_address) or
+         (su5_access_target = CU5_TARGET_WORKRAM and s_work_view = '1' and su24_access_address(13 downto 1) = iu15_view_word_address(12 downto 0))) else '0';
 
     bitmap : entity work.rabbitpunch_ram16
         generic map (
-            sint_ADDRESS_BITS => 15,
-            POWER_UP_WORD => x"FFFF"
+            GINT_ADDRESS_BITS => 15,
+            GU16_POWER_UP_WORD => x"FFFF"
         )
         port map (
             i_clk => i_clk,
@@ -130,7 +130,7 @@ begin
             iux_view_address => su15_bitmap_address,
             ou16_view_data => su16_bitmap_view
         );
-    sprites : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 11)
+    sprites : entity work.rabbitpunch_ram16 generic map (GINT_ADDRESS_BITS => 11)
         port map (
             i_clk => i_clk,
             i_cpu_enable => s_sprite_enable,
@@ -143,7 +143,7 @@ begin
             iux_view_address => su11_sprite_address,
             ou16_view_data => su16_sprite_view
         );
-    tiles : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 13)
+    tiles : entity work.rabbitpunch_ram16 generic map (GINT_ADDRESS_BITS => 13)
         port map (
             i_clk => i_clk,
             i_cpu_enable => s_tile_enable,
@@ -156,7 +156,7 @@ begin
             iux_view_address => su13_tile_address,
             ou16_view_data => su16_tile_view
         );
-    palette : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 10)
+    palette : entity work.rabbitpunch_ram16 generic map (GINT_ADDRESS_BITS => 10)
         port map (
             i_clk => i_clk,
             i_cpu_enable => s_palette_enable,
@@ -169,7 +169,7 @@ begin
             iux_view_address => su10_palette_address,
             ou16_view_data => su16_palette_view
         );
-    work_ram : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 13)
+    work_ram : entity work.rabbitpunch_ram16 generic map (GINT_ADDRESS_BITS => 13)
         port map (
             i_clk => i_clk,
             i_cpu_enable => s_work_enable,
@@ -200,12 +200,12 @@ begin
             case styp_state is
                 when STATE_IDLE =>
                     if (i_request = '1') then
-                        if (su5_target = TARGET_ROM) then
+                        if (su5_target = CU5_TARGET_ROM) then
                             o_rom_request <= '1';
                             ou18_rom_byte_address <= iu24_request_address(17 downto 1) & '0';
                             styp_state <= STATE_ROM_REPLY;
-                        elsif (su5_target = TARGET_BITMAP or su5_target = TARGET_SPRITES or su5_target = TARGET_TILES or
-                                su5_target = TARGET_PALETTE or su5_target = TARGET_WORKRAM) then
+                        elsif (su5_target = CU5_TARGET_BITMAP or su5_target = CU5_TARGET_SPRITES or su5_target = CU5_TARGET_TILES or
+                                su5_target = CU5_TARGET_PALETTE or su5_target = CU5_TARGET_WORKRAM) then
                             su5_reply_target <= su5_target;
                             s_reply_write <= i_request_write;
                             if (s_write_collision = '1') then
@@ -229,11 +229,11 @@ begin
                         ou16_response_data <= (others => '0');
                     else
                         case su5_reply_target is
-                            when TARGET_BITMAP => ou16_response_data <= su16_bitmap_data;
-                            when TARGET_SPRITES => ou16_response_data <= su16_sprite_data;
-                            when TARGET_TILES => ou16_response_data <= su16_tile_data;
-                            when TARGET_PALETTE => ou16_response_data <= su16_palette_data;
-                            when TARGET_WORKRAM => ou16_response_data <= su16_work_data;
+                            when CU5_TARGET_BITMAP => ou16_response_data <= su16_bitmap_data;
+                            when CU5_TARGET_SPRITES => ou16_response_data <= su16_sprite_data;
+                            when CU5_TARGET_TILES => ou16_response_data <= su16_tile_data;
+                            when CU5_TARGET_PALETTE => ou16_response_data <= su16_palette_data;
+                            when CU5_TARGET_WORKRAM => ou16_response_data <= su16_work_data;
                             when others => ou16_response_data <= (others => '1');
                         end case;
                     end if;
@@ -247,7 +247,7 @@ begin
         end if;
     end process;
     with su5_view_target select ou16_view_data <=
-        su16_bitmap_view when TARGET_BITMAP, su16_sprite_view when TARGET_SPRITES,
-        su16_tile_view when TARGET_TILES, su16_palette_view when TARGET_PALETTE,
-        su16_work_view when TARGET_WORKRAM, (others => '1') when others;
+        su16_bitmap_view when CU5_TARGET_BITMAP, su16_sprite_view when CU5_TARGET_SPRITES,
+        su16_tile_view when CU5_TARGET_TILES, su16_palette_view when CU5_TARGET_PALETTE,
+        su16_work_view when CU5_TARGET_WORKRAM, (others => '1') when others;
 end architecture;

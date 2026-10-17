@@ -10,8 +10,8 @@ use work.rabbitpunch_config.all;
 -- at the framework boundary; gameplay reset never resets raster or enables.
 entity rabbitpunch_machine is
     generic (
-        sint_IMAGE_BYTES : positive := ROM_IMAGE_SIZE;
-        DIP_DEFAULT : unsigned(15 downto 0) := x"0000"
+        GINT_IMAGE_BYTES : positive := CINT_ROM_IMAGE_SIZE;
+        GU16_DIP_DEFAULT : unsigned(15 downto 0) := x"0000"
     );
     port (
         i_clk : in std_logic;
@@ -150,9 +150,9 @@ begin
     o_ready <= s_ready;
     platform : entity work.rabbitpunch_platform
         generic map (
-            sint_IMAGE_BYTES => sint_IMAGE_BYTES,
-            DIP_DEFAULT => DIP_DEFAULT,
-            EXTERNAL_PHASE_ENABLE => true
+            GINT_IMAGE_BYTES => GINT_IMAGE_BYTES,
+            GU16_DIP_DEFAULT => GU16_DIP_DEFAULT,
+            GBOOL_EXTERNAL_PHASE_ENABLE => true
         )
         port map (
             i_clk => i_clk,

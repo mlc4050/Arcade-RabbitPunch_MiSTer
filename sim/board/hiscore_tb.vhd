@@ -7,7 +7,7 @@ use std.textio.all;
 use std.env.all;
 
 entity hiscore_tb is
-    generic (SERVICE_MODE : boolean := false);
+    generic (GBOOL_SERVICE_MODE : boolean := false);
 end entity;
 
 architecture test of hiscore_tb is
@@ -37,7 +37,7 @@ architecture test of hiscore_tb is
     signal s_memory_initialize, s_enabled, s_config_error : std_logic;
 begin
     s_clk <= not s_clk after 5 ns;
-    direct_store : if (not SERVICE_MODE) generate
+    direct_store : if (not GBOOL_SERVICE_MODE) generate
         s_memory_initialize <= s_initialize or s_reset;
         dut : entity work.rabbitpunch_hiscore
             port map (
@@ -71,7 +71,7 @@ begin
                 iu8_memory_data => su8_response
             );
     end generate;
-    file_service : if (SERVICE_MODE) generate
+    file_service : if (GBOOL_SERVICE_MODE) generate
         dut : entity work.rabbitpunch_hiscore_service
             port map (
                 i_clk => s_clk,
@@ -133,7 +133,7 @@ begin
     su16_ram_write <= su16_prefill_data when s_prefill = '1' else su16_bus_data;
     ram : entity work.rabbitpunch_ram16
         generic map (
-            sint_ADDRESS_BITS => 13
+            GINT_ADDRESS_BITS => 13
         )
         port map (
             i_clk => s_clk,
@@ -207,7 +207,7 @@ begin
         procedure load_config is
             variable vu192_packet : unsigned(191 downto 0);
         begin
-            if (SERVICE_MODE) then
+            if (GBOOL_SERVICE_MODE) then
                 vu192_packet := x"0000001E001300020002000100000000000FFE0100770080";
                 if (s_us = '1') then
                     vu192_packet(31 downto 16) := to_unsigned(115, 16);

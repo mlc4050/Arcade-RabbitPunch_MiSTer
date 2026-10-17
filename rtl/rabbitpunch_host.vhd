@@ -10,7 +10,7 @@ use work.rabbitpunch_config.all;
 -- are omitted just as in the framework template; this boundary enables neither.
 entity rabbitpunch_host is
     generic (
-        CONFIG_STRING : string := DEFAULT_CONFIG_STRING
+        GSTR_CONFIG_STRING : string := CSTR_DEFAULT_CONFIG_STRING
     );
     port (
         i_clk : in std_logic;
@@ -51,8 +51,8 @@ architecture boundary of rabbitpunch_host is
     end function;
     component hps_io is
         generic (
-            CONF_STR : unsigned(CONFIG_STRING'length * 8 - 1 downto 0);
-            STRLEN : integer := CONFIG_STRING'length;
+            CONF_STR : unsigned(GSTR_CONFIG_STRING'length * 8 - 1 downto 0);
+            STRLEN : integer := GSTR_CONFIG_STRING'length;
             WIDE : integer := 0;
             PS2DIV : integer := 0
         );
@@ -95,8 +95,8 @@ begin
     su36_unused_extensions(15 downto 0) <= (others => '0');
     host_interface : hps_io
         generic map (
-            CONF_STR => pack_config(CONFIG_STRING),
-            STRLEN => CONFIG_STRING'length,
+            CONF_STR => pack_config(GSTR_CONFIG_STRING),
+            STRLEN => GSTR_CONFIG_STRING'length,
             WIDE => 0,
             PS2DIV => 0
         )

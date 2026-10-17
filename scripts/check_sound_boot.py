@@ -45,7 +45,7 @@ def main():
                  f'force -freeze {path}/DIRSet 1', 'run 21 ns',
                  f'noforce {path}/DIRSet', f'noforce {path}/DIR')
         result = run_case(case, sources, 'sound_boot_tb', '101 ms', 'SOUND_BOOT_PASS',
-                          sim_args=(f'-gWRITE_LIMIT={reference["writes"]}',), wall_timeout=600, setup_commands=setup)
+                          sim_args=(f'-gGINT_WRITE_LIMIT={reference["writes"]}',), wall_timeout=600, setup_commands=setup)
         expected = [tuple(int(word, 16) for word in line.split()) for line in trace.read_text().splitlines()]
         actual = [tuple(int(word, 16) for word in line.split()) for line in (out/'rtl_sound_writes.txt').read_text().splitlines()]
         if actual != expected:
