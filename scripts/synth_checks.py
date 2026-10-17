@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "host": (0, ("host_check", "rabbitpunch_host", "hps_io")),
     "load_frontend": (0, ("rabbitpunch_load_frontend", "rabbitpunch_ddr_copy", "rom_loader", "ddram_phy")),
     "ddr_copy": (0, ("rabbitpunch_ddr_copy", "rom_loader", "ddram_phy")),
     "audio_mixer": (0, ("rabbitpunch_audio_mixer",)),
