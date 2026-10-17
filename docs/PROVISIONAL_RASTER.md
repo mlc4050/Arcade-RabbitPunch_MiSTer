@@ -63,4 +63,24 @@ but not yet connected to the production platform. Enable tests check 175065
 rational-cadence/reset conditions; raster tests cover two complete default frames
 (221184 beam pixels), a small odd-sized positive-sync case, sparse enables,
 coordinate offsets and reset while stopped. See reference/raster_checks.json.
-The new isolated raster implementation check is next. No playable RBF exists.
+The isolated raster/enable implementation at d23887d passes all 48 MHz timing
+and coverage gates: 86 ALMs, 114 registers, zero RAM/DSP, worst setup +11.514 ns
+and hold +0.147 ns. See reference/raster_synth.json; full reports are retained
+under debug/fit_archive/raster_d23887d/. No playable RBF exists.
+
+The descriptive VHDL PLL wrapper now requests a 50 MHz input and two
+46.666667 MHz outputs. System logic uses output 0; output 1 provisionally shifts
+by 10714 ps (half a period) for the external SDRAM clock only. This is an initial
+controller bring-up choice, adjustable through SDRAM_PHASE_SHIFT. The installed
+vendor PLL model passes lock/relock, 448 individual period/phase observations and
+two 224-period average-frequency checks. Its documented 10 ps synchronization
+drift is allowed per edge; the 4.8 us average span must remain within 20 ps.
+This model result does not establish the fitted PLL counters or physical SDRAM
+sampling window. Those checks belong to clock-tree/full-shell implementation.
+
+A separate three-register reset-release wrapper asserts asynchronously if the
+PLL loses lock and releases on three system-clock edges. Its test covers reset
+assertion/release and loss/recovery of the clock. It is cold initialization;
+game reset and pause do not reset the ROM transport/PLL. See
+reference/pll_checks.json. Next: scanline bank ownership and production timing
+connections, then the complete clock/SDRAM implementation.

@@ -1,0 +1,25 @@
+[
+  {
+    "case": "reset_release",
+    "pass_marker": "RESET_RELEASE_PASS",
+    "log": "debug\\baselines\\reset_release\\result.log",
+    "source_sha256": {
+      "rtl/rabbitpunch_reset_release.vhd": "00d7c5a85bcd24508ceef1e3b3b3b065678e7350d16bc06deab66d733e5375ec",
+      "sim/board/reset_release_tb.vhd": "721ac3c582ec07fd86dfcc2b7dcdde39b812589fa51a794380fa88d39db10ff6"
+    },
+    "log_sha256": "fda59e179023eb74a45b6e733b357e1b1fe2255839bf86201a7682cf82923eee",
+    "scope": "Reset release and installed Altera PLL behavioral model; no fitted PLL-counter, board electrical phase or hardware lock evidence"
+  },
+  {
+    "case": "pll",
+    "pass_marker": "PLL_PASS",
+    "log": "debug\\baselines\\pll\\result.log",
+    "source_sha256": {
+      "rtl/rabbitpunch_pll.vhd": "d4c045a9d2659dd6b1a41e1c335716a6b9cd7cc98ab468c2f5556d1635134486",
+      "rtl/rabbitpunch_reset_release.vhd": "00d7c5a85bcd24508ceef1e3b3b3b065678e7350d16bc06deab66d733e5375ec",
+      "sim/board/pll_tb.vhd": "d0bb35300b3151212aa1f98e24b8b1c0944abd5293c26a8d1de87a835341a3f3"
+    },
+    "log_sha256": "7acd83c2e7b12ec247faad167a78cbff125b8242725f4a696dd5b8bf84aa5f00",
+    "scope": "Reset release and installed Altera PLL behavioral model; no fitted PLL-counter, board electrical phase or hardware lock evidence"
+  }
+]
