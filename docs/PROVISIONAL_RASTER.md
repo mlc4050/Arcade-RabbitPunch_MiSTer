@@ -58,9 +58,4 @@ Only then prepare an RBF for hardware testing; launching it still requires the
 user's direction. Physical measurements can replace the provisional parameters
 without changing the render/memory architecture.
 
-The standalone VHDL clock-enable generator and adjustable raster are implemented
-but not yet connected to the production platform. Enable tests check 175065
-rational-cadence/reset conditions; raster tests cover two complete default frames
-(221184 beam pixels), a small odd-sized positive-sync case, sparse enables,
-coordinate offsets and reset while stopped. See reference/raster_checks.json.
-The new isolated raster implementation check is next. No playable RBF exists.
+No production RTL, PLL, MRA timing or playable RBF is changed by this proposal.
