@@ -1,0 +1,48 @@
+[
+  {
+    "set": "rabiolep",
+    "mame_version": "0289",
+    "entry": "@:maincpu,program,ffe01,77,00,80",
+    "address": 1048065,
+    "length": 119,
+    "first": 0,
+    "last": 128,
+    "initialized_frame": 8,
+    "work_ram_first_word": 7936,
+    "first_byte_lane": "lower",
+    "last_address": 1048183,
+    "words_spanned": 60,
+    "initial_sha256": "524e9f2452d57ab3ca410a4bce68b032b990da755511f758e38da2c272ea493d",
+    "data_sha256": "0b7e8e53ee9366f10c75df7b8b7c57de1ba573a1089cafd0937423843f4a2fc9",
+    "driver_sha256": "77d83ca4786d83fc2474e467f09a0fd15067ede165c2406825af8b0e132364bd",
+    "source_sha256": {
+      "scripts/capture_hiscore_reference.py": "2c036965ef133c3c9562583c5e95baf1281735f58c3588f79afd32ce7c4b4376",
+      "scripts/mame/hiscore_reference.lua": "170db4bb570970817c9e0aaeda5f99e06b84b6c94658053176f6fb70b86f438d"
+    },
+    "log_sha256": "e30698db92985e2d9fa5b9b965d8299a91135f85a2d69e27b5688924cd1d9ac8",
+    "scope": "Read-only live MAME readiness using release-pinned hiscore.dat and score-block byte geometry; private initial bytes, no core persistence implementation or RAM writes"
+  },
+  {
+    "set": "rpunch",
+    "mame_version": "0289",
+    "entry": "@:maincpu,program,ffe01,73,00,17",
+    "address": 1048065,
+    "length": 115,
+    "first": 0,
+    "last": 23,
+    "initialized_frame": 8,
+    "work_ram_first_word": 7936,
+    "first_byte_lane": "lower",
+    "last_address": 1048179,
+    "words_spanned": 58,
+    "initial_sha256": "fbe1d8db9aea48f7812155e85d26e5142caa8176fb50b4de8c71f57f05cd0d70",
+    "data_sha256": "0b7e8e53ee9366f10c75df7b8b7c57de1ba573a1089cafd0937423843f4a2fc9",
+    "driver_sha256": "77d83ca4786d83fc2474e467f09a0fd15067ede165c2406825af8b0e132364bd",
+    "source_sha256": {
+      "scripts/capture_hiscore_reference.py": "2c036965ef133c3c9562583c5e95baf1281735f58c3588f79afd32ce7c4b4376",
+      "scripts/mame/hiscore_reference.lua": "170db4bb570970817c9e0aaeda5f99e06b84b6c94658053176f6fb70b86f438d"
+    },
+    "log_sha256": "f71cb4834f372802692b3f4cc70c2b5d7a8b71b21957f77737b9dbb8af10f3ce",
+    "scope": "Read-only live MAME readiness using release-pinned hiscore.dat and score-block byte geometry; private initial bytes, no core persistence implementation or RAM writes"
+  }
+]

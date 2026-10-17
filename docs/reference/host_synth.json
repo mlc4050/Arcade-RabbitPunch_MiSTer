@@ -1,5 +1,5 @@
 {
-  "commit": "ca18563ff551ca2f71bc3b8736855bbc4ea7ea9e",
+  "commit": "622ec8e9c348342e877cc5b8082fbffeb24d9666",
   "device": "5CSEBA6U23I7",
   "project": "host_check",
   "constraint_mhz": 48,
@@ -8,11 +8,11 @@
   "timings": [
     {
       "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 6.491
+      "slack_ns": 6.967
     },
     {
       "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.34
+      "slack_ns": 0.331
     },
     {
       "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
@@ -20,39 +20,39 @@
     },
     {
       "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 6.647
+      "slack_ns": 7.05
     },
     {
       "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.323
+      "slack_ns": 0.322
     },
     {
       "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.573
+      "slack_ns": 9.572
     },
     {
       "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 7.998
+      "slack_ns": 8.378
     },
     {
       "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.181
+      "slack_ns": 0.176
     },
     {
       "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.822
+      "slack_ns": 9.827
     },
     {
       "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 8.42
+      "slack_ns": 8.693
     },
     {
       "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.167
+      "slack_ns": 0.156
     },
     {
       "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.825
+      "slack_ns": 9.827
     }
   ],
   "timing_coverage": {
@@ -82,15 +82,15 @@
     }
   },
   "fit_summary": [
-    "Fitter Status : Successful - Sat Oct 17 01:23:53 2026",
+    "Fitter Status : Successful - Sat Oct 17 07:42:10 2026",
     "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
     "Revision Name : host_check",
     "Top-level Entity Name : host_check",
     "Family : Cyclone V",
     "Device : 5CSEBA6U23I7",
     "Timing Models : Final",
-    "Logic utilization (in ALMs) : 330 / 41,910 ( < 1 % )",
-    "Total registers : 392",
+    "Logic utilization (in ALMs) : 348 / 41,910 ( < 1 % )",
+    "Total registers : 384",
     "Total pins : 1 / 314 ( < 1 % )",
     "Total virtual pins : 330",
     "Total block memory bits : 0 / 5,662,720 ( 0 % )",
@@ -103,6 +103,6 @@
     "Total PLLs : 0 / 6 ( 0 % )",
     "Total DLLs : 0 / 4 ( 0 % )"
   ],
-  "log_sha256": "433ee4f64e8c95bf5d35d47595b9046fbc41d1cff2ce20c6182130f07d38617f",
+  "log_sha256": "f0b0447839bcae7a5b52e1a4881882f2cdc5b71f8aed086c12ab0594183c12fa",
   "scope": "Standalone host block with virtual I/O; not a complete core or hardware release"
 }

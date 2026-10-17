@@ -26,8 +26,8 @@ its functional netlist, which the VHDL host_tb drives in ModelSim. The profile
 aliases both video telemetry clocks to its 48 MHz evaluation clock and leaves
 pixel/raster activity zero. It establishes no real video or 100 MHz telemetry.
 
-The host fit passes with zero RAM, 330 ALMs, 392 registers, worst setup +6.491 ns
-and hold +0.167 ns, all reported corners and six timing coverage categories
+The host fit passes with zero RAM, 348 ALMs, 384 registers, worst setup +6.967 ns
+and hold +0.156 ns, all reported corners and six timing coverage categories
 passing (reference/host_synth.json). VHDL netlist tests read the complete config
 text back and verify both joystick word orders, all eight status words, native
 FIO command/index/download/data addresses and the wait pin. F2 and extended
@@ -40,13 +40,13 @@ scoped in DDR_LOADING.md.
 The native host functional netlist is now connected to the logical platform in
 platform_host_tb. Actual command strobes produce CPU-visible controls and DIPs,
 byte/DDR downloads and pause/reset/retry behavior. See PLATFORM.md and
-reference/platform_host_checks.json. The prototype configuration text remains
-unchanged; this is not final OSD or physical HPS bridge validation.
+reference/platform_host_checks.json. The development configuration is shared with the platform; this is not final OSD or physical HPS bridge validation.
 
 
 Development configuration now lives in rabbitpunch_config.vhd: reset (bit 0),
 pause (bit 1), OSD pause (bit 2), and the exact padded MRA button names/slots.
 Reset precedes J1. The configuration version is v0.1-dev. Video/scaler/audio
-menu options wait for their physical shell connections. Native host readback
-and platform command tests must be refreshed for this configuration before
-it is considered verified; current earlier reports retain their exact commits.
+menu options wait for their physical shell connections. Full native host readback and connected platform command tests pass for this
+configuration (reference/host_netlist_checks.json and
+reference/platform_host_checks.json). This checks bytes and decoded controls,
+not the physical ARM OSD renderer.

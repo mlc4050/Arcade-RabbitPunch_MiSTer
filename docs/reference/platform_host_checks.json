@@ -2,8 +2,8 @@
   "case": "platform_host",
   "pass_marker": "PLATFORM_HOST_PASS",
   "log": "debug\\baselines\\platform_host\\result.log",
-  "host_netlist_commit": "ca18563ff551ca2f71bc3b8736855bbc4ea7ea9e",
-  "host_netlist_sha256": "5304445bc5add3181dd9e544f3af4021266f29e6e5f0036a47a7abb8e76962b2",
+  "host_netlist_commit": "622ec8e9c348342e877cc5b8082fbffeb24d9666",
+  "host_netlist_sha256": "c31632f0c7b396c5bfff93963e4b8a4cda4b2324c84067479a8b3d228ec65a58",
   "source_sha256": {
     "rtl/cpu/fx68k/fx68k.sv": "846602cd0fc25a9eee04f641ba5e6fcfa05a80a1db417898040c78b1f7449a33",
     "rtl/cpu/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
@@ -101,10 +101,11 @@
     "rtl/rabbitpunch_inputs.vhd": "a7c7ef8c8104b8cd0a5fa7c77dae7e6b29752d55af7b2a18ab897ebded25a776",
     "rtl/rabbitpunch_pause.vhd": "eb03457d010dd4566bf4f379ac89269cbe72952cbb6d116970e79fbeb42c7bab",
     "rtl/rabbitpunch_controls.vhd": "d1f774e4d4afb7db55f7b0904fa1581e3893bd7982b64b7737f3e080b12f7f16",
-    "rtl/rabbitpunch_platform.vhd": "9566c673d354178f66768c51c853ac9c0cf51a8a56c483f896a8d50a6a7a9f12",
-    "debug/netlists/host_ca18563/host_check.vo": "5304445bc5add3181dd9e544f3af4021266f29e6e5f0036a47a7abb8e76962b2",
+    "rtl/rabbitpunch_config.vhd": "bbe130256cb6b97a069873d24f0980fb543354fafafe30f03f9b4abc1920dc26",
+    "rtl/rabbitpunch_platform.vhd": "d10dd2b64b49e0127db83834f42ca3bf6d16152da7e7f00f0b34d52fc4f390e2",
+    "debug/netlists/host_622ec8e/host_check.vo": "c31632f0c7b396c5bfff93963e4b8a4cda4b2324c84067479a8b3d228ec65a58",
     "sim/board/platform_host_tb.vhd": "4009a84a5da017149b8ccf84bda48ed52b289ebf495e6767b2b71bea3be5cbc7"
   },
-  "log_sha256": "c6668f8094cb9f48fa113b30ac1d4e1002665016ab98415c1dbebf4cf74c7320",
+  "log_sha256": "6c72976f9ffdefa291d0fa1088d532e6b6ed8f4792d12e60c5e6d8ca882ee90e",
   "scope": "Native unchanged hps_io via checked Quartus functional netlist drives raw UIO/FIO command strobes into the RTL logical platform and actual fx68k/SDRAM/chip model: input/DIP CPU reads, DDR and byte loads, pause/reload/reset and partial-image recovery. Behavioral HPS master and DDR staging, audio/video idle; no physical ARM bridge, shared DDR mux, raster/PLL or electrical timing proof"
 }
