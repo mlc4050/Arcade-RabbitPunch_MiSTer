@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """Read the core's ISSP probes over JTAG, holding the machine-wide hwlock.
 
-    python scripts/read_issp.py                # decode the first instance
-    python scripts/read_issp.py D              # decode instance D
-    python scripts/read_issp.py C clear        # further args go to the Tcl
-    python scripts/read_issp.py F set 8        # write source byte 8 and leave it
-    python scripts/read_issp.py F pulse 2      # write 2, then 0
+    python scripts/read_issp.py RPUN          # read-only Rabbit Punch status
+
+RPUN has no source controls. Counters survive game reset and saturate; reload
+configuration for a fresh counter window. No clear/set/pulse action is supported.
 
 scripts/read_issp.tcl does the reading; run it through this. quartus_stp
 started bare takes no marker, so a build or a simulation -- from this repo or

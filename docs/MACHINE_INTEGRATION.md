@@ -112,5 +112,6 @@ debug/fit_archive/clocked_machine_2374ddc/.
 
 Both real-ROM CPUs also pass short 32-main/8-sound ordered MAME startup comparisons
 using the vendor PLL, shifted SDRAM chip clock, early runtime read window and
-production fractional enables. Larger prefixes are running; raster events stay
+production fractional enables. Both games also pass 2000 main and 256 sound ordered writes
+(reference/system_boot_pll_phase_boot_checks.json). Raster events stay
 idle in this CPU-specific bench, so it does not prove interactive gameplay.

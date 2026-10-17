@@ -165,8 +165,9 @@ def check_present(stage):
     except OSError:
         print("  (no fit report at %s -- cannot check)" % rpt)
         return []
-    missing = [n for n in REQUIRED_INSTANCES if n not in text]
-    for n in REQUIRED_INSTANCES:
+    required = REQUIRED_INSTANCES + (("rabbitpunch_debug", "altsource_probe") if REV.endswith("_stp") else ())
+    missing = [n for n in required if n not in text]
+    for n in required:
         print("  %-18s %s" % (n, "present" if n in text else "MISSING"))
     return missing
 
@@ -249,6 +250,12 @@ def main():
             sys.exit("expected at most one SEED assignment in %s, found %d" % (qsf, n))
         open(qsf, "w", encoding="utf-8", newline="\n").write(new)
         print("seed:   %d (stage only)" % args.seed)
+
+    if not args.synth_check:
+        # The value is part of this staged snapshot, never a guessed device identity.
+        qsf = Path(stage) / f"{REV}.qsf"
+        with qsf.open("a", encoding="utf-8", newline="\n") as output:
+            output.write(f"\nset_global_assignment -name VERILOG_MACRO \"RABBITPUNCH_BUILD_ID=32'h{head[:8]}\"\n")
 
     # THE SEED IS PART OF THE BUILD. Two .rbf files from the same commit at
     # different seeds are not interchangeable: one placement with every clock

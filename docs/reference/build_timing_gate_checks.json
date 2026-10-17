@@ -1,0 +1,76 @@
+{
+  "checks": [
+    {
+      "case": "accepted_full_summary",
+      "rejected": false
+    },
+    {
+      "case": "accepted_full_coverage",
+      "rejected": false
+    },
+    {
+      "case": "missing_summary",
+      "rejected": true
+    },
+    {
+      "case": "missing_coverage",
+      "rejected": true
+    },
+    {
+      "case": "negative_Setup",
+      "rejected": true
+    },
+    {
+      "case": "negative_Hold",
+      "rejected": true
+    },
+    {
+      "case": "negative_Recovery",
+      "rejected": true
+    },
+    {
+      "case": "negative_Removal",
+      "rejected": true
+    },
+    {
+      "case": "negative_Minimum_Pulse_Width",
+      "rejected": true
+    },
+    {
+      "case": "empty_summary",
+      "rejected": true
+    },
+    {
+      "case": "hold_coverage_Illegal_Clocks",
+      "rejected": true
+    },
+    {
+      "case": "hold_coverage_Unconstrained_Clocks",
+      "rejected": true
+    },
+    {
+      "case": "hold_coverage_Unconstrained_Input_Ports",
+      "rejected": true
+    },
+    {
+      "case": "hold_coverage_Unconstrained_Input_Port_Paths",
+      "rejected": true
+    },
+    {
+      "case": "hold_coverage_Unconstrained_Output_Ports",
+      "rejected": true
+    },
+    {
+      "case": "hold_coverage_Unconstrained_Output_Port_Paths",
+      "rejected": true
+    },
+    {
+      "case": "empty_coverage",
+      "rejected": true
+    }
+  ],
+  "reference_summary_sha256": "176d7c808c09cfe3c7248b00dc5683e0f895a612e95ebb44e8c82adff3756a41",
+  "reference_coverage_sha256": "e636dede4cf09d0c26c66c482038c6af8915d896f3fa53b74f73de5dc816dc61",
+  "script_sha256": "a171d2e5136ff0c09784f126569845c82d06e4dcaa6d5323bae6fc53a86c8e03",
+  "scope": "Real accepted Quartus report plus controlled missing/negative timing and coverage mutations; no compile or hardware claim"
+}

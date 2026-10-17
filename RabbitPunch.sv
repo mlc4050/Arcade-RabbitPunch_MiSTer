@@ -44,6 +44,13 @@ wire [7:0] file_data, upload_data;
 wire file_download, file_upload, file_write, file_wait, upload_request;
 wire horizontal_blank, vertical_blank;
 wire loading, downloading, ready, error, underflow, pll_locked;
+wire paused, scanout_armed, audio_sample, adpcm_busy;
+wire cpu_request, cpu_write, sound_request, sound_write;
+wire [23:0] cpu_address;
+wire [15:0] cpu_data, sound_address;
+wire [7:0] sound_data;
+wire [1:0] cpu_bytes;
+wire [8:0] beam_x, beam_y;
 assign CLK_VIDEO = clk_sys;
 assign DDRAM_CLK = clk_sys;
 // Preserve the physical data-enable window during loading/reset. RGB is black
@@ -136,7 +143,7 @@ rabbitpunch_clocked_machine machine
     .ou64_ddr_write_data(DDRAM_DIN),
     .ou8_ddr_byte_enables(DDRAM_BE),
     .o_ddr_write(DDRAM_WE),
-    .o_paused(),
+    .o_paused(paused),
     .i_view_enable('0),
     .iu5_view_target('0),
     .iu15_view_word_address('0),
@@ -146,15 +153,15 @@ rabbitpunch_clocked_machine machine
     .ou16_right_pcm(),
     .ou9_adpcm_pcm(),
     .ou16_mono_pcm(AUDIO_L),
-    .o_audio_sample_marker(),
-    .o_adpcm_busy(),
+    .o_audio_sample_marker(audio_sample),
+    .o_adpcm_busy(adpcm_busy),
     .i_audio_view_enable('0),
     .iu11_audio_view_address('0),
     .ou8_audio_view_data(),
-    .o_audio_debug_request(),
-    .o_audio_debug_write(),
-    .ou16_audio_debug_address(),
-    .ou8_audio_debug_data(),
+    .o_audio_debug_request(sound_request),
+    .o_audio_debug_write(sound_write),
+    .ou16_audio_debug_address(sound_address),
+    .ou8_audio_debug_data(sound_data),
     .o_sound_command_write(),
     .ou8_sound_command(),
     .o_sound_pending(),
@@ -171,11 +178,11 @@ rabbitpunch_clocked_machine machine
     .o_gga_write(),
     .ou4_gga_write_address(),
     .ou8_gga_write_data(),
-    .o_cpu_request(),
-    .o_cpu_request_write(),
-    .ou24_cpu_request_address(),
-    .ou16_cpu_request_data(),
-    .ou2_cpu_request_bytes(),
+    .o_cpu_request(cpu_request),
+    .o_cpu_request_write(cpu_write),
+    .ou24_cpu_request_address(cpu_address),
+    .ou16_cpu_request_data(cpu_data),
+    .ou2_cpu_request_bytes(cpu_bytes),
     .o_image_valid(),
     .o_error(error),
     .o_done(),
@@ -202,9 +209,36 @@ rabbitpunch_clocked_machine machine
     .ou8_red(VGA_R),
     .ou8_green(VGA_G),
     .ou8_blue(VGA_B),
-    .ou9_horizontal_position(),
-    .ou9_vertical_position(),
-    .o_scanout_armed(),
+    .ou9_horizontal_position(beam_x),
+    .ou9_vertical_position(beam_y),
+    .o_scanout_armed(scanout_armed),
     .o_scanout_underflow(underflow)
 );
+`ifdef DEBUG_ISSP
+`ifndef RABBITPUNCH_BUILD_ID
+`define RABBITPUNCH_BUILD_ID 32'h00000000
+`endif
+rabbitpunch_debug #(.GU32_BUILD_ID(`RABBITPUNCH_BUILD_ID)) debug_probe
+(
+    .i_clk(clk_sys),
+    .i_pixel_enable(CE_PIXEL),
+    .i_visible(VGA_DE),
+    .i_vertical_sync(VGA_VS),
+    .iu9_beam_x(beam_x),
+    .iu9_beam_y(beam_y),
+    .iu16_status({5'd0, RESET, adpcm_busy, file_download, paused, scanout_armed,
+                  underflow, error, downloading, loading, ready, pll_locked}),
+    .i_cpu_request(cpu_request),
+    .i_cpu_write(cpu_write),
+    .iu24_cpu_address(cpu_address),
+    .iu16_cpu_data(cpu_data),
+    .iu2_cpu_bytes(cpu_bytes),
+    .i_sound_request(sound_request),
+    .i_sound_write(sound_write),
+    .iu16_sound_address(sound_address),
+    .iu8_sound_data(sound_data),
+    .i_audio_sample(audio_sample),
+    .ou512_snapshot()
+);
+`endif
 endmodule
