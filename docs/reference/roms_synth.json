@@ -1,5 +1,5 @@
 {
-  "commit": "7f448fcd9fc5875b99d4f88925a4b7ddd24376a8",
+  "commit": "08af6d0792af040ab82eaa73a54dfe1d3b5c2d0c",
   "device": "5CSEBA6U23I7",
   "project": "roms_check",
   "constraint_mhz": 48,
@@ -8,11 +8,11 @@
   "timings": [
     {
       "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 5.873
+      "slack_ns": 5.284
     },
     {
       "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.419
+      "slack_ns": 0.38
     },
     {
       "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
@@ -20,11 +20,11 @@
     },
     {
       "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 6.369
+      "slack_ns": 5.305
     },
     {
       "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.392
+      "slack_ns": 0.332
     },
     {
       "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
@@ -32,23 +32,23 @@
     },
     {
       "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 7.962
+      "slack_ns": 7.512
     },
     {
       "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.182
+      "slack_ns": 0.181
     },
     {
       "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.801
+      "slack_ns": 9.8
     },
     {
       "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 8.226
+      "slack_ns": 7.959
     },
     {
       "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.167
+      "slack_ns": 0.165
     },
     {
       "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
@@ -82,17 +82,17 @@
     }
   },
   "fit_summary": [
-    "Fitter Status : Successful - Fri Oct 16 20:44:03 2026",
+    "Fitter Status : Successful - Sat Oct 17 00:21:16 2026",
     "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
     "Revision Name : roms_check",
     "Top-level Entity Name : rabbitpunch_roms",
     "Family : Cyclone V",
     "Device : 5CSEBA6U23I7",
     "Timing Models : Final",
-    "Logic utilization (in ALMs) : 520 / 41,910 ( 1 % )",
-    "Total registers : 1196",
+    "Logic utilization (in ALMs) : 806 / 41,910 ( 2 % )",
+    "Total registers : 1878",
     "Total pins : 39 / 314 ( 12 % )",
-    "Total virtual pins : 191",
+    "Total virtual pins : 246",
     "Total block memory bits : 0 / 5,662,720 ( 0 % )",
     "Total RAM Blocks : 0 / 553 ( 0 % )",
     "Total DSP Blocks : 0 / 112 ( 0 % )",
@@ -103,6 +103,6 @@
     "Total PLLs : 0 / 6 ( 0 % )",
     "Total DLLs : 0 / 4 ( 0 % )"
   ],
-  "log_sha256": "f9eb1598ecb8c700654860c4c6d315d0acb2065e67182fa6ac9ec40c5708a9a1",
+  "log_sha256": "de4f2ea745c023d6d8f06b07ec74bdbbe1967ea48827e0906bd6297c00632b3a",
   "scope": "Production cached ROM subsystem and word loader with half-period synthetic virtual-input/DQ tester timing; no evaluation registers added; not final PLL, HPS download or electrical timing proof"
 }

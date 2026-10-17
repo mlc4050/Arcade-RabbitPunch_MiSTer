@@ -38,6 +38,22 @@ entity system_check is
         iu8_player2 : in unsigned(7 downto 0);
         iu8_service : in unsigned(7 downto 0);
         iu16_dips : in unsigned(15 downto 0);
+        i_sound_cpu_enable : in std_logic := '0';
+        i_ym_enable : in std_logic := '0';
+        i_ym_half_enable : in std_logic := '0';
+        i_adpcm_enable : in std_logic := '0';
+        ou16_left_pcm : out unsigned(15 downto 0);
+        ou16_right_pcm : out unsigned(15 downto 0);
+        ou9_adpcm_pcm : out unsigned(8 downto 0);
+        o_audio_sample_marker : out std_logic;
+        o_adpcm_busy : out std_logic;
+        i_audio_view_enable : in std_logic := '0';
+        iu11_audio_view_address : in unsigned(10 downto 0) := (others => '0');
+        ou8_audio_view_data : out unsigned(7 downto 0);
+        o_audio_debug_request : out std_logic;
+        o_audio_debug_write : out std_logic;
+        ou16_audio_debug_address : out unsigned(15 downto 0);
+        ou8_audio_debug_data : out unsigned(7 downto 0);
         i_sound_command_read : in std_logic;
         o_sound_command_write : out std_logic;
         ou8_sound_command : out unsigned(7 downto 0);
@@ -150,6 +166,22 @@ architecture evaluation of system_check is
     signal su27_boundary_ou27_bytes_loaded : unsigned(26 downto 0) := (others => '0');
     signal s_boundary_o_ready : std_logic := '0';
     signal s_boundary_o_loading : std_logic := '0';
+    signal s_boundary_i_sound_cpu_enable : std_logic := '0';
+    signal s_boundary_i_ym_enable : std_logic := '0';
+    signal s_boundary_i_ym_half_enable : std_logic := '0';
+    signal s_boundary_i_adpcm_enable : std_logic := '0';
+    signal su16_boundary_ou16_left_pcm : unsigned(15 downto 0) := (others => '0');
+    signal su16_boundary_ou16_right_pcm : unsigned(15 downto 0) := (others => '0');
+    signal su9_boundary_ou9_adpcm_pcm : unsigned(8 downto 0) := (others => '0');
+    signal s_boundary_o_audio_sample_marker : std_logic := '0';
+    signal s_boundary_o_adpcm_busy : std_logic := '0';
+    signal s_boundary_i_audio_view_enable : std_logic := '0';
+    signal su11_boundary_iu11_audio_view_address : unsigned(10 downto 0) := (others => '0');
+    signal su8_boundary_ou8_audio_view_data : unsigned(7 downto 0) := (others => '0');
+    signal s_boundary_o_audio_debug_request : std_logic := '0';
+    signal s_boundary_o_audio_debug_write : std_logic := '0';
+    signal su16_boundary_ou16_audio_debug_address : unsigned(15 downto 0) := (others => '0');
+    signal su8_boundary_ou8_audio_debug_data : unsigned(7 downto 0) := (others => '0');
 begin
     boundary : process(i_clk)
     begin
@@ -186,6 +218,22 @@ begin
             su8_boundary_iu8_player2 <= iu8_player2;
             su8_boundary_iu8_service <= iu8_service;
             su16_boundary_iu16_dips <= iu16_dips;
+            s_boundary_i_sound_cpu_enable <= i_sound_cpu_enable;
+            s_boundary_i_ym_enable <= i_ym_enable;
+            s_boundary_i_ym_half_enable <= i_ym_half_enable;
+            s_boundary_i_adpcm_enable <= i_adpcm_enable;
+            ou16_left_pcm <= su16_boundary_ou16_left_pcm;
+            ou16_right_pcm <= su16_boundary_ou16_right_pcm;
+            ou9_adpcm_pcm <= su9_boundary_ou9_adpcm_pcm;
+            o_audio_sample_marker <= s_boundary_o_audio_sample_marker;
+            o_adpcm_busy <= s_boundary_o_adpcm_busy;
+            s_boundary_i_audio_view_enable <= i_audio_view_enable;
+            su11_boundary_iu11_audio_view_address <= iu11_audio_view_address;
+            ou8_audio_view_data <= su8_boundary_ou8_audio_view_data;
+            o_audio_debug_request <= s_boundary_o_audio_debug_request;
+            o_audio_debug_write <= s_boundary_o_audio_debug_write;
+            ou16_audio_debug_address <= su16_boundary_ou16_audio_debug_address;
+            ou8_audio_debug_data <= su8_boundary_ou8_audio_debug_data;
             s_boundary_i_sound_command_read <= i_sound_command_read;
             o_sound_command_write <= s_boundary_o_sound_command_write;
             ou8_sound_command <= su8_boundary_ou8_sound_command;
@@ -256,6 +304,22 @@ begin
             iu8_player2 => su8_boundary_iu8_player2,
             iu8_service => su8_boundary_iu8_service,
             iu16_dips => su16_boundary_iu16_dips,
+            i_sound_cpu_enable => s_boundary_i_sound_cpu_enable,
+            i_ym_enable => s_boundary_i_ym_enable,
+            i_ym_half_enable => s_boundary_i_ym_half_enable,
+            i_adpcm_enable => s_boundary_i_adpcm_enable,
+            ou16_left_pcm => su16_boundary_ou16_left_pcm,
+            ou16_right_pcm => su16_boundary_ou16_right_pcm,
+            ou9_adpcm_pcm => su9_boundary_ou9_adpcm_pcm,
+            o_audio_sample_marker => s_boundary_o_audio_sample_marker,
+            o_adpcm_busy => s_boundary_o_adpcm_busy,
+            i_audio_view_enable => s_boundary_i_audio_view_enable,
+            iu11_audio_view_address => su11_boundary_iu11_audio_view_address,
+            ou8_audio_view_data => su8_boundary_ou8_audio_view_data,
+            o_audio_debug_request => s_boundary_o_audio_debug_request,
+            o_audio_debug_write => s_boundary_o_audio_debug_write,
+            ou16_audio_debug_address => su16_boundary_ou16_audio_debug_address,
+            ou8_audio_debug_data => su8_boundary_ou8_audio_debug_data,
             i_sound_command_read => s_boundary_i_sound_command_read,
             o_sound_command_write => s_boundary_o_sound_command_write,
             ou8_sound_command => su8_boundary_ou8_sound_command,

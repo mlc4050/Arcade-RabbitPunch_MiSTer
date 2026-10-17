@@ -43,6 +43,22 @@ entity rabbitpunch_system is
         iu8_player2 : in unsigned(7 downto 0);
         iu8_service : in unsigned(7 downto 0);
         iu16_dips : in unsigned(15 downto 0);
+        i_sound_cpu_enable : in std_logic := '0';
+        i_ym_enable : in std_logic := '0';
+        i_ym_half_enable : in std_logic := '0';
+        i_adpcm_enable : in std_logic := '0';
+        ou16_left_pcm : out unsigned(15 downto 0);
+        ou16_right_pcm : out unsigned(15 downto 0);
+        ou9_adpcm_pcm : out unsigned(8 downto 0);
+        o_audio_sample_marker : out std_logic;
+        o_adpcm_busy : out std_logic;
+        i_audio_view_enable : in std_logic := '0';
+        iu11_audio_view_address : in unsigned(10 downto 0) := (others => '0');
+        ou8_audio_view_data : out unsigned(7 downto 0);
+        o_audio_debug_request : out std_logic;
+        o_audio_debug_write : out std_logic;
+        ou16_audio_debug_address : out unsigned(15 downto 0);
+        ou8_audio_debug_data : out unsigned(7 downto 0);
         i_sound_command_read : in std_logic;
         o_sound_command_write : out std_logic;
         ou8_sound_command : out unsigned(7 downto 0);
@@ -100,7 +116,16 @@ architecture rtl of rabbitpunch_system is
     signal s_cpu_rom_request, s_cpu_rom_valid : std_logic;
     signal su18_cpu_rom_address : unsigned(17 downto 0);
     signal su16_cpu_rom_data : unsigned(15 downto 0);
+    signal s_main_paused, s_audio_paused, s_sound_pending, s_sound_command_read : std_logic;
+    signal su8_sound_command : unsigned(7 downto 0);
+    signal s_audio_request, s_audio_ready, s_audio_valid, s_sample_request, s_sample_valid : std_logic;
+    signal su16_audio_address : unsigned(15 downto 0);
+    signal su18_sample_address : unsigned(17 downto 0);
+    signal su8_audio_data, su8_sample_data : unsigned(7 downto 0);
 begin
+    o_paused <= s_main_paused and s_audio_paused;
+    ou8_sound_command <= su8_sound_command;
+    o_sound_pending <= s_sound_pending;
     s_board_reset <= i_initialize or i_game_reset or s_download_reset or not s_rom_ready;
     o_ready <= not s_board_reset;
     o_loading <= s_loading;
@@ -110,7 +135,7 @@ begin
             i_initialize => i_initialize or s_download_reset,
             i_reset => s_board_reset,
             i_pause => i_pause,
-            o_paused => o_paused,
+            o_paused => s_main_paused,
             i_vblank_start => i_vblank_start,
             i_half_frame => i_half_frame,
             i_line_valid => i_line_valid,
@@ -152,10 +177,10 @@ begin
             iu8_player2 => iu8_player2,
             iu8_service => iu8_service,
             iu16_dips => iu16_dips,
-            i_sound_command_read => i_sound_command_read,
+            i_sound_command_read => i_sound_command_read or s_sound_command_read,
             o_sound_command_write => o_sound_command_write,
-            ou8_sound_command => ou8_sound_command,
-            o_sound_pending => o_sound_pending,
+            ou8_sound_command => su8_sound_command,
+            o_sound_pending => s_sound_pending,
             ou16_video_flags => ou16_video_flags,
             ou9_scroll0_y => ou9_scroll0_y,
             ou9_scroll0_x => ou9_scroll0_x,
@@ -174,6 +199,41 @@ begin
             ou24_cpu_request_address => ou24_cpu_request_address,
             ou16_cpu_request_data => ou16_cpu_request_data,
             ou2_cpu_request_bytes => ou2_cpu_request_bytes
+        );
+    audio : entity work.rabbitpunch_audio
+        port map (
+            i_clk => i_clk,
+            i_reset => s_board_reset,
+            i_cpu_enable => i_sound_cpu_enable,
+            i_ym_enable => i_ym_enable,
+            i_ym_half_enable => i_ym_half_enable,
+            i_adpcm_enable => i_adpcm_enable,
+            i_pause => i_pause,
+            o_paused => s_audio_paused,
+            iu8_command => su8_sound_command,
+            i_command_pending => s_sound_pending,
+            o_command_read => s_sound_command_read,
+            o_rom_request => s_audio_request,
+            ou16_rom_address => su16_audio_address,
+            i_rom_ready => s_audio_ready,
+            i_rom_response_valid => s_audio_valid,
+            iu8_rom_response_data => su8_audio_data,
+            o_adpcm_rom_request => s_sample_request,
+            ou18_adpcm_rom_address => su18_sample_address,
+            i_adpcm_rom_valid => s_sample_valid,
+            iu8_adpcm_rom_data => su8_sample_data,
+            ou9_adpcm_pcm => ou9_adpcm_pcm,
+            o_adpcm_busy => o_adpcm_busy,
+            ou16_left_pcm => ou16_left_pcm,
+            ou16_right_pcm => ou16_right_pcm,
+            o_sample_marker => o_audio_sample_marker,
+            i_view_enable => i_audio_view_enable,
+            iu11_view_address => iu11_audio_view_address,
+            ou8_view_data => ou8_audio_view_data,
+            o_debug_request => o_audio_debug_request,
+            o_debug_write => o_audio_debug_write,
+            ou16_debug_address => ou16_audio_debug_address,
+            ou8_debug_data => ou8_audio_debug_data
         );
     roms : entity work.rabbitpunch_roms
         port map (
@@ -201,15 +261,15 @@ begin
             iu18_cpu_byte_address => su18_cpu_rom_address,
             o_cpu_response_valid => s_cpu_rom_valid,
             ou16_cpu_response_data => su16_cpu_rom_data,
-            i_audio_request => '0',
-            o_audio_ready => open,
-            iu16_audio_byte_address => (others => '0'),
-            o_audio_response_valid => open,
-            ou8_audio_response_data => open,
-            i_sample_request => '0',
-            iu18_sample_byte_address => (others => '0'),
-            o_sample_valid => open,
-            ou8_sample_data => open,
+            i_audio_request => s_audio_request,
+            o_audio_ready => s_audio_ready,
+            iu16_audio_byte_address => su16_audio_address,
+            o_audio_response_valid => s_audio_valid,
+            ou8_audio_response_data => su8_audio_data,
+            i_sample_request => s_sample_request,
+            iu18_sample_byte_address => su18_sample_address,
+            o_sample_valid => s_sample_valid,
+            ou8_sample_data => su8_sample_data,
             iou16_sdram_data => iou16_sdram_data,
             ou13_sdram_address => ou13_sdram_address,
             ou2_sdram_bank => ou2_sdram_bank,

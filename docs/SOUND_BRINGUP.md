@@ -242,4 +242,13 @@ audio caches only after all clients drain. roms_tb checks concurrent reads from
 all five clients, both sample banks, cached adjacent accesses, loader byte masks,
 and replacement-image invalidation. Loader acknowledgments must never appear
 as client replies. Download and main-only system regressions also pass. The
-system wrapper still ties off audio until the complete audio instance is added.
+system wrapper now connects the complete audio instance and main command latch;
+its end-to-end executing-CPU diagnostic passes
+(reference/system_audio_checks.json); expanded implementation is pending.
+
+
+Production ROM fit/netlist evidence: reference/roms_synth.json and
+reference/roms_netlist_checks.json. The expanded subsystem uses 806 ALMs,
+1878 registers, zero block RAM, worst setup +5.284 ns and hold +0.165 ns
+at the 48 MHz evaluation constraint. All reported corners and six timing
+coverage checks pass. This is not final PLL or PCB SDRAM timing.

@@ -13,13 +13,13 @@ inherited MiSTer template demo remains connected at the framework top level.
 | Captured-state graphics | All six HDL RGB scenes match MAME through shared native RAM, ROM caches and the real SDRAM command model: 373248 identical pixels, concurrent synthetic CPU traffic, live bitmap/palette updates and reset recovery. Largest measured cached line cost is 2557 clocks, 53.3 us at 48 MHz; physical deadlines remain open. |
 | Executing CPU with logical video | Both games pass 10000-write boot comparisons while rendering 526 logical lines each (151488 black RGB/tag checks per game). This early prefix uses an explicit MAME-style zero RAM seed and black palette/tag checks, distinct from the captured graphics proof. |
 | Logical board implementation | CPU/I/O/IRQ/shared-RAM video together pass every reported 48 MHz timing corner: 2962 ALMs, 112 M10K blocks, worst setup +6.808 ns and hold +0.115 ns. Logical test boundaries are registered; final external pin timing is not established. |
-| Sound subsystem | Unchanged JT51 and its descriptive VHDL wrapper pass reset/status, explicit mute, sample cadence and timer/IRQ baselines. T80 transaction/pause/reset diagnostics and connected command IRQ tests pass. Both audio ROMs match 4096 MAME startup writes through native sound RAM, VHDL bus decode and JT51, with explicit MAME CPU/RAM test seeds. The logical sound board also passes synthesized-netlist diagnostics and 48 MHz implementation (2405 ALMs, 11 RAM blocks, setup +2.621 ns / hold +0.105 ns). Native/wrapped JT7759 synthetic playback and retrigger baselines pass; sample banking/control, shared ROM scheduling and game audio remain unintegrated. |
+| Sound subsystem | Unchanged JT51 and its descriptive VHDL wrapper pass reset/status, explicit mute, sample cadence and timer/IRQ baselines. T80 transaction/pause/reset diagnostics and connected command IRQ tests pass. Both audio ROMs match 4096 MAME startup writes through native sound RAM, VHDL bus decode and JT51, with explicit MAME CPU/RAM test seeds. The logical sound board also passes synthesized-netlist diagnostics and 48 MHz implementation (2405 ALMs, 11 RAM blocks, setup +2.621 ns / hold +0.105 ns). Native/wrapped JT7759 synthetic playback and retrigger baselines pass; bank/reset/start and shared sound ROM scheduling are connected and tested. Both sets also match 4096 startup writes through shared SDRAM. Complete logical audio passes fit/netlist tests; game audio remains unverified. |
 | ROM transport and image loading | SDRAM adapter, ROM mapper/cache and word loader pass directed, implementation and synthesized-netlist tests. Sequential download control passes delayed-response/error-recovery tests, real SDRAM image replacement and implementation timing. HPS/DDR staging remains unconnected. |
 | Connected logical system | Board, download control and cached SDRAM now connect. Three downloaded synthetic 68000 programs execute checked native-RAM writes, including hot-cache replacement, soft reset without reload, partial-image rejection and recovery. Combined-system implementation passes at 48 MHz under its documented evaluation constraints: 3275 ALMs, 112 M10Ks, worst setup +4.035 ns / hold +0.107 ns. |
 
 The system clock is still a 48 MHz evaluation constraint. Physical pixel clock,
 raster totals/blanking and SDRAM PLL/pin phase require evidence before dependent
-hardware integration. Sound, full game execution/play coverage, MiSTer HPS/DDR
+hardware integration. Real game audio, full game execution/play coverage, MiSTer HPS/DDR
 loading, output/features and hardware verification remain open.
 
 Evidence: [BOARD_INTEGRATION.md](BOARD_INTEGRATION.md),
@@ -256,5 +256,6 @@ timing guesses into measurements. Close those decisions with evidence before the
 Latest sound transport milestone: both sets pass 4096 MAME sound-startup writes
 through shared cached SDRAM. Production ROM loading now includes sound program
 and sample clients, with concurrent-client and image-replacement regressions.
-The audio CPU/chips still require connection to the complete system wrapper;
+The complete system now passes downloaded 68000 commands through the sound latch,
+T80 IRQ/ack, banked sample playback and coordinated CPU pause;
 physical raster timing and final MiSTer integration remain open.

@@ -189,8 +189,8 @@ Prepared read arbiter owns three pending credits, three latched 27-bit aligned
 addresses, selected/active owner, round-robin next index and three returned
 64-bit data registers. Idle means no backend request remains outstanding;
 parent clients must also consume visible replies before image invalidation.
-There is no reset cancellation or new RAM. The arbiter is not wired into the
-production ROM subsystem yet.
+There is no reset cancellation or new RAM. The production ROM subsystem now uses it on physical port 2 beside the
+loader ownership mux.
 
 
 Audio ROM frontend state: independent program/sample request FSMs, burst byte
@@ -199,3 +199,12 @@ burst-cache instances retain 16 bytes across game reset. Invalidate after both
 clients and shared-read queue drain, before changing images. The sample output
 valid compares the complete current banked address, so a stale pending reply
 cannot escape after a bank change. No production reset cancels an accepted read.
+
+
+The complete logical system connects the existing main command latch/pending
+bit directly to audio's command input/IRQ and returns its read acknowledgment.
+No second mailbox is added. System pause reports complete only when both CPU
+adapters have drained; chip clock enables continue independently of CPU pause.
+Sound native RAM has its own paused inspection port. Sound/sample caches retain
+ROM data through a game reset and invalidate on drained image replacement.
+Separate raw FM and sample PCM outputs remain available before final mixing.

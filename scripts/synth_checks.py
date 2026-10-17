@@ -16,7 +16,7 @@ CHECKS = {
     "adpcm": (0, ("rabbitpunch_adpcm", "rabbitpunch_upd7759", "jt7759_ctrl", "jt7759_adpcm")),
     "sound_board": (19403, ("rabbitpunch_sound_board", "rabbitpunch_soundcpu", "rabbitpunch_sound_bus", "rabbitpunch_ram8", "jt51")),
     "soundcpu": (0, ("rabbitpunch_soundcpu", "rabbitpunch_z80", "T80se")),
-    "system": (907936, ("rabbitpunch_system", "rabbitpunch_board", "fx68k", "rabbitpunch_roms", "rabbitpunch_download", "jtframe_draw")),
+    "system": (927339, ("rabbitpunch_system", "rabbitpunch_board", "fx68k", "rabbitpunch_roms", "rabbitpunch_download", "jtframe_draw", "rabbitpunch_audio", "T80se", "jt51", "jt7759")),
     "download": (0, ("rabbitpunch_download",)),
     # Native RAM/lines 868352 + micro ROM 17*1024 + nano ROM 66*336.
     # Nano bits 2 and 23 are constant zero in the pinned donor and optimized out.
@@ -87,7 +87,7 @@ def run_check(stage, quartus_bin, stamp, name):
     if any(instance not in hierarchy for instance in required_instances):
         raise SystemExit("A required block disappeared during synthesis")
     sound_memory = []
-    if name in ("sound_board", "audio"):
+    if name in ("sound_board", "audio", "system"):
         expected_sound_memory = {
             "rabbitpunch_ram8:sound_ram": (2048, 8),
             "jt51_sh:u_acc": (8, 68),
@@ -102,6 +102,8 @@ def run_check(stage, quartus_bin, stamp, name):
             columns = [value.strip() for value in line.split(";")[1:-1]]
             if len(columns) == 9 and columns[1] in ("M10K block", "AUTO"):
                 matches = [key for key in expected_sound_memory if key + "|" in columns[0]]
+                if not matches and name == "system":
+                    continue
                 if len(matches) != 1:
                     raise SystemExit(f"Unexpected sound memory: {columns[0]}")
                 key = matches[0]
@@ -146,7 +148,7 @@ def run_check(stage, quartus_bin, stamp, name):
     if name == "system":
         scope = ("Logical CPU/IO/video/RAM system, sequential loader and cached SDRAM controller; "
                  "registered logical test boundaries, wire-connected SDRAM pins and hypothetical half-period external tester; "
-                 "no HPS/DDR, sound, final PLL/raster or PCB electrical timing proof")
+                 "no HPS/DDR, final PCM mixing, PLL/raster or PCB electrical timing proof")
     report={"commit":stamp.split()[0],"device":"5CSEBA6U23I7","project":project_name,
             "constraint_mhz":48,"seed":int(seed_match[1]),"memory_bits":expected_bits,"timings":timings,
             "timing_coverage":coverage,
