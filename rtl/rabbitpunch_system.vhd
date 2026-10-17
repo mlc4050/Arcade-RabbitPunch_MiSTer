@@ -15,6 +15,7 @@ entity rabbitpunch_system is
         i_game_reset : in std_logic;
         i_pause : in std_logic;
         o_paused : out std_logic;
+        i_maintenance_initialize : in std_logic := '0';
         i_maintenance_access : in std_logic := '0';
         i_maintenance_valid : in std_logic := '0';
         i_maintenance_write : in std_logic := '0';
@@ -158,6 +159,7 @@ begin
             i_reset => s_board_reset,
             i_pause => i_pause,
             o_paused => s_main_paused,
+            i_maintenance_initialize => i_maintenance_initialize,
             i_maintenance_access => i_maintenance_access,
             i_maintenance_valid => i_maintenance_valid,
             i_maintenance_write => i_maintenance_write,

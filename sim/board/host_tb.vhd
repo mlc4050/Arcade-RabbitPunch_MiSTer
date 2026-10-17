@@ -34,7 +34,12 @@ architecture test of host_tb is
         o_file_write : out std_logic;
         ou27_file_byte_address : out unsigned(26 downto 0);
         ou8_file_data : out unsigned(7 downto 0);
-        i_file_wait : in std_logic
+        i_file_wait : in std_logic;
+        i_file_upload_request : in std_logic := '0';
+        iu8_file_upload_index : in unsigned(7 downto 0) := (others => '0');
+        iu8_file_upload_data : in unsigned(7 downto 0) := (others => '0');
+        o_file_upload : out std_logic;
+        o_file_read : out std_logic
     );
     end component;
     constant CONFIG : string := DEFAULT_CONFIG_STRING;
@@ -50,6 +55,10 @@ architecture test of host_tb is
     signal su27_address : unsigned(26 downto 0);
     signal su8_data : unsigned(7 downto 0);
     signal sint_writes : natural := 0;
+    signal sint_reads : natural := 0;
+    signal s_upload_request : std_logic := '0';
+    signal s_upload, s_read : std_logic;
+    signal su8_upload_data : unsigned(7 downto 0) := (others => '0');
 begin
     s_clk <= not s_clk after 10417 ps;
     su46_bus <= su46_master;
@@ -77,11 +86,23 @@ begin
             o_file_write => s_write,
             ou27_file_byte_address => su27_address,
             ou8_file_data => su8_data,
-            i_file_wait => s_wait
+            i_file_wait => s_wait,
+            i_file_upload_request => s_upload_request,
+            iu8_file_upload_index => to_unsigned(4, 8),
+            iu8_file_upload_data => su8_upload_data,
+            o_file_upload => s_upload,
+            o_file_read => s_read
         );
     monitor : process(s_clk)
     begin
         if (rising_edge(s_clk)) then
+            -- One-clock synchronous storage read, matching the score buffer RAM.
+            su8_upload_data <= su27_address(7 downto 0) xor x"A7";
+            if (s_read = '1') then
+                assert (s_upload = '1' and s_download = '0' and su16_index = 4)
+                    report "Native upload read pulse outside the selected upload" severity failure;
+                sint_reads <= sint_reads + 1;
+            end if;
             if (s_write = '1') then
                 assert (s_download = '1' and su16_index = 0 and su27_address = sint_writes and
                     su8_data = 16#A0# + sint_writes)
@@ -203,7 +224,46 @@ begin
         cycles(4);
         file_command(16#53#, 0);
         assert (s_download = '0' and sint_writes = 8) report "Host download end or byte count mismatch" severity failure;
-        report "HOST_PASS native_hps_io=checked config_string=checked joystick_status_order=checked byte_download=8 wait_pin=checked keyboard_press_release=checked";
+        s_upload_request <= '1';
+        cycles(6);
+        uio_begin(16#3C#);
+        assert (su46_bus(15 downto 0) = x"0401")
+            report "Native save request/index was not returned to the HPS" severity failure;
+        uio_end;
+        uio_begin(16#3C#);
+        assert (su46_bus(15 downto 0) = 0)
+            report "Native save request was not cleared by the HPS poll" severity failure;
+        uio_end;
+        s_upload_request <= '0';
+        cycles(6);
+        s_upload_request <= '1';
+        cycles(6);
+        uio_begin(16#3C#);
+        assert (su46_bus(15 downto 0) = x"0401")
+            report "Native save request did not rearm on a new request edge" severity failure;
+        uio_end;
+        s_upload_request <= '0';
+        file_command(16#55#, 4);
+        file_command(16#53#, 16#AA#);
+        assert (s_upload = '1' and s_download = '0' and su27_address = 0 and sint_reads = 1)
+            report "Native upload did not preload its first byte" severity failure;
+        for vint_chunk in 0 to 6 loop
+            su46_master(35) <= '1';
+            word(16#54#);
+            for vint_byte in 0 to 16 loop
+                word(0);
+                assert (su46_bus(7 downto 0) = (to_unsigned(vint_chunk * 17 + vint_byte, 8) xor x"A7"))
+                    report "Native upload lost a byte across synchronous RAM or command boundaries" severity failure;
+            end loop;
+            su46_master(35) <= '0';
+            cycles(4);
+        end loop;
+        assert (su27_address = 119 and sint_reads = 120 and sint_writes = 8)
+            report "Native upload byte/read count or download isolation mismatch" severity failure;
+        file_command(16#53#, 0);
+        assert (s_upload = '0' and s_download = '0')
+            report "Native upload did not end" severity failure;
+        report "HOST_PASS native_hps_io=checked config_string=checked joystick_status_order=checked byte_download=8 byte_upload=119 upload_request_rearm=checked synchronous_read=checked wait_pin=checked keyboard_press_release=checked";
         finish;
         wait;
     end process;

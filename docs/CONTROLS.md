@@ -8,7 +8,7 @@ bits 2/7 stay zero. In particular the original unused freeze input is not Pause.
 | MiSTer pad bit | Board meaning |
 |---|---|
 | 0 / 1 / 2 / 3 | right / left / down / up -> player bits 3 / 2 / 1 / 0 |
-| 4 / 5 | Missile / Punch -> player bits 4 / 5 |
+| 4 / 5 | Missile / Shoot -> player bits 4 / 5 |
 | 6:9 | padded action slots, ignored |
 | 10 | controller 1/2 Start -> SERVICE bits 5/6 |
 | 11 | controller 1/2 Coin -> SERVICE bits 4/3 |
@@ -23,7 +23,7 @@ input. The board has no service-coin 2 input, so keyboard 0 is ignored.
 | Keyboard | Action |
 |---|---|
 | arrows / R F D G | player 1 / player 2 movement |
-| left Ctrl, left Alt / A, S | Missile, Punch for player 1 / player 2 |
+| left Ctrl, left Alt / A, S | Missile, Shoot for player 1 / player 2 |
 | 1 / 2 | Start 1 / Start 2 |
 | 5 / 6 | Coin 1 / Coin 2 |
 | 9 / F2 | Service coin / Test switch; F2 can be held at boot |
@@ -51,3 +51,10 @@ OSD/state ownership and DIP preservation across game reset
 (reference/pause_checks.json and reference/controls_checks.json). Controls pass a full Quartus fit at 48 MHz with zero block RAM and all
 reported timing/coverage checks passing (reference/controls_synth.json). The
 separate system CPU-drain/pause tests retain their own scope.
+
+
+The displayed second action is **Shoot**. The pinned driver's hardware-map
+comment calls this bit the punch button (player bit 5); player bit 4 is the
+separate missile button. This naming update preserves both MAME input bits,
+keyboard defaults and existing controller slots. Shoot and Missile are separate
+controls for each player.

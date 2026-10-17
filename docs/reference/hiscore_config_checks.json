@@ -1,0 +1,11 @@
+{
+  "case": "hiscore_config",
+  "pass_marker": "HISCORE_CONFIG_PASS",
+  "log": "debug\\baselines\\hiscore_config\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_hiscore_config.vhd": "fcb70ea11a4ea24040d0b1d09c7ceb1512e4527cfad06c316f3aea79ac614d6d",
+    "sim/board/hiscore_config_tb.vhd": "23038d415d23b86e8bce9a6c674b487a5037cb1c84b72b246c69eb13ae6f4674"
+  },
+  "log_sha256": "912738f9c2e4496aeb5861f8fb64b402375093f4eac2cc64a621bfb33199a22e",
+  "scope": "Standard 24-byte hiscore metadata parser: both captured MAME geometries, full-width wait endianness, strict descriptor support, truncation/reorder/overflow rejection, unrelated file-index isolation and ROM-generation clear. No production persistence integration."
+}

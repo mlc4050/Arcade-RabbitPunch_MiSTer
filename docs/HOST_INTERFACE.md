@@ -50,3 +50,19 @@ menu options wait for their physical shell connections. Full native host readbac
 configuration (reference/host_netlist_checks.json and
 reference/platform_host_checks.json). This checks bytes and decoded controls,
 not the physical ARM OSD renderer.
+
+
+Upload request/index/data and native active/read flags are exposed through the
+unsigned wrapper. The verified pre-menu upload fit/test checks a 119-byte transfer
+from a synchronous read source, command boundaries and pending request rearming.
+The configuration now adds `H3O3,Autosave high scores,Off,On;` at status bit 3;
+the logical platform supplies menu-mask bit 3 until a valid profile exists. The refreshed native host fit and configuration/upload netlist test pass for
+this menu generation (reference/host_synth.json and host_netlist_checks.json).
+
+
+The composed native score-platform test now passes both sets. It verifies
+standard configuration/NVRAM transfers, CPU-consumed restored bytes, UIO3C save
+request polling, native score uploads, UIO2E profile-dependent menu visibility,
+soft-reset restoration and ROM-generation isolation. The file master is a VHDL
+protocol driver, not ARM Main software; no on-device filesystem claim follows.
+See reference/platform_hiscore_host_checks.json.

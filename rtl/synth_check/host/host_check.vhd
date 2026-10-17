@@ -30,7 +30,12 @@ entity host_check is
         o_file_write : out std_logic;
         ou27_file_byte_address : out unsigned(26 downto 0);
         ou8_file_data : out unsigned(7 downto 0);
-        i_file_wait : in std_logic
+        i_file_wait : in std_logic;
+        i_file_upload_request : in std_logic := '0';
+        iu8_file_upload_index : in unsigned(7 downto 0) := (others => '0');
+        iu8_file_upload_data : in unsigned(7 downto 0) := (others => '0');
+        o_file_upload : out std_logic;
+        o_file_read : out std_logic
     );
 end entity;
 
@@ -66,6 +71,11 @@ begin
             o_file_write => o_file_write,
             ou27_file_byte_address => ou27_file_byte_address,
             ou8_file_data => ou8_file_data,
-            i_file_wait => i_file_wait
+            i_file_wait => i_file_wait,
+            i_file_upload_request => i_file_upload_request,
+            iu8_file_upload_index => iu8_file_upload_index,
+            iu8_file_upload_data => iu8_file_upload_data,
+            o_file_upload => o_file_upload,
+            o_file_read => o_file_read
         );
 end architecture;

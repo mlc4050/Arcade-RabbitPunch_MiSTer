@@ -29,7 +29,12 @@ entity rabbitpunch_host is
         o_file_write : out std_logic;
         ou27_file_byte_address : out unsigned(26 downto 0);
         ou8_file_data : out unsigned(7 downto 0);
-        i_file_wait : in std_logic
+        i_file_wait : in std_logic;
+        i_file_upload_request : in std_logic := '0';
+        iu8_file_upload_index : in unsigned(7 downto 0) := (others => '0');
+        iu8_file_upload_data : in unsigned(7 downto 0) := (others => '0');
+        o_file_upload : out std_logic;
+        o_file_read : out std_logic
     );
 end entity;
 
@@ -74,6 +79,8 @@ architecture boundary of rabbitpunch_host is
             ioctl_wr : out std_logic;
             ioctl_addr : out unsigned(26 downto 0);
             ioctl_dout : out unsigned(7 downto 0);
+            ioctl_upload : out std_logic;
+            ioctl_rd : out std_logic;
             ioctl_upload_req : in std_logic;
             ioctl_upload_index : in unsigned(7 downto 0);
             ioctl_din : in unsigned(7 downto 0);
@@ -116,9 +123,11 @@ begin
             ioctl_wr => o_file_write,
             ioctl_addr => ou27_file_byte_address,
             ioctl_dout => ou8_file_data,
-            ioctl_upload_req => '0',
-            ioctl_upload_index => (others => '0'),
-            ioctl_din => (others => '0'),
+            ioctl_upload => o_file_upload,
+            ioctl_rd => o_file_read,
+            ioctl_upload_req => i_file_upload_request,
+            ioctl_upload_index => iu8_file_upload_index,
+            ioctl_din => iu8_file_upload_data,
             ioctl_wait => i_file_wait,
             sdram_sz => ou16_sdram_configuration
         );

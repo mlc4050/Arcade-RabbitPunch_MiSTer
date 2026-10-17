@@ -36,7 +36,7 @@ def button_names():
     text = (core_root() / "rtl/rabbitpunch_layout.vhd").read_text()
     slots = {name: int(value) for name, value in re.findall(
         r"constant\s+JOY_(\w+)\s*:\s*natural\s*:=\s*(\d+)", text)}
-    labels = {"MISSILE": "Missile", "PUNCH": "Punch", "START": "Start", "COIN": "Coin",
+    labels = {"MISSILE": "Missile", "SHOOT": "Shoot", "START": "Start", "COIN": "Coin",
               "PAUSE": "Pause", "SERVICE": "Service", "TEST": "Test"}
     if set(slots) != set(labels) or len(set(slots.values())) != len(slots) or min(slots.values()) < 4:
         raise ValueError("Invalid VHDL joystick slot definitions")
@@ -44,6 +44,39 @@ def button_names():
     for key, slot in slots.items():
         names[slot - 4] = labels[key]
     return ",".join(names)
+
+
+def hiscore_metadata(name):
+    reference = {row['set']: row for row in json.loads(
+        (core_root() / 'docs/reference/hiscore_reference.json').read_text())}
+    row = reference[name]
+    expected = (0xFFE01, 119, 0, 0x80) if name == 'rabiolep' else (0xFFE01, 115, 0, 0x17)
+    actual = tuple(row[key] for key in ('address', 'length', 'first', 'last'))
+    if actual != expected or row['mame_version'] != '0289':
+        raise ValueError('Score metadata differs from the pinned MAME profile')
+    # Clock counts for the 48 MHz logical platform: wait one second, then
+    # retry the initialization sentinels at most once per 65536 clocks.
+    header = (48_000_000).to_bytes(4, 'big') + bytes.fromhex('FFFF00020002000100000000')
+    record = row['address'].to_bytes(4, 'big') + row['length'].to_bytes(2, 'big') + bytes([row['first'], row['last']])
+    payload = header + record
+    if len(payload) != 24:
+        raise ValueError('Score metadata must have one 8-byte length-width-2 record')
+    return payload, row['length']
+
+
+def emit_hiscore(parent, name):
+    payload, length = hiscore_metadata(name)
+    config = ET.SubElement(parent, 'rom', index='3')
+    ET.SubElement(config, 'part').text = payload.hex(' ').upper()
+    ET.SubElement(parent, 'nvram', index='4', size=str(length))
+    # Main_MiSTer's XML events load each section in document order.
+    order = [(node.tag, node.get('index')) for node in parent
+             if node.tag in ('rom', 'nvram')]
+    if order != [('rom', '0'), ('rom', '3'), ('nvram', '4')]:
+        raise ValueError('Expected ROM image, score configuration, then optional NVRAM dump')
+    return {'config_index': 3, 'dump_index': 4, 'bytes': length,
+            'config_sha256': hashlib.sha256(payload).hexdigest(),
+            'load_order': ['rom0', 'config3', 'nvram4']}
 
 
 def fill(parent, value, length):
@@ -181,6 +214,7 @@ def main():
         rom = ET.SubElement(doc, "rom", index="0", zip="rabiolep.zip" if name == "rabiolep" else "rpunch.zip|rabiolep.zip", md5="None")
         for region in ordered:
             emit_region(rom, region)
+        hiscore = emit_hiscore(doc, name)
         switches(doc, name, driver)
         ET.SubElement(doc, "buttons", names=button_names(), count="2")
         ET.indent(doc, space="    ")
@@ -208,7 +242,7 @@ def main():
         report = {"set": name, "mameversion": version, "bytes": len(actual),
                   "sha256": hashlib.sha256(actual).hexdigest(), "source_and_listxml_checked": True,
                   "xml_vs_address_assembly": "identical", "xml_vs_mame_regions": "identical",
-                  "mra": path.relative_to(root).as_posix()}
+                  "mra": path.relative_to(root).as_posix(), "hiscore": hiscore}
         reports.append(report)
         print(f"PASS {name}: {len(actual):#x} bytes; MRA matches source assembly and actual MAME regions")
     (root / "docs/reference/mra_checks.json").write_text(json.dumps(reports, indent=2) + "\n")

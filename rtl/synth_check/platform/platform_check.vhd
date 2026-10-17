@@ -19,6 +19,15 @@ entity platform_check is
         i_debug_pause : in std_logic := '0';
         i_state_pause : in std_logic := '0';
         i_host_download : in std_logic;
+        i_host_upload : in std_logic := '0';
+        o_host_upload_request : out std_logic;
+        ou8_host_upload_data : out unsigned(7 downto 0);
+        ou16_host_menu_mask : out unsigned(15 downto 0);
+        o_hiscore_enabled : out std_logic;
+        o_hiscore_config_error : out std_logic;
+        o_hiscore_initialized : out std_logic;
+        o_hiscore_saved_valid : out std_logic;
+        o_hiscore_dirty : out std_logic;
         iu16_host_index : in unsigned(15 downto 0);
         i_host_write : in std_logic;
         iu27_host_byte_address : in unsigned(26 downto 0);
@@ -247,10 +256,28 @@ architecture evaluation of platform_check is
     signal s_boundary_o_maintenance_response_valid : std_logic := '0';
     signal su8_boundary_ou8_maintenance_response_data : unsigned(7 downto 0) := (others => '0');
     signal s_boundary_o_maintenance_pause : std_logic := '0';
+    signal su16_boundary_ou16_host_menu_mask : unsigned(15 downto 0) := (others => '0');
+    signal s_boundary_i_host_upload : std_logic := '0';
+    signal s_boundary_o_host_upload_request : std_logic := '0';
+    signal su8_boundary_ou8_host_upload_data : unsigned(7 downto 0) := (others => '0');
+    signal s_boundary_o_hiscore_enabled : std_logic := '0';
+    signal s_boundary_o_hiscore_config_error : std_logic := '0';
+    signal s_boundary_o_hiscore_initialized : std_logic := '0';
+    signal s_boundary_o_hiscore_saved_valid : std_logic := '0';
+    signal s_boundary_o_hiscore_dirty : std_logic := '0';
 begin
     boundary : process(i_clk)
     begin
         if (rising_edge(i_clk)) then
+            ou16_host_menu_mask <= su16_boundary_ou16_host_menu_mask;
+            s_boundary_i_host_upload <= i_host_upload;
+            o_host_upload_request <= s_boundary_o_host_upload_request;
+            ou8_host_upload_data <= su8_boundary_ou8_host_upload_data;
+            o_hiscore_enabled <= s_boundary_o_hiscore_enabled;
+            o_hiscore_config_error <= s_boundary_o_hiscore_config_error;
+            o_hiscore_initialized <= s_boundary_o_hiscore_initialized;
+            o_hiscore_saved_valid <= s_boundary_o_hiscore_saved_valid;
+            o_hiscore_dirty <= s_boundary_o_hiscore_dirty;
             s_boundary_i_maintenance_access <= i_maintenance_access;
             s_boundary_i_maintenance_valid <= i_maintenance_valid;
             s_boundary_i_maintenance_write <= i_maintenance_write;
@@ -379,6 +406,15 @@ begin
             i_debug_pause => s_boundary_i_debug_pause,
             i_state_pause => s_boundary_i_state_pause,
             i_host_download => s_boundary_i_host_download,
+            i_host_upload => s_boundary_i_host_upload,
+            ou16_host_menu_mask => su16_boundary_ou16_host_menu_mask,
+            o_host_upload_request => s_boundary_o_host_upload_request,
+            ou8_host_upload_data => su8_boundary_ou8_host_upload_data,
+            o_hiscore_enabled => s_boundary_o_hiscore_enabled,
+            o_hiscore_config_error => s_boundary_o_hiscore_config_error,
+            o_hiscore_initialized => s_boundary_o_hiscore_initialized,
+            o_hiscore_saved_valid => s_boundary_o_hiscore_saved_valid,
+            o_hiscore_dirty => s_boundary_o_hiscore_dirty,
             iu16_host_index => su16_boundary_iu16_host_index,
             i_host_write => s_boundary_i_host_write,
             iu27_host_byte_address => su27_boundary_iu27_host_byte_address,

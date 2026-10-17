@@ -51,3 +51,12 @@ checks. HPS wait is obeyed before command strobes. This avoids ModelSim 10.5b's
 native hps_io parser limitation without replacing the host with a behavioral
 parser. The runner verifies the archived netlist hash and matching committed
 host sources. There is no SDF or physical ARM bridge in this test.
+
+
+The logical platform now includes standard high-score config3/dump4 service,
+atomic score banks and a session arbiter sharing the acknowledged maintenance
+byte port with external state/debug access. Host upload request/data/active and
+profile-dependent menu mask are explicit ports; status bit 3 enables autosave.
+See HISCORE.md and reference/platform_hiscore_checks.json for the executing-CPU
+proof. This adds 2048 logical RAM bits (one M10K) to the platform; the refreshed
+combined fit now passes all 48 MHz timing/coverage gates (reference/platform_synth.json).

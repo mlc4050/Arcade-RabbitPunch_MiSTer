@@ -44,7 +44,7 @@
     "rtl/rabbitpunch_board_video.vhd": "18c5d8143d927063946082dcfdebac39fd45f8fbb04888ecf47929280c04751b",
     "rtl/rabbitpunch_maintenance.vhd": "19d90ccaf6c967a05b7c6964dceb46e34ba7945bf3ae3a9e30d7cade5c6c1268",
     "rtl/rabbitpunch_bus_owner.vhd": "3bb5f2efb7da8141a317e8f2ade3e9f3b5e6796bfc5f990e7e44d8c2fcb4e6dc",
-    "rtl/rabbitpunch_board.vhd": "32978c6b006c521563c2a62ceaf92f554f1b66b97f54e5264ddb06b5f2788d9a",
+    "rtl/rabbitpunch_board.vhd": "6d29b8f023761fd07ddf2036c9e2ff6c0e62badadbafdbb8e475bb7da489c806",
     "rtl/rabbitpunch_download.vhd": "2abd96a09434a09d4893d4d51a75fb96d739a546fb643fc6c0d0a4cfbc0e4dd6",
     "rtl/cpu/t80/T80_Pack.vhd": "f0e6aff273f25d904fd55e53372e44b52d07a82b8c6cb58fe73ea7fde06ec22d",
     "rtl/cpu/t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
@@ -91,11 +91,11 @@
     "rtl/rabbitpunch_adpcm.vhd": "49f95542e8a7ee7de24c9730ed1e0fa195d55cb0116b9bee4b28c596614315db",
     "rtl/rabbitpunch_audio.vhd": "cf51bd509893f671fb3590770c1e4589dccb2c773219e302c2955f20566abda8",
     "rtl/rabbitpunch_audio_mixer.vhd": "d79efd2d315fc7db9e95f7f6ecc5e72b713b836b1024a0281f15f6167d94e64d",
-    "rtl/rabbitpunch_system.vhd": "fd4faab3d89ef0dff07a2c546849ae737c90d9d4ec42013f30fe415129004a68",
+    "rtl/rabbitpunch_system.vhd": "358a63321a80b9d75c8a93d83ab487bd5a2b3de3e3a0020e1b4c291c80a6561d",
     "sim/board/system_audio_tb.vhd": "d58effcb6181637bf394b9c51788a5ee697741f32605dc7175e09541cd517269"
   },
   "fixture_source_sha256": "013d9c6f3e85be0878f18cdf6af1fde145a628037ac7b3b54d2dbea1084b8d6b",
   "synthetic_image_sha256": "1a9f247a66ecc303582250ffc4c9959ab30d77614aab1a35817a81d856f8a028",
-  "log_sha256": "8054af3c04b08e108d1a537e919037f0a1437ec6bf616cc9dc80e6658c6f89d4",
+  "log_sha256": "5a3150c8e2708e945956021d6c1513880f07461ac1743323f4cf882a5b4bc99a",
   "scope": "Production logical system with executing fx68k/T80, native main/sound RAM, JT51/JT7759 and shared cached SDRAM: four downloaded 32-byte main diagnostics send commands through the internal sound latch/IRQ/ack, trigger both synthetic sample banks and verify sound RAM plus continued playback/cadence during coordinated CPU pause, maintenance byte write/read while both CPUs are paused with sample playback continuing, replacement during nonzero PCM aborts/mutes playback and recovers; defined mixed PCM and Yamaha startup qualification; sound/sample regions directly preloaded, logical video idle; no real game audio/full image loader/HPS/PLL/raster/electrical proof"
 }

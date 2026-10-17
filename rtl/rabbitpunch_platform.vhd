@@ -27,6 +27,15 @@ entity rabbitpunch_platform is
         i_debug_pause : in std_logic := '0';
         i_state_pause : in std_logic := '0';
         i_host_download : in std_logic;
+        i_host_upload : in std_logic := '0';
+        o_host_upload_request : out std_logic;
+        ou8_host_upload_data : out unsigned(7 downto 0);
+        ou16_host_menu_mask : out unsigned(15 downto 0);
+        o_hiscore_enabled : out std_logic;
+        o_hiscore_config_error : out std_logic;
+        o_hiscore_initialized : out std_logic;
+        o_hiscore_saved_valid : out std_logic;
+        o_hiscore_dirty : out std_logic;
         iu16_host_index : in unsigned(15 downto 0);
         i_host_write : in std_logic;
         iu27_host_byte_address : in unsigned(26 downto 0);
@@ -142,13 +151,24 @@ entity rabbitpunch_platform is
 end entity;
 
 architecture rtl of rabbitpunch_platform is
-    signal s_system_loading : std_logic;
+    signal s_system_loading, s_score_enabled : std_logic;
+    signal s_load_wait, s_score_wait, s_score_initialize : std_logic;
+    signal s_score_access, s_score_valid, s_score_write, s_score_ready, s_score_response : std_logic;
+    signal su14_score_address : unsigned(13 downto 0);
+    signal su8_score_write_data, su8_score_read_data : unsigned(7 downto 0);
+    signal s_memory_initialize, s_memory_access, s_memory_valid, s_memory_write : std_logic;
+    signal s_memory_ready, s_memory_response : std_logic;
+    signal su14_memory_address : unsigned(13 downto 0);
+    signal su8_memory_write_data, su8_memory_read_data : unsigned(7 downto 0);
     signal s_game_reset, s_controls_reset, s_downloading, s_ddr_mode : std_logic;
     signal s_frontend_error, s_system_error, s_word_valid, s_word_ready, s_pause_request : std_logic;
     signal su27_word_address : unsigned(26 downto 0);
     signal su16_word_data, su16_dips : unsigned(15 downto 0);
     signal su8_player1, su8_player2, su8_service : unsigned(7 downto 0);
 begin
+    o_hiscore_enabled <= s_score_enabled;
+    ou16_host_menu_mask <= to_unsigned(8, 16) when s_score_enabled = '0' else to_unsigned(0, 16);
+    o_host_wait <= s_load_wait or s_score_wait;
     s_game_reset <= i_framework_reset or iu128_status(STATUS_RESET_BIT) or iu2_host_buttons(1) or s_frontend_error or s_system_error;
     s_controls_reset <= s_game_reset or s_downloading;
     o_downloading <= s_downloading;
@@ -197,7 +217,7 @@ begin
             i_host_write => i_host_write,
             iu27_host_byte_address => iu27_host_byte_address,
             iu8_host_data => iu8_host_data,
-            o_host_wait => o_host_wait,
+            o_host_wait => s_load_wait,
             o_download_active => s_downloading,
             o_done => open,
             o_error => s_frontend_error,
@@ -216,6 +236,68 @@ begin
             ou8_ddr_byte_enables => ou8_ddr_byte_enables,
             o_ddr_write => o_ddr_write
         );
+    high_scores : entity work.rabbitpunch_hiscore_service
+        port map (
+            i_clk => i_clk,
+            i_initialize => i_initialize,
+            i_game_reset => s_game_reset or s_downloading,
+            i_osd_open => i_osd_open,
+            i_autosave => iu128_status(STATUS_HISCORE_AUTOSAVE_BIT),
+            i_download => i_host_download,
+            i_upload => i_host_upload,
+            iu16_file_index => iu16_host_index,
+            i_write => i_host_write,
+            iu27_byte_address => iu27_host_byte_address,
+            iu8_data => iu8_host_data,
+            ou8_data => ou8_host_upload_data,
+            o_wait => s_score_wait,
+            o_upload_request => o_host_upload_request,
+            o_enabled => s_score_enabled,
+            o_config_error => o_hiscore_config_error,
+            o_initialized => o_hiscore_initialized,
+            o_saved_valid => o_hiscore_saved_valid,
+            o_dirty => o_hiscore_dirty,
+            o_memory_initialize => s_score_initialize,
+            o_memory_access => s_score_access,
+            o_memory_valid => s_score_valid,
+            o_memory_write => s_score_write,
+            ou14_memory_address => su14_score_address,
+            ou8_memory_data => su8_score_write_data,
+            i_memory_ready => s_score_ready,
+            i_memory_response => s_score_response,
+            iu8_memory_data => su8_score_read_data
+        );
+    maintenance_clients : entity work.rabbitpunch_maintenance_clients
+        port map (
+            i_clk => i_clk,
+            i_initialize => s_controls_reset or i_initialize,
+            i_score_initialize => s_score_initialize,
+            i_external_access => i_maintenance_access,
+            i_external_valid => i_maintenance_valid,
+            i_external_write => i_maintenance_write,
+            iu14_external_address => iu14_maintenance_byte_address,
+            iu8_external_data => iu8_maintenance_data,
+            o_external_ready => o_maintenance_ready,
+            o_external_response => o_maintenance_response_valid,
+            ou8_external_data => ou8_maintenance_response_data,
+            i_score_access => s_score_access,
+            i_score_valid => s_score_valid,
+            i_score_write => s_score_write,
+            iu14_score_address => su14_score_address,
+            iu8_score_data => su8_score_write_data,
+            o_score_ready => s_score_ready,
+            o_score_response => s_score_response,
+            ou8_score_data => su8_score_read_data,
+            o_memory_initialize => s_memory_initialize,
+            o_memory_access => s_memory_access,
+            o_memory_valid => s_memory_valid,
+            o_memory_write => s_memory_write,
+            ou14_memory_address => su14_memory_address,
+            ou8_memory_data => su8_memory_write_data,
+            i_memory_ready => s_memory_ready,
+            i_memory_response => s_memory_response,
+            iu8_memory_data => su8_memory_read_data
+        );
     system : entity work.rabbitpunch_system
         generic map (sint_IMAGE_BYTES => sint_IMAGE_BYTES)
         port map (
@@ -224,14 +306,15 @@ begin
             i_game_reset => s_game_reset,
             i_pause => s_pause_request,
             o_paused => o_paused,
-            i_maintenance_access => i_maintenance_access,
-            i_maintenance_valid => i_maintenance_valid,
-            i_maintenance_write => i_maintenance_write,
-            iu14_maintenance_byte_address => iu14_maintenance_byte_address,
-            iu8_maintenance_data => iu8_maintenance_data,
-            o_maintenance_ready => o_maintenance_ready,
-            o_maintenance_response_valid => o_maintenance_response_valid,
-            ou8_maintenance_response_data => ou8_maintenance_response_data,
+            i_maintenance_initialize => s_memory_initialize,
+            i_maintenance_access => s_memory_access,
+            i_maintenance_valid => s_memory_valid,
+            i_maintenance_write => s_memory_write,
+            iu14_maintenance_byte_address => su14_memory_address,
+            iu8_maintenance_data => su8_memory_write_data,
+            o_maintenance_ready => s_memory_ready,
+            o_maintenance_response_valid => s_memory_response,
+            ou8_maintenance_response_data => su8_memory_read_data,
             o_maintenance_pause => o_maintenance_pause,
             i_vblank_start => i_vblank_start,
             i_half_frame => i_half_frame,

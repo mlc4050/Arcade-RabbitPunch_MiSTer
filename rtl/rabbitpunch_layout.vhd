@@ -20,7 +20,7 @@ package rabbitpunch_layout is
 
     -- MiSTer joystick slot numbers; directions occupy bits 0..3.
     constant JOY_MISSILE : natural := 4;
-    constant JOY_PUNCH : natural := 5;
+    constant JOY_SHOOT : natural := 5;
     constant JOY_START : natural := 10;
     constant JOY_COIN : natural := 11;
     constant JOY_PAUSE : natural := 12;

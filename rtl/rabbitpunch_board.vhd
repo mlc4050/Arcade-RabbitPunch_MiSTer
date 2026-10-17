@@ -16,6 +16,7 @@ entity rabbitpunch_board is
         i_reset : in std_logic;
         i_pause : in std_logic;
         o_paused : out std_logic;
+        i_maintenance_initialize : in std_logic := '0';
         i_maintenance_access : in std_logic := '0';
         i_maintenance_valid : in std_logic := '0';
         i_maintenance_write : in std_logic := '0';
@@ -128,7 +129,7 @@ begin
     maintenance : entity work.rabbitpunch_maintenance
         port map (
             i_clk => i_clk,
-            i_initialize => i_initialize or i_reset,
+            i_initialize => i_initialize or i_reset or i_maintenance_initialize,
             i_access_requested => i_maintenance_access,
             o_pause => s_maintenance_pause,
             i_cpu_paused => s_cpu_paused and i_maintenance_permitted,

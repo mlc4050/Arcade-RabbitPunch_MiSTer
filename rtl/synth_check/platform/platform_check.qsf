@@ -101,6 +101,10 @@ set_global_assignment -name VHDL_FILE ../../rabbitpunch_inputs.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_pause.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_controls.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_config.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_hiscore.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_hiscore_config.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_hiscore_service.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_maintenance_clients.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_platform.vhd
 set_global_assignment -name VHDL_FILE platform_check.vhd
 set_global_assignment -name SDC_FILE platform_check.sdc
@@ -256,3 +260,12 @@ set_instance_assignment -name VIRTUAL_PIN ON -to o_maintenance_ready
 set_instance_assignment -name VIRTUAL_PIN ON -to o_maintenance_response_valid
 set_instance_assignment -name VIRTUAL_PIN ON -to ou8_maintenance_response_data[*]
 set_instance_assignment -name VIRTUAL_PIN ON -to o_maintenance_pause
+set_instance_assignment -name VIRTUAL_PIN ON -to i_host_upload
+set_instance_assignment -name VIRTUAL_PIN ON -to o_host_upload_request
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_host_upload_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_hiscore_enabled
+set_instance_assignment -name VIRTUAL_PIN ON -to o_hiscore_config_error
+set_instance_assignment -name VIRTUAL_PIN ON -to o_hiscore_initialized
+set_instance_assignment -name VIRTUAL_PIN ON -to o_hiscore_saved_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_hiscore_dirty
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_host_menu_mask[*]
