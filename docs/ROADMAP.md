@@ -51,11 +51,14 @@ and refresh cadence. ROM request mapping passes synthetic and controller/model
 integration tests. SDRAM implementation and synthesized command-model tests
 also pass, under explicitly synthetic external-pin timing assumptions. The
 complete renderer/shared SDRAM Rabbit Punch play1000 screenshot comparison
-passes with competing CPU ROM reads; a second-set replay is running. Its worst
+passes with competing CPU ROM reads; Rabio Lepus attract also passes. Its worst
 line is 3806 clocks, with physical raster deadlines still unresolved. A tiny
 24-byte read-only ROM cache passes directed and synthesized-netlist tests;
 the busy captured scene passes every cached RGB pixel and reduces the worst
-line from 3806 to 1939 clocks. The remaining five cached scenes run serially.
+line from 3806 to 1939 clocks. All six cached scenes now match 373248 RGB
+pixels; the largest line cost across those scenes is 2557 clocks (53.3 us at
+48 MHz). These are response-driven synthetic competing CPU ROM requests,
+not full executing gameplay or a proven physical line deadline.
 A connected production ROM subsystem with word loading and safe replacement
 image invalidation also passes implementation and synthesized-netlist checks.
 Executing Rabio Lepus matches its first 10000 MAME writes through that ROM path;
@@ -63,7 +66,9 @@ Rabbit Punch is still running. A connected logical board now joins CPU, I/O,
 IRQ and shared-RAM video; both games pass 1000-write comparisons while logical
 lines render concurrently. Tests explicitly seed native model RAM to MAME-style
 zeros and check black palette output/tags in this early prefix. This is separate
-from the captured-scene graphics proofs. Connected-board implementation is running.
+from the captured-scene graphics proofs. Connected-board implementation passes every timing corner at 48 MHz, with
+2962 ALMs, 112 M10K blocks, worst setup +6.808 ns and hold +0.115 ns under
+its documented logical-interface evaluation contract.
 No complete game is running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 

@@ -12,13 +12,14 @@ Level-1 IRQ/autovector handling passes a STOP/handler/RTE diagnostic through VHD
 The logical VHDL video pipeline matches six MAME frames through native line,
 bitmap and palette RAM, with direct HDL RGB comparison and standalone timing closure.
 Shared CPU/video BRAM now passes all six scenes, concurrent writes and live
-bitmap/palette updates, with all-corner implementation timing closure. A full
-Rabbit Punch scene also matches through the actual shared SDRAM controller/model
-with competing CPU ROM reads. SDRAM, ROM mapping and tiny ROM burst caches pass
+bitmap/palette updates, with all-corner implementation timing closure. All six captured
+scenes also match through the actual shared SDRAM controller/model and tiny
+ROM caches, with competing synthetic CPU ROM reads. SDRAM, ROM mapping and tiny ROM burst caches pass
 separate implementation and synthesized-netlist tests. Physical raster/PLL,
 full raster scheduling and real-pin SDRAM timing remain open. The connected
 logical CPU/I/O/video board passes 1000-write MAME comparisons for both games
-while lines render; its combined implementation check is running.
+while lines render; combined board placement/routing/timing passes at 48 MHz
+under documented evaluation-interface constraints.
 See [board integration](docs/BOARD_INTEGRATION.md) for exact test scope.
 No complete game or playable RBF.
 The inherited template demo remains connected.

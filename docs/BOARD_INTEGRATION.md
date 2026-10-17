@@ -65,3 +65,10 @@ The exact RAM-bit gate is 907936: native board/line RAM 868352, CPU micro ROM
 17 x 1024 and CPU nano ROM 66 x 336. The pinned 68-bit nano-ROM file has constant
 zero columns 2 and 23; Quartus explicitly removes those two columns. This is
 verified against the donor data and synthesis report, not missing CPU state.
+
+The completed logical-board fit uses 2962 ALMs, 3310 registers, 112 M10K blocks
+and 907936 RAM bits. Every reported corner passes: worst setup +6.808 ns,
+worst hold +0.115 ns, with zero illegal clocks/unconstrained paths in the six
+coverage categories. Report: reference/board_synth.json. The two-game 1000-write
+concurrent-video proof is reference/board_sdram_boot_smoke_checks.json; the
+10000-write extension is still running.

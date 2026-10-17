@@ -89,9 +89,9 @@ streaming latency and reset draining. The Rabbit Punch play1000 replay passes ev
 live bitmap/palette updates, tags and fixed pixel output latency also pass.
 The worst line is 3806 clocks (about 79.3 us at 48 MHz). This is throughput
 measurement under synthetic traffic, not an established physical deadline.
-reference/video_sdram_checks.json currently contains this one completed capture;
-it must not be presented as all six shared-SDRAM scenes. A Rabio Lepus replay
-is running separately.
+reference/video_sdram_checks.json contains Rabbit Punch play1000 and Rabio
+Lepus attract: exactly two uncached captures. The cached regression below
+contains all six captures.
 
 
 The ROM address/lane adapter also passes standalone Quartus implementation and
@@ -117,8 +117,8 @@ The cache's isolated implementation and synthesized functional netlist also
 pass, including mixed hits/misses on independent clients. It uses 441 ALMs,
 577 registers and no M10K blocks under the documented synthetic tester contract.
 Exact reports: reference/rom_cache_synth.json and rom_cache_netlist_checks.json.
-The cached full-RGB comparison is next. A separate cached bench preserves the
-completed uncached timing baseline.
+A separate cached bench preserves the completed uncached timing baseline.
+All six cached full-RGB comparisons pass; exact measurements appear below.
 
 
 ## Connected ROM subsystem
@@ -136,8 +136,8 @@ images and 42 simultaneous requester replies. It checks partial-byte loading,
 CPU byte order, both tile banks, adjacent words hitting one cached burst,
 loader-response isolation and replacement-image invalidation of all three warm
 caches. Ten physical read bursts serve the checks. The completed report is
-reference/rom_subsystem_checks.json. Its production-top implementation/netlist
-verification is next; this test does not establish electrical pin timing.
+reference/rom_subsystem_checks.json. Its production-top implementation and functional-netlist checks also pass;
+these tests do not establish electrical pin timing.
 
 Uncached full-pixel SDRAM proof now includes both Rabbit Punch play1000 and
 Rabio Lepus attract, 124416 matching RGB pixels total. The report has exactly
@@ -158,5 +158,10 @@ Worst line cost drops from 3806 uncached to 1939 cached clocks (about 79.3 to
 checked ROM reads and 72199 work-RAM writes; 8956 physical SDRAM READ commands
 are counted. CPU traffic is response-driven, so the read counts differ between
 runs; this is an identical captured image and generator, not an identical
-bus-request trace. No complete physical scanline deadline is claimed. The
-cached report currently contains this one scene; the remaining five run serially.
+bus-request trace. No complete physical scanline deadline is claimed. All six cached scenes now pass, totaling 373248 identical RGB pixels. Their
+maximum line costs are 1722/2557 clocks for Rabio Lepus/Rabbit Punch attract,
+2007/1939 for play1000, and 2375/2256 for play1800. The largest measured cost
+is 2557 clocks, about 53.3 us at 48 MHz. The source, fixture, image and transcript
+hashes are verified in reference/video_sdram_cache_checks.json. No physical
+raster deadline or continuously executing gameplay claim follows from this
+captured-state replay.
