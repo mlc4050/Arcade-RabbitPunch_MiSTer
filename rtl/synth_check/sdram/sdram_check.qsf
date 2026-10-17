@@ -1,0 +1,70 @@
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY sdram_check
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sdram_types.vhd
+set_global_assignment -name SYSTEMVERILOG_FILE ../../memory/sdram/sdram.sv
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sdram.vhd
+set_global_assignment -name VHDL_FILE sdram_check.vhd
+set_global_assignment -name SDC_FILE sdram_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_location_assignment PIN_Y11 -to ou13_sdram_address[0]
+set_location_assignment PIN_AA26 -to ou13_sdram_address[1]
+set_location_assignment PIN_AA13 -to ou13_sdram_address[2]
+set_location_assignment PIN_AA11 -to ou13_sdram_address[3]
+set_location_assignment PIN_W11 -to ou13_sdram_address[4]
+set_location_assignment PIN_Y19 -to ou13_sdram_address[5]
+set_location_assignment PIN_AB23 -to ou13_sdram_address[6]
+set_location_assignment PIN_AC23 -to ou13_sdram_address[7]
+set_location_assignment PIN_AC22 -to ou13_sdram_address[8]
+set_location_assignment PIN_C12 -to ou13_sdram_address[9]
+set_location_assignment PIN_AB26 -to ou13_sdram_address[10]
+set_location_assignment PIN_AD17 -to ou13_sdram_address[11]
+set_location_assignment PIN_D12 -to ou13_sdram_address[12]
+set_location_assignment PIN_Y17 -to ou2_sdram_bank[0]
+set_location_assignment PIN_AB25 -to ou2_sdram_bank[1]
+set_location_assignment PIN_V12 -to iou16_sdram_data[0]
+set_location_assignment PIN_E8 -to iou16_sdram_data[1]
+set_location_assignment PIN_D11 -to iou16_sdram_data[2]
+set_location_assignment PIN_W12 -to iou16_sdram_data[3]
+set_location_assignment PIN_AH13 -to iou16_sdram_data[4]
+set_location_assignment PIN_D8 -to iou16_sdram_data[5]
+set_location_assignment PIN_AH14 -to iou16_sdram_data[6]
+set_location_assignment PIN_AF7 -to iou16_sdram_data[7]
+set_location_assignment PIN_AE24 -to iou16_sdram_data[8]
+set_location_assignment PIN_AD23 -to iou16_sdram_data[9]
+set_location_assignment PIN_AE6 -to iou16_sdram_data[10]
+set_location_assignment PIN_AE23 -to iou16_sdram_data[11]
+set_location_assignment PIN_AG14 -to iou16_sdram_data[12]
+set_location_assignment PIN_AD5 -to iou16_sdram_data[13]
+set_location_assignment PIN_AF4 -to iou16_sdram_data[14]
+set_location_assignment PIN_AH3 -to iou16_sdram_data[15]
+set_location_assignment PIN_AG13 -to ou2_sdram_byte_mask[0]
+set_location_assignment PIN_AF13 -to ou2_sdram_byte_mask[1]
+set_location_assignment PIN_AG10 -to o_sdram_clock_enable
+set_location_assignment PIN_AA19 -to o_sdram_write_n
+set_location_assignment PIN_AA18 -to o_sdram_column_n
+set_location_assignment PIN_Y18 -to o_sdram_chip_select
+set_location_assignment PIN_W14 -to o_sdram_row_n
+set_instance_assignment -name VIRTUAL_PIN ON -to i_initialize
+set_instance_assignment -name VIRTUAL_PIN ON -to iu3_requests[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou3_ready[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu3_writes[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu81_byte_addresses[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu48_write_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu6_byte_enables[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou3_response_valid[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou192_read_data[*]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to iou16_sdram_data[*]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ou13_sdram_address[*]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ou2_sdram_bank[*]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ou2_sdram_byte_mask[*]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to o_sdram_chip_select
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to o_sdram_write_n
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to o_sdram_row_n
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to o_sdram_column_n
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to o_sdram_clock_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to o_initialized

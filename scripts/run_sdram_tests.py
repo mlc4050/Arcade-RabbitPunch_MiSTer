@@ -6,7 +6,7 @@ from run_baselines import run_case
 
 root = core_root()
 sources = ["rtl/rabbitpunch_sdram_types.vhd", "rtl/memory/sdram/sdram.sv",
-           "rtl/rabbitpunch_sdram.vhd", "sim/vendor/sdram/sdram_chip_model_wide.sv",
+           "rtl/rabbitpunch_sdram.vhd", "rtl/synth_check/sdram/sdram_check.vhd", "sim/vendor/sdram/sdram_chip_model_wide.sv",
            "sim/memory/sdram_tb.vhd"]
 manifest = json.loads((root / "docs/reference/vendor_manifest.json").read_text())
 for row in manifest["files"]:

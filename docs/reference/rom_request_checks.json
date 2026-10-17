@@ -1,0 +1,34 @@
+[
+  {
+    "case": "rom_requests",
+    "pass_marker": "ROM_REQUESTS_PASS",
+    "log": "debug\\baselines\\rom_requests\\result.log",
+    "source_sha256": {
+      "rtl/rabbitpunch_layout.vhd": "a58ffaac82eee573a9925afacc8621f4b594a8818b56f924dbebb339ad04eac1",
+      "rtl/rabbitpunch_sdram_types.vhd": "ef3d7e0bcb2b6522984ab20ae9e4464625d7a810e76307142fd3ef0a08115480",
+      "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+      "rtl/rabbitpunch_sdram.vhd": "06a3659bbbab5dde9ca7986c292883cabb09f42342af71163d446076fd22b766",
+      "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
+      "rtl/rabbitpunch_rom_requests.vhd": "3a49b04bf3a3ac0981cc40dd1ba9b1b4e1790cd778b6c2d4e5de1c039863d4fa",
+      "sim/memory/rom_requests_tb.vhd": "6e20465d3c318192609a9723fa1ec1033b49905e7be89cd6f1b5a906204e620e"
+    },
+    "log_sha256": "74569cc92438d0ef2837d9ddf848ab6c91335518b05fd77d2a0562535517eca7",
+    "scope": "Synthetic byte-address-dependent data with delayed/backpressured burst clients; region offsets, banks, word lanes and CPU endian assembly; no analog timing or full-game proof"
+  },
+  {
+    "case": "rom_requests_pin",
+    "pass_marker": "ROM_REQUESTS_PASS",
+    "log": "debug\\baselines\\rom_requests_pin\\result.log",
+    "source_sha256": {
+      "rtl/rabbitpunch_layout.vhd": "a58ffaac82eee573a9925afacc8621f4b594a8818b56f924dbebb339ad04eac1",
+      "rtl/rabbitpunch_sdram_types.vhd": "ef3d7e0bcb2b6522984ab20ae9e4464625d7a810e76307142fd3ef0a08115480",
+      "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+      "rtl/rabbitpunch_sdram.vhd": "06a3659bbbab5dde9ca7986c292883cabb09f42342af71163d446076fd22b766",
+      "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
+      "rtl/rabbitpunch_rom_requests.vhd": "3a49b04bf3a3ac0981cc40dd1ba9b1b4e1790cd778b6c2d4e5de1c039863d4fa",
+      "sim/memory/rom_requests_tb.vhd": "6e20465d3c318192609a9723fa1ec1033b49905e7be89cd6f1b5a906204e620e"
+    },
+    "log_sha256": "721b5b282b9d20cf6b0e2431b6e41fe0af2b75b0756088ae0e3cb730a5d77845",
+    "scope": "Synthetic byte-address-dependent data with actual SDRAM controller and command model; region offsets, banks, word lanes and CPU endian assembly; no analog timing or full-game proof"
+  }
+]

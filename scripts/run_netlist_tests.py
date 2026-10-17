@@ -18,6 +18,7 @@ from run_baselines import run_case
 
 
 BLOCKS = {
+    "sdram": ("sdram_tb", "SDRAM_PASS", "sim/memory/sdram_tb.vhd"),
     "tiles": ("tile_layer_tb", "TILE_LAYER_PASS", "sim/video/tile_layer_tb.vhd"),
     "sprites": ("sprite_row_tb", "SPRITE_ROW_PASS", "sim/video/sprite_row_tb.vhd"),
 }
@@ -62,7 +63,11 @@ def main():
             source = root / "debug/baselines/video_sprite_row" / filename
             shutil.copyfile(source, case_directory / filename)
             vectors[filename] = hashlib.sha256(source.read_bytes()).hexdigest()
-    sources = [str(netlist.relative_to(root)).replace("\\", "/"), "sim/video/tile_test_support.vhd", bench]
+    support = "rtl/rabbitpunch_sdram_types.vhd" if args.block == "sdram" else "sim/video/tile_test_support.vhd"
+    sources = [str(netlist.relative_to(root)).replace("\\", "/"), support]
+    if args.block == "sdram":
+        sources.append("sim/vendor/sdram/sdram_chip_model_wide.sv")
+    sources.append(bench)
     libraries = [item for library in ("cyclonev_ver", "altera_ver", "altera_lnsim_ver", "lpm_ver", "sgate_ver")
                  for item in ("-L", library)]
     check = run_case(f"gate_{args.block}", sources, top, "60 ms", marker,

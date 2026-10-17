@@ -96,3 +96,9 @@ initialization wait state/counter. The imported controller owns open command,
 refresh and burst-capture state. It remains independent of game reset. The
 current capture boundary must drain all clients; no save/restore interface is
 claimed. ROM contents remain recreated from the MRA rather than saved.
+
+
+The read-only ROM requester also holds one pending/queued flag per client,
+aligned burst addresses, byte-lane offsets and response registers. It has no
+cache and no game-reset input; drain it together with the SDRAM adapter before
+capturing state or restarting a transaction stream.

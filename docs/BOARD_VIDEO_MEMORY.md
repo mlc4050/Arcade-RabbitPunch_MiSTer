@@ -60,8 +60,9 @@ contains a directed live update: CPU writes force bitmap pen 1 at X=8/Y=0 and
 set its palette entry green; the next requested pixel must be 00FF00. Its original
 62208 screenshot pixels are recorded before this modification. Reset is tested
 with an external graphics ROM response pending and a pixel in flight. The initial
-shared-RAM title replay passes; the complete six-scene/live-update regression
-and combined board/video implementation/timing check are in progress.
+shared-RAM six-scene regression now passes: 373248 RGB pixels match MAME,
+with live updates/reset recovery and competing work-RAM writes. The registered
+combined implementation/timing evaluation also passes all corners.
 
 The isolated board_video target requires 868352 RAM bits: the five source banks
 plus four line banks, with no duplicate source memory. This is still a virtual-I/O
@@ -142,3 +143,10 @@ corner: worst setup +7.070 ns, worst hold +0.131 ns. Resource use is 817 ALMs,
 1440 registers including the evaluation boundary, and 106 M10K blocks with
 868352 used RAM bits. All six timing-coverage categories are zero. Exact built
 commit, seed and log hash are in reference/board_video_synth.json.
+
+
+All six completed shared-RAM replay reports have been checked against current
+compiled source hashes, transcript hashes and MAME/HDL image bytes. Each reports
+62208 matching RGB pixels and more than 1000 concurrent work-RAM writes. The
+initial parallel timeout is retained as failed-run history; the completed serial
+runs are the current evidence in reference/video_pipeline_checks.json.

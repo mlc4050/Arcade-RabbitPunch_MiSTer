@@ -41,11 +41,15 @@ The shared native RAM backend passes 849 directed CPU/video/inspection checks.
 Both 10000-write real-ROM CPU comparisons pass again after that refactor. A
 Quartus mixed-language port-index mismatch was found and corrected without
 editing JTFRAME: corrected tile and sprite synthesized netlists pass the existing
-VHDL functional tests. The focused Rabbit Punch play1000 shared-RAM scene now
-matches every RGB pixel and passes a live CPU bitmap/palette update. Remaining
-scene replays run serially; the corrected combined implementation is retrying
-placement after a small virtual-reset input hold failure. No complete game is
-integrated/running yet.
+VHDL functional tests. All six shared-RAM scenes now match all 373248 RGB
+pixels, with live CPU bitmap/palette updates, concurrent work-RAM writes and
+reset recovery. A registered evaluation boundary resolves the artificial direct
+virtual-input timing contract; the combined fit passes every corner at 48 MHz,
+with 106 M10K blocks. An unchanged configurable SDRAM controller and VHDL pulse
+adapter pass command-model tests, including byte masks, both chips, burst lanes
+and refresh cadence. ROM request mapping passes synthetic and controller/model
+integration tests. SDRAM synthesis/netlist checks and connecting the complete
+renderer to the shared ROM transport are next. No complete game is running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
 ## Goal and scope

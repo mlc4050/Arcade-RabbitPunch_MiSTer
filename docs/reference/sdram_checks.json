@@ -6,9 +6,10 @@
     "rtl/rabbitpunch_sdram_types.vhd": "ef3d7e0bcb2b6522984ab20ae9e4464625d7a810e76307142fd3ef0a08115480",
     "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
     "rtl/rabbitpunch_sdram.vhd": "06a3659bbbab5dde9ca7986c292883cabb09f42342af71163d446076fd22b766",
+    "rtl/synth_check/sdram/sdram_check.vhd": "5f4dd509dfde1ff681786d9407d47f3018e22a6a9ccb7d54651b02db88dbec68",
     "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
-    "sim/memory/sdram_tb.vhd": "08506069154c7464d1767a672a9b04ad9de372ae0cb335ed60855f1d64f3360d"
+    "sim/memory/sdram_tb.vhd": "c50e5bd7de851d1e62e9075a4ab4340cf3a9d61d6ef4880317c455deec6d2efc"
   },
-  "log_sha256": "9b716e3cbd1d5b0d134ffc48a2c738cbfc25f0e49e3f8109b2aca65d5e3d6fdf",
+  "log_sha256": "73c1efec37aed3eece74af0f3bda73ceddde0586916ad9efcb7232e44813d74c",
   "scope": "Pin-command functional model, two chips, three clients, burst order, byte masks and refresh cadence at 48 MHz; no analog/board timing proof"
 }

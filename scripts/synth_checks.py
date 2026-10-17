@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "sdram": (0, ("rabbitpunch_sdram", "sdram:memory_controller")),
     "memory": (835584, ("bitmap", "sprites", "tiles", "palette", "work_ram")),
     "tiles": (0, ("rabbitpunch_tile_lookup", "rabbitpunch_tile_row", "jtframe_draw")),
     "sprites": (0, ("rabbitpunch_sprite_row", "jtframe_draw")),
@@ -96,6 +97,9 @@ def run_check(stage, quartus_bin, stamp, name):
              "all DUT paths remain single-cycle timed, no false/multicycle paths; "
              "not final MiSTer pin/PLL/SDRAM timing") if name == "board_video" else (
              f"Standalone {name} block with virtual I/O; not a complete core or hardware release")
+    if name == "sdram":
+        scope = ("SDRAM adapter/controller with registered synthetic tester and hypothetical half-period DQ input timing; "
+                 "physical pin placement checked, no final PLL/SDRAM clock/PCB electrical timing proof")
     report={"commit":stamp.split()[0],"device":"5CSEBA6U23I7","project":project_name,
             "constraint_mhz":48,"seed":int(seed_match[1]),"memory_bits":expected_bits,"timings":timings,
             "timing_coverage":coverage,

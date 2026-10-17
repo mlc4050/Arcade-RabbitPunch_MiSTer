@@ -8,6 +8,30 @@ entity sdram_tb is
 end entity;
 
 architecture test of sdram_tb is
+    component sdram_check is
+        port (
+            i_clk : in std_logic;
+            i_initialize : in std_logic;
+            o_initialized : out std_logic;
+            iu3_requests : in unsigned(2 downto 0);
+            ou3_ready : out unsigned(2 downto 0);
+            iu3_writes : in unsigned(2 downto 0);
+            iu81_byte_addresses : in unsigned(80 downto 0);
+            iu48_write_data : in unsigned(47 downto 0);
+            iu6_byte_enables : in unsigned(5 downto 0);
+            ou3_response_valid : out unsigned(2 downto 0);
+            ou192_read_data : out unsigned(191 downto 0);
+            iou16_sdram_data : inout unsigned(15 downto 0);
+            ou13_sdram_address : out unsigned(12 downto 0);
+            ou2_sdram_bank : out unsigned(1 downto 0);
+            ou2_sdram_byte_mask : out unsigned(1 downto 0);
+            o_sdram_chip_select : out std_logic;
+            o_sdram_write_n : out std_logic;
+            o_sdram_row_n : out std_logic;
+            o_sdram_column_n : out std_logic;
+            o_sdram_clock_enable : out std_logic
+        );
+    end component;
     component sdram_chip_model_wide is
         port (
             clk : in std_logic;
@@ -29,6 +53,7 @@ architecture test of sdram_tb is
     signal su16_data : t_sdram_write_data := (others => (others => '0'));
     signal su2_bytes : t_sdram_byte_enables := (others => "11");
     signal su64_data : t_sdram_read_data;
+    signal su192_data : unsigned(191 downto 0);
     signal su16_dq : unsigned(15 downto 0);
     signal su13_address : unsigned(12 downto 0);
     signal su2_bank, su2_mask : unsigned(1 downto 0);
@@ -41,7 +66,7 @@ architecture test of sdram_tb is
     type t_expected is array (0 to BASES'length * 4 - 1) of unsigned(15 downto 0);
 begin
     s_clk <= not s_clk after 10417 ps;
-    dut : entity work.rabbitpunch_sdram
+    dut : sdram_check
         port map (
             i_clk => s_clk,
             i_initialize => s_initialize,
@@ -49,11 +74,11 @@ begin
             iu3_requests => su3_requests,
             ou3_ready => su3_ready,
             iu3_writes => su3_writes,
-            iu27_byte_addresses => su27_addresses,
-            iu16_write_data => su16_data,
-            iu2_byte_enables => su2_bytes,
+            iu81_byte_addresses => su27_addresses(2) & su27_addresses(1) & su27_addresses(0),
+            iu48_write_data => su16_data(2) & su16_data(1) & su16_data(0),
+            iu6_byte_enables => su2_bytes(2) & su2_bytes(1) & su2_bytes(0),
             ou3_response_valid => su3_valid,
-            ou64_read_data => su64_data,
+            ou192_read_data => su192_data,
             iou16_sdram_data => su16_dq,
             ou13_sdram_address => su13_address,
             ou2_sdram_bank => su2_bank,
@@ -64,6 +89,9 @@ begin
             o_sdram_column_n => s_column_n,
             o_sdram_clock_enable => s_cke
         );
+    lanes : for gint_client in 0 to 2 generate
+        su64_data(gint_client) <= su192_data(gint_client * 64 + 63 downto gint_client * 64);
+    end generate;
     chip : sdram_chip_model_wide
         port map (
             clk => s_clk,
