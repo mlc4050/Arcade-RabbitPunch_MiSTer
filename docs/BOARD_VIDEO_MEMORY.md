@@ -85,3 +85,9 @@ only the exported netlist plus test support. The corrected tile netlist passes a
 netlist checks and full shared-RAM RGB replays remain pending at this checkpoint. Earlier RTL pixel
 comparisons remain valid simulation evidence; passing timing alone did not
 establish graphics-address functional equivalence in synthesis.
+
+The corrected combined board/video seed-2 implementation was rejected for
+-0.045 ns hold slack from the virtual i_reset input to sprite-line view-valid
+state at the slow 1100 mV/-40 C corner. Setup passes. The evaluation project
+now pins seed 3 for a fresh placement, with the same RTL and constraints.
+The timing gates remain strict; a successful fit must pass every corner.
