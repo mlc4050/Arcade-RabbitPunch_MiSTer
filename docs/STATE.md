@@ -170,3 +170,10 @@ VHDL standalone wrapper. It has no production state capture/restore interface.
 The native 17-bit ROM address and 9-bit raw signed PCM are exposed; bank and
 board-control state are not implemented yet. Native/wrapped synthetic tests
 exercise playback and reset, not savestates or game audio.
+
+
+ADPCM board-control adapter owns one bank bit, physical reset state, latched
+8-bit command, reset-release readiness and idle/waiting/start FSM. Its bank is
+part of every exposed 18-bit sample ROM address. A future frontend must reject
+stale responses after address/bank changes; no frontend cache or queue is added
+by this adapter. No restore interface is implemented yet.

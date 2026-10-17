@@ -136,6 +136,28 @@ PCM presence and reset mute at a nominal 48 MHz/75 = 640 kHz enable. Evidence:
 reference/jt7759_checks.json. The ROM-valid response is qualified by request and
 address. The descriptive wrapper exposes active-high start/busy and raw signed
 PCM bits on unsigned ports. This is not a decoded-value/MAME waveform, bank
-switching, shared SDRAM, Quartus implementation or audible game proof. The board
-adapter still must translate F400 bit 7 active-low reset and bit 0 ROM bank,
-then latch F600 data and produce the chip's start edge.
+switching, shared SDRAM, Quartus implementation or audible game proof. The board adapter below now implements those control signals; the chip is
+still separate from the logical sound board and shared ROM scheduler.
+
+
+## Board sample control and banking
+
+rabbitpunch_adpcm translates F400 bit 7 into active-low physical reset and bit 0
+into the extra ROM bank. F600 latches the command before a one-clock start
+pulse. A command immediately after reset release waits for the chip's first
+control enable, so its edge cannot be lost while the native controller leaves
+reset. Commands during asserted control reset are ignored. A command while
+busy still reaches the chip, which owns whether that start is accepted.
+
+The output is an 18-bit byte address within the 256 KiB sample region, formed
+from bank plus the native 17-bit address. The external ROM frontend must qualify
+valid data against that full current address; an old bank's pending response
+must never assert valid for the new address. This module supplies no transport
+queue/cache or shared SDRAM arbitration. PCM retains raw 9-bit signed encoding.
+
+adpcm_tb passes three complete synthetic samples across both banks, immediate
+commands after reset release, an ignored command during reset, and reset abort
+after actual nonzero PCM decoding. ROM replies are delayed 23 system clocks
+and address-qualified. Evidence: reference/adpcm_checks.json. These are board
+control tests, not real game samples, PCM-value comparison or audio mixing.
+A standalone implementation target is prepared; results are pending.
