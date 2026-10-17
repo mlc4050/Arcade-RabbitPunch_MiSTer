@@ -1,66 +1,66 @@
 {
-  "commit": "8e608a33b17120a2131a1cf42f4e48e58d7539e0",
+  "commit": "82a14bc757ad15338c98af7afc437458641a651b",
   "device": "5CSEBA6U23I7",
   "project": "platform_check",
   "constraint_mhz": 48,
   "seed": 3,
-  "memory_bits": 927339,
+  "memory_bits": 929387,
   "timings": [
     {
       "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 3.845
+      "slack_ns": 4.161
     },
     {
       "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.254
+      "slack_ns": 0.238
     },
     {
       "type": "Slow 1100mV 100C Model Recovery 'clk_sys'",
-      "slack_ns": 10.464
+      "slack_ns": 10.959
     },
     {
       "type": "Slow 1100mV 100C Model Removal 'clk_sys'",
-      "slack_ns": 1.156
+      "slack_ns": 1.329
     },
     {
       "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.059
+      "slack_ns": 9.055
     },
     {
       "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 2.885
+      "slack_ns": 2.971
     },
     {
       "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.242
+      "slack_ns": 0.188
     },
     {
       "type": "Slow 1100mV -40C Model Recovery 'clk_sys'",
-      "slack_ns": 10.774
+      "slack_ns": 11.272
     },
     {
       "type": "Slow 1100mV -40C Model Removal 'clk_sys'",
-      "slack_ns": 1.069
+      "slack_ns": 1.234
     },
     {
       "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 8.968
+      "slack_ns": 8.978
     },
     {
       "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 7.771
+      "slack_ns": 7.78
     },
     {
       "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.138
+      "slack_ns": 0.141
     },
     {
       "type": "Fast 1100mV 100C Model Recovery 'clk_sys'",
-      "slack_ns": 14.949
+      "slack_ns": 15.272
     },
     {
       "type": "Fast 1100mV 100C Model Removal 'clk_sys'",
-      "slack_ns": 0.581
+      "slack_ns": 0.676
     },
     {
       "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
@@ -68,19 +68,19 @@
     },
     {
       "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 8.022
+      "slack_ns": 8.015
     },
     {
       "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.082
+      "slack_ns": 0.095
     },
     {
       "type": "Fast 1100mV -40C Model Recovery 'clk_sys'",
-      "slack_ns": 15.91
+      "slack_ns": 16.169
     },
     {
       "type": "Fast 1100mV -40C Model Removal 'clk_sys'",
-      "slack_ns": 0.494
+      "slack_ns": 0.574
     },
     {
       "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
@@ -114,19 +114,19 @@
     }
   },
   "fit_summary": [
-    "Fitter Status : Successful - Sat Oct 17 08:39:08 2026",
+    "Fitter Status : Successful - Sat Oct 17 12:34:50 2026",
     "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
     "Revision Name : platform_check",
     "Top-level Entity Name : platform_check",
     "Family : Cyclone V",
     "Device : 5CSEBA6U23I7",
     "Timing Models : Final",
-    "Logic utilization (in ALMs) : 6,431 / 41,910 ( 15 % )",
-    "Total registers : 7832",
+    "Logic utilization (in ALMs) : 6,628 / 41,910 ( 16 % )",
+    "Total registers : 8166",
     "Total pins : 39 / 314 ( 12 % )",
-    "Total virtual pins : 927",
-    "Total block memory bits : 927,339 / 5,662,720 ( 16 % )",
-    "Total RAM Blocks : 123 / 553 ( 22 % )",
+    "Total virtual pins : 958",
+    "Total block memory bits : 929,387 / 5,662,720 ( 16 % )",
+    "Total RAM Blocks : 124 / 553 ( 22 % )",
     "Total DSP Blocks : 1 / 112 ( < 1 % )",
     "Total HSSI RX PCSs : 0",
     "Total HSSI PMA RX Deserializers : 0",
@@ -135,7 +135,7 @@
     "Total PLLs : 0 / 6 ( 0 % )",
     "Total DLLs : 0 / 4 ( 0 % )"
   ],
-  "log_sha256": "d4b30c62075673ca748be79a3d3ed06bc89ed8d7761923005302ae36f6ed5a40",
+  "log_sha256": "300d04717bd1e10717893f22b53afe9f72de822371a403351ff8707830b36504",
   "scope": "Logical controls/pause, host-signal DDR/byte load frontend and complete CPU/audio/video/SDRAM system; registered logical test boundaries, direct SDRAM pins and hypothetical half-period external tester; no native HPS wrapper/DDR ownership mux, final PLL/raster or PCB electrical timing proof",
   "sound_memory": [
     {
