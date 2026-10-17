@@ -185,5 +185,38 @@ starts sample 0 through F600. Both banks produce complete nonzero PCM playback.
 CPU pause drains and permits RAM inspection while both sample playback and YM
 sample cadence continue. YM busy status readback and IM1/RETI also pass. Both
 ROM backends have delayed replies; this is not shared SDRAM or real game audio.
-Evidence: reference/audio_checks.json. A full logical-audio implementation
-target is prepared; results are pending.
+Evidence: reference/audio_checks.json. Combined logical-audio implementation passes all reported 48 MHz timing
+corners with worst setup +2.371 ns / hold +0.105 ns. It preserves all eight
+sound RAM geometries and 19403 RAM bits (reference/audio_synth.json). The
+connected test also passes the synthesized functional netlist, without DUT
+RTL in that simulation (reference/audio_netlist_checks.json).
+
+
+## Sound ROM transport and shared controller diagnostic
+
+rabbitpunch_audio_roms maps sound-program bytes at ROM_AUDIOCPU_BASE and sample
+bytes at ROM_UPD_BASE through the existing burst cache, using two eight-byte
+entries. Program requests use ready plus one reply pulse; sample valid is
+qualified by the full current 18-bit address. A bank change during an outstanding
+miss cannot expose its old bank's reply. Withdrawing a sample request drains
+the old miss; an image change requires quiescent clients and explicit invalidation.
+All eight byte lanes, region limits, simultaneous misses and invalidation pass
+(reference/audio_roms_checks.json).
+
+rabbitpunch_audio_rom_transport places those two cache clients beside a main
+CPU burst client in rabbitpunch_read_arbiter. The resulting read port is intended
+for the controller's physical port 2; sprite/tile ports remain separate and retain
+priority. This transport adds no pixel or frame storage. Its standalone
+implementation check is prepared; results are pending.
+
+audio_sdram_tb now runs the complete audio subsystem and transport through the
+unchanged SDRAM controller and chip-command model. A directly preloaded synthetic
+image contains the Z80 program and two sample banks. Continuous synthetic main
+bursts share port 2; independently paced synthetic reads use high-priority ports
+0/1. Both CPU-commanded sample banks play and pause/IRQ/YM checks pass, alongside
+2511 checked main bursts and 696 checked priority bursts. Longest measured
+program/sample byte replies are 50/30 system clocks (1.04/0.625 us at nominal
+48 MHz). Evidence: reference/audio_sdram_checks.json. These traffic generators
+are not the executing main CPU or captured video renderer and do not establish
+worst-case video deadlines, real game audio or physical SDRAM timing. No ROM
+loader is exercised in this directly preloaded diagnostic.

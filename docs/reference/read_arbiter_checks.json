@@ -1,0 +1,12 @@
+{
+  "case": "read_arbiter",
+  "pass_marker": "READ_ARBITER_PASS",
+  "log": "debug\\baselines\\read_arbiter\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_sdram_types.vhd": "ef3d7e0bcb2b6522984ab20ae9e4464625d7a810e76307142fd3ef0a08115480",
+    "rtl/rabbitpunch_read_arbiter.vhd": "c7855072a428a83ac9c2ac171f05fc54657f87d1bb0adb14de01e926af4b6852",
+    "sim/memory/read_arbiter_tb.vhd": "f6528bb3841b2788b41dfb76ccb2d6cd027785f64513b0a51b03e72c2a1cf468"
+  },
+  "log_sha256": "c692b81887b1d1f16f2cafab8acf674c05cd2503ef5016dbdada14330307b1d9",
+  "scope": "Three queued read-only burst clients: simultaneous acceptance, held ownership under backend backpressure, variable response delay, round-robin fairness, continuous client credit recycling, disabled acceptance with existing requests drained; synthetic backend, no SDRAM/video/audio integration"
+}

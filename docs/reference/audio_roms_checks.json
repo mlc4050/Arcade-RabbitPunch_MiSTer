@@ -1,0 +1,14 @@
+{
+  "case": "audio_roms",
+  "pass_marker": "AUDIO_ROMS_PASS",
+  "log": "debug\\baselines\\audio_roms\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_layout.vhd": "a58ffaac82eee573a9925afacc8621f4b594a8818b56f924dbebb339ad04eac1",
+    "rtl/rabbitpunch_sdram_types.vhd": "ef3d7e0bcb2b6522984ab20ae9e4464625d7a810e76307142fd3ef0a08115480",
+    "rtl/rabbitpunch_rom_cache.vhd": "de28c8c49b0f691edf035d988c973414cfa9b03af92f0f3141c4a7c6279f279c",
+    "rtl/rabbitpunch_audio_roms.vhd": "5b5ae1bcc87e47672a65f0719cb52da1f1f7e5832112d6318118b349a4a37c2c",
+    "sim/memory/audio_roms_tb.vhd": "ae601e2d79ba10939c325361291df1704837a01f903d08c3e7002f9391149575"
+  },
+  "log_sha256": "875baa71826627630269ff676cc7fac9272fa06e1fb3f23cb08603fb828e0932",
+  "scope": "Sound CPU and sample byte frontends around existing burst caches: all eight lanes, exact image-region/bank boundaries, concurrent misses, full-address rejection of stale bank reply, withdrawn request drain and new-image invalidation; synthetic independent burst backends, no physical SDRAM arbitration or game playback"
+}

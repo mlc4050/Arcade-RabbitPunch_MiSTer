@@ -1,0 +1,14 @@
+{
+  "case": "gate_audio",
+  "pass_marker": "AUDIO_PASS",
+  "log": "debug\\baselines\\gate_audio\\result.log",
+  "commit": "1bf439ea5c8c27a2062cc4ccce80435b66ab34f1",
+  "vectors_sha256": {},
+  "netlist_sha256": "cf727bb768afa96c753525b7b3bd7847bc513f63c3eca066dd2ea815d5116a1c",
+  "source_sha256": {
+    "debug/netlists/audio_1bf439e/audio_check.vo": "cf727bb768afa96c753525b7b3bd7847bc513f63c3eca066dd2ea815d5116a1c",
+    "sim/sound/audio_netlist_tb.vhd": "a1a7751c4aef624c970c02808b97c85dc4f7aac7b1bb24d72ab4e29a6df3c8ce"
+  },
+  "log_sha256": "b841e0098c4565da05e4c39bd47faaf951175af77d4e953f693bdee13ec3950b",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
+}

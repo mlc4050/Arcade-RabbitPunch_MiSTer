@@ -183,3 +183,19 @@ rabbitpunch_audio adds no storage: it connects sound_board's ADPCM strobes/data
 to the sample controller. Program/sample transport, main command ownership and
 PCM mixing remain external. Pause drains the sound CPU while both chips keep
 running; this is a logical CPU-pause contract, not complete-system savestates.
+
+
+Prepared read arbiter owns three pending credits, three latched 27-bit aligned
+addresses, selected/active owner, round-robin next index and three returned
+64-bit data registers. Idle means no backend request remains outstanding;
+parent clients must also consume visible replies before image invalidation.
+There is no reset cancellation or new RAM. The arbiter is not wired into the
+production ROM subsystem yet.
+
+
+Audio ROM frontend state: independent program/sample request FSMs, burst byte
+offsets, pending sample address and one returned sample byte/tag. Existing
+burst-cache instances retain 16 bytes across game reset. Invalidate after both
+clients and shared-read queue drain, before changing images. The sample output
+valid compares the complete current banked address, so a stale pending reply
+cannot escape after a bank change. No production reset cancels an accepted read.

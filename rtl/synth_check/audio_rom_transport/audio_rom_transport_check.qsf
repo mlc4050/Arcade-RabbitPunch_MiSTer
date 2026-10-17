@@ -1,0 +1,37 @@
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY audio_rom_transport_check
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_layout.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sdram_types.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_rom_cache.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_read_arbiter.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_audio_roms.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_audio_rom_transport.vhd
+set_global_assignment -name VHDL_FILE audio_rom_transport_check.vhd
+set_global_assignment -name SDC_FILE audio_rom_transport_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_invalidate
+set_instance_assignment -name VIRTUAL_PIN ON -to o_idle
+set_instance_assignment -name VIRTUAL_PIN ON -to i_program_request
+set_instance_assignment -name VIRTUAL_PIN ON -to o_program_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_program_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_program_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_program_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_sample_request
+set_instance_assignment -name VIRTUAL_PIN ON -to iu18_sample_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_sample_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_sample_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_main_request
+set_instance_assignment -name VIRTUAL_PIN ON -to o_main_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to iu27_main_byte_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_main_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to ou64_main_read_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_backend_request
+set_instance_assignment -name VIRTUAL_PIN ON -to ou27_backend_byte_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_backend_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to i_backend_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to iu64_backend_read_data[*]

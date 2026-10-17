@@ -165,3 +165,25 @@ is 2557 clocks, about 53.3 us at 48 MHz. The source, fixture, image and transcri
 hashes are verified in reference/video_sdram_cache_checks.json. No physical
 raster deadline or continuously executing gameplay claim follows from this
 captured-state replay.
+
+
+## Queued read sharing, prepared for sound
+
+rabbitpunch_read_arbiter is a separately tested three-client, one-backend
+read-only burst queue. It is not connected to rabbitpunch_roms yet. Each client
+has one pending credit and a latched aligned byte address. Backend responses
+are returned only to the saved owner. Round-robin selection advances after a
+reply; disabling new acceptance does not cancel or stop existing transactions.
+No clock or SDRAM frequency change is introduced.
+
+The intended clients are main CPU cached misses, audio CPU cached misses and
+sample-chip cached misses sharing the physical controller's low-priority read
+port. Sprite/tile ports retain their existing controller priority. The sound
+byte/cache frontends and physical connection remain to be implemented; no
+bandwidth/deadline result is implied by this queue test.
+
+read_arbiter_tb checks simultaneous acceptance, latched addresses despite input
+changes, independent ready credits, backend backpressure, variable reply delay,
+round-robin ordering, continuous credit recycling without starvation, and
+acceptance disable/re-enable with pending transactions drained. Evidence:
+reference/read_arbiter_checks.json. This is a synthetic backend proof only.
