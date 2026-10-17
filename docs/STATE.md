@@ -310,3 +310,13 @@ ready tag before the next physical row. Late completion cannot switch banks
 mid-line. Initialization must also reset/drain the connected renderer before
 new requests; no extra line/frame pixel storage or full savestate interface is
 added. These blocks are standalone until production timing integration lands.
+
+The continuous scanout wiring now connects the scheduler, beam and output adapter
+with the platform in rabbitpunch_machine. It adds no pixel storage. Game readiness
+loss clears scheduler ownership and sticky output diagnostics while beam counters,
+sync and clock-enable phases continue. The main CPU's optional external-phase mode
+stores its alternating phase only when enabled and not frozen; pause leaves the
+shared fractional enable generator running. The legacy internal divider remains
+available by default for independent logical tests. Full savestate capture must
+include both the shared enable phases and the CPU adapter phase, or cold-restart
+that timing boundary rather than independently restoring only one of them.

@@ -8,10 +8,12 @@ use work.rabbitpunch_layout.all;
 -- ROM transport. Cold I/O initialization is separate from CPU/video reset.
 entity rabbitpunch_board is
     generic (
-        sint_PHASE_DIVIDER : positive := 3
+        sint_PHASE_DIVIDER : positive := 3;
+        EXTERNAL_PHASE_ENABLE : boolean := false
     );
     port (
         i_clk : in std_logic;
+        i_main_phase_enable : in std_logic := '0';
         i_initialize : in std_logic;
         i_reset : in std_logic;
         i_pause : in std_logic;
@@ -179,9 +181,13 @@ begin
             iu16_backend_response_data => su16_response_data
         );
     cpu : entity work.rabbitpunch_maincpu
-        generic map (sint_PHASE_DIVIDER => sint_PHASE_DIVIDER)
+        generic map (
+            sint_PHASE_DIVIDER => sint_PHASE_DIVIDER,
+            EXTERNAL_PHASE_ENABLE => EXTERNAL_PHASE_ENABLE
+        )
         port map (
             i_clk => i_clk,
+            i_phase_enable => i_main_phase_enable,
             i_reset => i_reset,
             i_pause => i_pause or s_maintenance_pause,
             i_interrupt_level1 => s_irq_pending,

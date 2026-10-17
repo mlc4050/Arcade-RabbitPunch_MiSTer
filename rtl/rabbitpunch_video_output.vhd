@@ -14,6 +14,7 @@ entity rabbitpunch_video_output is
     port (
         i_clk : in std_logic;
         i_reset : in std_logic;
+        i_clear_underflow : in std_logic := '0';
         i_pixel_enable : in std_logic;
         i_active : in std_logic;
         i_hsync : in std_logic;
@@ -98,6 +99,9 @@ begin
                         s_underflow <= '1';
                     end if;
                 end if;
+            end if;
+            if (i_clear_underflow = '1') then
+                s_underflow <= '0';
             end if;
             if (i_reset = '1') then
                 su7_metadata <= (others => (others => '0'));

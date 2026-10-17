@@ -34,3 +34,9 @@ required vendor-type conversions stay inside that wrapper. Do not rename importe
 internal hierarchies or MiSTer sys sources for style cleanup.
 All generated work, caches, build outputs, logs and temporary files go on D:.
 Use scripts/d_drive.ps1 to launch Python tools with D-drive temporary/cache paths.
+
+The user requests continuous independent work within the approved scope. Keep
+implementing, testing and recording evidence without routine confirmation or a
+plan-only stopping point. Stop only on completion, explicit user direction, usage
+limits or a genuine blocker requiring unavailable input/permission. Follow the
+continuation rule in D:/git/MiSTer-CoreSkill/mister-arcade-core/SKILL.md.

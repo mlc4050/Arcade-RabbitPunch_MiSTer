@@ -12,10 +12,12 @@ use work.rabbitpunch_config.all;
 entity rabbitpunch_platform is
     generic (
         sint_IMAGE_BYTES : positive := ROM_IMAGE_SIZE;
-        DIP_DEFAULT : unsigned(15 downto 0) := x"0000"
+        DIP_DEFAULT : unsigned(15 downto 0) := x"0000";
+        EXTERNAL_PHASE_ENABLE : boolean := false
     );
     port (
         i_clk : in std_logic;
+        i_main_phase_enable : in std_logic := '0';
         i_initialize : in std_logic;
         i_framework_reset : in std_logic;
         iu128_status : in unsigned(127 downto 0);
@@ -299,9 +301,13 @@ begin
             iu8_memory_data => su8_memory_read_data
         );
     system : entity work.rabbitpunch_system
-        generic map (sint_IMAGE_BYTES => sint_IMAGE_BYTES)
+        generic map (
+            sint_IMAGE_BYTES => sint_IMAGE_BYTES,
+            EXTERNAL_PHASE_ENABLE => EXTERNAL_PHASE_ENABLE
+        )
         port map (
             i_clk => i_clk,
+            i_main_phase_enable => i_main_phase_enable,
             i_initialize => i_initialize,
             i_game_reset => s_game_reset,
             i_pause => s_pause_request,

@@ -1,0 +1,38 @@
+[
+  {
+    "case": "maincpu_fractional_phase",
+    "pass_marker": "MAINCPU_PHASE_PASS",
+    "log": "debug\\baselines\\maincpu_fractional_phase\\result.log",
+    "external_phase_enable": true,
+    "source_sha256": {
+      "rtl/cpu/fx68k/fx68k.sv": "846602cd0fc25a9eee04f641ba5e6fcfa05a80a1db417898040c78b1f7449a33",
+      "rtl/cpu/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
+      "rtl/cpu/fx68k/uaddrPla.sv": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a",
+      "rtl/rabbitpunch_bus.vhd": "2ff140db32be1209154ffce745039cd569d3ba0fbb0531c560fd173fa080f5c5",
+      "rtl/rabbitpunch_fx68k.vhd": "f58d91e270636a92f629854f63e923aa6a8a7175b5f9d409a0f2e401e0a53ea1",
+      "rtl/rabbitpunch_maincpu.vhd": "59304074ce2db4054962275acb0fb4dd401e99278a59fffcb616abdfec936783",
+      "rtl/rabbitpunch_clock_enables.vhd": "3c2356fb1fd0d45bd58e710b9fd0262cd6aa40f7081da6c6ae4bd9f22fe11a10",
+      "sim/board/maincpu_phase_tb.vhd": "fe2e84501915bceb54df64c25a40c5d3c901f1c5bca6bbcd3eefa0dfcd883061"
+    },
+    "log_sha256": "79e392aa85df01fd82634cb907bcac660b663667de8fdaa17948a40445a73e7d",
+    "scope": "Executing unchanged fx68k with fractional or legacy phase selection, variable-latency bus model, byte lanes, pause, reset replay and IRQ/autovector/handler; no game ROM or physical memory proof"
+  },
+  {
+    "case": "maincpu_legacy_phase",
+    "pass_marker": "MAINCPU_PHASE_PASS",
+    "log": "debug\\baselines\\maincpu_legacy_phase\\result.log",
+    "external_phase_enable": false,
+    "source_sha256": {
+      "rtl/cpu/fx68k/fx68k.sv": "846602cd0fc25a9eee04f641ba5e6fcfa05a80a1db417898040c78b1f7449a33",
+      "rtl/cpu/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
+      "rtl/cpu/fx68k/uaddrPla.sv": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a",
+      "rtl/rabbitpunch_bus.vhd": "2ff140db32be1209154ffce745039cd569d3ba0fbb0531c560fd173fa080f5c5",
+      "rtl/rabbitpunch_fx68k.vhd": "f58d91e270636a92f629854f63e923aa6a8a7175b5f9d409a0f2e401e0a53ea1",
+      "rtl/rabbitpunch_maincpu.vhd": "59304074ce2db4054962275acb0fb4dd401e99278a59fffcb616abdfec936783",
+      "rtl/rabbitpunch_clock_enables.vhd": "3c2356fb1fd0d45bd58e710b9fd0262cd6aa40f7081da6c6ae4bd9f22fe11a10",
+      "sim/board/maincpu_phase_tb.vhd": "fe2e84501915bceb54df64c25a40c5d3c901f1c5bca6bbcd3eefa0dfcd883061"
+    },
+    "log_sha256": "6c05d9698730f8fda7e49a1b05d2701fc6b6bc18c4047acf21f2abe543d5291a",
+    "scope": "Executing unchanged fx68k with fractional or legacy phase selection, variable-latency bus model, byte lanes, pause, reset replay and IRQ/autovector/handler; no game ROM or physical memory proof"
+  }
+]

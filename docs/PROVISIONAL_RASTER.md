@@ -59,7 +59,8 @@ user's direction. Physical measurements can replace the provisional parameters
 without changing the render/memory architecture.
 
 The standalone VHDL clock-enable generator and adjustable raster are implemented
-but not yet connected to the production platform. Enable tests check 175065
+and connected to the production platform through rabbitpunch_machine. The
+MiSTer framework top remains the inherited demo until shell integration lands. Enable tests check 175065
 rational-cadence/reset conditions; raster tests cover two complete default frames
 (221184 beam pixels), a small odd-sized positive-sync case, sparse enables,
 coordinate offsets and reset while stopped. See reference/raster_checks.json.
@@ -93,3 +94,12 @@ same-edge completion is eligible, and initialization flushes queued/active work.
 Only ownership/tags are added; tile/sprite pixels remain in the existing two
 banks. See reference/scanline_scheduler_checks.json. Continuous real-renderer
 scanout and CPU/audio contention tests follow production wiring.
+
+The continuous scanout controller passes 124416 synthetic RGB checks, including
+an intentionally late row and readiness loss/recovery without stopping sync.
+The connected machine passes downloaded 68000 diagnostic programs with external
+fractional phases and continuous pixel cadence through loading, pause, reset,
+replacement and partial-image recovery. That short test ends before the first
+vertical interrupt/render window; it does not prove a complete executing frame.
+A separate static-MAME capture test drives the real graphics/ROM path at continuous
+raster cadence; its first run is pending. See MACHINE_INTEGRATION.md.
