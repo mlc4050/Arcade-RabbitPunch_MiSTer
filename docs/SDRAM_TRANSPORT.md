@@ -119,3 +119,26 @@ pass, including mixed hits/misses on independent clients. It uses 441 ALMs,
 Exact reports: reference/rom_cache_synth.json and rom_cache_netlist_checks.json.
 The cached full-RGB comparison is next. A separate cached bench preserves the
 completed uncached timing baseline.
+
+
+## Connected ROM subsystem
+
+rabbitpunch_roms.vhd connects the requester, cache and physical SDRAM adapter.
+Its word-loader shares port 2 under an explicit loading mode. Enter/leave that
+mode only after o_idle; a registered ownership flag prevents a loader response
+from reaching the CPU/cache path. Beginning a load invalidates the drained ROM
+caches. Externally hold CPU/video reset while loading and issue word requests
+only with loader-ready. The transport itself remains active throughout download.
+No HPS ioctl/DDR staging interface is connected yet.
+
+The connected VHDL/chip-model test passes 34 loader writes across two distinct
+images and 42 simultaneous requester replies. It checks partial-byte loading,
+CPU byte order, both tile banks, adjacent words hitting one cached burst,
+loader-response isolation and replacement-image invalidation of all three warm
+caches. Ten physical read bursts serve the checks. The completed report is
+reference/rom_subsystem_checks.json. Its production-top implementation/netlist
+verification is next; this test does not establish electrical pin timing.
+
+Uncached full-pixel SDRAM proof now includes both Rabbit Punch play1000 and
+Rabio Lepus attract, 124416 matching RGB pixels total. The report has exactly
+those two captures; the six-scene native-BRAM proof is a separate regression.

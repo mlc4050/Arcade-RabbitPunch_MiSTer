@@ -109,3 +109,9 @@ aligned addresses, valid bits and per-client miss states/requested addresses.
 A restore may invalidate these derived entries after draining transactions;
 there is no need to save immutable ROM data. Never invalidate or change images
 with pending cache/transport work. This state is independent of game reset.
+
+
+The connected ROM subsystem adds previous-loading and loader-ownership flags.
+A load transition requires drained mapper/cache/controller transactions, and
+invalidates derived ROM cache entries. Game reset must not touch these flags;
+HPS download integration will hold gameplay reset while this path keeps running.

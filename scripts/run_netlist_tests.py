@@ -18,6 +18,7 @@ from run_baselines import run_case
 
 
 BLOCKS = {
+    "roms": ("roms_tb", "ROMS_PASS", "sim/memory/roms_tb.vhd"),
     "rom_cache": ("rom_cache_tb", "ROM_CACHE_PASS", "sim/memory/rom_cache_tb.vhd"),
     "rom_requests": ("rom_requests_tb", "ROM_REQUESTS_PASS", "sim/memory/rom_requests_tb.vhd"),
     "sdram": ("sdram_tb", "SDRAM_PASS", "sim/memory/sdram_tb.vhd"),
@@ -65,9 +66,9 @@ def main():
             source = root / "debug/baselines/video_sprite_row" / filename
             shutil.copyfile(source, case_directory / filename)
             vectors[filename] = hashlib.sha256(source.read_bytes()).hexdigest()
-    support = "rtl/rabbitpunch_sdram_types.vhd" if args.block in ("sdram", "rom_requests", "rom_cache") else "sim/video/tile_test_support.vhd"
+    support = "rtl/rabbitpunch_sdram_types.vhd" if args.block in ("sdram", "rom_requests", "rom_cache", "roms") else "sim/video/tile_test_support.vhd"
     sources = [str(netlist.relative_to(root)).replace("\\", "/"), support]
-    if args.block == "sdram":
+    if args.block in ("sdram", "roms"):
         sources.append("sim/vendor/sdram/sdram_chip_model_wide.sv")
     if args.block == "rom_requests":
         sources += ["rtl/memory/sdram/sdram.sv", "rtl/rabbitpunch_sdram.vhd",

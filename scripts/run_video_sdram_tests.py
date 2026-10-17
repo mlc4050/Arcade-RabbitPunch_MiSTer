@@ -50,12 +50,19 @@ def main():
             shutil.copyfile(previous / name, directory / name)
         for filename, capture_file in (("spriteram.hex", "spriteram.bin"), ("vram.hex", "videoram.bin"),
                                        ("bitmap.hex", "bitmap.bin"), ("palette.hex", "palette.bin")):
-            if (capture / capture_file).exists():
-                actual = [int(word, 16) for word in (directory / filename).read_text().splitlines()]
-                assert actual == [word[0] for word in struct.iter_unpack(">H", (capture / capture_file).read_bytes())]
+            actual = [int(word, 16) for word in (directory / filename).read_text().splitlines()]
+            assert actual == [word[0] for word in struct.iter_unpack(">H", (capture / capture_file).read_bytes())]
+        registers = (capture / "reg_vregs.bin").read_bytes()
+        settings = [int.from_bytes(registers[12:14], "big")]
+        settings += [int.from_bytes(registers[offset:offset+2], "big") & 511 for offset in (0, 2, 4, 6)]
+        settings += [registers[17] & 63, registers[19] & 63]
+        assert settings == [int(word, 16) for word in (directory / "video_settings.hex").read_text().splitlines()]
         regions = root / "debug/rom_regions" / fixture["set"]
         region_names = ("maincpu", "audiocpu", "tiles1", "tiles2", "sprites", "upd")
-        image = b"".join((regions / (name + ".bin")).read_bytes() for name in region_names)
+        expected_sizes = (0x40000, 0x10000, 0x80000, 0x80000, 0x80000, 0x40000)
+        parts = [(regions / (name + ".bin")).read_bytes() for name in region_names]
+        assert tuple(map(len, parts)) == expected_sizes
+        image = b"".join(parts)
         assert len(image) == 0x210000
         (directory / "maincpu.hex").write_text("".join(f"{word[0]:04x}\n" for word in
             struct.iter_unpack(">H", (regions / "maincpu.bin").read_bytes())))
@@ -86,6 +93,8 @@ def main():
             max_line_cycles=int(re.search(r"max_cycles=\s*(\d+)", log)[1]),
             expected_rgb_sha256=hashlib.sha256(expected).hexdigest(), actual_rgb_sha256=hashlib.sha256(actual).hexdigest(),
             rom_image_sha256=hashlib.sha256(image).hexdigest(),
+            fixture_sha256={name: hashlib.sha256((directory / name).read_bytes()).hexdigest()
+                for name in ("maincpu.hex", "video_settings.hex", "spriteram.hex", "vram.hex", "bitmap.hex", "palette.hex")},
             source_sha256={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources},
             log_sha256=hashlib.sha256((root / result["log"]).read_bytes()).hexdigest(),
             scope="Actual shared SDRAM controller/chip-command model feeding graphics and competing synthetic CPU ROM reads; native board RAM with CPU writes; direct ROM model preload, no loader/CPU execution/physical raster/electrical timing proof")

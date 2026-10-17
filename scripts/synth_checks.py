@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "roms": (0, ("rabbitpunch_roms", "rabbitpunch_rom_cache", "rabbitpunch_rom_requests", "rabbitpunch_sdram")),
     "rom_cache": (0, ("rabbitpunch_rom_cache",)),
     "rom_requests": (0, ("rabbitpunch_rom_requests",)),
     "sdram": (0, ("rabbitpunch_sdram", "sdram:memory_controller")),
@@ -101,9 +102,12 @@ def run_check(stage, quartus_bin, stamp, name):
              f"Standalone {name} block with virtual I/O; not a complete core or hardware release")
     if name in ("rom_requests", "rom_cache"):
         scope = "ROM request logic with wire-only port flattening and half-period synthetic virtual input timing; not a final core or external pin proof"
-    if name == "sdram":
+    if name in ("sdram", "roms"):
         scope = ("SDRAM adapter/controller with registered synthetic tester and hypothetical half-period DQ input timing; "
                  "physical pin placement checked, no final PLL/SDRAM clock/PCB electrical timing proof")
+    if name == "roms":
+        scope = ("Production cached ROM subsystem and word loader with half-period synthetic virtual-input/DQ tester timing; "
+                 "no evaluation registers added; not final PLL, HPS download or electrical timing proof")
     report={"commit":stamp.split()[0],"device":"5CSEBA6U23I7","project":project_name,
             "constraint_mhz":48,"seed":int(seed_match[1]),"memory_bits":expected_bits,"timings":timings,
             "timing_coverage":coverage,
