@@ -54,7 +54,11 @@ complete renderer/shared SDRAM Rabbit Punch play1000 screenshot comparison
 passes with competing CPU ROM reads; a second-set replay is running. Its worst
 line is 3806 clocks, with physical raster deadlines still unresolved. A tiny
 24-byte read-only ROM cache passes directed and synthesized-netlist tests;
-full-pixel cached/uncached throughput comparison is next. No complete game is running yet.
+the busy captured scene passes every cached RGB pixel and reduces the worst
+line from 3806 to 1939 clocks. The remaining five cached scenes run serially.
+A connected production ROM subsystem with word loading and safe replacement
+image invalidation also passes implementation and synthesized-netlist checks.
+Executing-CPU boot comparison through this memory path is next. No complete game is running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
 ## Goal and scope

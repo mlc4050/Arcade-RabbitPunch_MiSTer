@@ -142,3 +142,21 @@ verification is next; this test does not establish electrical pin timing.
 Uncached full-pixel SDRAM proof now includes both Rabbit Punch play1000 and
 Rabio Lepus attract, 124416 matching RGB pixels total. The report has exactly
 those two captures; the six-scene native-BRAM proof is a separate regression.
+
+
+The connected production ROM top passes staged implementation in every reported
+corner, with 520 ALMs, 1196 registers and no M10K blocks. Its exported functional
+netlist passes the same 34-write/42-reply/two-image VHDL loader/cache scoreboard.
+Reports: reference/roms_synth.json and roms_netlist_checks.json. The explicit
+synthetic external tester timing limitation remains; no physical PLL/PCB timing
+or HPS loader claim follows from these fits.
+
+The first cached full-pixel replay, Rabbit Punch play1000, matches all 62208 RGB
+pixels, including live updates, tags, fixed scanout latency and reset draining.
+Worst line cost drops from 3806 uncached to 1939 cached clocks (about 79.3 to
+40.4 us at 48 MHz). The same synthetic CPU request generator completes 33956
+checked ROM reads and 72199 work-RAM writes; 8956 physical SDRAM READ commands
+are counted. CPU traffic is response-driven, so the read counts differ between
+runs; this is an identical captured image and generator, not an identical
+bus-request trace. No complete physical scanline deadline is claimed. The
+cached report currently contains this one scene; the remaining five run serially.
