@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "platform": (927339, ("rabbitpunch_platform", "rabbitpunch_controls", "rabbitpunch_load_frontend", "rabbitpunch_system", "fx68k", "T80se", "jt51", "jt7759", "rom_loader", "ddram_phy", "jtframe_draw")),
     "controls": (0, ("rabbitpunch_controls", "rabbitpunch_inputs", "rabbitpunch_keys", "rabbitpunch_pause", "mame_keys")),
     "host": (0, ("host_check", "rabbitpunch_host", "hps_io")),
     "load_frontend": (0, ("rabbitpunch_load_frontend", "rabbitpunch_ddr_copy", "rom_loader", "ddram_phy")),
@@ -79,7 +80,7 @@ def run_check(stage, quartus_bin, stamp, name):
     if result.returncode or "Full Compilation was successful" not in log:
         print("\n".join(log.splitlines()[-35:]))
         raise SystemExit(f"Standalone {name} compile failed: {log_path}")
-    if name in ("tiles", "sprites", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "system"):
+    if name in ("tiles", "sprites", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "system", "platform"):
         stuck = re.findall(r'Pin "(ou17_(?:(?:sprite|tile)_)?rom_word_address\[\d+\])" is stuck', log)
         if stuck:
             raise SystemExit(f"Unexpected constant graphics ROM address bits: {stuck}")
@@ -92,7 +93,7 @@ def run_check(stage, quartus_bin, stamp, name):
     if any(instance not in hierarchy for instance in required_instances):
         raise SystemExit("A required block disappeared during synthesis")
     sound_memory = []
-    if name in ("sound_board", "audio", "system"):
+    if name in ("sound_board", "audio", "system", "platform"):
         expected_sound_memory = {
             "rabbitpunch_ram8:sound_ram": (2048, 8),
             "jt51_sh:u_acc": (8, 68),
@@ -107,7 +108,7 @@ def run_check(stage, quartus_bin, stamp, name):
             columns = [value.strip() for value in line.split(";")[1:-1]]
             if len(columns) == 9 and columns[1] in ("M10K block", "AUTO"):
                 matches = [key for key in expected_sound_memory if key + "|" in columns[0]]
-                if not matches and name == "system":
+                if not matches and name in ("system", "platform"):
                     continue
                 if len(matches) != 1:
                     raise SystemExit(f"Unexpected sound memory: {columns[0]}")
@@ -154,6 +155,10 @@ def run_check(stage, quartus_bin, stamp, name):
         scope = ("Logical CPU/IO/video/RAM system, sequential loader and cached SDRAM controller; "
                  "registered logical test boundaries, wire-connected SDRAM pins and hypothetical half-period external tester; "
                  "no HPS/DDR, analog/game audio, final PLL/raster or PCB electrical timing proof")
+    if name == "platform":
+        scope = ("Logical controls/pause, host-signal DDR/byte load frontend and complete CPU/audio/video/SDRAM system; "
+                 "registered logical test boundaries, direct SDRAM pins and hypothetical half-period external tester; "
+                 "no native HPS wrapper/DDR ownership mux, final PLL/raster or PCB electrical timing proof")
     report={"commit":stamp.split()[0],"device":"5CSEBA6U23I7","project":project_name,
             "constraint_mhz":48,"seed":int(seed_match[1]),"memory_bits":expected_bits,"timings":timings,
             "timing_coverage":coverage,

@@ -89,3 +89,12 @@ There are 129 accepted word transfers and 24 DDR reads. Audio/video are idle;
 this models HPS signals rather than instantiating real hps_io. Full-size frontend
 implementation passes all reported 48 MHz corners: 294 ALMs, zero RAM,
 setup +5.860 ns / hold +0.136 ns (reference/load_frontend_synth.json) (reference/system_frontend_checks.json).
+
+
+Integrated retry protection: i_start_ready defaults high for standalone callers,
+but rabbitpunch_platform connects it to downstream not-loading. Host wait also
+asserts during frontend error drain. The master waits before a new transaction,
+including DDR mode with no byte strobes; otherwise an early retry can overlap
+the previous image's final SDRAM write. platform_tb covers immediate partial-
+image recovery with this backpressure. The older standalone frontend fit above
+records its exact earlier commit; the combined platform fit covers this update.

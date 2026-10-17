@@ -265,5 +265,12 @@ Host/control milestone: the real unchanged hps_io wrapper passes Quartus fit
 and VHDL functional-netlist command/config/file/key tests despite the old
 ModelSim native-parser limitation. Automatic load frontend fit passes. The
 active-high board input mapper passes live MAME vectors for both sets, raw DIP
-metadata/default checks and composed pause-owner tests; controls fit is pending.
+metadata/default checks and composed pause-owner tests; controls fit also passes all 48 MHz timing and coverage checks with zero RAM.
 See HOST_INTERFACE.md, CONTROLS.md and DDR_LOADING.md for exact boundaries.
+
+
+Logical platform now connects controls, status/reset and DIP metadata to the
+byte/DDR loader and complete system. Executing 68000 diagnostics check actual
+input/DIP reads, native RAM, pause/reload and partial-image recovery. The
+combined full-size platform fit is the next verification gate; physical timing
+and actual MiSTer shell/DDR ownership remain open (PLATFORM.md).

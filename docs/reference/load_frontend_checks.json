@@ -7,9 +7,9 @@
     "rtl/memory/ddram/ddram_phy.sv": "5a0cc2eeca7d71ba83fbd19d79c38b9983f5956cb737acf4df64e20848d0578c",
     "rtl/memory/ddram/rom_loader.sv": "01ea1c583107760fedb7457a35cc44e8a77d53e4be7593a4eae85fb4702602d5",
     "rtl/rabbitpunch_ddr_copy.vhd": "3f9c8c48b2f71d8e90442449f3578e359f611ff2942c3a153f6b3a6b50b1d061",
-    "rtl/rabbitpunch_load_frontend.vhd": "87b7b9a206f6d3dbf757402c44a1a6783a5af9fde87969bd2f163617a7f53a02",
-    "sim/memory/load_frontend_tb.vhd": "224c48a35101d0c3b9e4bffbecd30eacd5058896578ac6cfacefc50628c7d371"
+    "rtl/rabbitpunch_load_frontend.vhd": "e1c7fe85bad980800080aff2074ec3217140d1dc714f2e55290fa4fc1c9878f4",
+    "sim/memory/load_frontend_tb.vhd": "19edde505e82025215af3810d2ae7a5d791212a69f3708b8ec388154de489c97"
   },
-  "log_sha256": "10cc610ecedab83aa0ec46e0a8466f6a25ca1030f111247c44c3698aa3e9c847",
-  "scope": "VHDL HPS-signal frontend plus actual native DDR PHY/copier and word-credit wrapper: metadata filtering, DDR-only copy after reset release, no soft-reset recopy, direct-byte pairing including same-edge first byte, backpressure, short/nonsequential rejection, overlapping-download old-copy drain and fresh recovery; behavioral DDR/word sink, no real hps_io or system/physical DDR proof"
+  "log_sha256": "f962ab6d3ecde4404242bb227fd3ab6b80b8741c3e855833f40583680c95b68d",
+  "scope": "VHDL HPS-signal frontend plus actual native DDR PHY/copier and word-credit wrapper: downstream drain readiness/backpressure, metadata filtering, DDR-only copy after reset release, no soft-reset recopy, direct-byte pairing including same-edge first byte, backpressure, short/nonsequential rejection, overlapping-download old-copy drain and fresh recovery; behavioral DDR/word sink, no real hps_io or system/physical DDR proof"
 }

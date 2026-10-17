@@ -10,5 +10,5 @@ sources=['rtl/rabbitpunch_layout.vhd','rtl/memory/ddram/ddram_phy.sv','rtl/memor
 result=run_case('load_frontend',sources,'load_frontend_tb','1 ms','LOAD_FRONTEND_PASS')
 result.update(source_sha256={name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in sources},
     log_sha256=hashlib.sha256((root/result['log']).read_bytes()).hexdigest(),
-    scope='VHDL HPS-signal frontend plus actual native DDR PHY/copier and word-credit wrapper: metadata filtering, DDR-only copy after reset release, no soft-reset recopy, direct-byte pairing including same-edge first byte, backpressure, short/nonsequential rejection, overlapping-download old-copy drain and fresh recovery; behavioral DDR/word sink, no real hps_io or system/physical DDR proof')
+    scope='VHDL HPS-signal frontend plus actual native DDR PHY/copier and word-credit wrapper: downstream drain readiness/backpressure, metadata filtering, DDR-only copy after reset release, no soft-reset recopy, direct-byte pairing including same-edge first byte, backpressure, short/nonsequential rejection, overlapping-download old-copy drain and fresh recovery; behavioral DDR/word sink, no real hps_io or system/physical DDR proof')
 (root/'docs/reference/load_frontend_checks.json').write_text(json.dumps(result,indent=2)+'\n')

@@ -236,3 +236,10 @@ it. Inherited per-key latches/toggle state retain held keyboard actions. Manual
 pause owns one latch and previous-button bit, separate from OSD/debug/state
 pause levels. Game reset clears manual pause while preserving DIP metadata.
 No full savestate restore path is added by these controls.
+
+
+The logical platform adds no state. It joins host status/reset and the existing
+controls, download frontend and complete system. The frontend now defers a
+fresh image until the previous downstream loader drains; no generation queue
+or clock domain is introduced. Physical HPS/DDR ownership and raster remain
+external.

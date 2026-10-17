@@ -48,6 +48,6 @@ without treating an already-held key as a new press. It requests CPU clock-enabl
 pause through the existing board adapters; it adds no clock gate, video buffer
 or chip-enable gating. The connected controls test checks pad/keyboard pause,
 OSD/state ownership and DIP preservation across game reset
-(reference/pause_checks.json and reference/controls_checks.json). Controls
-implementation is pending; the separate system CPU-drain/pause tests retain
-their own scope.
+(reference/pause_checks.json and reference/controls_checks.json). Controls pass a full Quartus fit at 48 MHz with zero block RAM and all
+reported timing/coverage checks passing (reference/controls_synth.json). The
+separate system CPU-drain/pause tests retain their own scope.

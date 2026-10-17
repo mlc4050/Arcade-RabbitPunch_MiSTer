@@ -11,6 +11,7 @@ end entity;
 architecture test of load_frontend_tb is
     signal s_clk : std_logic := '0';
     signal s_initialize : std_logic := '1';
+    signal s_start_ready : std_logic := '1';
     signal s_framework_reset : std_logic := '1';
     signal s_host_download, s_host_write : std_logic := '0';
     signal su16_host_index : unsigned(15 downto 0) := (others => '0');
@@ -42,6 +43,7 @@ begin
             i_clk => s_clk,
             i_initialize => s_initialize,
             i_framework_reset => s_framework_reset,
+            i_start_ready => s_start_ready,
             i_host_download => s_host_download,
             iu16_host_index => su16_host_index,
             i_host_write => s_host_write,
@@ -181,7 +183,13 @@ begin
         s_framework_reset <= '0';
         cycles(10);
         assert (sint_reads = 0) report "Reset release without a ROM download copied stale DDR" severity failure;
+        s_start_ready <= '0';
         begin_rom(0);
+        cycles(20);
+        assert (s_active = '0' and s_host_wait = '1' and sint_reads = 0)
+            report "Frontend accepted a new image before downstream drain" severity failure;
+        s_start_ready <= '1';
+        cycles(3);
         s_host_download <= '0';
         cycles(12);
         assert (s_active = '1' and s_ddr_mode = '1' and sint_reads = 0)

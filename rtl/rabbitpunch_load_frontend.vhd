@@ -17,6 +17,8 @@ entity rabbitpunch_load_frontend is
         i_clk : in std_logic;
         i_initialize : in std_logic;
         i_framework_reset : in std_logic;
+        -- Retry only after the downstream loader has drained a prior image.
+        i_start_ready : in std_logic := '1';
         i_host_download : in std_logic;
         iu16_host_index : in unsigned(15 downto 0);
         i_host_write : in std_logic;
@@ -57,14 +59,15 @@ architecture rtl of rabbitpunch_load_frontend is
     signal su16_copy_data : unsigned(15 downto 0);
 begin
     s_host_rom <= '1' when i_host_download = '1' and iu16_host_index = 0 else '0';
-    o_download_active <= '1' when s_host_rom = '1' or styp_state /= STATE_IDLE else '0';
+    o_download_active <= '1' when (s_host_rom = '1' and i_start_ready = '1') or styp_state /= STATE_IDLE else '0';
     s_copy_start <= '1' when styp_state = STATE_DDR_START else '0';
     s_copy_selected <= '1' when styp_state = STATE_DDR_START or styp_state = STATE_DDR_COPY else '0';
     o_error <= s_error;
     o_ddr_mode <= s_ddr_mode;
     -- Include the current write pulse so hps_io cannot queue another byte
     -- before our captured-word backpressure becomes visible.
-    o_host_wait <= s_word_pending or i_host_write or s_copy_selected when iu16_host_index = 0 else '0';
+    o_host_wait <= '1' when iu16_host_index = 0 and (styp_state = STATE_ERROR_DRAIN or (styp_state = STATE_IDLE and i_start_ready = '0')) else
+        s_word_pending or i_host_write or s_copy_selected when iu16_host_index = 0 else '0';
     o_word_valid <= s_copy_valid when s_copy_selected = '1' else s_word_pending;
     ou27_word_byte_address <= su27_copy_address when s_copy_selected = '1' else su27_word_address;
     ou16_word_data <= su16_copy_data when s_copy_selected = '1' else su16_word_data;
@@ -106,7 +109,7 @@ begin
                 su27_next_byte <= (others => '0');
             else
                 s_previous_host <= s_host_rom;
-                v_start := styp_state = STATE_IDLE and s_host_rom = '1';
+                v_start := styp_state = STATE_IDLE and s_host_rom = '1' and i_start_ready = '1';
                 vu27_count := su27_next_byte;
                 if (s_word_pending = '1' and i_word_ready = '1') then
                     s_word_pending <= '0';
@@ -181,7 +184,7 @@ begin
                 -- Only one host ROM transaction may own a copy at a time.
                 -- Drain the old copy on overlap and leave the caller in error
                 -- reset until a fresh transaction recovers.
-                if (s_host_rom = '1' and s_previous_host = '0' and not v_start) then
+                if (s_host_rom = '1' and s_previous_host = '0' and not v_start and styp_state /= STATE_IDLE) then
                     s_error <= '1';
                     if (styp_state = STATE_WAIT_RELEASE or styp_state = STATE_BYTE_DRAIN) then
                         styp_state <= STATE_ERROR_DRAIN;

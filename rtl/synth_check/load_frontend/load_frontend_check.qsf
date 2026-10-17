@@ -37,3 +37,4 @@ set_instance_assignment -name VIRTUAL_PIN ON -to o_ddr_read
 set_instance_assignment -name VIRTUAL_PIN ON -to ou64_ddr_write_data[*]
 set_instance_assignment -name VIRTUAL_PIN ON -to ou8_ddr_byte_enables[*]
 set_instance_assignment -name VIRTUAL_PIN ON -to o_ddr_write
+set_instance_assignment -name VIRTUAL_PIN ON -to i_start_ready
