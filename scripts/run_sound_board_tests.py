@@ -15,7 +15,7 @@ def main():
     result = run_case('sound_board', sources, 'sound_board_tb', '400 us', 'SOUND_BOARD_PASS', wall_timeout=180)
     result.update(source_sha256={name: hashlib.sha256((root/name).read_bytes()).hexdigest() for name in sources},
         log_sha256=hashlib.sha256((root/result['log']).read_bytes()).hexdigest(),
-        scope='Native sound board: two synthetic command interrupts, FF interrupt acknowledge/IM1 handler/RETI, mailbox read acknowledgements, native RAM inspection and CPU pause while JT51 sample cadence continues; behavioral ROM transport, no uPD or game sound')
+        scope='Native sound board: actual YM write/busy-status readback, two synthetic command interrupts, FF interrupt acknowledge/IM1 handler/RETI, mailbox read acknowledgements, native RAM inspection and CPU pause while JT51 sample cadence continues; behavioral ROM transport, no uPD or game sound')
     (root/'docs/reference/sound_board_checks.json').write_text(json.dumps(result, indent=2)+'\n')
 
 

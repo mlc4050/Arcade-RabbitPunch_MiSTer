@@ -4,9 +4,9 @@
   "log": "debug\\baselines\\sound_bus\\result.log",
   "source_sha256": {
     "rtl/rabbitpunch_ram8.vhd": "63b8171389498f7d35fd35279b02d071cd3922f93a8b00fbe178c23e704e2824",
-    "rtl/rabbitpunch_sound_bus.vhd": "7cd00e001c1203332b6da385e5a6cef0f8c1b04d5d884389ded2e0196b7bfa0e",
-    "sim/sound/sound_bus_tb.vhd": "8fa565cc1563167bfe45e2530edf4be626968e77641b660c29173fd612041c7b"
+    "rtl/rabbitpunch_sound_bus.vhd": "4dc4efacb473205c6377527b26bc7537a269720f2d869f2d673f88dd64d49058",
+    "sim/sound/sound_bus_tb.vhd": "9a0c7e4d113a5cd782694ec9ec3ab4d825c11fb34bfee0fc33c8d53fc5a8f92d"
   },
-  "log_sha256": "390fd69d798b3d0b750ceeb3b7e0239bad859a58e3e9e4bd3765b54f27ad6dc7",
+  "log_sha256": "1666eb8067e7d633bb0af6f2ab34b0ac4b22e2df79675a205cc6fad4e913c04a",
   "scope": "Native 2048-byte sound RAM write/read and inspection, full selected sound map, YM enable-aligned writes, command ACK and ADPCM output strobes, held ROM requests/delayed replies; no CPU, actual sound chips or SDRAM"
 }

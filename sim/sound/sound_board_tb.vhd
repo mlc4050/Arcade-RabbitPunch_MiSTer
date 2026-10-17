@@ -9,11 +9,15 @@ end entity;
 architecture test of sound_board_tb is
     type t_program is array (0 to 255) of unsigned(7 downto 0);
     constant PROGRAM : t_program := (
-        0 => x"31", 1 => x"FF", 2 => x"FF", 3 => x"ED", 4 => x"56",
-        5 => x"FB", 6 => x"76", 7 => x"C3", 8 => x"06", 9 => x"00",
+        0 => x"31", 1 => x"FF", 2 => x"FF", 3 => x"3E", 4 => x"14",
+        5 => x"32", 6 => x"00", 7 => x"F0", 8 => x"AF", 9 => x"32",
+        10 => x"01", 11 => x"F0", 12 => x"3A", 13 => x"01", 14 => x"F0",
+        15 => x"E6", 16 => x"80", 17 => x"FE", 18 => x"80",
+        19 => x"C2", 20 => x"FF", 21 => x"00", 22 => x"ED", 23 => x"56",
+        24 => x"FB", 25 => x"76", 26 => x"C3", 27 => x"19", 28 => x"00",
         16#38# => x"3A", 16#39# => x"00", 16#3A# => x"F2",
         16#3B# => x"32", 16#3C# => x"00", 16#3D# => x"F8",
-        16#3E# => x"FB", 16#3F# => x"ED", 16#40# => x"4D", others => x"00");
+        16#3E# => x"FB", 16#3F# => x"ED", 16#40# => x"4D", 255 => x"76", others => x"00");
     signal s_clk : std_logic := '0';
     signal s_reset : std_logic := '1';
     signal s_pause, s_paused, s_send, s_pending, s_ack : std_logic := '0';
@@ -143,11 +147,11 @@ begin
         wait for 2 us;
         wait until falling_edge(s_clk);
         s_reset <= '0';
-        wait until s_debug_request = '1' and su16_debug_address = 6 for 100 us;
-        assert (s_debug_request = '1' and su16_debug_address = 6) report "Sound CPU did not reach EI/HALT" severity failure;
+        wait until s_debug_request = '1' and su16_debug_address = 25 for 100 us;
+        assert (s_debug_request = '1' and su16_debug_address = 25) report "Sound CPU did not pass YM busy readback and reach EI/HALT" severity failure;
         command(x"42", 1);
         command(x"3C", 2);
-        report "SOUND_BOARD_PASS commands=2 interrupt_ack=checked native_ram=checked pause_keeps_ym_running=checked";
+        report "SOUND_BOARD_PASS ym_busy_readback=checked commands=2 interrupt_ack=checked native_ram=checked pause_keeps_ym_running=checked";
         finish;
         wait;
     end process;

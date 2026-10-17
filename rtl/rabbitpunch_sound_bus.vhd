@@ -18,7 +18,7 @@ entity rabbitpunch_sound_bus is
         i_rom_ready : in std_logic;
         i_rom_response_valid : in std_logic;
         iu8_rom_response_data : in unsigned(7 downto 0);
-        i_ym_enable : in std_logic;
+        i_ym_write_enable : in std_logic;
         iu8_ym_status : in unsigned(7 downto 0);
         o_ym_write : out std_logic;
         o_ym_data_register : out std_logic;
@@ -42,7 +42,9 @@ architecture rtl of rabbitpunch_sound_bus is
 begin
     s_ram_enable <= '1' when i_request = '1' and iu16_request_address >= x"F800" else '0';
     o_rom_request <= '1' when styp_state = STATE_ROM_REQUEST else '0';
-    o_ym_write <= '1' when styp_state = STATE_YM_WRITE else '0';
+    -- JT51's register interface consumes writes on every system clock.
+    -- Present exactly one pulse at the selected chip-enable edge.
+    o_ym_write <= '1' when styp_state = STATE_YM_WRITE and i_ym_write_enable = '1' else '0';
     sound_ram : entity work.rabbitpunch_ram8
         port map (
             i_clk => i_clk,
@@ -112,7 +114,7 @@ begin
                     o_response_valid <= '1';
                     styp_state <= STATE_IDLE;
                 when STATE_YM_WRITE =>
-                    if (i_ym_enable = '1') then
+                    if (i_ym_write_enable = '1') then
                         o_response_valid <= '1';
                         styp_state <= STATE_IDLE;
                     end if;

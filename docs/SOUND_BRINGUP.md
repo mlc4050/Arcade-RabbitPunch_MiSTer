@@ -116,8 +116,10 @@ rabbitpunch_sound_bus implements the pinned sound map: ROM 0000-EFFF,
 YM2151 F000/F001, command read/ack F200, ADPCM control F400 and command F600,
 and native 2 KiB RAM F800-FFFF. Unmapped reads return FF and unmapped/ROM
 writes have no device effect. One request pulse receives one reply. ROM
-request/address hold until ready, followed by a separate response. YM writes
-hold until one chip enable; they are not repeated on subsequent enables.
+request/address hold until ready, followed by a separate response. YM address/data hold until the half-chip (P1) enable, when one system-clock
+write pulse is presented. The half-enable matters: JT51 samples busy status
+on cen_p1; a pulse on the other chip phase can miss it. JT51 consumes register writes on every system clock, so holding
+write active while awaiting that enable would repeat the write.
 The two ADPCM outputs are byte strobes for a future chip adapter, not playback.
 
 rabbitpunch_ram8 uses explicit native M10K dual ports, both driven by i_clk.
@@ -138,8 +140,8 @@ mixed, and audio ROM transport is external; the main system does not instantiate
 this board yet. The connected native-RAM startup regression passes all 4096 ordered writes
 for both games: reference/sound_board_boot_checks.json. It uses the same
 explicitly captured MAME CPU reset seed and MAME-style native RAM zeros as the
-earlier startup fixture; production RAM remains uninitialized. The full
-sound-board implementation gate is being checked.
+earlier startup fixture; production RAM remains uninitialized. These proofs are rerun when the single-pulse YM write qualification changes;
+the final implementation/netlist result must cover that same RTL.
 
 
 sound_board_tb also runs a synthetic Z80 IM1 interrupt handler twice from
@@ -154,3 +156,10 @@ Quartus infers from unchanged JT51 shift registers: 2048x8, 8x68, 4x21, 27x10,
 native sound RAM; the synthesis RAM summary identified the additional vendor
 state. The corrected gate checks each instance/geometry and rejects missing,
 duplicated or unexpected memories. No chip RTL or memory latency was changed.
+
+
+The command diagnostic now first programs YM register 14, reads busy status
+through the CPU and branches to failure unless the write was accepted. This
+caught the distinction between JT51's chip enable and register/busy P1 enable.
+Register write pulses are aligned with i_ym_half_enable; audio processing still
+receives both original chip enables. No vendor logic is changed.

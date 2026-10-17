@@ -28,6 +28,8 @@ begin
             else
                 sint_divider <= sint_divider + 1;
             end if;
+            assert (s_ym_write /= '1' or s_ym_enable = '1')
+                report "YM write extended beyond its single enable edge" severity failure;
             if (s_ym_write = '1' and s_ym_enable = '1') then
                 if (sint_ym_writes = 0) then
                     assert (s_ym_data = '0' and su8_ym_data = x"14") report "YM address latch failed" severity failure;
@@ -63,7 +65,7 @@ begin
             i_rom_ready => s_rom_ready,
             i_rom_response_valid => s_rom_response,
             iu8_rom_response_data => su8_rom_data,
-            i_ym_enable => s_ym_enable,
+            i_ym_write_enable => s_ym_enable,
             iu8_ym_status => x"A5",
             o_ym_write => s_ym_write,
             o_ym_data_register => s_ym_data,

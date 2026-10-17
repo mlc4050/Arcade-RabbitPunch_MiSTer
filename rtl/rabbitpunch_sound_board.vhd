@@ -79,7 +79,7 @@ begin
             i_rom_ready => i_rom_ready,
             i_rom_response_valid => i_rom_response_valid,
             iu8_rom_response_data => iu8_rom_response_data,
-            i_ym_enable => i_ym_enable,
+            i_ym_write_enable => i_ym_half_enable,
             iu8_ym_status => su8_ym_status,
             o_ym_write => s_ym_write,
             o_ym_data_register => s_ym_data,
