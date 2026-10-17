@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "ddr_copy": (0, ("rabbitpunch_ddr_copy", "rom_loader", "ddram_phy")),
     "audio_mixer": (0, ("rabbitpunch_audio_mixer",)),
     "audio_rom_transport": (0, ("rabbitpunch_audio_rom_transport", "rabbitpunch_audio_roms", "rabbitpunch_rom_cache", "rabbitpunch_read_arbiter")),
     "audio": (19403, ("rabbitpunch_audio", "rabbitpunch_sound_board", "rabbitpunch_adpcm", "jt51", "jt7759")),

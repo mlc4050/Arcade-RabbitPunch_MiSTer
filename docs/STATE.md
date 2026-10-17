@@ -214,3 +214,10 @@ Mono output adds a 16-bit registered PCM word and two FM warmup flags. Reset
 clears the flags; the second Yamaha sample marker qualifies its contribution
 after one complete accumulator period. Stopped chip enables cannot release the
 warmup mask. Mixing adds no RAM or video buffering. No restore interface is added.
+
+
+The load-time DDR wrapper adds one pending 16-bit stream word/address and a
+previous-active flag. Native rom_loader owns the 64-bit granule, word index,
+byte offset and copy FSM; ddram_phy owns one outstanding external read. These
+are load-time transport state and must drain before ownership changes; neither
+is reset by a gameplay soft reset. No additional RAM or gameplay DDR use is added.

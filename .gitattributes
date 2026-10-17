@@ -3,3 +3,4 @@ scripts/hooks/* text eol=lf
 rtl/cpu/** -text
 rtl/jtframe/*.v -text
 sim/vendor/** -text
+rtl/memory/ddram/** -text

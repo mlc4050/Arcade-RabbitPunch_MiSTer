@@ -12,6 +12,7 @@ this does not change any imported component's own licence.
 | JTFRAME subset | GPL-3.0-or-later; Jose Tejada Gomez | rtl/jtframe/PROVENANCE.md and retained SPDX headers |
 | TG68K.C evaluation copy | LGPL-3.0-or-later; Tobias Gubener and contributors | rtl/cpu/tg68k/PROVENANCE.md and retained source headers |
 | Donor CPU testbenches | Copied from the named local core repositories | sim/vendor/PROVENANCE.md and source manifest |
+| DDR PHY and word-copy engine | GPL v3 in the Psikyo donor README/LICENSE; unchanged | rtl/memory/ddram/PROVENANCE.md and retained LICENSE/UPSTREAM_README.md |
 | Skill tooling and workflow assets | Inherited from MiSTer-CoreSkill | Bootstrap history and original file notices |
 
 Exact donor commits, source paths and file hashes are in

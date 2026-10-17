@@ -33,3 +33,9 @@ same-clock registered test boundaries and the 48 MHz evaluation constraint.
 Implementation passes all timing corners with zero block RAM.
 reference/download_synth.json records the exact fit and synthetic tester
 constraints; it is not a final external-pin or HPS transfer proof.
+
+
+The load-time DDR copier now supplies this word stream in a connected synthetic
+system test. See DDR_LOADING.md: original donor PHY baseline, VHDL credit
+adapter, hot image replacement and soft reset without recopy pass. HPS mode
+selection/reset-release triggering and shared DDR-port ownership remain open.

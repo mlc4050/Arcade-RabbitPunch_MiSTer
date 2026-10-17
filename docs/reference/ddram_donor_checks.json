@@ -1,0 +1,12 @@
+{
+  "case": "ddram_phy_donor",
+  "pass_marker": "PASS: ddram_phy matches expected behavior at all tested latencies",
+  "log": "debug\\baselines\\ddram_phy_donor\\result.log",
+  "source_sha256": {
+    "rtl/memory/ddram/ddram_phy.sv": "5a0cc2eeca7d71ba83fbd19d79c38b9983f5956cb737acf4df64e20848d0578c",
+    "sim/vendor/ddram/ddram_model.sv": "f50424e93d41543de3e9598b6c62a5ab52c68547085c47fca3f3d8d46c9a76ad",
+    "sim/vendor/ddram/tb_ddram_phy.sv": "8a62fd56ff878a05afa4fa7ec287902043be4fb49adb4b6a3b5dbb862c5e8360"
+  },
+  "log_sha256": "f0d7ed652b26574e8d0b66587339d8436ce1a9665495c1b3bfc2659aec6785d9",
+  "scope": "Unchanged original DDR PHY/model/test from pinned Psikyo donor: single-byte lane writes, full-granule readback, consecutive reads and next-cycle reuse at model latencies 6/13; no physical HPS DDR or copy-loader integration proof"
+}
