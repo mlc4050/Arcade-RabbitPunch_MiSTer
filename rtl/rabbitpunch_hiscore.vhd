@@ -131,27 +131,12 @@ begin
                 s_notified <= '0';
                 s_capture_pending <= '0';
                 su32_wait <= iu32_start_wait;
-            elsif (i_game_reset = '1') then
-                styp_state <= STATE_IDLE;
-                s_initialized <= '0';
-                s_capture_pending <= '0';
-                su32_wait <= iu32_start_wait;
-                if (i_dump_download = '1') then
-                    s_download_bad <= '1';
-                end if;
             else
-                if (i_osd_open = '1' and s_old_osd = '0' and s_initialized = '1') then
-                    s_capture_pending <= '1';
-                end if;
+                -- Host snapshot loading is independent of the gameplay reset.
+                -- Reset still cancels RAM work through the maintenance helper.
                 if (i_dump_upload = '0' and s_old_upload = '1') then
                     s_dirty <= '0';
                     s_notified <= '0';
-                end if;
-                if (styp_state = STATE_IDLE and i_dump_download = '0' and i_dump_upload = '0' and
-                    s_dirty = '1' and s_saved_valid = '1' and s_notified = '0' and
-                    i_autosave = '1' and i_osd_open = '1' and s_capture_pending = '0') then
-                    o_upload_request <= '1';
-                    s_notified <= '1';
                 end if;
                 if (i_dump_download = '1') then
                     if (s_old_download = '0') then
@@ -175,105 +160,121 @@ begin
                         su32_wait <= iu32_start_wait;
                     end if;
                 end if;
-                -- Native HPS may announce a transfer while wait is asserted.
-                -- Finish accepted RAM work before admitting its first data byte.
-                if (styp_state /= STATE_IDLE or (i_dump_download = '0' and s_old_download = '0')) then
-                    case styp_state is
-                        when STATE_IDLE =>
-                            if (i_profile_valid = '1' and i_dump_upload = '0') then
-                                if (s_initialized = '0') then
-                                    if (su32_wait /= 0) then
-                                        su32_wait <= su32_wait - 1;
-                                    else
+                if (i_game_reset = '1') then
+                    styp_state <= STATE_IDLE;
+                    s_initialized <= '0';
+                    s_capture_pending <= '0';
+                    su32_wait <= iu32_start_wait;
+                else
+                    if (i_osd_open = '1' and s_old_osd = '0' and s_initialized = '1') then
+                        s_capture_pending <= '1';
+                    end if;
+                    if (styp_state = STATE_IDLE and i_dump_download = '0' and i_dump_upload = '0' and
+                        s_dirty = '1' and s_saved_valid = '1' and s_notified = '0' and s_old_download = '0' and
+                        i_autosave = '1' and i_osd_open = '1' and s_capture_pending = '0') then
+                        o_upload_request <= '1';
+                        s_notified <= '1';
+                    end if;
+                    -- Native HPS may announce a transfer while wait is asserted.
+                    -- Finish accepted RAM work before admitting its first data byte.
+                    if (styp_state /= STATE_IDLE or (i_dump_download = '0' and s_old_download = '0')) then
+                        case styp_state is
+                            when STATE_IDLE =>
+                                if (i_profile_valid = '1' and i_dump_upload = '0') then
+                                    if (s_initialized = '0') then
+                                        if (su32_wait /= 0) then
+                                            su32_wait <= su32_wait - 1;
+                                        else
+                                            su7_index <= (others => '0');
+                                            styp_state <= STATE_FIRST_ISSUE;
+                                        end if;
+                                    elsif (s_capture_pending = '1') then
                                         su7_index <= (others => '0');
-                                        styp_state <= STATE_FIRST_ISSUE;
-                                    end if;
-                                elsif (s_capture_pending = '1') then
-                                    su7_index <= (others => '0');
-                                    s_changed <= not s_saved_valid;
-                                    s_capture_pending <= '0';
-                                    styp_state <= STATE_CAPTURE_ISSUE;
-                                end if;
-                            end if;
-                        when STATE_FIRST_ISSUE =>
-                            if (i_memory_ready = '1') then
-                                styp_state <= STATE_FIRST_WAIT;
-                            end if;
-                        when STATE_FIRST_WAIT =>
-                            if (i_memory_response = '1') then
-                                if (iu8_memory_data = 0) then
-                                    su7_index <= su7_length - 1;
-                                    styp_state <= STATE_LAST_ISSUE;
-                                else
-                                    su32_wait <= resize(iu16_check_wait, 32);
-                                    styp_state <= STATE_IDLE;
-                                end if;
-                            end if;
-                        when STATE_LAST_ISSUE =>
-                            if (i_memory_ready = '1') then
-                                styp_state <= STATE_LAST_WAIT;
-                            end if;
-                        when STATE_LAST_WAIT =>
-                            if (i_memory_response = '1') then
-                                if (iu8_memory_data = su8_last_guard) then
-                                    su7_index <= (others => '0');
-                                    if (s_saved_valid = '1') then
-                                        styp_state <= STATE_RESTORE_READ;
-                                    else
-                                        s_changed <= '1';
+                                        s_changed <= not s_saved_valid;
+                                        s_capture_pending <= '0';
                                         styp_state <= STATE_CAPTURE_ISSUE;
                                     end if;
-                                else
-                                    su32_wait <= resize(iu16_check_wait, 32);
-                                    styp_state <= STATE_IDLE;
                                 end if;
-                            end if;
-                        when STATE_RESTORE_READ =>
-                            styp_state <= STATE_RESTORE_ISSUE;
-                        when STATE_RESTORE_ISSUE =>
-                            if (i_memory_ready = '1') then
-                                styp_state <= STATE_RESTORE_WAIT;
-                            end if;
-                        when STATE_RESTORE_WAIT =>
-                            if (i_memory_response = '1') then
-                                if (su7_index = su7_length - 1) then
+                            when STATE_FIRST_ISSUE =>
+                                if (i_memory_ready = '1') then
+                                    styp_state <= STATE_FIRST_WAIT;
+                                end if;
+                            when STATE_FIRST_WAIT =>
+                                if (i_memory_response = '1') then
+                                    if (iu8_memory_data = 0) then
+                                        su7_index <= su7_length - 1;
+                                        styp_state <= STATE_LAST_ISSUE;
+                                    else
+                                        su32_wait <= resize(iu16_check_wait, 32);
+                                        styp_state <= STATE_IDLE;
+                                    end if;
+                                end if;
+                            when STATE_LAST_ISSUE =>
+                                if (i_memory_ready = '1') then
+                                    styp_state <= STATE_LAST_WAIT;
+                                end if;
+                            when STATE_LAST_WAIT =>
+                                if (i_memory_response = '1') then
+                                    if (iu8_memory_data = su8_last_guard) then
+                                        su7_index <= (others => '0');
+                                        if (s_saved_valid = '1') then
+                                            styp_state <= STATE_RESTORE_READ;
+                                        else
+                                            s_changed <= '1';
+                                            styp_state <= STATE_CAPTURE_ISSUE;
+                                        end if;
+                                    else
+                                        su32_wait <= resize(iu16_check_wait, 32);
+                                        styp_state <= STATE_IDLE;
+                                    end if;
+                                end if;
+                            when STATE_RESTORE_READ =>
+                                styp_state <= STATE_RESTORE_ISSUE;
+                            when STATE_RESTORE_ISSUE =>
+                                if (i_memory_ready = '1') then
+                                    styp_state <= STATE_RESTORE_WAIT;
+                                end if;
+                            when STATE_RESTORE_WAIT =>
+                                if (i_memory_response = '1') then
+                                    if (su7_index = su7_length - 1) then
+                                        s_initialized <= '1';
+                                        s_capture_pending <= i_osd_open;
+                                        styp_state <= STATE_IDLE;
+                                    else
+                                        su7_index <= su7_index + 1;
+                                        styp_state <= STATE_RESTORE_READ;
+                                    end if;
+                                end if;
+                            when STATE_CAPTURE_ISSUE =>
+                                if (i_memory_ready = '1') then
+                                    styp_state <= STATE_CAPTURE_WAIT;
+                                end if;
+                            when STATE_CAPTURE_WAIT =>
+                                if (i_memory_response = '1') then
+                                    if (s_saved_valid = '0' or i_dump_upload = '1' or iu8_memory_data /= su8_view_data) then
+                                        s_changed <= '1';
+                                    end if;
+                                    if (su7_index = su7_length - 1) then
+                                        styp_state <= STATE_CAPTURE_COMMIT;
+                                    else
+                                        su7_index <= su7_index + 1;
+                                        styp_state <= STATE_CAPTURE_ISSUE;
+                                    end if;
+                                end if;
+                            when STATE_CAPTURE_COMMIT =>
+                                -- Never switch the read bank during an HPS transfer.
+                                if (i_dump_upload = '0') then
+                                    s_saved_bank <= not s_saved_bank;
+                                    s_saved_valid <= '1';
                                     s_initialized <= '1';
-                                    s_capture_pending <= i_osd_open;
+                                    if (s_changed = '1') then
+                                        s_dirty <= '1';
+                                        s_notified <= '0';
+                                    end if;
                                     styp_state <= STATE_IDLE;
-                                else
-                                    su7_index <= su7_index + 1;
-                                    styp_state <= STATE_RESTORE_READ;
                                 end if;
-                            end if;
-                        when STATE_CAPTURE_ISSUE =>
-                            if (i_memory_ready = '1') then
-                                styp_state <= STATE_CAPTURE_WAIT;
-                            end if;
-                        when STATE_CAPTURE_WAIT =>
-                            if (i_memory_response = '1') then
-                                if (s_saved_valid = '0' or i_dump_upload = '1' or iu8_memory_data /= su8_view_data) then
-                                    s_changed <= '1';
-                                end if;
-                                if (su7_index = su7_length - 1) then
-                                    styp_state <= STATE_CAPTURE_COMMIT;
-                                else
-                                    su7_index <= su7_index + 1;
-                                    styp_state <= STATE_CAPTURE_ISSUE;
-                                end if;
-                            end if;
-                        when STATE_CAPTURE_COMMIT =>
-                            -- Never switch the read bank during an HPS transfer.
-                            if (i_dump_upload = '0') then
-                                s_saved_bank <= not s_saved_bank;
-                                s_saved_valid <= '1';
-                                s_initialized <= '1';
-                                if (s_changed = '1') then
-                                    s_dirty <= '1';
-                                    s_notified <= '0';
-                                end if;
-                                styp_state <= STATE_IDLE;
-                            end if;
-                    end case;
+                        end case;
+                    end if;
                 end if;
             end if;
         end if;

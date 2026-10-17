@@ -372,8 +372,10 @@ begin
             s_prefill <= '0';
             s_initialize <= '0';
             load_config;
-            s_reset <= '0';
             load_dump(vint_length);
+            assert (s_saved = '1' and s_initialized = '0')
+                report "Score file loaded under gameplay reset was discarded" severity failure;
+            s_reset <= '0';
             vint_writes := sint_writes;
             cycles(300);
             assert (s_saved = '1' and s_initialized = '0' and sint_writes = vint_writes)
@@ -423,8 +425,14 @@ begin
             cycles(30);
             assert (sint_upload_requests = vint_notices + 1)
                 report "Dirty upload request repeated without a new snapshot" severity failure;
+            s_reset <= '1';
+            cycles(3);
             check_upload(1);
-            assert (s_dirty = '0') report "Completed upload did not clear dirty state" severity failure;
+            assert (s_dirty = '0') report "Completed reset-held upload did not clear dirty state" severity failure;
+            set_table(0);
+            s_reset <= '0';
+            wait_initialized;
+            check_ram(1);
             load_dump(vint_length - 1);
             check_upload(1);
             load_dump(vint_length, true);
@@ -480,7 +488,7 @@ begin
             assert (s_saved = '1') report "First run without a file never became saveable" severity failure;
             check_upload(2);
         end loop;
-        report "HISCORE_PASS sets=2 captured_geometry=checked sentinel_gate=checked changed_guard_bytes=checked native_ram_lanes_neighbors=checked delayed_ack=checked atomic_bank_commit=checked incomplete_reordered_oversize_downloads=checked reset_debt=checked first_run_without_file=checked concurrent_upload_bank_stability=checked busy_download_announcement=checked";
+        report "HISCORE_PASS sets=2 captured_geometry=checked sentinel_gate=checked changed_guard_bytes=checked native_ram_lanes_neighbors=checked delayed_ack=checked atomic_bank_commit=checked incomplete_reordered_oversize_downloads=checked reset_debt=checked first_run_without_file=checked concurrent_upload_bank_stability=checked busy_download_announcement=checked load_while_game_reset=checked";
         finish;
         wait;
     end process;

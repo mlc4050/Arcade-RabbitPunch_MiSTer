@@ -119,15 +119,15 @@
     "rtl/rabbitpunch_pause.vhd": "8bbbcd71a56ff3e30c898f61eed9ffa64909d3674767ee31de9ed017475d386c",
     "rtl/rabbitpunch_controls.vhd": "fc5a784432187c8ec72dc9a558f40db46c3f23beed00a7cbcc947e403094dd08",
     "rtl/rabbitpunch_config.vhd": "262cf96fa14d29bd37b057ef71d822f8e3e97eb1cda455d84b6284b34a2a416d",
-    "rtl/rabbitpunch_hiscore.vhd": "deb3db4fcd55026b46ddb47e6a0713910c30f8ed3940adf4e5dcda1c6f879312",
+    "rtl/rabbitpunch_hiscore.vhd": "ae503d52f8bf71d1ea5fcce76bae4a5e6936fd18a1babde342f80b8be5188b24",
     "rtl/rabbitpunch_hiscore_config.vhd": "fcb70ea11a4ea24040d0b1d09c7ceb1512e4527cfad06c316f3aea79ac614d6d",
     "rtl/rabbitpunch_hiscore_service.vhd": "4428ab8031e87adcc6ec81e781fd055d7bc93461cef11a6a6defa07e45bd5d2b",
     "rtl/rabbitpunch_maintenance_clients.vhd": "559976bd1124ea5ed26bf4f1ce5371d837dd126ad366acbe4ffbb8e8b8de548a",
     "rtl/rabbitpunch_platform.vhd": "7960c3c761da77ec2bea55872e48057e28243cbebb7f42ae051c125b80887997",
     "debug/netlists/host_00cc992/host_check.vo": "424638023889eaf4ec0f6493329fb83bdb36b6b3eda0a01a2fc35575b36f40f4",
-    "sim/board/platform_hiscore_tb.vhd": "b59a98ad1d36985af02a9d157ba504a396c1d6ddba89048565421a5252af70db"
+    "sim/board/platform_hiscore_tb.vhd": "c152cd19c416dfbb0ede235da8186ad917dbf09f5bf370f630204a7c53c1fe6c"
   },
   "vectors_sha256": "56c5bb10b5801c7e067a3a6770e4369431bac096d0f90be7ed958c3974b4af01",
-  "log_sha256": "51bef8e4e4ca4c29c1ff25f7c742382c7152290dfec6f53347140b55a7b21330",
+  "log_sha256": "84d72535e813b90dd531226141e5e5ebac9641074605c23eabffcaffa5f776c9",
   "scope": "Full logical platform and executing fx68k through actual shared SDRAM/chip model, native work/score RAM and both maintenance clients. Both MAME table geometries, standard config3/dump4 restore, CPU-consumed restored score word, external maintenance prefill, changed-score OSD autosave/upload, soft-reset restore and ROM-generation/DIP isolation. Native HPS command strobes when --host-netlist, otherwise modeled file signals; game ROM replaced by a 64-byte diagnostic; no disk persistence or physical timing claim."
 }

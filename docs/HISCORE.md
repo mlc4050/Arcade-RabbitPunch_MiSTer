@@ -161,3 +161,14 @@ the score service prevents retained score bytes crossing games. Physical menu
 behavior, unusually early exit before initialization, and disk-file persistence
 still require the final MiSTer shell/hardware test; the simulation does not run
 the ARM menu software.
+
+
+Gameplay reset does not reject host score files. File downloads, atomic bank
+commit, upload readback and upload-completion bookkeeping continue while the
+CPU is held reset; game-RAM restoration remains blocked until reset releases
+and initialization sentinels match. Unit/service tests check reset-held loading
+and upload completion, and direct/native full-platform tests hold status reset
+through config3/dump4 before checking the CPU's restored word. The preceding
+controller fails the new unit test at the expected reset-held-load assertion
+(private debug/baselines/hiscore_reset_unfixed/negative_control.json). All final
+positive report source/log hashes were checked before this commit.

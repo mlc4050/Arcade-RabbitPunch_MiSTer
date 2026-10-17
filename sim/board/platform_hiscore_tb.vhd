@@ -757,6 +757,8 @@ begin
                 report "Full platform retained previous ROM's score profile/image" severity failure;
             check_menu(8);
             table_bytes(false);
+            su128_status(0) <= '1';
+            cycles(3);
             configure(vint_game = 1);
             su16_host_index <= to_unsigned(4, 16);
             native_file_command(16#55#, 4);
@@ -769,6 +771,9 @@ begin
             s_host_download <= '0';
             native_file_command(16#53#, 0);
             cycles(3);
+            assert (s_score_saved = '1' and s_score_initialized = '0')
+                report "Platform discarded a score file while game reset was held" severity failure;
+            su128_status(0) <= '0';
             wait_scores;
             check_echo(false);
             upload(false);
@@ -808,7 +813,7 @@ begin
         end loop;
         assert (s_error = '0' and su16_dips = x"A55A")
             report "Score persistence disturbed image or DIP state" severity failure;
-        report "PLATFORM_HISCORE_PASS sets=2 executing_cpu=checked shared_sdram=checked config3_dump4=checked restore_echo=checked external_client_arbitration=checked osd_autosave=checked upload_bytes=234 soft_reset_restore=checked rom_generation_isolation=checked dips_preserved=checked menu_visibility=checked host_netlist=" & boolean'image(HOST_NETLIST_MODE);
+        report "PLATFORM_HISCORE_PASS sets=2 executing_cpu=checked shared_sdram=checked config3_dump4=checked restore_echo=checked external_client_arbitration=checked osd_autosave=checked upload_bytes=234 soft_reset_restore=checked rom_generation_isolation=checked dips_preserved=checked menu_visibility=checked reset_held_file_load=checked host_netlist=" & boolean'image(HOST_NETLIST_MODE);
         finish;
         wait;
     end process;

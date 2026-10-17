@@ -6,12 +6,12 @@
     "rtl/rabbitpunch_ram8.vhd": "fd924b3eddbe1769b3e2dbd175e0f2a57629097ddba0dbd4cf295edfe81b3b39",
     "rtl/rabbitpunch_ram16.vhd": "7f740e02f07b244a8bd84721e763163495ec8a5c1936c06ab74d05e340816b50",
     "rtl/rabbitpunch_maintenance.vhd": "19d90ccaf6c967a05b7c6964dceb46e34ba7945bf3ae3a9e30d7cade5c6c1268",
-    "rtl/rabbitpunch_hiscore.vhd": "deb3db4fcd55026b46ddb47e6a0713910c30f8ed3940adf4e5dcda1c6f879312",
+    "rtl/rabbitpunch_hiscore.vhd": "ae503d52f8bf71d1ea5fcce76bae4a5e6936fd18a1babde342f80b8be5188b24",
     "rtl/rabbitpunch_hiscore_config.vhd": "fcb70ea11a4ea24040d0b1d09c7ceb1512e4527cfad06c316f3aea79ac614d6d",
     "rtl/rabbitpunch_hiscore_service.vhd": "4428ab8031e87adcc6ec81e781fd055d7bc93461cef11a6a6defa07e45bd5d2b",
-    "sim/board/hiscore_tb.vhd": "905fb5eaca4f3c08fdbe612b53651f6b9d1669c5cbf7921e3e2d943d9a5a8ef1"
+    "sim/board/hiscore_tb.vhd": "aea06023c12ec8d573983bf6cd940b101129722d3346e030f8e08300412f4eb2"
   },
   "vectors_sha256": "56c5bb10b5801c7e067a3a6770e4369431bac096d0f90be7ed958c3974b4af01",
-  "log_sha256": "ad2fe4443d5be6ad80f32858eff94d6665c3b916e6d29ee5ddcb143c59d7f187",
+  "log_sha256": "657889070b771513e5cb6e0ffb48c007f587f4af2d37a06f8f760a05aa427fee",
   "scope": "Standard index-3 metadata plus index-4 file service composition. Atomic saved-score banks with native dual-port RAM and production maintenance byte adapter, both captured MAME geometries. Backend pause confirmation and varying acknowledgment latency, initialization guards, changed saved guard bytes, exact restoration and neighbors, first run without a file, unchanged/changed captures, autosave request edges, malformed file rejection and reset debt. No production platform composition or disk persistence claim."
 }
