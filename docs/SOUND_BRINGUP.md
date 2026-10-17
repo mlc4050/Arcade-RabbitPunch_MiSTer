@@ -103,3 +103,9 @@ while the CPU waits/pauses. Its register initialization is exercised, but no
 PCM waveform or audible game result is claimed. Native vendor sources remain
 unchanged. The new staged soundcpu fit target checks the transaction adapter
 and T80 only, with registered logical evaluation interfaces at 48 MHz.
+
+The sound CPU implementation passes all reported 48 MHz timing corners with
+zero block RAM, worst setup +5.642 ns and hold +0.156 ns.
+reference/soundcpu_synth.json pins the staged commit and six zero-issue timing
+coverage categories. This checks T80 and the transaction adapter; JT51 and the
+future native sound RAM/backend are outside that fit.
