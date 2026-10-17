@@ -1,3 +1,5 @@
+-- SPDX-License-Identifier: GPL-3.0-or-later
+-- Copyright (C) 2026 RabbitPunch contributors
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -5,11 +7,14 @@ library altera_mf;
 use altera_mf.altera_mf_components.all;
 
 -- CPU read/write port plus a read-only video/state inspection port, one clock.
--- RAM contents are deliberately not reset. CPU writes define each byte independently.
+-- Configuration initializes physical RAM to zero; gameplay reset preserves bytes.
 -- CPU read data is meaningful for reads only; mixed-port same-address collisions
 -- have no guaranteed value and must be avoided by video/state arbitration.
 entity rabbitpunch_ram16 is
-    generic (sint_ADDRESS_BITS : positive := 13);
+    generic (
+        sint_ADDRESS_BITS : positive := 13;
+        POWER_UP_WORD : unsigned(15 downto 0) := x"0000"
+    );
     port (
         i_clk : in std_logic;
         i_cpu_enable : in std_logic;
@@ -26,11 +31,16 @@ end entity;
 
 architecture rtl of rabbitpunch_ram16 is
     subtype t_data is unsigned(15 downto 0);
+    -- Constant XOR encoding gives nonzero logical power-up contents without
+    -- a simulation/project-relative MIF path. Both byte lanes remain independent.
+    signal su16_physical_cpu_data, su16_physical_view_data : unsigned(15 downto 0);
     signal s_cpu_write_enable : std_logic;
     signal s_cpu_read_enable : std_logic;
 begin
     assert iux_cpu_address'length = sint_ADDRESS_BITS and iux_view_address'length = sint_ADDRESS_BITS
         report "RAM address ports must match sint_ADDRESS_BITS" severity failure;
+    ou16_cpu_data <= su16_physical_cpu_data xor POWER_UP_WORD;
+    ou16_view_data <= su16_physical_view_data xor POWER_UP_WORD;
     s_cpu_write_enable <= i_cpu_enable and i_cpu_write;
     s_cpu_read_enable <= i_cpu_enable and not i_cpu_write;
 
@@ -60,7 +70,7 @@ begin
             read_during_write_mode_port_a => "NEW_DATA_NO_NBE_READ",
             read_during_write_mode_port_b => "NEW_DATA_NO_NBE_READ",
             read_during_write_mode_mixed_ports => "DONT_CARE",
-            power_up_uninitialized => "TRUE"
+            power_up_uninitialized => "FALSE"
         )
         port map (
             clock0 => i_clk,
@@ -73,11 +83,11 @@ begin
             rden_b => i_view_enable,
             address_a => std_logic_vector(iux_cpu_address),
             address_b => std_logic_vector(iux_view_address),
-            data_a => std_logic_vector(iu16_cpu_data),
+            data_a => std_logic_vector(iu16_cpu_data xor POWER_UP_WORD),
             data_b => (others => '0'),
             byteena_a => std_logic_vector(iu2_cpu_bytes),
             byteena_b => (others => '1'),
-            t_data(q_a) => ou16_cpu_data,
-            t_data(q_b) => ou16_view_data
+            t_data(q_a) => su16_physical_cpu_data,
+            t_data(q_b) => su16_physical_view_data
         );
 end architecture;

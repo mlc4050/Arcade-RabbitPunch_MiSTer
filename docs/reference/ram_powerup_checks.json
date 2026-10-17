@@ -1,0 +1,12 @@
+{
+  "case": "ram_powerup",
+  "pass_marker": "RAM_POWERUP_PASS",
+  "log": "debug\\baselines\\ram_powerup\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_ram16.vhd": "944818901a265eb00e376732c43da881745b6e020303bb907283f3a2aeb46beb",
+    "rtl/rabbitpunch_ram8.vhd": "fe34437890ca1cc79c920831062d7e43f2f0d2c01dd40fc7323e9614920ffee1",
+    "sim/memory/ram_powerup_tb.vhd": "071f02b62fc564a362dc31e2fd238369e3aac84c4440f7c7254343530b86cd02"
+  },
+  "log_sha256": "4c88f85567e9a957190a706772aad182b23d288d9855b3066375b065dcf8458f",
+  "scope": "Native M10K configuration contents without simulator deposits: all 256 addresses on both read ports, three logical word patterns and zeroed byte RAM; independent upper/lower writes and disabled-output retention. Board binding is checked separately; physical hardware power-up not yet measured."
+}

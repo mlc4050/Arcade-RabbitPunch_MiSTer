@@ -287,3 +287,11 @@ accepted-byte pending bit. Client payload is held by the selected caller until
 acceptance; no extra memory transaction queue is introduced. Drain the shared
 helper/backend before taking a stable state. A canceled score client initializes
 only its helper session; backend bus ownership still drains independently.
+
+
+Native RAM configuration now uses zeroed physical M10K storage. Bitmap uses
+constant FFFF XOR encoding to expose MAME's transparent-15 startup pixels;
+other production word banks and byte RAM use zero. State view/maintenance APIs
+return logical values and need no format change. A raw vendor-memory dump of
+the bitmap must be decoded with FFFF. CPU/game reset does not clear these banks.
+See RAM_POWERUP.md for startup scope and tests.

@@ -24,7 +24,6 @@ Rules:
 | Raster events not generated in real-ROM boot bench | `boot_writes_tb.sv`, interrupts instance | GGA IRQ state and CPU acknowledge work, but vblank/half-frame events are tied low | Supply verified raster events and compare IRQ execution against MAME | Directed scheduler and CPU STOP/handler/RTE tests pass; early boot is not a full timing comparison | tooling |
 | System reset also drives CPU power-up reset | `rabbitpunch_maincpu.vhd`, i_powerup_reset | No separate cold/warm reset policy yet | Wire and verify distinct reset behavior during board integration | Diagnostic reset replay passes; game warm reset unverified | latent |
 | Boot ROM transport and external inputs remain behavioral | `sim/board/boot_writes_tb.sv` | ROM array supplies the external handshake; DIP defaults come from MRA, controls are inactive | Integrate SDRAM transport, input mapper and sound CPU | VHDL RAM, board I/O and mailbox now used; a poll of a pending command stops for the missing sound CPU | tooling |
-| No assigned RAM power-up contents yet | `rabbitpunch_ram16.vhd`, physical_ram | MAME starts ordinary RAM at zero and bitmap pixels at transparent 15; RAM explicitly uses power_up_uninitialized TRUE until a board startup policy is implemented | Define and verify FPGA configuration-time initialization or a startup fill before CPU/video release | Tests explicitly initialize all checked words; 10000-write boot prefix passes, pre-clear display unverified | latent |
 
 | Same-word video/inspection reads take priority over a CPU write | `rabbitpunch_board_memory.vhd`, STATE_WAIT_WRITE_SLOT | Deterministic FPGA policy avoids undefined native mixed-port collisions; original PCB bus ownership timing is not yet established | Verify against schematics/measurements and prove CPU wait bounds with the physical raster | Directed collision tests pass; original arbitration unverified | visible |
 
@@ -54,3 +53,10 @@ changed; an unseeded Rabio Lepus diagnostic differed in four temporary stack
 bytes while matching every peripheral write. Sound memory replies in that test
 are behavioral, periodically delayed by 53 clocks; this is not original-board
 cycle timing or shared SDRAM bandwidth proof. See SOUND_BRINGUP.md.
+
+
+Resolved RAM startup policy: native word/byte RAM now has explicit
+configuration-time contents, with transparent-15 packed bitmap words and zero
+ordinary RAM matching MAME. No game-reset clear sweep is introduced.
+RAM_POWERUP.md and reference/ram_powerup_checks.json record the contract;
+physical board startup verification remains open.

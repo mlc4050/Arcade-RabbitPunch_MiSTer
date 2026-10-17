@@ -90,6 +90,16 @@ begin
             assert (s_response = '0') report "Repeated CPU acknowledgment" severity failure;
         end procedure;
     begin
+        -- Check mapped configuration-time contents before any CPU write.
+        for vint_bank in 0 to 4 loop
+            vu16_expected := x"0000";
+            if (vint_bank = 0) then
+                vu16_expected := x"FFFF";
+            end if;
+            for vint_word in 0 to 63 loop
+                access_memory(vint_bank, vint_word, '0', "11", x"0000", vu16_expected);
+            end loop;
+        end loop;
         for vint_bank in 0 to 4 loop
             for vint_word in 0 to 63 loop
                 access_memory(vint_bank, vint_word, '1', "11", to_unsigned(vint_bank * 4096 + vint_word, 16), x"0000");
