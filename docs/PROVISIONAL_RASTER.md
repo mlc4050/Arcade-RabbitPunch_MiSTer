@@ -102,4 +102,7 @@ fractional phases and continuous pixel cadence through loading, pause, reset,
 replacement and partial-image recovery. That short test ends before the first
 vertical interrupt/render window; it does not prove a complete executing frame.
 A separate static-MAME capture test drives the real graphics/ROM path at continuous
-raster cadence; its first run is pending. See MACHINE_INTEGRATION.md.
+raster cadence; Rabbit Punch attract passes all 62208 pixels with zero differences
+and no underflow. Maximum render cost is 2576 of 3024 system clocks per line.
+The combined machine fit passes all 48 MHz timing/coverage gates (+2.077 ns setup,
++0.100 ns hold); the clocked wrapper also passes vendor-model CPU/load tests. See MACHINE_INTEGRATION.md.

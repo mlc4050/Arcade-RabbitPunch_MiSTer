@@ -30,9 +30,16 @@ Verification so far:
   unknown-state warnings are expected and audio function is not scored.
 - Existing board and platform regressions pass after phase-port propagation.
 - `run_scanout_capture_tests.py`: first continuous real-graphics/shared-SDRAM MAME
-  snapshot comparison is in progress. It uses direct ROM chip-model preload and
+  snapshot comparison passes for Rabbit Punch attract: all 62208 RGB pixels match MAME,
+  zero underflow, worst render cost 2576 of 3024 clocks. It uses direct ROM chip-model preload and
   synthetic competing CPU traffic; it does not execute a game or prove hardware.
-- The combined machine implementation target is prepared, not yet accepted.
+- Combined machine implementation ccb6fa8 passes at the conservative 48 MHz
+  evaluation constraint: 929387 RAM bits, worst setup +2.077 ns / hold +0.100 ns,
+  all timing corners and six coverage categories pass. Reports are retained under
+  debug/fit_archive/machine_ccb6fa8/.
+- The clocked-machine wrapper passes the same downloaded-program diagnostics
+  using the installed vendor PLL model and production reset-release boundary.
+  Fitted PLL counters/phase and physical SDRAM timing remain unverified.
 
 Reports live in `docs/reference/`; private simulator logs/images and fit archives
 live under `debug/`. Standalone PLL-model checks do not prove fitted clock counters,
