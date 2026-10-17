@@ -35,7 +35,10 @@ BLOCKS = {
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("block", choices=BLOCKS)
+    parser.add_argument("--wall-timeout", type=int, default=300, help="Maximum real seconds for the netlist simulation")
     args = parser.parse_args()
+    if args.wall_timeout <= 0:
+        parser.error("Wall timeout must be positive")
     root = core_root()
     require_no_jtag(f"Rabbit Punch {args.block} netlist export and simulation")
     stamp = (root / "build/BUILT_COMMIT").read_text().split()[0]
@@ -88,7 +91,7 @@ def main():
     libraries = [item for library in ("cyclonev_ver", "altera_ver", "altera_lnsim_ver", "lpm_ver", "sgate_ver")
                  for item in ("-L", library)]
     check = run_case(f"gate_{args.block}", sources, top, "60 ms", marker,
-                     sim_args=libraries + (["-gEVALUATION_BOUNDARY=true"] if args.block == "memory" else []), wall_timeout=300)
+                     sim_args=libraries + (["-gEVALUATION_BOUNDARY=true"] if args.block == "memory" else []), wall_timeout=args.wall_timeout)
     check.update(commit=stamp, vectors_sha256=vectors, netlist_sha256=hashlib.sha256(netlist.read_bytes()).hexdigest(),
                  source_sha256={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources},
                  log_sha256=hashlib.sha256((root / check["log"]).read_bytes()).hexdigest(),

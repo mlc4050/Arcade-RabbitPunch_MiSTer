@@ -75,3 +75,21 @@ both direct and registered boundaries; netlist mode selects the registered
 component and accounts for the two added test-only boundary stages. No timing
 false paths or multicycle exceptions are used. Final board electrical timing
 still requires the physical integration check.
+
+The corrected isolated target at fa445a9 passes all timing and coverage checks:
+835584 RAM bits, worst setup +6.462 ns and hold +0.186 ns. Reports are retained
+under `debug/fit_archive/memory_fa445a9/` and summarized in
+`reference/memory_synth.json`. The exhaustive synthesized-netlist simulation
+is tracked separately from this implementation result.
+
+An additional private negative control removes only the bitmap bank's FFFF
+binding. The full mapped-memory bench fails at CPU bank 0, word 0, after
+successful compilation/loading. This checks the production bank policy as well
+as the primitive defaults; see reference/ram_bank_initialization_negative.json.
+
+The initial synthesized-memory replay reached its 300-second real-time limit
+without an assertion failure. ModelSim Starter reports exceeding its recommended
+capacity; the partial log is retained under
+`debug/baselines/gate_memory_timeout_300/`. The active replay uses an explicit
+1200-second limit and progress markers. No netlist functional pass is claimed
+until that replay completes.

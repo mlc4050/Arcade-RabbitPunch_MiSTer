@@ -1,0 +1,77 @@
+{
+  "status": "UNVERIFIED CANDIDATE; no final raster or clock selection",
+  "sets": [
+    {
+      "set": "rabiolep",
+      "trace_sha256": "1c86e032223fe48c7db151b617f731746aa089cccd65cf61410a798641ec4b0b",
+      "registers_hex": [
+        "47",
+        "57",
+        "61",
+        "6b",
+        "00",
+        "01",
+        null,
+        null,
+        "6b",
+        "73",
+        "77",
+        "7f",
+        "1f",
+        "00",
+        null,
+        null
+      ]
+    },
+    {
+      "set": "rpunch",
+      "trace_sha256": "b220109c13ee36b49fa416d392db6adb3d03db994a88159d9c1ca23b97d158a3",
+      "registers_hex": [
+        "47",
+        "57",
+        "61",
+        "6b",
+        "00",
+        "01",
+        null,
+        null,
+        "6b",
+        "73",
+        "77",
+        "7f",
+        "1f",
+        "00",
+        null,
+        null
+      ]
+    }
+  ],
+  "hypothesis": {
+    "horizontal_scale": 4,
+    "vertical_scale": 2,
+    "counter_encoding": "register + 1",
+    "horizontal_active_end": 288,
+    "horizontal_sync_start": 352,
+    "horizontal_sync_end": 392,
+    "horizontal_total": 432,
+    "vertical_active_end": 216,
+    "vertical_sync_start": 232,
+    "vertical_sync_end": 240,
+    "vertical_total": 256
+  },
+  "nominal_proposal": {
+    "system_hz": 46666666.666666664,
+    "pixel_divider": 7,
+    "pixel_hz": 6666666.666666667,
+    "line_hz": 15432.0987654321,
+    "frame_hz": 60.28163580246914,
+    "line_cycles": 3024,
+    "largest_previously_measured_cached_line_cycles": 2557,
+    "remaining_cycles": 467
+  },
+  "limits": [
+    "GGA register interpretation and output pixel-clock identity are hypotheses, not established hardware facts.",
+    "Clock-enable/PLL and scanout implementation require approval to proceed provisionally, or original-board timing evidence.",
+    "The 2557-cycle graphics measurement is not a proof of every dynamic scene with executing CPUs and sound."
+  ]
+}

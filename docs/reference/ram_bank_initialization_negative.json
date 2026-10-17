@@ -1,0 +1,14 @@
+{
+  "expected_failure": true,
+  "reason": "Removing the bitmap bank FFFF logical power-up binding fails at the first CPU read; compilation and primitive loading succeeded.",
+  "source_sha256": {
+    "rtl/rabbitpunch_layout.vhd": "28913c5c8d29e0aca34042db0f001e9e6a628b577ed2220af219c4e2fd86a968",
+    "rtl/rabbitpunch_decode.vhd": "c2ffd118ed681db262d7f82639d7011fa908ed88bf5e9206f3f5f1422f187a5e",
+    "rtl/rabbitpunch_ram16.vhd": "944818901a265eb00e376732c43da881745b6e020303bb907283f3a2aeb46beb",
+    "debug/negative/board_without_bitmap_fill.vhd": "b104be0678bfc62f3f3e83c98047522f67227a1f039013f7b5535f62b3da745a",
+    "rtl/rabbitpunch_memory.vhd": "848a5cebb1558b68de8d681e3a6b2a14a64890a22e9efe9c9d75203c2390e059",
+    "sim/memory/memory_powerup_tb.vhd": "aa02b546c0e7befcbecafcd5c2600f6af3d4201b03023cfec17547110fea84af"
+  },
+  "log": "debug/baselines/memory_powerup_missing_bitmap_fill/result.log",
+  "log_sha256": "f3aa4e1ca34989431b9d026b2d222e569cf0291a4e1cf09e1299573a8c8e2f00"
+}

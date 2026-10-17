@@ -172,6 +172,7 @@ begin
             assert (s_view_valid = '0') report "View valid failed to clear" severity failure;
         end procedure;
     begin
+        report "MEMORY_POWERUP_START: checking configuration contents";
         -- Every word is read through both interfaces before the first write.
         for vint_bank in 0 to 4 loop
             vu16_initial := x"0000";
@@ -181,6 +182,10 @@ begin
             for vint_word in 0 to C_DEPTHS(vint_bank) - 1 loop
                 cpu_access(vint_bank, vint_word, '0', "11", x"0000", vu16_initial);
                 view_word(vint_bank, vint_word, vu16_initial);
+                if (vint_word mod 4096 = 4095 or vint_word = C_DEPTHS(vint_bank) - 1) then
+                    report "MEMORY_POWERUP_PROGRESS bank=" & integer'image(vint_bank) &
+                        " words=" & integer'image(vint_word + 1);
+                end if;
             end loop;
         end loop;
         -- First, middle and last words exercise both byte lanes in each bank.
