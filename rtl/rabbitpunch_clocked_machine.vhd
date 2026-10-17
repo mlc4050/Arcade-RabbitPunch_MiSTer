@@ -145,7 +145,7 @@ entity rabbitpunch_clocked_machine is
 end entity;
 
 architecture rtl of rabbitpunch_clocked_machine is
-    signal s_system_clk, s_locked, s_initialize : std_logic;
+    signal s_system_clk, s_locked, s_initialize, s_framework_reset : std_logic;
 begin
     o_system_clk <= s_system_clk;
     o_pll_locked <= s_locked;
@@ -166,6 +166,12 @@ begin
             i_asynchronous_reset => i_cold_reset or not s_locked,
             o_reset => s_initialize
         );
+    gameplay_reset : entity work.rabbitpunch_reset_release
+        port map (
+            i_clk => s_system_clk,
+            i_asynchronous_reset => i_framework_reset,
+            o_reset => s_framework_reset
+        );
     machine : entity work.rabbitpunch_machine
         generic map (
             GINT_IMAGE_BYTES => GINT_IMAGE_BYTES,
@@ -174,7 +180,7 @@ begin
         port map (
             i_clk => s_system_clk,
             i_initialize => s_initialize,
-            i_framework_reset => i_framework_reset,
+            i_framework_reset => s_framework_reset,
             iu128_status => iu128_status,
             iu2_host_buttons => iu2_host_buttons,
             iu32_joystick0 => iu32_joystick0,

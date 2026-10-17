@@ -60,7 +60,8 @@ without changing the render/memory architecture.
 
 The standalone VHDL clock-enable generator and adjustable raster are implemented
 and connected to the production platform through rabbitpunch_machine. The
-MiSTer framework top remains the inherited demo until shell integration lands. Enable tests check 175065
+MiSTer framework boundary now points to that machine; its full implementation
+and physical output remain unverified. Enable tests check 175065
 rational-cadence/reset conditions; raster tests cover two complete default frames
 (221184 beam pixels), a small odd-sized positive-sync case, sparse enables,
 coordinate offsets and reset while stopped. See reference/raster_checks.json.
@@ -72,7 +73,7 @@ under debug/fit_archive/raster_d23887d/. No playable RBF exists.
 The descriptive VHDL PLL wrapper now requests a 50 MHz input and two
 46.666667 MHz outputs. System logic uses output 0; output 1 provisionally shifts
 by 10714 ps (half a period) for the external SDRAM clock only. This is an initial
-controller bring-up choice, adjustable through SDRAM_PHASE_SHIFT. The installed
+controller bring-up choice, adjustable through GSTR_SDRAM_PHASE_SHIFT. The installed
 vendor PLL model passes lock/relock, 448 individual period/phase observations and
 two 224-period average-frequency checks. Its documented 10 ps synchronization
 drift is allowed per edge; the 4.8 us average span must remain within 20 ps.

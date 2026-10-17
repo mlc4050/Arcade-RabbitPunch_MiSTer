@@ -115,9 +115,9 @@
     "rtl/rabbitpunch_machine.vhd": "6c60f2400e79c2f866dfbfdf6e3fbcc4cde34feda44c8f6c1d453b1638f04e3f",
     "rtl/rabbitpunch_pll.vhd": "988e14413b0f965adc2ea6f35ebe87620bb1e01aa4a8bc48336c82194271283d",
     "rtl/rabbitpunch_reset_release.vhd": "00d7c5a85bcd24508ceef1e3b3b3b065678e7350d16bc06deab66d733e5375ec",
-    "rtl/rabbitpunch_clocked_machine.vhd": "470058aab8c78ac52ec93c0b6c877761fcebb4b5ed17bef986f4f8bf9cfcc5e6",
+    "rtl/rabbitpunch_clocked_machine.vhd": "0e067aa70f7c7048c66facefc4ce3301519ad46a4ec9882ba298bd18957a1d72",
     "sim/board/clocked_machine_tb.vhd": "d82eb785f59728ebb589d6807a7322c4c07fc388fe17e0708eb32e6ed7ba75eb"
   },
-  "log_sha256": "5e0b7b368e6d0c63a0b6a59e58366099f9fb40943d2e12f4a9f3f5f2f1879477",
+  "log_sha256": "3c8e15d373b8c77a93f4435374a4860315c86f8e31453d90b292fc6098a6eaba",
   "scope": "Machine download/control/CPU diagnostics driven by installed vendor PLL behavioral model and production reset release; live horizontal cadence through gameplay resets. Before first vertical render; sound ROM absent/audio not scored; SDRAM command model samples the system clock, no physical phase/electrical/fitted-counter or complete MiSTer proof"
 }

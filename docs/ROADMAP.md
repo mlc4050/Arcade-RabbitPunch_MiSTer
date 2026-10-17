@@ -2,7 +2,8 @@
 
 Approved by the user in the originating chat. The core is in simulation and
 implementation bring-up; no complete game or playable RBF exists yet. The
-inherited MiSTer template demo remains connected at the framework top level.
+MiSTer framework boundary now points to the VHDL machine; full-shell
+implementation and hardware bring-up remain pending.
 
 ## Current verified status
 

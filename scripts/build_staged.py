@@ -62,7 +62,9 @@ QUARTUS_BIN = None
 # cannot catch that; presence is asserted separately. Add each name in the
 # commit that adds the module it names, so the gate grows with the design.
 REQUIRED_INSTANCES = (
-    "hps_io",        # the framework's HPS interface; present from the template on
+    "hps_io", "rabbitpunch_clocked_machine", "rabbitpunch_scanout",
+    "rabbitpunch_scanline_scheduler", "rabbitpunch_rom_cache", "fx68k",
+    "T80se", "jt51", "jt7759", "jtframe_draw", "rabbitpunch_hiscore_service",
     # "fx68k", "sdram", "arcade_video", "Hq2x", "screen_rotate_two", ...
 )
 

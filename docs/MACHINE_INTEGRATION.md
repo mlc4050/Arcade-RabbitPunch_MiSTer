@@ -52,3 +52,16 @@ RAM startup checks are rerun after the rename. Both regenerated MRAs still match
 all 0x210000 bytes against independent assembly and actual MAME-loaded regions.
 The cached native-host netlist must be regenerated because its checked wrapper
 source names changed; its source guard stays enabled.
+
+The renamed native-host boundary now passes a fresh Quartus fit/netlist test,
+raw-command platform loading/control tests and both profiles' native score-file
+round trips. Archived host fit: debug/fit_archive/host_d929f0a/. The clocked machine
+also passes after synchronizing release of the external framework gameplay reset
+through a separate three-register release chain; that reset never restarts the PLL.
+
+The existing RabbitPunch.sv is now only MiSTer macro-port boundary wiring to the
+VHDL host and clocked machine. files.qip selects the production sources. Physical
+blanking drives VGA_DE independently of game readiness; colors remain black until
+rows are armed. Signed mono PCM feeds both channels. The DDR interface currently
+has one client, the load-time copier; rotation is not connected. Full-shell fit,
+SDRAM pin timing and hardware output remain pending.
