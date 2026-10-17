@@ -112,3 +112,26 @@ shows Optimize Hold Timing = All Paths and Multi-Corner Timing = On, so adding
 those assignments would be ineffective. The evaluation project retains seed 3
 and requests maximum router timing optimization plus timing ECO optimization.
 RTL, clock period, I/O constraints and strict timing gates are unchanged.
+
+
+## Registered implementation evaluation
+
+The direct virtual-input project exposed input-to-register hold failures. At
+seed 3 with maximum router effort and timing ECO enabled, the worst reported
+hold is -1.254 ns from a virtual CPU byte-enable input; the internal
+register-to-register hold at the inspected slow/-40 C corner is +0.212 ns.
+The previous 0 ns input-delay model launched from the external clock pin while
+the register clock arrived roughly 4.65 ns later. These reports do not establish
+a clock-domain crossing or a long combinational setup path.
+
+The isolated project now uses board_video_check.vhd, an evaluation-only wrapper
+with same-clock launch and capture registers on every non-clock interface.
+Synthetic virtual inputs change half a period after the external rising edge;
+virtual output delays are zero. All boundary-register-to-DUT and DUT-to-boundary
+paths, along with every internal path, retain the normal single-cycle setup
+and same-edge hold checks. No false paths or multicycle exceptions are added.
+This explicit tester contract is not a claim about final external pins; the
+wrapper is absent from production RTL and adds no game latency. Final MiSTer
+integration, PLL and SDRAM timing still require their own implementation.
+Maximum router/ECO experiments are removed; seed 3 remains fixed. The new fit
+must pass the existing all-corner timing, coverage and RAM-count gates.

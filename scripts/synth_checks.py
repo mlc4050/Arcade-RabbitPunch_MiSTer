@@ -91,11 +91,16 @@ def run_check(stage, quartus_bin, stamp, name):
     seed_match=re.search(r"(?m)^set_global_assignment -name SEED (\d+)\s*$",assignments)
     if not seed_match:
         raise SystemExit("Isolated project must pin a fitter seed")
+    scope = ("Standalone board/video logic with same-clock launch/capture registers; "
+             "synthetic virtual inputs change at half a clock period, outputs use zero delay; "
+             "all DUT paths remain single-cycle timed, no false/multicycle paths; "
+             "not final MiSTer pin/PLL/SDRAM timing") if name == "board_video" else (
+             f"Standalone {name} block with virtual I/O; not a complete core or hardware release")
     report={"commit":stamp.split()[0],"device":"5CSEBA6U23I7","project":project_name,
             "constraint_mhz":48,"seed":int(seed_match[1]),"memory_bits":expected_bits,"timings":timings,
             "timing_coverage":coverage,
             "fit_summary":fit.splitlines(),"log_sha256":hashlib.sha256(log_path.read_bytes()).hexdigest(),
-            "scope":f"Standalone {name} block with virtual I/O; not a complete core or hardware release"}
+            "scope":scope}
     destination=core_root()/f"debug/{name}_synth.json"
     destination.parent.mkdir(parents=True,exist_ok=True)
     destination.write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
