@@ -377,4 +377,31 @@ begin
         std.env.finish;
         wait;
     end process;
+    liveness : process(s_clk)
+        variable vint_idle : natural := 0;
+    begin
+        if (rising_edge(s_clk)) then
+            if (s_preload_done = '0' or s_reset = '1' or s_line_done = '1' or
+                (s_line_valid = '1' and s_line_ready = '1') or s_output_valid = '1' or s_output_error = '1') then
+                vint_idle := 0;
+            else
+                vint_idle := vint_idle + 1;
+                assert (vint_idle < 20000) report "Video pipeline stalled; lines=" & integer'image(sint_lines_done) &
+                    "; pixels=" & integer'image(sint_pixels) severity failure;
+            end if;
+        end if;
+    end process;
+    progress : process
+        file v_progress : text open write_mode is "progress.txt";
+        variable v_line : line;
+    begin
+        loop
+            wait for 250 us;
+            write(v_line, time'image(now) & "; preloaded=" & std_logic'image(s_preload_done) &
+                "; lines=" & integer'image(sint_lines_done) & "; pixels=" & integer'image(sint_pixels) &
+                "; cpu_writes=" & integer'image(sint_cpu_writes));
+            writeline(v_progress, v_line);
+            flush(v_progress);
+        end loop;
+    end process;
 end architecture;

@@ -1315,3 +1315,19 @@ ack address that is also an input port must acknowledge on writes only.
   with "Resource not accessible by personal access token (cloneTemplateRepository)" even with
   Administration write; the GraphQL mutation behind it is refused. The REST endpoint
   `POST repos/<owner>/<template>/generate` works with the same token. `new_core.py` uses it.
+
+### [RabbitPunch] Match foreign HDL port indices, not just vector widths
+
+JTFRAME draw exposes Verilog rom_addr[CW+6:2]. A VHDL component declared the
+same width as CW+4 downto 0. ModelSim RTL tests passed, but Quartus synthesized
+shifted/truncated addresses; low address bits were reported stuck at zero.
+An exported synthesized tile netlist failed the existing address assertion at
+115 ns. Preserve the vendor range in both component and adapter wire, then
+translate explicitly to the public unsigned address. The corrected netlist
+passes all 8256 queued tile rows / 66048 pixels. No vendor edit was needed.
+Audit unexpected constant-output warnings even when implementation and timing
+pass. Reuse functional VHDL benches against Quartus-generated netlists without
+compiling the original RTL implementation into that simulation. Functional
+netlist simulation and post-route TimeQuest timing check different properties.
+Evidence: RabbitPunch scripts/run_netlist_tests.py and
+reference/foreign_port_regression.json.

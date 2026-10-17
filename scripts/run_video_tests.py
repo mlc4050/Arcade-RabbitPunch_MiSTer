@@ -14,6 +14,7 @@ from run_tile_tests import capture_vectors
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--only", help="capture directory basename for a focused replay")
+    parser.add_argument("--jobs", type=int, choices=(1, 2), default=1, help="independent simulator processes; default serial")
     args = parser.parse_args()
     root = core_root()
     sources = ["rtl/rabbitpunch_layout.vhd", "rtl/rabbitpunch_decode.vhd",
@@ -70,7 +71,7 @@ def main():
     fixtures = [fixture for fixture in fixtures if not args.only or
                 (root / fixture["capture"]).name == args.only]
     # Each fixture owns its simulator library, vectors, transcript and image.
-    with ThreadPoolExecutor(max_workers=2) as pool:
+    with ThreadPoolExecutor(max_workers=args.jobs) as pool:
         results = list(pool.map(run_fixture, fixtures))
     if not results:
         raise SystemExit("No matching video fixture")

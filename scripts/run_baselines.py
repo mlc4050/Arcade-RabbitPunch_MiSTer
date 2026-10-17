@@ -22,9 +22,16 @@ def run_case(name, sources, top, duration, marker, sim_args=(), wall_timeout=90)
     logs = []
 
     def command(exe, *args):
-        result = subprocess.run([str(tools / (exe + ".exe")), *map(str, args)], cwd=run_dir,
-                                capture_output=True, text=True,
-                                timeout=wall_timeout if exe == "vsim" else 90, **NO_WINDOW)
+        try:
+            result = subprocess.run([str(tools / (exe + ".exe")), *map(str, args)], cwd=run_dir,
+                                    capture_output=True, text=True,
+                                    timeout=wall_timeout if exe == "vsim" else 90, **NO_WINDOW)
+        except subprocess.TimeoutExpired as error:
+            def decoded(value):
+                return value.decode("utf-8", errors="replace") if isinstance(value, bytes) else (value or "")
+            logs.append(decoded(error.stdout) + decoded(error.stderr))
+            (run_dir / "result.log").write_text("\n".join(logs), encoding="utf-8")
+            raise SystemExit(f"{name}: {exe} exceeded wall-clock limit; partial transcript saved to {run_dir / 'result.log'}") from None
         output = result.stdout + result.stderr
         logs.append(output)
         (run_dir / "result.log").write_text("\n".join(logs), encoding="utf-8")

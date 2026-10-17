@@ -1,0 +1,9 @@
+{
+  "before_commit": "d2e42fde7eb11ca6716a61542a943992b17253e7",
+  "before_failure": "Tile code/row/ROM bank mismatch at 115 ns in Quartus synthesized tile netlist",
+  "before_netlist_sha256": "2781ba0b5bee87e8f24ec8b78578be1e02abbb3e8fcdd674d75c034238d68d03",
+  "before_log_sha256": "617f8c9499038f70c0cf5dc41ecf7a5ea1a834738001fd0718755bff1688c6bd",
+  "before_log": "debug\\baselines\\gate_tiles_before_fix\\result.log",
+  "after_report": "docs/reference/tiles_netlist_checks.json",
+  "vendor_source_modified": false
+}

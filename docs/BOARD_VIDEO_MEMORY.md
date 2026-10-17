@@ -81,7 +81,7 @@ and translates to the descriptive zero-based external address explicitly.
 
 RTL tile and sprite regressions pass after the change. Synthesized-netlist
 checks reuse the existing VHDL testbenches through component binding, compiling
-only the exported netlist plus test support. Corrected netlist checks and the
-full shared-RAM RGB replays are pending at this checkpoint. Earlier RTL pixel
+only the exported netlist plus test support. The corrected tile netlist passes all 8256 queued rows and 66048 pixels. Sprite
+netlist checks and full shared-RAM RGB replays remain pending at this checkpoint. Earlier RTL pixel
 comparisons remain valid simulation evidence; passing timing alone did not
 establish graphics-address functional equivalence in synthesis.

@@ -60,6 +60,10 @@ def run_check(stage, quartus_bin, stamp, name):
     if result.returncode or "Full Compilation was successful" not in log:
         print("\n".join(log.splitlines()[-35:]))
         raise SystemExit(f"Standalone {name} compile failed: {log_path}")
+    if name in ("tiles", "sprites", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video"):
+        stuck = re.findall(r'Pin "(ou17_(?:(?:sprite|tile)_)?rom_word_address\[\d+\])" is stuck', log)
+        if stuck:
+            raise SystemExit(f"Unexpected constant graphics ROM address bits: {stuck}")
     output=project/"output_files"
     fit=(output/f"{project_name}.fit.summary").read_text(encoding="utf-8",errors="replace")
     bits=re.search(r"Total block memory bits\s*:\s*([\d,]+)",fit)

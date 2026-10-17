@@ -1,0 +1,15 @@
+{
+  "case": "gate_tiles",
+  "pass_marker": "TILE_LAYER_PASS",
+  "log": "debug\\baselines\\gate_tiles\\result.log",
+  "commit": "19739b0e37e2bc84cf27e9002393fe2e733a20ed",
+  "vectors_sha256": {},
+  "netlist_sha256": "504d278dd9af99b47113df09a522843b8767dfc2156098f34eb3a5220e068549",
+  "source_sha256": {
+    "debug/netlists/tiles_19739b0/tiles_check.vo": "504d278dd9af99b47113df09a522843b8767dfc2156098f34eb3a5220e068549",
+    "sim/video/tile_test_support.vhd": "8bc2eeaa799428b1fd7aa58e1a1ecee011d524133be591424402d17ededa7e24",
+    "sim/video/tile_layer_tb.vhd": "619806ea1c92898e91dd718e1a81ebdce5c02a4b6cc934fde0a5aea87371d12e"
+  },
+  "log_sha256": "145e24d7927537c473c60a379cd5a61f1cd28730ee5d6ecda931f220fa9cb2f9",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
+}

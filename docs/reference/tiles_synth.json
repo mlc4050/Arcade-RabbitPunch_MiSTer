@@ -1,5 +1,5 @@
 {
-  "commit": "d48e7245aaa8bb66340feb3fe6a3f519be8a6f39",
+  "commit": "19739b0e37e2bc84cf27e9002393fe2e733a20ed",
   "device": "5CSEBA6U23I7",
   "project": "tiles_check",
   "constraint_mhz": 48,
@@ -8,47 +8,47 @@
   "timings": [
     {
       "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 10.265
+      "slack_ns": 10.491
     },
     {
       "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.362
+      "slack_ns": 0.304
     },
     {
       "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.73
+      "slack_ns": 9.725
     },
     {
       "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 11.341
+      "slack_ns": 11.213
     },
     {
       "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.108
+      "slack_ns": 0.104
     },
     {
       "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.571
+      "slack_ns": 9.569
     },
     {
       "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 13.048
+      "slack_ns": 13.191
     },
     {
       "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.181
+      "slack_ns": 0.164
     },
     {
       "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.828
+      "slack_ns": 9.829
     },
     {
       "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 15.0
+      "slack_ns": 15.096
     },
     {
       "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.163
+      "slack_ns": 0.141
     },
     {
       "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
@@ -82,15 +82,15 @@
     }
   },
   "fit_summary": [
-    "Fitter Status : Successful - Fri Oct 16 07:47:34 2026",
+    "Fitter Status : Successful - Fri Oct 16 10:11:58 2026",
     "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
     "Revision Name : tiles_check",
     "Top-level Entity Name : rabbitpunch_tile_layer",
     "Family : Cyclone V",
     "Device : 5CSEBA6U23I7",
     "Timing Models : Final",
-    "Logic utilization (in ALMs) : 139 / 41,910 ( < 1 % )",
-    "Total registers : 201",
+    "Logic utilization (in ALMs) : 140 / 41,910 ( < 1 % )",
+    "Total registers : 213",
     "Total pins : 1 / 314 ( < 1 % )",
     "Total virtual pins : 168",
     "Total block memory bits : 0 / 5,662,720 ( 0 % )",
@@ -103,6 +103,6 @@
     "Total PLLs : 0 / 6 ( 0 % )",
     "Total DLLs : 0 / 4 ( 0 % )"
   ],
-  "log_sha256": "4bbd3b128a73bf5da2111a2c10f649beef4c1ebcf7b688f0e6ae99a441687aa1",
+  "log_sha256": "08779af99476b901e509342700c9426e7985e46afffd437fb4a1e6b2fc8c959c",
   "scope": "Standalone tiles block with virtual I/O; not a complete core or hardware release"
 }
