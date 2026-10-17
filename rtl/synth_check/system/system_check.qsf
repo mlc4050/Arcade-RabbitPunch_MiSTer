@@ -86,6 +86,7 @@ set_global_assignment -name VHDL_FILE ../../rabbitpunch_sound_board.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_upd7759.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_adpcm.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_audio.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_audio_mixer.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_system.vhd
 set_global_assignment -name SYSTEMVERILOG_FILE ../../memory/sdram/sdram.sv
 set_global_assignment -name VHDL_FILE system_check.vhd
@@ -210,3 +211,4 @@ set_instance_assignment -name VIRTUAL_PIN ON -to o_audio_debug_request
 set_instance_assignment -name VIRTUAL_PIN ON -to o_audio_debug_write
 set_instance_assignment -name VIRTUAL_PIN ON -to ou16_audio_debug_address[*]
 set_instance_assignment -name VIRTUAL_PIN ON -to ou8_audio_debug_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_mono_pcm[*]

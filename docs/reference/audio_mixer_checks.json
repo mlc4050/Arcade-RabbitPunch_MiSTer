@@ -1,0 +1,11 @@
+{
+  "case": "audio_mixer",
+  "pass_marker": "AUDIO_MIXER_PASS",
+  "log": "debug\\baselines\\audio_mixer\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_audio_mixer.vhd": "3e8e3684f188f2d751fc7f6f01dad1ff4869869576701aae7b48641049c0601b",
+    "sim/sound/audio_mixer_tb.vhd": "c21e62951968287c0784f42e9811a2fff41979017504f002555aae07320f827f"
+  },
+  "log_sha256": "c65c7e3ed570179444b30256953bf29b226ec8b599d4a95821c0fb2d18351795",
+  "scope": "Registered mono sum with MAME 0.50 routing weights, JT7759 native PCM expansion, one final arithmetic half and 16-bit saturation; integer-reference arithmetic coverage, no game waveform or analog gain proof"
+}

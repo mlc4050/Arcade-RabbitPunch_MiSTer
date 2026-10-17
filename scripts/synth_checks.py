@@ -11,12 +11,13 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "audio_mixer": (0, ("rabbitpunch_audio_mixer",)),
     "audio_rom_transport": (0, ("rabbitpunch_audio_rom_transport", "rabbitpunch_audio_roms", "rabbitpunch_rom_cache", "rabbitpunch_read_arbiter")),
     "audio": (19403, ("rabbitpunch_audio", "rabbitpunch_sound_board", "rabbitpunch_adpcm", "jt51", "jt7759")),
     "adpcm": (0, ("rabbitpunch_adpcm", "rabbitpunch_upd7759", "jt7759_ctrl", "jt7759_adpcm")),
     "sound_board": (19403, ("rabbitpunch_sound_board", "rabbitpunch_soundcpu", "rabbitpunch_sound_bus", "rabbitpunch_ram8", "jt51")),
     "soundcpu": (0, ("rabbitpunch_soundcpu", "rabbitpunch_z80", "T80se")),
-    "system": (927339, ("rabbitpunch_system", "rabbitpunch_board", "fx68k", "rabbitpunch_roms", "rabbitpunch_download", "jtframe_draw", "rabbitpunch_audio", "T80se", "jt51", "jt7759")),
+    "system": (927339, ("rabbitpunch_system", "rabbitpunch_board", "fx68k", "rabbitpunch_roms", "rabbitpunch_download", "jtframe_draw", "rabbitpunch_audio", "T80se", "jt51", "jt7759", "rabbitpunch_audio_mixer")),
     "download": (0, ("rabbitpunch_download",)),
     # Native RAM/lines 868352 + micro ROM 17*1024 + nano ROM 66*336.
     # Nano bits 2 and 23 are constant zero in the pinned donor and optimized out.

@@ -24,7 +24,7 @@
     "rtl/rabbitpunch_read_arbiter.vhd": "c7855072a428a83ac9c2ac171f05fc54657f87d1bb0adb14de01e926af4b6852",
     "rtl/rabbitpunch_audio_roms.vhd": "5b5ae1bcc87e47672a65f0719cb52da1f1f7e5832112d6318118b349a4a37c2c",
     "rtl/rabbitpunch_audio_rom_transport.vhd": "c3d0e3e80b5ad46867ee9eacc163a41392976cb02218a6987a1985e110284e0c",
-    "rtl/rabbitpunch_roms.vhd": "f382467283f23800cb64649370edafde80dcbe149e5afdc439a1eec94a4d2954",
+    "rtl/rabbitpunch_roms.vhd": "52cdc9e62ab4a01dd60c68d01cfd12aeb53dc464ce6e4f7b89acec6a924ad34d",
     "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
     "rtl/jtframe/jtframe_draw.v": "2c52e8735ddf3eb0925c42d8f893035fb4180ed69f61cd5eaa7120b519be8edc",
     "rtl/rabbitpunch_sprite_priority.vhd": "fd49c0085d8a9250f74c5872f6619ff327ded4d0c157bdd106c9f95efd61ae49",
@@ -88,9 +88,10 @@
     "rtl/rabbitpunch_upd7759.vhd": "38d8e7f106759009323027ae17ad3905d58a69034eb57c0f2daa76f5fdaf3d1a",
     "rtl/rabbitpunch_adpcm.vhd": "72b28e62f4a5e38e942fd0b4068a10e9200d69ef68652624f91875af664d66dd",
     "rtl/rabbitpunch_audio.vhd": "001143defe3df5968a1d660ceb70ff9edda62756d575606e2558d65ae2a71a46",
-    "rtl/rabbitpunch_system.vhd": "16a2b3cdcc780668281279ec661fc094a08541ce6c005c5b30ca84460d3e7fb5",
-    "sim/board/system_download_tb.vhd": "f4168a2b990bfd57e62c1765935084d80af384944155c0b8a4d2d13f18c25c72"
+    "rtl/rabbitpunch_audio_mixer.vhd": "3e8e3684f188f2d751fc7f6f01dad1ff4869869576701aae7b48641049c0601b",
+    "rtl/rabbitpunch_system.vhd": "0118d3f0899a2f2bc57710330a48e5a01ca6a524350c4f0c62ec6073c9be31a0",
+    "sim/board/system_download_tb.vhd": "358e6cafb275f462976c9c9029117eadab64576a83bfbb4da6717cf7ad364b15"
   },
-  "log_sha256": "ac0a2b2994a91382c086b83c6f98e104b0ce7636adfa9dd622f2cc045f8927c6",
+  "log_sha256": "420b2604017c0eff000ab77f0e725d3057f08e74dd70252c16ac39644f1464c8",
   "scope": "Three synthetic 32-byte 68000 program downloads and one rejected partial image through production SDRAM; actual CPU writes and native RAM inspection, hot-cache image replacement, soft reset without reload, partial-image reset hold and recovery; logical video idle, no HPS/DDR/PLL/raster/hardware proof"
 }

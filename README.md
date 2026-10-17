@@ -23,12 +23,15 @@ under documented evaluation-interface constraints.
 The board, ROM subsystem and download control now form a connected logical
 system that executes downloaded synthetic 68000 diagnostics, including image
 replacement, soft reset and incomplete-download recovery.
-The separate logical T80/JT51 sound board matches both audio ROMs' first 4096
-MAME writes with documented CPU/RAM test seeds. Command IRQ, native sound RAM,
-Yamaha status readback and pause pass in RTL and a synthesized-netlist test;
-its full implementation meets all reported 48 MHz timing corners. Native and
-wrapped JT7759 sample-playback baselines also pass. Sample control/banking, sound
-ROM scheduling, main-system connection and audible game sound remain open.
+The connected logical audio subsystem includes T80, JT51 and JT7759 with sample
+bank/reset/start control and shared SDRAM scheduling. Both real sound ROMs match
+4096 MAME startup writes with documented CPU/RAM seeds. Both CPUs running together
+also match bounded MAME prefixes of 2000 main writes and 256 sound writes per set.
+Downloaded 68000 commands drive the sound latch/IRQ/ack, native sound RAM and
+sample playback. CPU pause preserves chip playback. Active-playback image
+replacement now drains correctly, aborts/mutes playback and recovers. A mono
+mixer passes 283135 integer arithmetic checks; startup silence, active replacement and
+defined-output regressions pass. Updated implementation is pending. Audible real-game sound remains unverified.
 See [sound bring-up](docs/SOUND_BRINGUP.md), [board integration](docs/BOARD_INTEGRATION.md) and
 [system integration](docs/SYSTEM_INTEGRATION.md) for exact test scope.
 No complete game or playable RBF.

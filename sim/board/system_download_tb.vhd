@@ -20,6 +20,7 @@ architecture test of system_download_tb is
             SDRAM_nCAS : in std_logic
         );
     end component;
+    signal su16_mono_pcm : unsigned(15 downto 0);
     signal s_clk : std_logic := '0';
     signal s_download, s_word_valid, s_pause, s_game_reset, s_view_enable : std_logic := '0';
     signal s_word_ready, s_ready, s_loading, s_image_valid, s_error, s_done, s_paused, s_view_valid : std_logic;
@@ -79,6 +80,7 @@ begin
             ou16_left_pcm => open,
             ou16_right_pcm => open,
             ou9_adpcm_pcm => open,
+            ou16_mono_pcm => su16_mono_pcm,
             o_audio_sample_marker => open,
             o_adpcm_busy => open,
             i_audio_view_enable => '0',
@@ -143,6 +145,16 @@ begin
             SDRAM_nCAS => s_column_n
         );
 
+    pcm_defined : process(s_clk)
+    begin
+        if (rising_edge(s_clk) and now > 1 us) then
+            assert (su16_mono_pcm = 0) report "Disabled audio clocks must keep mixed PCM silent" severity failure;
+            for vint_bit in su16_mono_pcm'range loop
+                assert (su16_mono_pcm(vint_bit) = '0' or su16_mono_pcm(vint_bit) = '1')
+                    report "Mixed PCM is undefined during startup/reset/playback" severity failure;
+            end loop;
+        end if;
+    end process;
     monitor : process(s_clk)
     begin
         if (rising_edge(s_clk)) then

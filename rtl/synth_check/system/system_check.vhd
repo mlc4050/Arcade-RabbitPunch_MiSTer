@@ -45,6 +45,7 @@ entity system_check is
         ou16_left_pcm : out unsigned(15 downto 0);
         ou16_right_pcm : out unsigned(15 downto 0);
         ou9_adpcm_pcm : out unsigned(8 downto 0);
+        ou16_mono_pcm : out unsigned(15 downto 0);
         o_audio_sample_marker : out std_logic;
         o_adpcm_busy : out std_logic;
         i_audio_view_enable : in std_logic := '0';
@@ -182,6 +183,7 @@ architecture evaluation of system_check is
     signal s_boundary_o_audio_debug_write : std_logic := '0';
     signal su16_boundary_ou16_audio_debug_address : unsigned(15 downto 0) := (others => '0');
     signal su8_boundary_ou8_audio_debug_data : unsigned(7 downto 0) := (others => '0');
+    signal su16_boundary_ou16_mono_pcm : unsigned(15 downto 0) := (others => '0');
 begin
     boundary : process(i_clk)
     begin
@@ -224,6 +226,7 @@ begin
             s_boundary_i_adpcm_enable <= i_adpcm_enable;
             ou16_left_pcm <= su16_boundary_ou16_left_pcm;
             ou16_right_pcm <= su16_boundary_ou16_right_pcm;
+            ou16_mono_pcm <= su16_boundary_ou16_mono_pcm;
             ou9_adpcm_pcm <= su9_boundary_ou9_adpcm_pcm;
             o_audio_sample_marker <= s_boundary_o_audio_sample_marker;
             o_adpcm_busy <= s_boundary_o_adpcm_busy;
@@ -310,6 +313,7 @@ begin
             i_adpcm_enable => s_boundary_i_adpcm_enable,
             ou16_left_pcm => su16_boundary_ou16_left_pcm,
             ou16_right_pcm => su16_boundary_ou16_right_pcm,
+            ou16_mono_pcm => su16_boundary_ou16_mono_pcm,
             ou9_adpcm_pcm => su9_boundary_ou9_adpcm_pcm,
             o_audio_sample_marker => s_boundary_o_audio_sample_marker,
             o_adpcm_busy => s_boundary_o_adpcm_busy,

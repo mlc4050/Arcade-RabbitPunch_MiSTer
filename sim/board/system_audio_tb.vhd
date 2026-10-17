@@ -1,3 +1,5 @@
+-- SPDX-License-Identifier: GPL-3.0-or-later
+-- Copyright (C) 2026 RabbitPunch contributors
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -38,6 +40,7 @@ architecture test of system_audio_tb is
     signal sint_divider : natural range 0 to 23 := 0;
     signal sint_adpcm_divider : natural range 0 to 74 := 0;
     signal s_adpcm_busy, s_sample_marker, s_audio_request, s_audio_write, s_sound_pending : std_logic;
+    signal su16_mono_pcm : unsigned(15 downto 0);
     signal su9_adpcm_pcm : unsigned(8 downto 0);
     signal su16_audio_address : unsigned(15 downto 0);
     signal su8_audio_data, su8_audio_view_data : unsigned(7 downto 0);
@@ -63,6 +66,10 @@ begin
             end if;
             if (s_sample_marker = '1') then
                 sint_samples <= sint_samples + 1;
+            end if;
+            if (s_audio_request = '1' and s_audio_write = '1' and su16_audio_address = 16#F400#) then
+                assert (su8_audio_data(7 downto 1) = "1000000" and su8_audio_data(0) = su16_expected(0))
+                    report "Sound handler selected the wrong sample bank/reset control" severity failure;
             end if;
             if (s_audio_request = '1' and s_audio_write = '1' and su16_audio_address = 16#F600#) then
                 sint_audio_commands <= sint_audio_commands + 1;
@@ -112,6 +119,7 @@ begin
             ou16_left_pcm => open,
             ou16_right_pcm => open,
             ou9_adpcm_pcm => su9_adpcm_pcm,
+            ou16_mono_pcm => su16_mono_pcm,
             o_audio_sample_marker => s_sample_marker,
             o_adpcm_busy => s_adpcm_busy,
             i_audio_view_enable => s_audio_view,
@@ -176,6 +184,15 @@ begin
             SDRAM_nCAS => s_column_n
         );
 
+    pcm_defined : process(s_clk)
+    begin
+        if (rising_edge(s_clk) and now > 1 us) then
+            for vint_bit in su16_mono_pcm'range loop
+                assert (su16_mono_pcm(vint_bit) = '0' or su16_mono_pcm(vint_bit) = '1')
+                    report "Mixed PCM is undefined during startup/reset/playback" severity failure;
+            end loop;
+        end if;
+    end process;
     monitor : process(s_clk)
     begin
         if (rising_edge(s_clk)) then
@@ -194,7 +211,7 @@ begin
     end process;
     stimulus : process
         variable vint_before : natural;
-        procedure cycles(vint_count : positive) is
+        procedure cycles(vint_count : positive; v_abort : boolean := false) is
         begin
             for vint_cycle in 1 to vint_count loop
                 wait until falling_edge(s_clk);
@@ -232,6 +249,8 @@ begin
                 su27_address <= (others => '1');
                 su16_data <= (others => '1');
             end loop;
+            assert (s_adpcm_busy = '0' and su9_adpcm_pcm = 0 and su16_mono_pcm = 0)
+                report "Image download did not abort/mute sample playback" severity failure;
             s_download <= '0';
             wait until s_ready = '1' for 10 us;
             assert (s_ready = '1' and s_image_valid = '1' and s_error = '0' and su27_loaded = 32)
@@ -239,7 +258,7 @@ begin
             su16_expected <= vu16_value;
             cycles(1);
         end procedure;
-        procedure playback(vu16_command : unsigned(15 downto 0); vint_count : positive) is
+        procedure playback(vu16_command : unsigned(15 downto 0); vint_count : positive; v_abort : boolean := false) is
             variable vint_samples_before : natural;
         begin
             load_program(vu16_command);
@@ -254,6 +273,9 @@ begin
             wait until su9_adpcm_pcm /= 0 for 3 ms;
             assert (s_adpcm_busy = '1' and su9_adpcm_pcm /= 0)
                 report "CPU-commanded sample did not produce PCM" severity failure;
+            if (v_abort) then
+                return;
+            end if;
             s_pause <= '1';
             if (s_paused /= '1') then
                 wait until s_paused = '1' for 20 us;
@@ -278,9 +300,12 @@ begin
         cycles(4);
         playback(x"0042", 1);
         playback(x"0043", 2);
-        assert (sint_stream_words = 32 and s_error = '0')
+        -- Replace an image while real PCM is playing, then prove recovery.
+        playback(x"0042", 3, true);
+        playback(x"0043", 4);
+        assert (sint_stream_words = 64 and s_error = '0')
             report "Audio system replacement downloads failed" severity failure;
-        report "SYSTEM_AUDIO_PASS images=2 main_commands=2 sound_commands=2 native_sound_ram=checked paused_playback=checked";
+        report "SYSTEM_AUDIO_PASS images=4 main_commands=4 sound_commands=4 download_aborts_active_sample=checked native_sound_ram=checked paused_playback=checked";
         finish;
         wait;
     end process;

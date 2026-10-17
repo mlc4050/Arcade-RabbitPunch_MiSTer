@@ -24,7 +24,7 @@
     "rtl/rabbitpunch_read_arbiter.vhd": "c7855072a428a83ac9c2ac171f05fc54657f87d1bb0adb14de01e926af4b6852",
     "rtl/rabbitpunch_audio_roms.vhd": "5b5ae1bcc87e47672a65f0719cb52da1f1f7e5832112d6318118b349a4a37c2c",
     "rtl/rabbitpunch_audio_rom_transport.vhd": "c3d0e3e80b5ad46867ee9eacc163a41392976cb02218a6987a1985e110284e0c",
-    "rtl/rabbitpunch_roms.vhd": "f382467283f23800cb64649370edafde80dcbe149e5afdc439a1eec94a4d2954",
+    "rtl/rabbitpunch_roms.vhd": "52cdc9e62ab4a01dd60c68d01cfd12aeb53dc464ce6e4f7b89acec6a924ad34d",
     "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
     "rtl/jtframe/jtframe_draw.v": "2c52e8735ddf3eb0925c42d8f893035fb4180ed69f61cd5eaa7120b519be8edc",
     "rtl/rabbitpunch_sprite_priority.vhd": "fd49c0085d8a9250f74c5872f6619ff327ded4d0c157bdd106c9f95efd61ae49",
@@ -88,11 +88,13 @@
     "rtl/rabbitpunch_upd7759.vhd": "38d8e7f106759009323027ae17ad3905d58a69034eb57c0f2daa76f5fdaf3d1a",
     "rtl/rabbitpunch_adpcm.vhd": "72b28e62f4a5e38e942fd0b4068a10e9200d69ef68652624f91875af664d66dd",
     "rtl/rabbitpunch_audio.vhd": "001143defe3df5968a1d660ceb70ff9edda62756d575606e2558d65ae2a71a46",
-    "rtl/rabbitpunch_system.vhd": "16a2b3cdcc780668281279ec661fc094a08541ce6c005c5b30ca84460d3e7fb5",
-    "sim/board/system_audio_tb.vhd": "97e093cdfa6f331a2563351c590eae90e8c4747e01fdf0b3f60ab30e121fcb82"
+    "rtl/rabbitpunch_audio_mixer.vhd": "3e8e3684f188f2d751fc7f6f01dad1ff4869869576701aae7b48641049c0601b",
+    "rtl/rabbitpunch_system.vhd": "0118d3f0899a2f2bc57710330a48e5a01ca6a524350c4f0c62ec6073c9be31a0",
+    "sim/board/system_audio_tb.vhd": "b96ed852358ac99224e85c7fc70079cd93de32e3100828f03ade58ed6afb1b83"
   },
   "fixture_source_sha256": "5ccfbc32f624b312029fc872746402af7dc493887fd1029c82a830dcf0c69a6f",
   "synthetic_image_sha256": "1a9f247a66ecc303582250ffc4c9959ab30d77614aab1a35817a81d856f8a028",
-  "log_sha256": "eadd43a532caeea41d048d1e8dd3fa4335d367c75fcb54962925afcf3ef9d4e7",
-  "scope": "Production logical system with executing fx68k/T80, native main/sound RAM, JT51/JT7759 and shared cached SDRAM: two downloaded 32-byte main diagnostics send commands through the internal sound latch/IRQ/ack, trigger both synthetic sample banks and verify sound RAM plus continued playback/cadence during coordinated CPU pause; sound/sample regions directly preloaded, logical video idle; no real game audio/full image loader/HPS/PLL/raster/electrical proof"
+  "log_sha256": "e54db247e96722cfc49974ecb5e803913e07217a7b10a42c9445251b6fc47611",
+  "scope": "Production logical system with executing fx68k/T80, native main/sound RAM, JT51/JT7759 and shared cached SDRAM: four downloaded 32-byte main diagnostics send commands through the internal sound latch/IRQ/ack, trigger both synthetic sample banks and verify sound RAM plus continued playback/cadence during coordinated CPU pause, replacement during nonzero PCM aborts/mutes playback and recovers; sound/sample regions directly preloaded, logical video idle; no real game audio/full image loader/HPS/PLL/raster/electrical proof; defined mixed PCM with native Yamaha complete-period startup qualification",
+  "defined_mixer_arithmetic": "No numeric_std/failed-assert instance in mixer; VHDL output-bit assertions passed"
 }

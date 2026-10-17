@@ -1,10 +1,13 @@
 # Sound bring-up
 
-The logical sound board connects T80, the VHDL memory map, native 2 KiB sound
-RAM and unchanged JT51. It passes command/interrupt diagnostics, full Quartus
-implementation and a synthesized-netlist diagnostic. It is not connected to
-rabbitpunch_system yet. Audio ROM transport remains external; uPD7759 playback,
-sample banking, mixing, shared SDRAM scheduling and audible game sound remain open.
+The connected logical sound system includes T80, native 2 KiB sound RAM,
+YM2151 and uPD7759 with board bank/reset/start controls. Program and sample ROMs
+share SDRAM with the main CPU; the complete system connects command IRQ/read
+acknowledgment and coordinated CPU pause. Directed playback, chip baselines,
+synthesized-netlist diagnostics and implementation checks pass at the scopes
+below. Active-playback image replacement exposed an ownership-idle race; its
+fix passes directed and active-playback replacement regressions. Mono output is
+connected with startup qualification; audible real-game sound remains open.
 
 ## Sound CPU and memory map
 
@@ -252,3 +255,25 @@ reference/roms_netlist_checks.json. The expanded subsystem uses 806 ALMs,
 1878 registers, zero block RAM, worst setup +5.284 ns and hold +0.165 ns
 at the 48 MHz evaluation constraint. All reported corners and six timing
 coverage checks pass. This is not final PLL or PCB SDRAM timing.
+
+
+## Mono PCM arithmetic
+
+rabbitpunch_audio_mixer is a registered mono mixer connected to the system
+output alongside its raw PCM buses. Pinned MAME rpunch.cpp routes each YM channel and the sample channel
+to mono at 0.50 gain. JT7759's own raw logger expands its nine-bit sample by
+seven bits. The mixer sums sign-extended raw bit patterns, halves the combined
+sum and saturates to signed 16-bit range. Negative odd sums round down by one
+LSB. All authored ports/intermediates remain unsigned. There is one system-clock
+output register and no audio/frame buffer. audio_mixer_tb passes 283135 integer-
+reference checks including every sample code across FM boundary combinations,
+every FM code on each channel, cancellation and reset mute. This arithmetic
+proof does not establish original-board analog gain or game waveform accuracy.
+
+
+The expanded end-to-end diagnostic now checks four downloaded main programs,
+explicit F400 bank/reset values, active-sample image replacement, recovery,
+coordinated pause and mixed-output mute. Defined-bit assertions and absence of
+mixer arithmetic warnings also pass. The loader ownership-idle fix excludes
+currently offered requests, preventing acceptance and image invalidation on the
+same edge. Disabled audio enables hold mono at zero through download and reset.

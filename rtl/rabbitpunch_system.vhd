@@ -50,6 +50,7 @@ entity rabbitpunch_system is
         ou16_left_pcm : out unsigned(15 downto 0);
         ou16_right_pcm : out unsigned(15 downto 0);
         ou9_adpcm_pcm : out unsigned(8 downto 0);
+        ou16_mono_pcm : out unsigned(15 downto 0);
         o_audio_sample_marker : out std_logic;
         o_adpcm_busy : out std_logic;
         i_audio_view_enable : in std_logic := '0';
@@ -118,6 +119,8 @@ architecture rtl of rabbitpunch_system is
     signal su16_cpu_rom_data : unsigned(15 downto 0);
     signal s_main_paused, s_audio_paused, s_sound_pending, s_sound_command_read : std_logic;
     signal su8_sound_command : unsigned(7 downto 0);
+    signal s_fm_primed, s_fm_valid : std_logic := '0';
+    signal su16_left_mix, su16_right_mix : unsigned(15 downto 0);
     signal s_audio_request, s_audio_ready, s_audio_valid, s_sample_request, s_sample_valid : std_logic;
     signal su16_audio_address : unsigned(15 downto 0);
     signal su18_sample_address : unsigned(17 downto 0);
@@ -199,6 +202,33 @@ begin
             ou24_cpu_request_address => ou24_cpu_request_address,
             ou16_cpu_request_data => ou16_cpu_request_data,
             ou2_cpu_request_bytes => ou2_cpu_request_bytes
+        );
+    -- JT51's rolling accumulator needs a complete sample period after reset.
+    -- Keep FM silent through the first marker until the next period completes.
+    su16_left_mix <= ou16_left_pcm when s_fm_valid = '1' else (others => '0');
+    su16_right_mix <= ou16_right_pcm when s_fm_valid = '1' else (others => '0');
+    process(i_clk)
+    begin
+        if (rising_edge(i_clk)) then
+            if (s_board_reset = '1') then
+                s_fm_primed <= '0';
+                s_fm_valid <= '0';
+            elsif (o_audio_sample_marker = '1') then
+                s_fm_primed <= '1';
+                if (s_fm_primed = '1') then
+                    s_fm_valid <= '1';
+                end if;
+            end if;
+        end if;
+    end process;
+    mixer : entity work.rabbitpunch_audio_mixer
+        port map (
+            i_clk => i_clk,
+            i_reset => s_board_reset,
+            iu16_left_pcm => su16_left_mix,
+            iu16_right_pcm => su16_right_mix,
+            iu9_adpcm_pcm => ou9_adpcm_pcm,
+            ou16_mono_pcm => ou16_mono_pcm
         );
     audio : entity work.rabbitpunch_audio
         port map (

@@ -215,6 +215,8 @@ begin
             s_sprite_request <= '1';
             s_tile_request <= '1';
             s_cpu_request <= '1';
+            wait for 1 ns;
+            assert (s_idle = '0') report "Offered ROM requests must prevent loader ownership" severity failure;
             tick;
             s_audio_request <= '0';
             s_sprite_request <= '0';

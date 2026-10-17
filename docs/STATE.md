@@ -208,3 +208,9 @@ adapters have drained; chip clock enables continue independently of CPU pause.
 Sound native RAM has its own paused inspection port. Sound/sample caches retain
 ROM data through a game reset and invalidate on drained image replacement.
 Separate raw FM and sample PCM outputs remain available before final mixing.
+
+
+Mono output adds a 16-bit registered PCM word and two FM warmup flags. Reset
+clears the flags; the second Yamaha sample marker qualifies its contribution
+after one complete accumulator period. Stopped chip enables cannot release the
+warmup mask. Mixing adds no RAM or video buffering. No restore interface is added.

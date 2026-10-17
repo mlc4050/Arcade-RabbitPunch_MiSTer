@@ -2,7 +2,7 @@
 
 rabbitpunch_system joins the CPU/I/O/video board, ROM requester/cache/SDRAM
 subsystem and sequential image download controller on one i_clk. It adds wiring
-only. A configured FPGA starts without a valid image and holds CPU/video reset.
+plus registered mono mixing and its startup-validity flags. A configured FPGA starts without a valid image and holds CPU/video reset.
 ROM initialization and loading continue while gameplay is held in reset.
 
 The caller supplies raw 16-bit image words through valid/ready, with low byte
@@ -51,16 +51,31 @@ and sprite reads retain the higher-priority physical ports. External enables
 control sound CPU, YM, YM half-rate and ADPCM cadence on the same system clock.
 Defaults disable these enables for the legacy download-only test. System pause
 completes only after both CPUs drain, while chip enables can continue playback.
-Raw FM left/right and sample PCM remain separate unsigned buses carrying signed
-bit patterns. A sound-RAM inspection port requires the sound CPU paused.
+Raw FM left/right and sample PCM remain available as unsigned buses carrying
+signed bit patterns, alongside a registered saturated mono output. A sound-RAM inspection port requires the sound CPU paused.
 
-run_system_audio_tests.py executes two downloaded 32-byte 68000 programs which
+run_system_audio_tests.py executes four downloaded 32-byte 68000 programs which
 write commands 42/43 to $0c000e and stop. The real T80 interrupt handler reads and
 acknowledges the internal latch, stores each command at F800, selects its sample
 bank and starts synthetic playback. Both runs produce nonzero PCM, both CPUs
 pause, sound RAM reads back the command and playback plus YM cadence continue.
-The second program download also exercises reset and hot ROM-cache invalidation.
+Replacement downloads exercise reset and hot ROM-cache invalidation. One starts
+during nonzero PCM, checking abort/mute, ownership drain and playback recovery.
 Evidence: reference/system_audio_checks.json. Sound/sample fixture regions are
 directly preloaded; this is not a full-image download or real-game audio proof.
 The existing three-image/partial-download/soft-reset test passes with audio
-instantiated and its enables disabled. Expanded system implementation is pending.
+instantiated and its enables disabled. Expanded system implementation passes all reported 48 MHz corners with 5952
+ALMs, 7141 registers and 927339 RAM bits. The eight sound-memory geometries are
+checked alongside the total RAM budget; six coverage categories have zero
+violations (reference/system_synth.json). The offered-request versus idle race found during active playback is fixed and
+its directed ROM/download/playback regressions pass. The final mono revision
+is awaiting its updated implementation check.
+
+
+Mono arithmetic uses the pinned MAME routing gains and sums before halving.
+JT51 PCM is masked until one complete sample period follows reset; stopped
+chip enables keep the mask asserted. Disabled-clock download/reset tests require
+mono output zero, and playback tests require defined output bits with no mixer
+arithmetic warnings. Final fixture/RTL hashes are in the corresponding reports.
+The 2000/256 real-ROM proof predates mono output; its exact sources are pinned in
+reference/system_boot_checks.json, independently of the synthetic playback tests.

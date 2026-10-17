@@ -372,6 +372,20 @@ count showed zero writes. Measure the last observable stage.
 
 ## Memory transport: req/valid contracts, latency, byte order
 
+### [RabbitPunch] An ownership-idle flag must include requests offered on the current edge
+
+A ROM frontend can have no registered pending work while accepting a new request
+on the same edge that a loader sees idle and takes ownership. Resetting a CPU does
+not retract its already-issued request in the next bus/frontend stage. Image
+replacement during nonzero sample playback reproduced this in the connected
+system: the loader entered loading while an audio frontend entered REQUEST, then
+cache invalidation asserted before that request drained. Keep offered requester
+signals in the top-level ownership-idle condition, while allowing accepted reads
+to finish. A directed idle assertion and the active-playback replacement test
+cover this boundary. Failure evidence is preserved privately under
+debug/baselines/system_audio_active_replace_failure.log; no vendor change is needed.
+
+
 ### Give a registered RAM its full read latency before consuming the data
 
 An FSM that registers a RAM address in one state and reads data in the next gets the PREVIOUS

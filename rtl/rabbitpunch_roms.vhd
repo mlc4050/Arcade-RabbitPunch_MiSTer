@@ -75,8 +75,12 @@ architecture rtl of rabbitpunch_roms is
     signal su2_memory_bytes : t_sdram_byte_enables;
     signal su64_memory_data : t_sdram_read_data;
 begin
+    -- An offered request is accepted on this same edge. Pending-state flags
+    -- alone would report idle one edge too early to the download controller.
     s_idle <= '1' when s_front_idle = '1' and s_cache_idle = '1' and s_shared_idle = '1' and
-        s_loader_pending = '0' and su3_memory_ready = "111" else '0';
+        s_loader_pending = '0' and su3_memory_ready = "111" and
+        i_sprite_request = '0' and i_tile_request = '0' and i_cpu_request = '0' and
+        i_audio_request = '0' and i_sample_request = '0' else '0';
     o_idle <= s_idle;
     o_ready <= s_initialized and not i_loading;
     o_loader_ready <= s_initialized and i_loading and su3_memory_ready(2) and not s_loader_pending;
