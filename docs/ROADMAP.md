@@ -48,8 +48,9 @@ virtual-input timing contract; the combined fit passes every corner at 48 MHz,
 with 106 M10K blocks. An unchanged configurable SDRAM controller and VHDL pulse
 adapter pass command-model tests, including byte masks, both chips, burst lanes
 and refresh cadence. ROM request mapping passes synthetic and controller/model
-integration tests. SDRAM synthesis/netlist checks and connecting the complete
-renderer to the shared ROM transport are next. No complete game is running yet.
+integration tests. SDRAM implementation and synthesized command-model tests
+also pass, under explicitly synthetic external-pin timing assumptions. The
+complete renderer/shared SDRAM screenshot comparison is now in progress. No complete game is running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
 ## Goal and scope

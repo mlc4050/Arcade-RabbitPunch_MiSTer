@@ -1331,3 +1331,24 @@ compiling the original RTL implementation into that simulation. Functional
 netlist simulation and post-route TimeQuest timing check different properties.
 Evidence: RabbitPunch scripts/run_netlist_tests.py and
 reference/foreign_port_regression.json.
+
+
+### [RabbitPunch] Diagnose virtual input hold separately from internal register hold
+
+A 48 MHz block fit failed hold despite generous setup slack. Full path reports
+showed virtual i_reset/CPU inputs launched at the external clock pin with 0 ns
+input delay, while destination clocks arrived about 4.65 ns later. Maximum
+router/ECO effort made the external violation worse (-1.254 ns), but a separate
+register-to-register report at the inspected corner passed (+0.212 ns). A
+synthesis-only same-clock launch/capture wrapper and explicit half-period
+synthetic stimulus contract produced all-corner setup/hold passes with no
+false/multicycle exceptions. Keep that contract visible: it is internal/block
+evaluation, not proof of the final PLL, board inputs or SDRAM electrical timing.
+Evidence: RabbitPunch reference/board_video_synth.json and BOARD_VIDEO_MEMORY.md.
+
+A tester boundary must register client interfaces only. Delaying physical SDRAM
+commands without delaying write DQ changes protocol behavior: the pin scoreboard
+immediately caught Z-valued readback in the first wrapper attempt. Passing the
+physical command/data interface through unchanged restores RTL and synthesized
+netlist agreement. Evidence: reference/sdram_netlist_checks.json; same VHDL
+scoreboard checks 60 writes and 360 read words through the exported netlist.

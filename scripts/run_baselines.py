@@ -9,7 +9,7 @@ from coretools import core_root, modelsim_bin, NO_WINDOW
 from hwlock import require_no_jtag
 
 
-def run_case(name, sources, top, duration, marker, sim_args=(), wall_timeout=90):
+def run_case(name, sources, top, duration, marker, sim_args=(), wall_timeout=90, setup_commands=()):
     require_no_jtag(f"Rabbit Punch baseline: {name}")
     root, tools = core_root(), modelsim_bin()
     run_dir = root / "debug/baselines" / name
@@ -47,7 +47,9 @@ def run_case(name, sources, top, duration, marker, sim_args=(), wall_timeout=90)
     (run_dir / "run.do").write_text(
         "onerror {quit -code 1 -f}\nonbreak {quit -code 1 -f}\n"
         "set BreakOnAssertion 2\n"
-        f"vsim -onfinish exit work.{top} {' '.join(sim_args)}\nrun {duration}\nquit -code 0 -f\n", encoding="utf-8")
+        f"vsim -onfinish exit work.{top} {' '.join(sim_args)}\n" +
+        "".join(command + "\n" for command in setup_commands) +
+        f"run {duration}\nquit -code 0 -f\n", encoding="utf-8")
     command("vsim", "-c", "-do", "do run.do")
     if marker not in logs[-1]:
         raise SystemExit(f"{name}: missing pass marker; see {run_dir / 'result.log'}")

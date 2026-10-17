@@ -67,3 +67,21 @@ is explicitly hypothetical: it checks elaboration, placement and internal paths,
 not real chip/PCB electrical timing. No final PLL or chip-clock phase is proven.
 The same VHDL pin scoreboard binds to this wrapper for RTL and synthesized
 functional-netlist tests. Do not include it in the production core.
+
+
+The staged sdram_check fit passes every reported setup/hold/pulse corner and all
+six timing-coverage gates with 404 ALMs, 920 registers including the evaluation
+boundary, and no M10K blocks. Exact timing and scope are recorded in
+reference/sdram_synth.json. The Quartus-exported functional netlist passes the
+same VHDL command-level scoreboard: 60 writes, 360 checked read words and no
+warnings/errors. Its measured maximum per-chip refresh gap is 324 clocks.
+reference/sdram_netlist_checks.json pins that netlist, bench and transcript.
+These results retain the hypothetical external tester timing limitation above.
+
+A new video_sdram_capture_tb.vhd connects the native board/video path to the ROM
+requester, actual SDRAM controller and command model. Captured graphics ROM bytes
+are loaded directly into model memory through ModelSim's mem load command;
+physical loader writes are verified separately, so a successful screenshot must
+not be described as loader proof. The bench runs competing synthetic main-ROM
+reads and work-RAM writes, checking CPU byte order, complete RGB, scanline tags,
+streaming latency and reset draining. The first focused replay is in progress.

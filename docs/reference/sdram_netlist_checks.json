@@ -1,0 +1,16 @@
+{
+  "case": "gate_sdram",
+  "pass_marker": "SDRAM_PASS",
+  "log": "debug\\baselines\\gate_sdram\\result.log",
+  "commit": "b0ebf2056415b08da10423eb693b93138da7d12c",
+  "vectors_sha256": {},
+  "netlist_sha256": "26e965761cf460f2417f1c2c4ec2bf48cb7fdb7b1a347cf3dc075d37e39775b5",
+  "source_sha256": {
+    "debug/netlists/sdram_b0ebf20/sdram_check.vo": "26e965761cf460f2417f1c2c4ec2bf48cb7fdb7b1a347cf3dc075d37e39775b5",
+    "rtl/rabbitpunch_sdram_types.vhd": "ef3d7e0bcb2b6522984ab20ae9e4464625d7a810e76307142fd3ef0a08115480",
+    "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
+    "sim/memory/sdram_tb.vhd": "c50e5bd7de851d1e62e9075a4ab4340cf3a9d61d6ef4880317c455deec6d2efc"
+  },
+  "log_sha256": "4694d601e8d861676061ec4bc95d497aa828ad12d21e42f913a38db59ce77d3d",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
+}
