@@ -18,8 +18,8 @@ render the next line.
 
 video_output_tb passes 420 slots covering sparse enables, independent sync and
 blank transitions, all four failure paths, retained faults and reset flush
-(reference/video_output_checks.json). A native-renderer capture comparison is
-in progress; physical PLL/raster/pin timing and the MiSTer shell remain open.
+(reference/video_output_checks.json). All six native-renderer capture comparisons pass: 373248 pixels match MAME
+exactly (reference/video_output_capture_checks.json); physical PLL/raster/pin timing and the MiSTer shell remain open.
 
 
 The first adapter fit was rejected by its zero-RAM gate: Quartus inferred an
@@ -29,5 +29,7 @@ together with metadata. No pixel storage or additional latency is introduced.
 The first complete Rabio Lepus gameplay replay matched all 62208 MAME pixels;
 the corrected register-only fit passes all reported 48 MHz corners and six
 coverage gates: 92 ALMs, 168 registers, zero RAM, worst setup +8.469 ns and
-hold +0.139 ns (reference/video_output_synth.json). The corrected six-scene
-replay remains in progress.
+hold +0.139 ns (reference/video_output_synth.json). The corrected six-scene replay also passes all 373248 pixels, coordinate
+ordering, reset recovery and live bitmap/palette update checks. Graphics ROM
+channels are behavioral in this output-specific replay; the earlier shared-
+SDRAM graphics proof has its own source/transport scope.
