@@ -27,4 +27,7 @@ altshift_taps coordinate delay using 68 block RAM bits. That implementation
 commit was reverted and corrected by resetting the coordinate delay registers
 together with metadata. No pixel storage or additional latency is introduced.
 The first complete Rabio Lepus gameplay replay matched all 62208 MAME pixels;
-the corrected register-only implementation and six-scene replay are pending.
+the corrected register-only fit passes all reported 48 MHz corners and six
+coverage gates: 92 ALMs, 168 registers, zero RAM, worst setup +8.469 ns and
+hold +0.139 ns (reference/video_output_synth.json). The corrected six-scene
+replay remains in progress.

@@ -243,3 +243,9 @@ controls, download frontend and complete system. The frontend now defers a
 fresh image until the previous downstream loader drains; no generation queue
 or clock domain is introduced. Physical HPS/DDR ownership and raster remain
 external.
+
+
+The output adapter owns five stages of enable/active/sync/blanking/accepted
+metadata and coordinates, output RGB/control registers, and one sticky
+underflow flag. Reset flushes all stages. They are ordinary registers (zero
+RAM in Quartus), no line/frame pixel storage or additional clock domain.
