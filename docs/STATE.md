@@ -161,3 +161,10 @@ restore writer. The sound bus owns an outstanding ROM address, YM write
 address/data and transaction state; it deliberately remains live during CPU
 reset/pause to finish the request owed by soundcpu. The main board remains the
 owner of command byte/pending state. ADPCM strobes are not chip state or audio.
+
+
+JT7759 is now an unchanged isolated evaluation component behind an unsigned
+VHDL standalone wrapper. It has no production state capture/restore interface.
+The native 17-bit ROM address and 9-bit raw signed PCM are exposed; bank and
+board-control state are not implemented yet. Native/wrapped synthetic tests
+exercise playback and reset, not savestates or game audio.

@@ -1,171 +1,142 @@
 # Sound bring-up
 
-The sound board is not integrated or audible yet. The main board's command
-mailbox is implemented, and the T80 CPU donor has its earlier baseline. A new
-active-high unsigned VHDL T80 adapter also passes opcode fetch, held WAIT,
-memory/I/O writes, HALT and clock-enable stopping at a safe halted point.
-Its raw enable is not a bus-draining pause handshake; the future sound board
-must own that scheduling. reference/z80_wrapper_checks.json records the scope. This
-checkpoint adds an unchanged JT51/YM2151 evaluation copy, descriptive unsigned
-VHDL wrapper and an isolated chip baseline. uPD7759 and Z80 board/ROM scheduling
-remain open.
+The logical sound board connects T80, the VHDL memory map, native 2 KiB sound
+RAM and unchanged JT51. It passes command/interrupt diagnostics, full Quartus
+implementation and a synthesized-netlist diagnostic. It is not connected to
+rabbitpunch_system yet. Audio ROM transport remains external; uPD7759 playback,
+sample banking, mixing, shared SDRAM scheduling and audible game sound remain open.
 
-## YM2151 donor and baseline
+## Sound CPU and memory map
 
-Selected chip RTL: Arcade-JalecoMS1BCD_MiSTer commit
-f16ec2b84c14409b5ae7b8ade761fffd7ec34b8e, clean selected JT51 files.
-Upstream is jotego/jt51, GPL-3.0-or-later. Its exact upstream JT51 revision is
-not recorded by that donor. Dependency hashes and source paths are in
-reference/vendor_manifest.json and rtl/sound/jt51/PROVENANCE.md. No donor RTL
-is modified. Two SIMULATION-only diagnostic helpers come from the complete
-local upstream JT51 checkout at 00dd3f935c8d73bbebe7a16c4af1c6f32ac742ed.
-They are not synthesis dependencies or a mixed version of the sound chip.
+rabbitpunch_soundcpu presents one outstanding byte transaction. o_request is a
+one-clock pulse; address/data/write are latched and every request owes one reply,
+including writes. T80 advances on i_enable only when its active memory cycle is
+complete. Refresh/interrupt acknowledge are not memory requests. Acknowledge
+supplies FF for IM1; long backend replies stretch CPU execution through enables.
+This is not proof of original-board instruction/bus timing.
 
-The selected donor has no original regression suite. The older complete JT51
-checkout has a top-level test using DAC ports absent from this selected copy;
-its tests and chip interfaces must not be silently mixed. The new VHDL native
-baseline runs before wrapper testing and states its limits explicitly.
+i_pause stops new requests and drains an accepted reply before o_paused. A
+completed read stays available on resume. Reset holds T80 reset until an old
+response drains, preventing it from becoming a new opcode. The backend must
+remain live during CPU reset/pause. soundcpu_tb checks RAM readback, peripheral
+writes, 65-clock replies, pause mid-read, reset mid-read and replay. Evidence:
+reference/soundcpu_checks.json. Its isolated fit passes at 48 MHz: 1109 ALMs,
+zero RAM, worst setup +5.642 ns / hold +0.156 ns (soundcpu_synth.json).
 
-run_ym2151_tests.py verifies native and wrapped interfaces using a 48 MHz
-evaluation clock, 4 MHz chip enable and 2 MHz half-enable. Both enable inputs
-advance the same clock domain. Measured sample-marker edges are 768 system
-clocks apart (chip clock/64). Explicit channel mute/key-off programming produces
-zero PCM. Do not assume FM parameter storage is initialized by reset alone.
-Timer A/B status, IRQ assertion/clearing and a complete timer B period pass.
-The first B overflow includes free-running prescaler phase, so its full period
-is measured between consecutive overflows while load remains asserted.
-Results: reference/ym2151_checks.json.
+rabbitpunch_sound_bus follows the pinned MAME map:
 
-This is not a keyed-tone waveform, game-register trace, analog-level or by-ear
-comparison. The sound CPU and MAME command traces must drive further verification
-before game sound is claimed. The wrapper has descriptive chip select/write,
-register/data selection, status and active-high interrupt ports. PCM outputs
-use unsigned buses containing raw two's-complement bits, including separate
-chip-quantized and full-resolution pairs; mixing must preserve that encoding.
-The sample marker is forwarded unchanged and consumed synchronously, not as a
-new clock. Peripheral CT pins are unused by the board adapter.
+| Address | Behavior |
+|---|---|
+| 0000-EFFF | External audio ROM reads; writes ignored |
+| F000 | YM address write; unused read returns FF |
+| F001 | YM data write / status read |
+| F200 | Command byte read and acknowledgement pulse |
+| F400 | ADPCM control-byte strobe |
+| F600 | ADPCM command-byte strobe |
+| F800-FFFF | Native 2048-byte sound RAM |
 
-## uPD7759 candidate
+Other reads return FF; other writes have no peripheral effect. YM read-offset
+semantics were checked against mame0289:3rdparty/ymfm/src/ymfm_opm.cpp. Address/data
+are held while waiting for the P1 half-chip enable, then JT51 receives exactly
+one system-clock write pulse. Its register logic consumes writes on every
+system clock, while busy status samples on cen_p1; both pulse width and phase
+matter. The board's i_ym_half_enable supplies that write qualification.
 
-Arcade-SystemC2_MiSTer commit acb146209bcbb58a7f2687c4b162b2ee9a3ff88c has
-a clean selected JT7759 directory, not copied or validated here yet. Its current
-README port table differs from the actual entry point: native ROM address is
-17 bits and PCM output is signed 9 bits. Bind the HDL declaration, not that
-stale table. Rabbit Punch's extra sample-ROM bank is outside the 128 KiB native
-address window and needs board-specific VHDL handling. Reset/start polarity,
-standalone mode, ROM latency and command timing must be checked against the
-MAME driver/device and the actual donor before connection.
+ROM request/address hold until ready, followed by a separate response. Native
+rabbitpunch_ram8 has explicit dual ports on i_clk and no RAM reset. Inspection
+is read-only and permitted only after CPU pause drains; same-address CPU-write /
+inspection collisions are forbidden. sound_bus_tb writes/checks all 2048 bytes
+through CPU and inspection ports, exercises address boundaries, exact peripheral
+strobes, 17-clock ROM backpressure and 53-clock replies. Evidence:
+reference/sound_bus_checks.json. ADPCM strobes are not chip playback yet.
 
-The sound ROM clients still need a verified path into shared SDRAM, with measured
-impact on line deadlines. Do not add a frame buffer or silently increase clocks
-to accommodate them.
+## Connected board verification
 
-## Executing sound CPU and MAME startup reference
+The main board remains owner of the command byte/pending flag. A sound read
+acknowledges that latch. Z80 IRQ is YM IRQ OR command pending. All logic uses
+i_clk with supplied enables; pause stops the CPU while JT51/ROM transport stay
+live. PCM buses contain raw two's-complement bits despite their unsigned types.
 
-rabbitpunch_soundcpu wraps the descriptive T80 adapter with one outstanding
-memory transaction. o_request pulses for one i_clk; the backend owes exactly
-one response, including writes. Address/write/data are latched. The CPU advances
-only at i_enable when the active memory cycle has completed. Refresh and Z80
-interrupt-acknowledge cycles are not memory requests; interrupt acknowledge
-supplies FF for the board's Z80 interrupt convention. No new clock is generated.
-Long backend replies stretch execution through clock enables; this is not proof
-of original Z80 bus timing or of the final SDRAM bandwidth budget.
+sound_board_tb first writes YM register 14 and checks busy status through the
+CPU. It then exercises two command interrupts, FF acknowledge, IM1 handler,
+mailbox acknowledgement, native RAM storage/inspection, RETI and resume. During
+each pause, at least two JT51 sample-marker periods continue without CPU writes.
+This synthetic program initializes its own CPU state. Report:
+reference/sound_board_checks.json.
 
-i_pause stops new transactions while an accepted reply drains, then o_paused
-asserts. The held completed read remains available on resume. Reset holds the
-CPU in reset until any old response drains, so it cannot become a new opcode.
-The backend must remain live during pause/reset. Diagnostic soundcpu_tb uses
-65-clock delayed replies, RAM readback, peripheral writes, pause mid-read,
-reset mid-read and replay. Evidence: reference/soundcpu_checks.json.
+The same behavior passes against the Quartus-generated sound_board_check
+functional netlist, with no DUT RTL in that simulation. Its launch/capture
+registers add evaluation-interface latency, accounted for by the inspection
+stimulus. Report: reference/sound_board_netlist_checks.json. This is not an SDF
+simulation; routed timing is checked separately. The protected DSP simulation
+model emits port-width warnings; no keyed FM waveform has been verified.
 
-capture_sound_boot.py installs MAME write/command taps before soft reset and
-captures both audio ROMs' first 4096 ordered writes. Each prefix contains 3881
-RAM writes, 107 YM2151 address/data pairs and one uPD control write; neither
-contains a main-CPU command or mailbox read. This is sound-board initialization,
-not an attract/game music capture. Lua subscriptions are retained globally and
-callback faults are propagated to the runner. Hashes: reference/sound_boot_reference.json.
+The final logical sound-board implementation uses 2405 ALMs, 1755 registers,
+11 RAM blocks, 19403 RAM bits and one DSP. All reported 48 MHz timing corners
+pass: worst setup +2.621 ns / hold +0.105 ns, with six zero-issue clock/path
+coverage categories. reference/sound_board_synth.json records the staged commit.
+Registered logical boundaries and synthetic external timing are evaluation
+constraints, not final PLL, board-pin or complete-core timing proof.
 
-check_sound_boot.py executes the actual audio ROM using T80, actual JT51,
-behavioral ROM/RAM/peripheral decoding and periodic 53-clock delayed replies.
-Every one of 4096 writes matches MAME for each set. The simulation explicitly
-loads MAME's captured reset register state through the vendor's existing DIR
-state input after reset. It does not change the CPU's production reset behavior.
-MAME resets A=00/F=40 and general registers to defined values; native T80 resets
-A/F=FF and leaves its register RAM uninitialized. An initial unseeded Rabio
-Lepus run matched all peripheral writes but differed in four temporary stack
-bytes (one unknown). The strict seeded comparison normalizes that starting
-condition instead of masking any write differences. RAM is also explicitly
-zero-initialized in this behavioral fixture. Evidence: reference/sound_boot_checks.json.
+Its strict resource gate checks native sound RAM and seven inferred JT51 state
+memories individually: 2048x8, 8x68, 4x21, 27x10, 28x2, 32x45, 3x15 and 29x20.
+No chip state or pipeline was removed to meet the gate.
 
-The startup test does not contain production sound RAM, ROM arbitration,
-uPD playback, main-board commands or final interrupt timing. JT51 keeps running
-while the CPU waits/pauses. Its register initialization is exercised, but no
-PCM waveform or audible game result is claimed. Native vendor sources remain
-unchanged. The new staged soundcpu fit target checks the transaction adapter
-and T80 only, with registered logical evaluation interfaces at 48 MHz.
+## MAME sound startup comparison
 
-The sound CPU implementation passes all reported 48 MHz timing corners with
-zero block RAM, worst setup +5.642 ns and hold +0.156 ns.
-reference/soundcpu_synth.json pins the staged commit and six zero-issue timing
-coverage categories. This checks T80 and the transaction adapter; JT51 and the
-future native sound RAM/backend are outside that fit.
+capture_sound_boot.py installs guarded taps before resetting MAME 0.289. Each
+set's 4096-write prefix contains 3881 RAM writes, 107 YM address/data pairs and
+one ADPCM control write. Neither prefix contains a main-CPU command or mailbox
+read: these are initialization traces, not attract/game music. Source/ROM/trace
+hashes are in reference/sound_boot_reference.json.
 
-## Native sound backend and logical sound board
+check_sound_boot.py compares T80/JT51 with a behavioral backend; all 4096 writes
+match for both sets (sound_boot_checks.json). check_sound_board_boot.py repeats
+that comparison through production sound decode and native RAM with periodic
+53-clock external ROM replies. The final single-pulse/P1/status-decode RTL is
+being rechecked: Rabio Lepus passes; Rabbit Punch is running. The final aggregate
+report is reference/sound_board_boot_checks.json.
 
-rabbitpunch_sound_bus implements the pinned sound map: ROM 0000-EFFF,
-YM2151 F000/F001, command read/ack F200, ADPCM control F400 and command F600,
-and native 2 KiB RAM F800-FFFF. Unmapped reads return FF and unmapped/ROM
-writes have no device effect. One request pulse receives one reply. ROM
-request/address hold until ready, followed by a separate response. YM address/data hold until the half-chip (P1) enable, when one system-clock
-write pulse is presented. The half-enable matters: JT51 samples busy status
-on cen_p1; a pulse on the other chip phase can miss it. JT51 consumes register writes on every system clock, so holding
-write active while awaiting that enable would repeat the write.
-The two ADPCM outputs are byte strobes for a future chip adapter, not playback.
+These strict comparisons explicitly load captured MAME reset registers through
+the vendor's existing DIR simulation input and seed fixture RAM with zeros.
+MAME resets A=00/F=40; T80 resets A/F=FF and leaves register RAM uninitialized.
+An initial unseeded Rabio Lepus run matched every peripheral write but differed
+in four temporary stack bytes, one unknown. Normalizing the starting condition
+avoids masking any write difference. Production CPU/RAM reset behavior is
+unchanged. Ordered startup writes are not full boot, interrupt timing or PCM
+waveform verification.
 
-rabbitpunch_ram8 uses explicit native M10K dual ports, both driven by i_clk.
-RAM is not reset. The inspection port is read-only; sound_board permits it only
-when the sound CPU has drained into pause. CPU writes and inspection must not
-collide. sound_bus_tb initializes every byte by ordinary writes before checking
-all 2048 CPU reads and all 2048 inspection reads; it also verifies peripheral
-boundaries, exact strobes, 17-clock ROM backpressure and 53-clock response delay.
-Evidence: reference/sound_bus_checks.json.
+## Reused chip provenance and isolated tests
 
-rabbitpunch_sound_board connects the transaction CPU, native backend and JT51.
-The main board still owns the existing command latch/pending flag; command reads
-return its byte and pulse its acknowledgement. Z80 IRQ is YM IRQ OR command
-pending. CPU/half-chip/chip enables are supplied by the caller, all on i_clk.
-Pause stops the CPU and drains its transaction while JT51 and ROM transport stay
-live. PCM remains raw two's-complement in unsigned buses. No ADPCM sound is
-mixed, and audio ROM transport is external; the main system does not instantiate
-this board yet. The connected native-RAM startup regression passes all 4096 ordered writes
-for both games: reference/sound_board_boot_checks.json. It uses the same
-explicitly captured MAME CPU reset seed and MAME-style native RAM zeros as the
-earlier startup fixture; production RAM remains uninitialized. These proofs are rerun when the single-pulse YM write qualification changes;
-the final implementation/netlist result must cover that same RTL.
+JT51 is unchanged from Arcade-JalecoMS1BCD_MiSTer commit
+f16ec2b84c14409b5ae7b8ade761fffd7ec34b8e. Its exact upstream JT51 revision is
+not recorded by that donor. Two simulation-only diagnostic helpers come from
+the complete upstream checkout at 00dd3f935c8d73bbebe7a16c4af1c6f32ac742ed;
+no chip versions are mixed. GPL-3.0-or-later, manifest/provenance under rtl/sound/jt51.
+The native/wrapped chip baseline checks explicit channel mute, sample cadence,
+timer A/B IRQ and clearing. Initial FM storage is not assumed silent. The full
+B period is measured between overflows because its first overflow includes
+free-running prescaler phase. Evidence: reference/ym2151_checks.json.
 
+JT7759 is an unchanged evaluation copy from SNK68 commit
+566133699ecd2ec2aa6897de6f0995ebefb60624 (GPL-3.0-or-later). Its exact upstream
+revision is not recorded by the donor. Native ROM addressing is 17 bits and PCM
+is signed 9 bits; the README's port table is stale. Manifest/provenance are
+under rtl/sound/jt7759. The alternate SystemC2 controller holds DONE until reset,
+so that candidate was not selected.
 
-sound_board_tb also runs a synthetic Z80 IM1 interrupt handler twice from
-command-pending IRQ. It checks FF interrupt acknowledge, command reads/acks,
-RETI/resume, correct native RAM storage/inspection and two continuing JT51
-sample-marker periods during each drained CPU pause. It uses initialized
-program state rather than the MAME CPU seed. Evidence: reference/sound_board_checks.json.
+The imported JT7759 automatic test has reset/start and multi-sample fixture
+limitations. Its original sources are retained; a simulator-controlled first
+sample completes with an explicit idle assertion (jt7759_donor_checks.json).
+Its failed automatic multi-sample transcript is retained in debug; it is not
+reported as a passing retrigger proof. No vendor source was changed to pass it.
 
-The full sound-board resource gate includes native sound RAM plus seven RAMs
-Quartus infers from unchanged JT51 shift registers: 2048x8, 8x68, 4x21, 27x10,
-28x2, 32x45, 3x15 and 29x20, totaling 19403 bits. The first gate assumed only
-native sound RAM; the synthesis RAM summary identified the additional vendor
-state. The corrected gate checks each instance/geometry and rejects missing,
-duplicated or unexpected memories. No chip RTL or memory latency was changed.
-
-
-The command diagnostic now first programs YM register 14, reads busy status
-through the CPU and branches to failure unless the write was accepted. This
-caught the distinction between JT51's chip enable and register/busy P1 enable.
-Register write pulses are aligned with i_ym_half_enable; audio processing still
-receives both original chip enables. No vendor logic is changed.
-
-
-YM reads follow MAME 0.289's ymfm_opm.cpp: F000 is unused and returns FF;
-only F001 returns status. Both offsets accept their respective address/data
-writes. The map boundary test checks this distinction rather than exposing
-JT51's unqualified status output at both offsets.
+The separate VHDL native and rabbitpunch_upd7759 wrapper tests pass two different
+complete synthetic commands, retriggering, 13-clock delayed ROM data, nonzero
+PCM presence and reset mute at a nominal 48 MHz/75 = 640 kHz enable. Evidence:
+reference/jt7759_checks.json. The ROM-valid response is qualified by request and
+address. The descriptive wrapper exposes active-high start/busy and raw signed
+PCM bits on unsigned ports. This is not a decoded-value/MAME waveform, bank
+switching, shared SDRAM, Quartus implementation or audible game proof. The board
+adapter still must translate F400 bit 7 active-low reset and bit 0 ROM bank,
+then latch F600 data and produce the chip's start edge.

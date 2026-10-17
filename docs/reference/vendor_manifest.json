@@ -29,6 +29,11 @@
       "directory": "jt51",
       "commit": "00dd3f935c8d73bbebe7a16c4af1c6f32ac742ed",
       "selected_files_clean": true
+    },
+    "upd7759": {
+      "directory": "SNK68",
+      "commit": "566133699ecd2ec2aa6897de6f0995ebefb60624",
+      "selected_files_clean": true
     }
   },
   "files": [
@@ -379,6 +384,66 @@
       "source": "ver/common/sep32_cnt.v",
       "target": "sim/vendor/jt51/sep32_cnt.v",
       "sha256": "cc15f156e3bbf72f19956c6fca34c4d17986a576209d1ae890450519692edce7"
+    },
+    {
+      "donor": "upd7759",
+      "source": "rtl/jt7759/hdl/jt7759.v",
+      "target": "rtl/sound/jt7759/hdl/jt7759.v",
+      "sha256": "a4defeee8f5b5fec795af00d6185aa941f4135ab72ae5f7fece31908c3c48c1a"
+    },
+    {
+      "donor": "upd7759",
+      "source": "rtl/jt7759/hdl/jt7759_adpcm.v",
+      "target": "rtl/sound/jt7759/hdl/jt7759_adpcm.v",
+      "sha256": "41d795e33e2085d3d07ee0acab23e85f495f3766e61bd91f177c46e84072380d"
+    },
+    {
+      "donor": "upd7759",
+      "source": "rtl/jt7759/hdl/jt7759_ctrl.v",
+      "target": "rtl/sound/jt7759/hdl/jt7759_ctrl.v",
+      "sha256": "19ad3a6572dec4e61d0046b222b6af53660cb558123b985f43db86dd5ed98aa9"
+    },
+    {
+      "donor": "upd7759",
+      "source": "rtl/jt7759/hdl/jt7759_data.v",
+      "target": "rtl/sound/jt7759/hdl/jt7759_data.v",
+      "sha256": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d"
+    },
+    {
+      "donor": "upd7759",
+      "source": "rtl/jt7759/hdl/jt7759_div.v",
+      "target": "rtl/sound/jt7759/hdl/jt7759_div.v",
+      "sha256": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862"
+    },
+    {
+      "donor": "upd7759",
+      "source": "rtl/jt7759/hdl/jt7759.qip",
+      "target": "rtl/sound/jt7759/hdl/jt7759.qip",
+      "sha256": "539b5a33937ef2ee2f77e698dc683576092312278e9841a92b5f3e1fbe9beab1"
+    },
+    {
+      "donor": "upd7759",
+      "source": "rtl/jt7759/LICENSE",
+      "target": "rtl/sound/jt7759/LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "donor": "upd7759",
+      "source": "rtl/jt7759/README.md",
+      "target": "rtl/sound/jt7759/README.md",
+      "sha256": "b3679b1270391a33788feab278bcabfb8014452655e741cb3af14cf9cd07e4b4"
+    },
+    {
+      "donor": "upd7759",
+      "source": "rtl/jt7759/ver/top/test.v",
+      "target": "sim/vendor/jt7759/test.v",
+      "sha256": "4d7d3e1bda680f69c13ae7e5d8bb5ba9384b9a4bd411efc93cdb350abdf4676f"
+    },
+    {
+      "donor": "upd7759",
+      "source": "rtl/jt7759/ver/top/go.sh",
+      "target": "sim/vendor/jt7759/go.sh",
+      "sha256": "ac886fe2888e6718fa66eb1b8cca5429ee597d24755f3fd15858fd63b94ec812"
     }
   ]
 }

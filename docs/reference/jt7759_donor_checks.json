@@ -1,0 +1,16 @@
+{
+  "case": "jt7759_donor",
+  "pass_marker": "jt7759: sample done",
+  "log": "debug\\baselines\\jt7759_donor\\result.log",
+  "source_sha256": {
+    "rtl/sound/jt7759/hdl/jt7759.v": "a4defeee8f5b5fec795af00d6185aa941f4135ab72ae5f7fece31908c3c48c1a",
+    "rtl/sound/jt7759/hdl/jt7759_adpcm.v": "41d795e33e2085d3d07ee0acab23e85f495f3766e61bd91f177c46e84072380d",
+    "rtl/sound/jt7759/hdl/jt7759_ctrl.v": "19ad3a6572dec4e61d0046b222b6af53660cb558123b985f43db86dd5ed98aa9",
+    "rtl/sound/jt7759/hdl/jt7759_data.v": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d",
+    "rtl/sound/jt7759/hdl/jt7759_div.v": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862",
+    "sim/vendor/jt7759/test.v": "4d7d3e1bda680f69c13ae7e5d8bb5ba9384b9a4bd411efc93cdb350abdf4676f"
+  },
+  "synthetic_rom_sha256": "25f36abee33a1a01206f38884f95e6104b4bc25743441e912778754a322bd0f1",
+  "log_sha256": "21c52900b67b4c0bd033bc69bc7d23027484033c64334a4f31e4ef67827381a0",
+  "scope": "Original donor chip/test/ROM model with simulator-controlled start: first synthetic sample completes and returns idle; original automatic multi-sample fixture stalls, so it is not a retrigger proof. Separate VHDL baseline covers two different complete commands at 640 kHz; no PCM-value/game/wrapper proof"
+}

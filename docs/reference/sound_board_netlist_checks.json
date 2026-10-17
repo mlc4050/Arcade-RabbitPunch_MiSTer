@@ -1,0 +1,14 @@
+{
+  "case": "gate_sound_board",
+  "pass_marker": "SOUND_BOARD_PASS",
+  "log": "debug\\baselines\\gate_sound_board\\result.log",
+  "commit": "6bbec1082caa62d053f2023e64639b9622be53fa",
+  "vectors_sha256": {},
+  "netlist_sha256": "8bcc5ae92f26d9fcbaa6318408e3d341c6b33ccf8c4cc626fa9e31f4ee803b9f",
+  "source_sha256": {
+    "debug/netlists/sound_board_6bbec10/sound_board_check.vo": "8bcc5ae92f26d9fcbaa6318408e3d341c6b33ccf8c4cc626fa9e31f4ee803b9f",
+    "sim/sound/sound_board_netlist_tb.vhd": "769d6451418ed3c4896bf14425ad25f275cc4653d119ed0ec774e81cfe4a19af"
+  },
+  "log_sha256": "b829080baf508777077faa1e708aacfb777960d5f633d2cc245d77d94701fd9a",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
+}
