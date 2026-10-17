@@ -30,5 +30,6 @@ transfer or electrical timing proof. reference/download_checks.json pins both.
 
 The isolated download implementation target uses the full production image size,
 same-clock registered test boundaries and the 48 MHz evaluation constraint.
-Its external tester is hypothetical; check reference/download_synth.json once
-that implementation check completes before claiming closure.
+Implementation passes all timing corners with zero block RAM.
+reference/download_synth.json records the exact fit and synthetic tester
+constraints; it is not a final external-pin or HPS transfer proof.

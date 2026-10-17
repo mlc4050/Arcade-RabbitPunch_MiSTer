@@ -61,15 +61,17 @@ pixels; the largest line cost across those scenes is 2557 clocks (53.3 us at
 not full executing gameplay or a proven physical line deadline.
 A connected production ROM subsystem with word loading and safe replacement
 image invalidation also passes implementation and synthesized-netlist checks.
-Executing Rabio Lepus matches its first 10000 MAME writes through that ROM path;
-Rabbit Punch is still running. A connected logical board now joins CPU, I/O,
+Both games match their first 10000 MAME writes and all 24 checked I/O fields
+through that cached SDRAM ROM path. A connected logical board now joins CPU, I/O,
 IRQ and shared-RAM video; both games pass 1000-write comparisons while logical
 lines render concurrently. Tests explicitly seed native model RAM to MAME-style
 zeros and check black palette output/tags in this early prefix. This is separate
 from the captured-scene graphics proofs. Connected-board implementation passes every timing corner at 48 MHz, with
 2962 ALMs, 112 M10K blocks, worst setup +6.808 ns and hold +0.115 ns under
 its documented logical-interface evaluation contract.
-No complete game is running yet.
+Sequential image download control passes delayed-response and real SDRAM-model
+replacement tests plus implementation/timing checks. HPS/DDR staging is not
+connected yet. No complete game is running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
 ## Goal and scope
