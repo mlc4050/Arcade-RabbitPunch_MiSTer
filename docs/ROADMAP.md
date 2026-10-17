@@ -50,7 +50,11 @@ adapter pass command-model tests, including byte masks, both chips, burst lanes
 and refresh cadence. ROM request mapping passes synthetic and controller/model
 integration tests. SDRAM implementation and synthesized command-model tests
 also pass, under explicitly synthetic external-pin timing assumptions. The
-complete renderer/shared SDRAM screenshot comparison is now in progress. No complete game is running yet.
+complete renderer/shared SDRAM Rabbit Punch play1000 screenshot comparison
+passes with competing CPU ROM reads; a second-set replay is running. Its worst
+line is 3806 clocks, with physical raster deadlines still unresolved. A tiny
+24-byte read-only ROM cache passes directed and synthesized-netlist tests;
+full-pixel cached/uncached throughput comparison is next. No complete game is running yet.
 Hardware evidence and local source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
 
 ## Goal and scope

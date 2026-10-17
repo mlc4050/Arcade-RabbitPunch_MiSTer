@@ -110,8 +110,12 @@ backend accepts/responds; hits return registered data without SDRAM access.
 Game reset leaves immutable ROM cache entries valid. Image replacement must
 first drain all clients, then pulse invalidate before any new request.
 
-The directed test passes 438 replies using 51 backend fetches, with independent
+The directed test passes 444 replies using 54 backend fetches, with independent
 stalls, tag replacements, changed input pins and changed backing data after
 invalidation. This is synthetic hit/miss coverage, not a gameplay speed claim.
-The cache's implementation/netlist check and cached full-RGB comparison are next.
-A separate cached bench preserves the completed uncached timing baseline.
+The cache's isolated implementation and synthesized functional netlist also
+pass, including mixed hits/misses on independent clients. It uses 441 ALMs,
+577 registers and no M10K blocks under the documented synthetic tester contract.
+Exact reports: reference/rom_cache_synth.json and rom_cache_netlist_checks.json.
+The cached full-RGB comparison is next. A separate cached bench preserves the
+completed uncached timing baseline.

@@ -1,0 +1,15 @@
+{
+  "case": "gate_rom_cache",
+  "pass_marker": "ROM_CACHE_PASS",
+  "log": "debug\\baselines\\gate_rom_cache\\result.log",
+  "commit": "a810dff3e0890afd0fd69ec7cf636c061d4a8fed",
+  "vectors_sha256": {},
+  "netlist_sha256": "53522905f0a0b95a1c86b6ad7ca951046ab2355419bcd434ac08c53338cc2fc0",
+  "source_sha256": {
+    "debug/netlists/rom_cache_a810dff/rom_cache_check.vo": "53522905f0a0b95a1c86b6ad7ca951046ab2355419bcd434ac08c53338cc2fc0",
+    "rtl/rabbitpunch_sdram_types.vhd": "ef3d7e0bcb2b6522984ab20ae9e4464625d7a810e76307142fd3ef0a08115480",
+    "sim/memory/rom_cache_tb.vhd": "b82c8ec443a7f8f705d55bd1aca0133ed8110b44da8d6369e1a808460f8567f6"
+  },
+  "log_sha256": "c343a70c2e9e9e240fd5de03eba139ce2e2447c480befb53872bd0032807a257",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
+}

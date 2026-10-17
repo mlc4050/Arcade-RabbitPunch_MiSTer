@@ -108,11 +108,14 @@ begin
             wait until rising_edge(s_clk);
             wait for 1 ns;
         end procedure;
-        procedure read_all(vint_delta : natural) is
+        procedure read_all(vint_delta : natural; v_mixed : boolean := false) is
         begin
             assert (su3_ready = "111") report "Cache not idle before test request" severity failure;
             for vint_client in 0 to 2 loop
                 vu27_expected(vint_client) := to_unsigned(16#50000# + vint_client * 16#80000# + vint_delta, 27);
+                if (v_mixed and vint_client /= 0) then
+                    vu27_expected(vint_client) := vu27_expected(vint_client) - 8;
+                end if;
                 su27_addresses(vint_client) <= vu27_expected(vint_client);
             end loop;
             su3_requests <= "111";
@@ -148,15 +151,22 @@ begin
             end loop;
             assert (sint_fetches = vint_prior_fetches) report "Cache hit accessed SDRAM" severity failure;
         end loop;
+        -- A slow miss on one port must coexist with hits on the other two.
+        vint_prior_fetches := sint_fetches;
+        read_all(16 * 8, true);
+        assert (sint_fetches = vint_prior_fetches + 1) report "Mixed hit/miss isolation failed" severity failure;
+        vint_prior_fetches := sint_fetches;
+        read_all(16 * 8);
+        assert (sint_fetches = vint_prior_fetches + 2) report "Independent cache tags aliased" severity failure;
         s_invalidate <= '1';
         sint_epoch <= 1;
         tick;
         s_invalidate <= '0';
         tick;
         vint_prior_fetches := sint_fetches;
-        read_all(15 * 8);
+        read_all(16 * 8);
         assert (sint_fetches = vint_prior_fetches + 3) report "Invalidation failed to refetch" severity failure;
-        read_all(15 * 8);
+        read_all(16 * 8);
         for vint_wait in 0 to 100 loop
             tick;
             assert (su3_valid = "000" and su3_backend_requests = "000") report "Cache emitted idle traffic" severity failure;
