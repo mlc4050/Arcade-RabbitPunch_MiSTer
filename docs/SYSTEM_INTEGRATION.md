@@ -105,3 +105,12 @@ continued sample playback. Platform and native HPS command tests also pass.
 See MAINTENANCE.md and reference/system_maintenance_checks.json. Physical timing
 and HPS persistence remain separate; the new owner passes full-platform implementation; its real-ROM prefix
 comparison is being refreshed for this revision.
+
+
+The maintenance-integrated real-ROM system comparison is now complete for both
+rabiolep and rpunch. Each matches 10,000 ordered main-CPU writes and 4,096 ordered
+sound-CPU writes against its captured MAME startup prefix through the actual
+shared SDRAM transport/chip model. The transparent CPU bus owner preserves the
+expected sequence. Exact source hashes and private log hashes are recorded in
+reference/system_boot_10000_4096_maintenance_checks.json. This establishes the
+captured startup prefixes, not complete gameplay/audio or physical clock timing.
