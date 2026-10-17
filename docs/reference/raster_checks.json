@@ -1,0 +1,37 @@
+[
+  {
+    "case": "clock_enables",
+    "pass_marker": "CLOCK_ENABLES_PASS",
+    "log": "debug\\baselines\\clock_enables\\result.log",
+    "source_sha256": {
+      "rtl/rabbitpunch_clock_enables.vhd": "3c2356fb1fd0d45bd58e710b9fd0262cd6aa40f7081da6c6ae4bd9f22fe11a10",
+      "sim/board/clock_enables_tb.vhd": "0861ad2f7be2cf165e06f5c5fdefbd13766fae0bb6ef992c71fa354315eaf69a"
+    },
+    "log_sha256": "efcbd83ed54a44d5be69fa8861c90ee185d14ca941b87a74d10e62bbd79754ee",
+    "scope": "Provisional enable ratios and parameterized beam contract only: no PLL, game/render integration, original-board timing measurement or physical output proof"
+  },
+  {
+    "case": "raster_small",
+    "pass_marker": "RASTER_PASS",
+    "log": "debug\\baselines\\raster_small\\result.log",
+    "source_sha256": {
+      "rtl/rabbitpunch_clock_enables.vhd": "3c2356fb1fd0d45bd58e710b9fd0262cd6aa40f7081da6c6ae4bd9f22fe11a10",
+      "rtl/rabbitpunch_raster.vhd": "b15030d8ba92bc3f473a93388f7072d9c3e4529ad24da17fa6735abfbcd7473a",
+      "sim/video/raster_tb.vhd": "8204314a14d26fb31be8c4a369835be79013832301ae1247d28b06c2b95ae949"
+    },
+    "log_sha256": "6f4221a7634157750d558b91c37da40eef25f8598acaef748774a1f12bf78418",
+    "scope": "Provisional enable ratios and parameterized beam contract only: no PLL, game/render integration, original-board timing measurement or physical output proof"
+  },
+  {
+    "case": "raster_nominal",
+    "pass_marker": "RASTER_PASS",
+    "log": "debug\\baselines\\raster_nominal\\result.log",
+    "source_sha256": {
+      "rtl/rabbitpunch_clock_enables.vhd": "3c2356fb1fd0d45bd58e710b9fd0262cd6aa40f7081da6c6ae4bd9f22fe11a10",
+      "rtl/rabbitpunch_raster.vhd": "b15030d8ba92bc3f473a93388f7072d9c3e4529ad24da17fa6735abfbcd7473a",
+      "sim/video/raster_tb.vhd": "8204314a14d26fb31be8c4a369835be79013832301ae1247d28b06c2b95ae949"
+    },
+    "log_sha256": "d99417af8b98cc7caf4b639481679425202088bd99f87df4f19af9dde40d0b05",
+    "scope": "Provisional enable ratios and parameterized beam contract only: no PLL, game/render integration, original-board timing measurement or physical output proof"
+  }
+]
