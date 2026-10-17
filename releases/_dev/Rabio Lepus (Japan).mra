@@ -61,5 +61,5 @@
         <dip name="Extended Play" bits="12" ids="500000 points,300000 points" />
         <dip name="Demo Sounds" bits="13" ids="On,Off" />
     </switches>
-    <buttons names="Missile,Punch,-,-,-,-,Start,Coin,Pause,Service,Test" count="2" />
+    <buttons names="Missile,Shoot,-,-,-,-,Start,Coin,Pause,Service,Test" count="2" />
 </misterromdescription>

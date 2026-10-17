@@ -122,9 +122,9 @@
     "rtl/rabbitpunch_hiscore_service.vhd": "4428ab8031e87adcc6ec81e781fd055d7bc93461cef11a6a6defa07e45bd5d2b",
     "rtl/rabbitpunch_maintenance_clients.vhd": "559976bd1124ea5ed26bf4f1ce5371d837dd126ad366acbe4ffbb8e8b8de548a",
     "rtl/rabbitpunch_platform.vhd": "7960c3c761da77ec2bea55872e48057e28243cbebb7f42ae051c125b80887997",
-    "sim/board/platform_hiscore_tb.vhd": "57f5772353808f264dea2ac29c9ebd98e1a74ef2da8a6fc48fe01877f0e4f202"
+    "sim/board/platform_hiscore_tb.vhd": "75e83253abf5ed1c7c3e4962a888ccf05de0fc86470ba670744ede4f55bd07e6"
   },
   "vectors_sha256": "56c5bb10b5801c7e067a3a6770e4369431bac096d0f90be7ed958c3974b4af01",
-  "log_sha256": "d75b6d0726cd039b9313204ef7db53d30c207d2f467037dc54e6e1c43fa08507",
-  "scope": "Full logical platform and executing fx68k through actual shared SDRAM/chip model, native work/score RAM and both maintenance clients. Both MAME table geometries, standard config3/dump4 restore, CPU-consumed restored score word, external maintenance prefill, changed-score OSD autosave/upload, soft-reset restore and ROM-generation/DIP isolation. HPS commands modeled as file signals, game ROM replaced by a 64-byte diagnostic; no disk persistence or physical timing claim."
+  "log_sha256": "3e5ced1f460be01fca526d17f9487ac6db06b2c0b6e48248e93e2d835605b808",
+  "scope": "Full logical platform and executing fx68k through actual shared SDRAM/chip model, native work/score RAM and both maintenance clients. Both MAME table geometries, standard config3/dump4 restore, CPU-consumed restored score word, external maintenance prefill, changed-score OSD autosave/upload, soft-reset restore and ROM-generation/DIP isolation. Native HPS command strobes when --host-netlist, otherwise modeled file signals; game ROM replaced by a 64-byte diagnostic; no disk persistence or physical timing claim."
 }

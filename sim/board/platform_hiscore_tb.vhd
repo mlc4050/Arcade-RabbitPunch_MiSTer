@@ -8,9 +8,43 @@ use std.textio.all;
 use work.rabbitpunch_layout.all;
 
 entity platform_hiscore_tb is
+    generic (HOST_NETLIST_MODE : boolean := false);
 end entity;
 
 architecture test of platform_hiscore_tb is
+    component host_check is
+    port (
+        i_clk : in std_logic;
+        iu16_host_data : in unsigned(15 downto 0);
+        i_host_strobe : in std_logic;
+        i_uio_select : in std_logic;
+        i_file_select : in std_logic;
+        ou16_host_response : out unsigned(15 downto 0);
+        o_host_wait : out std_logic;
+        o_wide_mode : out std_logic;
+        iu16_menu_mask : in unsigned(15 downto 0);
+        ou128_status : out unsigned(127 downto 0);
+        ou32_joystick0 : out unsigned(31 downto 0);
+        ou32_joystick1 : out unsigned(31 downto 0);
+        ou11_key_event : out unsigned(10 downto 0);
+        ou2_buttons : out unsigned(1 downto 0);
+        o_forced_scandoubler : out std_logic;
+        o_direct_video : out std_logic;
+        ou16_sdram_configuration : out unsigned(15 downto 0);
+        o_file_download : out std_logic;
+        ou16_file_index : out unsigned(15 downto 0);
+        o_file_write : out std_logic;
+        ou27_file_byte_address : out unsigned(26 downto 0);
+        ou8_file_data : out unsigned(7 downto 0);
+        i_file_wait : in std_logic;
+        i_file_upload_request : in std_logic := '0';
+        iu8_file_upload_index : in unsigned(7 downto 0) := (others => '0');
+        iu8_file_upload_data : in unsigned(7 downto 0) := (others => '0');
+        o_file_upload : out std_logic;
+        o_file_read : out std_logic
+    );
+    end component;
+
     component sdram_chip_model_wide is
         port (
             clk : in std_logic;
@@ -106,7 +140,54 @@ architecture test of platform_hiscore_tb is
     signal su8_maintenance_data, su8_maintenance_response : unsigned(7 downto 0) := (others => '0');
     signal su16_score_echo : unsigned(15 downto 0) := (others => '0');
     signal sint_upload_requests : natural := 0;
+    signal s_file_download, s_file_write, s_file_upload : std_logic;
+    signal su16_file_index, su16_host_response, su16_menu_mask : unsigned(15 downto 0);
+    signal su27_file_address : unsigned(26 downto 0);
+    signal su8_file_data : unsigned(7 downto 0);
+    signal su16_native_data : unsigned(15 downto 0) := (others => '0');
+    signal s_native_strobe, s_native_uio, s_native_file : std_logic := '0';
 begin
+    direct_host : if (not HOST_NETLIST_MODE) generate
+        s_file_download <= s_host_download;
+        s_file_write <= s_host_write;
+        s_file_upload <= s_host_upload;
+        su16_file_index <= su16_host_index;
+        su27_file_address <= su27_host_address;
+        su8_file_data <= su8_host_data;
+    end generate;
+    native_host : if (HOST_NETLIST_MODE) generate
+        host : host_check
+            port map (
+                i_clk => s_clk,
+                iu16_host_data => su16_native_data,
+                i_host_strobe => s_native_strobe,
+                i_uio_select => s_native_uio,
+                i_file_select => s_native_file,
+                ou16_host_response => su16_host_response,
+                o_host_wait => open,
+                o_wide_mode => open,
+                iu16_menu_mask => su16_menu_mask,
+                ou128_status => open,
+                ou32_joystick0 => open,
+                ou32_joystick1 => open,
+                ou11_key_event => open,
+                ou2_buttons => open,
+                o_forced_scandoubler => open,
+                o_direct_video => open,
+                ou16_sdram_configuration => open,
+                o_file_download => s_file_download,
+                ou16_file_index => su16_file_index,
+                o_file_write => s_file_write,
+                ou27_file_byte_address => su27_file_address,
+                ou8_file_data => su8_file_data,
+                i_file_wait => s_host_wait,
+                i_file_upload_request => s_upload_request,
+                iu8_file_upload_index => to_unsigned(4, 8),
+                iu8_file_upload_data => su8_upload_data,
+                o_file_upload => s_file_upload,
+                o_file_read => open
+            );
+    end generate;
     s_clk <= not s_clk after 10417 ps;
     s_ddr_busy <= '1' when sint_cycles mod 23 < 7 else '0';
     ddr_backend : process(s_clk)
@@ -154,10 +235,11 @@ begin
             iu32_joystick1 => su32_joystick1,
             iu11_key_event => su11_key_event,
             i_osd_open => s_osd_open,
-            i_host_download => s_host_download,
-            i_host_upload => s_host_upload,
+            i_host_download => s_file_download,
+            i_host_upload => s_file_upload,
             o_host_upload_request => s_upload_request,
             ou8_host_upload_data => su8_upload_data,
+            ou16_host_menu_mask => su16_menu_mask,
             o_hiscore_enabled => s_score_enabled,
             o_hiscore_config_error => s_score_error,
             o_hiscore_initialized => s_score_initialized,
@@ -172,10 +254,10 @@ begin
             o_maintenance_response_valid => s_maintenance_response,
             ou8_maintenance_response_data => su8_maintenance_response,
             o_maintenance_pause => s_maintenance_pause,
-            iu16_host_index => su16_host_index,
-            i_host_write => s_host_write,
-            iu27_host_byte_address => su27_host_address,
-            iu8_host_data => su8_host_data,
+            iu16_host_index => su16_file_index,
+            i_host_write => s_file_write,
+            iu27_host_byte_address => su27_file_address,
+            iu8_host_data => su8_file_data,
             o_host_wait => s_host_wait,
             o_downloading => s_download,
             o_ddr_owner => s_ddr_owner,
@@ -345,6 +427,37 @@ begin
                 wait until falling_edge(s_clk);
             end loop;
         end procedure;
+        procedure native_word(vint_data : natural) is
+        begin
+            su16_native_data <= to_unsigned(vint_data, 16);
+            s_native_strobe <= '1';
+            cycles(1);
+            s_native_strobe <= '0';
+            cycles(3);
+        end procedure;
+        procedure native_file_command(vint_command, vint_data : natural) is
+        begin
+            if (HOST_NETLIST_MODE) then
+                cycles(1);
+                s_native_file <= '1';
+                native_word(vint_command);
+                native_word(vint_data);
+                s_native_file <= '0';
+                cycles(4);
+            end if;
+        end procedure;
+        procedure check_menu(vint_mask : natural) is
+        begin
+            assert (su16_menu_mask = vint_mask) report "Score menu visibility differs from profile validity" severity failure;
+            if (HOST_NETLIST_MODE) then
+                s_native_uio <= '1';
+                native_word(16#2E#);
+                native_word(0);
+                assert (su16_host_response = vint_mask) report "Native menu-mask readback mismatch" severity failure;
+                s_native_uio <= '0';
+                cycles(4);
+            end if;
+        end procedure;
         procedure host_byte(vint_byte, vint_epoch : natural) is
             variable vu16_word : unsigned(15 downto 0);
         begin
@@ -363,6 +476,7 @@ begin
             s_host_write <= '1';
             cycles(1);
             s_host_write <= '0';
+            native_file_command(16#54#, to_integer(su8_host_data));
             su27_host_address <= (others => '1');
             su8_host_data <= (others => '1');
         end procedure;
@@ -388,6 +502,8 @@ begin
             end if;
             assert (s_host_wait = '0') report "Previous image did not drain before next host transaction" severity failure;
             s_host_download <= '1';
+            native_file_command(16#55#, 0);
+            native_file_command(16#53#, 1);
             cycles(3);
             if (not v_ddr) then
                 for vint_byte in 0 to 63 loop
@@ -400,6 +516,7 @@ begin
             assert (s_host_wait = '0') report "New image start did not wait for old loader drain" severity failure;
             cycles(1);
             s_host_download <= '0';
+            native_file_command(16#53#, 0);
             if (v_ddr) then
                 cycles(10);
                 assert (sint_ddr_reads = vint_reads_before and s_ready = '0')
@@ -489,6 +606,7 @@ begin
             s_host_write <= '1';
             cycles(1);
             s_host_write <= '0';
+            native_file_command(16#54#, to_integer(vu8_data));
             cycles(1);
         end procedure;
         procedure configure(v_us : boolean) is
@@ -498,15 +616,19 @@ begin
                 vint_offset := 24;
             end if;
             su16_host_index <= to_unsigned(3, 16);
+            native_file_command(16#55#, 3);
+            native_file_command(16#53#, 1);
             s_host_download <= '1';
             cycles(3);
             for vint_byte in 0 to 23 loop
                 file_byte(vint_byte, v_metadata(vint_offset + vint_byte));
             end loop;
             s_host_download <= '0';
+            native_file_command(16#53#, 0);
             cycles(3);
             assert (s_score_enabled = '1' and s_score_error = '0')
                 report "Platform rejected valid score metadata" severity failure;
+            check_menu(0);
         end procedure;
         procedure memory_byte(vint_address : natural; vu8_data : unsigned(7 downto 0)) is
         begin
@@ -571,6 +693,8 @@ begin
             end if;
             assert (s_host_wait = '0') report "Full platform score snapshot never completed" severity failure;
             s_host_upload <= '1';
+            native_file_command(16#55#, 4);
+            native_file_command(16#53#, 16#AA#);
             for vint_byte in 0 to vint_length - 1 loop
                 su27_host_address <= to_unsigned(vint_byte, 27);
                 cycles(3);
@@ -578,10 +702,17 @@ begin
                 if (v_modified) then
                     vu8_expected := vu8_expected xor x"5A";
                 end if;
-                assert (su8_upload_data = vu8_expected)
-                    report "Full platform score upload byte mismatch" severity failure;
+                if (HOST_NETLIST_MODE) then
+                    native_file_command(16#54#, 0);
+                    assert (su16_host_response(7 downto 0) = vu8_expected)
+                        report "Native HPS score upload byte mismatch" severity failure;
+                else
+                    assert (su8_upload_data = vu8_expected)
+                        report "Full platform score upload byte mismatch" severity failure;
+                end if;
             end loop;
             s_host_upload <= '0';
+            native_file_command(16#53#, 0);
             cycles(3);
         end procedure;
     begin
@@ -612,15 +743,19 @@ begin
             wait_probe;
             assert (s_score_enabled = '0' and s_score_saved = '0')
                 report "Full platform retained previous ROM's score profile/image" severity failure;
+            check_menu(8);
             table_bytes(false);
             configure(vint_game = 1);
             su16_host_index <= to_unsigned(4, 16);
+            native_file_command(16#55#, 4);
+            native_file_command(16#53#, 1);
             s_host_download <= '1';
             cycles(3);
             for vint_byte in 0 to vint_length - 1 loop
                 file_byte(vint_byte, v_bytes(vint_base + vint_length + vint_byte));
             end loop;
             s_host_download <= '0';
+            native_file_command(16#53#, 0);
             cycles(3);
             wait_scores;
             check_echo(false);
@@ -636,6 +771,14 @@ begin
             end if;
             assert (sint_upload_requests = vint_notices + 1 and s_score_dirty = '1' and s_user_paused = '0')
                 report "Platform autosave/pause wiring mismatch" severity failure;
+            if (HOST_NETLIST_MODE) then
+                s_native_uio <= '1';
+                native_word(16#3C#);
+                assert (su16_host_response = x"0401")
+                    report "Native HPS did not receive the platform's autosave request" severity failure;
+                s_native_uio <= '0';
+                cycles(4);
+            end if;
             upload(true);
             assert (s_score_dirty = '0') report "Platform upload did not finish dirty transaction" severity failure;
             s_osd_open <= '0';
@@ -653,7 +796,7 @@ begin
         end loop;
         assert (s_error = '0' and su16_dips = x"A55A")
             report "Score persistence disturbed image or DIP state" severity failure;
-        report "PLATFORM_HISCORE_PASS sets=2 executing_cpu=checked shared_sdram=checked config3_dump4=checked restore_echo=checked external_client_arbitration=checked osd_autosave=checked upload_bytes=234 soft_reset_restore=checked rom_generation_isolation=checked dips_preserved=checked";
+        report "PLATFORM_HISCORE_PASS sets=2 executing_cpu=checked shared_sdram=checked config3_dump4=checked restore_echo=checked external_client_arbitration=checked osd_autosave=checked upload_bytes=234 soft_reset_restore=checked rom_generation_isolation=checked dips_preserved=checked menu_visibility=checked host_netlist=" & boolean'image(HOST_NETLIST_MODE);
         finish;
         wait;
     end process;

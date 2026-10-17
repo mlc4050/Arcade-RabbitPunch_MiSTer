@@ -61,5 +61,5 @@
         <dip name="Continues" bits="14" ids="On,Off" />
         <dip name="Flip Screen" bits="15" ids="Off,On" />
     </switches>
-    <buttons names="Missile,Punch,-,-,-,-,Start,Coin,Pause,Service,Test" count="2" />
+    <buttons names="Missile,Shoot,-,-,-,-,Start,Coin,Pause,Service,Test" count="2" />
 </misterromdescription>

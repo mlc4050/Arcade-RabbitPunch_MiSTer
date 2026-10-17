@@ -4,12 +4,12 @@
   "log": "debug\\baselines\\controls\\result.log",
   "source_sha256": {
     "rtl/mame_keys.sv": "c2d3d7fa4cefeebeaeba0e74b66f90fd0ee98b5ae33e4113e9eb1f3c66559edc",
-    "rtl/rabbitpunch_keys.vhd": "a6c44218c22b8b245272901ba6e2fc7cd7e784a2898c703e47872fc6ff6514c7",
-    "rtl/rabbitpunch_inputs.vhd": "a7c7ef8c8104b8cd0a5fa7c77dae7e6b29752d55af7b2a18ab897ebded25a776",
-    "rtl/rabbitpunch_pause.vhd": "eb03457d010dd4566bf4f379ac89269cbe72952cbb6d116970e79fbeb42c7bab",
-    "rtl/rabbitpunch_controls.vhd": "d1f774e4d4afb7db55f7b0904fa1581e3893bd7982b64b7737f3e080b12f7f16",
-    "sim/board/controls_tb.vhd": "91d8d4d7e573f923c97b990782d0bf6edc24ac8297b309dd9da12173dd5d70d6"
+    "rtl/rabbitpunch_keys.vhd": "75905e497a9d6facd72a68b25491aa08367f9aa85c7b784821102a9e04e891ff",
+    "rtl/rabbitpunch_inputs.vhd": "12390a74888d13c1f0c38d5e8d1f8ea5eff3673d225b5440e03a2b20b43e3630",
+    "rtl/rabbitpunch_pause.vhd": "8bbbcd71a56ff3e30c898f61eed9ffa64909d3674767ee31de9ed017475d386c",
+    "rtl/rabbitpunch_controls.vhd": "fc5a784432187c8ec72dc9a558f40db46c3f23beed00a7cbcc947e403094dd08",
+    "sim/board/controls_tb.vhd": "89e059b106feedfc4896162b7041138436a327ad0c33069a506e69100c6a1aa6"
   },
-  "log_sha256": "a08bfaa5e13b48bc6d5e358837fc2b3f7d0a7b7e3f813dec90411a9a63ea2b9e",
+  "log_sha256": "fc7a5456bfd1a63a3dab8b8d30cb6330deef574ae9c6c64de74e30578830b9e0",
   "scope": "Connected MAME keyboard/pad mapper and pause owners: pad-to-keyboard toggle, held-key unrelated input, OSD/state pause, cold-versus-game reset DIP preservation and original freeze pin held inactive; no physical controls/native HPS/gameplay/CPU-drain proof"
 }

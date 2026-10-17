@@ -37,7 +37,7 @@ architecture test of hiscore_tb is
     signal s_memory_initialize, s_enabled, s_config_error : std_logic;
 begin
     s_clk <= not s_clk after 5 ns;
-    direct_store : if not SERVICE_MODE generate
+    direct_store : if (not SERVICE_MODE) generate
         s_memory_initialize <= s_initialize or s_reset;
         dut : entity work.rabbitpunch_hiscore
             port map (
@@ -71,7 +71,7 @@ begin
                 iu8_memory_data => su8_response
             );
     end generate;
-    file_service : if SERVICE_MODE generate
+    file_service : if (SERVICE_MODE) generate
         dut : entity work.rabbitpunch_hiscore_service
             port map (
                 i_clk => s_clk,

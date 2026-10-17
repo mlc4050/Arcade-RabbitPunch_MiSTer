@@ -17,6 +17,6 @@ package rabbitpunch_config is
         "O1,Pause,Off,On;" &
         "O2,Pause when OSD is open,Off,On;" &
         "H3O3,Autosave high scores,Off,On;" &
-        "J1,Missile,Punch,-,-,-,-,Start,Coin,Pause,Service,Test;" &
+        "J1,Missile,Shoot,-,-,-,-,Start,Coin,Pause,Service,Test;" &
         "V,v0.1-dev;";
 end package;

@@ -36,7 +36,7 @@ def button_names():
     text = (core_root() / "rtl/rabbitpunch_layout.vhd").read_text()
     slots = {name: int(value) for name, value in re.findall(
         r"constant\s+JOY_(\w+)\s*:\s*natural\s*:=\s*(\d+)", text)}
-    labels = {"MISSILE": "Missile", "PUNCH": "Punch", "START": "Start", "COIN": "Coin",
+    labels = {"MISSILE": "Missile", "SHOOT": "Shoot", "START": "Start", "COIN": "Coin",
               "PAUSE": "Pause", "SERVICE": "Service", "TEST": "Test"}
     if set(slots) != set(labels) or len(set(slots.values())) != len(slots) or min(slots.values()) < 4:
         raise ValueError("Invalid VHDL joystick slot definitions")
