@@ -71,9 +71,10 @@ and 907936 RAM bits. Every reported corner passes: worst setup +6.808 ns,
 worst hold +0.115 ns, with zero illegal clocks/unconstrained paths in the six
 coverage categories. Report: reference/board_synth.json. The two-game 1000-write
 concurrent-video proof is reference/board_sdram_boot_smoke_checks.json; the
-10000-write extension is still running.
+10000-write extension also passes for both games: reference/board_sdram_boot_checks.json.
 
 Both CPU-only 10000-write boot comparisons through production cached SDRAM
 pass with all 24 checked I/O fields. reference/cpu_sdram_boot_checks.json pins
-those executing-CPU results. The separate connected-video 10000-write run is
-still in progress; do not conflate its status with the CPU-only result.
+those executing-CPU results. The separate connected-video 10000-write run also passes for both games, with
+526 logical lines, 151488 black RGB/tag checks and 9989 overlapping CPU writes
+per game. This remains an early reset prefix without physical raster interrupts.
