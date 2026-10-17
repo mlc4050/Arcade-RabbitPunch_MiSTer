@@ -11,6 +11,7 @@ use work.rabbitpunch_config.all;
 -- i_initialize is cold transport initialization, never the gameplay reset.
 entity rabbitpunch_platform is
     generic (
+        GINT_SDRAM_READ_CAPTURE_ADJUST : natural range 0 to 2 := 0;
         GINT_IMAGE_BYTES : positive := CINT_ROM_IMAGE_SIZE;
         GU16_DIP_DEFAULT : unsigned(15 downto 0) := x"0000";
         GBOOL_EXTERNAL_PHASE_ENABLE : boolean := false
@@ -302,6 +303,7 @@ begin
         );
     system : entity work.rabbitpunch_system
         generic map (
+            GINT_SDRAM_READ_CAPTURE_ADJUST => GINT_SDRAM_READ_CAPTURE_ADJUST,
             GINT_IMAGE_BYTES => GINT_IMAGE_BYTES,
             GBOOL_EXTERNAL_PHASE_ENABLE => GBOOL_EXTERNAL_PHASE_ENABLE
         )

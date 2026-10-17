@@ -7,6 +7,7 @@ use work.rabbitpunch_layout.all;
 -- Physical raster/PLL and HPS/DDR streaming remain external interfaces.
 entity rabbitpunch_system is
     generic (
+        GINT_SDRAM_READ_CAPTURE_ADJUST : natural range 0 to 2 := 0;
         GINT_IMAGE_BYTES : positive := CINT_ROM_IMAGE_SIZE;
         GBOOL_EXTERNAL_PHASE_ENABLE : boolean := false
     );
@@ -304,6 +305,9 @@ begin
             ou8_debug_data => ou8_audio_debug_data
         );
     roms : entity work.rabbitpunch_roms
+        generic map (
+            GINT_SDRAM_READ_CAPTURE_ADJUST => GINT_SDRAM_READ_CAPTURE_ADJUST
+        )
         port map (
             i_clk => i_clk,
             i_initialize => i_initialize,

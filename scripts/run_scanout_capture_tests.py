@@ -15,8 +15,11 @@ from run_baselines import run_case
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--only", help="capture basename; default all six, serial")
+    parser.add_argument("--pll-clock", action="store_true", help="Use the vendor PLL and shifted chip clock")
     args = parser.parse_args()
     root = core_root()
+    if (root / "debug/scanout_stop_requested").exists():
+        raise SystemExit("STOPPED between capture cases for a source update; completed cases are retained")
     fixtures = json.loads((root / "scripts/mame/video_fixtures.json").read_text())
     fixtures = [row for row in fixtures if not args.only or Path(row["capture"]).name == args.only]
     if not fixtures:
@@ -36,10 +39,10 @@ def main():
     sources += ["rtl/rabbitpunch_rom_cache.vhd", "rtl/rabbitpunch_clock_enables.vhd",
         "rtl/rabbitpunch_raster.vhd", "rtl/rabbitpunch_scanline_scheduler.vhd",
         "rtl/rabbitpunch_video_output.vhd", "rtl/rabbitpunch_scanout.vhd",
-        "sim/video/scanout_capture_tb.vhd"]
+        "rtl/rabbitpunch_pll.vhd", "sim/video/scanout_capture_tb.vhd"]
     top = "scanout_capture_tb"
     marker = "SCANOUT_CAPTURE_PASS"
-    prefix = "scanout_capture_"
+    prefix = "scanout_pll_" if args.pll_clock else "scanout_capture_"
     hashes = {p: hashlib.sha256((root/p).read_bytes()).hexdigest() for p in sources}
     reports = []
     for fixture in fixtures:
@@ -75,7 +78,9 @@ def main():
             for index, (word,) in enumerate(struct.iter_unpack("<H", image)):
                 output.write(f"{index:x}: {word:04x}\n")
         setup = [f"mem load -format mti -infile {{{memory_file.as_posix()}}} /{top}/shared_roms/chip/mem"]
+        libraries = [item for name in ("altera_lnsim_ver", "altera_ver", "lpm_ver") for item in ("-L", name)]
         result = run_case(case, sources, top, "80 ms", marker,
+                          sim_args=libraries + (["-gGBOOL_PLL_CLOCK=true"] if args.pll_clock else []),
                           wall_timeout=1800, setup_commands=setup)
         assert hashes == {p: hashlib.sha256((root/p).read_bytes()).hexdigest() for p in sources}
         pixels = [int(word, 16) for word in (directory / "pixels.hex").read_text().splitlines()]
@@ -97,8 +102,9 @@ def main():
                 for name in ("maincpu.hex", "video_settings.hex", "spriteram.hex", "vram.hex", "bitmap.hex", "palette.hex")},
             source_sha256={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources},
             log_sha256=hashlib.sha256((root / result["log"]).read_bytes()).hexdigest(),
-            scope="Continuous provisional raster and real graphics/shared SDRAM command model; static MAME snapshot, synthetic RAM writes/ROM reads, direct ROM preload; no CPU execution, PLL or hardware timing proof")
-        result.update(line_budget_cycles=3024, underflow=False,
+            scope=("Vendor PLL and half-period SDRAM clock with early runtime read capture; " if args.pll_clock else "Synthetic same-phase system/chip clock; ") + "Continuous provisional raster and real graphics/shared SDRAM command model; static MAME snapshot, synthetic RAM writes/ROM reads, direct ROM preload; no CPU execution or hardware/electrical timing proof")
+        result.update(pll_clock=args.pll_clock, sdram_read_capture_adjust=int(args.pll_clock),
+            line_budget_cycles=3024, underflow=False,
             physical_sdram_bursts=int(re.search(r"bursts=\s*(\d+)", log)[1]))
         reports.append(result)
         print(f"PASS {case}: all 62208 RGB pixels identical to MAME through shared SDRAM", flush=True)

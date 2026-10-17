@@ -9,6 +9,7 @@ use work.rabbitpunch_layout.all;
 use work.rabbitpunch_sdram_types.all;
 
 entity scanout_capture_tb is
+    generic (GBOOL_PLL_CLOCK : boolean := false);
 end entity;
 
 architecture test of scanout_capture_tb is
@@ -19,7 +20,8 @@ architecture test of scanout_capture_tb is
     constant C_TILES : t_unsigned_words := read_hex("vram.hex", 8192, 16);
     constant C_BITMAP : t_unsigned_words := read_hex("bitmap.hex", 32768, 16);
     constant C_PALETTE : t_unsigned_words := read_hex("palette.hex", 1024, 16);
-    signal s_clk : std_logic := '0';
+    signal s_reference_clk : std_logic := '0';
+    signal s_clk, s_chip_clk : std_logic := '0';
     signal s_reset : std_logic := '1';
     signal s_line_valid, s_bank : std_logic := '0';
     signal s_line_ready, s_line_done : std_logic;
@@ -55,7 +57,21 @@ architecture test of scanout_capture_tb is
     signal su9_scan_x, su9_horizontal, su9_vertical : unsigned(8 downto 0);
     signal su8_scan_y, su8_scan_red, su8_scan_green, su8_scan_blue : unsigned(7 downto 0);
 begin
-    s_clk <= not s_clk after 10714 ps;
+    s_reference_clk <= not s_reference_clk after 10 ns;
+    synthetic_clock : if (not GBOOL_PLL_CLOCK) generate
+        s_clk <= not s_clk after 10714 ps;
+        s_chip_clk <= s_clk;
+    end generate;
+    physical_clock : if (GBOOL_PLL_CLOCK) generate
+        pll : entity work.rabbitpunch_pll
+            port map (
+                i_reference_clk => s_reference_clk,
+                i_reset => '0',
+                o_system_clk => s_clk,
+                o_sdram_clk => s_chip_clk,
+                o_locked => open
+            );
+    end generate;
     su24_output_rgb <= su8_scan_red & su8_scan_green & su8_scan_blue;
     su6_count <= C_SETTINGS(5)(5 downto 0);
     su6_priority <= C_SETTINGS(6)(5 downto 0);
@@ -284,6 +300,9 @@ begin
                 iu64_backend_read_data => su64_data
             );
         memory_transport : entity work.rabbitpunch_sdram
+            generic map (
+                GINT_READ_CAPTURE_ADJUST => boolean'pos(GBOOL_PLL_CLOCK)
+            )
             port map (
                 i_clk => s_clk,
                 i_initialize => '0',
@@ -308,7 +327,7 @@ begin
             );
         chip : sdram_chip_model_wide
             port map (
-                clk => s_clk,
+                clk => s_chip_clk,
                 SDRAM_DQ => su16_dq,
                 SDRAM_A => su13_address,
                 SDRAM_BA => su2_bank,

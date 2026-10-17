@@ -1,3 +1,5 @@
+-- SPDX-License-Identifier: GPL-3.0-or-later
+-- Copyright (C) 2026 RabbitPunch contributors
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -5,9 +7,53 @@ use std.env.all;
 use work.rabbitpunch_sdram_types.all;
 
 entity sdram_tb is
+    generic (
+        GBOOL_PLL_CLOCK : boolean := false;
+        GINT_READ_CAPTURE_ADJUST : natural range 0 to 2 := 1
+    );
 end entity;
 
 architecture test of sdram_tb is
+    component rabbitpunch_pll is
+        port (
+            i_reference_clk : in std_logic;
+            i_reset : in std_logic;
+            o_system_clk : out std_logic;
+            o_sdram_clk : out std_logic;
+            o_locked : out std_logic
+        );
+    end component;
+    component rabbitpunch_sdram is
+        generic (
+            GINT_READ_CAPTURE_ADJUST : natural range 0 to 2 := 0;
+            GINT_REFRESH_INTERVAL_CYCLES : positive := 160;
+            GINT_POWERUP_WAIT_CYCLES : positive := 6000;
+            GINT_INITIALIZE_WAIT_CYCLES : positive := 1024
+        );
+        port (
+            i_clk : in std_logic;
+            i_initialize : in std_logic;
+            o_initialized : out std_logic;
+            iu3_requests : in unsigned(2 downto 0);
+            ou3_ready : out unsigned(2 downto 0);
+            iu3_writes : in unsigned(2 downto 0);
+            iu27_byte_addresses : in t_sdram_addresses;
+            iu16_write_data : in t_sdram_write_data;
+            iu2_byte_enables : in t_sdram_byte_enables;
+            ou3_response_valid : out unsigned(2 downto 0);
+            ou64_read_data : out t_sdram_read_data;
+            iou16_sdram_data : inout unsigned(15 downto 0);
+            ou13_sdram_address : out unsigned(12 downto 0);
+            ou2_sdram_bank : out unsigned(1 downto 0);
+            ou2_sdram_byte_mask : out unsigned(1 downto 0);
+            o_sdram_chip_select : out std_logic;
+            o_sdram_write_n : out std_logic;
+            o_sdram_row_n : out std_logic;
+            o_sdram_column_n : out std_logic;
+            o_sdram_clock_enable : out std_logic
+        );
+    end component;
+
     component sdram_check is
         port (
             i_clk : in std_logic;
@@ -44,7 +90,8 @@ architecture test of sdram_tb is
             SDRAM_nCAS : in std_logic
         );
     end component;
-    signal s_clk : std_logic := '0';
+    signal s_reference_clk : std_logic := '0';
+    signal s_clk, s_chip_clk : std_logic := '0';
     signal s_initialize : std_logic := '1';
     signal s_initialized : std_logic;
     signal su3_requests, su3_writes : unsigned(2 downto 0) := "000";
@@ -61,40 +108,84 @@ architecture test of sdram_tb is
     signal sint_refreshes : natural := 0;
     signal sint_max_refresh_gap : natural := 0;
     type t_bases is array (natural range <>) of natural;
-    constant BASES : t_bases := (0, 16#1000#, 16#50000#, 16#D0000#, 16#150000#,
+    constant C_BASES : t_bases := (0, 16#1000#, 16#50000#, 16#D0000#, 16#150000#,
         16#200000#, 16#1000000#, 16#2000000#, 16#4000000#, 16#7FFFFF8#);
-    type t_expected is array (0 to BASES'length * 4 - 1) of unsigned(15 downto 0);
+    type t_expected is array (0 to C_BASES'length * 4 - 1) of unsigned(15 downto 0);
 begin
-    s_clk <= not s_clk after 10417 ps;
-    dut : sdram_check
-        port map (
-            i_clk => s_clk,
-            i_initialize => s_initialize,
-            o_initialized => s_initialized,
-            iu3_requests => su3_requests,
-            ou3_ready => su3_ready,
-            iu3_writes => su3_writes,
-            iu81_byte_addresses => su27_addresses(2) & su27_addresses(1) & su27_addresses(0),
-            iu48_write_data => su16_data(2) & su16_data(1) & su16_data(0),
-            iu6_byte_enables => su2_bytes(2) & su2_bytes(1) & su2_bytes(0),
-            ou3_response_valid => su3_valid,
-            ou192_read_data => su192_data,
-            iou16_sdram_data => su16_dq,
-            ou13_sdram_address => su13_address,
-            ou2_sdram_bank => su2_bank,
-            ou2_sdram_byte_mask => su2_mask,
-            o_sdram_chip_select => s_chip,
-            o_sdram_write_n => s_write_n,
-            o_sdram_row_n => s_row_n,
-            o_sdram_column_n => s_column_n,
-            o_sdram_clock_enable => s_cke
-        );
-    lanes : for gint_client in 0 to 2 generate
-        su64_data(gint_client) <= su192_data(gint_client * 64 + 63 downto gint_client * 64);
+    s_reference_clk <= not s_reference_clk after 10 ns;
+    synthetic_clock : if (not GBOOL_PLL_CLOCK) generate
+        s_clk <= not s_clk after 10417 ps;
+        s_chip_clk <= s_clk;
+    end generate;
+    physical_clock : if (GBOOL_PLL_CLOCK) generate
+        pll : rabbitpunch_pll
+            port map (
+                i_reference_clk => s_reference_clk,
+                i_reset => '0',
+                o_system_clk => s_clk,
+                o_sdram_clk => s_chip_clk,
+                o_locked => open
+            );
+    end generate;
+    synthetic_dut : if (not GBOOL_PLL_CLOCK) generate
+        dut : sdram_check
+            port map (
+                i_clk => s_clk,
+                i_initialize => s_initialize,
+                o_initialized => s_initialized,
+                iu3_requests => su3_requests,
+                ou3_ready => su3_ready,
+                iu3_writes => su3_writes,
+                iu81_byte_addresses => su27_addresses(2) & su27_addresses(1) & su27_addresses(0),
+                iu48_write_data => su16_data(2) & su16_data(1) & su16_data(0),
+                iu6_byte_enables => su2_bytes(2) & su2_bytes(1) & su2_bytes(0),
+                ou3_response_valid => su3_valid,
+                ou192_read_data => su192_data,
+                iou16_sdram_data => su16_dq,
+                ou13_sdram_address => su13_address,
+                ou2_sdram_bank => su2_bank,
+                ou2_sdram_byte_mask => su2_mask,
+                o_sdram_chip_select => s_chip,
+                o_sdram_write_n => s_write_n,
+                o_sdram_row_n => s_row_n,
+                o_sdram_column_n => s_column_n,
+                o_sdram_clock_enable => s_cke
+            );
+        lanes : for gint_client in 0 to 2 generate
+            su64_data(gint_client) <= su192_data(gint_client * 64 + 63 downto gint_client * 64);
+        end generate;
+    end generate;
+    physical_dut : if (GBOOL_PLL_CLOCK) generate
+        dut : rabbitpunch_sdram
+            generic map (
+                GINT_READ_CAPTURE_ADJUST => GINT_READ_CAPTURE_ADJUST
+            )
+            port map (
+                i_clk => s_clk,
+                i_initialize => s_initialize,
+                o_initialized => s_initialized,
+                iu3_requests => su3_requests,
+                ou3_ready => su3_ready,
+                iu3_writes => su3_writes,
+                iu27_byte_addresses => su27_addresses,
+                iu16_write_data => su16_data,
+                iu2_byte_enables => su2_bytes,
+                ou3_response_valid => su3_valid,
+                ou64_read_data => su64_data,
+                iou16_sdram_data => su16_dq,
+                ou13_sdram_address => su13_address,
+                ou2_sdram_bank => su2_bank,
+                ou2_sdram_byte_mask => su2_mask,
+                o_sdram_chip_select => s_chip,
+                o_sdram_write_n => s_write_n,
+                o_sdram_row_n => s_row_n,
+                o_sdram_column_n => s_column_n,
+                o_sdram_clock_enable => s_cke
+            );
     end generate;
     chip : sdram_chip_model_wide
         port map (
-            clk => s_clk,
+            clk => s_chip_clk,
             SDRAM_DQ => su16_dq,
             SDRAM_A => su13_address,
             SDRAM_BA => su2_bank,
@@ -113,7 +204,9 @@ begin
     begin
         if (rising_edge(s_clk)) then
             vint_cycle := vint_cycle + 1;
-            if (s_initialized = '1' and s_row_n = '0' and s_column_n = '0' and s_write_n = '1') then
+            if (s_initialized = '0') then
+                vint_last := (others => vint_cycle);
+            elsif (s_row_n = '0' and s_column_n = '0' and s_write_n = '1') then
                 vint_chip := 0;
                 if (s_chip = '1') then
                     vint_chip := 1;
@@ -185,24 +278,24 @@ begin
             assert (su3_ready = "000") report "Client ready before initialization" severity failure;
             tick;
         end loop;
-        for vint_group in BASES'range loop
+        for vint_group in C_BASES'range loop
             for vint_word in 0 to 3 loop
                 vu16_expected(vint_group * 4 + vint_word) := to_unsigned(16#8100# + vint_group * 32 + vint_word * 7, 16);
-                transact((vint_group + vint_word) mod 3, BASES(vint_group) + vint_word * 2,
+                transact((vint_group + vint_word) mod 3, C_BASES(vint_group) + vint_word * 2,
                     '1', vu16_expected(vint_group * 4 + vint_word), "11", vu64_saved);
             end loop;
         end loop;
         -- Single writes must mask all following burst beats on every port. Adjacent words
         -- initialized above catch accidental modification of any of those beats.
-        for vint_group in BASES'range loop
-            transact(vint_group mod 3, BASES(vint_group) + 2, '1', x"003C", "01", vu64_saved);
-            transact((vint_group + 1) mod 3, BASES(vint_group) + 2, '1', x"C700", "10", vu64_saved);
+        for vint_group in C_BASES'range loop
+            transact(vint_group mod 3, C_BASES(vint_group) + 2, '1', x"003C", "01", vu64_saved);
+            transact((vint_group + 1) mod 3, C_BASES(vint_group) + 2, '1', x"C700", "10", vu64_saved);
             vu16_expected(vint_group * 4 + 1) := x"C73C";
         end loop;
         for vint_round in 0 to 29 loop
             for vint_port in 0 to 2 loop
-                vint_base := (vint_round + vint_port * 3) mod BASES'length;
-                su27_addresses(vint_port) <= to_unsigned(BASES(vint_base), 27);
+                vint_base := (vint_round + vint_port * 3) mod C_BASES'length;
+                su27_addresses(vint_port) <= to_unsigned(C_BASES(vint_base), 27);
                 su3_writes(vint_port) <= '0';
             end loop;
             su3_requests <= "111";
@@ -218,13 +311,13 @@ begin
                     end if;
                     if (su3_valid(vint_port) = '1') then
                         assert (vu3_seen(vint_port) = '0') report "Repeated response during contention" severity failure;
-                        vint_base := (vint_round + vint_port * 3) mod BASES'length;
+                        vint_base := (vint_round + vint_port * 3) mod C_BASES'length;
                         for vint_word in 0 to 3 loop
                             vu64_expected(vint_word * 16 + 15 downto vint_word * 16) := vu16_expected(vint_base * 4 + vint_word);
                         end loop;
                         assert (su64_data(vint_port) = vu64_expected)
                             report "Burst data/address/byte lane mismatch, port " & integer'image(vint_port) &
-                                " base " & integer'image(BASES(vint_base)) & " got " & to_hstring(su64_data(vint_port)) &
+                                " base " & integer'image(C_BASES(vint_base)) & " got " & to_hstring(su64_data(vint_port)) &
                                 " expected " & to_hstring(vu64_expected) severity failure;
                         vu64_captured(vint_port) := su64_data(vint_port);
                         vu3_seen(vint_port) := '1';
@@ -243,6 +336,27 @@ begin
             assert (su64_data(0) = vu64_saved) report "Captured response changed while idle" severity failure;
         end loop;
         assert (sint_refreshes > 20) report "Missing refresh command coverage" severity failure;
+        if (GBOOL_PLL_CLOCK) then
+            s_initialize <= '1';
+            for vint_wait in 0 to 4 loop
+                tick;
+            end loop;
+            s_initialize <= '0';
+            for vint_wait in 0 to 9000 loop
+                tick;
+                exit when s_initialized = '1';
+            end loop;
+            assert (s_initialized = '1' and su3_ready = "111")
+                report "Shifted-clock SDRAM failed reinitialization" severity failure;
+            for vint_port in 0 to 2 loop
+                transact(vint_port, C_BASES(0), '0', x"0000", "11", vu64_saved);
+                for vint_word in 0 to 3 loop
+                    assert (vu64_saved(vint_word * 16 + 15 downto vint_word * 16) = vu16_expected(vint_word))
+                        report "Read window or memory changed across SDRAM reinitialization" severity failure;
+                end loop;
+                vint_checks := vint_checks + 4;
+            end loop;
+        end if;
         report "SDRAM_PASS checked_words=" & integer'image(vint_checks) &
             " writes=" & integer'image(vint_transactions) &
             " refresh_commands=" & integer'image(sint_refreshes) &

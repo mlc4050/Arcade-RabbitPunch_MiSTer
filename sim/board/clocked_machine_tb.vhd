@@ -263,7 +263,7 @@ begin
         );
     chip : sdram_chip_model_wide
         port map (
-            clk => s_clk,
+            clk => s_sdram_clk,
             SDRAM_DQ => su16_dq,
             SDRAM_A => su13_sdram_address,
             SDRAM_BA => su2_bank,

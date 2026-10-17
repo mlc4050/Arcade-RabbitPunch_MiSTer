@@ -10,6 +10,7 @@ use work.rabbitpunch_config.all;
 -- drives only the external SDRAM pin; game reset never resets the PLL.
 entity rabbitpunch_clocked_machine is
     generic (
+        GINT_SDRAM_READ_CAPTURE_ADJUST : natural range 0 to 2 := 1;
         GSTR_SDRAM_PHASE_SHIFT : string := "10714 ps";
         GINT_IMAGE_BYTES : positive := CINT_ROM_IMAGE_SIZE;
         GU16_DIP_DEFAULT : unsigned(15 downto 0) := x"0000"
@@ -174,6 +175,7 @@ begin
         );
     machine : entity work.rabbitpunch_machine
         generic map (
+            GINT_SDRAM_READ_CAPTURE_ADJUST => GINT_SDRAM_READ_CAPTURE_ADJUST,
             GINT_IMAGE_BYTES => GINT_IMAGE_BYTES,
             GU16_DIP_DEFAULT => GU16_DIP_DEFAULT
         )

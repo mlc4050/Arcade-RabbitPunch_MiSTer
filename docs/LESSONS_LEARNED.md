@@ -372,6 +372,20 @@ count showed zero writes. Measure the last observable stage.
 
 ## Memory transport: req/valid contracts, latency, byte order
 
+### [RabbitPunch] Test the external memory clock relationship before trusting same-edge simulations
+
+A shared SDRAM controller passed same-edge command-model tests and MAME RGB
+captures but shifted each burst by one word with the planned half-period chip
+clock. The real PLL-model/chip-clock test exposed it. The existing rd_adj input
+selected the earlier runtime capture, but enabling it during initialization also
+changed the state-wrap point and prevented the initialization counter finishing.
+The VHDL boundary now leaves it zero until running, then applies the selected
+window. Positive burst/byte-mask/reinitialization tests and negative controls for
+both the wrong window and missing initialization guard document the correction.
+Sample the chip model on the actual external clock; functional same-edge captures
+are still useful but do not establish that clock relationship or PCB timing.
+
+
 ### [RabbitPunch] An ownership-idle flag must include requests offered on the current edge
 
 A ROM frontend can have no registered pending work while accepting a new request

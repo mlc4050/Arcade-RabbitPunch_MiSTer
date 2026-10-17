@@ -10,6 +10,7 @@ use work.rabbitpunch_sdram_types.all;
 -- The physical SDRAM clock is generated separately at the MiSTer top level.
 entity rabbitpunch_sdram is
     generic (
+        GINT_READ_CAPTURE_ADJUST : natural range 0 to 2 := 0;
         GINT_REFRESH_INTERVAL_CYCLES : positive := 160;
         GINT_POWERUP_WAIT_CYCLES : positive := 6000;
         GINT_INITIALIZE_WAIT_CYCLES : positive := 1024
@@ -87,6 +88,7 @@ architecture rtl of rabbitpunch_sdram is
     type t_state is (STATE_POWER_WAIT, STATE_INITIALIZE_WAIT, STATE_RUNNING);
     signal styp_state : t_state := STATE_POWER_WAIT;
     signal sint_wait : natural range 0 to GINT_POWERUP_WAIT_CYCLES + GINT_INITIALIZE_WAIT_CYCLES := 0;
+    signal su2_read_capture_adjust : unsigned(1 downto 0);
     signal s_vendor_initialize : std_logic := '1';
     signal su3_pending, su3_request_toggle, su3_acknowledge : unsigned(2 downto 0) := (others => '0');
     signal su3_write_low, su3_write_high : unsigned(2 downto 0) := (others => '0');
@@ -94,6 +96,10 @@ architecture rtl of rabbitpunch_sdram is
     signal su16_write_data : t_sdram_write_data := (others => (others => '0'));
     signal su64_read_data : t_sdram_read_data;
 begin
+    -- rd_adj also changes the donor's state-wrap point. Initialization counts
+    -- the unadjusted final state, so only runtime reads may select another edge.
+    su2_read_capture_adjust <= to_unsigned(GINT_READ_CAPTURE_ADJUST, 2)
+        when styp_state = STATE_RUNNING and i_initialize = '0' else "00";
     assert (GINT_REFRESH_INTERVAL_CYCLES <= 1023) report "Refresh interval exceeds donor counter" severity failure;
     o_initialized <= '1' when styp_state = STATE_RUNNING and i_initialize = '0' else '0';
     ou3_ready <= not su3_pending when styp_state = STATE_RUNNING and i_initialize = '0' else "000";
@@ -115,7 +121,7 @@ begin
             SDRAM_CLK => open,
             SDRAM_CKE => o_sdram_clock_enable,
             init => s_vendor_initialize,
-            rd_adj => "00",
+            rd_adj => su2_read_capture_adjust,
             clk => i_clk,
             addr0 => su27_addresses(0)(26 downto 1),
             wrl0 => su3_write_low(0),

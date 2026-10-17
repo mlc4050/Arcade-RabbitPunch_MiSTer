@@ -1,0 +1,34 @@
+[
+  {
+    "case": "sdram_pll_wrong_window",
+    "expected_failure": true,
+    "detected": "Burst data/address/byte lane mismatch",
+    "log": "debug/baselines/sdram_pll_wrong_window/result.log",
+    "log_sha256": "b691343926a7ad6d798356c0de4619bdea3e59af16f205c74b14af3faf7dc5ab",
+    "source_sha256": {
+      "rtl/rabbitpunch_sdram_types.vhd": "35c1406e611389f2ee18dd3da7b0805e389ac4b8bd763c8a603a691b5de66367",
+      "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+      "rtl/rabbitpunch_sdram.vhd": "272312140f432a65208cb0d18a9784271ea089be2ac124afcde235e14e10c86e",
+      "rtl/synth_check/sdram/sdram_check.vhd": "9655026e3a3dffdc0be5833e84fc4f931bee10d2c41a6cdf30e034e9d13a6fd5",
+      "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
+      "rtl/rabbitpunch_pll.vhd": "988e14413b0f965adc2ea6f35ebe87620bb1e01aa4a8bc48336c82194271283d",
+      "sim/memory/sdram_tb.vhd": "413d74001b24b2a56aa2456db1d7d6ad218e39022f19eb6cd3bf159330431db0"
+    }
+  },
+  {
+    "case": "sdram_pll_unguarded_init",
+    "expected_failure": true,
+    "detected": "SDRAM transaction stalled",
+    "log": "debug/baselines/sdram_pll_unguarded_init/result.log",
+    "log_sha256": "5f8ba4911bfe5bb5a69e36174afaa2462af987e9584a9cb74972673d419ff015",
+    "source_sha256": {
+      "rtl/rabbitpunch_sdram_types.vhd": "35c1406e611389f2ee18dd3da7b0805e389ac4b8bd763c8a603a691b5de66367",
+      "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+      "debug/sdram_unguarded_adjust.vhd": "a50a86a08461f2b43405bef0d34b53ee8f98e710785fbc2724ff2213f4e47966",
+      "rtl/synth_check/sdram/sdram_check.vhd": "9655026e3a3dffdc0be5833e84fc4f931bee10d2c41a6cdf30e034e9d13a6fd5",
+      "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
+      "rtl/rabbitpunch_pll.vhd": "988e14413b0f965adc2ea6f35ebe87620bb1e01aa4a8bc48336c82194271283d",
+      "sim/memory/sdram_tb.vhd": "413d74001b24b2a56aa2456db1d7d6ad218e39022f19eb6cd3bf159330431db0"
+    }
+  }
+]

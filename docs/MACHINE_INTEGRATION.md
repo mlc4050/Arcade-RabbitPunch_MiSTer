@@ -65,3 +65,24 @@ blanking drives VGA_DE independently of game readiness; colors remain black unti
 rows are armed. Signed mono PCM feeds both channels. The DDR interface currently
 has one client, the load-time copier; rotation is not connected. Full-shell fit,
 SDRAM pin timing and hardware output remain pending.
+
+The first PLL/chip-clock SDRAM test exposed a one-word-late read burst. Existing
+same-edge command-model tests did not cover that phase. The production clocked
+machine now selects GINT_SDRAM_READ_CAPTURE_ADJUST=1; logical same-phase users
+retain zero. The VHDL adapter keeps rd_adj at zero during initialization, since
+the unchanged donor uses it in its state-wrap condition as well as read capture.
+At runtime one selects the earlier read window. An ungated nonzero adjustment
+prevents initialization from finishing; explicit negative controls detect both
+that stall and the original burst shift.
+
+The corrected PLL/chip-clock test passes 372 word checks, 63 transactions, both
+chips/three clients, byte masks, refresh and reinitialization preserving data.
+The clocked CPU/download machine also passes with the chip actually clocked from
+the shifted PLL output. Continuous MAME graphics with that same clock relationship
+is running. These are command-model proofs, not PCB setup/hold measurements.
+
+Clock-tree fit 02d3b39 was rejected for a 3.3 V clock output mixed with the
+standalone project's default 2.5 V SDRAM-bank I/O. Its target commit was reverted
+(c829698); reports are archived in debug/fit_archive/clocked_machine_02d3b39_rejected/.
+The corrected evaluation target assigns 3.3 V consistently. The full MiSTer shell
+already inherits explicit 3.3 V SDRAM assignments from the unchanged sys files.
