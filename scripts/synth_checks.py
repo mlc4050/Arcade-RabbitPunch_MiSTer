@@ -11,7 +11,9 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
-    "board": (908608, ("rabbitpunch_board", "rabbitpunch_maincpu", "fx68k", "rabbitpunch_io", "rabbitpunch_irq", "rabbitpunch_board_video", "jtframe_draw")),
+    # Native RAM/lines 868352 + micro ROM 17*1024 + nano ROM 66*336.
+    # Nano bits 2 and 23 are constant zero in the pinned donor and optimized out.
+    "board": (907936, ("rabbitpunch_board", "rabbitpunch_maincpu", "fx68k", "rabbitpunch_io", "rabbitpunch_irq", "rabbitpunch_board_video", "jtframe_draw")),
     "roms": (0, ("rabbitpunch_roms", "rabbitpunch_rom_cache", "rabbitpunch_rom_requests", "rabbitpunch_sdram")),
     "rom_cache": (0, ("rabbitpunch_rom_cache",)),
     "rom_requests": (0, ("rabbitpunch_rom_requests",)),
