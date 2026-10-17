@@ -148,3 +148,22 @@ A first-hand [Rabio Lepus PCB repair log](https://jammarcade.net/rabio-lepus-rep
 traces shared sprite-ROM address A7 through a 74LS273 at 8A to data D0 of a
 2Kx8 SRAM at 10A. It supports an address-latch path on that board, but supplies
 no pixel-clock, raw-raster or frame-latch measurement. Do not infer those from it.
+
+
+## Original manual and schematic reference
+
+The original Bally Midway field-kit manual M051-00F12-A013 is available as a
+[33-page preservation scan](https://www.crazykong.com/manuals/RabbitPunch.man.pdf).
+The local D-drive copy and SHA256 are recorded in reference/board_manual.json;
+the PDF and rendered schematic pages are private reference artifacts.
+
+PDF pages 28-30 are VS7-0102 sheets 1/3-3/3; pages 31-33 are VS7-0101 sheets
+1/3-3/3 (printed pages 25-30). The drawings identify the processor/audio board,
+video clock/GGA, bitmap RAM/serializers, tile path, palette output and sprite
+logic. The clock detail on PDF page 31 labels the 13.333 MHz oscillator; it
+is consistent with the source driver's documented divided GGA clock. Exact
+raster totals and blanking phases are still unproven: the GGA is custom and
+MAME implements only its register storage/callback. Do not substitute the
+software screen dimensions or speculative register interpretations for physical
+timing evidence. The manual's control labels independently confirm Missile
+and Fire/Punch. No final PLL or raster constants change from this inspection.

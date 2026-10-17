@@ -1,0 +1,21 @@
+{
+  "url": "https://www.crazykong.com/manuals/RabbitPunch.man.pdf",
+  "path": ".local/reference/rabbitpunch-manual.pdf",
+  "sha256": "0edf3b05bfadab5bf5dede2f9af75d17e29bd5d597673f1d016d2d0dfecc0b07",
+  "bytes": 3798992,
+  "pages": 33,
+  "schematic_pages": {
+    "VS7-0102": [
+      28,
+      29,
+      30
+    ],
+    "VS7-0101": [
+      31,
+      32,
+      33
+    ]
+  },
+  "rendered_pages": ".local/reference/rabbitpunch-pages/",
+  "scope": "Original kit manual scan with board schematics; custom GGA internals and exact raster totals not established"
+}
