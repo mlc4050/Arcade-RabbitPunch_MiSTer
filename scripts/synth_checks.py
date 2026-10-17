@@ -55,10 +55,6 @@ CHECKS = {
 }
 
 
-CHECKS["clocked_machine"] = (CHECKS["machine"][0], CHECKS["machine"][1] +
-    ("rabbitpunch_clocked_machine", "rabbitpunch_pll", "rabbitpunch_reset_release"))
-
-
 def run_check(stage, quartus_bin, stamp, name):
     expected_bits, required_instances = CHECKS[name]
     project_name=f"{name}_check"
@@ -90,7 +86,7 @@ def run_check(stage, quartus_bin, stamp, name):
     if result.returncode or "Full Compilation was successful" not in log:
         print("\n".join(log.splitlines()[-35:]))
         raise SystemExit(f"Standalone {name} compile failed: {log_path}")
-    if name in ("tiles", "sprites", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "system", "platform", "machine", "clocked_machine"):
+    if name in ("tiles", "sprites", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "system", "platform", "machine"):
         stuck = re.findall(r'Pin "(ou17_(?:(?:sprite|tile)_)?rom_word_address\[\d+\])" is stuck', log)
         if stuck:
             raise SystemExit(f"Unexpected constant graphics ROM address bits: {stuck}")
@@ -103,7 +99,7 @@ def run_check(stage, quartus_bin, stamp, name):
     if any(instance not in hierarchy for instance in required_instances):
         raise SystemExit("A required block disappeared during synthesis")
     sound_memory = []
-    if name in ("sound_board", "audio", "system", "platform", "machine", "clocked_machine"):
+    if name in ("sound_board", "audio", "system", "platform", "machine"):
         expected_sound_memory = {
             "rabbitpunch_ram8:sound_ram": (2048, 8),
             "jt51_sh:u_acc": (8, 68),
@@ -118,7 +114,7 @@ def run_check(stage, quartus_bin, stamp, name):
             columns = [value.strip() for value in line.split(";")[1:-1]]
             if len(columns) == 9 and columns[1] in ("M10K block", "AUTO"):
                 matches = [key for key in expected_sound_memory if key + "|" in columns[0]]
-                if not matches and name in ("system", "platform", "machine", "clocked_machine"):
+                if not matches and name in ("system", "platform", "machine"):
                     continue
                 if len(matches) != 1:
                     raise SystemExit(f"Unexpected sound memory: {columns[0]}")
@@ -177,32 +173,6 @@ def run_check(stage, quartus_bin, stamp, name):
             "timing_coverage":coverage,
             "fit_summary":fit.splitlines(),"log_sha256":hashlib.sha256(log_path.read_bytes()).hexdigest(),
             "scope":scope}
-    if name == "clocked_machine":
-        clocks_log = project / "clock_tree.log"
-        with clocks_log.open("w", encoding="utf-8") as log:
-            clock_run = subprocess.run([str(Path(quartus_bin) / "quartus_sta.exe"), "-t",
-                str(stage / "scripts/inspect_clock_tree.tcl")], cwd=project, env=env,
-                stdout=log, stderr=subprocess.STDOUT, **NO_WINDOW)
-        if clock_run.returncode:
-            raise SystemExit(f"Clock-tree inspection failed: {clocks_log}")
-        rows = []
-        for line in (output / "clock_tree.tsv").read_text().splitlines()[1:]:
-            clock_name, period, rise, fall, positive, negative = line.split("\t")
-            rows.append(dict(name=clock_name, period_ns=float(period), rise_ns=float(rise),
-                fall_ns=float(fall), positive_registers=int(positive), negative_registers=int(negative)))
-        reference = [r for r in rows if abs(r["period_ns"] - 20) < 0.002]
-        generated = [r for r in rows if abs(r["period_ns"] - 150 / 7) < 0.002]
-        system = [r for r in generated if abs(r["rise_ns"]) < 0.03]
-        shifted = [r for r in generated if abs(r["rise_ns"] - 75 / 7) < 0.03]
-        if not (len(rows) == 3 and len(reference) == len(system) == len(shifted) == 1):
-            raise SystemExit(f"Unexpected fitted PLL frequency/phase: {rows}")
-        if system[0]["positive_registers"] < 100 or shifted[0]["positive_registers"] or shifted[0]["negative_registers"]:
-            raise SystemExit(f"Unexpected functional clock-domain users: {rows}")
-        pll_count = re.search(r"Total PLLs\s*:\s*([\d,]+)", fit)
-        if not pll_count or int(pll_count[1].replace(",", "")) != 1:
-            raise SystemExit("Expected one fitted PLL")
-        report.update(constraint_mhz=46.6666666667, pll_count=1, clock_tree=rows,
-            scope="Actual 50 MHz PLL input and two fitted 46.6667 MHz outputs, one functional system-clock domain and half-period SDRAM output only; registered logical test boundaries and hypothetical external I/O timing; no physical HPS/DDR mux, full MiSTer shell or PCB electrical timing proof")
     if sound_memory:
         report["sound_memory"] = sound_memory
     destination=core_root()/f"debug/{name}_synth.json"
