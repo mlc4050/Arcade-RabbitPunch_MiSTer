@@ -113,7 +113,11 @@ begin
          (su5_access_target = TARGET_PALETTE and s_palette_view = '1' and su24_access_address(10 downto 1) = su10_palette_address) or
          (su5_access_target = TARGET_WORKRAM and s_work_view = '1' and su24_access_address(13 downto 1) = iu15_view_word_address(12 downto 0))) else '0';
 
-    bitmap : entity work.rabbitpunch_ram16 generic map (sint_ADDRESS_BITS => 15)
+    bitmap : entity work.rabbitpunch_ram16
+        generic map (
+            sint_ADDRESS_BITS => 15,
+            POWER_UP_WORD => x"FFFF"
+        )
         port map (
             i_clk => i_clk,
             i_cpu_enable => s_bitmap_enable,

@@ -1377,3 +1377,13 @@ releasing selection. Likewise, a helper called after a registered event must
 align its strobe to span an accepting clock edge, rather than dropping it at the
 next falling edge before any receiver edge occurs. Evidence: the native
 platform_hiscore_tb upload and autosave-poll checks, which now pass both sets.
+
+### [RabbitPunch] Keep dependent generic calculations outside Quartus 17 interfaces
+
+ModelSim 10.5b accepted a VHDL-2008 generic default that referenced a preceding
+generic in the same interface list. Quartus 17.0.2 rejected it with errors
+10552/10556. Moving the half-frame calculation into an architecture constant
+preserved the tested behavior and avoided that unsupported syntax. Compile with
+the target synthesizer before treating simulator acceptance as compatibility.
+The rejected implementation was reverted; its log is retained under
+`debug/fit_archive/raster_414924d_rejected/`.

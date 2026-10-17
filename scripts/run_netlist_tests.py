@@ -18,6 +18,7 @@ from run_baselines import run_case
 
 
 BLOCKS = {
+    "memory": ("memory_powerup_tb", "MEMORY_POWERUP_PASS", "sim/memory/memory_powerup_tb.vhd"),
     "host": ("host_tb", "HOST_PASS", "sim/board/host_tb.vhd"),
     "audio": ("audio_netlist_tb", "AUDIO_PASS", "sim/sound/audio_netlist_tb.vhd"),
     "adpcm": ("adpcm_netlist_tb", "ADPCM_PASS", "sim/sound/adpcm_netlist_tb.vhd"),
@@ -34,7 +35,10 @@ BLOCKS = {
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("block", choices=BLOCKS)
+    parser.add_argument("--wall-timeout", type=int, default=300, help="Maximum real seconds for the netlist simulation")
     args = parser.parse_args()
+    if args.wall_timeout <= 0:
+        parser.error("Wall timeout must be positive")
     root = core_root()
     require_no_jtag(f"Rabbit Punch {args.block} netlist export and simulation")
     stamp = (root / "build/BUILT_COMMIT").read_text().split()[0]
@@ -72,24 +76,29 @@ def main():
             vectors[filename] = hashlib.sha256(source.read_bytes()).hexdigest()
     support = "rtl/rabbitpunch_sdram_types.vhd" if args.block in ("sdram", "rom_requests", "rom_cache", "roms") else "sim/video/tile_test_support.vhd"
     sources = [str(netlist.relative_to(root)).replace("\\", "/")]
-    if args.block not in ("sound_board", "adpcm", "audio", "host"):
+    if args.block not in ("sound_board", "adpcm", "audio", "host", "memory"):
         sources.append(support)
     if args.block in ("sdram", "roms"):
         sources.append("sim/vendor/sdram/sdram_chip_model_wide.sv")
     if args.block == "rom_requests":
         sources += ["rtl/memory/sdram/sdram.sv", "rtl/rabbitpunch_sdram.vhd",
                     "sim/vendor/sdram/sdram_chip_model_wide.sv"]
+    if args.block == "memory":
+        sources.append("rtl/rabbitpunch_layout.vhd")
     if args.block == "host":
         sources.append("rtl/rabbitpunch_config.vhd")
     sources.append(bench)
     libraries = [item for library in ("cyclonev_ver", "altera_ver", "altera_lnsim_ver", "lpm_ver", "sgate_ver")
                  for item in ("-L", library)]
     check = run_case(f"gate_{args.block}", sources, top, "60 ms", marker,
-                     sim_args=libraries, wall_timeout=300)
+                     sim_args=libraries + (["-gEVALUATION_BOUNDARY=true", "-gEXHAUSTIVE=false"] if args.block == "memory" else []), wall_timeout=args.wall_timeout)
     check.update(commit=stamp, vectors_sha256=vectors, netlist_sha256=hashlib.sha256(netlist.read_bytes()).hexdigest(),
                  source_sha256={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources},
                  log_sha256=hashlib.sha256((root / check["log"]).read_bytes()).hexdigest(),
                  scope="Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest")
+    if args.block == "memory":
+        check.update(memory_initialization_addresses=408, memory_initialization_reads=816, exhaustive=False,
+                     scope=check["scope"] + "; all five banks: first/last word of every 256-word region through both CPU and inspection, plus masked writes; full-address coverage is RTL only")
     (root / f"docs/reference/{args.block}_netlist_checks.json").write_text(json.dumps(check, indent=2) + "\n", encoding="utf-8")
 
 

@@ -167,3 +167,16 @@ MAME implements only its register storage/callback. Do not substitute the
 software screen dimensions or speculative register interpretations for physical
 timing evidence. The manual's control labels independently confirm Missile
 and Fire/Punch. No final PLL or raster constants change from this inspection.
+
+
+## Additional Video System core comparison
+
+The public [jlrh Aero Fighters timing module](https://github.com/jlrh/videosystem-fpga/blob/dc2ca4e82eaee3477bad4a75ae6a4977e2faa09b/cores/aerofgt/hdl/jtaerofgt_video_timing.v)
+uses fixed 320x224 active geometry and 456x256 totals, with a fractional pixel
+enable. The [repository description](https://github.com/jlrh/videosystem-fpga/tree/dc2ca4e82eaee3477bad4a75ae6a4977e2faa09b)
+identifies its target as the newer Aero Fighters board. This is a useful related
+integration example; it is not a C7-01 register decoder or evidence for Rabbit
+Punch's raster. No source from it is imported into this core.
+
+PROVISIONAL_RASTER.md separately records an explicitly unverified bring-up
+option and the decision needed before selecting approximate physical timings.

@@ -1,5 +1,5 @@
 {
-  "commit": "ea6e0fd4b6f17028729e2d56445b6150aebc909b",
+  "commit": "fa445a9ae73f0eddcb64f1376417840b32b5c523",
   "device": "5CSEBA6U23I7",
   "project": "memory_check",
   "constraint_mhz": 48,
@@ -8,35 +8,35 @@
   "timings": [
     {
       "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 8.083
+      "slack_ns": 6.462
     },
     {
       "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.495
+      "slack_ns": 0.434
     },
     {
       "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.073
+      "slack_ns": 9.071
     },
     {
       "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 7.947
+      "slack_ns": 6.576
     },
     {
       "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.209
+      "slack_ns": 0.451
     },
     {
       "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 8.993
+      "slack_ns": 8.977
     },
     {
       "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 12.559
+      "slack_ns": 10.874
     },
     {
       "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.228
+      "slack_ns": 0.2
     },
     {
       "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
@@ -44,15 +44,15 @@
     },
     {
       "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 14.443
+      "slack_ns": 11.006
     },
     {
       "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.209
+      "slack_ns": 0.186
     },
     {
       "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.197
+      "slack_ns": 9.196
     }
   ],
   "timing_coverage": {
@@ -82,15 +82,15 @@
     }
   },
   "fit_summary": [
-    "Fitter Status : Successful - Fri Oct 16 03:16:07 2026",
+    "Fitter Status : Successful - Sat Oct 17 13:03:42 2026",
     "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
     "Revision Name : memory_check",
-    "Top-level Entity Name : rabbitpunch_memory",
+    "Top-level Entity Name : memory_check",
     "Family : Cyclone V",
     "Device : 5CSEBA6U23I7",
     "Timing Models : Final",
-    "Logic utilization (in ALMs) : 226 / 41,910 ( < 1 % )",
-    "Total registers : 58",
+    "Logic utilization (in ALMs) : 310 / 41,910 ( < 1 % )",
+    "Total registers : 230",
     "Total pins : 1 / 314 ( < 1 % )",
     "Total virtual pins : 136",
     "Total block memory bits : 835,584 / 5,662,720 ( 15 % )",
@@ -103,6 +103,6 @@
     "Total PLLs : 0 / 6 ( 0 % )",
     "Total DLLs : 0 / 4 ( 0 % )"
   ],
-  "log_sha256": "6f89e8ccf9399a14929654ea097c97a171c5dfae0a01a7e0277c46387b4c041a",
+  "log_sha256": "e9862a299e6afcfdfa5033fed2d3a13082a721c7c3a2f249ecb6ba56319c1d92",
   "scope": "Standalone memory block with virtual I/O; not a complete core or hardware release"
 }

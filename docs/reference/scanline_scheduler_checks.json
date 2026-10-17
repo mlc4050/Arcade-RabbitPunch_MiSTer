@@ -1,0 +1,11 @@
+{
+  "case": "scanline_scheduler",
+  "pass_marker": "SCANLINE_SCHEDULER_PASS",
+  "log": "debug\\baselines\\scanline_scheduler\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_scanline_scheduler.vhd": "89fbde11ae5842198c632eae636ad3556a36452298e362cbdc4f22469858b8d2",
+    "sim/video/scanline_scheduler_tb.vhd": "15a1b0125bbf3861d069aa6cd9b4944f718d1e0be17555f2d9a90f3b8bde116d"
+  },
+  "log_sha256": "7349d2e3dc8907b9cdcd0ff53798df230eb51b5a2fe418852e1fda96914c527e",
+  "scope": "Line-bank ownership with a delayed renderer model; no pixel RAM added, no physical timing, real renderer or CPU/SDRAM integration proof"
+}

@@ -72,8 +72,8 @@ def main():
         cpu='/system_boot_tb/system/audio/sound_board/sound_cpu/cpu/cpu/u0'
         sound_ram='/system_boot_tb/system/audio/sound_board/sound_bus/sound_ram/physical_ram/MEMORY'
         setup=['run 1 ns',f'mem load -format mti -infile {{{memory.as_posix()}}} /system_boot_tb/chip/mem']
-        setup += [f'mem load -filltype value -filldata 0 -fillradix hex /system_boot_tb/system/board/board_video/memory/{bank}/physical_ram/MEMORY/m_mem_data_{port}' for bank in ('bitmap','sprites','tiles','palette','work_ram') for port in ('a','b')]
-        setup += [f'mem load -filltype value -filldata 0 -fillradix hex {sound_ram}/m_mem_data_{port}' for port in ('a','b')]
+        # Board/sound RAM now initializes through its production altsyncram
+        # configuration. Only the existing sound CPU register normalization remains.
         setup += ['run 200 us',f"force -freeze {cpu}/DIR 212'h{packed:053x}",f'force -freeze {cpu}/DIRSet 1','run 21 ns',f'noforce {cpu}/DIRSet',f'noforce {cpu}/DIR','force -freeze /system_boot_tb/s_run 1']
         result=run_case(case,sources,'system_boot_tb','101 ms','SYSTEM_BOOT_PASS',wall_timeout=args.wall_timeout,
             sim_args=(f'-gMAIN_WRITE_LIMIT={args.main_writes}',f'-gSOUND_WRITE_LIMIT={args.sound_writes}',f'-gDIP_DEFAULT={dips}'),setup_commands=tuple(setup))
@@ -85,12 +85,12 @@ def main():
                 raise SystemExit(f'{game} {name} mismatch #{index}: MAME={expected[index:index+1]}, HDL={actual[index:index+1]}')
         assert source_hashes=={name:sha(root/name) for name in sources}, 'Sources changed during simulation'
         result.update(set=game,main_writes_compared=args.main_writes,sound_writes_compared=args.sound_writes,
-            artifact_variant=args.variant, maintenance_bus_owner='rtl/rabbitpunch_bus_owner.vhd' in sources,
+            artifact_variant=args.variant, maintenance_bus_owner='rtl/rabbitpunch_bus_owner.vhd' in sources,ram_initialization='production configuration; no RAM deposits',
             source_sha256=source_hashes,rom_image_sha256=hashlib.sha256(image).hexdigest(),
             mame_main_trace_sha256=sha(main_trace),mame_sound_trace_sha256=sha(sound_trace),
             rtl_main_trace_sha256=sha(out/'rtl_main_writes.txt'),rtl_sound_trace_sha256=sha(out/'rtl_sound_writes.txt'),
             log_sha256=sha(root/result['log']),reset_state_sha256=sha(state_file),
-            scope='Both real-ROM CPUs in production logical system and shared SDRAM; independent ordered startup write-prefix comparisons, MAME-seeded native RAM and sound CPU registers; 32-byte real header downloaded into otherwise directly preloaded image; logical video/raster events idle, no cycle alignment/full-image load/game audio/hardware timing proof')
+            scope='Both real-ROM CPUs in production logical system and shared SDRAM; independent ordered startup write-prefix comparisons, configuration-initialized native RAM without simulator deposits; MAME-normalized sound CPU registers; 32-byte real header downloaded into otherwise directly preloaded image; logical video/raster events idle, no cycle alignment/full-image load/game audio/hardware timing proof')
         results.append(result)
         (root/f'debug/{case}_checks.json').write_text(json.dumps([result],indent=2)+'\n')
         print(f'PASS {game}: {args.main_writes} main and {args.sound_writes} sound writes match MAME',flush=True)

@@ -25,8 +25,8 @@
     "rtl/cpu/fx68k/uaddrPla.sv": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a",
     "rtl/rabbitpunch_layout.vhd": "28913c5c8d29e0aca34042db0f001e9e6a628b577ed2220af219c4e2fd86a968",
     "rtl/rabbitpunch_decode.vhd": "c2ffd118ed681db262d7f82639d7011fa908ed88bf5e9206f3f5f1422f187a5e",
-    "rtl/rabbitpunch_ram16.vhd": "7f740e02f07b244a8bd84721e763163495ec8a5c1936c06ab74d05e340816b50",
-    "rtl/rabbitpunch_board_memory.vhd": "ceeaa5949e621fe31635a01d1e0db81040d69b8d8fb32470b9a5087a17d78a93",
+    "rtl/rabbitpunch_ram16.vhd": "944818901a265eb00e376732c43da881745b6e020303bb907283f3a2aeb46beb",
+    "rtl/rabbitpunch_board_memory.vhd": "2757fd9aaee28bf3b3418305c20c09604de4497633680f2b961208f98d8809b7",
     "rtl/rabbitpunch_memory.vhd": "848a5cebb1558b68de8d681e3a6b2a14a64890a22e9efe9c9d75203c2390e059",
     "rtl/rabbitpunch_bus.vhd": "2ff140db32be1209154ffce745039cd569d3ba0fbb0531c560fd173fa080f5c5",
     "rtl/rabbitpunch_fx68k.vhd": "f58d91e270636a92f629854f63e923aa6a8a7175b5f9d409a0f2e401e0a53ea1",
@@ -101,7 +101,7 @@
     "rtl/rabbitpunch_z80.vhd": "f7479e0294d0198559b98326b0e59b1187901348bd2a4d7a5cb8de55ef8b038f",
     "rtl/rabbitpunch_soundcpu.vhd": "5e2be4ac02441a2d2bcd69dec67c24743fce9e9fc8d601821245f4cec0316240",
     "rtl/rabbitpunch_ym2151.vhd": "286a83e81a7caaaf91c4758db87fa1977c78e2b6dea7acf9b3f2eb62d5dbefff",
-    "rtl/rabbitpunch_ram8.vhd": "fd924b3eddbe1769b3e2dbd175e0f2a57629097ddba0dbd4cf295edfe81b3b39",
+    "rtl/rabbitpunch_ram8.vhd": "fe34437890ca1cc79c920831062d7e43f2f0d2c01dd40fc7323e9614920ffee1",
     "rtl/rabbitpunch_sound_bus.vhd": "f20bcb586a20fffb1890e3bb5eeaf7c699b5f76027ebc984bef4d831f0ee1e07",
     "rtl/rabbitpunch_sound_board.vhd": "8f6fd2d941048f83bcb42af8e56da5ee873b4dfc4ce67da9e90518c3bf12ec18",
     "rtl/rabbitpunch_upd7759.vhd": "88e3d984ec532e73671c6e465fb18e1e6b6d2f324d3bf993035be86b410ba438",
@@ -128,6 +128,6 @@
     "sim/board/platform_hiscore_tb.vhd": "c152cd19c416dfbb0ede235da8186ad917dbf09f5bf370f630204a7c53c1fe6c"
   },
   "vectors_sha256": "56c5bb10b5801c7e067a3a6770e4369431bac096d0f90be7ed958c3974b4af01",
-  "log_sha256": "84d72535e813b90dd531226141e5e5ebac9641074605c23eabffcaffa5f776c9",
+  "log_sha256": "28b4520ac9795cbfc0689a89e5fca9194ac0c2f49b2484f6c92778fe6a0640ef",
   "scope": "Full logical platform and executing fx68k through actual shared SDRAM/chip model, native work/score RAM and both maintenance clients. Both MAME table geometries, standard config3/dump4 restore, CPU-consumed restored score word, external maintenance prefill, changed-score OSD autosave/upload, soft-reset restore and ROM-generation/DIP isolation. Native HPS command strobes when --host-netlist, otherwise modeled file signals; game ROM replaced by a 64-byte diagnostic; no disk persistence or physical timing claim."
 }

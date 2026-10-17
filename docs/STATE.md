@@ -253,8 +253,7 @@ RAM in Quartus), no line/frame pixel storage or additional clock domain.
 
 The standalone maintenance adapter owns a one-request FSM, byte-lane selector
 and held bus payload. Initialization drains outstanding memory debt before
-releasing pause and suppresses its stale client response. It adds no RAM and
-is not yet in the production bus path.
+releasing pause and suppresses its stale client response. It adds no RAM; the integrated system uses it through the shared bus owner.
 
 
 The standalone bus owner adds one held packet/pending bit per requester and
@@ -268,8 +267,7 @@ the main and sound adapters, and ready waits for both to drain. ROM generation
 handoff also waits for all board-owner packets, including currently offered
 requests. The idle CPU path bypasses packet storage; selected backend payload
 is held for the reply. Reset clears I/O effects but acknowledges accepted I/O
-so no owner debt is stranded. HPS persistence/restore orchestration is not yet
-connected.
+so no owner debt is stranded. HPS persistence/restore orchestration now connects through the high-score service described below.
 
 
 High-score persistence adds a 256-byte native dual-port RAM split into two
@@ -287,3 +285,28 @@ accepted-byte pending bit. Client payload is held by the selected caller until
 acceptance; no extra memory transaction queue is introduced. Drain the shared
 helper/backend before taking a stable state. A canceled score client initializes
 only its helper session; backend bus ownership still drains independently.
+
+
+Native RAM configuration now uses zeroed physical M10K storage. Bitmap uses
+constant FFFF XOR encoding to expose MAME's transparent-15 startup pixels;
+other production word banks and byte RAM use zero. State view/maintenance APIs
+return logical values and need no format change. A raw vendor-memory dump of
+the bitmap must be decoded with FFFF. CPU/game reset does not clear these banks.
+See RAM_POWERUP.md for startup scope and tests.
+
+
+The provisional clock-enable generator adds a /7 pixel phase, modulo-35 main
+and sound accumulators, a sound half-rate phase bit and modulo-875 ADPCM
+accumulator. These advance on the system clock and are separate from user pause
+and game reset. The raster adds two nine-bit beam counters; it has no pixel RAM.
+The PLL/reset boundary adds three cold-initialization release registers. Its
+asynchronous assertion covers PLL clock loss; game reset does not reset the PLL.
+
+The scanline scheduler adds a t_state/styp_state request/render FSM, one held
+render bank/Y, two ready-bank bits and eight-bit row tags, display bank/valid,
+armed and sticky-underflow flags. It starts row zero during vertical blank and
+prepares each following visible row in the spare bank. A handoff consumes the
+ready tag before the next physical row. Late completion cannot switch banks
+mid-line. Initialization must also reset/drain the connected renderer before
+new requests; no extra line/frame pixel storage or full savestate interface is
+added. These blocks are standalone until production timing integration lands.

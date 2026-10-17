@@ -1,3 +1,5 @@
+-- SPDX-License-Identifier: GPL-3.0-or-later
+-- Copyright (C) 2026 RabbitPunch contributors
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -5,7 +7,7 @@ library altera_mf;
 use altera_mf.altera_mf_components.all;
 
 -- Sound CPU read/write port plus read-only state inspection, one clock.
--- RAM contents are deliberately not reset. CPU writes define each byte.
+-- Configuration initializes RAM to zero; gameplay reset preserves bytes.
 -- CPU read data is meaningful for reads only; mixed-port same-address collisions
 -- have no guaranteed value and must be avoided by sound/state arbitration.
 entity rabbitpunch_ram8 is
@@ -59,7 +61,7 @@ begin
             read_during_write_mode_port_a => "NEW_DATA_NO_NBE_READ",
             read_during_write_mode_port_b => "NEW_DATA_NO_NBE_READ",
             read_during_write_mode_mixed_ports => "DONT_CARE",
-            power_up_uninitialized => "TRUE"
+            power_up_uninitialized => "FALSE"
         )
         port map (
             clock0 => i_clk,
