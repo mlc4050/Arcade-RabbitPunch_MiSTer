@@ -7,7 +7,18 @@
     "source_and_listxml_checked": true,
     "xml_vs_address_assembly": "identical",
     "xml_vs_mame_regions": "identical",
-    "mra": "releases/_dev/Rabio Lepus (Japan).mra"
+    "mra": "releases/_dev/Rabio Lepus (Japan).mra",
+    "hiscore": {
+      "config_index": 3,
+      "dump_index": 4,
+      "bytes": 119,
+      "config_sha256": "8d3d680a1ec2b361b5aec91237f02520f92807a934e4e8e3bafd234bf5404b48",
+      "load_order": [
+        "rom0",
+        "config3",
+        "nvram4"
+      ]
+    }
   },
   {
     "set": "rpunch",
@@ -17,6 +28,17 @@
     "source_and_listxml_checked": true,
     "xml_vs_address_assembly": "identical",
     "xml_vs_mame_regions": "identical",
-    "mra": "releases/_dev/Rabbit Punch (US).mra"
+    "mra": "releases/_dev/Rabbit Punch (US).mra",
+    "hiscore": {
+      "config_index": 3,
+      "dump_index": 4,
+      "bytes": 115,
+      "config_sha256": "c3407b043c1d2ec2092c241d78366949f1a969dac977f2692ffe3153e94bb774",
+      "load_order": [
+        "rom0",
+        "config3",
+        "nvram4"
+      ]
+    }
   }
 ]

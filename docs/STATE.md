@@ -270,3 +270,20 @@ requests. The idle CPU path bypasses packet storage; selected backend payload
 is held for the reply. Reset clears I/O effects but acknowledges accepted I/O
 so no owner debt is stranded. HPS persistence/restore orchestration is not yet
 connected.
+
+
+High-score persistence adds a 256-byte native dual-port RAM split into two
+128-byte banks, the saved-bank selector/valid/dirty/notified flags, initialized
+flag, pending OSD capture, byte index, download count/error, prior host flags,
+startup/retry counter and acknowledged-access FSM. Only complete snapshots switch
+banks. A game reset cancels partial work and keeps the last saved bank; a new ROM
+or metadata generation invalidates it. The profile parser owns a 192-bit packet,
+count/error/previous-active state and decoded profile/wait fields. Full savestate
+support must preserve the selected set/generation alongside those flags, or drain
+and rebuild persistence without mixing files from another game.
+
+The maintenance-client arbiter owns a session FSM (idle/external/score) and one
+accepted-byte pending bit. Client payload is held by the selected caller until
+acceptance; no extra memory transaction queue is introduced. Drain the shared
+helper/backend before taking a stable state. A canceled score client initializes
+only its helper session; backend bus ownership still drains independently.

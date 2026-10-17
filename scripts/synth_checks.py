@@ -15,7 +15,7 @@ CHECKS = {
     "hiscore": (2048, ("rabbitpunch_hiscore", "rabbitpunch_ram8")),
     "maintenance": (0, ("rabbitpunch_maintenance",)),
     "video_output": (0, ("rabbitpunch_video_output",)),
-    "platform": (927339, ("rabbitpunch_platform", "rabbitpunch_controls", "rabbitpunch_load_frontend", "rabbitpunch_system", "fx68k", "T80se", "jt51", "jt7759", "rom_loader", "ddram_phy", "jtframe_draw", "rabbitpunch_maintenance", "rabbitpunch_bus_owner")),
+    "platform": (929387, ("rabbitpunch_platform", "rabbitpunch_hiscore_service", "rabbitpunch_hiscore_config", "rabbitpunch_hiscore", "rabbitpunch_maintenance_clients", "rabbitpunch_controls", "rabbitpunch_load_frontend", "rabbitpunch_system", "fx68k", "T80se", "jt51", "jt7759", "rom_loader", "ddram_phy", "jtframe_draw", "rabbitpunch_maintenance", "rabbitpunch_bus_owner")),
     "controls": (0, ("rabbitpunch_controls", "rabbitpunch_inputs", "rabbitpunch_keys", "rabbitpunch_pause", "mame_keys")),
     "host": (0, ("host_check", "rabbitpunch_host", "hps_io")),
     "load_frontend": (0, ("rabbitpunch_load_frontend", "rabbitpunch_ddr_copy", "rom_loader", "ddram_phy")),

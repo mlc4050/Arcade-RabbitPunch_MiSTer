@@ -288,3 +288,13 @@ full-platform fit passes every 48 MHz timing/coverage gate with unchanged RAM;
 its full real-ROM startup comparison is next;
 pre-maintenance full startup results retain their exact source hashes. HPS
 high-score persistence remains open (MAINTENANCE.md, HISCORE.md).
+
+
+High-score logical implementation: the native host upload path, atomic saved
+banks, validated standard config3/dump4 service and maintenance-client session
+arbitration pass unit simulations. The full logical platform passes both game
+geometries with executing-CPU score reads, OSD snapshots/uploads, soft reset and
+ROM-generation isolation. Development MRAs contain correct per-set nvram sizes
+and standard configuration while retaining identical ROM0 images against MAME.
+Refreshed combined fit/native host-menu proof and physical disk persistence
+remain pending. See HISCORE.md for exact scope and references.

@@ -44,7 +44,7 @@
     "rtl/rabbitpunch_board_video.vhd": "18c5d8143d927063946082dcfdebac39fd45f8fbb04888ecf47929280c04751b",
     "rtl/rabbitpunch_maintenance.vhd": "19d90ccaf6c967a05b7c6964dceb46e34ba7945bf3ae3a9e30d7cade5c6c1268",
     "rtl/rabbitpunch_bus_owner.vhd": "3bb5f2efb7da8141a317e8f2ade3e9f3b5e6796bfc5f990e7e44d8c2fcb4e6dc",
-    "rtl/rabbitpunch_board.vhd": "32978c6b006c521563c2a62ceaf92f554f1b66b97f54e5264ddb06b5f2788d9a",
+    "rtl/rabbitpunch_board.vhd": "6d29b8f023761fd07ddf2036c9e2ff6c0e62badadbafdbb8e475bb7da489c806",
     "rtl/rabbitpunch_download.vhd": "2abd96a09434a09d4893d4d51a75fb96d739a546fb643fc6c0d0a4cfbc0e4dd6",
     "rtl/cpu/t80/T80_Pack.vhd": "f0e6aff273f25d904fd55e53372e44b52d07a82b8c6cb58fe73ea7fde06ec22d",
     "rtl/cpu/t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
@@ -91,9 +91,9 @@
     "rtl/rabbitpunch_adpcm.vhd": "49f95542e8a7ee7de24c9730ed1e0fa195d55cb0116b9bee4b28c596614315db",
     "rtl/rabbitpunch_audio.vhd": "cf51bd509893f671fb3590770c1e4589dccb2c773219e302c2955f20566abda8",
     "rtl/rabbitpunch_audio_mixer.vhd": "d79efd2d315fc7db9e95f7f6ecc5e72b713b836b1024a0281f15f6167d94e64d",
-    "rtl/rabbitpunch_system.vhd": "fd4faab3d89ef0dff07a2c546849ae737c90d9d4ec42013f30fe415129004a68",
+    "rtl/rabbitpunch_system.vhd": "358a63321a80b9d75c8a93d83ab487bd5a2b3de3e3a0020e1b4c291c80a6561d",
     "sim/board/system_download_tb.vhd": "b60ff3e69613d420b0fcc8a2ba28e2bf1b8a6958221263e0695371fe8c67beea"
   },
-  "log_sha256": "39105026401ea370c0406038f2c5e942332bf8c576528814ba4578d6419493f8",
+  "log_sha256": "26d4d2af98630dab0776a8ea8b7b6d01d0ee17539c05b40cd946e7ff4890fdb8",
   "scope": "Three synthetic 32-byte 68000 program downloads and one rejected partial image through production SDRAM; actual CPU writes and native RAM inspection, hot-cache image replacement, soft reset without reload, partial-image reset hold and recovery; logical video idle, no HPS/DDR/PLL/raster/hardware proof"
 }

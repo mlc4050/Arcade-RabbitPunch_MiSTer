@@ -46,6 +46,10 @@
         <part name="rl_f18.bin" crc="47840673" length="0x20000" />
         <part repeat="0x20000">00</part>
     </rom>
+    <rom index="3">
+        <part>02 DC 6C 00 FF FF 00 02 00 02 00 01 00 00 00 00 00 0F FE 01 00 77 00 80</part>
+    </rom>
+    <nvram index="4" size="119" />
     <switches default="00,00" base="0">
         <dip name="Coin A" bits="0,3" ids="1C/1C,-,4C/5C,5C/6C,1C/6C,6C/4C,2C/3C,-,1C/2C,1C/3C,1C/4C,1C/5C,2C/1C,3C/1C,-,-" />
         <dip name="Coin B" bits="4,7" ids="1C/1C,-,4C/5C,5C/6C,1C/6C,6C/4C,2C/3C,-,1C/2C,1C/3C,1C/4C,1C/5C,2C/1C,3C/1C,-,-" />

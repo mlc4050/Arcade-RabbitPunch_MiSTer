@@ -22,11 +22,11 @@ would copy unrelated US RAM bytes.
 
 Existing work-RAM inspection can read the region while the main CPU is paused.
 Production maintenance now provides acknowledged byte reads/writes through
-the existing work-RAM CPU port. The HPS score upload/restore path is still open. Future restore must request pause, wait for CPU/bus drain, use masked RAM
-writes without resetting memory, preserve neighboring bytes, and release pause
-only after accepted accesses complete. Score polling/load/save must be scoped
+the existing work-RAM CPU port. The HPS score service now requests pause, waits for CPU/bus drain, and uses masked RAM
+writes without resetting memory, preserves neighboring bytes, and releases pause
+only after accepted accesses complete. Score polling/load/save is scoped
 per ROM generation and set. The host boundary exposes uploads; platform persistence composition is still pending.
-This reference does not claim persistence is implemented or verified in HDL.
+The reference capture itself does not establish persistence; HDL checks are listed below.
 
 
 The standalone rabbitpunch_maintenance byte adapter now passes actual native
@@ -38,7 +38,7 @@ correct lane. It holds pause through an accepted memory access even after the
 client ends its session. Initialization discards a pending client result only
 after draining its backend reply. Delays of 0..51 and 300 clocks are checked
 (reference/maintenance_checks.json). It is now connected to the production
-bus owner; HPS score upload/restore remains separate (MAINTENANCE.md). No maintenance access
+bus owner; HPS score upload/restore uses this path through the maintenance-client arbiter. No maintenance access
 bypasses the existing RAM port or adds pixel buffering.
 
 The inspected standard hiscore.v helpers use a configured pause-padding delay
@@ -50,8 +50,8 @@ and byte access acknowledgment; a fixed padding count is not an acknowledgment.
 
 `rabbitpunch_hiscore.vhd` is a single-clock VHDL client of the production
 maintenance byte interface. Validated per-game metadata selects the two table
-geometries above. The HPS configuration parser and platform composition remain
-pending; this module is not connected to the release shell yet.
+geometries above. The HPS configuration parser and logical platform composition are now connected;
+the physical release shell remains pending.
 
 A 256-byte native dual-port M10K contains two 128-byte banks. Downloads and
 snapshots populate the inactive bank; a complete transaction switches the saved
@@ -103,5 +103,41 @@ client state never strands real backend debt. The composed service passes the
 same native-memory tests through real index-3 configuration transfers, including
 first-run readiness, soft reset restore, concurrent upload bank stability and a
 download announced while RAM work is outstanding. See
-reference/hiscore_service_checks.json and hiscore_config_checks.json. Production
-platform composition and generated MRA metadata remain pending.
+reference/hiscore_service_checks.json and hiscore_config_checks.json. Production logical platform composition and development MRA metadata are connected;
+physical MiSTer/disk testing remains pending.
+
+
+## Logical platform composition
+
+The platform connects the score service and an exclusive maintenance-client
+arbiter to the existing byte helper. External state/debug sessions have idle
+priority. An ended session retains ownership through its accepted byte reply;
+neither client can steal an active session. Score reconfiguration cancels only
+score-owned helper work and preserves backend draining. ROM/game reset retains
+the existing full-system cancellation/drain rules.
+
+The standard service uses host indices 3/4 and status bit 3 for autosave.
+`ou16_host_menu_mask(3)` hides the option until a valid profile exists. No
+original-board battery RAM is inferred: MiSTer software persists the snapshot.
+
+The development MRAs load ROM0, then the 24-byte score configuration, then
+`nvram index=4` with decimal size 119 or 115. The generated metadata uses a
+48,000,000-clock startup wait (one second at the evaluation clock), 65535-clock
+retry wait, acknowledged hold descriptors of two, one write pass and no change
+mask/padding. These are software loading-policy waits, not measurements of board
+clock timing. Subsequent sentinel checks still gate restoration.
+
+Main_MiSTer's [MRA loader](https://github.com/MiSTer-devel/Main_MiSTer/blob/master/support/arcade/mra_loader.cpp)
+processes sections in document order, loads an existing `config/nvram/<MRA>.nvm`
+at the nvram node, and uploads exactly its declared size when saving. It derives
+the separate DIP filename `<MRA>.dip` and sends selected DIP bytes at index 254.
+The FPGA never opens either file. No input `.nvm` means no index-4 download;
+first-run capture in the score service covers that case.
+
+`run_platform_hiscore_tests.py` uses actual generated MRA metadata (only startup
+and retry waits accelerated to 30/19 clocks), both captured MAME table geometries,
+the full platform, executing fx68k, shared SDRAM/chip model and native work RAM.
+It checks CPU-consumed restored bytes, external maintenance arbitration, changed
+OSD snapshots, uploads, soft-reset restore, ROM-generation isolation and preserved
+DIP state. Native HPS strobe-to-file behavior and the physical `.nvm` disk round
+trip are separate evidence boundaries.

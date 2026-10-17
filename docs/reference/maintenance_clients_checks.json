@@ -1,0 +1,11 @@
+{
+  "case": "maintenance_clients",
+  "pass_marker": "MAINTENANCE_CLIENTS_PASS",
+  "log": "debug\\baselines\\maintenance_clients\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_maintenance_clients.vhd": "559976bd1124ea5ed26bf4f1ce5371d837dd126ad366acbe4ffbb8e8b8de548a",
+    "sim/board/maintenance_clients_tb.vhd": "f061b0fc67c94cc202a658fd6d98cc950ad349b7a47a4b7096974d2482e5e4a5"
+  },
+  "log_sha256": "e19481e5d30378b72b6daf28ad3bae95f464fdccfa1dbad53112a49bb67e6d2d",
+  "scope": "Maintenance byte-session arbitration: simultaneous external priority, direct idle handshake, ended-session debt, correct reply owner, no active-session preemption and score-only cancellation isolation. Backend response/readiness modeled; production RAM integration tested separately."
+}
