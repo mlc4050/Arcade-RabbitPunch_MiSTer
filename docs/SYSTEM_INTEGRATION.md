@@ -88,9 +88,9 @@ writes after the loader-idle and mono/startup changes. These supplement the
 larger pre-mixer comparison (reference/system_boot_32_8_checks.json).
 
 
-The extended final-system Rabio Lepus comparison passes all 10000 main-CPU
-and 4096 sound-CPU ordered writes against MAME through shared SDRAM
-(reference/system_boot_rabiolep_10000_4096_checks.json). Explicit MAME RAM and
+The extended pre-maintenance system comparison passes all 10000 main-CPU
+and 4096 sound-CPU ordered writes for both sets against MAME through shared SDRAM
+(reference/system_boot_10000_4096_checks.json). Explicit MAME RAM and
 sound-register seeds, direct preloaded ROM plus 32-byte real header download,
 and idle logical video/raster retain the bounded scope of the earlier test.
-Rabbit Punch's equivalent run is still in progress; this is not full game boot.
+Both runs pass; this remains a bounded startup comparison rather than full game boot.
