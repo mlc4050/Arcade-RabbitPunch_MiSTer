@@ -49,7 +49,7 @@ architecture rtl of rabbitpunch_hiscore is
     signal styp_state : t_state := STATE_IDLE;
     signal s_saved_bank, s_saved_valid, s_initialized : std_logic := '0';
     signal s_dirty, s_notified, s_changed, s_capture_pending : std_logic := '0';
-    signal s_old_download, s_old_upload, s_old_osd : std_logic := '0';
+    signal s_old_download, s_old_upload, s_old_osd, s_old_profile : std_logic := '0';
     signal s_download_bad : std_logic := '0';
     signal su8_download_count : unsigned(7 downto 0) := (others => '0');
     signal su7_index : unsigned(6 downto 0) := (others => '0');
@@ -111,6 +111,7 @@ begin
             s_old_download <= i_dump_download;
             s_old_upload <= i_dump_upload;
             s_old_osd <= i_osd_open;
+            s_old_profile <= i_profile_valid;
             if (i_initialize = '1') then
                 styp_state <= STATE_IDLE;
                 s_saved_bank <= '0';
@@ -121,6 +122,14 @@ begin
                 s_capture_pending <= '0';
                 s_download_bad <= '0';
                 su8_download_count <= (others => '0');
+                su32_wait <= iu32_start_wait;
+            elsif (i_profile_valid = '1' and s_old_profile = '0') then
+                styp_state <= STATE_IDLE;
+                s_saved_valid <= '0';
+                s_initialized <= '0';
+                s_dirty <= '0';
+                s_notified <= '0';
+                s_capture_pending <= '0';
                 su32_wait <= iu32_start_wait;
             elsif (i_game_reset = '1') then
                 styp_state <= STATE_IDLE;

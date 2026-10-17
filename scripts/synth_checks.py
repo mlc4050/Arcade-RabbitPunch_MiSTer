@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "hiscore_service": (2048, ("rabbitpunch_hiscore_service", "rabbitpunch_hiscore_config", "rabbitpunch_hiscore", "rabbitpunch_ram8")),
     "hiscore": (2048, ("rabbitpunch_hiscore", "rabbitpunch_ram8")),
     "maintenance": (0, ("rabbitpunch_maintenance",)),
     "video_output": (0, ("rabbitpunch_video_output",)),

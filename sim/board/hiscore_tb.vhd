@@ -7,6 +7,7 @@ use std.textio.all;
 use std.env.all;
 
 entity hiscore_tb is
+    generic (SERVICE_MODE : boolean := false);
 end entity;
 
 architecture test of hiscore_tb is
@@ -32,43 +33,81 @@ architecture test of hiscore_tb is
     signal sint_requests, sint_writes, sint_upload_requests : natural := 0;
     signal sint_delay : natural := 0;
     signal s_inflight : std_logic := '0';
+    signal su16_file_index : unsigned(15 downto 0) := to_unsigned(4, 16);
+    signal s_memory_initialize, s_enabled, s_config_error : std_logic;
 begin
     s_clk <= not s_clk after 5 ns;
-    dut : entity work.rabbitpunch_hiscore
-        port map (
-            i_clk => s_clk,
-            i_initialize => s_initialize,
-            i_game_reset => s_reset,
-            i_profile_valid => s_profile,
-            i_us_set => s_us,
-            iu32_start_wait => to_unsigned(30, 32),
-            iu16_check_wait => to_unsigned(19, 16),
-            i_osd_open => s_osd,
-            i_autosave => s_autosave,
-            i_dump_download => s_download,
-            i_dump_write => s_dump_write,
-            i_dump_upload => s_upload,
-            iu27_dump_address => su27_dump_address,
-            iu8_dump_data => su8_dump_in,
-            ou8_dump_data => su8_dump_out,
-            o_dump_wait => s_wait,
-            o_upload_request => s_request,
-            o_initialized => s_initialized,
-            o_saved_valid => s_saved,
-            o_dirty => s_dirty,
-            o_memory_access => s_access,
-            o_memory_valid => s_valid,
-            o_memory_write => s_write,
-            ou14_memory_address => su14_address,
-            ou8_memory_data => su8_data,
-            i_memory_ready => s_ready,
-            i_memory_response => s_response,
-            iu8_memory_data => su8_response
-        );
+    direct_store : if not SERVICE_MODE generate
+        s_memory_initialize <= s_initialize or s_reset;
+        dut : entity work.rabbitpunch_hiscore
+            port map (
+                i_clk => s_clk,
+                i_initialize => s_initialize,
+                i_game_reset => s_reset,
+                i_profile_valid => s_profile,
+                i_us_set => s_us,
+                iu32_start_wait => to_unsigned(30, 32),
+                iu16_check_wait => to_unsigned(19, 16),
+                i_osd_open => s_osd,
+                i_autosave => s_autosave,
+                i_dump_download => s_download,
+                i_dump_write => s_dump_write,
+                i_dump_upload => s_upload,
+                iu27_dump_address => su27_dump_address,
+                iu8_dump_data => su8_dump_in,
+                ou8_dump_data => su8_dump_out,
+                o_dump_wait => s_wait,
+                o_upload_request => s_request,
+                o_initialized => s_initialized,
+                o_saved_valid => s_saved,
+                o_dirty => s_dirty,
+                o_memory_access => s_access,
+                o_memory_valid => s_valid,
+                o_memory_write => s_write,
+                ou14_memory_address => su14_address,
+                ou8_memory_data => su8_data,
+                i_memory_ready => s_ready,
+                i_memory_response => s_response,
+                iu8_memory_data => su8_response
+            );
+    end generate;
+    file_service : if SERVICE_MODE generate
+        dut : entity work.rabbitpunch_hiscore_service
+            port map (
+                i_clk => s_clk,
+                i_initialize => s_initialize,
+                i_game_reset => s_reset,
+                i_osd_open => s_osd,
+                i_autosave => s_autosave,
+                i_download => s_download,
+                i_upload => s_upload,
+                iu16_file_index => su16_file_index,
+                i_write => s_dump_write,
+                iu27_byte_address => su27_dump_address,
+                iu8_data => su8_dump_in,
+                ou8_data => su8_dump_out,
+                o_wait => s_wait,
+                o_upload_request => s_request,
+                o_enabled => s_enabled,
+                o_config_error => s_config_error,
+                o_initialized => s_initialized,
+                o_saved_valid => s_saved,
+                o_dirty => s_dirty,
+                o_memory_initialize => s_memory_initialize,
+                o_memory_access => s_access,
+                o_memory_valid => s_valid,
+                o_memory_write => s_write,
+                ou14_memory_address => su14_address,
+                ou8_memory_data => su8_data,
+                i_memory_ready => s_ready,
+                i_memory_response => s_response,
+                iu8_memory_data => su8_response
+            );
+    end generate;
     maintenance : entity work.rabbitpunch_maintenance
         port map (
             i_clk => s_clk,
-            i_initialize => s_initialize or s_reset,
+            i_initialize => s_memory_initialize,
             i_access_requested => s_access,
             o_pause => s_pause,
             i_cpu_paused => s_paused,
@@ -164,6 +203,32 @@ begin
             for vint_cycle in 1 to vint_count loop
                 wait until falling_edge(s_clk);
             end loop;
+        end procedure;
+        procedure load_config is
+            variable vu192_packet : unsigned(191 downto 0);
+        begin
+            if (SERVICE_MODE) then
+                vu192_packet := x"0000001E001300020002000100000000000FFE0100770080";
+                if (s_us = '1') then
+                    vu192_packet(31 downto 16) := to_unsigned(115, 16);
+                    vu192_packet(7 downto 0) := x"17";
+                end if;
+                su16_file_index <= to_unsigned(3, 16);
+                s_download <= '1';
+                cycles(2);
+                for vint_byte in 0 to 23 loop
+                    su27_dump_address <= to_unsigned(vint_byte, 27);
+                    su8_dump_in <= vu192_packet(191 - vint_byte * 8 downto 184 - vint_byte * 8);
+                    s_dump_write <= '1';
+                    cycles(1);
+                end loop;
+                s_dump_write <= '0';
+                s_download <= '0';
+                cycles(3);
+                assert (s_enabled = '1' and s_config_error = '0')
+                    report "Score service did not accept the standard configuration transfer" severity failure;
+                su16_file_index <= to_unsigned(4, 16);
+            end if;
         end procedure;
         procedure wait_idle is
         begin
@@ -306,6 +371,7 @@ begin
             cycles(1);
             s_prefill <= '0';
             s_initialize <= '0';
+            load_config;
             s_reset <= '0';
             load_dump(vint_length);
             vint_writes := sint_writes;
@@ -327,7 +393,26 @@ begin
                 report "Unchanged score capture requested a save" severity failure;
             s_autosave <= '0';
             set_table(1);
-            capture;
+            s_osd <= '0';
+            cycles(3);
+            sint_delay <= 80;
+            s_osd <= '1';
+            wait until s_inflight = '1';
+            cycles(3);
+            -- A native upload flag may precede the HPS's wait polling.
+            s_upload <= '1';
+            cycles(20000);
+            assert (s_wait = '1') report "Capture switched saved banks during an upload" severity failure;
+            for vint_byte in 0 to vint_length - 1 loop
+                su27_dump_address <= to_unsigned(vint_byte, 27);
+                cycles(2);
+                assert (su8_dump_out = v_bytes(vint_base + vint_length + vint_byte))
+                    report "Concurrent upload observed a partially captured bank" severity failure;
+            end loop;
+            s_upload <= '0';
+            cycles(3);
+            sint_delay <= 0;
+            wait_initialized;
             cycles(30);
             assert (s_dirty = '1' and sint_upload_requests = vint_notices)
                 report "Manual score capture lost changes or ignored autosave off" severity failure;
@@ -345,6 +430,23 @@ begin
             load_dump(vint_length, true);
             check_upload(1);
             load_dump(vint_length + 1);
+            check_upload(1);
+            -- Download announcement must not swallow an outstanding RAM reply.
+            s_osd <= '0';
+            cycles(3);
+            s_osd <= '1';
+            wait until s_inflight = '1';
+            cycles(3);
+            s_download <= '1';
+            cycles(6000);
+            assert (s_wait = '0') report "Download announcement stranded score memory debt" severity failure;
+            su27_dump_address <= (others => '0');
+            su8_dump_in <= x"EE";
+            s_dump_write <= '1';
+            cycles(1);
+            s_dump_write <= '0';
+            s_download <= '0';
+            cycles(3);
             check_upload(1);
             -- Abandon an in-progress capture after a backend request is issued.
             s_osd <= '0';
@@ -372,12 +474,13 @@ begin
                 report "New ROM generation retained the previous saved score image" severity failure;
             set_table(0);
             s_initialize <= '0';
+            load_config;
             s_reset <= '0';
             wait_initialized;
             assert (s_saved = '1') report "First run without a file never became saveable" severity failure;
             check_upload(2);
         end loop;
-        report "HISCORE_PASS sets=2 captured_geometry=checked sentinel_gate=checked changed_guard_bytes=checked native_ram_lanes_neighbors=checked delayed_ack=checked atomic_bank_commit=checked incomplete_reordered_oversize_downloads=checked reset_debt=checked first_run_without_file=checked";
+        report "HISCORE_PASS sets=2 captured_geometry=checked sentinel_gate=checked changed_guard_bytes=checked native_ram_lanes_neighbors=checked delayed_ack=checked atomic_bank_commit=checked incomplete_reordered_oversize_downloads=checked reset_debt=checked first_run_without_file=checked concurrent_upload_bank_stability=checked busy_download_announcement=checked";
         finish;
         wait;
     end process;

@@ -85,3 +85,23 @@ index, read pulse, active flag and data. Its fitted functional-netlist test
 reads 119 bytes from a synchronous data source across seven commands and checks
 request polling/rearming. Existing native download/control platform tests also
 pass. No `sys` source was modified.
+
+
+`rabbitpunch_hiscore_config` accepts the standard 16-byte header plus one
+8-byte record with two-byte length. Address, length and guard bytes must match
+one of the two pinned MAME definitions. The supported descriptor has CHECK_HOLD
+and WRITE_HOLD = 2, WRITE_REPEATCOUNT = 1, WRITE_REPEATWAIT = 0,
+ACCESS_PAUSEPAD = 0 and CHANGEMASK = 0. Acknowledged memory replaces fixed pause
+padding; repeated writes and masks are not supported. Full-width START_WAIT and
+CHECK_WAIT remain programmable clock counts. Invalid metadata disables the
+profile and sets a diagnostic error. No unsupported field is silently ignored.
+
+`rabbitpunch_hiscore_service` composes the parser with the store at standard
+indices 3 and 4; ROM index 0 invalidates both profile and saved image. Its memory
+initialize output must also reach the production maintenance helper so canceled
+client state never strands real backend debt. The composed service passes the
+same native-memory tests through real index-3 configuration transfers, including
+first-run readiness, soft reset restore, concurrent upload bank stability and a
+download announced while RAM work is outstanding. See
+reference/hiscore_service_checks.json and hiscore_config_checks.json. Production
+platform composition and generated MRA metadata remain pending.

@@ -1,0 +1,17 @@
+{
+  "case": "hiscore_service",
+  "pass_marker": "HISCORE_PASS",
+  "log": "debug\\baselines\\hiscore_service\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_ram8.vhd": "fd924b3eddbe1769b3e2dbd175e0f2a57629097ddba0dbd4cf295edfe81b3b39",
+    "rtl/rabbitpunch_ram16.vhd": "7f740e02f07b244a8bd84721e763163495ec8a5c1936c06ab74d05e340816b50",
+    "rtl/rabbitpunch_maintenance.vhd": "19d90ccaf6c967a05b7c6964dceb46e34ba7945bf3ae3a9e30d7cade5c6c1268",
+    "rtl/rabbitpunch_hiscore.vhd": "deb3db4fcd55026b46ddb47e6a0713910c30f8ed3940adf4e5dcda1c6f879312",
+    "rtl/rabbitpunch_hiscore_config.vhd": "fcb70ea11a4ea24040d0b1d09c7ceb1512e4527cfad06c316f3aea79ac614d6d",
+    "rtl/rabbitpunch_hiscore_service.vhd": "4428ab8031e87adcc6ec81e781fd055d7bc93461cef11a6a6defa07e45bd5d2b",
+    "sim/board/hiscore_tb.vhd": "524b82ba17d8b40ff755122f40fff04af6a101d7af1f909ac69bb58042dcff23"
+  },
+  "vectors_sha256": "56c5bb10b5801c7e067a3a6770e4369431bac096d0f90be7ed958c3974b4af01",
+  "log_sha256": "787917c93b60e366e7a6db8b483607f2e83747926f6125ecf103374283ce76d5",
+  "scope": "Standard index-3 metadata plus index-4 file service composition. Atomic saved-score banks with native dual-port RAM and production maintenance byte adapter, both captured MAME geometries. Backend pause confirmation and varying acknowledgment latency, initialization guards, changed saved guard bytes, exact restoration and neighbors, first run without a file, unchanged/changed captures, autosave request edges, malformed file rejection and reset debt. No production platform composition or disk persistence claim."
+}
