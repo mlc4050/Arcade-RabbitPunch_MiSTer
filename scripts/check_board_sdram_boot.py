@@ -34,7 +34,7 @@ def main():
         expected = [tuple(int(word, 16) for word in line.split()) for line in reference.read_text().splitlines()][:args.writes]
         assert len(expected) == args.writes
         # The black-RGB expectation is valid only before this prefix changes palette.
-        assert all(0x40000 <= address < 0x50000 or 0xf0000 <= address < 0xf4000 or
+        assert all(0x40000 <= address < 0x50000 or 0xfc000 <= address <= 0xfffff or
                    0xc0000 <= address < 0xc0030 for address, mask, data in expected)
         regions = root / "debug/rom_regions" / game
         program = (regions / "maincpu.bin").read_bytes()
@@ -87,3 +87,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
