@@ -14,6 +14,11 @@
       "directory": "Arcade-KonamiGX_MiSTer",
       "commit": "89124d4f29e1d3f95557e5e5265efcbe9d0d7cb4",
       "selected_files_clean": true
+    },
+    "vamphalf": {
+      "directory": "Arcade-Vamphalf_MiSTer",
+      "commit": "8f9d15b879952371ec46cb2b0f5e960bfee25d22",
+      "selected_files_clean": true
     }
   },
   "files": [
@@ -196,6 +201,18 @@
       "source": "sim/fx68k_pace_tb/tb_fx68k_pace.sv",
       "target": "sim/vendor/fx68k/tb_fx68k_pace.sv",
       "sha256": "c5689b9a7aa037556ddd3011cadb64329cbb9c62b5531346957ab1c477a28199"
+    },
+    {
+      "donor": "vamphalf",
+      "source": "rtl/memory/sdram.sv",
+      "target": "rtl/memory/sdram/sdram.sv",
+      "sha256": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495"
+    },
+    {
+      "donor": "vamphalf",
+      "source": "sim/common/sdram_chip_model_wide.sv",
+      "target": "sim/vendor/sdram/sdram_chip_model_wide.sv",
+      "sha256": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c"
     }
   ]
 }

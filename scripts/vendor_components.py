@@ -13,9 +13,12 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     for name in ("seta", "psikyo", "gx"):
         ap.add_argument("--" + name, type=Path, required=True)
+    ap.add_argument("--vamphalf", type=Path, help="optional configurable SDRAM controller and pin model")
     args = ap.parse_args()
     root = core_root()
     donors = {key: getattr(args, key) for key in ("seta", "psikyo", "gx")}
+    if args.vamphalf:
+        donors["vamphalf"] = args.vamphalf
     jobs = []
     for name in ("TG68K_Pack.vhd", "TG68K_ALU.vhd", "TG68KdotC_Kernel.vhd", "TG68K.vhd"):
         jobs.append(("seta", f"rtl/cpu/tg68k/{name}", f"rtl/cpu/tg68k/{name}"))
@@ -38,7 +41,13 @@ def main():
         jobs.append(("seta", f"rtl/cpu/fx68k/{name}", f"rtl/cpu/fx68k/{name}"))
     jobs.append(("seta", "rtl/cpu/fx68k/PROVENANCE.md", "rtl/cpu/fx68k/DONOR_NOTES.md"))
     jobs.append(("seta", "sim/fx68k_pace_tb/tb_fx68k_pace.sv", "sim/vendor/fx68k/tb_fx68k_pace.sv"))
-    metadata = {"donors": {}, "files": []}
+    if args.vamphalf:
+        jobs += [("vamphalf", "rtl/memory/sdram.sv", "rtl/memory/sdram/sdram.sv"),
+                 ("vamphalf", "sim/common/sdram_chip_model_wide.sv", "sim/vendor/sdram/sdram_chip_model_wide.sv")]
+    out = root / "docs/reference/vendor_manifest.json"
+    metadata = json.loads(out.read_text()) if out.exists() else {"donors": {}, "files": []}
+    replaced_targets = {target for _, _, target in jobs}
+    metadata["files"] = [row for row in metadata["files"] if row["target"] not in replaced_targets]
     for key, repo in donors.items():
         paths = [src for donor, src, _ in jobs if donor == key]
         def git(*argv):

@@ -135,3 +135,10 @@ wrapper is absent from production RTL and adds no game latency. Final MiSTer
 integration, PLL and SDRAM timing still require their own implementation.
 Maximum router/ECO experiments are removed; seed 3 remains fixed. The new fit
 must pass the existing all-corner timing, coverage and RAM-count gates.
+
+
+The registered evaluation fit passes every reported setup, hold and pulse-width
+corner: worst setup +7.070 ns, worst hold +0.131 ns. Resource use is 817 ALMs,
+1440 registers including the evaluation boundary, and 106 M10K blocks with
+868352 used RAM bits. All six timing-coverage categories are zero. Exact built
+commit, seed and log hash are in reference/board_video_synth.json.

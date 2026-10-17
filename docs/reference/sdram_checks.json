@@ -1,0 +1,14 @@
+{
+  "case": "sdram",
+  "pass_marker": "SDRAM_PASS",
+  "log": "debug\\baselines\\sdram\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_sdram_types.vhd": "ef3d7e0bcb2b6522984ab20ae9e4464625d7a810e76307142fd3ef0a08115480",
+    "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+    "rtl/rabbitpunch_sdram.vhd": "06a3659bbbab5dde9ca7986c292883cabb09f42342af71163d446076fd22b766",
+    "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
+    "sim/memory/sdram_tb.vhd": "08506069154c7464d1767a672a9b04ad9de372ae0cb335ed60855f1d64f3360d"
+  },
+  "log_sha256": "9b716e3cbd1d5b0d134ffc48a2c738cbfc25f0e49e3f8109b2aca65d5e3d6fdf",
+  "scope": "Pin-command functional model, two chips, three clients, burst order, byte masks and refresh cadence at 48 MHz; no analog/board timing proof"
+}

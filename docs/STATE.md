@@ -86,3 +86,13 @@ Board I/O initialization is separate from CPU reset. GGA registers can now be re
 without borrowing the CPU bus; the boot bench pauses/drains before dumping all 24
 video/GGA state fields. IRQ and sound state lack a complete save/restore protocol.
 Input/DIP pins must be recorded with the future capture manifest.
+
+
+## SDRAM transport adapter
+
+rabbitpunch_sdram holds one accepted request per client, byte address, write
+word/byte enables, toggle/ack phase, three captured response granules, and the
+initialization wait state/counter. The imported controller owns open command,
+refresh and burst-capture state. It remains independent of game reset. The
+current capture boundary must drain all clients; no save/restore interface is
+claimed. ROM contents remain recreated from the MRA rather than saved.
