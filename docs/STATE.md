@@ -253,8 +253,7 @@ RAM in Quartus), no line/frame pixel storage or additional clock domain.
 
 The standalone maintenance adapter owns a one-request FSM, byte-lane selector
 and held bus payload. Initialization drains outstanding memory debt before
-releasing pause and suppresses its stale client response. It adds no RAM and
-is not yet in the production bus path.
+releasing pause and suppresses its stale client response. It adds no RAM; the integrated system uses it through the shared bus owner.
 
 
 The standalone bus owner adds one held packet/pending bit per requester and
@@ -268,8 +267,7 @@ the main and sound adapters, and ready waits for both to drain. ROM generation
 handoff also waits for all board-owner packets, including currently offered
 requests. The idle CPU path bypasses packet storage; selected backend payload
 is held for the reply. Reset clears I/O effects but acknowledges accepted I/O
-so no owner debt is stranded. HPS persistence/restore orchestration is not yet
-connected.
+so no owner debt is stranded. HPS persistence/restore orchestration now connects through the high-score service described below.
 
 
 High-score persistence adds a 256-byte native dual-port RAM split into two

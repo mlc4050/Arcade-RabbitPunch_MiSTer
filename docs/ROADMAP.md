@@ -16,9 +16,8 @@ inherited MiSTer template demo remains connected at the framework top level.
 | Sound subsystem | Unchanged JT51 and its descriptive VHDL wrapper pass reset/status, explicit mute, sample cadence and timer/IRQ baselines. T80 transaction/pause/reset diagnostics and connected command IRQ tests pass. Both audio ROMs match 4096 MAME startup writes through native sound RAM, VHDL bus decode and JT51, with explicit MAME CPU/RAM test seeds. The logical sound board also passes synthesized-netlist diagnostics and 48 MHz implementation (2405 ALMs, 11 RAM blocks, setup +2.621 ns / hold +0.105 ns). Native/wrapped JT7759 synthetic playback and retrigger baselines pass; bank/reset/start and shared sound ROM scheduling are connected and tested. Both sets also match 4096 startup writes through shared SDRAM. Complete logical audio passes fit/netlist tests. All 38 real sample streams pass 237330 decoded-value checks against a pinned-source MAME model; audible game audio remains unverified. |
 | ROM transport and image loading | SDRAM adapter, ROM mapper/cache and word loader pass directed, implementation and synthesized-netlist tests. Sequential download control passes delayed-response/error-recovery tests, real SDRAM image replacement and implementation timing. A load-time DDR copier now passes donor/direct tests and boots two synthetic main programs through the production SDRAM loader. The automatic HPS-signal frontend also passes DDR/direct-byte boot, reset-release, no-recopy and partial-image recovery tests. Native hps_io command parsing now connects to the logical platform in functional-netlist simulation; physical HPS/DDR ownership and interface integration remain open. |
 | Output alignment | Fixed five-system-clock RGB/sync/blanking adapter passes sparse cadence, missing/tag/error fallback and reset tests; all six actual HDL scenes pass 373248 RGB comparisons against MAME with independent ROM models. Fit: 92 ALMs, 168 registers, zero RAM; all 48 MHz timing/coverage gates pass. No physical raster is generated. |
-| Host/control platform | Native HPS commands drive controls, DIPs, ROM loading and score persistence into the executing 68000/native SDRAM model. Final score-platform fit passes at 48 MHz with 929387 RAM bits (124 M10K blocks), worst setup +2.971 ns / hold +0.095 ns. No physical PLL/raster/HPS bridge proof. |
+| Host/control platform | Native HPS commands drive controls, DIPs, ROM loading and score persistence into the executing 68000/native SDRAM model. Final score-platform fit passes at 48 MHz with 929387 RAM bits (124 M10K blocks), worst setup +3.142 ns / hold +0.109 ns after explicit RAM initialization (f6d5f7e). No physical PLL/raster/HPS bridge proof. |
 | Connected logical system | Both games match 10000 main and 4096 sound startup writes against MAME with transparent maintenance ownership. Download, hot replacement, pause, active audio maintenance and reset drain tests pass. Full game/audio and physical timing remain open. |
-
 | High-score persistence | Atomic saved banks and validated config3/dump4 service pass unit, native-memory, full-platform and native HPS command tests for both sets. Reset-held files, CPU-consumed restored bytes, changed snapshots/uploads, soft reset and game isolation pass. Final combined fit passes; physical `.nvm` disk round trip remains open. |
 
 The system clock is still a 48 MHz evaluation constraint. Physical pixel clock,
@@ -257,56 +256,26 @@ authorizes the local bootstrap and staged work above; it does not turn unresolve
 timing guesses into measurements. Close those decisions with evidence before the dependent RTL.
 
 
-Latest sound transport milestone: both sets pass 4096 MAME sound-startup writes
-through shared cached SDRAM. Production ROM loading now includes sound program
-and sample clients, with concurrent-client and image-replacement regressions.
-The complete system now passes downloaded 68000 commands through the sound latch,
-T80 IRQ/ack, banked sample playback and coordinated CPU pause;
-physical raster timing and final MiSTer integration remain open.
+## Recent integration milestones
 
+Both sets pass 10,000 main and 4,096 sound ordered startup-write comparisons
+through the production system, cached SDRAM and transparent maintenance owner.
+Those completed maintenance reports retain their exact source hashes and explicit
+RAM/CPU test seeds. Repeating the full prefix without RAM deposits is in progress;
+short startup checks already pass with configuration-initialized native RAM.
 
-Host/control milestone: the real unchanged hps_io wrapper passes Quartus fit
-and VHDL functional-netlist command/config/file/key tests despite the old
-ModelSim native-parser limitation. Automatic load frontend fit passes. The
-active-high board input mapper passes live MAME vectors for both sets, raw DIP
-metadata/default checks and composed pause-owner tests; controls fit also passes all 48 MHz timing and coverage checks with zero RAM.
-See HOST_INTERFACE.md, CONTROLS.md and DDR_LOADING.md for exact boundaries.
+Native high-score persistence now passes both game geometries through the fitted
+hps_io command parser and complete logical platform: config3/dump4 transfers,
+reset-held files, CPU-consumed restored words, OSD captures/uploads, native save
+polling, menu visibility, soft reset and ROM-generation isolation. Actual ARM
+filesystem `.nvm`/`.dip` round trips remain part of hardware testing.
 
+The combined platform fit with defined RAM power-up contents (f6d5f7e) passes
+all 48 MHz timing/coverage gates: 6,630 ALMs, 8,143 registers, 124 M10K blocks,
+929,387 RAM bits, worst setup +3.142 ns and hold +0.109 ns. The exhaustive RAM
+bench reads all 52,224 mapped words through CPU and inspection before writing;
+the isolated synthesized-memory check is next. See RAM_POWERUP.md and HISCORE.md.
 
-Logical platform now connects controls, status/reset and DIP metadata to the
-byte/DDR loader and complete system. Executing 68000 diagnostics check actual
-input/DIP reads, native RAM, pause/reload and partial-image recovery. The
-combined full-size platform fit passes all 48 MHz timing/coverage gates with
-927339 RAM bits; physical timing
-and actual MiSTer shell/DDR ownership remain open (PLATFORM.md).
-
-
-Production maintenance milestone: acknowledged byte access now joins both CPU
-pause adapters and the existing work-RAM port. The idle CPU bus bypasses packet
-storage; queued ownership includes all debt in ROM-load handoff. CPU-consumed
-restored bytes, independent user pause, reset/I/O/ROM boundaries, active audio
-maintenance and platform/native HPS regressions pass. The integrated owner's
-full-platform fit passes every 48 MHz timing/coverage gate with unchanged RAM;
-its full real-ROM startup comparison now passes both sets;
-pre-maintenance full startup results retain their exact source hashes. HPS
-high-score persistence remains open (MAINTENANCE.md, HISCORE.md).
-
-
-High-score logical implementation: the native host upload path, atomic saved
-banks, validated standard config3/dump4 service and maintenance-client session
-arbitration pass unit simulations. The full logical platform passes both game
-geometries with executing-CPU score reads, OSD snapshots/uploads, soft reset and
-ROM-generation isolation. Development MRAs contain correct per-set nvram sizes
-and standard configuration while retaining identical ROM0 images against MAME.
-Refreshed combined fit/native host-menu proof and physical disk persistence
-remain pending. See HISCORE.md for exact scope and references.
-
-
-Native persistence command milestone: both game profiles now pass the complete
-fitted hps_io-to-logical-platform test, including UIO3C save polling, native
-config3/dump4 transfers, CPU-restored word, score uploads and menu-mask readback.
-The refreshed host menu fit passes all 48 MHz timing/coverage checks. The new
-full-platform implementation check is running; physical `.nvm`/`.dip` round trips
-remain part of later hardware testing.
-
-Final high-score platform implementation at commit 82a14bc passes all timing and coverage gates: worst setup +2.971 ns, hold +0.095 ns, 929387 RAM bits. Both direct and native persistence regressions include files arriving while gameplay reset is held.
+Physical pixel-clock/raster/blanking evidence remains the next integration gate.
+The logical platform has no final PLL, physical HPS/DDR ownership mux, or complete
+MiSTer game top. No playable RBF or original-board timing proof is claimed.

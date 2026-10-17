@@ -59,3 +59,19 @@ timing and coverage gate with configuration initialization enabled: worst setup
 `reference/platform_synth.json`; private full reports are retained under
 `debug/fit_archive/platform_f6d5f7e/`. This virtual-I/O fit does not establish
 external SDRAM, PLL, pixel-clock or physical output timing.
+
+The first isolated-memory rerun used its old raw virtual-I/O boundary and was
+rejected for hold (worst -2.582 ns). A detailed slow-100C path report identifies
+`iu24_request_address[4]` to the pending-address register: input data delay
+2.203 ns versus destination clock arrival 4.499 ns, giving -2.296 ns at that
+corner. This result is retained under
+`debug/fit_archive/memory_c166ae1_rejected/`; it is not an accepted memory fit.
+
+The isolated target now uses `memory_check.vhd`, with same-clock launch/capture
+registers on every client port and an explicit falling-edge synthetic tester
+contract in its SDC, matching the other evaluation blocks. Production
+`rabbitpunch_memory` and RAM behavior are unchanged. The exhaustive bench checks
+both direct and registered boundaries; netlist mode selects the registered
+component and accounts for the two added test-only boundary stages. No timing
+false paths or multicycle exceptions are used. Final board electrical timing
+still requires the physical integration check.
