@@ -1,0 +1,17 @@
+{
+  "case": "z80_wrapper",
+  "pass_marker": "Z80_WRAPPER_PASS",
+  "log": "debug\\baselines\\z80_wrapper\\result.log",
+  "source_sha256": {
+    "rtl/cpu/t80/T80_Pack.vhd": "f0e6aff273f25d904fd55e53372e44b52d07a82b8c6cb58fe73ea7fde06ec22d",
+    "rtl/cpu/t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+    "rtl/cpu/t80/T80_MCode.vhd": "d4f03ddd9693e341ace2a685153838aec39085826fd2f6128ece1a9f8852f02e",
+    "rtl/cpu/t80/T80_ALU.vhd": "823a062b8be873505ac16e627351a5105101243a11483bf8f2446214893b739e",
+    "rtl/cpu/t80/T80.vhd": "ba63aaa402eadfc0d47e59e9747c516a22b7454ad0b27430e99d968efcae6ec0",
+    "rtl/cpu/t80/T80se.vhd": "d528be5e4a75a8e45d1965740bcd6c77180bd54e1862b8e177bea8a432e58588",
+    "rtl/rabbitpunch_z80.vhd": "21a74d6b9ea6f763ac84daa747d015580913d95ecb7428d1437ea719620f957e",
+    "sim/sound/z80_wrapper_tb.vhd": "7fc286fb706e66386665e2dc249990deca02aecdcbc14c47b98e09580cc87c4e"
+  },
+  "log_sha256": "3e24aecfc8f7266395fc44e8ecb84080fe3b0cb7b310bcfc3cd060ca65e65dac",
+  "scope": "Already-baselined T80 behind active-high unsigned VHDL adapter: instruction fetch, memory and I/O writes, WAIT stretching and clock-enable stop; no real sound ROM, sound bus or interrupt timing proof"
+}

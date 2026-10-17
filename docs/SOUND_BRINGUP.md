@@ -1,7 +1,11 @@
 # Sound bring-up
 
 The sound board is not integrated or audible yet. The main board's command
-mailbox is implemented, and the T80 CPU donor has its earlier baseline. This
+mailbox is implemented, and the T80 CPU donor has its earlier baseline. A new
+active-high unsigned VHDL T80 adapter also passes opcode fetch, held WAIT,
+memory/I/O writes, HALT and clock-enable stopping at a safe halted point.
+Its raw enable is not a bus-draining pause handshake; the future sound board
+must own that scheduling. reference/z80_wrapper_checks.json records the scope. This
 checkpoint adds an unchanged JT51/YM2151 evaluation copy, descriptive unsigned
 VHDL wrapper and an isolated chip baseline. uPD7759 and Z80 board/ROM scheduling
 remain open.

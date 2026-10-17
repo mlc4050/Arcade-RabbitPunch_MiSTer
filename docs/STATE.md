@@ -139,3 +139,9 @@ The JT51 evaluation copy owns FM register/shift storage, operator/envelope/phase
 state, timers, LFO/noise and accumulators. Its current native interface has no
 complete state capture/restore port. The VHDL adapter adds no state. Register
 programming can be traced; full sound savestate capture remains unavailable.
+
+
+The descriptive T80 adapter adds no state. Its enable directly controls CPU
+advancement; software pause must first drain/retain external bus transactions.
+T80 register/interrupt/machine-cycle state remains inside the unchanged CPU.
+A complete sound CPU capture/restore interface is not implemented.
