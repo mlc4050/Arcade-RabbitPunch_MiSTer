@@ -15,7 +15,7 @@ def main():
     results = [result]
     sources = ["rtl/rabbitpunch_layout.vhd", "rtl/rabbitpunch_download.vhd", "rtl/rabbitpunch_sdram_types.vhd",
         "rtl/memory/sdram/sdram.sv", "rtl/rabbitpunch_sdram.vhd", "rtl/rabbitpunch_rom_requests.vhd",
-        "rtl/rabbitpunch_rom_cache.vhd", "rtl/rabbitpunch_roms.vhd",
+        "rtl/rabbitpunch_rom_cache.vhd", "rtl/rabbitpunch_read_arbiter.vhd", "rtl/rabbitpunch_audio_roms.vhd", "rtl/rabbitpunch_audio_rom_transport.vhd", "rtl/rabbitpunch_roms.vhd",
         "sim/vendor/sdram/sdram_chip_model_wide.sv", "sim/memory/download_sdram_tb.vhd"]
     result = run_case("download_sdram", sources, "download_sdram_tb", "300 us", "DOWNLOAD_SDRAM_PASS")
     result.update(source_sha256={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources},

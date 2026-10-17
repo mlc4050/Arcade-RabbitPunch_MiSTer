@@ -207,7 +207,9 @@ rabbitpunch_audio_rom_transport places those two cache clients beside a main
 CPU burst client in rabbitpunch_read_arbiter. The resulting read port is intended
 for the controller's physical port 2; sprite/tile ports remain separate and retain
 priority. This transport adds no pixel or frame storage. Its standalone
-implementation check is prepared; results are pending.
+48 MHz implementation passes all reported corners with worst setup +10.815 ns
+and hold +0.160 ns, zero block RAM and no unconstrained paths
+(reference/audio_rom_transport_synth.json).
 
 audio_sdram_tb now runs the complete audio subsystem and transport through the
 unchanged SDRAM controller and chip-command model. A directly preloaded synthetic
@@ -220,3 +222,24 @@ program/sample byte replies are 50/30 system clocks (1.04/0.625 us at nominal
 are not the executing main CPU or captured video renderer and do not establish
 worst-case video deadlines, real game audio or physical SDRAM timing. No ROM
 loader is exercised in this directly preloaded diagnostic.
+
+
+## Real sound startup through shared SDRAM
+
+Both rabiolep and rpunch match all 4096 ordered sound-CPU writes from MAME 0.289
+through the native sound board, audio ROM cache, shared read queue, unchanged
+SDRAM controller and chip-command model (reference/sound_sdram_boot_checks.json).
+The fixture seeds the captured MAME CPU registers and zero sound RAM after cold
+SDRAM initialization; production reset behavior is unchanged. Actual ROM images
+are directly preloaded. Competing main and priority reads are synthetic traffic.
+ADPCM remains reset-held during this startup prefix, so this proves program-fetch
+integration and startup register writes, not game music or sample playback.
+
+The production rabbitpunch_roms now shares controller port 2 between main cache
+misses, sound-program reads and banked sample reads. Sprite/tile ports 0/1 keep
+priority. Loading owns port 2 exclusively and invalidates both main/video and
+audio caches only after all clients drain. roms_tb checks concurrent reads from
+all five clients, both sample banks, cached adjacent accesses, loader byte masks,
+and replacement-image invalidation. Loader acknowledgments must never appear
+as client replies. Download and main-only system regressions also pass. The
+system wrapper still ties off audio until the complete audio instance is added.

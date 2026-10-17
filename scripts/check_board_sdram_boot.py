@@ -24,7 +24,7 @@ def main():
         "rtl/rabbitpunch_fx68k.vhd", "rtl/rabbitpunch_maincpu.vhd", "rtl/rabbitpunch_io.vhd",
         "rtl/rabbitpunch_irq.vhd", "rtl/rabbitpunch_sdram_types.vhd", "rtl/memory/sdram/sdram.sv",
         "rtl/rabbitpunch_sdram.vhd", "rtl/rabbitpunch_rom_requests.vhd", "rtl/rabbitpunch_rom_cache.vhd",
-        "rtl/rabbitpunch_roms.vhd", "sim/vendor/sdram/sdram_chip_model_wide.sv", "sim/board/board_sdram_boot_tb.vhd"]
+        "rtl/rabbitpunch_read_arbiter.vhd", "rtl/rabbitpunch_audio_roms.vhd", "rtl/rabbitpunch_audio_rom_transport.vhd", "rtl/rabbitpunch_roms.vhd", "sim/vendor/sdram/sdram_chip_model_wide.sv", "sim/board/board_sdram_boot_tb.vhd"]
     sources = list(dict.fromkeys(sources[:-1] + ['rtl/rabbitpunch_layout.vhd', 'rtl/rabbitpunch_decode.vhd', 'rtl/jtframe/jtframe_draw.v', 'rtl/rabbitpunch_ram16.vhd', 'rtl/rabbitpunch_board_memory.vhd', 'rtl/rabbitpunch_sprite_priority.vhd', 'rtl/rabbitpunch_pixel_mixer.vhd', 'rtl/rabbitpunch_tile_row.vhd', 'rtl/rabbitpunch_tile_lookup.vhd', 'rtl/rabbitpunch_tile_layer.vhd', 'rtl/rabbitpunch_tiles.vhd', 'rtl/rabbitpunch_sprite_scan.vhd', 'rtl/rabbitpunch_sprite_row.vhd', 'rtl/rabbitpunch_sprite_line.vhd', 'rtl/rabbitpunch_sprites.vhd', 'rtl/rabbitpunch_bitmap_pixel.vhd', 'rtl/rabbitpunch_video.vhd', 'rtl/rabbitpunch_palette_pixel.vhd', 'rtl/rabbitpunch_rgb_video.vhd', 'rtl/rabbitpunch_board_video.vhd', 'rtl/rabbitpunch_sdram_types.vhd', 'rtl/memory/sdram/sdram.sv', 'rtl/rabbitpunch_sdram.vhd', 'rtl/rabbitpunch_rom_requests.vhd', 'sim/vendor/sdram/sdram_chip_model_wide.sv'] + ["rtl/rabbitpunch_board.vhd", sources[-1]]))
     old = {row["set"]: row for row in json.loads((root / "docs/reference/boot_checks.json").read_text())}
     results = []

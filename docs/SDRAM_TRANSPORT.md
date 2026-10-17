@@ -187,3 +187,12 @@ changes, independent ready credits, backend backpressure, variable reply delay,
 round-robin ordering, continuous credit recycling without starvation, and
 acceptance disable/re-enable with pending transactions drained. Evidence:
 reference/read_arbiter_checks.json. This is a synthetic backend proof only.
+
+
+Production ROM integration now places rabbitpunch_audio_rom_transport on physical
+port 2 beside the existing loader mux. Its main client serves the main ROM cache;
+sound program/sample caches have independent credits in the round-robin queue.
+The loading transition requires frontends, all caches, the queue and physical
+requests drained. All caches invalidate together at loading entry. The directed
+ROM subsystem test covers five concurrent clients and two replacement images;
+this does not yet connect the audio CPU to rabbitpunch_system.

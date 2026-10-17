@@ -21,7 +21,10 @@
     "rtl/rabbitpunch_sdram.vhd": "06a3659bbbab5dde9ca7986c292883cabb09f42342af71163d446076fd22b766",
     "rtl/rabbitpunch_rom_requests.vhd": "3a49b04bf3a3ac0981cc40dd1ba9b1b4e1790cd778b6c2d4e5de1c039863d4fa",
     "rtl/rabbitpunch_rom_cache.vhd": "de28c8c49b0f691edf035d988c973414cfa9b03af92f0f3141c4a7c6279f279c",
-    "rtl/rabbitpunch_roms.vhd": "d327532342b4bd656d00d6dc5a5c43ba5c4c1e9929e18d1f4c066740f725a017",
+    "rtl/rabbitpunch_read_arbiter.vhd": "c7855072a428a83ac9c2ac171f05fc54657f87d1bb0adb14de01e926af4b6852",
+    "rtl/rabbitpunch_audio_roms.vhd": "5b5ae1bcc87e47672a65f0719cb52da1f1f7e5832112d6318118b349a4a37c2c",
+    "rtl/rabbitpunch_audio_rom_transport.vhd": "c3d0e3e80b5ad46867ee9eacc163a41392976cb02218a6987a1985e110284e0c",
+    "rtl/rabbitpunch_roms.vhd": "f382467283f23800cb64649370edafde80dcbe149e5afdc439a1eec94a4d2954",
     "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
     "rtl/jtframe/jtframe_draw.v": "2c52e8735ddf3eb0925c42d8f893035fb4180ed69f61cd5eaa7120b519be8edc",
     "rtl/rabbitpunch_sprite_priority.vhd": "fd49c0085d8a9250f74c5872f6619ff327ded4d0c157bdd106c9f95efd61ae49",
@@ -41,9 +44,9 @@
     "rtl/rabbitpunch_board_video.vhd": "7422292b3bb135d3fd879d5e0292368230c74e6a543d8917439eb40b85e0efcc",
     "rtl/rabbitpunch_board.vhd": "a564343adcfa5912032638cda338fc83e2bc52bd5d7da28d1370a44242ab7fc9",
     "rtl/rabbitpunch_download.vhd": "4c6f2c03657fca709454251ba13940113e59348c3236bb146d1eb9d5ba2150cb",
-    "rtl/rabbitpunch_system.vhd": "fc764c3608f455d4f2d81b496f40c8f76f9cc9d9ac83e49eb8265537aa285d28",
+    "rtl/rabbitpunch_system.vhd": "ccb83b32f40c822e569729ff98009fb5fd5038096b363b4e45f25279e90ae0aa",
     "sim/board/system_download_tb.vhd": "a0051a70ca4487262fe2e069557e2ba44390004218ceaa9aa8ecf3b7a2732d64"
   },
-  "log_sha256": "5c6408024ac1dc54829e176bad13c8b518f7c33b03658f7d1e1abd2ba295ea3f",
+  "log_sha256": "8fa9952cef5e547f8ba83242b99b553caa8ff47046da21155d3889055754b525",
   "scope": "Three synthetic 32-byte 68000 program downloads and one rejected partial image through production SDRAM; actual CPU writes and native RAM inspection, hot-cache image replacement, soft reset without reload, partial-image reset hold and recovery; logical video idle, no HPS/DDR/PLL/raster/hardware proof"
 }

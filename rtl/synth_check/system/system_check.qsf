@@ -39,6 +39,9 @@ set_global_assignment -name VHDL_FILE ../../rabbitpunch_sdram_types.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_sdram.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_rom_requests.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_rom_cache.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_read_arbiter.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_audio_roms.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_audio_rom_transport.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_roms.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_download.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_system.vhd

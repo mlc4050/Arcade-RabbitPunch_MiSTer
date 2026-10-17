@@ -251,3 +251,10 @@ No hardware result is reported without a capture/log/probe; staged builds gate o
 The user approved this roadmap and the mixed-language reuse approach. That approval
 authorizes the local bootstrap and staged work above; it does not turn unresolved physical
 timing guesses into measurements. Close those decisions with evidence before the dependent RTL.
+
+
+Latest sound transport milestone: both sets pass 4096 MAME sound-startup writes
+through shared cached SDRAM. Production ROM loading now includes sound program
+and sample clients, with concurrent-client and image-replacement regressions.
+The audio CPU/chips still require connection to the complete system wrapper;
+physical raster timing and final MiSTer integration remain open.

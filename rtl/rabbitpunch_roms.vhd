@@ -34,6 +34,15 @@ entity rabbitpunch_roms is
         iu18_cpu_byte_address : in unsigned(17 downto 0);
         o_cpu_response_valid : out std_logic;
         ou16_cpu_response_data : out unsigned(15 downto 0);
+        i_audio_request : in std_logic := '0';
+        o_audio_ready : out std_logic;
+        iu16_audio_byte_address : in unsigned(15 downto 0) := (others => '0');
+        o_audio_response_valid : out std_logic;
+        ou8_audio_response_data : out unsigned(7 downto 0);
+        i_sample_request : in std_logic := '0';
+        iu18_sample_byte_address : in unsigned(17 downto 0) := (others => '0');
+        o_sample_valid : out std_logic;
+        ou8_sample_data : out unsigned(7 downto 0);
         iou16_sdram_data : inout unsigned(15 downto 0);
         ou13_sdram_address : out unsigned(12 downto 0);
         ou2_sdram_bank : out unsigned(1 downto 0);
@@ -50,6 +59,10 @@ architecture rtl of rabbitpunch_roms is
     signal s_initialized, s_front_idle, s_cache_idle, s_idle : std_logic;
     signal s_previous_loading, s_loader_pending : std_logic := '0';
     signal s_invalidate : std_logic;
+    signal s_shared_idle, s_shared_request, s_shared_main_ready, s_shared_main_valid : std_logic;
+    signal su27_shared_address : unsigned(26 downto 0);
+    signal su64_shared_main_data : unsigned(63 downto 0);
+    signal s_audio_program_ready, s_audio_program_valid, s_sample_valid : std_logic;
     signal su3_front_requests, su3_front_ready, su3_front_valid : unsigned(2 downto 0);
     signal su27_front_addresses : t_sdram_addresses;
     signal su64_front_data : t_sdram_read_data;
@@ -62,20 +75,27 @@ architecture rtl of rabbitpunch_roms is
     signal su2_memory_bytes : t_sdram_byte_enables;
     signal su64_memory_data : t_sdram_read_data;
 begin
-    s_idle <= '1' when s_front_idle = '1' and s_cache_idle = '1' and
+    s_idle <= '1' when s_front_idle = '1' and s_cache_idle = '1' and s_shared_idle = '1' and
         s_loader_pending = '0' and su3_memory_ready = "111" else '0';
     o_idle <= s_idle;
     o_ready <= s_initialized and not i_loading;
     o_loader_ready <= s_initialized and i_loading and su3_memory_ready(2) and not s_loader_pending;
     s_invalidate <= i_loading and not s_previous_loading;
-    su3_cache_ready <= su3_memory_ready when i_loading = '0' else "000";
-    su3_cache_valid <= su3_memory_valid when s_loader_pending = '0' else su3_memory_valid and "011";
-    su64_cache_data <= su64_memory_data;
-    su3_memory_requests <= su3_cache_requests when i_loading = '0' else
+    o_audio_ready <= s_audio_program_ready and s_initialized and not i_loading;
+    o_audio_response_valid <= s_audio_program_valid and not i_loading;
+    o_sample_valid <= s_sample_valid and s_initialized and not i_loading;
+    su3_cache_ready <= (2 => s_shared_main_ready, 1 => su3_memory_ready(1), 0 => su3_memory_ready(0))
+        when i_loading = '0' else "000";
+    su3_cache_valid <= (2 => s_shared_main_valid, 1 => su3_memory_valid(1), 0 => su3_memory_valid(0));
+    su64_cache_data(0) <= su64_memory_data(0);
+    su64_cache_data(1) <= su64_memory_data(1);
+    su64_cache_data(2) <= su64_shared_main_data;
+    su3_memory_requests <= (2 => s_shared_request, 1 => su3_cache_requests(1), 0 => su3_cache_requests(0))
+        when i_loading = '0' else
         (2 => i_loader_request, others => '0');
     su27_memory_addresses(0) <= su27_cache_addresses(0);
     su27_memory_addresses(1) <= su27_cache_addresses(1);
-    su27_memory_addresses(2) <= iu27_loader_byte_address when i_loading = '1' else su27_cache_addresses(2);
+    su27_memory_addresses(2) <= iu27_loader_byte_address when i_loading = '1' else su27_shared_address;
     su3_memory_writes <= "100" when i_loading = '1' else "000";
     su16_memory_data <= (2 => iu16_loader_data, others => (others => '0'));
     su2_memory_bytes <= (2 => iu2_loader_bytes, others => "00");
@@ -119,6 +139,31 @@ begin
             iu3_backend_response_valid => su3_cache_valid,
             iu64_backend_read_data => su64_cache_data
         );
+    shared_readers : entity work.rabbitpunch_audio_rom_transport
+        port map (
+            i_clk => i_clk,
+            i_invalidate => s_invalidate,
+            o_idle => s_shared_idle,
+            i_program_request => i_audio_request and s_initialized and not i_loading,
+            o_program_ready => s_audio_program_ready,
+            iu16_program_address => iu16_audio_byte_address,
+            o_program_response_valid => s_audio_program_valid,
+            ou8_program_data => ou8_audio_response_data,
+            i_sample_request => i_sample_request and s_initialized and not i_loading,
+            iu18_sample_address => iu18_sample_byte_address,
+            o_sample_valid => s_sample_valid,
+            ou8_sample_data => ou8_sample_data,
+            i_main_request => su3_cache_requests(2),
+            o_main_ready => s_shared_main_ready,
+            iu27_main_byte_address => su27_cache_addresses(2),
+            o_main_response_valid => s_shared_main_valid,
+            ou64_main_read_data => su64_shared_main_data,
+            o_backend_request => s_shared_request,
+            ou27_backend_byte_address => su27_shared_address,
+            i_backend_ready => su3_memory_ready(2) and not i_loading,
+            i_backend_response_valid => su3_memory_valid(2) and not s_loader_pending and not i_loading,
+            iu64_backend_read_data => su64_memory_data(2)
+        );
     memory_transport : entity work.rabbitpunch_sdram
         port map (
             i_clk => i_clk,
@@ -147,7 +192,7 @@ begin
         if (rising_edge(i_clk)) then
             o_loader_response_valid <= '0';
             if (i_loading /= s_previous_loading) then
-                assert ((s_front_idle = '1' and s_cache_idle = '1' and s_loader_pending = '0') and
+                assert ((s_front_idle = '1' and s_cache_idle = '1' and s_shared_idle = '1' and s_loader_pending = '0') and
                     (su3_memory_ready = "111" or s_initialized = '0'))
                     report "ROM loading mode changed before transport drained" severity failure;
             end if;
@@ -162,7 +207,8 @@ begin
                     report "Loader request outside selected image or empty byte mask" severity failure;
                 s_loader_pending <= '1';
             end if;
-            if (i_sprite_request = '1' or i_tile_request = '1' or i_cpu_request = '1') then
+            if (i_sprite_request = '1' or i_tile_request = '1' or i_cpu_request = '1' or
+                i_audio_request = '1' or i_sample_request = '1') then
                 assert (o_ready = '1') report "ROM request during initialization/download" severity failure;
             end if;
         end if;

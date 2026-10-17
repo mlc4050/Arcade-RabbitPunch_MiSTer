@@ -8,7 +8,7 @@
       "rtl/rabbitpunch_download.vhd": "4c6f2c03657fca709454251ba13940113e59348c3236bb146d1eb9d5ba2150cb",
       "sim/memory/download_tb.vhd": "ab3653ff4195cf7b0331bf98932025d98950da1b0dc663d231db937df2c7167b"
     },
-    "log_sha256": "79ab12a3691f3826fe33f449371513a516b7e4047283c41c61e3df8f28027811",
+    "log_sha256": "8aed395ccabe7fc421a21979203b12705aa9255c006f437c1ca8c17866920f14",
     "scope": "16-byte test images with synthetic delayed/backpressured loader; no HPS/DDR or physical memory integration proof"
   },
   {
@@ -23,11 +23,14 @@
       "rtl/rabbitpunch_sdram.vhd": "06a3659bbbab5dde9ca7986c292883cabb09f42342af71163d446076fd22b766",
       "rtl/rabbitpunch_rom_requests.vhd": "3a49b04bf3a3ac0981cc40dd1ba9b1b4e1790cd778b6c2d4e5de1c039863d4fa",
       "rtl/rabbitpunch_rom_cache.vhd": "de28c8c49b0f691edf035d988c973414cfa9b03af92f0f3141c4a7c6279f279c",
-      "rtl/rabbitpunch_roms.vhd": "d327532342b4bd656d00d6dc5a5c43ba5c4c1e9929e18d1f4c066740f725a017",
+      "rtl/rabbitpunch_read_arbiter.vhd": "c7855072a428a83ac9c2ac171f05fc54657f87d1bb0adb14de01e926af4b6852",
+      "rtl/rabbitpunch_audio_roms.vhd": "5b5ae1bcc87e47672a65f0719cb52da1f1f7e5832112d6318118b349a4a37c2c",
+      "rtl/rabbitpunch_audio_rom_transport.vhd": "c3d0e3e80b5ad46867ee9eacc163a41392976cb02218a6987a1985e110284e0c",
+      "rtl/rabbitpunch_roms.vhd": "f382467283f23800cb64649370edafde80dcbe149e5afdc439a1eec94a4d2954",
       "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
-      "sim/memory/download_sdram_tb.vhd": "484dcd98a249832cafa706a1462c0101d61d7fa03bff127c81ff4bce5696cdf1"
+      "sim/memory/download_sdram_tb.vhd": "f2d13722a9fbfe14c90b3f013fb3117a0802c1e903f6f895a60b41838e617017"
     },
-    "log_sha256": "3c16b12dae0cfa18fb626d60d55d08c5dd52d8a3adb174ff38af9c9c0d5f5a2e",
+    "log_sha256": "77503fc5c80ff970da1ca86b92989402e240af7c303ffe552539b491c6e2b5b9",
     "scope": "Two 16-byte images written through production ROM loader/cache/controller and SDRAM chip commands; 16 CPU readbacks verify byte order and replacement; no HPS/DDR/physical electrical timing proof"
   }
 ]

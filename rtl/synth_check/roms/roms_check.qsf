@@ -60,6 +60,9 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to o_sdram_clock_enable
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_layout.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_rom_requests.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_rom_cache.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_read_arbiter.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_audio_roms.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_audio_rom_transport.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_roms.vhd
 set_instance_assignment -name VIRTUAL_PIN ON -to i_initialize
 set_instance_assignment -name VIRTUAL_PIN ON -to o_ready
@@ -84,3 +87,12 @@ set_instance_assignment -name VIRTUAL_PIN ON -to i_cpu_request
 set_instance_assignment -name VIRTUAL_PIN ON -to iu18_cpu_byte_address[*]
 set_instance_assignment -name VIRTUAL_PIN ON -to o_cpu_response_valid
 set_instance_assignment -name VIRTUAL_PIN ON -to ou16_cpu_response_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_audio_request
+set_instance_assignment -name VIRTUAL_PIN ON -to o_audio_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_audio_byte_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_audio_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_audio_response_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_sample_request
+set_instance_assignment -name VIRTUAL_PIN ON -to iu18_sample_byte_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_sample_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_sample_data[*]

@@ -9,10 +9,13 @@
     "rtl/rabbitpunch_sdram.vhd": "06a3659bbbab5dde9ca7986c292883cabb09f42342af71163d446076fd22b766",
     "rtl/rabbitpunch_rom_requests.vhd": "3a49b04bf3a3ac0981cc40dd1ba9b1b4e1790cd778b6c2d4e5de1c039863d4fa",
     "rtl/rabbitpunch_rom_cache.vhd": "de28c8c49b0f691edf035d988c973414cfa9b03af92f0f3141c4a7c6279f279c",
-    "rtl/rabbitpunch_roms.vhd": "d327532342b4bd656d00d6dc5a5c43ba5c4c1e9929e18d1f4c066740f725a017",
+    "rtl/rabbitpunch_read_arbiter.vhd": "c7855072a428a83ac9c2ac171f05fc54657f87d1bb0adb14de01e926af4b6852",
+    "rtl/rabbitpunch_audio_roms.vhd": "5b5ae1bcc87e47672a65f0719cb52da1f1f7e5832112d6318118b349a4a37c2c",
+    "rtl/rabbitpunch_audio_rom_transport.vhd": "c3d0e3e80b5ad46867ee9eacc163a41392976cb02218a6987a1985e110284e0c",
+    "rtl/rabbitpunch_roms.vhd": "f382467283f23800cb64649370edafde80dcbe149e5afdc439a1eec94a4d2954",
     "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
-    "sim/memory/roms_tb.vhd": "c72e96296d60ff9ad2d23eb09ac884fa63c77c3beab89e8ed69e73a9d0bc4883"
+    "sim/memory/roms_tb.vhd": "b011582395e1a95f7d90c341082e085d04e95717d0a0e3a9487da9a6d3ed3200"
   },
-  "log_sha256": "649e75ca1108b578b7e7f2932ecc25d9b66bfa1f3fe805db562ab12b6e67edc9",
+  "log_sha256": "c7115a24736c4ebea94c68ec5965cdadf1865a0f3b8543d10fe21dab453d41c3",
   "scope": "Production ROM subsystem with actual word loader, cache invalidation and SDRAM chip-command model; no HPS download or electrical timing proof"
 }

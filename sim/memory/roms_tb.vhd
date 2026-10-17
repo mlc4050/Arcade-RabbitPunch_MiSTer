@@ -33,6 +33,15 @@ architecture test of roms_tb is
             iu18_cpu_byte_address : in unsigned(17 downto 0);
             o_cpu_response_valid : out std_logic;
             ou16_cpu_response_data : out unsigned(15 downto 0);
+            i_audio_request : in std_logic := '0';
+            o_audio_ready : out std_logic;
+            iu16_audio_byte_address : in unsigned(15 downto 0) := (others => '0');
+            o_audio_response_valid : out std_logic;
+            ou8_audio_response_data : out unsigned(7 downto 0);
+            i_sample_request : in std_logic := '0';
+            iu18_sample_byte_address : in unsigned(17 downto 0) := (others => '0');
+            o_sample_valid : out std_logic;
+            ou8_sample_data : out unsigned(7 downto 0);
             iou16_sdram_data : inout unsigned(15 downto 0);
             ou13_sdram_address : out unsigned(12 downto 0);
             ou2_sdram_bank : out unsigned(1 downto 0);
@@ -67,6 +76,11 @@ architecture test of roms_tb is
     signal su17_sprite_address, su17_tile_address : unsigned(16 downto 0) := (others => '0');
     signal su18_cpu_address : unsigned(17 downto 0) := (others => '0');
     signal s_foreground : std_logic := '0';
+    signal s_audio_request, s_sample_request : std_logic := '0';
+    signal s_audio_ready, s_audio_valid, s_sample_valid : std_logic;
+    signal su16_audio_address : unsigned(15 downto 0) := (others => '0');
+    signal su18_sample_address : unsigned(17 downto 0) := (others => '0');
+    signal su8_audio_data, su8_sample_data : unsigned(7 downto 0);
     signal s_sprite_valid, s_tile_valid, s_cpu_valid : std_logic;
     signal su32_sprite_data, su32_tile_data : unsigned(31 downto 0);
     signal su16_cpu_data, su16_dq : unsigned(15 downto 0);
@@ -109,6 +123,15 @@ begin
             iu18_cpu_byte_address => su18_cpu_address,
             o_cpu_response_valid => s_cpu_valid,
             ou16_cpu_response_data => su16_cpu_data,
+            i_audio_request => s_audio_request,
+            o_audio_ready => s_audio_ready,
+            iu16_audio_byte_address => su16_audio_address,
+            o_audio_response_valid => s_audio_valid,
+            ou8_audio_response_data => su8_audio_data,
+            i_sample_request => s_sample_request,
+            iu18_sample_byte_address => su18_sample_address,
+            o_sample_valid => s_sample_valid,
+            ou8_sample_data => su8_sample_data,
             iou16_sdram_data => su16_dq,
             ou13_sdram_address => su13_address,
             ou2_sdram_bank => su2_bank,
@@ -139,9 +162,9 @@ begin
         end if;
     end process;
     process
-        type t_bases is array (0 to 3) of natural;
-        constant BASES : t_bases := (0, 16#50000#, 16#D0000#, 16#150000#);
-        variable vu3_seen : unsigned(2 downto 0);
+        type t_bases is array (0 to 6) of natural;
+        constant BASES : t_bases := (0, 16#50000#, 16#D0000#, 16#150000#, 16#40000#, 16#1D0000#, 16#1F0000#);
+        variable vu5_seen : unsigned(4 downto 0);
         variable vu32_expected : unsigned(31 downto 0);
         variable vu16_expected : unsigned(15 downto 0);
         variable vint_address, vint_before, vint_checks, vint_writes : natural := 0;
@@ -164,7 +187,7 @@ begin
             su16_loader_data <= not vu16_word;
             for vint_wait in 0 to 200 loop
                 tick;
-                assert (s_cpu_valid = '0' and s_tile_valid = '0' and s_sprite_valid = '0') report "Loader acknowledgment leaked to a ROM client" severity failure;
+                assert (s_cpu_valid = '0' and s_tile_valid = '0' and s_sprite_valid = '0' and s_audio_valid = '0' and s_sample_valid = '0') report "Loader acknowledgment leaked to a ROM client" severity failure;
                 if (s_loader_valid = '1') then
                     v_done := true;
                     exit;
@@ -184,41 +207,60 @@ begin
             if (vint_bank = 1) then
                 s_foreground <= '1';
             end if;
+            assert (s_audio_ready = '1') report "Audio requester not ready" severity failure;
+            su16_audio_address <= to_unsigned(vint_cpu_word * 2, 16);
+            su18_sample_address <= to_unsigned(vint_bank * 16#20000# + vint_cpu_word * 2, 18);
+            s_audio_request <= '1';
+            s_sample_request <= '1';
             s_sprite_request <= '1';
             s_tile_request <= '1';
             s_cpu_request <= '1';
             tick;
+            s_audio_request <= '0';
             s_sprite_request <= '0';
             s_tile_request <= '0';
             s_cpu_request <= '0';
-            vu3_seen := "000";
+            vu5_seen := "00000";
             for vint_wait in 0 to 200 loop
                 tick;
                 if (s_sprite_valid = '1') then
                     for vint_byte in 0 to 3 loop
                         vu32_expected(vint_byte * 8 + 7 downto vint_byte * 8) := byte_value(16#150000# + vint_graphics_word * 4 + vint_byte, vint_epoch);
                     end loop;
-                    assert (su32_sprite_data = vu32_expected and vu3_seen(0) = '0') report "Loaded sprite data/cache mismatch" severity failure;
-                    vu3_seen(0) := '1';
+                    assert (su32_sprite_data = vu32_expected and vu5_seen(0) = '0') report "Loaded sprite data/cache mismatch" severity failure;
+                    vu5_seen(0) := '1';
                     vint_checks := vint_checks + 1;
                 end if;
                 if (s_tile_valid = '1') then
                     for vint_byte in 0 to 3 loop
                         vu32_expected(vint_byte * 8 + 7 downto vint_byte * 8) := byte_value(16#50000# + vint_bank * 16#80000# + vint_graphics_word * 4 + vint_byte, vint_epoch);
                     end loop;
-                    assert (su32_tile_data = vu32_expected and vu3_seen(1) = '0') report "Loaded tile bank/cache mismatch" severity failure;
-                    vu3_seen(1) := '1';
+                    assert (su32_tile_data = vu32_expected and vu5_seen(1) = '0') report "Loaded tile bank/cache mismatch" severity failure;
+                    vu5_seen(1) := '1';
                     vint_checks := vint_checks + 1;
                 end if;
                 if (s_cpu_valid = '1') then
                     vu16_expected := byte_value(vint_cpu_word * 2, vint_epoch) & byte_value(vint_cpu_word * 2 + 1, vint_epoch);
-                    assert (su16_cpu_data = vu16_expected and vu3_seen(2) = '0') report "Loaded 68000 byte order/cache mismatch" severity failure;
-                    vu3_seen(2) := '1';
+                    assert (su16_cpu_data = vu16_expected and vu5_seen(2) = '0') report "Loaded 68000 byte order/cache mismatch" severity failure;
+                    vu5_seen(2) := '1';
                     vint_checks := vint_checks + 1;
                 end if;
-                exit when vu3_seen = "111";
+                if (s_audio_valid = '1') then
+                    assert (su8_audio_data = byte_value(16#40000# + vint_cpu_word * 2, vint_epoch) and vu5_seen(3) = '0')
+                        report "Audio program byte/cache mismatch" severity failure;
+                    vu5_seen(3) := '1';
+                    vint_checks := vint_checks + 1;
+                end if;
+                if (s_sample_valid = '1' and vu5_seen(4) = '0') then
+                    assert (su8_sample_data = byte_value(16#1D0000# + vint_bank * 16#20000# + vint_cpu_word * 2, vint_epoch))
+                        report "Sample bank byte/cache mismatch" severity failure;
+                    vu5_seen(4) := '1';
+                    vint_checks := vint_checks + 1;
+                end if;
+                exit when vu5_seen = "11111";
             end loop;
-            assert (vu3_seen = "111") report "ROM subsystem reply lost" severity failure;
+            assert (vu5_seen = "11111") report "ROM subsystem reply lost" severity failure;
+            s_sample_request <= '0';
             tick;
         end procedure;
     begin
@@ -248,7 +290,7 @@ begin
             tick;
             vint_before := sint_reads;
             read_set(0, 0, 0, vint_epoch);
-            assert (sint_reads = vint_before + 3) report "New image did not invalidate all three caches" severity failure;
+            assert (sint_reads = vint_before + 5) report "New image did not invalidate graphics, main and audio caches" severity failure;
             vint_before := sint_reads;
             for vint_word in 0 to 3 loop
                 read_set(vint_word, vint_word mod 2, 0, vint_epoch);
