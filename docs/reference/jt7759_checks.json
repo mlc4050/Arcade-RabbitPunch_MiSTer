@@ -11,9 +11,9 @@
       "rtl/sound/jt7759/hdl/jt7759_data.v": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d",
       "rtl/sound/jt7759/hdl/jt7759_div.v": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862",
       "rtl/rabbitpunch_upd7759.vhd": "38d8e7f106759009323027ae17ad3905d58a69034eb57c0f2daa76f5fdaf3d1a",
-      "sim/sound/jt7759_baseline_tb.vhd": "25e4609bc032f868c0c0f62e8eefaafaf6117cb7f10686797d2278fbe5ce03a5"
+      "sim/sound/jt7759_baseline_tb.vhd": "5fd8aafbae99b0209a6843c76946521b9fe65985f00576865298b5f6dab29ee7"
     },
-    "log_sha256": "ddd0424f6845c16aea7a2515a1e4153d6c591904a1ceabb5bafa736ea11d1eb5",
+    "log_sha256": "f7110d8ad66748d4d37891d435609dcc215f343de5a7fa5b8a7a1e6b1edcd1fb",
     "scope": "Native unchanged JT7759 and descriptive wrapper, 48 MHz evaluation clock and 640 kHz enable, two different synthetic standalone sample starts/completions, delayed ROM replies and reset mute; nonzero PCM presence only, no decoded-value/game waveform/bank/hardware timing proof"
   },
   {
@@ -28,9 +28,9 @@
       "rtl/sound/jt7759/hdl/jt7759_data.v": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d",
       "rtl/sound/jt7759/hdl/jt7759_div.v": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862",
       "rtl/rabbitpunch_upd7759.vhd": "38d8e7f106759009323027ae17ad3905d58a69034eb57c0f2daa76f5fdaf3d1a",
-      "sim/sound/jt7759_baseline_tb.vhd": "25e4609bc032f868c0c0f62e8eefaafaf6117cb7f10686797d2278fbe5ce03a5"
+      "sim/sound/jt7759_baseline_tb.vhd": "5fd8aafbae99b0209a6843c76946521b9fe65985f00576865298b5f6dab29ee7"
     },
-    "log_sha256": "1ceb64526f2bcbcbb67894e9704bfd81cf0db08190f1f9abb73c5a11d2574d59",
+    "log_sha256": "75f1e0788b483a4cc02a27ad14ef09ab49146a187755ea3b21dcc021d26ac8ec",
     "scope": "Native unchanged JT7759 and descriptive wrapper, 48 MHz evaluation clock and 640 kHz enable, two different synthetic standalone sample starts/completions, delayed ROM replies and reset mute; nonzero PCM presence only, no decoded-value/game waveform/bank/hardware timing proof"
   }
 ]

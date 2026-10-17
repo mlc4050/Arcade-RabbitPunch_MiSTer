@@ -17,13 +17,19 @@ scenes also match through the actual shared SDRAM controller/model and tiny
 ROM caches, with competing synthetic CPU ROM reads. SDRAM, ROM mapping and tiny ROM burst caches pass
 separate implementation and synthesized-netlist tests. Physical raster/PLL,
 full raster scheduling and real-pin SDRAM timing remain open. The connected
-logical CPU/I/O/video board passes 1000-write MAME comparisons for both games
+logical CPU/I/O/video board passes 10000-write MAME comparisons for both games
 while lines render; combined board placement/routing/timing passes at 48 MHz
 under documented evaluation-interface constraints.
 The board, ROM subsystem and download control now form a connected logical
 system that executes downloaded synthetic 68000 diagnostics, including image
 replacement, soft reset and incomplete-download recovery.
-See [board integration](docs/BOARD_INTEGRATION.md) and
+The separate logical T80/JT51 sound board matches both audio ROMs' first 4096
+MAME writes with documented CPU/RAM test seeds. Command IRQ, native sound RAM,
+Yamaha status readback and pause pass in RTL and a synthesized-netlist test;
+its full implementation meets all reported 48 MHz timing corners. Native and
+wrapped JT7759 sample-playback baselines also pass. Sample control/banking, sound
+ROM scheduling, main-system connection and audible game sound remain open.
+See [sound bring-up](docs/SOUND_BRINGUP.md), [board integration](docs/BOARD_INTEGRATION.md) and
 [system integration](docs/SYSTEM_INTEGRATION.md) for exact test scope.
 No complete game or playable RBF.
 The inherited template demo remains connected.
@@ -58,9 +64,12 @@ The sys directory is unchanged apart from Windows checkout line endings.
 Bootstrap tooling and workflows came from the local MiSTer-CoreSkill checkout.
 CPU and initial JTFRAME evaluation sources are pinned with passing baseline checks;
 an unchanged YM2151 evaluation copy and VHDL wrapper now pass isolated timer/IRQ,
-sample-cadence and explicit-mute tests. The sound board is not integrated yet. See [BASELINES](docs/BASELINES.md).
+sample-cadence and explicit-mute tests. JT7759 is a separately baselined evaluation
+copy; all selected vendor sources remain unchanged. See [BASELINES](docs/BASELINES.md)
+and [sound bring-up](docs/SOUND_BRINGUP.md).
 
-Codex assisted with research, documentation and reference tooling. Future RTL needs
-simulation, timing closure and board verification before release. No hardware
+Codex assisted with research, documentation, board RTL, adapters, testbenches and
+reference tooling. Simulation and implementation checks are recorded; board
+verification is still required before release. No hardware
 results or release artifacts exist yet. Distribution: GPL-3.0-or-later, preserving
 third-party notices and recording provenance for each added dependency.

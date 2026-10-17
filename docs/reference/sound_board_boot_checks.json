@@ -10,7 +10,7 @@
     "reset_state_sha256": "22be5825dcaca89601e81de46cfd3c5f0acaf8e628fc0e75a536442228fb7195",
     "simulation_cpu_seed": "Vendor DIR state-load input initialized from captured MAME reset state after reset; no production RTL reset change",
     "rtl_trace_sha256": "a009bf420a19c16915b33f10c84e4df6c558defc836cb96a629656726f295702",
-    "log_sha256": "90fd92d0db115dc2d9c56aabcf5157d1c1299ef706458594704c10ac8c3a11ef",
+    "log_sha256": "39187d3ba9522894e7aca115f4379cb67de781b37e80e906589859a1ea9af21e",
     "source_sha256": {
       "rtl/cpu/t80/T80_Pack.vhd": "f0e6aff273f25d904fd55e53372e44b52d07a82b8c6cb58fe73ea7fde06ec22d",
       "rtl/cpu/t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
@@ -46,8 +46,8 @@
       "rtl/rabbitpunch_soundcpu.vhd": "a203a2192e38f8e8dabd23a89f93ee3da936a90aef2637ef154175887e107fa9",
       "rtl/rabbitpunch_ym2151.vhd": "ffb3d550d38586328f1b5a25d1c5c0ff6d96f0c439ae659386dd350a6fdb5ce5",
       "rtl/rabbitpunch_ram8.vhd": "63b8171389498f7d35fd35279b02d071cd3922f93a8b00fbe178c23e704e2824",
-      "rtl/rabbitpunch_sound_bus.vhd": "7cd00e001c1203332b6da385e5a6cef0f8c1b04d5d884389ded2e0196b7bfa0e",
-      "rtl/rabbitpunch_sound_board.vhd": "42fa28297a4d2f873b5ca8f5819ec8ed1c42564693c2a5b161d66d7b0f1f5709",
+      "rtl/rabbitpunch_sound_bus.vhd": "faf7694bb4396268d89179b47f1ca6c5e23281be6c5bbe5caee8310f9d655710",
+      "rtl/rabbitpunch_sound_board.vhd": "bb41d8b894978d4312c5081ae87d050426584a51c7823037eff5adf07ddf88c1",
       "sim/sound/sound_board_boot_tb.vhd": "08ae42dc52eea658a104a7dff5838a676ea55d7fec5644fab5c797860d4d8155"
     },
     "scope": "Connected T80, production sound bus, native 2048-byte RAM and actual JT51; behavioral audio-ROM transport with periodic 53-clock replies; explicitly normalized MAME CPU/RAM seed, startup writes only, no main commands/uPD/SDRAM/physical timing proof"
@@ -63,7 +63,7 @@
     "reset_state_sha256": "22be5825dcaca89601e81de46cfd3c5f0acaf8e628fc0e75a536442228fb7195",
     "simulation_cpu_seed": "Vendor DIR state-load input initialized from captured MAME reset state after reset; no production RTL reset change",
     "rtl_trace_sha256": "540be55b19d484bd5befe29574a48fd2700d18888f74e17d5bdc15919f5fa6f4",
-    "log_sha256": "1d51c5e3c17fccaaa19ea0a973b2b0c0e8c595945c26b210297055a64a587142",
+    "log_sha256": "b12b8f8aea144a9234d17c35551f6b157770db40c2cc746ea22be735f7e56817",
     "source_sha256": {
       "rtl/cpu/t80/T80_Pack.vhd": "f0e6aff273f25d904fd55e53372e44b52d07a82b8c6cb58fe73ea7fde06ec22d",
       "rtl/cpu/t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
@@ -99,8 +99,8 @@
       "rtl/rabbitpunch_soundcpu.vhd": "a203a2192e38f8e8dabd23a89f93ee3da936a90aef2637ef154175887e107fa9",
       "rtl/rabbitpunch_ym2151.vhd": "ffb3d550d38586328f1b5a25d1c5c0ff6d96f0c439ae659386dd350a6fdb5ce5",
       "rtl/rabbitpunch_ram8.vhd": "63b8171389498f7d35fd35279b02d071cd3922f93a8b00fbe178c23e704e2824",
-      "rtl/rabbitpunch_sound_bus.vhd": "7cd00e001c1203332b6da385e5a6cef0f8c1b04d5d884389ded2e0196b7bfa0e",
-      "rtl/rabbitpunch_sound_board.vhd": "42fa28297a4d2f873b5ca8f5819ec8ed1c42564693c2a5b161d66d7b0f1f5709",
+      "rtl/rabbitpunch_sound_bus.vhd": "faf7694bb4396268d89179b47f1ca6c5e23281be6c5bbe5caee8310f9d655710",
+      "rtl/rabbitpunch_sound_board.vhd": "bb41d8b894978d4312c5081ae87d050426584a51c7823037eff5adf07ddf88c1",
       "sim/sound/sound_board_boot_tb.vhd": "08ae42dc52eea658a104a7dff5838a676ea55d7fec5644fab5c797860d4d8155"
     },
     "scope": "Connected T80, production sound bus, native 2048-byte RAM and actual JT51; behavioral audio-ROM transport with periodic 53-clock replies; explicitly normalized MAME CPU/RAM seed, startup writes only, no main commands/uPD/SDRAM/physical timing proof"

@@ -93,9 +93,8 @@ hashes are in reference/sound_boot_reference.json.
 check_sound_boot.py compares T80/JT51 with a behavioral backend; all 4096 writes
 match for both sets (sound_boot_checks.json). check_sound_board_boot.py repeats
 that comparison through production sound decode and native RAM with periodic
-53-clock external ROM replies. The final single-pulse/P1/status-decode RTL is
-being rechecked: Rabio Lepus passes; Rabbit Punch is running. The final aggregate
-report is reference/sound_board_boot_checks.json.
+53-clock external ROM replies. Both games pass all 4096 writes through the final single-pulse/P1/status-decode
+RTL. The aggregate report is reference/sound_board_boot_checks.json.
 
 These strict comparisons explicitly load captured MAME reset registers through
 the vendor's existing DIR simulation input and seed fixture RAM with zeros.

@@ -16,6 +16,8 @@ every frame.
 | Sprite line banks | rabbitpunch_sprite_line / rabbitpunch_ram16 | 2 x 16 x 512 | 2048 | Derived pixels and occupancy/index/tag; finish/flush and re-render before resuming video, or capture both banks with scheduler phase |
 | Packed tile line banks | rabbitpunch_tiles / rabbitpunch_ram16 | 2 x 16 x 512 | 2048 | Derived BG0/FG pixels; finish/flush and re-render, or capture banks and scheduler phase |
 
+| Sound work RAM | rabbitpunch_sound_bus / rabbitpunch_ram8 | 8 x 2048 | 2048 | Yes; read-only view after drained sound CPU pause, restore writer not implemented |
+
 ## Registers and FSMs
 
 | What | RTL | Bits | Save? | MAME `save_item` equivalent |
