@@ -10,6 +10,7 @@ use work.rabbitpunch_layout.all;
 entity system_boot_tb is
     generic (
         GBOOL_PLL_CLOCK : boolean := false;
+        GBOOL_CONTINUOUS_VIDEO : boolean := false;
         GINT_MAIN_WRITE_LIMIT : positive := 2000;
         GINT_SOUND_WRITE_LIMIT : positive := 256;
         GINT_DIP_DEFAULT : natural := 0
@@ -55,6 +56,14 @@ architecture test of system_boot_tb is
     signal su8_audio_data, su8_audio_view_data : unsigned(7 downto 0);
     signal s_audio_view : std_logic := '0';
     signal sint_samples, sint_audio_commands : natural := 0;
+    signal s_vblank_start, s_half_frame, s_line_valid, s_line_ready, s_render_bank, s_line_done : std_logic := '0';
+    signal s_pixel_request, s_pixel_ready, s_pixel_bank, s_rgb_valid, s_rgb_error : std_logic := '0';
+    signal su9_line_y, su9_pixel_x, su9_rgb_x : unsigned(8 downto 0) := (others => '0');
+    signal su8_pixel_y, su8_rgb_y, su8_red, su8_green, su8_blue : unsigned(7 downto 0) := (others => '0');
+    signal s_output_enable, s_output_active, s_output_sync, s_armed, s_underflow : std_logic := '0';
+    signal su9_output_x : unsigned(8 downto 0) := (others => '0');
+    signal su8_output_y, su8_output_red, su8_output_green, su8_output_blue : unsigned(7 downto 0) := (others => '0');
+
 begin
     s_reference_clk <= not s_reference_clk after 10 ns;
     synthetic_clock : if (not GBOOL_PLL_CLOCK) generate
@@ -106,6 +115,53 @@ begin
             end if;
         end if;
     end process;
+    continuous_video : if (GBOOL_CONTINUOUS_VIDEO) generate
+        scanout : entity work.rabbitpunch_scanout
+            port map (
+                i_clk => s_clk,
+                i_initialize => '0',
+                i_game_ready => s_ready,
+                o_main_phase_enable => open,
+                o_sound_cpu_enable => open,
+                o_ym_enable => open,
+                o_ym_half_enable => open,
+                o_adpcm_enable => open,
+                o_vblank_start => s_vblank_start,
+                o_half_frame => s_half_frame,
+                o_line_valid => s_line_valid,
+                i_line_ready => s_line_ready,
+                o_render_bank => s_render_bank,
+                ou9_line_y => su9_line_y,
+                i_line_done => s_line_done,
+                o_pixel_valid => s_pixel_request,
+                i_pixel_ready => s_pixel_ready,
+                o_pixel_bank => s_pixel_bank,
+                ou9_pixel_x => su9_pixel_x,
+                ou8_pixel_y => su8_pixel_y,
+                i_rgb_valid => s_rgb_valid,
+                i_rgb_error => s_rgb_error,
+                iu9_rgb_x => su9_rgb_x,
+                iu8_rgb_y => su8_rgb_y,
+                iu8_red => su8_red,
+                iu8_green => su8_green,
+                iu8_blue => su8_blue,
+                o_pixel_enable => s_output_enable,
+                o_active => s_output_active,
+                o_hsync => open,
+                o_vsync => s_output_sync,
+                o_hblank => open,
+                o_vblank => open,
+                ou9_output_x => su9_output_x,
+                ou8_output_y => su8_output_y,
+                ou8_red => su8_output_red,
+                ou8_green => su8_output_green,
+                ou8_blue => su8_output_blue,
+                ou9_horizontal_position => open,
+                ou9_vertical_position => open,
+                o_armed => s_armed,
+                o_underflow => s_underflow
+            );
+    end generate;
     system : entity work.rabbitpunch_system
         generic map (
             GINT_IMAGE_BYTES => 32,
@@ -119,25 +175,25 @@ begin
             i_game_reset => s_game_reset,
             i_pause => not s_run,
             o_paused => s_paused,
-            i_vblank_start => '0',
-            i_half_frame => '0',
-            i_line_valid => '0',
-            o_line_ready => open,
-            i_render_bank => '0',
-            iu9_line_y => (others => '0'),
-            o_line_done => open,
-            i_pixel_valid => '0',
-            o_pixel_ready => open,
-            i_pixel_bank => '0',
-            iu9_pixel_x => (others => '0'),
-            iu8_pixel_y => (others => '0'),
-            o_pixel_valid => open,
-            o_pixel_error => open,
-            ou9_pixel_x => open,
-            ou8_pixel_y => open,
-            ou8_red => open,
-            ou8_green => open,
-            ou8_blue => open,
+            i_vblank_start => s_vblank_start,
+            i_half_frame => s_half_frame,
+            i_line_valid => s_line_valid,
+            o_line_ready => s_line_ready,
+            i_render_bank => s_render_bank,
+            iu9_line_y => su9_line_y,
+            o_line_done => s_line_done,
+            i_pixel_valid => s_pixel_request,
+            o_pixel_ready => s_pixel_ready,
+            i_pixel_bank => s_pixel_bank,
+            iu9_pixel_x => su9_pixel_x,
+            iu8_pixel_y => su8_pixel_y,
+            o_pixel_valid => s_rgb_valid,
+            o_pixel_error => s_rgb_error,
+            ou9_pixel_x => su9_rgb_x,
+            ou8_pixel_y => su8_rgb_y,
+            ou8_red => su8_red,
+            ou8_green => su8_green,
+            ou8_blue => su8_blue,
             i_view_enable => s_view_enable,
             iu5_view_target => CU5_TARGET_WORKRAM,
             iu15_view_word_address => (others => '0'),
@@ -223,13 +279,58 @@ begin
         file main_trace : text open write_mode is "rtl_main_writes.txt";
         file sound_trace : text open write_mode is "rtl_sound_writes.txt";
         file progress_file : text open write_mode is "progress.txt";
+        file pixel_file : text open write_mode is "boot_pixels.hex";
         variable v_line : line;
         variable vu16_mask : unsigned(15 downto 0);
         variable vint_main, vint_sound : natural := 0;
         variable vint_progress : natural range 0 to 47999 := 0;
+        variable vint_pixels, vint_frames, vint_lines, vint_render_cycles, vint_max_line_cycles : natural := 0;
+        variable v_rendering : boolean := false;
+        variable v_previous_sync : std_logic := '1';
     begin
         if (rising_edge(s_clk)) then
             if (s_run = '1') then
+                if (GBOOL_CONTINUOUS_VIDEO) then
+                    assert (s_underflow = '0' and s_error = '0')
+                        report "Live CPU/video boot reported underflow or load error" severity failure;
+                    if (s_line_valid = '1' and s_line_ready = '1') then
+                        assert (not v_rendering) report "Overlapping live video rows" severity failure;
+                        v_rendering := true;
+                        vint_render_cycles := 0;
+                    end if;
+                    if (v_rendering) then
+                        vint_render_cycles := vint_render_cycles + 1;
+                    end if;
+                    if (s_line_done = '1') then
+                        assert (v_rendering and vint_render_cycles <= 3024)
+                            report "Live render row exceeded line budget" severity failure;
+                        v_rendering := false;
+                        vint_lines := vint_lines + 1;
+                        if (vint_render_cycles > vint_max_line_cycles) then
+                            vint_max_line_cycles := vint_render_cycles;
+                        end if;
+                    end if;
+                    if (s_output_enable = '1') then
+                        if (s_output_sync = '0' and v_previous_sync = '1') then
+                            vint_frames := vint_frames + 1;
+                        end if;
+                        v_previous_sync := s_output_sync;
+                        if (s_output_active = '1' and vint_pixels < 62208) then
+                            assert (su9_output_x = to_unsigned(8 + (vint_pixels mod 288), 9) and
+                                    su8_output_y = to_unsigned(vint_pixels / 288, 8))
+                                report "Live boot RGB coordinate ordering mismatch" severity failure;
+                            for vint_bit in 0 to 7 loop
+                                assert ((su8_output_red(vint_bit) = '0' or su8_output_red(vint_bit) = '1') and
+                                        (su8_output_green(vint_bit) = '0' or su8_output_green(vint_bit) = '1') and
+                                        (su8_output_blue(vint_bit) = '0' or su8_output_blue(vint_bit) = '1'))
+                                    report "Unknown live boot RGB bit" severity failure;
+                            end loop;
+                            hwrite(v_line, su8_output_red & su8_output_green & su8_output_blue);
+                            writeline(pixel_file, v_line);
+                            vint_pixels := vint_pixels + 1;
+                        end if;
+                    end if;
+                end if;
                 if (s_cpu_request = '1' and s_cpu_write = '1' and vint_main < GINT_MAIN_WRITE_LIMIT) then
                     hwrite(v_line, su24_cpu_address and x"0FFFFF");
                     write(v_line, string'(" "));
@@ -260,15 +361,24 @@ begin
                     write(v_line, vint_main);
                     write(v_line, string'(" sound="));
                     write(v_line, vint_sound);
+                    write(v_line, string'(" pixels="));
+                    write(v_line, vint_pixels);
+                    write(v_line, string'(" lines="));
+                    write(v_line, vint_lines);
                     writeline(progress_file, v_line);
                     flush(progress_file);
                     vint_progress := 0;
                 else
                     vint_progress := vint_progress + 1;
                 end if;
-                if (vint_main = GINT_MAIN_WRITE_LIMIT and vint_sound = GINT_SOUND_WRITE_LIMIT) then
+                if (vint_main = GINT_MAIN_WRITE_LIMIT and vint_sound = GINT_SOUND_WRITE_LIMIT and
+                        (not GBOOL_CONTINUOUS_VIDEO or (vint_pixels = 62208 and vint_frames >= 2))) then
                     report "SYSTEM_BOOT_PASS main_writes=" & integer'image(vint_main) &
-                        " sound_writes=" & integer'image(vint_sound);
+                        " sound_writes=" & integer'image(vint_sound) &
+                        " video_pixels=" & integer'image(vint_pixels) &
+                        " frames=" & integer'image(vint_frames) &
+                        " lines=" & integer'image(vint_lines) &
+                        " max_line_cycles=" & integer'image(vint_max_line_cycles);
                     finish;
                 end if;
             end if;

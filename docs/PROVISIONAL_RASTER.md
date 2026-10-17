@@ -107,3 +107,18 @@ raster cadence; Rabbit Punch attract passes all 62208 pixels with zero differenc
 and no underflow. Maximum render cost is 2576 of 3024 system clocks per line.
 The combined machine fit passes all 48 MHz timing/coverage gates (+2.077 ns setup,
 +0.100 ns hold); the clocked wrapper also passes vendor-model CPU/load tests. See MACHINE_INTEGRATION.md.
+
+The later actual-PLL machine fit 2374ddc closes fitted counter/phase inspection:
+42/5 VCO and /9 outputs produce nominal 46.6666667 MHz, with only output 0
+driving game logic and output 1 forwarding the half-period SDRAM pin clock.
+All reported timing corners and six coverage categories pass, with worst setup
++2.141 ns and hold +0.091 ns. See reference/clocked_machine_synth.json. The target
+uses hypothetical I/O budgets; real PCB timing and full-shell closure remain open.
+
+The physical chip-clock simulation required GINT_SDRAM_READ_CAPTURE_ADJUST=1
+after initialization. The unchanged donor's initialization wrap requires zero
+until running. Both the wrong read window and missing guard fail explicit
+negative controls. The continuous PLL-driven Rabbit Punch attract and Rabio Lepus
+gameplay snapshots each match all 62208 MAME pixels without underflow; additional
+scenes and a real-CPU continuous-frame integration run are in progress. These
+checks establish the simulated clock relationship, not original-board timing.
