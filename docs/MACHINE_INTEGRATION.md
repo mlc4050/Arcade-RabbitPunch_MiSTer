@@ -86,3 +86,15 @@ standalone project's default 2.5 V SDRAM-bank I/O. Its target commit was reverte
 (c829698); reports are archived in debug/fit_archive/clocked_machine_02d3b39_rejected/.
 The corrected evaluation target assigns 3.3 V consistently. The full MiSTer shell
 already inherits explicit 3.3 V SDRAM assignments from the unchanged sys files.
+
+The corrected 3.3 V fit b2d5328 met timing but failed the six-category coverage
+gate because the exported SDRAM clock pin was not declared as a generated clock.
+That target was reverted in bcf5e36 and archived under
+`debug/fit_archive/clocked_machine_b2d5328_unconstrained/`. Private-database analysis
+of the explicit exported-clock constraint reports zero in all six categories.
+The next committed implementation will rerun every timing gate. Clock inspection
+includes the internal PLL VCO and exported clock as distinct hard-block/pin roles;
+TimeQuest's register counts include those endpoints, so the validator checks their
+exact expected counts instead of treating them as extra functional logic domains.
+The fitted integer ratios are 42/5 for the VCO and /9 for each output, giving the
+nominal 46.6666667 MHz; the displayed timing periods are truncated to picoseconds.
