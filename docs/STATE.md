@@ -133,3 +133,9 @@ state is not implemented yet.
 rabbitpunch_system adds no storage beyond its constituent blocks. Download reset
 also initializes board I/O for a new image, while native RAM remains preserved.
 Soft reset reaches CPU/video only; ROM loading/caches/controller remain live.
+
+
+The JT51 evaluation copy owns FM register/shift storage, operator/envelope/phase
+state, timers, LFO/noise and accumulators. Its current native interface has no
+complete state capture/restore port. The VHDL adapter adds no state. Register
+programming can be traced; full sound savestate capture remains unavailable.

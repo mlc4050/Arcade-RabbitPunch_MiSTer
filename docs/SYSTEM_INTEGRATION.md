@@ -36,4 +36,7 @@ The system implementation target fits the full-size logical system with
 same-clock logical test boundaries and direct SDRAM pin wiring. Its external
 SDRAM timing assumptions are hypothetical, as in SDRAM_TRANSPORT.md. No extra
 clock pin or PLL is introduced; final shifted SDRAM clock wiring remains a
-physical integration task. Inspect reference/system_synth.json once completed.
+physical integration task. The completed implementation uses 3275 ALMs,
+4510 registers and 112 M10K blocks (907936 RAM bits); worst setup is +4.035 ns
+and hold +0.107 ns across all reported corners. Six clock/coverage categories
+have zero violations. Exact scope and fitted commit: reference/system_synth.json.

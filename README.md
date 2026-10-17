@@ -57,7 +57,8 @@ Framework: MiSTer-devel/Template_MiSTer 9c8eadb40067c8ce3aef90899844f62d688ac73a
 The sys directory is unchanged apart from Windows checkout line endings.
 Bootstrap tooling and workflows came from the local MiSTer-CoreSkill checkout.
 CPU and initial JTFRAME evaluation sources are pinned with passing baseline checks;
-sound dependencies have not been vendored yet. See [BASELINES](docs/BASELINES.md).
+an unchanged YM2151 evaluation copy and VHDL wrapper now pass isolated timer/IRQ,
+sample-cadence and explicit-mute tests. The sound board is not integrated yet. See [BASELINES](docs/BASELINES.md).
 
 Codex assisted with research, documentation and reference tooling. Future RTL needs
 simulation, timing closure and board verification before release. No hardware

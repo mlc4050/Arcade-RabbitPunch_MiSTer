@@ -19,6 +19,16 @@
       "directory": "Arcade-Vamphalf_MiSTer",
       "commit": "8f9d15b879952371ec46cb2b0f5e960bfee25d22",
       "selected_files_clean": true
+    },
+    "ym2151": {
+      "directory": "Arcade-JalecoMS1BCD_MiSTer",
+      "commit": "f16ec2b84c14409b5ae7b8ade761fffd7ec34b8e",
+      "selected_files_clean": true
+    },
+    "jt51_verification": {
+      "directory": "jt51",
+      "commit": "00dd3f935c8d73bbebe7a16c4af1c6f32ac742ed",
+      "selected_files_clean": true
     }
   },
   "files": [
@@ -213,6 +223,162 @@
       "source": "sim/common/sdram_chip_model_wide.sv",
       "target": "sim/vendor/sdram/sdram_chip_model_wide.sv",
       "sha256": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_acc.v",
+      "target": "rtl/sound/jt51/hdl/jt51_acc.v",
+      "sha256": "633319a0e89a78d390cba54a24aabf6f1019b705b378b636e246dcf44c8829f8"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_eg.v",
+      "target": "rtl/sound/jt51/hdl/jt51_eg.v",
+      "sha256": "6e7c5f315edc82b70918ea61d6d5c992204d4e8b272e33fb3ce539a9843cac5e"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_exp2lin.v",
+      "target": "rtl/sound/jt51/hdl/jt51_exp2lin.v",
+      "sha256": "cecc44acf6d7c8a81e80638e4a6eeb46f17d6c8d809e7a928338553bb23fb400"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_exprom.v",
+      "target": "rtl/sound/jt51/hdl/jt51_exprom.v",
+      "sha256": "c9f33ede4c1c0af6f54ae45620d986a2c5a2f0ef16b453dc7d2eeeac85f8cbb5"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_kon.v",
+      "target": "rtl/sound/jt51/hdl/jt51_kon.v",
+      "sha256": "e1bb08fe65a53d2dc871459cc91e4beeec9efb9e839b3a39a941fa27ac19ba0f"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_lfo.v",
+      "target": "rtl/sound/jt51/hdl/jt51_lfo.v",
+      "sha256": "2bb0e19b51982f761fd50eb992c90f6dbadf467528ac09fa033b48020cd8d193"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_lin2exp.v",
+      "target": "rtl/sound/jt51/hdl/jt51_lin2exp.v",
+      "sha256": "c4351ea7711364ab394ab510326111dc5047f4e57830bddef15163cbc4dcb98e"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_mmr.v",
+      "target": "rtl/sound/jt51/hdl/jt51_mmr.v",
+      "sha256": "db3a6506091e6ea99a17ad2f5b8b11ecf36d97f74dbf0c1098cf6db601d6fdd6"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_mod.v",
+      "target": "rtl/sound/jt51/hdl/jt51_mod.v",
+      "sha256": "1a04fe51a56756a98b577547bbd95cf984283288f2da2e4946d75063a69d357c"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_noise_lfsr.v",
+      "target": "rtl/sound/jt51/hdl/jt51_noise_lfsr.v",
+      "sha256": "6b58949a51dbfe8c96f19eac3aa84aaace7fcc5cc4e1902c084a93d3d1c4da91"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_noise.v",
+      "target": "rtl/sound/jt51/hdl/jt51_noise.v",
+      "sha256": "87b70082becc58ece4c223ea5ed01b0c0bc0b05ae95ace9b498768429232f360"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_op.v",
+      "target": "rtl/sound/jt51/hdl/jt51_op.v",
+      "sha256": "5dbb743c49af67e6dff7e6c65691a66371aaf5a126834525f9501a8af1420bbf"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_pg.v",
+      "target": "rtl/sound/jt51/hdl/jt51_pg.v",
+      "sha256": "d52c369e535196ee260243b2342c6a526a1d95425440512037f3f3b5185f0a8a"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_phinc_rom.v",
+      "target": "rtl/sound/jt51/hdl/jt51_phinc_rom.v",
+      "sha256": "41fefe0b9bc9a3b71a036d12d723666e4b588c57625228eee278f9704a6f53b1"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_phrom.v",
+      "target": "rtl/sound/jt51/hdl/jt51_phrom.v",
+      "sha256": "b3fb0623737dd22befa0bfa9a130d7b1437e81ff3e1842538251d5cd29a75c89"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_pm.v",
+      "target": "rtl/sound/jt51/hdl/jt51_pm.v",
+      "sha256": "9625bda77a523371fc4704ac66cfec95a9d1aff343c2e770ea5aba11eb50c8f3"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_reg_ch.v",
+      "target": "rtl/sound/jt51/hdl/jt51_reg_ch.v",
+      "sha256": "2303d898fa49bf67fa8aace6c1a1e00e48d2951f9a221e75058233953f670aad"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_csr_op.v",
+      "target": "rtl/sound/jt51/hdl/jt51_csr_op.v",
+      "sha256": "b129bf97cc155bc0e4312287af79b2c7985852ef65c1768f23ffa31badd5b648"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_reg.v",
+      "target": "rtl/sound/jt51/hdl/jt51_reg.v",
+      "sha256": "a9913cb08f562046c2f9375fd6f7a4a5a0eb4d46266df303875059761f304de7"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_sh.v",
+      "target": "rtl/sound/jt51/hdl/jt51_sh.v",
+      "sha256": "71246f6b6989f922220cdd370cee52ecd56c7244e11073ddc618028a4136f0aa"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51_timers.v",
+      "target": "rtl/sound/jt51/hdl/jt51_timers.v",
+      "sha256": "e885ffd11d62c2bf42aafb90eb30e681c3d98ae9c4fe6714b13d72f491347e70"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/hdl/jt51.v",
+      "target": "rtl/sound/jt51/hdl/jt51.v",
+      "sha256": "4c5f80dae49f435686d3f917897df867ba7725a44bd52c5d652658ba178689b0"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/LICENSE",
+      "target": "rtl/sound/jt51/LICENSE",
+      "sha256": "589ed823e9a84c56feb95ac58e7cf384626b9cbf4fda2a907bc36e103de1bad2"
+    },
+    {
+      "donor": "ym2151",
+      "source": "rtl/third_party/jt51/README.md",
+      "target": "rtl/sound/jt51/README.md",
+      "sha256": "84796dec6271dff44c55efbbe97f0e8cc3dfa796b3b8c5b8fbc30438cb8bdc81"
+    },
+    {
+      "donor": "jt51_verification",
+      "source": "ver/common/sep32.v",
+      "target": "sim/vendor/jt51/sep32.v",
+      "sha256": "e1f1733d87094bc51a31d39a34c27c71d408541939bfd4c7db00a248a02b85a1"
+    },
+    {
+      "donor": "jt51_verification",
+      "source": "ver/common/sep32_cnt.v",
+      "target": "sim/vendor/jt51/sep32_cnt.v",
+      "sha256": "cc15f156e3bbf72f19956c6fca34c4d17986a576209d1ae890450519692edce7"
     }
   ]
 }
