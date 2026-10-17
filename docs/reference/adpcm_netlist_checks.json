@@ -1,0 +1,14 @@
+{
+  "case": "gate_adpcm",
+  "pass_marker": "ADPCM_PASS",
+  "log": "debug\\baselines\\gate_adpcm\\result.log",
+  "commit": "0056fb2c6eb7d5d14449a944f3833d01ae204852",
+  "vectors_sha256": {},
+  "netlist_sha256": "116acbfd595a649af5430f4d5e79ac04e1f0390d541936eb8ecb70f6c309be10",
+  "source_sha256": {
+    "debug/netlists/adpcm_0056fb2/adpcm_check.vo": "116acbfd595a649af5430f4d5e79ac04e1f0390d541936eb8ecb70f6c309be10",
+    "sim/sound/adpcm_netlist_tb.vhd": "14304296142f8a76dfedb2051595119aa9ea492b79c3b7112b80132e36db93bd"
+  },
+  "log_sha256": "2bb6306e70b7ff1b2f0a06c05c21956989cfdfb5d38d906ae56335c499fce81c",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
+}

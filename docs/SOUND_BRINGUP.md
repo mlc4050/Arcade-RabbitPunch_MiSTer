@@ -160,4 +160,10 @@ commands after reset release, an ignored command during reset, and reset abort
 after actual nonzero PCM decoding. ROM replies are delayed 23 system clocks
 and address-qualified. Evidence: reference/adpcm_checks.json. These are board
 control tests, not real game samples, PCM-value comparison or audio mixing.
-A standalone implementation target is prepared; results are pending.
+Standalone ADPCM placement/routing passes all reported 48 MHz timing corners:
+worst setup +11.312 ns / hold +0.134 ns, with zero block RAM/DSP inferred.
+The unchanged decoder lookup implements in logic for this configuration.
+reference/adpcm_synth.json pins the commit and six zero-issue coverage categories.
+The same bank/reset/abort sequence passes the synthesized functional netlist
+(adpcm_netlist_checks.json), without the DUT RTL in that simulation. Evaluation
+boundary registers are accounted for; final external timing remains open.

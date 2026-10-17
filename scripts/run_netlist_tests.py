@@ -18,6 +18,7 @@ from run_baselines import run_case
 
 
 BLOCKS = {
+    "adpcm": ("adpcm_netlist_tb", "ADPCM_PASS", "sim/sound/adpcm_netlist_tb.vhd"),
     "sound_board": ("sound_board_netlist_tb", "SOUND_BOARD_PASS", "sim/sound/sound_board_netlist_tb.vhd"),
     "roms": ("roms_tb", "ROMS_PASS", "sim/memory/roms_tb.vhd"),
     "rom_cache": ("rom_cache_tb", "ROM_CACHE_PASS", "sim/memory/rom_cache_tb.vhd"),
@@ -69,7 +70,7 @@ def main():
             vectors[filename] = hashlib.sha256(source.read_bytes()).hexdigest()
     support = "rtl/rabbitpunch_sdram_types.vhd" if args.block in ("sdram", "rom_requests", "rom_cache", "roms") else "sim/video/tile_test_support.vhd"
     sources = [str(netlist.relative_to(root)).replace("\\", "/")]
-    if args.block != "sound_board":
+    if args.block not in ("sound_board", "adpcm"):
         sources.append(support)
     if args.block in ("sdram", "roms"):
         sources.append("sim/vendor/sdram/sdram_chip_model_wide.sv")
