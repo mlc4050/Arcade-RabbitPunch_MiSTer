@@ -128,3 +128,8 @@ count, latched pending word/address and transfer/drain FSM. This is load-time
 state independent of CPU/video reset. Do not capture/restore during an active
 image transfer; complete or reject and drain the image first. HPS/DDR staging
 state is not implemented yet.
+
+
+rabbitpunch_system adds no storage beyond its constituent blocks. Download reset
+also initializes board I/O for a new image, while native RAM remains preserved.
+Soft reset reaches CPU/video only; ROM loading/caches/controller remain live.

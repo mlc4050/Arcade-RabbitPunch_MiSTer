@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "system": (907936, ("rabbitpunch_system", "rabbitpunch_board", "fx68k", "rabbitpunch_roms", "rabbitpunch_download", "jtframe_draw")),
     "download": (0, ("rabbitpunch_download",)),
     # Native RAM/lines 868352 + micro ROM 17*1024 + nano ROM 66*336.
     # Nano bits 2 and 23 are constant zero in the pinned donor and optimized out.
@@ -68,7 +69,7 @@ def run_check(stage, quartus_bin, stamp, name):
     if result.returncode or "Full Compilation was successful" not in log:
         print("\n".join(log.splitlines()[-35:]))
         raise SystemExit(f"Standalone {name} compile failed: {log_path}")
-    if name in ("tiles", "sprites", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board"):
+    if name in ("tiles", "sprites", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "system"):
         stuck = re.findall(r'Pin "(ou17_(?:(?:sprite|tile)_)?rom_word_address\[\d+\])" is stuck', log)
         if stuck:
             raise SystemExit(f"Unexpected constant graphics ROM address bits: {stuck}")
@@ -112,6 +113,10 @@ def run_check(stage, quartus_bin, stamp, name):
     if name == "roms":
         scope = ("Production cached ROM subsystem and word loader with half-period synthetic virtual-input/DQ tester timing; "
                  "no evaluation registers added; not final PLL, HPS download or electrical timing proof")
+    if name == "system":
+        scope = ("Logical CPU/IO/video/RAM system, sequential loader and cached SDRAM controller; "
+                 "registered logical test boundaries, wire-connected SDRAM pins and hypothetical half-period external tester; "
+                 "no HPS/DDR, sound, final PLL/raster or PCB electrical timing proof")
     report={"commit":stamp.split()[0],"device":"5CSEBA6U23I7","project":project_name,
             "constraint_mhz":48,"seed":int(seed_match[1]),"memory_bits":expected_bits,"timings":timings,
             "timing_coverage":coverage,

@@ -1,0 +1,151 @@
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY system_check
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_layout.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_decode.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_ram16.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_board_memory.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprite_priority.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_pixel_mixer.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_tile_row.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_tile_lookup.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_tile_layer.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_tiles.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprite_scan.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprite_row.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprite_line.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprites.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_bitmap_pixel.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_video.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_palette_pixel.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_rgb_video.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_board_video.vhd
+set_global_assignment -name SYSTEMVERILOG_FILE ../../jtframe/jtframe_draw.v
+set_global_assignment -name SEARCH_PATH ../../..
+set_global_assignment -name SYSTEMVERILOG_FILE ../../cpu/fx68k/fx68k.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../cpu/fx68k/fx68kAlu.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../cpu/fx68k/uaddrPla.sv
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_bus.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_fx68k.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_maincpu.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_io.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_irq.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_board.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sdram_types.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sdram.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_rom_requests.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_rom_cache.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_roms.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_download.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_system.vhd
+set_global_assignment -name SYSTEMVERILOG_FILE ../../memory/sdram/sdram.sv
+set_global_assignment -name VHDL_FILE system_check.vhd
+set_global_assignment -name SDC_FILE system_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_initialize
+set_instance_assignment -name VIRTUAL_PIN ON -to i_game_reset
+set_instance_assignment -name VIRTUAL_PIN ON -to i_pause
+set_instance_assignment -name VIRTUAL_PIN ON -to o_paused
+set_instance_assignment -name VIRTUAL_PIN ON -to i_vblank_start
+set_instance_assignment -name VIRTUAL_PIN ON -to i_half_frame
+set_instance_assignment -name VIRTUAL_PIN ON -to i_line_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_line_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to i_render_bank
+set_instance_assignment -name VIRTUAL_PIN ON -to iu9_line_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_line_done
+set_instance_assignment -name VIRTUAL_PIN ON -to i_pixel_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_pixel_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to i_pixel_bank
+set_instance_assignment -name VIRTUAL_PIN ON -to iu9_pixel_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_pixel_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_pixel_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_pixel_error
+set_instance_assignment -name VIRTUAL_PIN ON -to ou9_pixel_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_pixel_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_red[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_green[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_blue[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_view_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to iu5_view_target[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu15_view_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_view_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_view_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_player1[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_player2[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_service[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_dips[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_sound_command_read
+set_instance_assignment -name VIRTUAL_PIN ON -to o_sound_command_write
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_sound_command[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_sound_pending
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_video_flags[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou9_scroll0_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou9_scroll0_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou9_scroll1_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou9_scroll1_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou6_sprite_count[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou6_sprite_priority[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou4_gga_selected[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu4_gga_view_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_gga_view_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_gga_write
+set_instance_assignment -name VIRTUAL_PIN ON -to ou4_gga_write_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_gga_write_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_cpu_request
+set_instance_assignment -name VIRTUAL_PIN ON -to o_cpu_request_write
+set_instance_assignment -name VIRTUAL_PIN ON -to ou24_cpu_request_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_cpu_request_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou2_cpu_request_bytes[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_download
+set_instance_assignment -name VIRTUAL_PIN ON -to i_word_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_word_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to iu27_word_byte_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_word_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_image_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_error
+set_instance_assignment -name VIRTUAL_PIN ON -to o_done
+set_instance_assignment -name VIRTUAL_PIN ON -to ou27_bytes_loaded[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to o_loading
+set_location_assignment PIN_Y11 -to ou13_sdram_address[0]
+set_location_assignment PIN_AA26 -to ou13_sdram_address[1]
+set_location_assignment PIN_AA13 -to ou13_sdram_address[2]
+set_location_assignment PIN_AA11 -to ou13_sdram_address[3]
+set_location_assignment PIN_W11 -to ou13_sdram_address[4]
+set_location_assignment PIN_Y19 -to ou13_sdram_address[5]
+set_location_assignment PIN_AB23 -to ou13_sdram_address[6]
+set_location_assignment PIN_AC23 -to ou13_sdram_address[7]
+set_location_assignment PIN_AC22 -to ou13_sdram_address[8]
+set_location_assignment PIN_C12 -to ou13_sdram_address[9]
+set_location_assignment PIN_AB26 -to ou13_sdram_address[10]
+set_location_assignment PIN_AD17 -to ou13_sdram_address[11]
+set_location_assignment PIN_D12 -to ou13_sdram_address[12]
+set_location_assignment PIN_Y17 -to ou2_sdram_bank[0]
+set_location_assignment PIN_AB25 -to ou2_sdram_bank[1]
+set_location_assignment PIN_V12 -to iou16_sdram_data[0]
+set_location_assignment PIN_E8 -to iou16_sdram_data[1]
+set_location_assignment PIN_D11 -to iou16_sdram_data[2]
+set_location_assignment PIN_W12 -to iou16_sdram_data[3]
+set_location_assignment PIN_AH13 -to iou16_sdram_data[4]
+set_location_assignment PIN_D8 -to iou16_sdram_data[5]
+set_location_assignment PIN_AH14 -to iou16_sdram_data[6]
+set_location_assignment PIN_AF7 -to iou16_sdram_data[7]
+set_location_assignment PIN_AE24 -to iou16_sdram_data[8]
+set_location_assignment PIN_AD23 -to iou16_sdram_data[9]
+set_location_assignment PIN_AE6 -to iou16_sdram_data[10]
+set_location_assignment PIN_AE23 -to iou16_sdram_data[11]
+set_location_assignment PIN_AG14 -to iou16_sdram_data[12]
+set_location_assignment PIN_AD5 -to iou16_sdram_data[13]
+set_location_assignment PIN_AF4 -to iou16_sdram_data[14]
+set_location_assignment PIN_AH3 -to iou16_sdram_data[15]
+set_location_assignment PIN_AG13 -to ou2_sdram_byte_mask[0]
+set_location_assignment PIN_AF13 -to ou2_sdram_byte_mask[1]
+set_location_assignment PIN_AG10 -to o_sdram_clock_enable
+set_location_assignment PIN_AA19 -to o_sdram_write_n
+set_location_assignment PIN_AA18 -to o_sdram_column_n
+set_location_assignment PIN_Y18 -to o_sdram_chip_select
+set_location_assignment PIN_W14 -to o_sdram_row_n
