@@ -1,5 +1,5 @@
 {
-  "commit": "b6c5c8b3afc91b1caf11392dd964846959abee7d",
+  "commit": "b7a9528d5d5b742950a6d7c179c7b889fe9d81ea",
   "device": "5CSEBA6U23I7",
   "project": "system_check",
   "constraint_mhz": 48,
@@ -8,59 +8,59 @@
   "timings": [
     {
       "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 3.274
+      "slack_ns": 3.761
     },
     {
       "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.302
+      "slack_ns": 0.244
     },
     {
       "type": "Slow 1100mV 100C Model Recovery 'clk_sys'",
-      "slack_ns": 11.829
+      "slack_ns": 13.628
     },
     {
       "type": "Slow 1100mV 100C Model Removal 'clk_sys'",
-      "slack_ns": 1.54
+      "slack_ns": 1.349
     },
     {
       "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.056
+      "slack_ns": 9.061
     },
     {
       "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 2.864
+      "slack_ns": 2.775
     },
     {
       "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.241
+      "slack_ns": 0.188
     },
     {
       "type": "Slow 1100mV -40C Model Recovery 'clk_sys'",
-      "slack_ns": 12.173
+      "slack_ns": 13.851
     },
     {
       "type": "Slow 1100mV -40C Model Removal 'clk_sys'",
-      "slack_ns": 1.425
+      "slack_ns": 1.263
     },
     {
       "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 8.97
+      "slack_ns": 8.98
     },
     {
       "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 8.154
+      "slack_ns": 8.143
     },
     {
       "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.148
+      "slack_ns": 0.136
     },
     {
       "type": "Fast 1100mV 100C Model Recovery 'clk_sys'",
-      "slack_ns": 15.239
+      "slack_ns": 16.613
     },
     {
       "type": "Fast 1100mV 100C Model Removal 'clk_sys'",
-      "slack_ns": 0.88
+      "slack_ns": 0.679
     },
     {
       "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
@@ -68,23 +68,23 @@
     },
     {
       "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 8.44
+      "slack_ns": 8.441
     },
     {
       "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.103
+      "slack_ns": 0.089
     },
     {
       "type": "Fast 1100mV -40C Model Recovery 'clk_sys'",
-      "slack_ns": 16.262
+      "slack_ns": 17.316
     },
     {
       "type": "Fast 1100mV -40C Model Removal 'clk_sys'",
-      "slack_ns": 0.716
+      "slack_ns": 0.58
     },
     {
       "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.197
+      "slack_ns": 9.195
     }
   ],
   "timing_coverage": {
@@ -114,17 +114,17 @@
     }
   },
   "fit_summary": [
-    "Fitter Status : Successful - Sat Oct 17 00:30:33 2026",
+    "Fitter Status : Successful - Sat Oct 17 00:54:40 2026",
     "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
     "Revision Name : system_check",
     "Top-level Entity Name : system_check",
     "Family : Cyclone V",
     "Device : 5CSEBA6U23I7",
     "Timing Models : Final",
-    "Logic utilization (in ALMs) : 5,952 / 41,910 ( 14 % )",
-    "Total registers : 7141",
+    "Logic utilization (in ALMs) : 6,000 / 41,910 ( 14 % )",
+    "Total registers : 7176",
     "Total pins : 39 / 314 ( 12 % )",
-    "Total virtual pins : 479",
+    "Total virtual pins : 495",
     "Total block memory bits : 927,339 / 5,662,720 ( 16 % )",
     "Total RAM Blocks : 123 / 553 ( 22 % )",
     "Total DSP Blocks : 1 / 112 ( < 1 % )",
@@ -135,8 +135,8 @@
     "Total PLLs : 0 / 6 ( 0 % )",
     "Total DLLs : 0 / 4 ( 0 % )"
   ],
-  "log_sha256": "34fe3d270b0b9a1508cfaeddf541c67ab0eecfe391e156db4959bd17e90b3ce7",
-  "scope": "Logical CPU/IO/video/RAM system, sequential loader and cached SDRAM controller; registered logical test boundaries, wire-connected SDRAM pins and hypothetical half-period external tester; no HPS/DDR, final PCM mixing, PLL/raster or PCB electrical timing proof",
+  "log_sha256": "6887c3b5fa649a95704a80d6c729b96dd698367cf34072fc6c47a1f779708878",
+  "scope": "Logical CPU/IO/video/RAM system, sequential loader and cached SDRAM controller; registered logical test boundaries, wire-connected SDRAM pins and hypothetical half-period external tester; no HPS/DDR, analog/game audio, final PLL/raster or PCB electrical timing proof",
   "sound_memory": [
     {
       "instance": "rabbitpunch_ram8:sound_ram",

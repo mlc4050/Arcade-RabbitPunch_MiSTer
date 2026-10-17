@@ -296,3 +296,15 @@ The final ROM idle fix also passes the refreshed standalone fit and functional
 netlist tests: 810 ALMs, 1872 registers, zero block RAM, worst setup +6.144 ns
 and hold +0.156 ns at 48 MHz. Final-wiring 32/8 main/sound boot smoke comparisons
 pass for both sets (reference/system_boot_32_8_checks.json).
+
+
+All 38 real bank-0 sample sequences now replay through the actual native nibble
+decoder and match 237330 PCM values against a pinned-MAME-source block/repeat/
+step model. Both sets have identical sample ROM bytes. There are no clipping
+cases in those sequences; bank 1 is zero-filled/unpopulated. ROM-derived vectors
+stay private under debug/. reference/adpcm_samples_checks.json records hashes,
+per-command counts and the distinction from whole-chip timing or MAME-binary
+waveform comparison. The final combined mono system also passes implementation:
+6000 ALMs, 7176 registers, 927339 RAM bits, setup +2.775 ns / hold +0.089 ns.
+The Quartus 17 output-port association restriction was resolved with internal
+PCM nets; VHDL-2008 simulation acceptance alone had not caught that restriction.

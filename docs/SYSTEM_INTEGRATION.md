@@ -69,7 +69,9 @@ ALMs, 7141 registers and 927339 RAM bits. The eight sound-memory geometries are
 checked alongside the total RAM budget; six coverage categories have zero
 violations (reference/system_synth.json). The offered-request versus idle race found during active playback is fixed and
 its directed ROM/download/playback regressions pass. The final mono revision
-is awaiting its updated implementation check.
+also passes implementation: 6000 ALMs, 7176 registers, 927339 RAM bits, worst
+setup +2.775 ns and hold +0.089 ns across all reported corners. Its fitted
+commit and precise scope are in reference/system_synth.json.
 
 
 Mono arithmetic uses the pinned MAME routing gains and sums before halving.

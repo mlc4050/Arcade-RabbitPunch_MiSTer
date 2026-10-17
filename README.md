@@ -31,7 +31,9 @@ Downloaded 68000 commands drive the sound latch/IRQ/ack, native sound RAM and
 sample playback. CPU pause preserves chip playback. Active-playback image
 replacement now drains correctly, aborts/mutes playback and recovers. A mono
 mixer passes 283135 integer arithmetic checks; startup silence, active replacement and
-defined-output regressions pass. Updated implementation is pending. Audible real-game sound remains unverified.
+defined-output regressions and the updated 48 MHz implementation pass. All 38
+real sample sequences also pass 237330 native-decoder value checks against a
+pinned-MAME-source model. Audible real-game sound remains unverified.
 See [sound bring-up](docs/SOUND_BRINGUP.md), [board integration](docs/BOARD_INTEGRATION.md) and
 [system integration](docs/SYSTEM_INTEGRATION.md) for exact test scope.
 No complete game or playable RBF.

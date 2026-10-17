@@ -30,3 +30,10 @@ no patch is applied to make artificial overflowing streams match MAME. Original
 DAC overflow behavior and any effect on these games remain unmeasured. This is
 a known reference difference, not a claim that MAME or the donor has been proved
 correct on physical hardware. Evidence: reference/adpcm_decode_checks.json.
+
+
+Actual in-scope sample data does not hit the saturation difference: all 38
+bank-0 streams contain 237330 checked decoded nibbles with no overflow. The
+actual native decoder matches every value in a pinned-source reference replay
+(reference/adpcm_samples_checks.json). This narrows the saturation concern for
+these declared samples without establishing complete-chip timing or analog gain.

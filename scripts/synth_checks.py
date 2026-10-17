@@ -149,7 +149,7 @@ def run_check(stage, quartus_bin, stamp, name):
     if name == "system":
         scope = ("Logical CPU/IO/video/RAM system, sequential loader and cached SDRAM controller; "
                  "registered logical test boundaries, wire-connected SDRAM pins and hypothetical half-period external tester; "
-                 "no HPS/DDR, final PCM mixing, PLL/raster or PCB electrical timing proof")
+                 "no HPS/DDR, analog/game audio, final PLL/raster or PCB electrical timing proof")
     report={"commit":stamp.split()[0],"device":"5CSEBA6U23I7","project":project_name,
             "constraint_mhz":48,"seed":int(seed_match[1]),"memory_bits":expected_bits,"timings":timings,
             "timing_coverage":coverage,

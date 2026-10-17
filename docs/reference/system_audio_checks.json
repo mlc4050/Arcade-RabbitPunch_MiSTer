@@ -89,12 +89,11 @@
     "rtl/rabbitpunch_adpcm.vhd": "72b28e62f4a5e38e942fd0b4068a10e9200d69ef68652624f91875af664d66dd",
     "rtl/rabbitpunch_audio.vhd": "001143defe3df5968a1d660ceb70ff9edda62756d575606e2558d65ae2a71a46",
     "rtl/rabbitpunch_audio_mixer.vhd": "3e8e3684f188f2d751fc7f6f01dad1ff4869869576701aae7b48641049c0601b",
-    "rtl/rabbitpunch_system.vhd": "0118d3f0899a2f2bc57710330a48e5a01ca6a524350c4f0c62ec6073c9be31a0",
+    "rtl/rabbitpunch_system.vhd": "1607a2dc0e723ef75fc1c6e07e023923b88e531d2a21468fb4d8812be6b2587f",
     "sim/board/system_audio_tb.vhd": "b96ed852358ac99224e85c7fc70079cd93de32e3100828f03ade58ed6afb1b83"
   },
   "fixture_source_sha256": "5ccfbc32f624b312029fc872746402af7dc493887fd1029c82a830dcf0c69a6f",
   "synthetic_image_sha256": "1a9f247a66ecc303582250ffc4c9959ab30d77614aab1a35817a81d856f8a028",
-  "log_sha256": "e54db247e96722cfc49974ecb5e803913e07217a7b10a42c9445251b6fc47611",
-  "scope": "Production logical system with executing fx68k/T80, native main/sound RAM, JT51/JT7759 and shared cached SDRAM: four downloaded 32-byte main diagnostics send commands through the internal sound latch/IRQ/ack, trigger both synthetic sample banks and verify sound RAM plus continued playback/cadence during coordinated CPU pause, replacement during nonzero PCM aborts/mutes playback and recovers; sound/sample regions directly preloaded, logical video idle; no real game audio/full image loader/HPS/PLL/raster/electrical proof; defined mixed PCM with native Yamaha complete-period startup qualification",
-  "defined_mixer_arithmetic": "No numeric_std/failed-assert instance in mixer; VHDL output-bit assertions passed"
+  "log_sha256": "8cd14395bb2a99093e0e62502c1a98b9f349d8e43af509c950fbe41dd11987fd",
+  "scope": "Production logical system with executing fx68k/T80, native main/sound RAM, JT51/JT7759 and shared cached SDRAM: four downloaded 32-byte main diagnostics send commands through the internal sound latch/IRQ/ack, trigger both synthetic sample banks and verify sound RAM plus continued playback/cadence during coordinated CPU pause, replacement during nonzero PCM aborts/mutes playback and recovers; defined mixed PCM and Yamaha startup qualification; sound/sample regions directly preloaded, logical video idle; no real game audio/full image loader/HPS/PLL/raster/electrical proof"
 }
