@@ -7,7 +7,11 @@ use std.env.all;
 
 entity video_options_tb is
     generic (
-        GINT_MODE : natural := 0
+        GINT_MODE : natural := 0;
+        GINT_VISIBLE_HEIGHT : positive := 8;
+        GINT_TOTAL_HEIGHT : positive := 16;
+        GINT_VERTICAL_SYNC_START : natural := 12;
+        GINT_VERTICAL_SYNC_END : positive := 14
     );
 end entity;
 
@@ -40,7 +44,7 @@ architecture test of video_options_tb is
     signal s_ce : std_logic := '0';
     signal sint_phase : natural range 0 to 6 := 0;
     signal sint_x : natural range 0 to 431 := 0;
-    signal sint_y : natural range 0 to 255 := 0;
+    signal sint_y : natural range 0 to GINT_TOTAL_HEIGHT - 1 := 0;
     signal sint_frames : natural := 0;
     signal s_hs, s_vs, s_hb, s_vb, s_forced, s_direct : std_logic;
     signal su3_effect : unsigned(2 downto 0);
@@ -52,9 +56,9 @@ begin
     s_clk <= not s_clk after 5 ns;
     s_ce <= '1' when sint_phase = 6 else '0';
     s_hs <= '0' when sint_x >= 352 and sint_x < 392 else '1';
-    s_vs <= '0' when sint_y >= 232 and sint_y < 240 else '1';
+    s_vs <= '0' when sint_y >= GINT_VERTICAL_SYNC_START and sint_y < GINT_VERTICAL_SYNC_END else '1';
     s_hb <= '0' when sint_x < 288 else '1';
-    s_vb <= '0' when sint_y < 216 else '1';
+    s_vb <= '0' when sint_y < GINT_VISIBLE_HEIGHT else '1';
     -- Three distinct colour lanes catch swaps; flat fields also permit exact
     -- comparison through HQ2x without an independent smoothing algorithm.
     su8_red <= x"31";
@@ -94,7 +98,7 @@ begin
                 sint_phase <= 0;
                 if (sint_x = 431) then
                     sint_x <= 0;
-                    if (sint_y = 255) then
+                    if (sint_y = GINT_TOTAL_HEIGHT - 1) then
                         sint_y <= 0;
                         sint_frames <= sint_frames + 1;
                     else
@@ -113,8 +117,8 @@ begin
         variable vint_lines : natural := 0;
         variable vint_line_pixels : natural := 0;
         variable vint_expected_width : natural := 288;
-        variable vint_expected_pixels : natural := 62208;
-        variable vint_expected_lines : natural := 216;
+        variable vint_expected_pixels : natural := 288 * GINT_VISIBLE_HEIGHT;
+        variable vint_expected_lines : natural := GINT_VISIBLE_HEIGHT;
         variable v_previous_de : std_logic := '0';
     begin
         wait until falling_edge(s_clk);
@@ -151,11 +155,11 @@ begin
         end if;
         if (sint_frames = 3) then
             if (GINT_MODE = 2) then
-                vint_expected_pixels := 248832;
-                vint_expected_lines := 432;
+                vint_expected_pixels := 1152 * GINT_VISIBLE_HEIGHT;
+                vint_expected_lines := 2 * GINT_VISIBLE_HEIGHT;
             elsif (GINT_MODE >= 1 and GINT_MODE <= 5) then
-                vint_expected_pixels := 124416;
-                vint_expected_lines := 432;
+                vint_expected_pixels := 576 * GINT_VISIBLE_HEIGHT;
+                vint_expected_lines := 2 * GINT_VISIBLE_HEIGHT;
             end if;
             assert (vint_pixels = vint_expected_pixels and vint_lines = vint_expected_lines)
                 report "Insufficient visible video output" severity failure;

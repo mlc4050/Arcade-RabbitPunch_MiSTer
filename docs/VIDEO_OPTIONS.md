@@ -16,7 +16,9 @@ adapter and is not advertised as supported.
 The framework line RAM capacity is two 292x24 input banks and a 584x96 output
 bank: 70080 bits total. The 256x6 HQ rule table is combinational in this fit and
 is not counted as block memory. Geometry and colour verification use a VHDL
-bench at the actual /7 enable ratio and provisional 432x256 raster. Detailed
+bench at the /7 enable ratio and full 432-pixel horizontal raster. The routine
+seven-mode regression uses 8 visible/16 total vertical lines to bound slow
+Starter Edition netlist simulation; --full-raster restores 216/256 lines. Detailed
 HQ2x edge-filter accuracy and physical video output are outside that test.
 
 Quartus 17's bundled ModelSim cannot compile the unchanged framework sources
@@ -31,3 +33,10 @@ then run_video_options_tests.py through scripts/d_drive.ps1. Both operations
 retain all generated files on D and use the shared no-JTAG guard. Complete
 seven-mode results, once passed, go to reference/video_options_checks.json;
 partial diagnostics remain private under debug/.
+
+The first standalone compilation (3cccb99) passes routed timing but its wrapper
+rejects an overestimated RAM budget of 71616 bits. The actual line RAM geometry
+is 70080 bits; the rule table does not contribute block-memory bits. That gate
+is corrected explicitly and a clean snapshot is refitted. The first full-height
+native netlist run hits its 180-second wall budget without an assertion failure;
+no pass is claimed for that interrupted run.
