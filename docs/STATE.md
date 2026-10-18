@@ -372,3 +372,14 @@ Initialization discards pending presentation writes and clears overflow; it
 never clears game RAM. Derived framebuffer validity must be discarded and a
 complete image recaptured after queue reset, overflow or ROM replacement.
 This queue and the rotation donor are not yet in the production source list.
+
+
+The isolated HDMI rotation adapter adds four configuration-initialized event
+history/pending bits to serialize framebuffer advances. The publication guard
+tracks the pixel count, source-frame slot, three valid-slot bits and capture/
+bad-frame/edge history. It never holds game pixels. The rotation transport
+combines that derived state with the existing 512x101 presentation queue;
+loader priority is a combinational mux and does not cancel read responses.
+Discard all presentation validity/queued writes after restore, overflow or ROM
+replacement and recapture a complete image at a clean frame boundary. These
+blocks remain disconnected from production and the game savestate surface.

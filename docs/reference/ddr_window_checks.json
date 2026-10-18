@@ -1,0 +1,58 @@
+{
+  "accepted": true,
+  "windows": [
+    {
+      "name": "framework scaler",
+      "base": 536870912,
+      "size": 25165824,
+      "last_byte": 562036735,
+      "base_hex": "0x20000000",
+      "size_hex": "0x1800000",
+      "last_byte_hex": "0x217fffff"
+    },
+    {
+      "name": "optional rotation",
+      "base": 603979776,
+      "size": 25165824,
+      "last_byte": 629145599,
+      "base_hex": "0x24000000",
+      "size_hex": "0x1800000",
+      "last_byte_hex": "0x257fffff"
+    },
+    {
+      "name": "ROM image",
+      "base": 805306368,
+      "size": 2162688,
+      "last_byte": 807469055,
+      "base_hex": "0x30000000",
+      "size_hex": "0x210000",
+      "last_byte_hex": "0x3020ffff"
+    }
+  ],
+  "rotated_width": 216,
+  "rotated_height": 288,
+  "rotated_stride_bytes": 864,
+  "rotated_frame_bytes": 248832,
+  "source_sha256": {
+    "sys/sys_top.v": "045f20e03ae1c38b9144a17c4a136c5072900de692065aea67d052667cc597e9",
+    "sys/ascal.vhd": "b460748da9c97fdb0efa5949ba55437eb7778112b3d683c39649427ea1a893af",
+    "rtl/video/rotation/screen_rotate_two.sv": "a704b114cc7d7c1684eb273ab98b436350a3ffb957b350fad975bb322ba11f9e",
+    "rtl/memory/ddram/ddram_phy.sv": "5a0cc2eeca7d71ba83fbd19d79c38b9983f5956cb737acf4df64e20848d0578c",
+    "rtl/rabbitpunch_layout.vhd": "e375b766fa01bf4ae808ccc315f7629488a2dfa4db9e7c8a98f7da993adae14d",
+    "RabbitPunch.qsf": "02c671cd0b89aecc41af42f77faba86047dda596939a1cbe404aea7b21066e51",
+    "RabbitPunch_stp.qsf": "c75ea5f29730fcf40ad97c88ecfac738084d4ad8ffbb6b4b3835a66d7f28c189",
+    "releases/_dev/Rabbit Punch (US).mra": "cc4e350448ba6b8268f7baad4da9dea96a585d9a18104c6e173f05e13b3bec84",
+    "releases/_dev/Rabio Lepus (Japan).mra": "207e83b4588cd0c6e366c45bf101f2e16e4c3e2e0cf37b56b47be2c740b22afa"
+  },
+  "mras": [
+    {
+      "path": "releases/_dev/Rabbit Punch (US).mra",
+      "ddr_address": null
+    },
+    {
+      "path": "releases/_dev/Rabio Lepus (Japan).mra",
+      "ddr_address": null
+    }
+  ],
+  "scope": "Configured core/framework source reservations, normal 8 MiB scaler slots with MISTER_SMALL_VBUF disabled, unchanged donor three 8 MiB slots, production ROM image extent and optional MRA staging address. Pairwise disjoint; one rotated 32-bit image fits its slot. Not a physical DDR test or an audit of arbitrary host-supplied external framebuffer addresses."
+}

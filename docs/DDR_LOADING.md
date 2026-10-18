@@ -98,3 +98,13 @@ including DDR mode with no byte strobes; otherwise an early retry can overlap
 the previous image's final SDRAM write. platform_tb covers immediate partial-
 image recovery with this backpressure. The older standalone frontend fit above
 records its exact earlier commit; the combined platform fit covers this update.
+
+
+An isolated presentation transport now shares the physical DDR port with the
+actual frontend/native copier in simulation. Concurrent presentation traffic
+and pending-queue takeover preserve all 24 expected DDR reads and 129 output
+words across the existing scenarios, including overlap drain. No presentation
+write occurs during frontend ownership; queued pixels are discarded and a
+fresh complete frame is required afterward. See HDMI_ROTATION.md and
+reference/load_frontend_rotation_checks.json. This is not yet the connected
+production shell or a physical HPS/DDR test.

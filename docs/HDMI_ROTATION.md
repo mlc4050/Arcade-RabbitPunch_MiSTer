@@ -68,3 +68,69 @@ The native framework samples hdmi_vbl into fb_vbl on clk_vid; an adapter must
 serialize the buffer-advance events and advertise only complete valid frames.
 The pixel-address and queued-write proofs do not establish safe publication,
 frame latency or loader handoff. Keep rotation disconnected until those pass.
+
+
+The descriptive adapter now serializes coincident source/destination buffer
+advances in VHDL, with the imported file unchanged. Its 8238d77 fit passes all
+standalone timing/coverage checks: 220 ALMs, 196 registers, no RAM/PLL and one
+inherited donor DSP; minimum setup +8.085 ns and hold +0.164 ns. Initialized
+between-edge tests check known read/write indices, active slot exclusion,
+read-slot progress and every pixel in three complete frames per case. Five
+compact FB_VBL phases (-2..+2 clocks), both low-latency request values, and
+both full native directions pass. Low-latency requests deliberately retain
+triple buffering: an initialized negative control exposes a legacy two-buffer
+collision when FB_VBL leads source VS. See hdmi_rotation_buffers_checks.json
+and hdmi_rotation_low_latency_probe.json. A separate early frozen-buffer
+report was invalid startup stimulus; hdmi_rotation_liveness_rejected.json
+retains that diagnosis and its corrected initialized recheck.
+
+The new publication guard accepts pixels only after a clean source frame
+boundary. It invalidates a slot on its first overwrite and advertises a slot
+only after a complete same-slot pixel count and an empty output queue at the
+frame boundary. Load, disable, not-ready and overflow immediately blank/flush
+presentation; recovery waits for another complete frame. Short, long,
+mixed-slot, queued, startup and post-load partial frames are rejected. Its
+7b1b43b standalone fit is 40 ALMs, 35 registers, no RAM/DSP/PLL, with setup
++7.557 ns and hold +0.170 ns. The functional netlist repeats the behavioral
+scenarios at the actual 62208-pixel size. See frame_publication_checks.json,
+frame_publication_synth.json and frame_publication_netlist_checks.json.
+
+The fitted rotator plus actual queue/publication RTL also passes both full
+CW/CCW images under repeated 96/64-clock DDR busy bursts. Each direction
+checks three complete 62208-pixel frames, every address/colour/byte mask, slot
+safety/progress, queue drain and publication only after all advertised-slot
+DDR pixel writes. Compact controls pass too. The first full-width publication
+checker incorrectly treated X=256 as frame origin by omitting its high bit;
+that exact failure is retained and the corrected checker passes. See
+hdmi_rotation_publication_checks.json and hdmi_rotation_publication_rejected.json.
+
+The combined transport now gives the loader immediate priority, discards old
+queued presentation writes and keeps DDR responses continuously connected to
+the loader. The caller must retain ownership through its last response and
+output word. The actual load frontend/native copier test verifies that
+contract under word backpressure, pending-queue takeover, DDR/direct byte
+modes, metadata filtering, reset gating, rejected overlaps and recovery:
+24 physical reads and all 129 expected output words remain exact, with no
+presentation write while the loader owns DDR. See load_frontend_rotation_checks.json.
+The separate mux/queue test also checks clean post-load image recovery.
+
+Transport fit 385ef95 passes all standalone timing/coverage checks: 465 ALMs,
+291 registers, six M10Ks/51712 bits, no DSP/PLL, setup +6.739 ns and hold
++0.172 ns. Its functional netlist passes the takeover/recovery scenario at
+62208 pixels per frame. These are isolated resources, not new full-shell totals.
+See rotation_transport_checks.json, rotation_transport_synth.json and
+rotation_transport_netlist_checks.json.
+
+Configured DDR reservations are disjoint: framework scaler 0x20000000..
+0x217fffff, rotator 0x24000000..0x257fffff, and the current ROM image at
+0x30000000..0x3020ffff. A rotated 216x288 image uses stride 864 and 248832
+bytes, fitting an 8 MiB slot. The audit derives addresses from RTL/framework
+sources and checks both QSFs and any MRA DDR address; it does not validate
+arbitrary host-supplied external-framebuffer locations. See ddr_window_checks.json.
+
+Next: latch HDMI mode changes safely, connect the native tap and framebuffer
+metadata/blanking plus the qualified loader transport, verify rotated aspect
+and control changes, then fit both complete MiSTer revisions. Actual CRT/HDMI
+hardware, arbitrary source/output phase/frequency, full end-to-end latency and
+physical DDR acceptance remain unverified. Native rendering keeps its existing
+one-row pipeline; optional HDMI rotation is the only new framebuffer path.
