@@ -4,8 +4,10 @@ Early development for Video System's 1987 arcade hardware, using MAME's rpunch.c
 as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
 
 Status: the VHDL CPU, memory, video, audio, ROM-loading, controls and high-score
-services are connected to the MiSTer boundary. The preceding non-debug full build passes prototype timing
-gates including HDMI sizing metadata and common screen flip. Optional CRT adjustment also passes a full-shell fit; no hardware-verified playable RBF or release exists.
+services are connected to the MiSTer boundary. Corrected HDMI rotation passes complete release/debug prototype timing gates,
+including native integer geometry, CRT adjustment and common flip. The newer
+audio-menu revision is undergoing full implementation; no hardware-verified
+playable RBF or release exists.
 
 Verification includes:
 
@@ -45,9 +47,19 @@ publication and direct-video bypass pass controller regressions. Both native
 qualified donor netlists. A reproduced interaction with doubled analog geometry
 is fixed: rotated integer scaling now measures the native framebuffer raster.
 The corrected complete controller passes standalone timing and functional control
-checks; its complete MiSTer release/debug builds are in progress. See
+checks. Its complete release/debug shells pass all 144/164 timing checks, with
+minimum setup/hold margins +0.217/+0.075 ns and +0.384/+0.075 ns respectively.
+The complete controller netlist also passes both 62,208-pixel directions at a
+separately documented compressed cadence, plus doubled-presentation integer
+metadata checks. The original production-raster complete-netlist image run
+remains incomplete after its wall timeout. See
 [rotation qualification](docs/HDMI_ROTATION.md) for exact source revisions,
 separate netlist/time-limit results and remaining physical tests.
+
+The Audio mix menu defaults to Mono and passes synthesized-host and connected
+HPS protocol tests for all four settings. Optional development MRAs select DDR
+ROM staging while preserving the verified direct-load ROM bytes; physical
+loading speed remains unmeasured.
 
 New board logic will use VHDL, with fx68k (SystemVerilog), T80 (VHDL), directly reused JTFRAME
 modules, and approved mixed-language sound/framework dependencies. Target: DE10-nano, Quartus Prime Lite 17.0.2, one

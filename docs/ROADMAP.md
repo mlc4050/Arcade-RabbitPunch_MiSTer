@@ -3,7 +3,8 @@
 Approved by the user in the originating chat. The core is in simulation and
 implementation bring-up; no complete game or playable RBF exists yet. The
 MiSTer framework boundary points to the VHDL machine. Prior non-debug full
-implementation passes; the newest output changes and hardware bring-up remain pending.
+implementation passes, including corrected HDMI rotation in both revisions.
+The newer audio-menu full implementations and hardware bring-up remain pending.
 
 ## Current status
 
@@ -14,30 +15,32 @@ implementation passes; the newest output changes and hardware bring-up remain pe
 | Video rendering | Six static scenes match MAME in the logical graphics pipeline. At the production 5357 ps chip-clock phase, Rabbit Punch attract and Rabio Lepus play1000 each match all 62208 pixels without underflow; worst rows are 2484/3024 and 1966/3024 clocks. The continuous renderer prepares one row ahead with two line banks and no composite framebuffer. |
 | Sound | T80, YM2151/JT51 and uPD7759/JT7759 paths are connected. All 38 sample sequences pass 237330 decoded-value checks. Both native-reset sound runs match all 4096 addresses/masks, 215 peripheral data writes and 3877 RAM values, with four explicitly audited bootstrap stack-save bytes reported separately. Audible and long-run game audio remain unverified. |
 | Host and persistence | Both-player Missile/Shoot controls, keyboard/pad inputs, pause, DIPs and high-score config3/dump4 transfers pass native-HPS/logical tests. The expanded video menu passes complete host protocol regression. Actual ARM `.dip`/`.nvm` filesystem round trips remain open. |
-| Output options | Forced scandoubling, HQ2x, three scanline strengths and direct-video override pass seven compact functional-netlist cases plus a full-width forced-doubling control. Normal pixels remain unbuffered after native scanout. HDMI aspect/integer metadata also passes standalone fit/netlist tests and is connected, with its full-shell fit passing all 144 checks. Common flip passes its exhaustive unit test, both 62208-pixel image-rotation comparisons and the clocked-machine fit with unchanged RAM; the registered-indicator full shell b5b14ee passes all 144 timing checks and coverage, with 82 untimed output paths under the unchanged 110 cap. CRT Adjust passes exact standalone fit/netlist RAM gates, full-height/native-raster image checks, signed size/position/vertical-shift controls and a complete MAME renderer comparison. Its expanded host menu passes fit/netlist protocol checks and the connected non-debug shell 77a7ff0 passes all 144 timing checks (setup +0.435 ns, hold +0.042 ns); native, forced-doubling and direct combined checks pass; the maintained one-row HQ2x pixel comparison also passes at compact and production horizontal widths, against independent native framework captures with matching black blanking. Isolated triple-buffer rotation, complete-frame publication and real-loader handoff now pass; rotation is connected experimentally with full-shell qualification pending; crop remains open. |
+| Output options | Forced scandoubling, HQ2x, three scanline strengths and direct-video override pass seven compact functional-netlist cases plus a full-width forced-doubling control. Normal pixels remain unbuffered after native scanout. HDMI aspect/integer metadata also passes standalone fit/netlist tests and is connected, with its full-shell fit passing all 144 checks. Common flip passes its exhaustive unit test, both 62208-pixel image-rotation comparisons and the clocked-machine fit with unchanged RAM; the registered-indicator full shell b5b14ee passes all 144 timing checks and coverage, with 82 untimed output paths under the unchanged 110 cap. CRT Adjust passes exact standalone fit/netlist RAM gates, full-height/native-raster image checks, signed size/position/vertical-shift controls and a complete MAME renderer comparison. Its expanded host menu passes fit/netlist protocol checks and the connected non-debug shell 77a7ff0 passes all 144 timing checks (setup +0.435 ns, hold +0.042 ns); native, forced-doubling and direct combined checks pass; the maintained one-row HQ2x pixel comparison also passes at compact and production horizontal widths, against independent native framework captures with matching black blanking. Isolated triple-buffer rotation, complete-frame publication and real-loader handoff now pass; corrected rotation passes complete release/debug qualification (144/164 timing checks), both dense complete-netlist image directions and doubled-presentation integer metadata. Physical output and crop remain open. |
 | Physical shell timing | Non-debug video-options shell 6397a94 passes all 144 reported checks: setup +0.323 ns, hold +0.100 ns, 14242 ALMs and 180 M10Ks. Prototype SDRAM constraints and inherited peripheral pin coverage gaps are explicit. Debug default seed 1b3e33f fails one inherited HDMI setup path by 0.204 ns; clean scanline-options retry f64d68b seed 2 passes all 164 checks (setup +0.373 ns, hold +0.067 ns). Connected aspect snapshot 42c1be5 also passes all 144 checks (setup +0.525 ns, hold +0.078 ns); common-flip d525db2 has positive slacks but fails the 110-path peripheral coverage cap by one; the accepted reference rebuild identifies only an additional LED[0] indicator path. The registered-indicator b5b14ee rebuild passes all 144 timing checks (setup +0.370 ns, hold +0.078 ns), with 82 untimed output paths under the unchanged 110 cap. |
 | Hardware | No playable board verification, deployment, screenshot, JTAG read or audible output is claimed. RBFs are local timed prototypes; there is no verified release. |
 
-Next work is completing both corrected HDMI-rotation shell implementations and
-the bounded complete-netlist image/combined-geometry checks. The expanded menu,
-mode/direct/loader controls, normal and rotated integer metadata, complete-frame
-publication and frontend handoff pass. The corrected controller standalone fit
-and functional-netlist controls also pass; both complete native image directions
-pass three scored production-raster frames in RTL around qualified donor netlists.
-The earlier connected shell passes all 144 timing checks but is retained as a
-superseded snapshot: it predates the native-versus-doubled geometry correction.
-The original long production-raster complete-netlist pixel run reached its real
-30-minute limit before a scored frame; it is preserved as incomplete, not passed.
-The separate compressed fixture keeps all 62208 pixels and queued DDR stalls;
-its RTL validation passes and its complete-netlist comparison is running.
+Next work is completing both audio-menu full-shell implementations and the
+original ROM-free diagnostic's native CPU-to-video path. Audio mix defaults to
+Mono; all four settings pass synthesized-host and connected HPS regressions.
+Development DDR-load MRAs preserve each verified 0x210000-byte image and change
+only the staging address/display description; the default direct MRAs remain.
+
+Corrected HDMI-rotation release 0884a46 and debug b2d73bc seed 2 pass all 144/164
+timing and unchanged coverage checks, with setup/hold +0.217/+0.075 ns and
++0.384/+0.075 ns. Both native directions pass three production-raster frames in
+RTL around qualified donor netlists. The complete controller netlist passes
+both 62208-pixel directions in the independently checked compressed fixture,
+plus both directions/all integer modes with doubled analog geometry.
+The original production-raster complete-netlist image run remains incomplete
+at its wall timeout; the compressed proof does not replace that scope.
 
 Combined CRT/HQ2x matches the independent native-framework reference at 1152
 flat-field and 1024 patterned output pixels. Full native raster, extreme clipping,
 live vertical-shift coverage, physical outputs and end-to-end latency remain open.
-Connected CRT release and instrumented seed-2 snapshots retain their positive
-144/164 timing/coverage baselines. Remaining local output features include crop
-and audio OSD options; hardware bring-up has no recorded result. Continue the
-approved local work without routine confirmation.
+Crop remains open: the framework shares core DE with analog output, so routing
+HDMI crop through that DE would also change CRT pixels. Preserve the native
+one-row analog path while resolving that interface. Continue the approved local
+work without routine confirmation.
 
 Evidence: [ROADMAP timing scope](SDRAM_PIN_TIMING.md),
 [video options](VIDEO_OPTIONS.md), [aspect evaluation](VIDEO_ASPECT.md), [common flip and CRT path](VIDEO_FLIP.md),
