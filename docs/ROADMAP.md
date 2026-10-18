@@ -5,33 +5,29 @@ implementation bring-up; no complete game or playable RBF exists yet. The
 MiSTer framework boundary now points to the VHDL machine; full-shell
 implementation and hardware bring-up remain pending.
 
-## Current verified status
+## Current status
 
-| Block | Evidence and scope |
+| Area | Verified state |
 |---|---|
-| Reference and MRAs | Matching MAME 0.289 source/binary; both 0x210000-byte ROM streams agree with MAME. Development MRAs include validated score metadata, separate 119/115-byte NVRAM sizes, DIPs and independent Missile/Shoot controls. |
-| CPU, bus and I/O | fx68k diagnostics, IRQ/autovector, pause/reset draining, native RAM and board I/O tests pass. Both games' first 10000 ordered writes and all 24 checked I/O fields match MAME through production cached SDRAM. |
-| Captured-state graphics | All six HDL RGB scenes match MAME through shared native RAM, ROM caches and the real SDRAM command model: 373248 identical pixels, concurrent synthetic CPU traffic, live bitmap/palette updates and reset recovery. Largest measured cached line cost is 2557 clocks, 53.3 us at 48 MHz; physical deadlines remain open. |
-| Executing CPU with logical video | Both games pass 10000-write boot comparisons while rendering 526 logical lines each (151488 black RGB/tag checks per game). This early prefix uses an explicit MAME-style zero RAM seed and black palette/tag checks, distinct from the captured graphics proof. |
-| Logical board implementation | CPU/I/O/IRQ/shared-RAM video together pass every reported 48 MHz timing corner: 2962 ALMs, 112 M10K blocks, worst setup +6.808 ns and hold +0.115 ns. Logical test boundaries are registered; final external pin timing is not established. |
-| Sound subsystem | Unchanged JT51 and its descriptive VHDL wrapper pass reset/status, explicit mute, sample cadence and timer/IRQ baselines. T80 transaction/pause/reset diagnostics and connected command IRQ tests pass. Both audio ROMs match 4096 MAME startup writes through native sound RAM, VHDL bus decode and JT51, with explicit MAME CPU/RAM test seeds. The logical sound board also passes synthesized-netlist diagnostics and 48 MHz implementation (2405 ALMs, 11 RAM blocks, setup +2.621 ns / hold +0.105 ns). Native/wrapped JT7759 synthetic playback and retrigger baselines pass; bank/reset/start and shared sound ROM scheduling are connected and tested. Both sets also match 4096 startup writes through shared SDRAM. Complete logical audio passes fit/netlist tests. All 38 real sample streams pass 237330 decoded-value checks against a pinned-source MAME model; audible game audio remains unverified. |
-| ROM transport and image loading | SDRAM adapter, ROM mapper/cache and word loader pass directed, implementation and synthesized-netlist tests. Sequential download control passes delayed-response/error-recovery tests, real SDRAM image replacement and implementation timing. A load-time DDR copier now passes donor/direct tests and boots two synthetic main programs through the production SDRAM loader. The automatic HPS-signal frontend also passes DDR/direct-byte boot, reset-release, no-recopy and partial-image recovery tests. Native hps_io command parsing now connects to the logical platform in functional-netlist simulation; physical HPS/DDR ownership and interface integration remain open. |
-| Output alignment | Fixed five-system-clock RGB/sync/blanking adapter passes sparse cadence, missing/tag/error fallback and reset tests; all six actual HDL scenes pass 373248 RGB comparisons against MAME with independent ROM models. Fit: 92 ALMs, 168 registers, zero RAM; all 48 MHz timing/coverage gates pass. No physical raster is generated. |
-| Host/control platform | Native HPS commands drive controls, DIPs, ROM loading and score persistence into the executing 68000/native SDRAM model. Final score-platform fit passes at 48 MHz with 929387 RAM bits (124 M10K blocks), worst setup +3.142 ns / hold +0.109 ns after explicit RAM initialization (f6d5f7e). No physical PLL/raster/HPS bridge proof. |
-| Connected logical system | Both games match 10000 main and 4096 sound startup writes against MAME with transparent maintenance ownership and no native-RAM deposits; sound CPU register normalization remains explicit. Download, hot replacement, pause, active audio maintenance and reset drain tests pass. Full game/audio and physical timing remain open. |
-| Provisional clock/raster | User-approved 46 2/3 MHz system, steady /7 pixels and fractional chip enables; standalone raster/PLL-model/reset checks pass. Continuous controller passes 124416 synthetic RGB checks with intentional deadline failure and live-sync recovery. Connected machine passes CPU/download/pause/reset diagnostics with external CPU phases; Rabbit Punch attract scanout matches all 62208 MAME pixels without underflow (2576/3024-clock worst row); combined machine fit passes 48 MHz with setup +2.077 ns / hold +0.100 ns. MiSTer shell and physical clock tree remain open. |
-| High-score persistence | Atomic saved banks and validated config3/dump4 service pass unit, native-memory, full-platform and native HPS command tests for both sets. Reset-held files, CPU-consumed restored bytes, changed snapshots/uploads, soft reset and game isolation pass. Final combined fit passes; physical `.nvm` disk round trip remains open. |
+| Reference | MAME 0.289 source/binary, both ROM layouts/MRAs, capture hashes and attract/play write sweeps are pinned. Original-board timing is unavailable; the user accepted documented provisional timing. |
+| CPUs and memory | Both games match 10000 main/4096 sound startup writes in the logical system. PLL/fractional-enable startup prefixes pass. Native RAM initialization, cached SDRAM, download/replacement, pause/drain and maintenance tests pass; physical HPS/DDR/SDRAM loading is unverified. |
+| Video rendering | Six static scenes match MAME in the logical graphics pipeline. At the production 5357 ps chip-clock phase, Rabbit Punch attract and Rabio Lepus play1000 each match all 62208 pixels without underflow; worst rows are 2484/3024 and 1966/3024 clocks. The continuous renderer prepares one row ahead with two line banks and no composite framebuffer. |
+| Sound | T80, YM2151/JT51 and uPD7759/JT7759 paths are connected. All 38 sample sequences pass 237330 decoded-value checks. Both native-reset sound runs match all 4096 addresses/masks, 215 peripheral data writes and 3877 RAM values, with four explicitly audited bootstrap stack-save bytes reported separately. Audible and long-run game audio remain unverified. |
+| Host and persistence | Both-player Missile/Shoot controls, keyboard/pad inputs, pause, DIPs and high-score config3/dump4 transfers pass native-HPS/logical tests. The expanded video menu passes complete host protocol regression. Actual ARM `.dip`/`.nvm` filesystem round trips remain open. |
+| Output options | Forced scandoubling, HQ2x, three scanline strengths and direct-video override pass seven compact functional-netlist cases plus a full-width forced-doubling control. Normal pixels remain unbuffered after native scanout. CRT Adjust, common flip, HDMI rotation/crop and remaining video options are still pending. |
+| Physical shell timing | Current non-debug video-options shell 6397a94 passes all 144 reported checks: setup +0.323 ns, hold +0.100 ns, 14242 ALMs and 180 M10Ks. Prototype SDRAM constraints and inherited peripheral pin coverage gaps are explicit. Debug default seed 1b3e33f fails one inherited HDMI setup path by 0.204 ns; game/SDRAM timing passes, and a new seed is next. |
+| Hardware | No playable board verification, deployment, screenshot, JTAG read or audible output is claimed. RBFs are local timed prototypes; there is no verified release. |
 
-The production shell now uses a fitted 46 2/3 MHz game clock and quarter-period
-SDRAM pin clock. The native raster remains provisional. Real game audio, full
-game execution/play coverage, physical MiSTer HPS/DDR loading, remaining output
-features and hardware verification remain open.
+Next work is the instrumented placement retry, standalone HDMI aspect/integer-size
+fit and netlist comparison, then remaining output features and hardware bring-up.
+The aspect adapter is isolated and unconnected; its startup ratio smoke passes,
+while full integer-mode synthesis/simulation remains pending. No routine user
+confirmation is required for the approved local work.
 
-Evidence: [BOARD_INTEGRATION.md](BOARD_INTEGRATION.md),
-[SYSTEM_INTEGRATION.md](SYSTEM_INTEGRATION.md),
-[SDRAM_TRANSPORT.md](SDRAM_TRANSPORT.md), [DOWNLOAD.md](DOWNLOAD.md),
-[VIDEO_PIPELINE.md](VIDEO_PIPELINE.md) and reports under reference/.
-Hardware/source citations: [HARDWARE_NOTES.md](HARDWARE_NOTES.md).
+Evidence: [ROADMAP timing scope](SDRAM_PIN_TIMING.md),
+[video options](VIDEO_OPTIONS.md), [aspect evaluation](VIDEO_ASPECT.md),
+[sound bring-up](SOUND_BRINGUP.md), [host/persistence](HISCORE.md),
+[provisional raster](PROVISIONAL_RASTER.md) and reports under reference/.
 
 ## Goal and scope
 
@@ -261,80 +257,27 @@ PROVISIONAL_RASTER.md. MAME accuracy is accepted where better board evidence
 is unavailable; proceed without repeating this approval request.
 
 
-## Recent integration milestones
+## Recent integration evidence
 
-Both sets pass 10,000 main and 4,096 sound ordered startup-write comparisons
-through the production system, cached SDRAM and transparent maintenance owner.
-Those older maintenance reports retain their exact source hashes and explicit
-RAM/CPU test seeds. The new complete two-game power-up run also passes without
-native-RAM deposits; sound CPU register normalization and direct SDRAM ROM-model
-preload remain explicit. See reference/system_boot_10000_4096_powerup_checks.json.
+The native-output instrumented full fit 90e053c and non-debug 81844b1 establish
+previous positive timing baselines; their revision-specific artifact manifests
+retain exact hashes. The connected video-options non-debug 6397a94 also passes,
+while instrumented 1b3e33f is explicitly rejected for its -0.204 ns HDMI setup
+path. No source/SDRAM false path was added to conceal that failure.
 
-Native high-score persistence now passes both game geometries through the fitted
-hps_io command parser and complete logical platform: config3/dump4 transfers,
-reset-held files, CPU-consumed restored words, OSD captures/uploads, native save
-polling, menu visibility, soft reset and ROM-generation isolation. Actual ARM
-filesystem `.nvm`/`.dip` round trips remain part of hardware testing.
+Production-phase MAME graphics comparisons are in
+reference/scanout_pll_5357ps_rpunch_attract_checks.json and
+reference/scanout_pll_5357ps_rabiolep_play1000_checks.json. The separate live CPU
+startup frame was black, correctly ordered and free of underflow; it is not a
+visible-gameplay or temporally aligned MAME-frame proof.
 
-The combined platform fit with defined RAM power-up contents (f6d5f7e) passes
-all 48 MHz timing/coverage gates: 6,630 ALMs, 8,143 registers, 124 M10K blocks,
-929,387 RAM bits, worst setup +3.142 ns and hold +0.109 ns. The exhaustive RAM
-bench reads all 52,224 mapped words through CPU and inspection before writing;
-the boundary-sampled synthesized-memory check also passes (921 checks). See RAM_POWERUP.md and HISCORE.md.
+Native-reset sound evidence and four per-set comparison negative controls are
+in reference/sound_board_native_reset_checks.json. The two ROMs use different
+bootstrap routine addresses, audited separately in SOUND_BRINGUP.md. The strict
+normalized full-write comparison remains available; no vendor reset change was
+made for the temporary saved bytes.
 
-The continuous raster and PLL/reset machine are now wired into the MiSTer top.
-The isolated PLL-driven implementation 2374ddc passes setup (+2.141 ns), hold
-(+0.091 ns), all other reported corners and six coverage categories. Its fitted
-clock ratios produce nominal 46.6666667 MHz and a half-period SDRAM output.
-The external chip-clock simulation exposed and fixed an early read-capture window
-in the VHDL adapter; imported memory RTL remains unchanged. Rabbit Punch attract
-now matches all 62208 MAME pixels through that clock relationship, without
-underflow and within one row's budget. Full-shell fit, actual PCB pin timing,
-interactive gameplay and audible hardware output remain pending. No verified
-playable RBF or original-board timing proof is claimed.
-
-The instrumented full-shell fit 90e053c now passes all 164 reported timing checks
-under the documented prototype SDRAM budgets, with minimum setup +0.367 ns and
-hold +0.078 ns. Resources are 13964 ALMs, 23693 registers, 166 M10Ks, 34 DSPs and
-three PLLs. The inherited peripheral and dedicated JTAG pin electrical timing
-scope is explicit; no game/SDRAM false paths were added. Read-only telemetry
-is present in the fitted debug build, but has not been read from hardware.
-Artifacts and exact qualification are in SDRAM_PIN_TIMING.md and
-reference/full_shell_90e053c_timing_checks.json.
-
-At the production 5357 ps SDRAM phase, Rabbit Punch attract matches all 62208
-MAME pixels with no underflow, worst row 2484/3024 clocks. A separate historical
-10714 ps live-raster Rabio Lepus run matches 2000 main/256 sound startup writes
-and outputs a complete, correctly ordered black startup frame without underflow
-(worst row 1950 clocks). It does not establish visible gameplay or a matching
-MAME frame. The production-phase Japanese gameplay snapshot comparison and a
-separate release-revision fit are the next verification steps.
-
-The separate non-debug full fit 81844b1 passes all 144 reported checks with
-minimum setup +0.368 ns and hold +0.076 ns; its archive and source/bitstream
-hashes are in reference/full_shell_81844b1_release_checks.json. This establishes
-an independently timed prototype revision, not a playable hardware release.
-The production-phase Rabio Lepus play1000 scene also passes all 62208 MAME RGB
-pixels; see reference/scanout_pll_5357ps_rabiolep_play1000_checks.json. Optional
-scandoubler/HQ2x/scanline output remains an isolated evaluation on the
-codex/video-options branch until its VHDL/netlist tests pass.
-
-Optional forced scandoubling, HQ2x and three CRT scanline strengths now pass a
-seven-mode VHDL/Quartus-functional-netlist suite, including exact native/direct
-bypass and direct-video override. A VHDL adapter and H5 OSD option are connected
-at the shell; native telemetry remains before it. The standalone target passes
-48 MHz timing/coverage (767 ALMs, 14 M10Ks, no DSPs). Full-width output and the
-new connected-shell full fit are pending; see VIDEO_OPTIONS.md.
-
-Native-reset sound startup now passes both games without CPU register loading
-or RAM deposits: all 4096 addresses/masks and 215 peripheral data writes match,
-with 3877 RAM values exact and four disassembly-audited reset-dependent stack
-save bytes reported separately. The comparator has four negative controls per
-set. This strengthens reset bring-up evidence; audible hardware/game audio
-remains open. See SOUND_BRINGUP.md and reference/sound_board_native_reset_checks.json.
-
-Connected optional video now has an independently timed non-debug full shell
-(6397a94): all 144 checks pass, minimum setup +0.323 ns/hold +0.100 ns and 180
-M10Ks. The corresponding instrumented default placement fails one inherited
-HDMI path by 0.204 ns, while game/SDRAM timing passes; another seed remains to
-be checked. Physical output and hardware playability are still open.
+Original ROM-free diagnostic MRAs are generated locally by build_diagnostic_rom.py.
+Both complete 32768-word and bounded CPU/bitmap fill diagnostics pass, including
+the deliberate corrupt-ROM branch. Native physical display/SDRAM execution of
+those images remains part of hardware bring-up.

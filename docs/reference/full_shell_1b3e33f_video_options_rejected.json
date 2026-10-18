@@ -1,0 +1,152 @@
+{
+  "build_commit": "1b3e33f0412cbf74ebf5a62aa263b447495550dd",
+  "revision": "RabbitPunch_stp",
+  "seed": "default",
+  "accepted": false,
+  "violations": [
+    {
+      "type": "Slow 1100mV -40C Model Setup 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": -0.204
+    }
+  ],
+  "timing_checks": 164,
+  "minimum_slack_ns": {
+    "Setup": -0.204,
+    "Hold": 0.085,
+    "Recovery": 3.277,
+    "Removal": 0.38,
+    "Minimum Pulse Width": 1.122
+  },
+  "game_setup_min_ns": 1.035,
+  "sdram_output_setup_min_ns": 0.767,
+  "coverage": {
+    "scope": "Inherited Template MiSTer peripheral pin paths left untimed by upstream sys_top.sdc; explicit source-locked scope, not a claim of HDMI/audio/SD/I2C electrical timing. No SDRAM or game-internal clock/path is excluded.",
+    "input_ports": [
+      "HDMI_I2C_SDA",
+      "HDMI_TX_INT",
+      "IO_SDA",
+      "SDCD_SPDIF",
+      "altera_reserved_tdi",
+      "altera_reserved_tms"
+    ],
+    "output_ports": [
+      "HDMI_I2C_SCL",
+      "HDMI_I2C_SDA",
+      "HDMI_I2S",
+      "HDMI_LRCLK",
+      "HDMI_MCLK",
+      "HDMI_SCLK",
+      "HDMI_TX_CLK",
+      "HDMI_TX_DE",
+      "HDMI_TX_D[0]",
+      "HDMI_TX_D[10]",
+      "HDMI_TX_D[11]",
+      "HDMI_TX_D[12]",
+      "HDMI_TX_D[13]",
+      "HDMI_TX_D[14]",
+      "HDMI_TX_D[15]",
+      "HDMI_TX_D[16]",
+      "HDMI_TX_D[17]",
+      "HDMI_TX_D[18]",
+      "HDMI_TX_D[19]",
+      "HDMI_TX_D[1]",
+      "HDMI_TX_D[20]",
+      "HDMI_TX_D[21]",
+      "HDMI_TX_D[22]",
+      "HDMI_TX_D[23]",
+      "HDMI_TX_D[2]",
+      "HDMI_TX_D[3]",
+      "HDMI_TX_D[4]",
+      "HDMI_TX_D[5]",
+      "HDMI_TX_D[6]",
+      "HDMI_TX_D[7]",
+      "HDMI_TX_D[8]",
+      "HDMI_TX_D[9]",
+      "HDMI_TX_HS",
+      "HDMI_TX_VS",
+      "IO_SCL",
+      "IO_SDA",
+      "LED[0]",
+      "LED[2]",
+      "LED[6]",
+      "SDCD_SPDIF",
+      "SDIO_CLK",
+      "SDIO_CMD",
+      "SDIO_DAT[0]",
+      "SDIO_DAT[1]",
+      "SDIO_DAT[2]",
+      "SDIO_DAT[3]",
+      "SD_SPI_CS",
+      "USER_IO[2]",
+      "USER_IO[4]",
+      "USER_IO[5]",
+      "altera_reserved_tdo"
+    ],
+    "raw_coverage": {
+      "Illegal Clocks": [
+        0,
+        0
+      ],
+      "Unconstrained Clocks": [
+        0,
+        0
+      ],
+      "Unconstrained Input Ports": [
+        6,
+        6
+      ],
+      "Unconstrained Input Port Paths": [
+        59,
+        59
+      ],
+      "Unconstrained Output Ports": [
+        51,
+        51
+      ],
+      "Unconstrained Output Port Paths": [
+        115,
+        115
+      ]
+    },
+    "instrumented_jtag_scope": "Only instrumented revision: dedicated Intel-generated TAP pins TDI/TMS/TDO lack external cable delays. TCK and internal debug timing remain checked; no game or SDRAM path excluded. Reference full fit 90e053c."
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Sat Oct 17 22:47:42 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : RabbitPunch_stp",
+    "Top-level Entity Name : sys_top",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 14,718 / 41,910 ( 35 % )",
+    "Total registers : 25232",
+    "Total pins : 145 / 314 ( 46 % )",
+    "Total virtual pins : 0",
+    "Total block memory bits : 1,380,192 / 5,662,720 ( 24 % )",
+    "Total RAM Blocks : 180 / 553 ( 33 % )",
+    "Total DSP Blocks : 34 / 112 ( 30 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 3 / 6 ( 50 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "archive": "debug/fit_archive/full_shell_1b3e33f_video_options_seed_default_rejected",
+  "artifact_sha256": {
+    "BUILT_COMMIT": "372d995f052c735583098059421ab549062951e771f282b3e11a5fabb4b77052",
+    "framework_timing_scope.json": "705cb14cc836af90db504a3d88a7ec3a9ea3bad81409f4cabeeb1cccd994c1cf",
+    "q_staged.log": "c570f705242b49ef4db199b932bd3ad9913c5309067e3435f61bdff48e11d3e3",
+    "RabbitPunch_stp.asm.rpt": "eb00ac12a7cfa7fdf3ce1f3f749a1814d00a38bb6021ba79c792561534c19220",
+    "RabbitPunch_stp.fit.rpt": "8f37e92d7b34b099bc9201ed829236402e50564f29471fd77729262b2fe35e0f",
+    "RabbitPunch_stp.fit.summary": "923a4c38940c287b63860997b9ca5fc5cb76857496e2c9a32fbeb799c1f7d02f",
+    "RabbitPunch_stp.flow.rpt": "79d4cebd88993cc05fc8a5460e9e7c4afb9bbfa391487aa4863f893eccad963a",
+    "RabbitPunch_stp.map.rpt": "1ac2c9d536d7f322fa537360612cb15f1f72b8da02eac95074ba79e5a8dda6b2",
+    "RabbitPunch_stp.map.summary": "6206ee5043941c1233017900ebbd1ea4529461f1c931ecaac5256b021f46a96b",
+    "RabbitPunch_stp.rbf": "81adc3da7e22ca7a339f974bbfa455424a0fcf5be71a4c839e577da63ec1ab03",
+    "RabbitPunch_stp.sof": "45d28c032a9b750fb52c19d0b641d0dd2b8d99bc11202bfd60ced464759d3859",
+    "RabbitPunch_stp.sta.rpt": "55fd63b2636704d39ca3c85021730b07f861940c4a389761f444410971151198",
+    "RabbitPunch_stp.sta.summary": "798bc73a94ea2685f699a1ed6aeef490f278e42a5ea6dcd1b1e589f11681880e"
+  },
+  "scope": "Completed full fit rejected by all-corner timing gate: one inherited HDMI PLL-domain setup path fails by 0.204 ns. No deployment/hardware validity claimed."
+}

@@ -49,8 +49,11 @@ registers, 70080 RAM bits in 14 M10Ks, zero DSPs and no PLL. All reported corner
 checks and all six timing-coverage categories pass. Minimum setup is +5.816 ns
 and minimum hold is +0.111 ns. This virtual-I/O fit is not full-shell timing.
 See reference/video_options_synth.json. All seven compact tests pass: native bypass, forced doubling, HQ2x, three
-scanline strengths, and direct-video override. The separate full-width control
-is running. The connected shell now exposes the Scandoubler Fx menu at status
+scanline strengths, and direct-video override. The separate full-width forced-scandoubler control also passes: 288 visible
+pixels on a 432-pixel raster produce exactly 576 visible output pixels in two
+rows, with exact RGB values after warm-up. It uses one visible/four total
+vertical lines; full-height and physical output remain unverified. See
+reference/video_options_full_width_checks.json. The connected shell now exposes the Scandoubler Fx menu at status
 bits 46:44, hides it under direct video, and honors forced doubling when direct
 video is off. Native renderer telemetry stays before this presentation path.
 
