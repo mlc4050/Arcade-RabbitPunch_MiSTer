@@ -184,3 +184,10 @@ the independent native-aspect comparison; the complete existing mode/loader/dire
 control regression also passes. See reference/hdmi_presented_geometry_checks.json
 and hdmi_presented_geometry_rejected_checks.json. Earlier fitted-controller and
 full-shell jobs predate this metadata correction; fresh synthesis/timing is required.
+
+The corrected native-geometry controller c7ecb10 passes standalone 48 MHz
+implementation: 795 ALMs, 877 registers, four M10Ks (one 512x80 queue), one DSP,
+no PLL. Minimum setup is +5.375 ns and hold +0.118 ns, with all six timing
+coverage categories clean. See reference/hdmi_presentation_native_geometry_synth.json.
+The full-controller functional netlist and corrected full-shell timing checks
+remain pending; earlier fit snapshots do not include this correction.
