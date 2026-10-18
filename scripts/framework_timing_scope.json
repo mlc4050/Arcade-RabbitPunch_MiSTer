@@ -1,0 +1,91 @@
+{
+  "scope": "Inherited Template MiSTer peripheral pin paths left untimed by upstream sys_top.sdc; explicit source-locked scope, not a claim of HDMI/audio/SD/I2C electrical timing. No SDRAM or game-internal clock/path is excluded.",
+  "reference_commit": "660a45a1edde2d901e6031dda7bbe2ba7b21b4a5",
+  "source_sha256": {
+    "sys/sys_top.sdc": "e1dffc544a3732619532fc97c129bb1dc98bf6fba9113319080c52530d37b7ec",
+    "sys/sys_top.v": "045f20e03ae1c38b9144a17c4a136c5072900de692065aea67d052667cc597e9"
+  },
+  "input_ports": [
+    "HDMI_I2C_SDA",
+    "HDMI_TX_INT",
+    "IO_SDA",
+    "SDCD_SPDIF"
+  ],
+  "output_ports": [
+    "HDMI_I2C_SCL",
+    "HDMI_I2C_SDA",
+    "HDMI_I2S",
+    "HDMI_LRCLK",
+    "HDMI_MCLK",
+    "HDMI_SCLK",
+    "HDMI_TX_CLK",
+    "HDMI_TX_DE",
+    "HDMI_TX_D[0]",
+    "HDMI_TX_D[10]",
+    "HDMI_TX_D[11]",
+    "HDMI_TX_D[12]",
+    "HDMI_TX_D[13]",
+    "HDMI_TX_D[14]",
+    "HDMI_TX_D[15]",
+    "HDMI_TX_D[16]",
+    "HDMI_TX_D[17]",
+    "HDMI_TX_D[18]",
+    "HDMI_TX_D[19]",
+    "HDMI_TX_D[1]",
+    "HDMI_TX_D[20]",
+    "HDMI_TX_D[21]",
+    "HDMI_TX_D[22]",
+    "HDMI_TX_D[23]",
+    "HDMI_TX_D[2]",
+    "HDMI_TX_D[3]",
+    "HDMI_TX_D[4]",
+    "HDMI_TX_D[5]",
+    "HDMI_TX_D[6]",
+    "HDMI_TX_D[7]",
+    "HDMI_TX_D[8]",
+    "HDMI_TX_D[9]",
+    "HDMI_TX_HS",
+    "HDMI_TX_VS",
+    "IO_SCL",
+    "IO_SDA",
+    "LED[0]",
+    "LED[2]",
+    "LED[6]",
+    "SDCD_SPDIF",
+    "SDIO_CLK",
+    "SDIO_CMD",
+    "SDIO_DAT[0]",
+    "SDIO_DAT[1]",
+    "SDIO_DAT[2]",
+    "SDIO_DAT[3]",
+    "SD_SPI_CS",
+    "USER_IO[2]",
+    "USER_IO[4]",
+    "USER_IO[5]"
+  ],
+  "maximum_unconstrained_paths": {
+    "setup_input": 14,
+    "hold_input": 14,
+    "setup_output": 110,
+    "hold_output": 110
+  },
+  "instrumented_jtag": {
+    "scope": "Only instrumented revision: dedicated Intel-generated TAP pins TDI/TMS/TDO lack external cable delays. TCK and internal debug timing remain checked; no game or SDRAM path excluded. Reference full fit 90e053c.",
+    "input_ports": [
+      "altera_reserved_tdi",
+      "altera_reserved_tms"
+    ],
+    "output_ports": [
+      "altera_reserved_tdo"
+    ],
+    "additional_unconstrained_paths": {
+      "setup_input": 45,
+      "hold_input": 45,
+      "setup_output": 5,
+      "hold_output": 5
+    },
+    "source_sha256": {
+      "rtl/rabbitpunch_debug.vhd": "6a85b120b16792baa22b389a8576fd46f73b4b81c0ce65306ab5fd3063e14938"
+    }
+  }
+}

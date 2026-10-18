@@ -27,7 +27,7 @@ def evaluate(raw, argv=(), instance='RPUN'):
     runtime.eval('proc get_device_names {args} {return 5CSEBA6_MOCK}')
     runtime.eval('proc start_insystem_source_probe {args} {capture_transport start}')
     runtime.eval('proc end_insystem_source_probe {args} {capture_transport end}')
-    runtime.call('set', 'mock_instances', f'{{0 1 512 {instance}}}')
+    runtime.call('set', 'mock_instances', f'{{0 1 511 {instance}}}')
     runtime.eval('proc get_insystem_source_probe_instance_info {args} {return $::mock_instances}')
     runtime.call('set', 'mock_raw', raw)
     runtime.eval('proc read_probe_data {args} {capture_transport read; return $::mock_raw}')
@@ -39,7 +39,7 @@ def evaluate(raw, argv=(), instance='RPUN'):
         error = str(failure)
     return output, calls, error
 
-raw = f'{packet:0512b}'
+raw = f'{packet:0511b}'
 output, calls, error = evaluate(raw, ('RPUN',))
 assert error is None, error
 fields = dict(line.strip().split() for line in output if line.startswith('  '))
@@ -54,10 +54,20 @@ expected = {'core_tag': '0x5250554E', 'build_id': '0x89ABCDEF', 'frames': '12',
 for name, value in expected.items():
     assert fields[name] == value, (name, fields[name], value)
 assert calls == [('start',), ('read',), ('end',)]
-checks = ['valid_registered_packet']
+from probe import decode
+assert decode('banner text\n' + '\n'.join(output)) == fields
+for invalid in ('  core_tag 0x00000000\n  layout_version 1',
+                '  core_tag 0x5250554E\n  layout_version 2'):
+    try:
+        decode(invalid)
+    except SystemExit:
+        pass
+    else:
+        raise AssertionError('One-line parser accepted the wrong identity')
+checks = ['valid_registered_packet', 'one_line_parser_identity_guards']
 for name, bad_raw, argv, instance in [
-    ('wrong_tag', f'{packet ^ 1:0512b}', (), 'RPUN'),
-    ('wrong_layout', f'{packet ^ (1 << 480):0512b}', (), 'RPUN'),
+    ('wrong_tag', f'{packet ^ 1:0511b}', (), 'RPUN'),
+    ('wrong_layout', f'{packet ^ (1 << 480):0511b}', (), 'RPUN'),
     ('wrong_width', raw[1:], (), 'RPUN'),
     ('wrong_binary', raw[:200] + 'X' + raw[201:], (), 'RPUN'),
     ('unknown_instance', raw, (), 'OTHER'),
@@ -74,7 +84,7 @@ for name, bad_raw, argv, instance in [
         assert calls == [], (name, calls)
     checks.append(name)
 result = dict(checks=checks, decoded_fields=len(fields),
-    source_sha256=hashlib.sha256(script.read_bytes()).hexdigest(),
+    source_sha256={name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in ('scripts/read_issp.tcl', 'scripts/probe.py')},
     scope='Python-hosted Tcl decoder with mocked enumeration/read/session commands; valid bit ordering and fail-closed identity/layout/width/selection/read-only controls; no JTAG tool or hardware connection')
 (root / 'docs/reference/debug_decode_checks.json').write_text(json.dumps(result, indent=2) + '\n')
 print(f'PASS debug decoder: {len(checks)} cases, {len(fields)} fields; no JTAG opened')

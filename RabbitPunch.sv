@@ -238,7 +238,7 @@ rabbitpunch_debug #(.GU32_BUILD_ID(`RABBITPUNCH_BUILD_ID)) debug_probe
     .iu16_sound_address(sound_address),
     .iu8_sound_data(sound_data),
     .i_audio_sample(audio_sample),
-    .ou512_snapshot()
+    .ou511_snapshot()
 );
 `endif
 endmodule

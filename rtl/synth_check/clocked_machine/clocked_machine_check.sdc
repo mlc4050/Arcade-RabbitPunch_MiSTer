@@ -10,7 +10,7 @@ set shifted_sources [list]
 foreach_in_collection clock [get_clocks *] {
     set period [get_clock_info -period $clock]
     set edges [get_clock_info -waveform $clock]
-    if {$period > 21.42 && $period < 21.44 && abs([lindex $edges 0] - 10.714286) < 0.03} {
+    if {$period > 21.42 && $period < 21.44 && abs([lindex $edges 0] - 5.357) < 0.03} {
         lappend shifted_sources [get_clock_info -targets $clock]
     }
     if {$period > 21.42 && $period < 21.44 && abs([lindex $edges 0]) < 0.01} {

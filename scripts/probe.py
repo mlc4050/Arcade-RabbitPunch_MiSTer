@@ -1,79 +1,49 @@
-#!/usr/bin/env python3
-"""Read the core's JTAG probe, guarded against a concurrent Quartus build.
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 RabbitPunch contributors
+"""One-line read-only RPUN telemetry through the shared JTAG guard.
 
-    python scripts/probe.py                    # read every field of the default instance
-    python scripts/probe.py clear              # read, then zero the counters
-    python scripts/probe.py --instance G
-    python scripts/probe.py --fields frames pll_locked
+    python scripts/probe.py
+    python scripts/probe.py --fields frames pll_locked underflow_events
 
-Wraps `quartus_stp -t scripts/read_issp.tcl`: refuses to run beside Quartus
-(scripts/hwlock.py) and prints one line per read, so a sequence of samples is
-readable rather than four screens of Quartus banner. Each line starts
-`<core>|<build>|<set>|` from the device (scripts/identity.py): with several sessions
-sharing the board, the core answering may not be this repository's.
+Counters survive gameplay reset. The RPUN source bus has no write/clear actions.
 """
 import argparse
-import subprocess
+import re
 import sys
-from pathlib import Path
+from identity import prefix
+from read_issp import read as read_raw
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from coretools import core_root, quartus_stp   # noqa: E402
-from hwlock import jtag_session                # noqa: E402
-from identity import prefix                     # noqa: E402
-
-REPO = core_root()
-TCL = Path(__file__).resolve().parent / "read_issp.tcl"
-
-# --- core-specific: edit for this core -------------------------------------
-# The instance `clear` acts on (its source bit 0 is the counter clear), and
-# the one read when --instance is not given.
-DEFAULT_INSTANCE = "F"
-# ---------------------------------------------------------------------------
+DEFAULT_INSTANCE = 'RPUN'
 
 
-def read(clear=False, instance=None):
-    args = [str(quartus_stp(REPO)), "-t", str(TCL)] + \
-        (["clear"] if clear else []) + ([instance] if instance else [])
-    r = subprocess.run(args, capture_output=True, text=True,
-                       timeout=300, cwd=str(REPO))
-    # quartus_stp writes the decoded fields to stderr, so parse both streams.
-    out = {}
-    for ln in (r.stdout.splitlines() + r.stderr.splitlines()):
-        s = ln.strip()
-        if not s or s.startswith("Info") or s.startswith("Error"):
-            continue
-        parts = s.split()
-        if len(parts) == 2 and not s.startswith(("hardware:", "device:",
-                                                 "instance:", "raw")):
-            out[parts[0]] = parts[1]
-    if not out and "not found" in (r.stdout + r.stderr):
-        sys.exit("JTAG hardware not found -- is the USB-Blaster plugged in?\n"
-                 "(after a forced Quartus kill it sometimes needs a replug)")
-    return out
+def decode(output):
+    fields = dict(re.findall(r'^\s{2}([a-z][a-z0-9_]*)\s+(0x[0-9A-Fa-f]+|[0-9]+|yes|no)\s*$', output, re.MULTILINE))
+    if fields.get('core_tag') != '0x5250554E' or fields.get('layout_version') != '1':
+        raise SystemExit('No valid RPUN layout decoded; retain the raw log and check the loaded build')
+    return fields
+
+
+def read(instance=DEFAULT_INSTANCE):
+    result = read_raw(instance, capture=True)
+    output = result.stdout + result.stderr
+    if result.returncode:
+        raise SystemExit(f'Probe read failed ({result.returncode}):\n{output}')
+    return decode(output)
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("action", nargs="?", choices=("read", "clear"),
-                    default="read")
-    ap.add_argument("--instance", help="probe instance id (default %s); clear "
-                                       "always acts on the default" % DEFAULT_INSTANCE)
-    ap.add_argument("--fields", nargs="*",
-                    help="only these fields, in this order")
-    a = ap.parse_args()
-
-    with jtag_session("probe.py"):
-        v = read(clear=(a.action == "clear"),
-                 instance=DEFAULT_INSTANCE if a.action == "clear"
-                 else (a.instance or DEFAULT_INSTANCE))
-    if not v:
-        sys.exit("no fields decoded -- does read_issp.tcl match the build?")
-    keys = a.fields if a.fields else list(v)
-    # core|build|set| from the device, after the lock is released
-    print(prefix() + " ".join("%s=%s" % (k, v.get(k, "?")) for k in keys))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--instance', default=DEFAULT_INSTANCE)
+    parser.add_argument('--fields', nargs='+')
+    args = parser.parse_args()
+    values = read(args.instance)
+    keys = args.fields or list(values)
+    unknown = set(keys) - values.keys()
+    if unknown:
+        parser.error('Unknown fields: ' + ', '.join(sorted(unknown)))
+    print(prefix() + ' '.join(f'{key}={values[key]}' for key in keys))
     return 0
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     sys.exit(main())

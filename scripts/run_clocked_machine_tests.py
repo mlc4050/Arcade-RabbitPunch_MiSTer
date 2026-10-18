@@ -16,5 +16,5 @@ result = run_case('clocked_machine', sources, 'clocked_machine_tb', '1 ms',
 assert hashes == {p: hashlib.sha256((root / p).read_bytes()).hexdigest() for p in sources}
 result.update(source_sha256=hashes,
     log_sha256=hashlib.sha256((root / result['log']).read_bytes()).hexdigest(),
-    scope='Machine download/control/CPU diagnostics driven by installed vendor PLL behavioral model and production reset release; live horizontal cadence through gameplay resets. Before first vertical render; sound ROM absent/audio not scored; SDRAM command model samples the half-period shifted external clock with the production read-window selection, no physical phase/electrical/fitted-counter or complete MiSTer proof')
+    scope='Machine download/control/CPU diagnostics driven by installed vendor PLL behavioral model and production reset release; live horizontal cadence through gameplay resets. Before first vertical render; sound ROM absent/audio not scored; SDRAM command model samples the 5357 ps shifted external clock with the production read-window selection, no physical phase/electrical/fitted-counter or complete MiSTer proof')
 (root / 'docs/reference/clocked_machine_checks.json').write_text(json.dumps(result, indent=2) + '\n')

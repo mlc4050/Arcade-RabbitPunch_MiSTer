@@ -3,7 +3,7 @@
 The instrumented RabbitPunch_stp revision includes rabbitpunch_debug; the release
 revision omits its instance. This is VHDL instrumentation with one system-clock
 process and no signals that control the game. Its counter/packet bench passes;
-the Tcl field decoder passes valid and deliberately malformed input tests without
+the Tcl field decoder and one-line Python reader pass valid and deliberately malformed input tests without
 opening JTAG. Fitted probe presence and actual hardware reads remain unverified.
 
 Use scripts/read_issp.py RPUN through scripts/d_drive.ps1 when all compilation and
@@ -44,3 +44,10 @@ counter width generic exercises saturation quickly; hardware retains 32 bits.
 Evidence: reference/debug_checks.json (VHDL behavior) and
 reference/debug_decode_checks.json (mocked Tcl transport). No hardware results
 are claimed by either report.
+
+Quartus 17's altsource_probe supports at most 511 probe bits. The initial
+512-bit instrumented build was rejected at elaboration, before fitting; it is
+archived under debug/fit_archive/full_shell_1693628_probe_width_rejected/.
+The unused top bit was removed. Layout version occupies bits 480..510; all
+other field positions remain unchanged. VHDL and decoder tests are rerun for
+the exact hardware width, and malformed-width packets remain rejected.

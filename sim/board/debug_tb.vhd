@@ -19,7 +19,7 @@ architecture test of debug_tb is
     signal su16_cpu_data, su16_sound_address : unsigned(15 downto 0) := (others => '0');
     signal su8_sound_data : unsigned(7 downto 0) := (others => '0');
     signal su2_bytes : unsigned(1 downto 0) := (others => '0');
-    signal su512_snapshot : unsigned(511 downto 0);
+    signal su511_snapshot : unsigned(510 downto 0);
 begin
     s_clk <= not s_clk after 5 ns;
     dut : entity work.rabbitpunch_debug
@@ -46,7 +46,7 @@ begin
             iu16_sound_address => su16_sound_address,
             iu8_sound_data => su8_sound_data,
             i_audio_sample => s_audio_sample,
-            ou512_snapshot => su512_snapshot
+            ou511_snapshot => su511_snapshot
         );
     stimulus : process
         procedure tick is
@@ -61,11 +61,11 @@ begin
         end procedure;
     begin
         settle;
-        assert (su512_snapshot(31 downto 0) = x"5250554E" and
-                su512_snapshot(63 downto 32) = x"1234ABCD" and
-                su512_snapshot(511 downto 480) = 1)
+        assert (su511_snapshot(31 downto 0) = x"5250554E" and
+                su511_snapshot(63 downto 32) = x"1234ABCD" and
+                su511_snapshot(510 downto 480) = 1)
             report "Probe identity or layout version mismatch" severity failure;
-        assert (su512_snapshot(223 downto 64) = 0)
+        assert (su511_snapshot(223 downto 64) = 0)
             report "Counters did not power up at zero" severity failure;
         -- Sync transitions between pixel enables must not create frames.
         s_vertical_sync <= '0';
@@ -94,22 +94,22 @@ begin
         s_sound_request <= '0';
         s_audio_sample <= '0';
         settle;
-        assert (su512_snapshot(95 downto 64) = 1 and
-                su512_snapshot(127 downto 96) = 1 and
-                su512_snapshot(159 downto 128) = 1 and
-                su512_snapshot(191 downto 160) = 1 and
-                su512_snapshot(223 downto 192) = 1 and
-                su512_snapshot(447 downto 416) = 1 and
-                su512_snapshot(479 downto 448) = 1)
+        assert (su511_snapshot(95 downto 64) = 1 and
+                su511_snapshot(127 downto 96) = 1 and
+                su511_snapshot(159 downto 128) = 1 and
+                su511_snapshot(191 downto 160) = 1 and
+                su511_snapshot(223 downto 192) = 1 and
+                su511_snapshot(447 downto 416) = 1 and
+                su511_snapshot(479 downto 448) = 1)
             report "Probe event counting mismatch" severity failure;
-        assert (su512_snapshot(255 downto 224) = x"02123456" and
-                su512_snapshot(271 downto 256) = x"CAFE" and
-                su512_snapshot(319 downto 288) = x"0187F123" and
-                su512_snapshot(351 downto 320) = x"01123456")
+        assert (su511_snapshot(255 downto 224) = x"02123456" and
+                su511_snapshot(271 downto 256) = x"CAFE" and
+                su511_snapshot(319 downto 288) = x"0187F123" and
+                su511_snapshot(351 downto 320) = x"01123456")
             report "Full address/data/byte capture mismatch" severity failure;
-        assert (su512_snapshot(360 downto 352) = 431 and
-                su512_snapshot(369 downto 361) = 255 and
-                su512_snapshot(399 downto 384) = x"0023")
+        assert (su511_snapshot(360 downto 352) = 431 and
+                su511_snapshot(369 downto 361) = 255 and
+                su511_snapshot(399 downto 384) = x"0023")
             report "Probe beam/status mismatch" severity failure;
         -- A read updates the request address without overwriting the last write.
         s_cpu_request <= '1';
@@ -119,11 +119,11 @@ begin
         s_cpu_request <= '0';
         su16_status <= (others => '0');
         settle;
-        assert (su512_snapshot(127 downto 96) = 2 and
-                su512_snapshot(159 downto 128) = 1 and
-                su512_snapshot(351 downto 320) = x"00ABCDEF" and
-                su512_snapshot(255 downto 224) = x"02123456" and
-                su512_snapshot(479 downto 448) = 1)
+        assert (su511_snapshot(127 downto 96) = 2 and
+                su511_snapshot(159 downto 128) = 1 and
+                su511_snapshot(351 downto 320) = x"00ABCDEF" and
+                su511_snapshot(255 downto 224) = x"02123456" and
+                su511_snapshot(479 downto 448) = 1)
             report "Read/write separation or reset-independent counters mismatch" severity failure;
         -- Exercise saturation with the reduced test-only counter width.
         for vint_index in 0 to 11 loop
@@ -144,13 +144,13 @@ begin
         s_sound_request <= '0';
         s_audio_sample <= '0';
         settle;
-        assert (su512_snapshot(95 downto 64) = 7 and
-                su512_snapshot(127 downto 96) = 7 and
-                su512_snapshot(159 downto 128) = 7 and
-                su512_snapshot(191 downto 160) = 7 and
-                su512_snapshot(223 downto 192) = 7 and
-                su512_snapshot(447 downto 416) = 7 and
-                su512_snapshot(479 downto 448) = 7)
+        assert (su511_snapshot(95 downto 64) = 7 and
+                su511_snapshot(127 downto 96) = 7 and
+                su511_snapshot(159 downto 128) = 7 and
+                su511_snapshot(191 downto 160) = 7 and
+                su511_snapshot(223 downto 192) = 7 and
+                su511_snapshot(447 downto 416) = 7 and
+                su511_snapshot(479 downto 448) = 7)
             report "Probe counter saturation mismatch" severity failure;
         report "DEBUG_PASS";
         finish;

@@ -1,0 +1,24 @@
+{
+  "case": "sdram_pll_5500ps",
+  "pass_marker": "SDRAM_PASS",
+  "log": "debug\\baselines\\sdram_pll_5500ps\\result.log",
+  "sdram_phase_ps": 5500,
+  "source_sha256": {
+    "rtl/rabbitpunch_sdram_types.vhd": "35c1406e611389f2ee18dd3da7b0805e389ac4b8bd763c8a603a691b5de66367",
+    "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+    "rtl/rabbitpunch_sdram.vhd": "272312140f432a65208cb0d18a9784271ea089be2ac124afcde235e14e10c86e",
+    "rtl/synth_check/sdram/sdram_check.vhd": "9655026e3a3dffdc0be5833e84fc4f931bee10d2c41a6cdf30e034e9d13a6fd5",
+    "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
+    "rtl/rabbitpunch_pll.vhd": "988e14413b0f965adc2ea6f35ebe87620bb1e01aa4a8bc48336c82194271283d",
+    "sim/memory/sdram_tb.vhd": "fc80cf43b2dc2a03d2a112a4cbb331b57483ad6554b381b9094bf8429d877f75"
+  },
+  "log_sha256": "5a6e97e55c203dba5c6c48932ce91b4601e0409c45004d1469ebe52a1561fce1",
+  "pll_clock": true,
+  "read_capture_adjust": 1,
+  "reinitialization_checked": true,
+  "checked_words": 372,
+  "writes": 63,
+  "refresh_commands": 35,
+  "max_refresh_gap": 324,
+  "scope": "Actual vendor PLL model at 46.6667 MHz with chip commands sampled on the external SDRAM clock shifted by 5500 ps; two chips, three clients, burst order, byte masks and refresh cadence; no analog/electrical or hardware timing proof"
+}

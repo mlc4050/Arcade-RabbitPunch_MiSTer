@@ -29,7 +29,7 @@ entity rabbitpunch_debug is
         iu16_sound_address : in unsigned(15 downto 0);
         iu8_sound_data : in unsigned(7 downto 0);
         i_audio_sample : in std_logic;
-        ou512_snapshot : out unsigned(511 downto 0)
+        ou511_snapshot : out unsigned(510 downto 0)
     );
 end entity;
 
@@ -63,7 +63,7 @@ architecture rtl of rabbitpunch_debug is
     signal su32_last_sound_request : unsigned(31 downto 0) := (others => '0');
     signal s_previous_sync : std_logic := '1';
     signal s_previous_underflow : std_logic := '0';
-    signal su512_snapshot : unsigned(511 downto 0) := (others => '0');
+    signal su511_snapshot : unsigned(510 downto 0) := (others => '0');
 
     function increment_saturated(iu32_value : unsigned(31 downto 0)) return unsigned is
     begin
@@ -73,9 +73,9 @@ architecture rtl of rabbitpunch_debug is
         return iu32_value + 1;
     end function;
 begin
-    ou512_snapshot <= su512_snapshot;
+    ou511_snapshot <= su511_snapshot;
     capture : process(i_clk)
-        variable vu512_packet : unsigned(511 downto 0);
+        variable vu511_packet : unsigned(510 downto 0);
     begin
         if (rising_edge(i_clk)) then
             if (i_pixel_enable = '1') then
@@ -114,37 +114,37 @@ begin
             if (iu16_status(5) = '1' and s_previous_underflow = '0') then
                 su32_underflows <= increment_saturated(su32_underflows);
             end if;
-            vu512_packet := (others => '0');
-            vu512_packet(31 downto 0) := CU32_CORE_ID;
-            vu512_packet(63 downto 32) := GU32_BUILD_ID;
-            vu512_packet(95 downto 64) := su32_frames;
-            vu512_packet(127 downto 96) := su32_cpu_requests;
-            vu512_packet(159 downto 128) := su32_cpu_writes;
-            vu512_packet(191 downto 160) := su32_sound_requests;
-            vu512_packet(223 downto 192) := su32_visible_pixels;
-            vu512_packet(255 downto 224) := su32_last_cpu_write;
-            vu512_packet(271 downto 256) := su16_last_cpu_data;
-            vu512_packet(319 downto 288) := su32_last_sound_request;
-            vu512_packet(351 downto 320) := su32_last_cpu_request;
-            vu512_packet(360 downto 352) := iu9_beam_x;
-            vu512_packet(369 downto 361) := iu9_beam_y;
-            vu512_packet(399 downto 384) := iu16_status;
-            vu512_packet(447 downto 416) := su32_audio_samples;
-            vu512_packet(479 downto 448) := su32_underflows;
-            vu512_packet(511 downto 480) := to_unsigned(1, 32);
-            su512_snapshot <= vu512_packet;
+            vu511_packet := (others => '0');
+            vu511_packet(31 downto 0) := CU32_CORE_ID;
+            vu511_packet(63 downto 32) := GU32_BUILD_ID;
+            vu511_packet(95 downto 64) := su32_frames;
+            vu511_packet(127 downto 96) := su32_cpu_requests;
+            vu511_packet(159 downto 128) := su32_cpu_writes;
+            vu511_packet(191 downto 160) := su32_sound_requests;
+            vu511_packet(223 downto 192) := su32_visible_pixels;
+            vu511_packet(255 downto 224) := su32_last_cpu_write;
+            vu511_packet(271 downto 256) := su16_last_cpu_data;
+            vu511_packet(319 downto 288) := su32_last_sound_request;
+            vu511_packet(351 downto 320) := su32_last_cpu_request;
+            vu511_packet(360 downto 352) := iu9_beam_x;
+            vu511_packet(369 downto 361) := iu9_beam_y;
+            vu511_packet(399 downto 384) := iu16_status;
+            vu511_packet(447 downto 416) := su32_audio_samples;
+            vu511_packet(479 downto 448) := su32_underflows;
+            vu511_packet(510 downto 480) := to_unsigned(1, 31);
+            su511_snapshot <= vu511_packet;
         end if;
     end process;
     hardware_probe : if (GBOOL_JTAG_ENABLE) generate
         probe : altsource_probe
             generic map (
                 instance_id => "RPUN",
-                probe_width => 512,
+                probe_width => 511,
                 source_width => 1,
                 sld_auto_instance_index => "YES"
             )
             port map (
-                probe => su512_snapshot,
+                probe => su511_snapshot,
                 source_clk => i_clk,
                 source_ena => '0',
                 source => open

@@ -16,7 +16,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--only", help="capture basename; default all six, serial")
     parser.add_argument("--pll-clock", action="store_true", help="Use the vendor PLL and shifted chip clock")
+    parser.add_argument('--phase-ps', type=int, default=10714, help='PLL chip-clock phase; nondefault phases use a private generated bench')
     args = parser.parse_args()
+    if not 1 <= args.phase_ps < 21428 or (not args.pll_clock and args.phase_ps != 10714):
+        parser.error('A phase inside one period requires --pll-clock')
     root = core_root()
     if (root / "debug/scanout_stop_requested").exists():
         raise SystemExit("STOPPED between capture cases for a source update; completed cases are retained")
@@ -40,9 +43,23 @@ def main():
         "rtl/rabbitpunch_raster.vhd", "rtl/rabbitpunch_scanline_scheduler.vhd",
         "rtl/rabbitpunch_video_output.vhd", "rtl/rabbitpunch_scanout.vhd",
         "rtl/rabbitpunch_pll.vhd", "sim/video/scanout_capture_tb.vhd"]
+    template = root / 'sim/video/scanout_capture_tb.vhd'
+    template_hash = hashlib.sha256(template.read_bytes()).hexdigest()
+    if args.pll_clock and args.phase_ps != 10714:
+        generated = root / f'debug/phases/scanout_capture_{args.phase_ps}ps.vhd'
+        generated.parent.mkdir(parents=True, exist_ok=True)
+        text = template.read_text()
+        marker_text = 'pll : entity work.rabbitpunch_pll\n            port map ('
+        assert text.count(marker_text) == 1
+        text = text.replace(marker_text, 'pll : entity work.rabbitpunch_pll\n            generic map (\n                GSTR_SDRAM_PHASE_SHIFT => "' + str(args.phase_ps) + ' ps"\n            )\n            port map (')
+        if not generated.exists() or generated.read_text() != text:
+            generated.write_text(text)
+        sources[-1] = generated.relative_to(root).as_posix()
     top = "scanout_capture_tb"
     marker = "SCANOUT_CAPTURE_PASS"
     prefix = "scanout_pll_" if args.pll_clock else "scanout_capture_"
+    if args.pll_clock and args.phase_ps != 10714:
+        prefix = f"scanout_pll_{args.phase_ps}ps_"
     hashes = {p: hashlib.sha256((root/p).read_bytes()).hexdigest() for p in sources}
     reports = []
     for fixture in fixtures:
@@ -102,7 +119,9 @@ def main():
                 for name in ("maincpu.hex", "video_settings.hex", "spriteram.hex", "vram.hex", "bitmap.hex", "palette.hex")},
             source_sha256={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources},
             log_sha256=hashlib.sha256((root / result["log"]).read_bytes()).hexdigest(),
-            scope=("Vendor PLL and half-period SDRAM clock with early runtime read capture; " if args.pll_clock else "Synthetic same-phase system/chip clock; ") + "Continuous provisional raster and real graphics/shared SDRAM command model; static MAME snapshot, synthetic RAM writes/ROM reads, direct ROM preload; no CPU execution or hardware/electrical timing proof")
+            scope=(f"Vendor PLL and {args.phase_ps} ps shifted SDRAM clock with early runtime read capture; " if args.pll_clock else "Synthetic same-phase system/chip clock; ") + "Continuous provisional raster and real graphics/shared SDRAM command model; static MAME snapshot, synthetic RAM writes/ROM reads, direct ROM preload; no CPU execution or hardware/electrical timing proof")
+        assert template_hash == hashlib.sha256(template.read_bytes()).hexdigest(), 'Bench template changed during simulation'
+        result.update(sdram_phase_ps=args.phase_ps if args.pll_clock else 0, template_sha256=template_hash)
         result.update(pll_clock=args.pll_clock, sdram_read_capture_adjust=int(args.pll_clock),
             line_budget_cycles=3024, underflow=False,
             physical_sdram_bursts=int(re.search(r"bursts=\s*(\d+)", log)[1]))

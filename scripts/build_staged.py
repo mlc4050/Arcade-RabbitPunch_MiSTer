@@ -42,6 +42,8 @@ see uncommitted work and are willing to leave the tree alone.
 """
 import argparse
 import datetime
+import hashlib
+import json
 import os
 import re
 import subprocess
@@ -113,7 +115,7 @@ def read_slacks(summary):
     return [(name[-100:], slack, tns) for name, slack, tns in rows if slack < 0]
 
 
-def check_timing_coverage(report):
+def check_timing_coverage(report, framework_scope=None, stage=None, revision=None):
     """Fail closed when illegal/unconstrained paths remain or the table is absent."""
     path = Path(report)
     if not path.is_file():
@@ -127,9 +129,67 @@ def check_timing_coverage(report):
         raise SystemExit("Timing coverage unverified: expected all six coverage categories")
     bad = [(name.strip(), int(setup), int(hold)) for name, setup, hold in rows
            if int(setup) or int(hold)]
-    if bad:
+    if bad and framework_scope is not None:
+        # Retain inherited framework I/O gaps as visible, source-locked scope.
+        # Never turn these into broad false paths or exempt clocks/core/SDRAM.
+        if stage is None:
+            raise SystemExit("Framework coverage scope requires the fitted stage")
+        scope = json.loads(Path(framework_scope).read_text())
+        for name, expected_hash in scope["source_sha256"].items():
+            actual = hashlib.sha256((Path(stage) / name).read_text().encode()).hexdigest()
+            if actual != expected_hash:
+                raise SystemExit(f"Framework timing scope source changed: {name}")
+        if any("Clocks" in name for name, _, _ in bad):
+            raise SystemExit(f"Illegal or unconstrained clocks: {bad}")
+        debug_scope = None
+        if revision is not None and revision.endswith("_stp"):
+            qsf = (Path(stage) / f"{revision}.qsf").read_text()
+            if not re.search(r'^set_global_assignment -name VERILOG_MACRO "DEBUG_ISSP=1"', qsf, re.M):
+                raise SystemExit("Reserved JTAG scope requires the instrumented revision macro")
+            debug_scope = scope["instrumented_jtag"]
+            for name, expected_hash in debug_scope["source_sha256"].items():
+                actual = hashlib.sha256((Path(stage) / name).read_text().encode()).hexdigest()
+                if actual != expected_hash:
+                    raise SystemExit(f"Instrumented JTAG scope source changed: {name}")
+        ports = {"inputs": set(), "outputs": set()}
+        direction = None
+        for line in path.read_text(errors="replace").splitlines():
+            if re.match(r"^;\s*Unconstrained Input Ports\s*;", line):
+                direction = "inputs"
+            elif re.match(r"^;\s*Unconstrained Output Ports\s*;", line):
+                direction = "outputs"
+            match = re.match(r"^;\s*([^;]+?)\s*;\s*(No (?:input|output) delay[^;]+|Partially constrained)\s*;", line)
+            if match and direction:
+                ports[direction].add(match[1].strip())
+        for key in ports:
+            allowed = set(scope["input_ports" if key == "inputs" else "output_ports"])
+            if debug_scope is not None:
+                allowed.update(debug_scope["input_ports" if key == "inputs" else "output_ports"])
+            if not ports[key] or not ports[key] <= allowed:
+                raise SystemExit(f"Unexpected untimed {key}: {sorted(ports[key] - allowed)}")
+        categories = {name.strip(): (int(setup), int(hold)) for name, setup, hold in rows}
+        for label, key in (("Input", "inputs"), ("Output", "outputs")):
+            count = len(ports[key])
+            if categories[f"Unconstrained {label} Ports"] != (count, count):
+                raise SystemExit(f"Untimed {key} count disagrees with enumerated framework ports")
+            setup, hold = categories[f"Unconstrained {label} Port Paths"]
+            maximum = dict(scope["maximum_unconstrained_paths"])
+            if debug_scope is not None:
+                for name, extra in debug_scope["additional_unconstrained_paths"].items():
+                    maximum[name] += extra
+            if (setup > maximum[f"setup_{label.lower()}"] or
+                    hold > maximum[f"hold_{label.lower()}"]):
+                raise SystemExit(f"Framework untimed path count increased: {label}")
+        destination = Path(stage) / "output_files/framework_timing_scope.json"
+        destination.write_text(json.dumps(dict(scope=scope["scope"], input_ports=sorted(ports["inputs"]),
+            output_ports=sorted(ports["outputs"]), raw_coverage=categories,
+            instrumented_jtag_scope=debug_scope["scope"] if debug_scope else None), indent=2) + "\n")
+        print(f"  clocks/core/SDRAM covered; framework/debug pin gaps retained: {len(ports['inputs'])} inputs, {len(ports['outputs'])} outputs")
+        print("  HDMI/audio/SD/I2C and reserved JTAG pin electrical timing are outside this scoped gate")
+    elif bad:
         raise SystemExit(f"Illegal clocks or unconstrained timing paths: {bad}")
-    print("  all six timing-coverage categories clear")
+    else:
+        print("  all six timing-coverage categories clear")
 
 
 def report_resources(stage):
@@ -170,6 +230,83 @@ def check_present(stage):
     for n in required:
         print("  %-18s %s" % (n, "present" if n in text else "MISSING"))
     return missing
+
+
+def clear_stale_bitstreams(stage, rev):
+    """A failed compile must not leave a previous bitstream looking current."""
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", rev):
+        raise SystemExit("Invalid staged revision name")
+    stage = Path(stage).resolve()
+    output = stage / "output_files"
+    if not output.exists():
+        return
+    if output.resolve().parent != stage:
+        raise SystemExit("Staged output directory resolves outside the build")
+    for suffix in ("rbf", "sof"):
+        artifact = output / f"{rev}.{suffix}"
+        if artifact.exists():
+            if artifact.resolve().parent != output.resolve():
+                raise SystemExit("Staged bitstream resolves outside the output directory")
+            artifact.unlink()
+
+
+def quartus_child_environment(root):
+    env = dict(os.environ)
+    scratch = Path(root) / ".local/quartus"
+    for key, folder in (("TEMP", "tmp"), ("TMP", "tmp"), ("TMPDIR", "tmp"),
+                        ("APPDATA", "appdata"), ("LOCALAPPDATA", "localappdata"),
+                        ("USERPROFILE", "profile")):
+        path = scratch / folder
+        path.mkdir(parents=True, exist_ok=True)
+        env[key] = str(path)
+    return env
+
+
+def inspect_full_clock_tree(stage, quartus_tools, rev):
+    """Verify the fitted game PLL and forwarded pin, without changing assignments."""
+    from hwlock import require_no_jtag
+    require_no_jtag("fitted full-shell clock inspection")
+    stage = Path(stage).resolve()
+    script = Path(__file__).with_name("inspect_clock_tree.tcl")
+    output = stage / "output_files"
+    log_path = output / "full_clock_tree.log"
+    with log_path.open("w") as log:
+        result = subprocess.run([str(Path(quartus_tools) / "quartus_sta.exe"), "-t", str(script), rev],
+            cwd=stage, env=quartus_child_environment(stage.parent), stdout=log,
+            stderr=subprocess.STDOUT, **NO_WINDOW)
+    if result.returncode:
+        raise SystemExit(f"Full fitted clock-tree inspection failed: {log_path}")
+    rows = []
+    for line in (output / "clock_tree.tsv").read_text().splitlines()[1:]:
+        name, period, rise, fall, positive, negative, multiply, divide = line.split("\t")
+        rows.append(dict(name=name, period_ns=float(period), rise_ns=float(rise), fall_ns=float(fall),
+            positive_timing_endpoints=int(positive), negative_timing_endpoints=int(negative),
+            multiply_by=int(multiply), divide_by=int(divide)))
+    game = [row for row in rows if "|machine|pll|clock_generator|" in row["name"]]
+    system = [row for row in game if abs(row["period_ns"] - 150 / 7) < 0.002 and abs(row["rise_ns"]) < 0.03]
+    shifted = [row for row in game if abs(row["period_ns"] - 150 / 7) < 0.002 and abs(row["rise_ns"] - 5.357) < 0.03]
+    vco = [row for row in game if "vcoph" in row["name"]]
+    exported = [row for row in rows if row["name"] == "sdram_pin"]
+    reference = [row for row in rows if row["name"] == "FPGA_CLK2_50" and abs(row["period_ns"] - 20) < 0.002]
+    if not (len(game) == 3 and len(system) == len(shifted) == len(vco) == len(exported) == len(reference) == 1):
+        raise SystemExit(f"Unexpected game PLL clock topology: {game}")
+    if (abs(exported[0]["rise_ns"] - 5.357) > 0.03 or abs(exported[0]["period_ns"] - 150 / 7) > 0.002 or
+            system[0]["positive_timing_endpoints"] < 100 or
+            shifted[0]["positive_timing_endpoints"] != 1 or shifted[0]["negative_timing_endpoints"] != 0 or
+            exported[0]["positive_timing_endpoints"] != 0 or exported[0]["negative_timing_endpoints"] != 0):
+        raise SystemExit("Unexpected game clock users or forwarded SDRAM pin phase")
+    frequencies = [50_000_000 * vco[0]["multiply_by"] / vco[0]["divide_by"] *
+                   row["multiply_by"] / row["divide_by"] for row in (system[0], shifted[0])]
+    if any(abs(frequency - 140_000_000 / 3) > 1 for frequency in frequencies):
+        raise SystemExit(f"Fitted game PLL integer ratios changed: {game}")
+    report = dict(commit=(stage / "BUILT_COMMIT").read_text().split()[0], revision=rev,
+        nominal_game_frequency_hz=frequencies[0], sdram_phase_ns=shifted[0]["rise_ns"], clocks=rows,
+        inspector_sha256=hashlib.sha256(script.read_bytes()).hexdigest(),
+        validator_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        scope="Fitted game PLL ratios, system domain, forwarded quarter-period SDRAM clock and absence of functional users on its shifted output; framework/JTAG clocks remain separate; not an electrical or hardware execution proof")
+    (output / "full_clock_tree.json").write_text(json.dumps(report, indent=2) + "\n")
+    print(f"  fitted game clock {frequencies[0]:.6f} Hz, SDRAM phase {shifted[0]['rise_ns']:.3f} ns")
+    return report
 
 
 def main():
@@ -286,15 +423,9 @@ def main():
     log_path = os.path.join(stage, "q_staged.log")
     open(marker, "w").write(stamp)
     try:
+        clear_stale_bitstreams(stage, REV)
         # Keep Quartus caches/profile writes on D: as well as project scratch.
-        env = dict(os.environ)
-        scratch = Path(here) / ".local/quartus"
-        for key, folder in (("TEMP", "tmp"), ("TMP", "tmp"), ("TMPDIR", "tmp"),
-                            ("APPDATA", "appdata"), ("LOCALAPPDATA", "localappdata"),
-                            ("USERPROFILE", "profile")):
-            path = scratch / folder
-            path.mkdir(parents=True, exist_ok=True)
-            env[key] = str(path)
+        env = quartus_child_environment(here)
         with open(log_path, "w") as log:
             compile_run = subprocess.run([quartus, "--flow", "compile", REV, "-c", REV],
                            cwd=stage, env=env, stdout=log, stderr=subprocess.STDOUT, **NO_WINDOW)
@@ -322,7 +453,8 @@ def main():
     print("==== timing ====")
     if not ok:
         sys.exit("BUILD FAILED -- see %s" % log_path)
-    check_timing_coverage(os.path.join(stage, "output_files", "%s.sta.rpt" % REV))
+    check_timing_coverage(os.path.join(stage, "output_files", "%s.sta.rpt" % REV),
+                          Path(stage) / "scripts/framework_timing_scope.json", stage, revision=REV)
     violations = read_slacks(
         os.path.join(stage, "output_files", "%s.sta.summary" % REV))
 
@@ -356,6 +488,7 @@ def main():
         print("WARNING: --allow-negative-slack given; this build misses timing "
               "on %d clock(s)." % len(violations))
 
+    inspect_full_clock_tree(stage, QUARTUS_BIN, REV)
     rbf = os.path.join(stage, "output_files", "%s.rbf" % REV)
     print("\nOK -- deploy with:\n"
           "  python scripts/deploy.py --rbf-only --rev %s --log \"%s\" \\\n"

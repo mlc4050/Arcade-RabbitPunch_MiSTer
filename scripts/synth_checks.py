@@ -196,11 +196,11 @@ def run_check(stage, quartus_bin, stamp, name):
         generated = [r for r in rows if abs(r["period_ns"] - 150 / 7) < 0.002 and r not in exported]
         internal = [r for r in rows if r not in reference + generated + exported]
         system = [r for r in generated if abs(r["rise_ns"]) < 0.03]
-        shifted = [r for r in generated if abs(r["rise_ns"] - 75 / 7) < 0.03]
+        shifted = [r for r in generated if abs(r["rise_ns"] - 5.357) < 0.03]
         if not (len(rows) == 5 and len(reference) == len(system) == len(shifted) == len(exported) == len(internal) == 1
                 and internal[0]["period_ns"] < 4 and "vcoph" in internal[0]["name"]
                 and abs(exported[0]["period_ns"] - 150 / 7) < 0.002
-                and abs(exported[0]["rise_ns"] - 75 / 7) < 0.03):
+                and abs(exported[0]["rise_ns"] - 5.357) < 0.03):
             raise SystemExit(f"Unexpected fitted PLL frequency/phase: {rows}")
         # TimeQuest counts PLL input/counter pins and forwarded clock outputs
         # as timing-register endpoints too. These exact hard-block/pin counts
@@ -221,7 +221,7 @@ def run_check(stage, quartus_bin, stamp, name):
             raise SystemExit(f"Fitted PLL integer ratios changed: {rows}")
         report.update(constraint_mhz=46.6666666667, pll_count=1, clock_tree=rows,
             nominal_frequency_hz=nominal_frequency, validation_script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-            scope="Actual 50 MHz PLL input and two fitted 46.6667 MHz outputs, one functional system-clock domain and half-period SDRAM output only; registered logical test boundaries and hypothetical external I/O timing; no physical HPS/DDR mux, full MiSTer shell or PCB electrical timing proof")
+            scope="Actual 50 MHz PLL input and two fitted 46.6667 MHz outputs, one functional system-clock domain and 5.357 ns SDRAM output phase only; registered logical test boundaries and hypothetical external I/O timing; no physical HPS/DDR mux, full MiSTer shell or PCB electrical timing proof")
     if sound_memory:
         report["sound_memory"] = sound_memory
     destination=core_root()/f"debug/{name}_synth.json"

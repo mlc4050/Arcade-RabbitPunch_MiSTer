@@ -1401,3 +1401,22 @@ preserved the tested behavior and avoided that unsupported syntax. Compile with
 the target synthesizer before treating simulator acceptance as compatibility.
 The rejected implementation was reverted; its log is retained under
 `debug/fit_archive/raster_414924d_rejected/`.
+
+### [RabbitPunch] Vendor debug limits require a real instrumented compile
+
+Quartus 17 altsource_probe accepts at most 511 probe bits. The 512-bit packet
+passed the IP-disabled VHDL behavior bench but failed the real instrumented
+elaboration in 1693628. Removing its unused top bit preserved the field layout;
+90e053c fits the 511-bit instance. Test the real IP width at elaboration and keep
+decoder width checks strict; a disabled-IP test cannot establish vendor limits.
+
+### [RabbitPunch] Forwarded SDRAM clock insertion changes the pin timing window
+
+The first full shell had all sixteen DQ input setup paths fail (worst -4.338 ns)
+with packed I/O input registers and positive internal game slack (+4.823 ns).
+The forwarded SDRAM pin clock had about 5.2 ns more insertion delay than the
+system capture clock. Changing the requested phase from half to quarter period
+balanced the input/output windows; the full instrumented 90e053c fit passes all
+164 reported checks. Check both input and output pin timing after routing and
+repeat chip-clock simulation at the selected phase. Internal clock-enable
+frequency and an ideal same-edge memory model cannot establish this margin.

@@ -22,10 +22,10 @@ implementation and hardware bring-up remain pending.
 | Provisional clock/raster | User-approved 46 2/3 MHz system, steady /7 pixels and fractional chip enables; standalone raster/PLL-model/reset checks pass. Continuous controller passes 124416 synthetic RGB checks with intentional deadline failure and live-sync recovery. Connected machine passes CPU/download/pause/reset diagnostics with external CPU phases; Rabbit Punch attract scanout matches all 62208 MAME pixels without underflow (2576/3024-clock worst row); combined machine fit passes 48 MHz with setup +2.077 ns / hold +0.100 ns. MiSTer shell and physical clock tree remain open. |
 | High-score persistence | Atomic saved banks and validated config3/dump4 service pass unit, native-memory, full-platform and native HPS command tests for both sets. Reset-held files, CPU-consumed restored bytes, changed snapshots/uploads, soft reset and game isolation pass. Final combined fit passes; physical `.nvm` disk round trip remains open. |
 
-The system clock is still a 48 MHz evaluation constraint. Physical pixel clock,
-raster totals/blanking and SDRAM PLL/pin phase require evidence before dependent
-hardware integration. Real game audio, full game execution/play coverage, MiSTer HPS/DDR
-loading, output/features and hardware verification remain open.
+The production shell now uses a fitted 46 2/3 MHz game clock and quarter-period
+SDRAM pin clock. The native raster remains provisional. Real game audio, full
+game execution/play coverage, physical MiSTer HPS/DDR loading, remaining output
+features and hardware verification remain open.
 
 Evidence: [BOARD_INTEGRATION.md](BOARD_INTEGRATION.md),
 [SYSTEM_INTEGRATION.md](SYSTEM_INTEGRATION.md),
@@ -292,3 +292,20 @@ now matches all 62208 MAME pixels through that clock relationship, without
 underflow and within one row's budget. Full-shell fit, actual PCB pin timing,
 interactive gameplay and audible hardware output remain pending. No verified
 playable RBF or original-board timing proof is claimed.
+
+The instrumented full-shell fit 90e053c now passes all 164 reported timing checks
+under the documented prototype SDRAM budgets, with minimum setup +0.367 ns and
+hold +0.078 ns. Resources are 13964 ALMs, 23693 registers, 166 M10Ks, 34 DSPs and
+three PLLs. The inherited peripheral and dedicated JTAG pin electrical timing
+scope is explicit; no game/SDRAM false paths were added. Read-only telemetry
+is present in the fitted debug build, but has not been read from hardware.
+Artifacts and exact qualification are in SDRAM_PIN_TIMING.md and
+reference/full_shell_90e053c_timing_checks.json.
+
+At the production 5357 ps SDRAM phase, Rabbit Punch attract matches all 62208
+MAME pixels with no underflow, worst row 2484/3024 clocks. A separate historical
+10714 ps live-raster Rabio Lepus run matches 2000 main/256 sound startup writes
+and outputs a complete, correctly ordered black startup frame without underflow
+(worst row 1950 clocks). It does not establish visible gameplay or a matching
+MAME frame. The production-phase Japanese gameplay snapshot comparison and a
+separate release-revision fit are the next verification steps.

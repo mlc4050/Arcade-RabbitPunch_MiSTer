@@ -115,9 +115,9 @@
     "rtl/rabbitpunch_machine.vhd": "1fec42ad92a88016d498f024c6a6221e1aecf6b3c7f8793883d92ec34d26f629",
     "rtl/rabbitpunch_pll.vhd": "988e14413b0f965adc2ea6f35ebe87620bb1e01aa4a8bc48336c82194271283d",
     "rtl/rabbitpunch_reset_release.vhd": "00d7c5a85bcd24508ceef1e3b3b3b065678e7350d16bc06deab66d733e5375ec",
-    "rtl/rabbitpunch_clocked_machine.vhd": "3cbccb15be6601241c4fccfddfc4221a213c0599aedf4503b4ddee3ee5f4e417",
+    "rtl/rabbitpunch_clocked_machine.vhd": "46801d1a76384b1488847d812c332466400127c3302d370c674c118d2708b24d",
     "sim/board/clocked_machine_tb.vhd": "90a6f653cfe86034d8f11e477fc862b4ec782dfc7b5497bb48f44d162a40deff"
   },
-  "log_sha256": "e4191218a775b5d5d3583e75ef4c0f9023f191a2a8b3c835658012e0df286886",
-  "scope": "Machine download/control/CPU diagnostics driven by installed vendor PLL behavioral model and production reset release; live horizontal cadence through gameplay resets. Before first vertical render; sound ROM absent/audio not scored; SDRAM command model samples the half-period shifted external clock with the production read-window selection, no physical phase/electrical/fitted-counter or complete MiSTer proof"
+  "log_sha256": "5c43c403f09058973e580659d84611ae78260caf5924de58fc01e91baa862381",
+  "scope": "Machine download/control/CPU diagnostics driven by installed vendor PLL behavioral model and production reset release; live horizontal cadence through gameplay resets. Before first vertical render; sound ROM absent/audio not scored; SDRAM command model samples the 5357 ps shifted external clock with the production read-window selection, no physical phase/electrical/fitted-counter or complete MiSTer proof"
 }

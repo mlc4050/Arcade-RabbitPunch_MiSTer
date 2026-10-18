@@ -1,0 +1,40 @@
+[
+  {
+    "case": "diagnostic_rom_full_known",
+    "pass_marker": "DIAGNOSTIC_ROM_PASS",
+    "log": "debug\\baselines\\diagnostic_rom_full_known\\result.log",
+    "source_sha256": {
+      "rtl/cpu/fx68k/fx68k.sv": "846602cd0fc25a9eee04f641ba5e6fcfa05a80a1db417898040c78b1f7449a33",
+      "rtl/cpu/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
+      "rtl/cpu/fx68k/uaddrPla.sv": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a",
+      "rtl/rabbitpunch_fx68k.vhd": "f58d91e270636a92f629854f63e923aa6a8a7175b5f9d409a0f2e401e0a53ea1",
+      "rtl/rabbitpunch_bus.vhd": "2ff140db32be1209154ffce745039cd569d3ba0fbb0531c560fd173fa080f5c5",
+      "rtl/rabbitpunch_maincpu.vhd": "691ed261127cc39688751e5f3995088b5199a4f8dbaa8a0e549ec67d4925249f",
+      "sim/board/diagnostic_rom_tb.vhd": "21773480c7918a0daa885e1252f094333e6f803014bdf630bc077ab65db11e2f"
+    },
+    "bitmap_fill_words": 32768,
+    "corrupt_rom": false,
+    "log_sha256": "b38d0dd9c5514d98570d3a57866ebcb2f50ca0bb1c30f4215a8b5bb820cc0790",
+    "fixture_sha256": "441434e9f23d383541c43f02407ee399fa86e792d0189cf2d64516a5244af105",
+    "scope": "Real fx68k instruction execution, delayed behavioral bus replies, original diagnostic ROM, ordered bitmap fill, known/corrupt ROM-word branch and controls-to-RAM heartbeat; no native SDRAM/BRAM, video output or hardware execution proof"
+  },
+  {
+    "case": "diagnostic_rom_full_corrupt",
+    "pass_marker": "DIAGNOSTIC_ROM_NEGATIVE_PASS",
+    "log": "debug\\baselines\\diagnostic_rom_full_corrupt\\result.log",
+    "source_sha256": {
+      "rtl/cpu/fx68k/fx68k.sv": "846602cd0fc25a9eee04f641ba5e6fcfa05a80a1db417898040c78b1f7449a33",
+      "rtl/cpu/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
+      "rtl/cpu/fx68k/uaddrPla.sv": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a",
+      "rtl/rabbitpunch_fx68k.vhd": "f58d91e270636a92f629854f63e923aa6a8a7175b5f9d409a0f2e401e0a53ea1",
+      "rtl/rabbitpunch_bus.vhd": "2ff140db32be1209154ffce745039cd569d3ba0fbb0531c560fd173fa080f5c5",
+      "rtl/rabbitpunch_maincpu.vhd": "691ed261127cc39688751e5f3995088b5199a4f8dbaa8a0e549ec67d4925249f",
+      "sim/board/diagnostic_rom_tb.vhd": "21773480c7918a0daa885e1252f094333e6f803014bdf630bc077ab65db11e2f"
+    },
+    "bitmap_fill_words": 32768,
+    "corrupt_rom": true,
+    "log_sha256": "42bc9cdc10828c0e1d32d0345bcefe023cdfc5e95145fb3e473bd866e015a6d9",
+    "fixture_sha256": "441434e9f23d383541c43f02407ee399fa86e792d0189cf2d64516a5244af105",
+    "scope": "Real fx68k instruction execution, delayed behavioral bus replies, original diagnostic ROM, ordered bitmap fill, known/corrupt ROM-word branch and controls-to-RAM heartbeat; no native SDRAM/BRAM, video output or hardware execution proof"
+  }
+]
