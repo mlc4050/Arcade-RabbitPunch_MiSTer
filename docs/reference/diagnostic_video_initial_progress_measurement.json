@@ -1,0 +1,19 @@
+{
+  "accepted": false,
+  "complete": false,
+  "reason": "Deliberately stopped the owned simulator after measuring progress; projected full diagnostic duration exceeds the initial 3600-second wall budget. Not an HDL assertion failure or expired timeout.",
+  "progress": [
+    "1028559996 ps; bitmap_words=178; pixels=0; lines=0",
+    "2057131428 ps; bitmap_words=462; pixels=0; lines=0"
+  ],
+  "scope": "Partial native diagnostic only; full bitmap fill and RGB scoring have not completed.",
+  "artifact_sha256": {
+    "pixels.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "progress.txt": "ec3073a77ce6a4297013f9faadeafdf49933925a334b8ff3d33d21732254da79",
+    "result.log": "afbe9e4a68d0e957d762a96531b4a4554b3eef025c7a1cf1aaab07e4a4f82ae4",
+    "run.do": "177b230750dea16b060577bb57a9bdc925e5f4059bfe621d0e7c5bd5f6529d09",
+    "transcript": "fa2a1c8030a38ef8ae33ff75ab6317e93593cbb5e716655bb54f57d1e17047f0",
+    "source/scripts/run_diagnostic_video_tests.py": "387f71bb8b961f86d07859b8e3bcf377c516b4cc906e7560512ebeb974ca15c7",
+    "source/sim/board/diagnostic_video_tb.vhd": "151f879009d0fb7f29bdfb5cf659e9b36824d22f055954d443c1afbdb86507eb"
+  }
+}

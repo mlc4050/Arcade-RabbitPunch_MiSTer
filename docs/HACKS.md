@@ -22,7 +22,7 @@ Rules:
 | What | Where | Why it is a hack | What would make it correct | Evidence | Severity |
 |---|---|---|---|---|---|
 | Provisional SDRAM clock phase | `rabbitpunch_clocked_machine.vhd`, GSTR_SDRAM_PHASE_SHIFT | Production quarter-period shifted output passes prototype constraints; actual module/PCB sampling margin is not measured | Check fitted PLL parameters, pin constraints and physical SDRAM transactions; tune phase/read capture if evidence requires | Production-phase command-model/frame tests and instrumented full fit pass; physical margin pending | visible |
-| Provisional output timing and fixed sync polarity | `rabbitpunch_raster.vhd`, `rabbitpunch_clock_enables.vhd` | User-authorized 432x256/60.2816 Hz candidate from schematic crystal and inferred GGA fields; MAME declares 60 Hz without raw timing | Compare MAME-visible behavior and validate output during MiSTer bring-up; replace constants if better evidence appears | Ratio/raster unit tests pass; PLL, continuous rendering and physical output pending; PROVISIONAL_RASTER.md | visible |
+| Provisional output timing and fixed sync polarity | `rabbitpunch_raster.vhd`, `rabbitpunch_clock_enables.vhd` | User-authorized 432x256/60.2816 Hz candidate from schematic crystal and inferred GGA fields; MAME declares 60 Hz without raw timing | Compare MAME-visible behavior and validate output during MiSTer bring-up; replace constants if better evidence appears | Ratio/raster and production-PLL continuous MAME-image checks pass; physical output pending; PROVISIONAL_RASTER.md | visible |
 | Raster events not generated in real-ROM boot bench | `boot_writes_tb.sv`, interrupts instance | GGA IRQ state and CPU acknowledge work, but vblank/half-frame events are tied low | Supply verified raster events and compare IRQ execution against MAME | Directed scheduler and CPU STOP/handler/RTE tests pass; early boot is not a full timing comparison | tooling |
 | System reset also drives CPU power-up reset | `rabbitpunch_maincpu.vhd`, i_powerup_reset | No separate cold/warm reset policy yet | Wire and verify distinct reset behavior during board integration | Diagnostic reset replay passes; game warm reset unverified | latent |
 | Boot ROM transport and external inputs remain behavioral | `sim/board/boot_writes_tb.sv` | ROM array supplies the external handshake; DIP defaults come from MRA, controls are inactive | Integrate SDRAM transport, input mapper and sound CPU | VHDL RAM, board I/O and mailbox now used; a poll of a pending command stops for the missing sound CPU | tooling |
@@ -69,13 +69,15 @@ physical board startup verification remains open.
 The framework boundary is being connected for first hardware bring-up. It exposes
 the native 288x216 raster and signed mono audio. Forced scandoubling, HQ2x and
 CRT scanline levels are connected through a tested VHDL wrapper; the new shell
-fits pass, while physical output remains pending. HDMI rotation is connected experimentally, with its full-shell qualification
-pending; remaining crop/audio OSD options are still unconnected. HDMI aspect/integer
+fits pass, while physical output remains pending. Corrected HDMI rotation passes
+release/debug full-shell timing and its documented functional comparisons. Audio
+mix is connected and passes synthesized-host/connected protocol regressions; its
+new full-shell implementations are running. Crop remains unconnected. HDMI aspect/integer
 metadata and common screen flip pass their full-shell gates;
 this is not the final standard-feature set. The framework HDMI scaler remains
 available. The optional rotator now shares DDR through a loader-priority queue/publication
-boundary verified in isolation with the real frontend; full-shell and physical
-contention checks remain pending. No game
+boundary verified with the real frontend and fitted complete-controller
+comparisons; physical contention checks remain pending. No game
 ROM fetch uses DDR during play. Physical output and audible game audio are untested.
 
 
@@ -100,5 +102,6 @@ CRT/HQ2x one-row colour assertion was an invalid flat-field expectation at the
 black blanking border. Compact and production-width captures now match every
 pixel of an independent native framework reference; no production HDL changed.
 Native, forced-doubled and direct combined cases also pass. Patterned combined
-HQ2x images, live vertical-shift changes, extreme clipping and physical monitor
+HQ2x now matches all 1024 pixels against an independent native-framework fixture.
+Live vertical-shift changes, extreme clipping and physical monitor
 checks remain open; see CRT_ADJUST.md. Native Off bypass is direct.

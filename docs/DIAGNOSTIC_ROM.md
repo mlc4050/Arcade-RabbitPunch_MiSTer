@@ -31,3 +31,26 @@ Generate with scripts/d_drive.ps1 scripts/build_diagnostic_rom.py. The shorter
 --test-short image is for simulation and is kept in a separate directory; do not
 substitute it for the full hardware-fill image. No source has been installed or
 launched on the device. Normal game MRAs remain unchanged.
+
+
+The native integration test is scripts/run_diagnostic_video_tests.py, using
+sim/board/diagnostic_video_tb.vhd. It retains the real PLL/fractional enables,
+shifted SDRAM chip model, native board RAM and continuous shared graphics path.
+The intended checks are every executed bitmap write, normal/corrupt ROM branch,
+one complete 288x216 RGB frame, no underflow, the 3024-clock row budget, and the
+completion signature through the paused native RAM inspection port. These checks
+are currently running; no completed native RGB result is claimed yet.
+
+The default run directly preloads the ROM fixture and performs a real 32-byte
+header download. --full-download instead sends the whole original 0x210000-byte
+image through the native word interface without a memory deposit. Neither mode
+exercises the ARM HPS frontend or physical pins. --corrupt changes the checked
+ROM word and expects the white stripe to become red. Separate output directories
+keep normal, corrupt and full-download cases independent.
+
+The first native run was deliberately stopped after measuring progress: 462
+bitmap words by 2.057 ms simulation time made the initial one-hour wall budget
+insufficient for the full fill and frame capture. Its source and partial transcript
+are retained in reference/diagnostic_video_initial_progress_measurement.json;
+this is an incomplete measurement, not an HDL assertion failure or a timed-out
+pass. Unchanged checks are being rerun with --wall-timeout 18000.
