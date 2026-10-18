@@ -11,7 +11,8 @@ use work.rabbitpunch_sdram_types.all;
 entity scanout_capture_tb is
     generic (
         GBOOL_PLL_CLOCK : boolean := false;
-        GBOOL_FLIP_SCREEN : boolean := false
+        GBOOL_FLIP_SCREEN : boolean := false;
+        GBOOL_CRT_ADJUST : boolean := false
     );
 end entity;
 
@@ -62,7 +63,58 @@ architecture test of scanout_capture_tb is
     signal s_frame_prepare, s_request_flip : std_logic;
     signal su9_source_line_y, su9_source_pixel_x, su9_source_rgb_x : unsigned(8 downto 0);
     signal su8_source_pixel_y, su8_source_rgb_y : unsigned(7 downto 0);
+    signal s_record_enable, s_record_active : std_logic;
+    signal su8_record_red, su8_record_green, su8_record_blue : unsigned(7 downto 0);
+    signal s_record_armed : std_logic := '0';
 begin
+    native_record : if (not GBOOL_CRT_ADJUST) generate
+        s_record_enable <= s_scan_enable;
+        s_record_active <= s_scan_active;
+        su8_record_red <= su8_scan_red;
+        su8_record_green <= su8_scan_green;
+        su8_record_blue <= su8_scan_blue;
+    end generate;
+    adjusted_record : if (GBOOL_CRT_ADJUST) generate
+        signal s_adjusted_horizontal_blank, s_adjusted_vertical_blank : std_logic;
+    begin
+        s_record_active <= not (s_adjusted_horizontal_blank or s_adjusted_vertical_blank) and s_record_armed;
+        crt_geometry : entity work.rabbitpunch_crt_adjust
+            port map (
+                i_clk => s_clk,
+                i_initialize => s_initialize,
+                i_pixel_enable => s_scan_enable,
+                i_adjust => '1',
+                i_size_enable => '1',
+                iu5_horizontal_size => (others => '0'),
+                iu7_horizontal_position => (others => '0'),
+                iu6_vertical_shift => (others => '0'),
+                iu8_red => su8_scan_red,
+                iu8_green => su8_scan_green,
+                iu8_blue => su8_scan_blue,
+                i_horizontal_sync => s_scan_hsync,
+                i_vertical_sync => s_scan_vsync,
+                i_horizontal_blank => s_scan_hblank,
+                i_vertical_blank => s_scan_vblank,
+                o_pixel_enable => s_record_enable,
+                ou8_red => su8_record_red,
+                ou8_green => su8_record_green,
+                ou8_blue => su8_record_blue,
+                o_horizontal_sync => open,
+                o_vertical_sync => open,
+                o_horizontal_blank => s_adjusted_horizontal_blank,
+                o_vertical_blank => s_adjusted_vertical_blank
+            );
+        first_native_frame : process(s_clk)
+        begin
+            if (rising_edge(s_clk)) then
+                if (s_initialize = '1') then
+                    s_record_armed <= '0';
+                elsif (s_scan_enable = '1' and s_scan_active = '1') then
+                    s_record_armed <= '1';
+                end if;
+            end if;
+        end process;
+    end generate;
     s_request_flip <= not su16_flags(12) when GBOOL_FLIP_SCREEN else su16_flags(12);
     view_flip : entity work.rabbitpunch_view_flip
         port map (
@@ -104,7 +156,7 @@ begin
                 o_locked => open
             );
     end generate;
-    su24_output_rgb <= su8_scan_red & su8_scan_green & su8_scan_blue;
+    su24_output_rgb <= su8_record_red & su8_record_green & su8_record_blue;
     su6_count <= CUX_SETTINGS(5)(5 downto 0);
     su6_priority <= CUX_SETTINGS(6)(5 downto 0);
     su16_flags <= CUX_SETTINGS(0);
@@ -437,9 +489,9 @@ begin
                         vint_max := vint_clock - vint_started;
                     end if;
                 end if;
-                if (s_scan_enable = '1' and s_scan_active = '1') then
-                    assert (to_integer(su9_scan_x) = vint_pixels mod 288 + 8 and
-                        to_integer(su8_scan_y) = vint_pixels / 288)
+                if (s_record_enable = '1' and s_record_active = '1') then
+                    assert (GBOOL_CRT_ADJUST or (to_integer(su9_scan_x) = vint_pixels mod 288 + 8 and
+                        to_integer(su8_scan_y) = vint_pixels / 288))
                         report "Continuous output frame order mismatch" severity failure;
                     write(v_line, to_hstring(su24_output_rgb));
                     writeline(v_output, v_line);
