@@ -17,13 +17,15 @@ def main():
     parser.add_argument("--only", help="capture basename; default all six, serial")
     parser.add_argument("--pll-clock", action="store_true", help="Use the vendor PLL and shifted chip clock")
     parser.add_argument('--phase-ps', type=int, default=10714, help='PLL chip-clock phase; nondefault phases use a private generated bench')
+    parser.add_argument('--flip-screen', action='store_true', help='Apply the common presentation flip in addition to the captured game flip flag')
+    parser.add_argument('--fixtures', type=Path, help='Fixture manifest; default the six canonical scenes')
     args = parser.parse_args()
     if not 1 <= args.phase_ps < 21428 or (not args.pll_clock and args.phase_ps != 10714):
         parser.error('A phase inside one period requires --pll-clock')
     root = core_root()
     if (root / "debug/scanout_stop_requested").exists():
         raise SystemExit("STOPPED between capture cases for a source update; completed cases are retained")
-    fixtures = json.loads((root / "scripts/mame/video_fixtures.json").read_text())
+    fixtures = json.loads((args.fixtures or root / "scripts/mame/video_fixtures.json").read_text(encoding="utf-8"))
     fixtures = [row for row in fixtures if not args.only or Path(row["capture"]).name == args.only]
     if not fixtures:
         raise SystemExit("No matching capture")
@@ -41,7 +43,7 @@ def main():
     sources.remove("sim/video/video_sdram_capture_tb.vhd")
     sources += ["rtl/rabbitpunch_rom_cache.vhd", "rtl/rabbitpunch_clock_enables.vhd",
         "rtl/rabbitpunch_raster.vhd", "rtl/rabbitpunch_scanline_scheduler.vhd",
-        "rtl/rabbitpunch_video_output.vhd", "rtl/rabbitpunch_scanout.vhd",
+        "rtl/rabbitpunch_video_output.vhd", "rtl/rabbitpunch_scanout.vhd", "rtl/rabbitpunch_view_flip.vhd",
         "rtl/rabbitpunch_pll.vhd", "sim/video/scanout_capture_tb.vhd"]
     template = root / 'sim/video/scanout_capture_tb.vhd'
     template_hash = hashlib.sha256(template.read_bytes()).hexdigest()
@@ -60,6 +62,8 @@ def main():
     prefix = "scanout_pll_" if args.pll_clock else "scanout_capture_"
     if args.pll_clock and args.phase_ps != 10714:
         prefix = f"scanout_pll_{args.phase_ps}ps_"
+    if args.flip_screen:
+        prefix += "flip_"
     hashes = {p: hashlib.sha256((root/p).read_bytes()).hexdigest() for p in sources}
     reports = []
     for fixture in fixtures:
@@ -97,7 +101,7 @@ def main():
         setup = [f"mem load -format mti -infile {{{memory_file.as_posix()}}} /{top}/shared_roms/chip/mem"]
         libraries = [item for name in ("altera_lnsim_ver", "altera_ver", "lpm_ver") for item in ("-L", name)]
         result = run_case(case, sources, top, "80 ms", marker,
-                          sim_args=libraries + (["-gGBOOL_PLL_CLOCK=true"] if args.pll_clock else []),
+                          sim_args=libraries + (["-gGBOOL_PLL_CLOCK=true"] if args.pll_clock else []) + (["-gGBOOL_FLIP_SCREEN=true"] if args.flip_screen else []),
                           wall_timeout=1800, setup_commands=setup)
         assert hashes == {p: hashlib.sha256((root/p).read_bytes()).hexdigest() for p in sources}
         pixels = [int(word, 16) for word in (directory / "pixels.hex").read_text().splitlines()]
@@ -105,10 +109,19 @@ def main():
         actual = b"".join(word.to_bytes(3, "big") for word in pixels)
         width, height, expected = read_rgb(capture / "reference.png")
         assert (width, height) == (288, 216)
+        mame_rgb_hash = hashlib.sha256(expected).hexdigest()
+        game_flip = bool(settings[0] & 0x1000)
+        effective_flip = args.flip_screen ^ game_flip
+        if effective_flip:
+            expected = b"".join(expected[n:n+3] for n in range(len(expected)-3, -1, -3))
         differing = sum(actual[n:n+3] != expected[n:n+3] for n in range(0, len(actual), 3))
         write_rgb(directory / "video.png", width, height, actual)
         assert differing == 0, f"{case}: {differing} RGB pixels differ from MAME"
         log = (root / result["log"]).read_text()
+        result.update(osd_flip=args.flip_screen, game_flip_flag=game_flip, effective_flip=effective_flip,
+            mame_rgb_sha256=mame_rgb_hash,
+            expected_transform="rotate180" if effective_flip else "identity",
+            flip_scope="MAME renderer ignores global video flag bit 12; expected image is the captured frame explicitly rotated 180 degrees when effective flip is set")
         result.update(capture=fixture["capture"], set=fixture["set"], pixels=62208, differing_pixels=0,
             concurrent_cpu_writes=int(re.search(r"cpu_writes=\s*(\d+)", log)[1]),
             concurrent_cpu_rom_reads=int(re.search(r"rom_reads=\s*(\d+)", log)[1]),
@@ -126,7 +139,7 @@ def main():
             line_budget_cycles=3024, underflow=False,
             physical_sdram_bursts=int(re.search(r"bursts=\s*(\d+)", log)[1]))
         reports.append(result)
-        print(f"PASS {case}: all 62208 RGB pixels identical to MAME through shared SDRAM", flush=True)
+        print(f"PASS {case}: all 62208 RGB pixels identical to the selected MAME presentation transform through shared SDRAM", flush=True)
         (root / f"docs/reference/{prefix}{capture.name.replace(chr(45), chr(95))}_checks.json").write_text(json.dumps([result], indent=2) + "\n")
     if not args.only:
         (root / f"docs/reference/{prefix}checks.json").write_text(json.dumps(reports, indent=2) + "\n")

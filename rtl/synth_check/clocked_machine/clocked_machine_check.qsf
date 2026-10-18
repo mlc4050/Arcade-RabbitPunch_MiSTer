@@ -112,6 +112,7 @@ set_global_assignment -name VHDL_FILE ../../rabbitpunch_raster.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_scanline_scheduler.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_video_output.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_scanout.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_view_flip.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_machine.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_pll.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_reset_release.vhd

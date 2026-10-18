@@ -12,7 +12,7 @@ def machine_sources():
     return platform_sources()[:-1] + [
         'rtl/rabbitpunch_clock_enables.vhd', 'rtl/rabbitpunch_raster.vhd',
         'rtl/rabbitpunch_scanline_scheduler.vhd', 'rtl/rabbitpunch_video_output.vhd',
-        'rtl/rabbitpunch_scanout.vhd', 'rtl/rabbitpunch_machine.vhd',
+        'rtl/rabbitpunch_scanout.vhd', 'rtl/rabbitpunch_view_flip.vhd', 'rtl/rabbitpunch_machine.vhd',
         'sim/board/machine_tb.vhd']
 
 

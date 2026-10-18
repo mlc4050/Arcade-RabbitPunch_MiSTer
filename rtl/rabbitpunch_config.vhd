@@ -17,6 +17,7 @@ package rabbitpunch_config is
         "O1,Pause,Off,On;" &
         "O2,Pause when OSD is open,Off,On;" &
         "H3O3,Autosave high scores,Off,On;" &
+        "O[65],Flip Screen,Off,On;" &
         "H5O[46:44],Scandoubler Fx,None,HQ2x,CRT 25%,CRT 50%,CRT 75%;" &
         "H5O[122:121],Aspect ratio,Original,Full Screen,[ARC1],[ARC2];" &
         "H5O[68:66],Scale,Normal,V-Integer,Narrower HV-Integer,Wider HV-Integer,HV-Integer;" &

@@ -37,3 +37,20 @@ bank-0 streams contain 237330 checked decoded nibbles with no overflow. The
 actual native decoder matches every value in a pinned-source reference replay
 (reference/adpcm_samples_checks.json). This narrows the saturation concern for
 these declared samples without establishing complete-chip timing or analog gain.
+
+
+## Global screen flip reference gap
+
+The pinned rpunch.cpp documents global flip in video-flags bit 12 and provides
+the real Flip Screen DIP at mask 0x8000. A fresh Rabio Lepus frame-300 capture,
+with that DIP set before power-on, confirms video flags 0x1000. The driver
+stores the flag but neither videoreg_w nor screen_update applies global flip
+to the tilemaps, sprites or bitmap. This makes its raw screenshot unsuitable
+as a flipped-picture golden image. See reference/flip_dip_mame_checks.json.
+
+The standard common-output flip feature is checked against the captured image
+rotated 180 degrees. It mirrors the visible viewport at the existing line-buffer
+read boundary for both HDMI and analog. This deliberately fills a presentation
+feature absent from MAME's renderer; it does not claim the GGA's original
+internal flip addressing or raster timing is known. The game's flag and the
+OSD flip are XORed, so two requests restore normal orientation.
