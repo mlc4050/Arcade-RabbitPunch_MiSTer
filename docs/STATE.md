@@ -349,3 +349,12 @@ orientation changes only at a safe frame-prepare boundary, before the next
 row-zero request. Requests accepted on the same edge as a previous completion
 retain ownership. Restore must drain or reset this boundary together with the
 renderer/scanout. No RGB, line or frame storage is added.
+
+
+The disconnected CRT Adjust evaluation adds presentation-only size/position/
+shift latches, a ten-bit read-rate accumulator, two sync-edge histories and
+three one-bit row-blanking tags. The unchanged donor adds two 512x24 line banks
+and horizontal/vertical sync history. Initialization resets wrapper state;
+native Off bypass does not read any of that history. Optional adjusted output
+must rebuild line/sync history after restore. This is not emulated board RAM
+and is not connected to the production savestate surface.

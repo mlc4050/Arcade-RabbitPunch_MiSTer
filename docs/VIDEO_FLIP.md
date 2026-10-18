@@ -39,8 +39,27 @@ render window and does not prove flipped game pixels.
 A fresh MAME 0.289 Rabio Lepus capture has the real Flip Screen DIP set before
 power-on and confirms video-flags 0x1000. The driver stores but does not render
 this global flag (MAME_KLUDGES.md). Consequently the expected flipped image is
-the raw captured frame explicitly rotated 180 degrees. Both full-renderer
-comparisons, routed integrated timing and physical output are still pending.
+the raw captured frame explicitly rotated 180 degrees. Both full-renderer comparisons now pass with zero differences across all
+62208 pixels each and no underflow. Rabbit Punch attract with the OSD flip
+uses at most 2468/3024 clocks per row; the real-DIP Rabio Lepus frame-300
+scene uses 1942/3024. Both use the production PLL and 5357 ps chip-clock phase
+with synthetic competing CPU traffic. They are static MAME snapshots, not
+executing-CPU gameplay proofs. See reference/scanout_pll_5357ps_flip_rpunch_attract_checks.json
+and reference/scanout_pll_5357ps_flip_dip_reference_rabiolep_300_checks.json.
+
+The standalone clocked-machine 7cc0369 fit also passes every reported corner
+and all six timing-coverage categories, with minimum setup +3.627 ns and hold
++0.082 ns. It uses 6719 ALMs, 8386 registers and the unchanged 929387 RAM bits
+in 124 M10Ks. Fitted clock inspection confirms one functional 46.667 MHz game
+domain and a 5357 ps forwarded SDRAM output. See
+reference/clocked_machine_flip_synth.json. The full d525db2 shell compiles with all 144 reported slacks nonnegative
+(minimum setup +0.401 ns and hold +0.083 ns), but remains rejected by the
+coverage guard: its 111 untimed peripheral output paths exceed the previous
+110 cap. The same 4 input/50 output pin names remain scoped, all clocks are
+constrained, and the manual fitted clock check passes. A fresh 42c1be5
+reference build is running to audit the difference before any gate change.
+No exception or cap increase has been applied. See
+reference/full_shell_flip_coverage_rejected.json. Physical output is unverified.
 This implementation does not claim recovery of the C7-01 GGA's internal
 address generation or original-board raster behavior.
 

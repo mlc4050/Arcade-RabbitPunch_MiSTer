@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "crt_adjust": (24705, ("rabbitpunch_crt_adjust", "crt_adjust:geometry", "altshift_taps:vsync_line_shreg_rtl_0")),
     "video_aspect": (0, ("rabbitpunch_video_aspect", "video_freak", "video_scale_int", "sys_udiv", "sys_umul")),
     "video_options": (70080, ("rabbitpunch_video_options", "video_mixer", "scandoubler", "Hq2x")),
     "machine": (929387, ("rabbitpunch_machine", "rabbitpunch_view_flip", "rabbitpunch_scanout", "rabbitpunch_clock_enables", "rabbitpunch_raster", "rabbitpunch_scanline_scheduler", "rabbitpunch_video_output", "rabbitpunch_platform", "fx68k", "T80se", "jt51", "jt7759", "jtframe_draw", "rabbitpunch_hiscore_service", "rabbitpunch_rom_cache")),
@@ -104,6 +105,23 @@ def run_check(stage, quartus_bin, stamp, name):
     hierarchy=(output/f"{project_name}.map.rpt").read_text(encoding="utf-8",errors="replace")
     if any(instance not in hierarchy for instance in required_instances):
         raise SystemExit("A required block disappeared during synthesis")
+    crt_memory = []
+    if name == "crt_adjust":
+        expected_crt_memory = {"altsyncram:mem_rtl_0": (1024, 24),
+                               "altshift_taps:vsync_line_shreg_rtl_0": (129, 1)}
+        for line in hierarchy.splitlines():
+            columns = [value.strip() for value in line.split(";")[1:-1]]
+            if len(columns) == 9 and columns[1] in ("M10K block", "AUTO"):
+                matches = [key for key in expected_crt_memory if key + "|" in columns[0]]
+                if len(matches) != 1:
+                    raise SystemExit(f"Unexpected CRT memory: {columns[0]}")
+                key = matches[0]
+                depth, width = int(columns[3]), int(columns[4])
+                if (depth, width) != expected_crt_memory[key] or int(columns[7]) != depth * width:
+                    raise SystemExit(f"CRT memory geometry changed: {key}")
+                crt_memory.append(dict(instance=key, depth=depth, width=width, bits=depth*width))
+        if len(crt_memory) != 2 or len({row["instance"] for row in crt_memory}) != 2:
+            raise SystemExit("CRT line or sync history RAM missing or duplicated")
     sound_memory = []
     if name in ("sound_board", "audio", "system", "platform", "machine", "clocked_machine"):
         expected_sound_memory = {
@@ -224,6 +242,8 @@ def run_check(stage, quartus_bin, stamp, name):
         report.update(constraint_mhz=46.6666666667, pll_count=1, clock_tree=rows,
             nominal_frequency_hz=nominal_frequency, validation_script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             scope="Actual 50 MHz PLL input and two fitted 46.6667 MHz outputs, one functional system-clock domain and 5.357 ns SDRAM output phase only; registered logical test boundaries and hypothetical external I/O timing; no physical HPS/DDR mux, full MiSTer shell or PCB electrical timing proof")
+    if crt_memory:
+        report["crt_memory"] = crt_memory
     if sound_memory:
         report["sound_memory"] = sound_memory
     destination=core_root()/f"debug/{name}_synth.json"
