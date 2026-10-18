@@ -52,8 +52,14 @@ and all six timing-coverage categories, with minimum setup +3.627 ns and hold
 +0.082 ns. It uses 6719 ALMs, 8386 registers and the unchanged 929387 RAM bits
 in 124 M10Ks. Fitted clock inspection confirms one functional 46.667 MHz game
 domain and a 5357 ps forwarded SDRAM output. See
-reference/clocked_machine_flip_synth.json. Full MiSTer-shell timing with flip
-and physical output are still pending.
+reference/clocked_machine_flip_synth.json. The full d525db2 shell compiles with all 144 reported slacks nonnegative
+(minimum setup +0.401 ns and hold +0.083 ns), but remains rejected by the
+coverage guard: its 111 untimed peripheral output paths exceed the previous
+110 cap. The same 4 input/50 output pin names remain scoped, all clocks are
+constrained, and the manual fitted clock check passes. A fresh 42c1be5
+reference build is running to audit the difference before any gate change.
+No exception or cap increase has been applied. See
+reference/full_shell_flip_coverage_rejected.json. Physical output is unverified.
 This implementation does not claim recovery of the C7-01 GGA's internal
 address generation or original-board raster behavior.
 
