@@ -4,8 +4,8 @@ Early development for Video System's 1987 arcade hardware, using MAME's rpunch.c
 as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
 
 Status: the VHDL CPU, memory, video, audio, ROM-loading, controls and high-score
-services are connected to the MiSTer boundary. Both debug and non-debug full builds pass the documented prototype timing
-gates; no hardware-verified playable RBF or release exists.
+services are connected to the MiSTer boundary. The non-debug full build passes the documented prototype timing
+gates; the latest debug placement is being rechecked; no hardware-verified playable RBF or release exists.
 
 Verification includes:
 
@@ -17,9 +17,9 @@ Verification includes:
   Punch attract and Rabio Lepus gameplay, with all 62,208 pixels matching each
   and no underflow. At the production 5.357 ns phase, Rabbit Punch attract and
   Rabio Lepus gameplay at frame 1000 both match exactly.
-- Full debug and non-debug MiSTer fits pass all reported corners at a fitted
-  46.667 MHz game clock and 5.357 ns SDRAM phase. The non-debug build's minimum
-  setup/hold margins are +0.368/+0.076 ns. The prototype SDRAM budgets and
+- The current non-debug MiSTer fit passes all reported corners at a fitted
+  46.667 MHz game clock and 5.357 ns SDRAM phase, with minimum setup/hold
+  margins +0.323/+0.100 ns. The prior native-output debug baseline also passes. The prototype SDRAM budgets and
   inherited peripheral/debug pin coverage scope are explicit in
   [SDRAM pin timing](docs/SDRAM_PIN_TIMING.md); physical margins remain unverified.
 - Native RAM startup contents, DDR/direct ROM loading, replacement/reset/pause,
