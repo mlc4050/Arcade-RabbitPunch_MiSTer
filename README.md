@@ -4,8 +4,8 @@ Early development for Video System's 1987 arcade hardware, using MAME's rpunch.c
 as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
 
 Status: the VHDL CPU, memory, video, audio, ROM-loading, controls and high-score
-services are connected to the MiSTer boundary. The non-debug full build passes the documented prototype timing
-gates; the latest debug placement is being rechecked; no hardware-verified playable RBF or release exists.
+services are connected to the MiSTer boundary. The preceding non-debug full build passes prototype timing
+gates. New HDMI sizing metadata and debug placement are being checked; no hardware-verified playable RBF or release exists.
 
 Verification includes:
 

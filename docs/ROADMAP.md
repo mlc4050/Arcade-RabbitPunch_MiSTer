@@ -2,8 +2,8 @@
 
 Approved by the user in the originating chat. The core is in simulation and
 implementation bring-up; no complete game or playable RBF exists yet. The
-MiSTer framework boundary now points to the VHDL machine; full-shell
-implementation and hardware bring-up remain pending.
+MiSTer framework boundary points to the VHDL machine. Prior non-debug full
+implementation passes; the newest output changes and hardware bring-up remain pending.
 
 ## Current status
 
@@ -14,14 +14,14 @@ implementation and hardware bring-up remain pending.
 | Video rendering | Six static scenes match MAME in the logical graphics pipeline. At the production 5357 ps chip-clock phase, Rabbit Punch attract and Rabio Lepus play1000 each match all 62208 pixels without underflow; worst rows are 2484/3024 and 1966/3024 clocks. The continuous renderer prepares one row ahead with two line banks and no composite framebuffer. |
 | Sound | T80, YM2151/JT51 and uPD7759/JT7759 paths are connected. All 38 sample sequences pass 237330 decoded-value checks. Both native-reset sound runs match all 4096 addresses/masks, 215 peripheral data writes and 3877 RAM values, with four explicitly audited bootstrap stack-save bytes reported separately. Audible and long-run game audio remain unverified. |
 | Host and persistence | Both-player Missile/Shoot controls, keyboard/pad inputs, pause, DIPs and high-score config3/dump4 transfers pass native-HPS/logical tests. The expanded video menu passes complete host protocol regression. Actual ARM `.dip`/`.nvm` filesystem round trips remain open. |
-| Output options | Forced scandoubling, HQ2x, three scanline strengths and direct-video override pass seven compact functional-netlist cases plus a full-width forced-doubling control. Normal pixels remain unbuffered after native scanout. CRT Adjust, common flip, HDMI rotation/crop and remaining video options are still pending. |
-| Physical shell timing | Current non-debug video-options shell 6397a94 passes all 144 reported checks: setup +0.323 ns, hold +0.100 ns, 14242 ALMs and 180 M10Ks. Prototype SDRAM constraints and inherited peripheral pin coverage gaps are explicit. Debug default seed 1b3e33f fails one inherited HDMI setup path by 0.204 ns; game/SDRAM timing passes, and a new seed is next. |
+| Output options | Forced scandoubling, HQ2x, three scanline strengths and direct-video override pass seven compact functional-netlist cases plus a full-width forced-doubling control. Normal pixels remain unbuffered after native scanout. HDMI aspect/integer metadata also passes standalone fit/netlist tests and is connected, with new full-shell validation pending. CRT Adjust, common flip and HDMI rotation/crop remain open. |
+| Physical shell timing | Last accepted non-debug video-options shell 6397a94 passes all 144 reported checks: setup +0.323 ns, hold +0.100 ns, 14242 ALMs and 180 M10Ks. Prototype SDRAM constraints and inherited peripheral pin coverage gaps are explicit. Debug default seed 1b3e33f fails one inherited HDMI setup path by 0.204 ns; game/SDRAM timing passes, and a new seed is next. |
 | Hardware | No playable board verification, deployment, screenshot, JTAG read or audible output is claimed. RBFs are local timed prototypes; there is no verified release. |
 
 Next work is the instrumented placement retry, standalone HDMI aspect/integer-size
 fit and netlist comparison, then remaining output features and hardware bring-up.
-The aspect adapter is isolated and unconnected; its startup ratio smoke passes,
-while full integer-mode synthesis/simulation remains pending. No routine user
+The aspect adapter now passes its standalone fit and complete integer-size
+netlist test and is connected. Its expanded host and full-shell checks are next. No routine user
 confirmation is required for the approved local work.
 
 Evidence: [ROADMAP timing scope](SDRAM_PIN_TIMING.md),
