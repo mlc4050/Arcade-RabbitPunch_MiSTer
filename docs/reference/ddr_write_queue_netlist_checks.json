@@ -1,0 +1,14 @@
+{
+  "case": "gate_ddr_write_queue",
+  "pass_marker": "DDR_WRITE_QUEUE_PASS",
+  "log": "debug\\baselines\\gate_ddr_write_queue\\result.log",
+  "commit": "3a4157fd5a65682c30c647e40561d0d592cd822b",
+  "vectors_sha256": {},
+  "netlist_sha256": "7912df43e73ea014f75815784cadfdd6af6f4f60f2e2c2c045b4008fc7d48004",
+  "source_sha256": {
+    "debug/netlists/ddr_write_queue_3a4157f/ddr_write_queue_check.vo": "7912df43e73ea014f75815784cadfdd6af6f4f60f2e2c2c045b4008fc7d48004",
+    "sim/video/ddr_write_queue_tb.vhd": "c3e18326242086ce370eb70a86f1eedfdb8327496c2928798bb691807a6956d2"
+  },
+  "log_sha256": "9b713f4242d259741f814fc7f667edb4ec48279bc99735d1c2ec48367e6d0f50",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
+}

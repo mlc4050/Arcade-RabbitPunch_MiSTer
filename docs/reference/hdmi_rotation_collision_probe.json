@@ -1,0 +1,15 @@
+{
+  "expected_failure": true,
+  "safe_to_connect": false,
+  "fitted_commit": "fc479ee2edbbb640116f89d77b0165d79f2ef5db",
+  "read_buffer": 1,
+  "write_buffer": 1,
+  "source_sha256": {
+    "debug/netlists/hdmi_rotation_fc479ee/hdmi_rotation_check.vo": "ed7cb1477d6d21a6dfbdea7bf52e10cae5f6962b41463d49a21d77ee781439c9",
+    "debug/hdmi_rotation_collision_tb.vhd": "f71d93e603a10015f410f8f7c7ef2075e4add513156751f36dfd11ad10b6df0f"
+  },
+  "template_sha256": "2c403b224592af5389e26ec2863337fe732631cf8c0c16e2afb881337d05aa31",
+  "log": "debug/baselines/rotation_collision_probe/result.log",
+  "log_sha256": "97ff330078a2fef7df065b426d7b8d11695a2cf42474d06d988500c3e7749640",
+  "scope": "Simulation negative control of unchanged isolated donor: FB_VBL equals source VSYNC, so both buffer selectors advance on the same clock. A visible write targets the advertised read buffer. This does not invalidate pixel-address proofs and is not a measured failure on another core or physical MiSTer. Requires serialized buffer advances and valid-frame publication before production connection."
+}

@@ -1,0 +1,33 @@
+{
+  "cases": [
+    {
+      "case": "rotation_queued_false_full",
+      "pass_marker": "HDMI_ROTATION_PASS",
+      "log": "debug\\baselines\\rotation_queued_false_full\\result.log",
+      "counterclockwise": false,
+      "pixels": 62208,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_fc479ee/hdmi_rotation_check.vo": "ed7cb1477d6d21a6dfbdea7bf52e10cae5f6962b41463d49a21d77ee781439c9",
+        "rtl/rabbitpunch_ddr_write_queue.vhd": "2d6f2617d3f8b3d8e7eb0176c02ded83c02aac193d8bec03039fe3916c8b0648",
+        "debug/hdmi_rotation_queued_tb.vhd": "fddc94eb74b56a7006e2036340f445b744991f3b7547a713fc6ec56398107865"
+      },
+      "log_sha256": "19cd386d4c6906750315fd0aaaf61fbeeb153ccca54558da01dfa41a62345cab"
+    },
+    {
+      "case": "rotation_queued_true_full",
+      "pass_marker": "HDMI_ROTATION_PASS",
+      "log": "debug\\baselines\\rotation_queued_true_full\\result.log",
+      "counterclockwise": true,
+      "pixels": 62208,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_fc479ee/hdmi_rotation_check.vo": "ed7cb1477d6d21a6dfbdea7bf52e10cae5f6962b41463d49a21d77ee781439c9",
+        "rtl/rabbitpunch_ddr_write_queue.vhd": "2d6f2617d3f8b3d8e7eb0176c02ded83c02aac193d8bec03039fe3916c8b0648",
+        "debug/hdmi_rotation_queued_tb.vhd": "fddc94eb74b56a7006e2036340f445b744991f3b7547a713fc6ec56398107865"
+      },
+      "log_sha256": "268264459009ec77ed13abe4e2245dd46252b77380c6af3911392de58321d829"
+    }
+  ],
+  "template_sha256": "2c403b224592af5389e26ec2863337fe732631cf8c0c16e2afb881337d05aa31",
+  "queue_fit_commit": "3a4157fd5a65682c30c647e40561d0d592cd822b",
+  "scope": "Fitted unchanged rotation netlist plus VHDL write queue. All 62208 nonuniform pixels, independent CW/CCW DDR addresses/byte masks/colour and buffer selection, under repeated 96- and 64-clock busy bursts in a 512-clock period. No overflow; queue drains before the next frame. No loader ownership, arbitrary-duration DDR stall safety, frame publication/latency or physical hardware proof; disconnected from production."
+}
