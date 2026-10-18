@@ -23,7 +23,8 @@ write pulses, sound CPU request pulses, visible pixel enables, PCM sample marker
 and rising underflow edges. All counters saturate at 0xFFFFFFFF, start at FPGA
 configuration, and survive gameplay reset. Once saturated they cannot supply a
 rate; reload configuration for a fresh window. Visible pixel counting follows
-physical data enable even during black loading screens. A zero underflow count
+native data enable even during black loading screens. Optional presentation
+scandoubling and HQ2x do not alter these native pixel/frame counters. A zero underflow count
 is meaningful only alongside advancing frame/pixel totals. The main request and
 write counters distinguish CPU reads from writes; full addresses/data/byte masks
 are retained, including upper address bits.

@@ -66,7 +66,8 @@ QUARTUS_BIN = None
 REQUIRED_INSTANCES = (
     "hps_io", "rabbitpunch_clocked_machine", "rabbitpunch_scanout",
     "rabbitpunch_scanline_scheduler", "rabbitpunch_rom_cache", "fx68k",
-    "T80se", "jt51", "jt7759", "jtframe_draw", "rabbitpunch_hiscore_service",
+    "T80se", "jt51", "jt7759", "jtframe_draw", "rabbitpunch_hiscore_service", "rabbitpunch_video_options",
+    "video_mixer", "scandoubler", "Hq2x", "rabbitpunch_video_aspect", "video_freak",
     # "fx68k", "sdram", "arcade_video", "Hq2x", "screen_rotate_two", ...
 )
 
@@ -311,7 +312,7 @@ def inspect_full_clock_tree(stage, quartus_tools, rev):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--synth-check", choices=["video_options", "clocked_machine", "machine", "raster", "hiscore_service", "hiscore", "maintenance", "video_output", "platform", "controls", "host", "load_frontend", "ddr_copy", "audio_mixer", "audio_rom_transport", "audio", "adpcm", "sound_board", "soundcpu", "memory", "tiles", "sprites", "sprite_scan", "priority", "sprite_line", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "download", "system", "sdram", "rom_requests", "rom_cache", "roms"],
+    ap.add_argument("--synth-check", choices=["video_aspect", "video_options", "clocked_machine", "machine", "raster", "hiscore_service", "hiscore", "maintenance", "video_output", "platform", "controls", "host", "load_frontend", "ddr_copy", "audio_mixer", "audio_rom_transport", "audio", "adpcm", "sound_board", "soundcpu", "memory", "tiles", "sprites", "sprite_scan", "priority", "sprite_line", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "download", "system", "sdram", "rom_requests", "rom_cache", "roms"],
                     help="fit an isolated block from HEAD instead of the MiSTer core")
     ap.add_argument("--rev", help="Quartus revision (default: CORE_REV, else the one "
                                   ".qsf in the core root, else the .qpf's last)")

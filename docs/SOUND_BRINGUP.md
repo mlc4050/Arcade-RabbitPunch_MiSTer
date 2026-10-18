@@ -308,3 +308,45 @@ waveform comparison. The final combined mono system also passes implementation:
 6000 ALMs, 7176 registers, 927339 RAM bits, setup +2.775 ns / hold +0.089 ns.
 The Quartus 17 output-port association restriction was resolved with internal
 PCM nets; VHDL-2008 simulation acceptance alone had not caught that restriction.
+
+## Native reset startup comparison
+
+Both real sound ROMs now also pass without DIR register loading or RAM deposits.
+For each set, all 4096 ordered write addresses and byte masks match MAME, all
+215 peripheral data writes match, and 3877 RAM data writes match exactly. Four
+early stack-save bytes are reported separately, not counted as exact data:
+
+| Zero-based write index | Address | MAME | Native T80 | Source |
+|---|---|---|---|---|
+| 4 | FFFC | 00 | FF | PUSH AF at 081A (Japan)/0817 (US), reset-dependent flags after EX AF,AF' |
+| 5 | FFFB | 00 | XX | PUSH BC at 081B (Japan)/0818 (US), B not initialized by the program yet |
+| 13 | FFF8 | 28 | EC | PUSH AF at 0836 (Japan)/0833 (US), inherited flag bits after ADD HL,BC |
+| 18 | FFF8 | 28 | EC | Same save in the second YM wait call |
+
+This audit comes from local disassembly of the supplied pinned sound ROM. The
+program then executes XOR A at 0013 and LD BC at 0014 before the RAM clear at
+001E. That clear overwrites the temporary stack locations. XX is the simulator's
+undefined byte, not a value hardware can store. No production reset circuitry or
+vendor CPU source was changed to make these save bytes resemble MAME.
+
+check_sound_board_boot.py --native-reset enforces exact address/mask ordering and
+all other data, permitting differences only at those four indexed stack-save
+locations. It reports their values explicitly. Four negative controls per set
+reject changed peripheral data, ordinary RAM data, an address and a byte mask.
+The existing normalized mode remains a strict full-write-prefix comparison.
+
+reference/sound_board_native_reset_checks.json records a retrospective audit of
+the completed source/log-hashed native runs. --reuse-existing requires their
+unchanged HDL sources, ROM/log hashes, pass marker and original difference list;
+it does not claim a fresh simulation. The test uses the production sound bus,
+native configuration-initialized RAM and JT51, with a behavioral delayed ROM
+transport at the legacy 48 MHz/4 MHz enable ratio. No main-game commands,
+ADPCM playback, production SDRAM/PLL timing, long-run game audio or audible
+hardware verification is established by this prefix.
+
+The bootstrap audit covers both ROMs separately. Rabbit Punch's configure entry
+is 085E and save routine 0817, three bytes before the Japanese 0861/081A entries;
+the corresponding save/wait instruction blocks are byte-identical. The shared
+0013/0014/001E initialization/clear path is also identical. Native exceptions
+are locked to separate hashes of each ROM's first 0x867 bytes; changing that
+code requires a fresh audit rather than silently retaining the exceptions.

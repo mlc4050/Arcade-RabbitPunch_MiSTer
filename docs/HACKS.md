@@ -51,8 +51,9 @@ MAME's defined Z80 reset registers differ from the unchanged T80 reset state.
 The strict 4096-write sound startup comparison explicitly seeds T80 through its
 existing simulation state-load input from captured MAME reset registers. This
 normalizes the test starting condition only. No production reset circuitry is
-changed; an unseeded Rabio Lepus diagnostic differed in four temporary stack
-bytes while matching every peripheral write. Sound memory replies in that test
+changed; the separate native-reset comparison now passes both games with all 4096
+write addresses/masks and 215 peripheral writes exact, while explicitly
+reporting four audited bootstrap stack-save bytes. Sound memory replies in that test
 are behavioral, periodically delayed by 53 clocks; this is not original-board
 cycle timing or shared SDRAM bandwidth proof. See SOUND_BRINGUP.md.
 
@@ -66,8 +67,12 @@ physical board startup verification remains open.
 ## First physical-shell prototype
 
 The framework boundary is being connected for first hardware bring-up. It exposes
-the native 288x216 raster and signed mono audio. Forced scandoubling, CRT Adjust,
-HDMI rotation/flip and expanded video/audio OSD options are still unconnected;
+the native 288x216 raster and signed mono audio. Forced scandoubling, HQ2x and
+CRT scanline levels are connected through a tested VHDL wrapper; the new shell
+fit and physical output remain pending. CRT Adjust, HDMI rotation/flip and
+remaining crop/audio OSD options are still unconnected. HDMI aspect/integer
+metadata is connected after standalone fit/netlist checks, with its new full-shell
+validation pending;
 this is not the final standard-feature set. The framework HDMI scaler remains
 available. DDR currently has only the load-time copier as a client; introducing a
 rotator requires an ownership mux and contention verification before use. No game

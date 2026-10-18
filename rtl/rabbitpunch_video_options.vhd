@@ -4,7 +4,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
--- Native output is an exact bypass. Optional doubling uses the unchanged
+-- Native RGB/enable/blanking are unbuffered; sync polarity is normalized.
+-- Optional doubling uses the unchanged
 -- MiSTer line-based mixer; every register still runs on i_clk with enables.
 -- Native sync pulses are active low; the framework mixer expects active high.
 entity rabbitpunch_video_options is

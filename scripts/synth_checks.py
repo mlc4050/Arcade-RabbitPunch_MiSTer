@@ -11,7 +11,8 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
-    "video_options": (71616, ("rabbitpunch_video_options", "video_mixer", "scandoubler", "Hq2x")),
+    "video_aspect": (0, ("rabbitpunch_video_aspect", "video_freak", "video_scale_int", "sys_udiv", "sys_umul")),
+    "video_options": (70080, ("rabbitpunch_video_options", "video_mixer", "scandoubler", "Hq2x")),
     "machine": (929387, ("rabbitpunch_machine", "rabbitpunch_scanout", "rabbitpunch_clock_enables", "rabbitpunch_raster", "rabbitpunch_scanline_scheduler", "rabbitpunch_video_output", "rabbitpunch_platform", "fx68k", "T80se", "jt51", "jt7759", "jtframe_draw", "rabbitpunch_hiscore_service", "rabbitpunch_rom_cache")),
     "raster": (0, ("rabbitpunch_clock_enables", "rabbitpunch_raster")),
     "hiscore_service": (2048, ("rabbitpunch_hiscore_service", "rabbitpunch_hiscore_config", "rabbitpunch_hiscore", "rabbitpunch_ram8")),
