@@ -1,0 +1,15 @@
+{
+  "accepted": false,
+  "reason": "Publication scoreboard identified frame origin using only low X/Y bytes. The 288-pixel fixture also has low X byte zero at X=256; the checker reset its accepted-pixel counter a second time.",
+  "archive": "debug/fit_archive/rotation_publication_7b1b43b_coordinate_checker_rejected",
+  "source_sha256": {
+    "scripts/run_hdmi_rotation_publication_tests.py": "a04b68fdddeef0ea5fa12db66d66a8f950a912037e7391e0409b8b46f891fe28",
+    "debug/hdmi_rotation_publication_tb.vhd": "f850b00e100854eeecb055a835136ab25c49cd450e16f53034a798a8b8bfe1ad",
+    "debug/hdmi_rotation_publication_runner.log": "a9349da428d631691a50afa43573bada355e5a3666bed96db5dc4943a50de77c",
+    "debug/baselines/rotation_publication_cw_full/result.log": "ef8304fa986ac359decf0fd40fb3a4b51645f6e78f297d694d704f0dfa4c9272",
+    "debug/baselines/rotation_publication_cw_full/run.do": "45aa9cb2a02896b7c0cb4a33dbca324539872245c646427693cda4f9222262fe",
+    "debug/baselines/rotation_publication_cw_full/progress.txt": "c1987ca93b8a2c32ee7f652e38e37fe95bb201128635ef97112ec27de6a3bbb2"
+  },
+  "resolution": "Use the seventeenth coordinate tag bit carried in blue bit zero as well; rerun the unchanged guard/queue/rotator integration. Compact cases already pass, because X never reaches 256.",
+  "scope": "Rejected checker result; not yet a passing full-image publication claim and not a physical hardware failure."
+}

@@ -18,6 +18,7 @@ from run_baselines import run_case
 
 
 BLOCKS = {
+    "rotation_transport": ("rotation_transport_tb", "ROTATION_TRANSPORT_PASS", "sim/video/rotation_transport_tb.vhd"),
     "frame_publication": ("frame_publication_tb", "FRAME_PUBLICATION_PASS", "sim/video/frame_publication_tb.vhd"),
     "ddr_write_queue": ("ddr_write_queue_tb", "DDR_WRITE_QUEUE_PASS", "sim/video/ddr_write_queue_tb.vhd"),
     "hdmi_rotation": ("hdmi_rotation_tb", "HDMI_ROTATION_PASS", "sim/video/hdmi_rotation_tb.vhd"),
@@ -81,7 +82,7 @@ def main():
             vectors[filename] = hashlib.sha256(source.read_bytes()).hexdigest()
     support = "rtl/rabbitpunch_sdram_types.vhd" if args.block in ("sdram", "rom_requests", "rom_cache", "roms") else "sim/video/tile_test_support.vhd"
     sources = [str(netlist.relative_to(root)).replace("\\", "/")]
-    if args.block not in ("frame_publication", "sound_board", "adpcm", "audio", "host", "memory", "video_aspect", "crt_adjust", "hdmi_rotation", "ddr_write_queue"):
+    if args.block not in ("rotation_transport", "frame_publication", "sound_board", "adpcm", "audio", "host", "memory", "video_aspect", "crt_adjust", "hdmi_rotation", "ddr_write_queue"):
         sources.append(support)
     if args.block in ("sdram", "roms"):
         sources.append("sim/vendor/sdram/sdram_chip_model_wide.sv")
@@ -92,14 +93,14 @@ def main():
         sources.append("rtl/rabbitpunch_layout.vhd")
     if args.block == "host":
         sources.append("rtl/rabbitpunch_config.vhd")
-    if args.block == "frame_publication":
+    if args.block in ("rotation_transport", "frame_publication"):
         # The fitted entity has its production 62208-pixel constant, not a
         # run-time generic. Keep the behavioral scenario, scale its stimulus.
         template = (root / bench).read_text(encoding="utf-8")
         generic_map = "        generic map (\n            GINT_FRAME_PIXELS => GINT_FRAME_PIXELS\n        )\n"
         assert template.count(generic_map) == 1
         template = template.replace(generic_map, "").replace("GINT_FRAME_PIXELS : positive := 4", "GINT_FRAME_PIXELS : positive := 62208")
-        bench = "debug/frame_publication_netlist_tb.vhd"
+        bench = f"debug/{args.block}_netlist_tb.vhd"
         (root / bench).write_text(template, encoding="utf-8")
     sources.append(bench)
     libraries = [item for library in ("cyclonev_ver", "altera_ver", "altera_lnsim_ver", "lpm_ver", "sgate_ver")
@@ -110,9 +111,9 @@ def main():
                  source_sha256={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources},
                  log_sha256=hashlib.sha256((root / check["log"]).read_bytes()).hexdigest(),
                  scope="Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest")
-    if args.block == "frame_publication":
+    if args.block in ("rotation_transport", "frame_publication"):
         check.update(frame_pixels=62208,
-                     template_sha256=hashlib.sha256((root / "sim/video/frame_publication_tb.vhd").read_bytes()).hexdigest())
+                     template_sha256=hashlib.sha256((root / BLOCKS[args.block][2]).read_bytes()).hexdigest())
     if args.block == "memory":
         check.update(memory_initialization_addresses=408, memory_initialization_reads=816, exhaustive=False,
                      scope=check["scope"] + "; all five banks: first/last word of every 256-word region through both CPU and inspection, plus masked writes; full-address coverage is RTL only")

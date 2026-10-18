@@ -95,7 +95,7 @@ text = text.replace(marker, '''    write_queue : entity work.rabbitpunch_ddr_wri
         variable vint_slot : natural;
     begin
         wait until falling_edge(s_clk);
-        if (s_raw_write = '1' and su64_raw_data(15 downto 0) = 0) then
+        if (s_raw_write = '1' and su64_raw_data(16 downto 0) = 0) then
             vint_counts(to_integer(su29_raw_address(21 downto 20))) := 0;
         end if;
         if (s_write = '1') then
@@ -107,7 +107,8 @@ text = text.replace(marker, '''    write_queue : entity work.rabbitpunch_ddr_wri
         end if;
         if (s_frame_valid = '1') then
             assert (vint_counts(to_integer(su32_base(24 downto 23))) = GINT_VISIBLE_WIDTH * GINT_VISIBLE_HEIGHT)
-                report "Published framebuffer before all DDR pixel writes" severity failure;
+                report "Published framebuffer before all DDR pixel writes: slot=" & to_hstring(su32_base(24 downto 23)) &
+                    " count=" & integer'image(vint_counts(to_integer(su32_base(24 downto 23)))) severity failure;
             s_publication_seen <= '1';
         end if;
     end process;

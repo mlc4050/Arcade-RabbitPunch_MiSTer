@@ -1,0 +1,13 @@
+{
+  "case": "rotation_transport",
+  "pass_marker": "ROTATION_TRANSPORT_PASS",
+  "log": "debug\\baselines\\rotation_transport\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_ddr_write_queue.vhd": "2d6f2617d3f8b3d8e7eb0176c02ded83c02aac193d8bec03039fe3916c8b0648",
+    "rtl/rabbitpunch_frame_publication.vhd": "aeea205f852f1d0c6b43b94a411e98a03d5ad72729f6008155043f1e52ab52f1",
+    "rtl/rabbitpunch_rotation_transport.vhd": "fa41de17a133ddfc7708369f07dac5a9d223a7290ae9f8717708da60289b999a",
+    "sim/video/rotation_transport_tb.vhd": "cdf1bd735b996c0a7fe22833182ac47c14718ecb26a8aa74f916eced47b38164"
+  },
+  "log_sha256": "e1938384a7ffa707e02bfcac12eefe16311b0e66f31afff472e1721104c5f125",
+  "scope": "Actual VHDL queue/publication/loader mux with synthetic four-pixel frames and loader commands. Ordered presentation writes, immediate loader priority and invalidation, takeover with pending pixels, delayed read response, loader command fields, queue discard, post-load frame-boundary restart and recovery. Caller holds loader ownership through response drain. Not the actual load frontend or rotator, not yet fitted or connected to production."
+}
