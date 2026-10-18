@@ -1,0 +1,12 @@
+{
+  "accepted": false,
+  "expected_negative_control": true,
+  "commit": "0f4eefc",
+  "reason": "Stable half-cycle stimulus exposes frozen framebuffer read selection. Earlier single-frame address/inequality tests did not prove publication liveness.",
+  "archive": "debug\\fit_archive\\hdmi_rotation_0f4eefc_before_liveness",
+  "source_sha256": {
+    "debug/netlists/hdmi_rotation_0f4eefc/hdmi_rotation_check.vo": "adea57c6e471c3ef50d946347d00974ec7a367979bb787adce04b31a5d9cd31c",
+    "sim/video/hdmi_rotation_buffers_tb.vhd": "2b2856b962031921859d2d054aea56fe35e5cf0c3faae4234ce586b92cdb3801"
+  },
+  "log_sha256": "372de3896b5110cd4553fc8c0887aca40e3f6fee375cbcced97881f6a3749b37"
+}
