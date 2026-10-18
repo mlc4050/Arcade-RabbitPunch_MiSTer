@@ -1,0 +1,35 @@
+{
+  "cases": [
+    {
+      "case": "native",
+      "progress": [],
+      "accepted": false,
+      "complete": false
+    },
+    {
+      "case": "adjusted",
+      "progress": [
+        "100000000 ps; frame=0; row=3; column=132"
+      ],
+      "accepted": false,
+      "complete": false
+    }
+  ],
+  "reason": "Deliberately stopped confirmed owned kernels after throughput measurement. Starter ModelSim warns of 14267+ statements over its recommended capacity. Adjusted fixture reached 100 us, frame 0/row 3; projected full three-frame native-raster comparison exceeds the original three-hour budget. Not a completed run or an expired wall timeout.",
+  "archive": "debug/fit_archive/crt_hq_full_raster_starter_progress",
+  "scope": "No full-raster HQ2x image pass claimed. Compact 1024-pixel and production-width flat-field proofs remain separate. Forced-stop transport/kernel teardown errors are not HDL assertion results.",
+  "artifact_sha256": {
+    "run_crt_hq_pattern_tests.py": "965b2bd64f658fd21acd56708b342b1aa60a439dc245e990460cad8dde5457d6",
+    "adjusted/crt_hq_pattern_adjusted_full_raster_tb.vhd": "0ab5f7dac0a8f0ede1d1d392c2c7f0b4a286ea5e7ab4dc3886cba23709fb53f7",
+    "adjusted/hq_pixels.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "adjusted/progress.txt": "ee1490ae507ff05b292fc6ae48ac841a308d93a2eafa17047fa97276cbc3dd11",
+    "adjusted/result.log": "3b090315a68ae9bd8fea51cecc69db2360e736b96774d47bf828a35aa9b6bed8",
+    "adjusted/run.do": "5b1197032a53592b096450ae17298afa455f54716729f4df80c4de981e2e7b89",
+    "adjusted/transcript": "44aa1423ffdb9bc135aa68b1c3730633d6816bb05ff43a23d9c4d6c7cdb5a199",
+    "native/crt_hq_pattern_native_full_raster_tb.vhd": "529ee8ac6ac69f9010fe0e3ccc8025630aaf2b48b0c1738fe80b7a5135f950af",
+    "native/pixels.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "native/result.log": "ad7024d1a873976e2d0b475414c7c3d5db66ee1742b59fa7436c51ccffb02237",
+    "native/run.do": "39d2b86d3a41fa8b38449543258051859bf12ae4f25bc0d7edd9627d019b2459",
+    "native/transcript": "c1557a4baf1ee2cbd66aa06c45621d696122593a16610352a0f032226b558574"
+  }
+}

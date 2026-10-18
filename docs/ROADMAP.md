@@ -4,8 +4,8 @@ Approved by the user in the originating chat. The core is in simulation and
 implementation bring-up; no complete game or playable RBF exists yet. The
 MiSTer framework boundary points to the VHDL machine. Prior non-debug full
 implementation passes, including corrected HDMI rotation in both revisions.
-The newer audio-menu release passes all 144 timing checks (setup +0.139 ns,
-hold +0.084 ns); its instrumented implementation and hardware bring-up remain pending.
+The newer audio-menu release/debug revisions pass all 144/164 timing checks
+(setup +0.139/+0.306 ns, hold +0.084/+0.078 ns). Hardware bring-up remains pending.
 
 ## Current status
 
@@ -20,8 +20,8 @@ hold +0.084 ns); its instrumented implementation and hardware bring-up remain pe
 | Physical shell timing | Non-debug video-options shell 6397a94 passes all 144 reported checks: setup +0.323 ns, hold +0.100 ns, 14242 ALMs and 180 M10Ks. Prototype SDRAM constraints and inherited peripheral pin coverage gaps are explicit. Debug default seed 1b3e33f fails one inherited HDMI setup path by 0.204 ns; clean scanline-options retry f64d68b seed 2 passes all 164 checks (setup +0.373 ns, hold +0.067 ns). Connected aspect snapshot 42c1be5 also passes all 144 checks (setup +0.525 ns, hold +0.078 ns); common-flip d525db2 has positive slacks but fails the 110-path peripheral coverage cap by one; the accepted reference rebuild identifies only an additional LED[0] indicator path. The registered-indicator b5b14ee rebuild passes all 144 timing checks (setup +0.370 ns, hold +0.078 ns), with 82 untimed output paths under the unchanged 110 cap. |
 | Hardware | No playable board verification, deployment, screenshot, JTAG read or audible output is claimed. RBFs are local timed prototypes; there is no verified release. |
 
-Next work is completing the instrumented audio-menu full-shell implementation and the
-original ROM-free diagnostic's native CPU-to-video path. Audio mix defaults to
+Next work is the original ROM-free diagnostic's native CPU-to-video path and
+full-raster CRT/HQ2x comparison with a qualified faster simulation backend. Audio mix defaults to
 Mono; all four settings pass synthesized-host and connected HPS regressions.
 Development DDR-load MRAs preserve each verified 0x210000-byte image and change
 only the staging address/display description; the default direct MRAs remain.

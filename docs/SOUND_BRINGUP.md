@@ -371,5 +371,7 @@ timing checks, required hierarchy/MISTER_FB, the fitted clock tree and unchanged
 pin-coverage gates. Minimum setup/hold are +0.139/+0.084 ns; utilization is
 15263 ALMs, 25388 registers, 187 M10Ks, 35 DSPs and three PLLs. The selected
 bitstream/source/timing artifacts are archived in the report's named worktree;
-see reference/full_shell_hdmi_audio_release_checks.json. The instrumented
-seed-2 implementation is still running. No physical audio playback is claimed.
+see reference/full_shell_hdmi_audio_release_checks.json. The instrumented 896da70 seed-2 implementation also passes all 164 checks,
+with setup/hold +0.306/+0.078 ns; its exact archive is recorded in
+reference/full_shell_hdmi_audio_debug_seed2_checks.json. No physical audio
+playback is claimed.

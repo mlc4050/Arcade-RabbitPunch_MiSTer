@@ -1,0 +1,71 @@
+{
+  "cases": [
+    {
+      "case": "native",
+      "pixels": 1024,
+      "differing_pixels": 1024,
+      "first_differences": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "accepted": false
+    },
+    {
+      "case": "adjusted",
+      "pixels": 1024,
+      "differing_pixels": 1024,
+      "first_differences": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "accepted": false
+    }
+  ],
+  "accepted": false,
+  "reason": "Quartus-selected RGB wires are declared in generate-local blocks and referenced outside them. The initial Verilator RTL interpretation created implicit single-bit nets and does not match qualified captures. Production and vendor RTL untouched.",
+  "artifact_sha256": {
+    "hq_fast_adjusted.v": "8a484051140e8aa5bb43fa5f1e98990d5b7ddb13d2aac1bd6fd27d90af4c7079",
+    "hq_fast_adjusted.vhd": "0f765f30419591ce6ff1d33c1aed9d8a01f122fc5e1a5f3383c0f1765478e717",
+    "hq_fast_adjusted_bridge.cpp": "ac409a1896982c2abd6ebcae570e84bc629a94f5c2fcbaaceddf39a2feba76fb",
+    "hq_fast_adjusted_build.log": "1ec3f2a78fa7c7a1fc25cbe2d65cb7dbc1d05d88f771f994187d3e670444f9b0",
+    "hq_fast_adjusted_export.log": "79a8be5b38e987a985b252960c1a35ebf9721c497c05bf2862c0ea1ea74613ad",
+    "hq_fast_adjusted_pixels.hex": "4e3c9645b90d9dfc2702024deaa9327c677a21064533fce2e13df3324b4dfd00",
+    "hq_fast_adjusted_run.log": "ef34abc2d41ba7d0537a650599a2864fecef1d76f0e12487bb8717c34e3d8162",
+    "hq_fast_native.v": "6193b65da2a34da610cde5cbbc621332c9b3429f4d9d4969308fad1d54fcaba4",
+    "hq_fast_native.vhd": "321b38a007f0645f42a75787010cbe0c1b54667ab9d168b92fb1e8659ab1e14f",
+    "hq_fast_native_bridge.cpp": "ef66e32e5f9dd20b02684bc20d81fca8ac20cd75b51f39c444e9341e0d64b3eb",
+    "hq_fast_native_build.log": "d2478d2c7653a71a37e48240cc7cb32882611a29801a4769707aea40d8fe58e1",
+    "hq_fast_native_export.log": "a5eef564d313816041b43627485bb6652a830ddfc82e402a3528eea039deb65e",
+    "hq_fast_native_pixels.hex": "4e3c9645b90d9dfc2702024deaa9327c677a21064533fce2e13df3324b4dfd00",
+    "hq_fast_native_run.log": "ef34abc2d41ba7d0537a650599a2864fecef1d76f0e12487bb8717c34e3d8162",
+    "rabbitpunch_video_options.vhd": "d2dd521242283000318c084bcf92fa15b2c03adbb723320554d6ce3880b48789"
+  }
+}

@@ -72,7 +72,7 @@ CRT scanline levels are connected through a tested VHDL wrapper; the new shell
 fits pass, while physical output remains pending. Corrected HDMI rotation passes
 release/debug full-shell timing and its documented functional comparisons. Audio
 mix is connected and passes synthesized-host/connected protocol regressions; its
-new full-shell implementations are running. Crop remains unconnected. HDMI aspect/integer
+release/debug full-shell implementations now pass all timing and coverage gates. Crop remains unconnected. HDMI aspect/integer
 metadata and common screen flip pass their full-shell gates;
 this is not the final standard-feature set. The framework HDMI scaler remains
 available. The optional rotator now shares DDR through a loader-priority queue/publication
