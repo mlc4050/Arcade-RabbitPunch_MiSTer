@@ -36,3 +36,9 @@ direct video. Original 4:3 remains the default. The newly connected full-shell
 fit and expanded native-host regression are next; physical HDMI behavior is
 not established by this standalone result. Crop and rotation are
 separate work, and are not advertised by this evaluation.
+
+The expanded native HPS menu now passes its own fitted host and complete protocol
+netlist regression, including every new aspect/scale configuration character,
+video flags, status transfers, controls, ROM-byte and high-score file transfers.
+See reference/host_aspect_synth.json and reference/host_netlist_checks.json.
+A new non-debug full-shell fit is running for the connected metadata revision.
