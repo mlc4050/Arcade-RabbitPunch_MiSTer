@@ -1,6 +1,6 @@
 # HDMI aspect and integer-size metadata evaluation
 
-rabbitpunch_video_aspect is an isolated, unconnected VHDL adapter around unchanged
+rabbitpunch_video_aspect is a VHDL adapter around unchanged
 sys/video_freak.sv and math.sv. It selects original 4:3, full screen and two
 framework custom aspect slots, and the four standard integer-scaling modes.
 Direct video selects original 4:3 and disables integer scaling. Reserved scale
@@ -23,7 +23,16 @@ functional validation will use a Quartus-generated netlist, including FPGA
 configuration values; the RTL smoke alone is not the integer-mode proof.
 
 The staged standalone project times all paths at 48 MHz with explicit virtual
-I/O delays. Synthesis, routed timing and the complete netlist regression are
-pending. The current shell remains at the preceding scanline-options revision;
-this adapter is not in files.qip or RabbitPunch.sv yet. Crop and rotation are
+I/O delays. The standalone 80527a6 fit passes all reported corners and six coverage
+categories: 260 ALMs, 412 registers, no RAM/DSP/PLL, minimum setup +6.732 ns
+and hold +0.120 ns. The complete synthesized-netlist VHDL regression passes,
+including distinct narrow/wide integer widths and HDMI resizing. See
+reference/video_aspect_synth.json and reference/video_aspect_netlist_checks.json.
+
+The adapter now connects VIDEO_ARX/ARY at the shell, measuring post-effect
+CE_PIXEL/VGA_DE/VGA_VS and receiving the framework HDMI dimensions. H5 OSD
+selectors use aspect bits 122:121 and scale bits 68:66; they are hidden under
+direct video. Original 4:3 remains the default. The newly connected full-shell
+fit and expanded native-host regression are next; physical HDMI behavior is
+not established by this standalone result. Crop and rotation are
 separate work, and are not advertised by this evaluation.

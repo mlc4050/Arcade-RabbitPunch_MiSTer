@@ -333,3 +333,9 @@ state after native scanout. It is not emulated board RAM. Native bypass has no
 added pixel storage; optional modes rebuild their line history from the running
 raster after reset/restore. Frame/pixel debug counters remain tied to native
 scanout. No full-frame render buffer or game-clock domain is introduced.
+
+HDMI sizing metadata adds two bits counting observed vertical-sync edges and
+a previous-sync bit, plus unchanged framework arithmetic/geometry state. It
+holds normal ratio metadata while geometry is first measured; no pixels or
+emulated game state pass through it. It has no game-reset/pause dependence,
+and uses the existing system clock with pixel enables.
