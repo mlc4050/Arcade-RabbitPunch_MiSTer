@@ -1,0 +1,16 @@
+{
+  "commit": "c7ecb10dd18663171870dd6024e880f47f622942",
+  "passed": false,
+  "failure_kind": "fixture_samples_before_mode_latch",
+  "failing_assertion": "Doubled fixture rotation did not latch",
+  "failure_time_ns": 456960,
+  "clockwise_integer_checks_completed": 4,
+  "scope": "Shortened second-direction wait observed combinational VS from the raster counter, then checked at the immediately following falling edge before the controller sampling rising edge. Preserve rejection; replace the premature check with four settling clocks and rerun all expectations. No production RTL change.",
+  "artifact_sha256": {
+    "hdmi_presented_geometry_fitted_bounded_runner.log": "a631b679a3ddaa0c246e4d516a7e3fe2148defe022644194bd4de0e9f5006345",
+    "hdmi_presented_geometry_fitted_tb.vhd": "fdd3e7c533f3b70c907bba4e7dff8cdb171b79c34c010ddf06ec23c6aa3eacd3",
+    "result.log": "0c50ca873f5cb21747e6fc3dc07f5321e919a38a53353c03fcd3b6fa494011bf",
+    "run_hdmi_presented_geometry_tests.py": "26411e8c9710719a5aaf695fa2cb31bfc35532618e093d3c4922decb54721b01",
+    "run.do": "be7f9d4a14c44c4aeaa59d1ab8ba30aad27a0cbd580d0025613078dabc57e234"
+  }
+}

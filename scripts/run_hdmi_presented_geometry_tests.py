@@ -10,7 +10,10 @@ from run_baselines import run_case
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--expect-rejection', action='store_true')
 parser.add_argument('--fitted', action='store_true', help='Use the latest complete controller fit rather than controller RTL')
+parser.add_argument('--wall-timeout', type=int, default=900)
 args = parser.parse_args()
+if args.wall_timeout <= 0:
+    parser.error('Wall timeout must be positive')
 root = core_root()
 sources = []
 for name in (('video_aspect',) if args.fitted else ('hdmi_rotation', 'video_aspect')):
@@ -87,6 +90,28 @@ text = text[:start] + '''    stimulus : process
 end architecture;
 '''
 if args.fitted:
+    # Metadata needs three measured frames once. Changing CW to CCW keeps the
+    # native geometry, so one further frame suffices for the applied direction.
+    warmup = '''            for vint_frame in 1 to 5 loop
+                wait until rising_edge(s_vertical_sync);
+            end loop;'''
+    assert text.count(warmup) == 1
+    text = text.replace(warmup, '''            if (vint_direction = 1) then
+                for vint_frame in 1 to 3 loop
+                    wait until rising_edge(s_vertical_sync);
+                end loop;
+            else
+                wait until rising_edge(s_vertical_sync);
+            end if;''')
+    settle = '''            wait until falling_edge(s_clk);
+            assert (su2_applied = vint_direction)'''
+    assert text.count(settle) == 1
+    text = text.replace(settle, '''            -- VS changes after the raster edge; allow the receiving clock
+            -- to sample the request before checking the applied direction.
+            for vint_settle in 1 to 4 loop
+                wait until falling_edge(s_clk);
+            end loop;
+            assert (su2_applied = vint_direction)''')
     fit = json.loads((root / 'debug/hdmi_presentation_synth.json').read_text())
     netlist = 'debug/netlists/hdmi_presentation_' + fit['commit'][:7] + '/hdmi_presentation_check.vo'
     sources.insert(0, netlist)
@@ -107,7 +132,7 @@ if args.fitted:
     name += '_fitted'
 try:
     result = run_case(name, sources, 'hdmi_presentation_control_tb', '5 ms',
-                      'HDMI_PRESENTED_GEOMETRY_PASS', sim_args=LIBRARIES, wall_timeout=600)
+                      'HDMI_PRESENTED_GEOMETRY_PASS', sim_args=LIBRARIES, wall_timeout=args.wall_timeout)
 except SystemExit as error:
     transcript = root / 'debug/baselines' / name / 'result.log'
     if not args.expect_rejection or not transcript.exists() or 'Rotated metadata used doubled analog geometry' not in transcript.read_text():
@@ -122,6 +147,8 @@ result.update(fitted=args.fitted, commit=fit['commit'] if args.fitted else None,
               scope=('Complete controller functional netlist without SDF and independent qualified aspect reference; ' if args.fitted else 'Complete controller RTL with qualified rotation/aspect netlists; ') + 'Native 32x20 /7 raster and independently doubled 64x40 analog presentation, both directions and four integer modes versus independent native transposed aspect. Synthetic geometry seam, not actual effects or hardware.')
 (root / 'docs/reference' / (name + '_checks.json')).write_text(json.dumps(result, indent=2) + '\n')
 print('PASS expected geometry rejection' if args.expect_rejection else 'PASS rotated geometry selection')
+
+
 
 
 

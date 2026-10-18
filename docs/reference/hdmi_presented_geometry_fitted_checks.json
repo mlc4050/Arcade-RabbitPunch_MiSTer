@@ -1,0 +1,14 @@
+{
+  "case": "hdmi_presented_geometry_fitted",
+  "pass_marker": "HDMI_PRESENTED_GEOMETRY_PASS",
+  "log": "debug\\baselines\\hdmi_presented_geometry_fitted\\result.log",
+  "fitted": true,
+  "commit": "c7ecb10dd18663171870dd6024e880f47f622942",
+  "source_sha256": {
+    "debug/netlists/hdmi_presentation_c7ecb10/hdmi_presentation_check.vo": "ff1a0c279a630e6ec2e83c5207e465bd5b8aa2084656df6ad0deba9afd67871d",
+    "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
+    "debug/hdmi_presented_geometry_fitted_tb.vhd": "5c517d3c785b373354fe256ec6c627dc045bdfcffaee64f9a0c9159e9f53ec77"
+  },
+  "log_sha256": "e1556ff8a120dbf88ea684489436e5b4f998a23eeb3fa1e6b63c7b8a0152e185",
+  "scope": "Complete controller functional netlist without SDF and independent qualified aspect reference; Native 32x20 /7 raster and independently doubled 64x40 analog presentation, both directions and four integer modes versus independent native transposed aspect. Synthetic geometry seam, not actual effects or hardware."
+}

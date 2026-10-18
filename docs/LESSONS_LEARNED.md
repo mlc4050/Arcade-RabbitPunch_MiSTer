@@ -1463,3 +1463,13 @@ Select native CE/VS/DE during rotation and preserve presented measurements for
 unrotated output. Both CW/CCW and all integer modes now match the independent
 native aspect reference (hdmi_presented_geometry_checks.json); the rejected
 fixture/transcript are retained separately.
+
+### [RabbitPunch] Check mode latching after a receiving clock edge
+
+A raster counter changes VS after its rising edge. Waiting for that combinational
+VS event and checking the mode at the next falling edge samples before the
+controller's next rising edge. A shortened netlist fixture failed exactly there
+on the CCW request, after all four CW integer checks had passed. Allowing four
+receiving clocks retains all expected metadata and both directions then pass.
+The rejected fixture is preserved as hdmi_presented_geometry_fitted_latch_fixture_rejected.json;
+production RTL was unchanged.

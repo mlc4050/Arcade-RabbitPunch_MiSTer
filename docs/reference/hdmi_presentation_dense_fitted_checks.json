@@ -1,0 +1,46 @@
+{
+  "cases": [
+    {
+      "case": "hdmi_presentation_dense_fitted_cw",
+      "pass_marker": "HDMI_PRESENTATION_PASS",
+      "log": "debug\\baselines\\hdmi_presentation_dense_fitted_cw\\result.log",
+      "counterclockwise": false,
+      "pixels": 62208,
+      "scored_frames": 1,
+      "warmup_frames": 4,
+      "source_sha256": {
+        "debug/netlists/hdmi_presentation_c7ecb10/hdmi_presentation_check.vo": "ff1a0c279a630e6ec2e83c5207e465bd5b8aa2084656df6ad0deba9afd67871d",
+        "debug/hdmi_presentation_dense_fitted_tb.vhd": "dc290d11c910708ca8d281c2eb664bc70c026e4682340a91a75a1993e4b283e8"
+      },
+      "log_sha256": "0f1744d940d2cde1675d2226e7f44e6441011299cee5687672e4e4a47b78a278"
+    },
+    {
+      "case": "hdmi_presentation_dense_fitted_ccw",
+      "pass_marker": "HDMI_PRESENTATION_PASS",
+      "log": "debug\\baselines\\hdmi_presentation_dense_fitted_ccw\\result.log",
+      "counterclockwise": true,
+      "pixels": 62208,
+      "scored_frames": 1,
+      "warmup_frames": 4,
+      "source_sha256": {
+        "debug/netlists/hdmi_presentation_c7ecb10/hdmi_presentation_check.vo": "ff1a0c279a630e6ec2e83c5207e465bd5b8aa2084656df6ad0deba9afd67871d",
+        "debug/hdmi_presentation_dense_fitted_tb.vhd": "dc290d11c910708ca8d281c2eb664bc70c026e4682340a91a75a1993e4b283e8"
+      },
+      "log_sha256": "d2f5c3475fc21a375f1a5bb575d5e96c23bc8fdf72c44f77411fbbb3aefd97f1"
+    }
+  ],
+  "fitted": true,
+  "fitted_commit": "c7ecb10dd18663171870dd6024e880f47f622942",
+  "visible": [
+    288,
+    216
+  ],
+  "total": [
+    304,
+    224
+  ],
+  "pixel_divider": 1,
+  "busy_cycles_per_512": 4,
+  "template_sha256": "a9b51809a1b9fcb693f4250b388675bd7a3357e2050b0aa5cf4805c11791a816",
+  "scope": "Compressed synthetic stimulus, not production raster or /7 cadence: all 62208 unique native pixels, exact CW/CCW DDR addresses/colours/byte masks, safe known buffer slots, advancing reads, queue drain and complete-image publication. Four-cycle DDR stalls overlap visible traffic and require queued packets. Fixed 62208-pixel fitted guard is unchanged. Functional netlist without SDF when fitted; otherwise controller RTL around qualified donor/aspect netlists. Production raster/stall proofs remain separate; no full-shell, executing-game, physical or measured latency claim."
+}

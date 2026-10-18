@@ -1,0 +1,15 @@
+{
+  "commit": "c7ecb10dd18663171870dd6024e880f47f622942",
+  "passed": false,
+  "failure_kind": "wall_timeout",
+  "wall_timeout_seconds": 600,
+  "assertion_failure_seen": false,
+  "scope": "Combined native/doubled metadata fixture through complete netlist and independent aspect reference. Full five-frame warmup per direction did not finish within the real-time limit. Frontend/kernel connection fatal messages occurred on timeout teardown. No pass claimed; shortened redundant warmup is a separately hashed fixture.",
+  "artifact_sha256": {
+    "hdmi_presented_geometry_fitted_runner.log": "c34019a3946df5fc69f08079eda8fdc5e9ab06f56d749c630bbc71b0e2ad5d68",
+    "hdmi_presented_geometry_fitted_tb.vhd": "7b6fd695a39648a568b239cb0f4576bef323d8168b128b6cba19a0473b20a01b",
+    "result.log": "b8134433eeb818942b5ddfc2bccb541f28b40f41f7debf8e1d2836ee6bdc0f75",
+    "run_hdmi_presented_geometry_tests.py": "558ec82bcc1cd22c68b69995b45202234f389d1b6bf8670bd5d472322d0de05b",
+    "run.do": "be7f9d4a14c44c4aeaa59d1ab8ba30aad27a0cbd580d0025613078dabc57e234"
+  }
+}

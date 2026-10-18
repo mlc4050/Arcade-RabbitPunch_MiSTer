@@ -208,3 +208,30 @@ four-cycle busy bursts and all 62208 pixels per case; its synthetic cadence
 is explicitly separate from the production proof. See hdmi_presentation_checks.json
 and hdmi_presentation_dense_rtl_checks.json. Dense complete-netlist images and
 the doubled-presentation netlist seam remain in progress.
+
+## Corrected connected qualification
+
+The corrected rotation release 0884a46 and instrumented b2d73bc (seed 2) now
+pass all 144/164 timing checks, required hierarchy/MISTER_FB, fitted clocks and
+the unchanged peripheral coverage gates. Minimum setup/hold are +0.217/+0.075 ns
+for release and +0.384/+0.075 ns for debug. Both use 187 M10Ks, 35 DSPs and
+three PLLs. Exact bitstreams, source snapshots and hashes are archived; see
+reference/full_shell_hdmi_native_geometry_release_checks.json and
+reference/full_shell_hdmi_native_geometry_debug_seed2_checks.json.
+
+The complete c7ecb10 functional netlist also passes both 62208-pixel directions
+in the independently validated compressed 304x224 /1 fixture with queued DDR
+stalls. Its production 62208-pixel validity count and optimized 512x80 queue
+are unchanged. Both directions and all four integer modes pass the independent
+native-aspect comparison while the analog fixture presents doubled geometry.
+The premature CCW check was fixed by allowing receiving clock edges; that
+rejected fixture and earlier wall timeout remain separately recorded. See
+reference/hdmi_presentation_dense_fitted_checks.json and
+reference/hdmi_presented_geometry_fitted_checks.json.
+
+The original full production-raster complete-netlist image test remains incomplete;
+its separate wall-timeout record is not replaced by the compressed proof. The
+production raster image proof uses controller RTL around qualified donor/aspect
+netlists. These connected timing snapshots predate the newer audio-mix menu.
+Physical outputs, DDR acceptance, playable gameplay and end-to-end latency
+remain unverified.
