@@ -63,3 +63,16 @@ video flags, 128-bit status ordering, keyboard/joysticks, byte download and nati
 high-score upload/request behavior pass with the new menu string. See
 reference/host_video_options_synth.json and reference/host_netlist_checks.json.
 The physical ARM/menu interaction is still part of hardware bring-up.
+
+The connected non-debug full fit 6397a94 passes all 144 reported timing checks
+and fitted clock/coverage gates: minimum setup +0.323 ns and hold +0.100 ns,
+14242 ALMs, 23916 registers, 180 M10Ks, 34 DSPs and three PLLs. Its qualified
+archive contains only the selected revision's artifacts; see
+reference/full_shell_video_options_release_checks.json. This is a timed
+prototype, not a hardware-verified release.
+
+The independent instrumented default-seed fit 1b3e33f is rejected: a slow -40 C
+HDMI-domain setup path fails by 0.204 ns. All game-clock setup checks pass
+(minimum +1.035 ns), as does SDRAM output setup (+0.767 ns). No timing exception
+was added. A second placement seed will be checked before touching unchanged
+framework logic. The failed bitstream remains archived and is not accepted.

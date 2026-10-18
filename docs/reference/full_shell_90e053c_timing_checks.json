@@ -1,7 +1,7 @@
 {
   "build_commit": "90e053c5d0d756952d48b85378f0924f19488c33",
   "revision": "RabbitPunch_stp",
-  "archive": "debug/fit_archive/full_shell_90e053c_phase5357_instrumented",
+  "archive": "debug/fit_archive/full_shell_90e053c_phase5357_instrumented/qualified",
   "qualification": "Retrospective validation of completed 90e053c full fit using updated fail-closed timing/coverage and clock-tree validators; original build runner correctly rejected newly introduced reserved JTAG pins. No rerun compile or physical execution claimed.",
   "timing_checks": 164,
   "minimum_slack_ns": {
@@ -927,20 +927,7 @@
     "framework_timing_scope.json": "705cb14cc836af90db504a3d88a7ec3a9ea3bad81409f4cabeeb1cccd994c1cf",
     "full_clock_tree.json": "e48f7143cc10dea415c8ae3a85e622887dca3b107a7fe2e52fec51340d48e50b",
     "full_clock_tree.log": "228a0e68b3b658c51c1b65c54fc10c2d568837c7b633b7db750a7145c4eac76e",
-    "full_unconstrained.rpt": "aee8205a5e34926ef95337b066a8d80fc5335adbd7253d1fe1ad2ce86bbf51aa",
-    "full_worst_setup.rpt": "a77b7004c2db6525bced14518de7716fa2039e8b0ba4e7da59c8adad0a6cd148",
-    "game_internal_setup.rpt": "d1c39089084f86b4af71e8d1dcc241940538c25c797aeb4585e6b9a539f83470",
     "q_staged.log": "f23e3d4c1bceb674c9a8d5d83ba0d547388cf06e47cdd15e86601b067255e425",
-    "RabbitPunch.asm.rpt": "1f84c41288063e83ad8d78e0b94eb33c7614f94f548cce1e24255e01f57b41bb",
-    "RabbitPunch.fit.rpt": "980e225470c5814595614c366de5c4c63e29b8b03fe057039af5d87eb96557c7",
-    "RabbitPunch.fit.summary": "5f8389ac33ea4efc329f04468285477db0e82357ed327ecbc1eed410c453f6a9",
-    "RabbitPunch.flow.rpt": "15aae351451693c4a1bac4e676f4aea4ed233f9f4eeb5f7411183dd5adb33731",
-    "RabbitPunch.map.rpt": "2eae623a798dc814d1f6e149cefd82f5449fa22dbaacff242b7bdad12ed8096a",
-    "RabbitPunch.map.summary": "9b57a0bd982252027c9b1a6c0e26d9482c94f581de757a7ca6ac284a8145ca93",
-    "RabbitPunch.rbf": "09e07373887cc5ba9be52d951377d57a0ca9fa2a3c8549adff63ccf5cffb56bc",
-    "RabbitPunch.sof": "075f0c5330fba924615dac2470366bf10be37d9d3215af6e53732d8196aa2f17",
-    "RabbitPunch.sta.rpt": "142c82fa7738a481cb87f51c3947175f9a8a6d185d474afc0cd10309f1090845",
-    "RabbitPunch.sta.summary": "e5429bf5a9b9f88f0293b8e98e8bc70bbd5192ae7f224c7d16b867244aadbf25",
     "RabbitPunch_stp.asm.rpt": "869d88a86c161413a7dff5ff2014dfa5909964ae026fff4b3957b330cb57a03f",
     "RabbitPunch_stp.fit.rpt": "29ff4f85ec9bf5a74a728f2bdf6cb303f740a044d754fdc082b3d92a22b0996e",
     "RabbitPunch_stp.fit.summary": "e2065c2d825f5150af2dca0c0967b6becf4e71a5f469b88dd68ec43a8492899b",
@@ -950,15 +937,7 @@
     "RabbitPunch_stp.rbf": "501367fe35ca943853400a5ae42aa3f49ed277b366b835b09d9f9385becf325b",
     "RabbitPunch_stp.sof": "67a17f4f9001c5b959d8b650024e9176a9187d0d1475a20b7bd26ed0603198a1",
     "RabbitPunch_stp.sta.rpt": "df9ed85056809e8a39fdd1fe9b07698d164c71a4246b45d2c1898fb3ec3962e8",
-    "RabbitPunch_stp.sta.summary": "e2c1ce75ff10e3ef7b98d520bba696d4d4161b3fd7bc017ac8c0c729fdfb6dfa",
-    "report_worst_paths.log": "2621e60bb1861395757c58f0ab7d672c3b6c31afc8ef9f39df44521457b2807a",
-    "sdram_input_setup.rpt": "03d618368086efa5d2bea93ae81f5f4efe8a043bdaebe0b6f2bb41872d0603b5",
-    "sta_all_fail.log": "d068244f82cd6ce19ce12aeb692776c03d1084d8179b416eb9c07b033241ff5a",
-    "sta_all_fail.rpt": "fda9c46d1fa950940d502fb045bd954c15df7c806f8ee518941ea7ab08abc298",
-    "sta_failing_paths.log": "07c43f59e8dc1581a21f55f13a0d018bd64bd64a298a4afbc8cae3876cc63979",
-    "sta_top50_summary.rpt": "36984c67e314674da2b2bf1da987f4122c1fc7d7f9a3f46ed52ba700b59c5a6e",
-    "sta_worst5_full.rpt": "ada6628a5fbcb320fb9e10daea6d86c5f375dde3649330280c8f8884984426fd",
-    "worst_paths_RabbitPunch_stp.rpt": "2e1919d094cbdd55343412231d1ed8ada55c0d02601708ab0895e37171ac666f"
+    "RabbitPunch_stp.sta.summary": "e2c1ce75ff10e3ef7b98d520bba696d4d4161b3fd7bc017ac8c0c729fdfb6dfa"
   },
   "resources": {
     "alms": 13964,
@@ -968,5 +947,7 @@
     "dsp": 34,
     "pll": 3
   },
-  "scope": "All reported internal game/framework checks and prototype SDRAM pin constraints pass. Source-locked inherited peripheral and dedicated instrumented JTAG pin electrical delays remain outside coverage. Actual SDRAM module/PCB timing and playable hardware are unverified."
+  "scope": "All reported internal game/framework checks and prototype SDRAM pin constraints pass. Source-locked inherited peripheral and dedicated instrumented JTAG pin electrical delays remain outside coverage. Actual SDRAM module/PCB timing and playable hardware are unverified.",
+  "forensic_archive": "debug/fit_archive/full_shell_90e053c_phase5357_instrumented",
+  "artifact_manifest_scope": "Only selected revision reports/bitstreams and their shared clock/coverage/build logs are qualified. Original mixed-revision directory is retained for forensics; its other files are not attributed to this build."
 }

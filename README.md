@@ -30,7 +30,9 @@ The core renders one row ahead into two line banks; it adds no composite frame
 buffer. Provisional geometry and clock assumptions are documented in
 [video timing](docs/PROVISIONAL_RASTER.md). Sound listening, physical outputs,
 interactive game execution and the remaining standard video features still
-require bring-up. See [machine integration](docs/MACHINE_INTEGRATION.md),
+require bring-up. Optional forced doubling, HQ2x and scanline modes now pass
+functional tests and the non-debug full fit; the latest debug placement has one
+small HDMI timing failure under investigation. See [machine integration](docs/MACHINE_INTEGRATION.md),
 [sound bring-up](docs/SOUND_BRINGUP.md), [prototype limitations](docs/HACKS.md)
 and [read-only debug probes](docs/DEBUG.md) for exact scope.
 

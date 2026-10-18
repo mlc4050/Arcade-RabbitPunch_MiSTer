@@ -51,8 +51,9 @@ MAME's defined Z80 reset registers differ from the unchanged T80 reset state.
 The strict 4096-write sound startup comparison explicitly seeds T80 through its
 existing simulation state-load input from captured MAME reset registers. This
 normalizes the test starting condition only. No production reset circuitry is
-changed; an unseeded Rabio Lepus diagnostic differed in four temporary stack
-bytes while matching every peripheral write. Sound memory replies in that test
+changed; the separate native-reset comparison now passes both games with all 4096
+write addresses/masks and 215 peripheral writes exact, while explicitly
+reporting four audited bootstrap stack-save bytes. Sound memory replies in that test
 are behavioral, periodically delayed by 53 clocks; this is not original-board
 cycle timing or shared SDRAM bandwidth proof. See SOUND_BRINGUP.md.
 

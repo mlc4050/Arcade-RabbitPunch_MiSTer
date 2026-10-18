@@ -1,7 +1,7 @@
 {
   "commit": "81844b16c3078c35553cf031d25db612332e500b",
   "revision": "RabbitPunch",
-  "archive": "debug/fit_archive/full_shell_81844b1_release_phase5357",
+  "archive": "debug/fit_archive/full_shell_81844b1_release_phase5357/qualified",
   "minimum_slack_ns": {
     "Setup": 0.368,
     "Hold": 0.076,
@@ -855,9 +855,6 @@
     "framework_timing_scope.json": "8bf6b1f724d5625aa51bf86634492c10796673940b72e35c285329023b857ecb",
     "full_clock_tree.json": "278a1bad0f68f85023177f82a8e9f75f8ab1370370fe550a0230ffdbe01419e5",
     "full_clock_tree.log": "dda2d392ed5b7ab9b10e2323eea71bdb8cf46a7084c3933f6a31e8aee231340e",
-    "full_unconstrained.rpt": "aee8205a5e34926ef95337b066a8d80fc5335adbd7253d1fe1ad2ce86bbf51aa",
-    "full_worst_setup.rpt": "a77b7004c2db6525bced14518de7716fa2039e8b0ba4e7da59c8adad0a6cd148",
-    "game_internal_setup.rpt": "d1c39089084f86b4af71e8d1dcc241940538c25c797aeb4585e6b9a539f83470",
     "q_staged.log": "f58af00baddc0885f4ece4ce700842a7b8f001fe53704ed661a9d0ae20b691e1",
     "RabbitPunch.asm.rpt": "21518efdcb3e45a9b47b6545f29bfc30be2b2906a6fb647453a29b5730e491f3",
     "RabbitPunch.fit.rpt": "c1d85aec284dd4117a911b17559032dd47f37fcd5e8845959e8d41f571436911",
@@ -868,22 +865,9 @@
     "RabbitPunch.rbf": "3a7b11948a710481dfa7895093a616bd05dd872e838de7f3c65a3c6f6e5451b5",
     "RabbitPunch.sof": "a2cad2019b946df4010e055b02dfa0facdd471c6550c6bc2a6209f0fdb1871c9",
     "RabbitPunch.sta.rpt": "ebac5b5fe324feca8d4a9cbdf29cd1b86e193d262953b0879da8dc708c534c8e",
-    "RabbitPunch.sta.summary": "d4cb225d95a92a36ad1b73d05ab47dc47561dc57623130c5aacdcc0a78ca4826",
-    "RabbitPunch_stp.asm.rpt": "869d88a86c161413a7dff5ff2014dfa5909964ae026fff4b3957b330cb57a03f",
-    "RabbitPunch_stp.fit.rpt": "29ff4f85ec9bf5a74a728f2bdf6cb303f740a044d754fdc082b3d92a22b0996e",
-    "RabbitPunch_stp.fit.summary": "e2065c2d825f5150af2dca0c0967b6becf4e71a5f469b88dd68ec43a8492899b",
-    "RabbitPunch_stp.flow.rpt": "a744f62fdaf37da9544811264d461ff275abe99965d545e6394c86192956850e",
-    "RabbitPunch_stp.map.rpt": "15722068e595918832553947dfaf431ef7ed249df5b050768c182bfb1f044f2d",
-    "RabbitPunch_stp.map.summary": "1fb4278166b2bdb3a1d44d5c5801b3fa5a2236749f583148404214e11d18e85b",
-    "RabbitPunch_stp.rbf": "501367fe35ca943853400a5ae42aa3f49ed277b366b835b09d9f9385becf325b",
-    "RabbitPunch_stp.sof": "67a17f4f9001c5b959d8b650024e9176a9187d0d1475a20b7bd26ed0603198a1",
-    "RabbitPunch_stp.sta.rpt": "df9ed85056809e8a39fdd1fe9b07698d164c71a4246b45d2c1898fb3ec3962e8",
-    "RabbitPunch_stp.sta.summary": "e2c1ce75ff10e3ef7b98d520bba696d4d4161b3fd7bc017ac8c0c729fdfb6dfa",
-    "report_worst_paths.log": "2621e60bb1861395757c58f0ab7d672c3b6c31afc8ef9f39df44521457b2807a",
-    "sdram_input_setup.rpt": "03d618368086efa5d2bea93ae81f5f4efe8a043bdaebe0b6f2bb41872d0603b5",
-    "sta_all_fail.log": "d068244f82cd6ce19ce12aeb692776c03d1084d8179b416eb9c07b033241ff5a",
-    "sta_failing_paths.log": "07c43f59e8dc1581a21f55f13a0d018bd64bd64a298a4afbc8cae3876cc63979",
-    "worst_paths_RabbitPunch_stp.rpt": "2e1919d094cbdd55343412231d1ed8ada55c0d02601708ab0895e37171ac666f"
+    "RabbitPunch.sta.summary": "d4cb225d95a92a36ad1b73d05ab47dc47561dc57623130c5aacdcc0a78ca4826"
   },
-  "scope": "Non-debug full shell: all reported corner checks and explicit prototype SDRAM timing pass; source-locked inherited peripheral pin electrical coverage remains outside scope; no hardware execution or actual module timing proof"
+  "scope": "Non-debug full shell: all reported corner checks and explicit prototype SDRAM timing pass; source-locked inherited peripheral pin electrical coverage remains outside scope; no hardware execution or actual module timing proof",
+  "forensic_archive": "debug/fit_archive/full_shell_81844b1_release_phase5357",
+  "artifact_manifest_scope": "Only selected revision reports/bitstreams and their shared clock/coverage/build logs are qualified. Original mixed-revision directory is retained for forensics; its other files are not attributed to this build."
 }
