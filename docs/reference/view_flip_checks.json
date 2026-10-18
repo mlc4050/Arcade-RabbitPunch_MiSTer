@@ -1,0 +1,12 @@
+{
+  "case": "view_flip",
+  "pass_marker": "VIEW_FLIP_PASS",
+  "log": "debug\\baselines\\view_flip\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_view_flip.vhd": "c16f16ab42a747e4214cd7992ec9d10efab577c0f3672fc61df15cffefa653ec",
+    "sim/video/view_flip_tb.vhd": "d8ca168b4abda8827b86903237e2a60dc0d2d323a437160e757339f715854c11"
+  },
+  "coordinate_points": 124416,
+  "log_sha256": "a34af849851c7b1bc1bf8f351e909b77d1b7f1c49ebae2f24c3baf950d80fda3",
+  "scope": "Coordinate and transaction-guard unit simulation; no renderer integration, routed timing or physical CRT proof"
+}

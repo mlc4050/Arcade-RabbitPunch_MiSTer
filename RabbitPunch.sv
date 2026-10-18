@@ -15,8 +15,6 @@ assign VGA_DISABLE = 0;
 assign HDMI_FREEZE = 0;
 assign HDMI_BLACKOUT = 0;
 assign HDMI_BOB_DEINT = 0;
-assign VIDEO_ARX = 13'd4;
-assign VIDEO_ARY = 13'd3;
 assign AUDIO_S = 1;
 assign AUDIO_R = AUDIO_L;
 assign AUDIO_MIX = 0;
@@ -239,6 +237,22 @@ rabbitpunch_video_options video_options
     .o_vertical_sync(VGA_VS),
     .o_data_enable(VGA_DE),
     .ou2_scanlines(VGA_SL)
+);
+// Aspect/integer-size metadata is measured from the presented raster. It
+// never intercepts or stores pixels and remains disabled under direct video.
+rabbitpunch_video_aspect video_aspect
+(
+    .i_clk(clk_sys),
+    .i_pixel_enable(CE_PIXEL),
+    .i_vertical_sync(VGA_VS),
+    .i_data_enable(VGA_DE),
+    .i_direct_video(direct_video),
+    .iu12_hdmi_width(HDMI_WIDTH),
+    .iu12_hdmi_height(HDMI_HEIGHT),
+    .iu2_aspect(status[122:121]),
+    .iu3_scale(status[68:66]),
+    .ou13_aspect_x(VIDEO_ARX),
+    .ou13_aspect_y(VIDEO_ARY)
 );
 `ifdef DEBUG_ISSP
 `ifndef RABBITPUNCH_BUILD_ID

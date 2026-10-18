@@ -4,8 +4,8 @@ Early development for Video System's 1987 arcade hardware, using MAME's rpunch.c
 as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
 
 Status: the VHDL CPU, memory, video, audio, ROM-loading, controls and high-score
-services are connected to the MiSTer boundary. The non-debug full build passes the documented prototype timing
-gates; the latest debug placement is being rechecked; no hardware-verified playable RBF or release exists.
+services are connected to the MiSTer boundary. The preceding non-debug full build passes prototype timing
+gates. HDMI sizing metadata and common screen flip are being checked; no hardware-verified playable RBF or release exists.
 
 Verification includes:
 
@@ -31,8 +31,9 @@ buffer. Provisional geometry and clock assumptions are documented in
 [video timing](docs/PROVISIONAL_RASTER.md). Sound listening, physical outputs,
 interactive game execution and the remaining standard video features still
 require bring-up. Optional forced doubling, HQ2x and scanline modes now pass
-functional tests and the non-debug full fit; the latest debug placement has one
-small HDMI timing failure under investigation. See [machine integration](docs/MACHINE_INTEGRATION.md),
+functional tests and full fits in both revisions. The instrumented seed-2 retry
+passes all 164 reported timing checks. Common CRT/HDMI flip is connected with
+full-renderer checks pending; see [analog output and flip](docs/VIDEO_FLIP.md). See [machine integration](docs/MACHINE_INTEGRATION.md),
 [sound bring-up](docs/SOUND_BRINGUP.md), [prototype limitations](docs/HACKS.md)
 and [read-only debug probes](docs/DEBUG.md) for exact scope.
 

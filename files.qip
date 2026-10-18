@@ -104,6 +104,7 @@ set_global_assignment -name VHDL_FILE rtl/rabbitpunch_raster.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_scanline_scheduler.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_video_output.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_scanout.vhd
+set_global_assignment -name VHDL_FILE rtl/rabbitpunch_view_flip.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_machine.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_pll.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_reset_release.vhd
@@ -111,6 +112,7 @@ set_global_assignment -name VHDL_FILE rtl/rabbitpunch_clocked_machine.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_host.vhd
 set_global_assignment -name SDC_FILE RabbitPunch.sdc
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_video_options.vhd
+set_global_assignment -name VHDL_FILE rtl/rabbitpunch_video_aspect.vhd
 set_global_assignment -name SYSTEMVERILOG_FILE RabbitPunch.sv
 
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_debug.vhd

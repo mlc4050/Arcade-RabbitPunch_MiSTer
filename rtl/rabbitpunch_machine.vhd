@@ -147,8 +147,39 @@ architecture rtl of rabbitpunch_machine is
     signal s_pixel_request, s_pixel_ready, s_pixel_bank, s_rgb_valid, s_rgb_error, s_ready : std_logic;
     signal su9_line_y, su9_pixel_x, su9_rgb_x : unsigned(8 downto 0);
     signal su8_pixel_y, su8_rgb_y, su8_red, su8_green, su8_blue : unsigned(7 downto 0);
+    signal su9_source_line_y, su9_source_pixel_x, su9_source_rgb_x : unsigned(8 downto 0);
+    signal su8_source_pixel_y, su8_source_rgb_y : unsigned(7 downto 0);
+    signal su16_video_flags : unsigned(15 downto 0);
+    signal s_request_flip : std_logic;
 begin
     o_ready <= s_ready;
+    ou16_video_flags <= su16_video_flags;
+    s_request_flip <= su16_video_flags(12) xor iu128_status(65);
+    view_flip : entity work.rabbitpunch_view_flip
+        port map (
+            i_clk => i_clk,
+            i_initialize => i_initialize,
+            i_game_ready => s_ready,
+            i_request_flip => s_request_flip,
+            i_frame_prepare => s_vblank_start,
+            i_line_valid => s_line_valid,
+            i_line_ready => s_line_ready,
+            i_line_done => s_line_done,
+            i_pixel_valid => s_pixel_request,
+            i_pixel_ready => s_pixel_ready,
+            i_rgb_valid => s_rgb_valid,
+            iu9_line_y => su9_line_y,
+            ou9_source_line_y => su9_source_line_y,
+            iu9_pixel_x => su9_pixel_x,
+            iu8_pixel_y => su8_pixel_y,
+            ou9_source_pixel_x => su9_source_pixel_x,
+            ou8_source_pixel_y => su8_source_pixel_y,
+            iu9_source_rgb_x => su9_source_rgb_x,
+            iu8_source_rgb_y => su8_source_rgb_y,
+            ou9_rgb_x => su9_rgb_x,
+            ou8_rgb_y => su8_rgb_y,
+            o_applied_flip => open
+        );
     platform : entity work.rabbitpunch_platform
         generic map (
             GINT_SDRAM_READ_CAPTURE_ADJUST => GINT_SDRAM_READ_CAPTURE_ADJUST,
@@ -217,17 +248,17 @@ begin
             i_line_valid => s_line_valid,
             o_line_ready => s_line_ready,
             i_render_bank => s_render_bank,
-            iu9_line_y => su9_line_y,
+            iu9_line_y => su9_source_line_y,
             o_line_done => s_line_done,
             i_pixel_valid => s_pixel_request,
             o_pixel_ready => s_pixel_ready,
             i_pixel_bank => s_pixel_bank,
-            iu9_pixel_x => su9_pixel_x,
-            iu8_pixel_y => su8_pixel_y,
+            iu9_pixel_x => su9_source_pixel_x,
+            iu8_pixel_y => su8_source_pixel_y,
             o_pixel_valid => s_rgb_valid,
             o_pixel_error => s_rgb_error,
-            ou9_pixel_x => su9_rgb_x,
-            ou8_pixel_y => su8_rgb_y,
+            ou9_pixel_x => su9_source_rgb_x,
+            ou8_pixel_y => su8_source_rgb_y,
             ou8_red => su8_red,
             ou8_green => su8_green,
             ou8_blue => su8_blue,
@@ -256,7 +287,7 @@ begin
             o_sound_command_write => o_sound_command_write,
             ou8_sound_command => ou8_sound_command,
             o_sound_pending => o_sound_pending,
-            ou16_video_flags => ou16_video_flags,
+            ou16_video_flags => su16_video_flags,
             ou9_scroll0_y => ou9_scroll0_y,
             ou9_scroll0_x => ou9_scroll0_x,
             ou9_scroll1_y => ou9_scroll1_y,

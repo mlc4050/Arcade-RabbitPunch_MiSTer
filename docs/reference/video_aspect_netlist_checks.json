@@ -1,0 +1,14 @@
+{
+  "case": "gate_video_aspect",
+  "pass_marker": "VIDEO_ASPECT_PASS",
+  "log": "debug\\baselines\\gate_video_aspect\\result.log",
+  "commit": "80527a62b202cde6a8506a9f18e4f1b85ecac717",
+  "vectors_sha256": {},
+  "netlist_sha256": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
+  "source_sha256": {
+    "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
+    "sim/video/video_aspect_tb.vhd": "3519df04e48412f730915de82354c4b5f31472d499e42748a27617ad35e31050"
+  },
+  "log_sha256": "ba8a87eede93946a9b39a6744b2eeb9749ea2bbb2c7f3e52e16a298a110ab2fd",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
+}

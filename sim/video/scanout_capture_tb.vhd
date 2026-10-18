@@ -9,17 +9,20 @@ use work.rabbitpunch_layout.all;
 use work.rabbitpunch_sdram_types.all;
 
 entity scanout_capture_tb is
-    generic (GBOOL_PLL_CLOCK : boolean := false);
+    generic (
+        GBOOL_PLL_CLOCK : boolean := false;
+        GBOOL_FLIP_SCREEN : boolean := false
+    );
 end entity;
 
 architecture test of scanout_capture_tb is
-    constant C_MAIN_ROM : t_unsigned_words := read_hex("maincpu.hex", 131072, 16);
+    constant CUX_MAIN_ROM : t_unsigned_words := read_hex("maincpu.hex", 131072, 16);
     signal sint_rom_reads, sint_sdram_bursts : natural := 0;
-    constant C_SETTINGS : t_unsigned_words := read_hex("video_settings.hex", 7, 16);
-    constant C_SPRITES : t_unsigned_words := read_hex("spriteram.hex", 2048, 16);
-    constant C_TILES : t_unsigned_words := read_hex("vram.hex", 8192, 16);
-    constant C_BITMAP : t_unsigned_words := read_hex("bitmap.hex", 32768, 16);
-    constant C_PALETTE : t_unsigned_words := read_hex("palette.hex", 1024, 16);
+    constant CUX_SETTINGS : t_unsigned_words := read_hex("video_settings.hex", 7, 16);
+    constant CUX_SPRITES : t_unsigned_words := read_hex("spriteram.hex", 2048, 16);
+    constant CUX_TILES : t_unsigned_words := read_hex("vram.hex", 8192, 16);
+    constant CUX_BITMAP : t_unsigned_words := read_hex("bitmap.hex", 32768, 16);
+    constant CUX_PALETTE : t_unsigned_words := read_hex("palette.hex", 1024, 16);
     signal s_reference_clk : std_logic := '0';
     signal s_clk, s_chip_clk : std_logic := '0';
     signal s_reset : std_logic := '1';
@@ -56,7 +59,36 @@ architecture test of scanout_capture_tb is
     signal s_armed, s_underflow : std_logic;
     signal su9_scan_x, su9_horizontal, su9_vertical : unsigned(8 downto 0);
     signal su8_scan_y, su8_scan_red, su8_scan_green, su8_scan_blue : unsigned(7 downto 0);
+    signal s_frame_prepare, s_request_flip : std_logic;
+    signal su9_source_line_y, su9_source_pixel_x, su9_source_rgb_x : unsigned(8 downto 0);
+    signal su8_source_pixel_y, su8_source_rgb_y : unsigned(7 downto 0);
 begin
+    s_request_flip <= not su16_flags(12) when GBOOL_FLIP_SCREEN else su16_flags(12);
+    view_flip : entity work.rabbitpunch_view_flip
+        port map (
+            i_clk => s_clk,
+            i_initialize => s_initialize,
+            i_game_ready => not s_reset,
+            i_request_flip => s_request_flip,
+            i_frame_prepare => s_frame_prepare,
+            i_line_valid => s_line_valid,
+            i_line_ready => s_line_ready,
+            i_line_done => s_line_done,
+            i_pixel_valid => s_pixel_valid,
+            i_pixel_ready => s_pixel_ready,
+            i_rgb_valid => s_output_valid,
+            iu9_line_y => su9_line_y,
+            ou9_source_line_y => su9_source_line_y,
+            iu9_pixel_x => su9_pixel_x,
+            iu8_pixel_y => su8_pixel_y,
+            ou9_source_pixel_x => su9_source_pixel_x,
+            ou8_source_pixel_y => su8_source_pixel_y,
+            iu9_source_rgb_x => su9_source_rgb_x,
+            iu8_source_rgb_y => su8_source_rgb_y,
+            ou9_rgb_x => su9_output_x,
+            ou8_rgb_y => su8_output_y,
+            o_applied_flip => open
+        );
     s_reference_clk <= not s_reference_clk after 10 ns;
     synthetic_clock : if (not GBOOL_PLL_CLOCK) generate
         s_clk <= not s_clk after 10714 ps;
@@ -73,14 +105,14 @@ begin
             );
     end generate;
     su24_output_rgb <= su8_scan_red & su8_scan_green & su8_scan_blue;
-    su6_count <= C_SETTINGS(5)(5 downto 0);
-    su6_priority <= C_SETTINGS(6)(5 downto 0);
-    su16_flags <= C_SETTINGS(0);
-    su16_pixel_flags <= C_SETTINGS(0);
-    su9_background_y <= C_SETTINGS(1)(8 downto 0);
-    su9_background_x <= C_SETTINGS(2)(8 downto 0);
-    su9_foreground_y <= C_SETTINGS(3)(8 downto 0);
-    su9_foreground_x <= C_SETTINGS(4)(8 downto 0);
+    su6_count <= CUX_SETTINGS(5)(5 downto 0);
+    su6_priority <= CUX_SETTINGS(6)(5 downto 0);
+    su16_flags <= CUX_SETTINGS(0);
+    su16_pixel_flags <= CUX_SETTINGS(0);
+    su9_background_y <= CUX_SETTINGS(1)(8 downto 0);
+    su9_background_x <= CUX_SETTINGS(2)(8 downto 0);
+    su9_foreground_y <= CUX_SETTINGS(3)(8 downto 0);
+    su9_foreground_x <= CUX_SETTINGS(4)(8 downto 0);
     scanout : entity work.rabbitpunch_scanout
         port map (
             i_clk => s_clk,
@@ -91,7 +123,7 @@ begin
             o_ym_enable => open,
             o_ym_half_enable => open,
             o_adpcm_enable => open,
-            o_vblank_start => open,
+            o_vblank_start => s_frame_prepare,
             o_half_frame => open,
             o_line_valid => s_line_valid,
             i_line_ready => s_line_ready,
@@ -133,7 +165,7 @@ begin
             i_line_valid => s_line_valid,
             o_line_ready => s_line_ready,
             i_render_bank => s_bank,
-            iu9_line_y => su9_line_y,
+            iu9_line_y => su9_source_line_y,
             iu6_sprite_count => su6_count,
             iu6_sprite_priority => su6_priority,
             iu9_background_scroll_x => su9_background_x,
@@ -154,13 +186,13 @@ begin
             i_pixel_valid => s_pixel_valid,
             o_pixel_ready => s_pixel_ready,
             i_pixel_bank => s_pixel_bank,
-            iu9_pixel_x => su9_pixel_x,
-            iu8_pixel_y => su8_pixel_y,
+            iu9_pixel_x => su9_source_pixel_x,
+            iu8_pixel_y => su8_source_pixel_y,
             iu16_pixel_video_flags => su16_pixel_flags,
             o_pixel_valid => s_output_valid,
             o_pixel_error => s_output_error,
-            ou9_pixel_x => su9_output_x,
-            ou8_pixel_y => su8_output_y,
+            ou9_pixel_x => su9_source_rgb_x,
+            ou8_pixel_y => su8_source_rgb_y,
             ou8_red => su8_red,
             ou8_green => su8_green,
             ou8_blue => su8_blue,
@@ -202,17 +234,17 @@ begin
         variable vint_writes : natural := 0;
         variable v_patch_applied : boolean := false;
     begin
-        for vint_word in C_SPRITES'range loop
-            write_word(16#60000# + vint_word * 2, C_SPRITES(vint_word));
+        for vint_word in CUX_SPRITES'range loop
+            write_word(16#60000# + vint_word * 2, CUX_SPRITES(vint_word));
         end loop;
-        for vint_word in C_TILES'range loop
-            write_word(16#80000# + vint_word * 2, C_TILES(vint_word));
+        for vint_word in CUX_TILES'range loop
+            write_word(16#80000# + vint_word * 2, CUX_TILES(vint_word));
         end loop;
-        for vint_word in C_BITMAP'range loop
-            write_word(16#40000# + vint_word * 2, C_BITMAP(vint_word));
+        for vint_word in CUX_BITMAP'range loop
+            write_word(16#40000# + vint_word * 2, CUX_BITMAP(vint_word));
         end loop;
-        for vint_word in C_PALETTE'range loop
-            write_word(16#A0000# + vint_word * 2, C_PALETTE(vint_word));
+        for vint_word in CUX_PALETTE'range loop
+            write_word(16#A0000# + vint_word * 2, CUX_PALETTE(vint_word));
         end loop;
         s_preload_done <= '1';
         -- Competing CPU transactions use the real work-RAM bank throughout
@@ -222,7 +254,7 @@ begin
                 -- X=8, Y=0 selects the high nibble of bitmap word 3.
                 -- Force pen 1 and make its palette entry green through CPU writes.
                 write_word(16#40006#, x"1FFF");
-                write_word(16#A0000# + (512 + to_integer(C_SETTINGS(0)(3 downto 0)) * 16 + 1) * 2, x"03E0");
+                write_word(16#A0000# + (512 + to_integer(CUX_SETTINGS(0)(3 downto 0)) * 16 + 1) * 2, x"03E0");
                 v_patch_applied := true;
                 s_patch_done <= '1';
             end if;
@@ -346,7 +378,7 @@ begin
                     v_pending := true;
                 end if;
                 if (s_program_valid = '1') then
-                    assert (v_pending and su16_program_data = C_MAIN_ROM(vint_address / 2))
+                    assert (v_pending and su16_program_data = CUX_MAIN_ROM(vint_address / 2))
                         report "Shared SDRAM CPU ROM read mismatch" severity failure;
                     vint_reads := vint_reads + 1;
                     vint_address := (vint_address + 2) mod 16#40000#;
