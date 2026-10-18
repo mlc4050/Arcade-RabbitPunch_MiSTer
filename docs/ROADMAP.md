@@ -325,3 +325,10 @@ bypass and direct-video override. A VHDL adapter and H5 OSD option are connected
 at the shell; native telemetry remains before it. The standalone target passes
 48 MHz timing/coverage (767 ALMs, 14 M10Ks, no DSPs). Full-width output and the
 new connected-shell full fit are pending; see VIDEO_OPTIONS.md.
+
+Native-reset sound startup now passes both games without CPU register loading
+or RAM deposits: all 4096 addresses/masks and 215 peripheral data writes match,
+with 3877 RAM values exact and four disassembly-audited reset-dependent stack
+save bytes reported separately. The comparator has four negative controls per
+set. This strengthens reset bring-up evidence; audible hardware/game audio
+remains open. See SOUND_BRINGUP.md and reference/sound_board_native_reset_checks.json.
