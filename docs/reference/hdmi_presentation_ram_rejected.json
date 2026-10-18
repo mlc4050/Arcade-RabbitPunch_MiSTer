@@ -1,0 +1,32 @@
+{
+  "accepted": false,
+  "commit": "e09bd90e07505f4a8620480081705eb75136f2f5",
+  "expected_bits": 51712,
+  "actual_bits": 40960,
+  "reason": "Exact RAM gate rejected the full controller because the rotator fixes 21 stored packet columns to zero. Physical memory is 512x80, rather than the standalone general queue 512x101.",
+  "constant_zero_packet_columns": [
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    94,
+    96,
+    97,
+    99,
+    100
+  ],
+  "archive": "debug/fit_archive/hdmi_presentation_e09bd90_ram_gate_rejected",
+  "resolution": "Add a source-derived fixed-zero-column audit and exact one-RAM 512x80 geometry gate, then refit and compare the complete functional netlist. No payload, capacity or timing exception change."
+}
