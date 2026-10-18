@@ -2,8 +2,9 @@
 
 The normal game ROM path remains external SDRAM. Onboard DDR3 is only a staging
 source at the HPS extra-RAM window 0x30000000. No gameplay ROM client is moved
-to DDR3. Physical HPS download/reset triggers and DDR ownership sharing are not
-wired into the MiSTer top yet.
+to DDR3. The experimental MiSTer shell connects the HPS-signal frontend and shares DDR
+with optional rotation through loader-priority transport. Physical HPS/DDR
+acceptance and full-image loading speed remain unverified.
 
 ## Reused transport and copy engine
 
@@ -115,3 +116,18 @@ Its ownership signal is downloading OR system-loading, keeping presentation
 blank/flushed through the downstream final SDRAM acknowledgment. MISTER_FB
 and the complete controller hierarchy are mandatory full-build gates; the new
 connected full-shell implementation and physical HPS/DDR tests remain pending.
+
+
+## Optional development DDR MRAs
+
+Run scripts/d_drive.ps1 scripts/build_ddr_mras.py to generate the two alternatives
+under releases/_dev/_ddr. They add address=0x30000000 only to ROM index 0;
+the normal direct-load development MRAs remain available. The display label
+and explanatory text identify the alternatives. Actual local merged-ROM
+assembly is identical to the original 0x210000-byte image for each set, with
+the pinned MAME version, DIPs/buttons, config3/nvram4 metadata and load order
+retained. Validation and the source-derived memory-window audit pass.
+See reference/ddr_mra_checks.json and reference/ddr_window_checks.json.
+These are unpublished development definitions, not a physical fast-load or
+throughput result. The copier still transfers game ROMs into external SDRAM;
+only optional presentation uses DDR during gameplay.
