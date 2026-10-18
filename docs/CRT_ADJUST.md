@@ -14,9 +14,14 @@ Off is a direct RGB/sync/blanking/enable bypass, with no extra pipeline or
 memory latency. On uses the donor's two 512-pixel line banks (1024 x 24 bits),
 reading the completed row while writing the next. This optional path adds
 one buffered row plus pixel/read-rate alignment; it is separate from the
-native one-row-ahead game renderer. It adds no complete frame buffer. The first fit reports 24576 RGB bits plus 129 bits of inferred VSYNC history
-(24705 total, four M10Ks). The original 24576-bit estimate was rejected by
-the RAM gate; the exact two-bank/sync geometry is now audited before refitting.
+native one-row-ahead game renderer. It adds no complete frame buffer. The qualified d9dfc8a standalone fit uses 24705 bits in four M10Ks:
+1024x24 RGB and 129x1 inferred VSYNC history, both checked exactly. It uses
+199 ALMs, 288 registers, zero DSPs and no PLL at a conservative 48 MHz.
+All reported corners and all six timing-coverage categories pass, with minimum
+setup +6.297 ns and hold +0.145 ns. The original 24576-bit estimate was
+rejected before the sync RAM was audited; that failure is preserved in
+reference/crt_adjust_budget_rejected.json. No donor change was made.
+See reference/crt_adjust_synth.json.
 
 Horizontal size changes the read enable, not a generated clock. The fixed
 /7 native cadence gives a period of 140 twentieths of a system clock. Each
@@ -52,11 +57,23 @@ Evidence: reference/crt_adjust_control_checks.json and
 reference/crt_adjust_geometry_checks.json. These synthetic geometry tests
 complement the game-renderer MAME comparisons; they are not MAME captures.
 
-A full-height RTL control now checks all 62208 pixels across 216 visible
+Full-height RTL and synthesized-netlist controls now check all 62208 pixels across 216 visible
 rows in a 256-line frame with no missing first or last row. Evidence:
-reference/crt_adjust_geometry_full_height_checks.json.
+reference/crt_adjust_geometry_full_height_checks.json and
+reference/crt_adjust_geometry_netlist_full_height_checks.json.
 
-Still open: functional-netlist geometry replay, extreme-size clipping, setting
+The synthesized bypass/all-32-rate control also passes. Five compact netlist
+picture cases pass, and the longer production-256-line control plus positive/
+negative one-line vertical shifts now pass, including exact phase comparisons.
+The initial 300-second wall timeout was a performance limit; completed compact
+cases and the uncompleted transcript were preserved, and only unfinished cases
+were retried with progress logging and a larger budget. See
+reference/crt_adjust_netlist_checks.json,
+reference/crt_adjust_geometry_netlist_compact_checks.json and
+reference/crt_adjust_geometry_netlist_selected_checks.json.
+
+Still open: exact native sync-window replay, real-renderer MAME comparison,
+extreme-size clipping, setting
 changes, main-OSD wiring and actual monitor behavior. No CRT Adjust option is
 advertised by the production menu yet. Vertical-size ring buffering is not
 included in this evaluation: it adds multiple rows and its cabinet mode expects
