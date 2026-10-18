@@ -29,7 +29,8 @@ architecture test of hdmi_rotation_buffers_tb is
     signal s_clk : std_logic := '0';
     signal s_pixel_enable, s_horizontal_sync, s_vertical_sync, s_data_enable : std_logic;
     signal s_counterclockwise, s_enabled, s_write : std_logic;
-    signal s_low_latency, s_donor_vertical_sync, s_framebuffer_blank : std_logic;
+    signal s_low_latency : std_logic;
+    signal s_donor_vertical_sync, s_framebuffer_blank : std_logic := '0';
     signal sint_phase : natural range 0 to 6 := 0;
     signal sint_x : natural range 0 to GINT_TOTAL_WIDTH - 1 := 0;
     signal sint_y : natural range 0 to GINT_TOTAL_HEIGHT - 1 := 0;

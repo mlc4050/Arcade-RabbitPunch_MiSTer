@@ -70,56 +70,27 @@ architecture rtl of rabbitpunch_hdmi_rotation is
         );
     end component;
     signal s_previous_video_sync, s_previous_framebuffer_blank : std_logic := '0';
-    signal s_completed : std_logic := '0';
-    signal su2_write_buffer : unsigned(1 downto 0) := "00";
-    signal su2_read_buffer : unsigned(1 downto 0) := "01";
-    signal su2_completed_buffer : unsigned(1 downto 0) := "10";
-    signal su32_donor_base : unsigned(31 downto 0);
-    signal su29_donor_address : unsigned(28 downto 0);
-
-    function free_buffer(iu2_first : unsigned(1 downto 0);
-        iu2_second : unsigned(1 downto 0)) return unsigned is
-    begin
-        for vint_buffer in 0 to 2 loop
-            if (iu2_first /= vint_buffer and iu2_second /= vint_buffer) then
-                return to_unsigned(vint_buffer, 2);
-            end if;
-        end loop;
-        return to_unsigned(0, 2);
-    end function;
+    signal s_previous_framebuffer_pulse, s_pending_framebuffer_advance : std_logic := '0';
+    signal s_video_sync_rise, s_framebuffer_blank_rise, s_framebuffer_advance : std_logic;
 begin
-    -- Own only the slot indices; the unchanged donor still calculates every
-    -- pixel offset, byte mask, format and stride. A single VHDL process can
-    -- order coincident events explicitly without narrowing FB_VBL to a pulse.
-    -- FB_VBL is already sampled on CLK_VIDEO by sys_top.
-    -- Low-latency requests intentionally use safe triple buffering here until
-    -- an end-to-end genlock/beam-racing contract is established.
-    ou32_base <= su32_donor_base(31 downto 25) & su2_read_buffer & su32_donor_base(22 downto 0);
-    ou29_ddr_word_address <= su29_donor_address(28 downto 22) & su2_write_buffer & su29_donor_address(19 downto 0);
-    coordinate_buffers : process(i_clk)
-        variable vu2_write, vu2_read, vu2_completed : unsigned(1 downto 0);
-        variable v_completed : std_logic;
+    -- FB_VBL is already sampled on CLK_VIDEO by sys_top. The donor advances
+    -- both buffer indices at every system edge, independent of pixel enable.
+    -- A simultaneous advance would choose the same third buffer for both.
+    s_video_sync_rise <= i_vertical_sync and not s_previous_video_sync;
+    s_framebuffer_blank_rise <= i_framebuffer_vertical_blank and not s_previous_framebuffer_blank;
+    s_framebuffer_advance <= (s_pending_framebuffer_advance or s_framebuffer_blank_rise) and
+        not s_video_sync_rise and not s_previous_framebuffer_pulse;
+    serialize_framebuffer_advance : process(i_clk)
     begin
         if (rising_edge(i_clk)) then
-            vu2_write := su2_write_buffer;
-            vu2_read := su2_read_buffer;
-            vu2_completed := su2_completed_buffer;
-            v_completed := s_completed;
-            if (i_vertical_sync = '1' and s_previous_video_sync = '0') then
-                vu2_completed := su2_write_buffer;
-                v_completed := '1';
-                vu2_write := free_buffer(su2_write_buffer, su2_read_buffer);
-            end if;
-            if (i_framebuffer_vertical_blank = '1' and s_previous_framebuffer_blank = '0' and
-                v_completed = '1' and vu2_completed /= vu2_write) then
-                vu2_read := vu2_completed;
-            end if;
-            su2_write_buffer <= vu2_write;
-            su2_read_buffer <= vu2_read;
-            su2_completed_buffer <= vu2_completed;
-            s_completed <= v_completed;
             s_previous_video_sync <= i_vertical_sync;
             s_previous_framebuffer_blank <= i_framebuffer_vertical_blank;
+            s_previous_framebuffer_pulse <= s_framebuffer_advance;
+            if (s_framebuffer_advance = '1') then
+                s_pending_framebuffer_advance <= '0';
+            elsif (s_framebuffer_blank_rise = '1') then
+                s_pending_framebuffer_advance <= '1';
+            end if;
         end if;
     end process;
     rotation : screen_rotate_two
@@ -141,14 +112,17 @@ begin
             FB_FORMAT => ou5_format,
             FB_WIDTH => ou12_width,
             FB_HEIGHT => ou12_height,
-            FB_BASE => su32_donor_base,
+            FB_BASE => ou32_base,
             FB_STRIDE => ou14_stride,
-            FB_VBL => '0',
+            FB_VBL => s_framebuffer_advance,
+            -- The legacy two-buffer path can overlap read/write slots when
+            -- FB_VBL leads source VS. Retain triple buffering for all requests
+            -- until a genlock/beam-racing contract is independently verified.
             FB_LL => '0',
             DDRAM_CLK => open,
             DDRAM_BUSY => i_ddr_busy,
             DDRAM_BURSTCNT => ou8_ddr_burst_count,
-            DDRAM_ADDR => su29_donor_address,
+            DDRAM_ADDR => ou29_ddr_word_address,
             DDRAM_DIN => ou64_ddr_data,
             DDRAM_BE => ou8_ddr_byte_enables,
             DDRAM_WE => o_ddr_write,
