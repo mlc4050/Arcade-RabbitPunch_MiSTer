@@ -309,3 +309,12 @@ and outputs a complete, correctly ordered black startup frame without underflow
 (worst row 1950 clocks). It does not establish visible gameplay or a matching
 MAME frame. The production-phase Japanese gameplay snapshot comparison and a
 separate release-revision fit are the next verification steps.
+
+The separate non-debug full fit 81844b1 passes all 144 reported checks with
+minimum setup +0.368 ns and hold +0.076 ns; its archive and source/bitstream
+hashes are in reference/full_shell_81844b1_release_checks.json. This establishes
+an independently timed prototype revision, not a playable hardware release.
+The production-phase Rabio Lepus play1000 scene also passes all 62208 MAME RGB
+pixels; see reference/scanout_pll_5357ps_rabiolep_play1000_checks.json. Optional
+scandoubler/HQ2x/scanline output remains an isolated evaluation on the
+codex/video-options branch until its VHDL/netlist tests pass.
