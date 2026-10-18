@@ -77,3 +77,11 @@ this is not the final standard-feature set. The framework HDMI scaler remains
 available. DDR currently has only the load-time copier as a client; introducing a
 rotator requires an ownership mux and contention verification before use. No game
 ROM fetch uses DDR during play. Physical output and audible game audio are untested.
+
+
+Common screen flip uses a visible-viewport coordinate mirror at the existing
+random-access line-buffer boundary, including bitmap requests and inverse RGB
+tags. It adds no composite framebuffer. This is a presentation implementation,
+not recovered C7-01 GGA circuitry; MAME's ignored global-flip bit is documented
+in MAME_KLUDGES.md. The coordinate/transaction unit test passes; full-renderer
+MAME image-rotation comparisons and routed integration timing are pending.

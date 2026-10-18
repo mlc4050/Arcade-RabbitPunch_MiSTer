@@ -1,0 +1,30 @@
+{
+  "set": "rabiolep",
+  "mame_version": "0.289",
+  "frame": 300,
+  "dip": "Flip Screen=On",
+  "dip_mask": 32768,
+  "video_flags": 4096,
+  "global_flip_bit": 12,
+  "source": "D:\\git\\mame\\src\\mame\\vsystem\\rpunch.cpp",
+  "source_sha256": "856dffea9e6c101bbf3a0c8fca20e41ad5913f6a16437212a0c4b79385fd0fce",
+  "mame_commit": "48d68b72e14cb7474e1b9fa8fbe56dce4062e60f",
+  "capture": "debug/flip_dip_reference_rabiolep_300",
+  "capture_sha256": {
+    "bitmap.bin": "84b76e3945a560899a79d428acf0c702cfbf53edbc8a38187309784384c828f1",
+    "dipinfo.txt": "ee0ffa2f957ff75b764735bbb9f7a2b080769d8f76453a44753e7e678ce2f167",
+    "manifest.txt": "db965b48a7f1ba7ec99236defd4efe9c126519b16ddc9f838038a94ddbbc88d0",
+    "palette.bin": "79fa3932d5acb07b8b004be1bb84829ed944f431f7fe16152103c3933187ce11",
+    "reference.png": "50517dd500eb18abad4e1adb532f4d284edaa4b8271d1e7963bc272130dc65f8",
+    "reg_bitmap.bin": "84b76e3945a560899a79d428acf0c702cfbf53edbc8a38187309784384c828f1",
+    "reg_palette.bin": "79fa3932d5acb07b8b004be1bb84829ed944f431f7fe16152103c3933187ce11",
+    "reg_spriteram.bin": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+    "reg_videoram.bin": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+    "reg_vregs.bin": "0d78443591d529634ccdf7de482f9ca7f3e1cf98ca4c5354cf1c1d9695310189",
+    "spriteram.bin": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+    "videoram.bin": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+    "workram.bin": "77f2d8aa90867aa0a9e71d996a107e92947126ef35aca8831fcb9f21b63f91ed"
+  },
+  "configuration_sha256": "adc7e419803a848100c88291c8ed168d277efded5729eb8703c95555ae0cfcb0",
+  "scope": "DIP seeded before power-on; game sets documented video flag bit 12. Pinned driver stores that flag but does not apply global orientation in its screen renderer. No original-board flip behavior proof."
+}

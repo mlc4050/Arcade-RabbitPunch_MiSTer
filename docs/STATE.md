@@ -339,3 +339,13 @@ a previous-sync bit, plus unchanged framework arithmetic/geometry state. It
 holds normal ratio metadata while geometry is first measured; no pixels or
 emulated game state pass through it. It has no game-reset/pause dependence,
 and uses the existing system clock with pixel enables.
+
+
+The common viewport flip adapter adds three single-bit presentation registers:
+applied orientation, outstanding render and outstanding pixel transaction.
+Initialization clears them; game-not-ready clears transaction ownership and
+selects the requested orientation while output is blanked. Once ready,
+orientation changes only at a safe frame-prepare boundary, before the next
+row-zero request. Requests accepted on the same edge as a previous completion
+retain ownership. Restore must drain or reset this boundary together with the
+renderer/scanout. No RGB, line or frame storage is added.

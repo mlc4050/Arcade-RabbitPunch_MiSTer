@@ -101,7 +101,7 @@
     "rtl/rabbitpunch_inputs.vhd": "6e32b5b707fc6e241ae89022b672f2fd28749717ce3e82804db6c5e037000465",
     "rtl/rabbitpunch_pause.vhd": "8bbbcd71a56ff3e30c898f61eed9ffa64909d3674767ee31de9ed017475d386c",
     "rtl/rabbitpunch_controls.vhd": "823bb8a80aacea97948d2bf2650b9206022e874f69209c3dbc99e98f51beea5a",
-    "rtl/rabbitpunch_config.vhd": "c8911ad9a92bd13da11822c87a75470549dccc3c16ee1d88f9c9c29ed7af55c9",
+    "rtl/rabbitpunch_config.vhd": "6570a770143dbb286c6f7969215af72faf4b5e28ee18066a40f427ecf244c911",
     "rtl/rabbitpunch_hiscore.vhd": "32ad363610bc4fb4a4fa0b7dea5312208ad910382112a8148e23dfb4e3c44d4b",
     "rtl/rabbitpunch_hiscore_config.vhd": "fcb70ea11a4ea24040d0b1d09c7ceb1512e4527cfad06c316f3aea79ac614d6d",
     "rtl/rabbitpunch_hiscore_service.vhd": "4428ab8031e87adcc6ec81e781fd055d7bc93461cef11a6a6defa07e45bd5d2b",
@@ -112,12 +112,13 @@
     "rtl/rabbitpunch_scanline_scheduler.vhd": "402fb9a0e2dd4baa65ea36999e0dd5fdd696cfbf08b6cce4115c91eeff6ac002",
     "rtl/rabbitpunch_video_output.vhd": "80580cd64347ba4c26ebe392dfcada4df2702a198a87669f951983dc6983dc57",
     "rtl/rabbitpunch_scanout.vhd": "2cfed3756f3ca8597c89fc82a4a6510f64b630bcf144fbdb14f96f3f35e361f0",
-    "rtl/rabbitpunch_machine.vhd": "1fec42ad92a88016d498f024c6a6221e1aecf6b3c7f8793883d92ec34d26f629",
+    "rtl/rabbitpunch_view_flip.vhd": "c16f16ab42a747e4214cd7992ec9d10efab577c0f3672fc61df15cffefa653ec",
+    "rtl/rabbitpunch_machine.vhd": "1b90796172514794ac58b4486cd15cca00f4cd5b23a7186d44268a907a99b2d9",
     "rtl/rabbitpunch_pll.vhd": "988e14413b0f965adc2ea6f35ebe87620bb1e01aa4a8bc48336c82194271283d",
     "rtl/rabbitpunch_reset_release.vhd": "00d7c5a85bcd24508ceef1e3b3b3b065678e7350d16bc06deab66d733e5375ec",
     "rtl/rabbitpunch_clocked_machine.vhd": "46801d1a76384b1488847d812c332466400127c3302d370c674c118d2708b24d",
     "sim/board/clocked_machine_tb.vhd": "90a6f653cfe86034d8f11e477fc862b4ec782dfc7b5497bb48f44d162a40deff"
   },
-  "log_sha256": "5c43c403f09058973e580659d84611ae78260caf5924de58fc01e91baa862381",
+  "log_sha256": "73121efcd7ba6fdf2c6c0868f9777278985726f29cb2ef7f0b61ff8c62996893",
   "scope": "Machine download/control/CPU diagnostics driven by installed vendor PLL behavioral model and production reset release; live horizontal cadence through gameplay resets. Before first vertical render; sound ROM absent/audio not scored; SDRAM command model samples the 5357 ps shifted external clock with the production read-window selection, no physical phase/electrical/fitted-counter or complete MiSTer proof"
 }

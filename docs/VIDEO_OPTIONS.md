@@ -76,3 +76,11 @@ HDMI-domain setup path fails by 0.204 ns. All game-clock setup checks pass
 (minimum +1.035 ns), as does SDRAM output setup (+0.767 ns). No timing exception
 was added. A second placement seed will be checked before touching unchanged
 framework logic. The failed bitstream remains archived and is not accepted.
+
+The clean instrumented placement retry f64d68b at seed 2 passes all 164
+reported timing checks and the same scoped clock/pin gates. Minimum setup is
++0.373 ns, hold +0.067 ns, recovery +3.393 ns, removal +0.444 ns and minimum
+pulse width +1.122 ns. No constraints or framework logic were changed for
+this retry. See reference/full_shell_video_options_debug_seed2_checks.json.
+This snapshot includes scanline/HQ2x options, but does not connect the later
+HDMI aspect adapter. Physical output remains unverified.

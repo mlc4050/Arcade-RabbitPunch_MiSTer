@@ -2,14 +2,14 @@
   "case": "gate_host",
   "pass_marker": "HOST_PASS",
   "log": "debug\\baselines\\gate_host\\result.log",
-  "commit": "f183f2d0dc3b8128e97b7b434f9e177c84e75ba0",
+  "commit": "caf1b3a0928f3c596e9bfe4576c3ba5be437f001",
   "vectors_sha256": {},
-  "netlist_sha256": "438979c9e454652a6703428fb8fc92a327fef8b535b0bebccf624324e3067996",
+  "netlist_sha256": "4e22316a4ff8d3eeac06ccdc848c560ef12e5cc6b0e8f0328b860049470ebdba",
   "source_sha256": {
-    "debug/netlists/host_f183f2d/host_check.vo": "438979c9e454652a6703428fb8fc92a327fef8b535b0bebccf624324e3067996",
-    "rtl/rabbitpunch_config.vhd": "ed55165e1f694da18e604d084fe7a3139b5c0a8aaa826a52512a7c48524e2ca0",
+    "debug/netlists/host_caf1b3a/host_check.vo": "4e22316a4ff8d3eeac06ccdc848c560ef12e5cc6b0e8f0328b860049470ebdba",
+    "rtl/rabbitpunch_config.vhd": "6570a770143dbb286c6f7969215af72faf4b5e28ee18066a40f427ecf244c911",
     "sim/board/host_tb.vhd": "ddefcff2e02268438f4d9fbbc8b3b51a21f3ca8f7181f1e0641205fc0e20cee6"
   },
-  "log_sha256": "dbe4c6701993354dae95baa3c7f506cec0b0948117a5d5445f54eb8415b1c405",
+  "log_sha256": "d4627137a59a557f5568607f92e12ebcf733cd67213d11e922661ebb5feab534",
   "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
 }

@@ -67,7 +67,7 @@ REQUIRED_INSTANCES = (
     "hps_io", "rabbitpunch_clocked_machine", "rabbitpunch_scanout",
     "rabbitpunch_scanline_scheduler", "rabbitpunch_rom_cache", "fx68k",
     "T80se", "jt51", "jt7759", "jtframe_draw", "rabbitpunch_hiscore_service", "rabbitpunch_video_options",
-    "video_mixer", "scandoubler", "Hq2x", "rabbitpunch_video_aspect", "video_freak",
+    "video_mixer", "scandoubler", "Hq2x", "rabbitpunch_video_aspect", "video_freak", "rabbitpunch_view_flip",
     # "fx68k", "sdram", "arcade_video", "Hq2x", "screen_rotate_two", ...
 )
 
