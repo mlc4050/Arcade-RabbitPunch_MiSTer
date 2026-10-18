@@ -1,0 +1,31 @@
+{
+  "cases": [
+    {
+      "case": "crt_adjust_geometry_full216",
+      "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+      "log": "debug\\baselines\\crt_adjust_geometry_full216\\result.log",
+      "source_sha256": {
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
+        "sim/video/crt_adjust_geometry_tb.vhd": "76615f9ebadddbac32db3a15312f28586f769009a72b3bedf8dbfc1fc67b17c4"
+      },
+      "horizontal_size_index": 0,
+      "horizontal_position_index": 0,
+      "rows": 216,
+      "pixels": 62208,
+      "log_sha256": "dcffc5731980ed4e3056bed5704a12651c536ab693ef266502a2bc8d045b70d2",
+      "vertical_shift_index": 0,
+      "frame_lines": 256,
+      "sync_metrics": {
+        "hperiod": 3024,
+        "hwidth": 280,
+        "vperiod": 774144,
+        "vwidth": 6048,
+        "vphase": 764525
+      }
+    }
+  ],
+  "fit_commit": null,
+  "full_height": true,
+  "scope": "Full-height RTL CRT adapter control: all 62208 ordered pixels over 288x216 visible and 432x256 total raster at /7 enable, first/last rows and exact sync periods checked after warm-up. Unchanged imported module, corrected wrapper VBlank tags. No synthesized geometry, setting changes, extreme-size clipping or physical CRT proof."
+}
