@@ -72,7 +72,12 @@ reference/crt_adjust_netlist_checks.json,
 reference/crt_adjust_geometry_netlist_compact_checks.json and
 reference/crt_adjust_geometry_netlist_selected_checks.json.
 
-Still open: exact native sync-window replay, real-renderer MAME comparison,
+The exact provisional native raster also passes the synthesized scoreboard:
+432x256 total, 288x216 visible, HSync 352..392 and VSync 232..240. All 62208
+source pixels and sync periods pass; see
+reference/crt_adjust_native_raster_netlist_checks.json.
+
+Still open: real-renderer MAME comparison,
 extreme-size clipping, setting
 changes, main-OSD wiring and actual monitor behavior. No CRT Adjust option is
 advertised by the production menu yet. Vertical-size ring buffering is not
