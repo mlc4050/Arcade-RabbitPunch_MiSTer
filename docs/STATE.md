@@ -351,7 +351,7 @@ retain ownership. Restore must drain or reset this boundary together with the
 renderer/scanout. No RGB, line or frame storage is added.
 
 
-The disconnected CRT Adjust evaluation adds presentation-only size/position/
+The optional connected CRT Adjust wrapper adds presentation-only size/position/
 shift latches, a ten-bit read-rate accumulator, two sync-edge histories and
 three one-bit row-blanking tags. The unchanged donor adds two 512x24 line banks
 and horizontal/vertical sync history. Initialization resets wrapper state;

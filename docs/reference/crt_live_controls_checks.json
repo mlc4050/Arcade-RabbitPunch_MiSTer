@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "case": "crt_live_controls",
+      "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+      "log": "debug\\baselines\\crt_live_controls\\result.log",
+      "source_sha256": {
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "aad8878d3ebe44a18a038c86fb7131a09699feae7898256ddc9c193310bb5c7e",
+        "debug/crt_live_controls_tb.vhd": "20020475951dbaa8fa7816f5a4f386f309b09bcc6dfccd58fff032fe411c3fad"
+      },
+      "pixels": 1728,
+      "log_sha256": "67e41e057c159428051bb30d3982fd83d0fc86a7127bac41acbe90d602420182"
+    },
+    {
+      "case": "crt_disable_reenable",
+      "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+      "log": "debug\\baselines\\crt_disable_reenable\\result.log",
+      "source_sha256": {
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "aad8878d3ebe44a18a038c86fb7131a09699feae7898256ddc9c193310bb5c7e",
+        "debug/crt_disable_reenable_tb.vhd": "51b350f0aacdca579e4e7f267386af7837c01093f91a602d5efdb6cb13fad9fb"
+      },
+      "pixels": 1728,
+      "log_sha256": "8d49b1b21b175b19b39aef5a312fdb36b669a6189aea3736670c74aaf88afcac"
+    }
+  ],
+  "template_sha256": "ff1a5758f1cf7fe4b8f0d2b3669ed80a05f8b86be2593c7595c8f6208c3f7f5a",
+  "scope": "CRT RTL at 288/432 horizontal and 6/12 vertical geometry, /7 enables. Change from size +2/position +8 to size -2/position -8 in vertical blank, then exact source-order/sync scoreboard after two frames of settling. Second case also disables for 200 system clocks with every-clock native bypass checks, then reenables. No glitch-free setting transition, production-frame shift transition, combined-effects transition, extreme clipping or physical monitor proof."
+}

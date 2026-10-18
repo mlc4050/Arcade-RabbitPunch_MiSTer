@@ -82,7 +82,11 @@ begin
     o_opaque <= '0' when s_foreground = '1' and su9_buffer_data(3 downto 0) = 15 else '1';
 
     drawer : jtframe_draw
-        generic map (AW => 9, CW => 14, PW => 9)
+        generic map (
+            AW => 9,
+            CW => 14,
+            PW => 9
+        )
         port map (
             rst => i_reset,
             clk => i_clk,

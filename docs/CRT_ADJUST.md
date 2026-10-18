@@ -93,8 +93,28 @@ size), 106:100 (the 97-entry horizontal position index) and 112:107 (signed
 vertical sync shift). Menu masks H6 and H7 control visibility. All encoded
 fields default to zero; no offset is implied by an untouched configuration.
 
-Still open: the newly connected host/full-shell implementation checks,
-extreme-size clipping, live setting changes, combined output effects and
+The expanded production menu also passes a fresh standalone host fit and
+functional synthesized HPS protocol test, including every configuration
+character, status and file transfers. See reference/host_crt_synth.json and
+reference/host_netlist_checks.json.
+
+Live size/position changes in vertical blank recover exact source pixels and
+sync periods after two bounded fixture frames. Disabling the optional path
+also restores exact native bypass on every tested system clock before reenable.
+See reference/crt_live_controls_checks.json. This checks settled recovery; it
+does not promise a glitch-free picture while changing a setting.
+
+The connected non-debug full shell 77a7ff0 passes all 144 timing checks and
+the unchanged clock/pin coverage gates: minimum setup +0.435 ns, hold
++0.042 ns, recovery +3.606 ns, removal +0.366 ns and pulse width +1.122 ns.
+It uses 14877 ALMs, 24829 registers, 183 M10Ks, 1404768 RAM bits, 34 DSPs
+and three PLLs. The full shell places the 1024x24 CRT RGB store in three
+M10Ks and uses registers for sync history; the isolated fit instead inferred
+a separate 129-bit sync RAM. Both resource results are recorded at their
+exact build commits. See reference/full_shell_crt_release_checks.json.
+
+Still open: instrumented-shell and combined-effects validation,
+extreme-size clipping, live vertical-shift/combined-output transitions and
 actual monitor behavior. Vertical-size ring buffering is omitted: it adds
 multiple rows and its cabinet mode expects at least eight system clocks per
 native pixel, whereas this core uses seven. V-Shift changes sync phase,

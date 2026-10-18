@@ -862,6 +862,22 @@ pair before the RTL around it.
 
 ## Timing closure
 
+### [RabbitPunch] Compare complete untimed path sets before changing a coverage cap
+
+The common-flip shell had positive slack but failed its existing peripheral
+coverage cap: 111 output paths versus 110. Rebuilding the accepted reference
+reproduced 110. A complete setup/hold path multiset comparison, normalizing only
+anonymous fitter IDs and duplicate-register suffixes, found exactly one new
+loader-idle path to LED[0]; every other path matched. Registering the combined
+indicator moved its status logic behind a timed clock boundary. The clean full
+rebuild passed all 144 timing checks and reduced peripheral output paths to 82,
+with the original cap, pin list and constraints unchanged. The external LED
+changes one clock later; game flags and video retain their original latency.
+Evidence: reference/flip_led_coverage_audit.json and
+reference/full_shell_flip_release_checks.json. A positive slack summary alone
+would have missed the changed untimed logic cone.
+
+
 - **[BallySente] Ask the timing analyser which path fails; do not reason about it.** A filter
   missed 25 ns by 0.182 ns. The critical path "obviously" ran through the shared multiplier, so
   the operand mux was registered -- still short. Then the mux was given its own cycle -- slack got
