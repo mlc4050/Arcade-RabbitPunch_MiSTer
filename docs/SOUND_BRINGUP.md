@@ -350,3 +350,17 @@ the corresponding save/wait instruction blocks are byte-identical. The shared
 0013/0014/001E initialization/clear path is also identical. Native exceptions
 are locked to separate hashes of each ROM's first 0x867 bytes; changing that
 code requires a fresh audit rather than silently retaining the exceptions.
+
+## Framework audio-mix menu
+
+The VHDL host boundary decodes status 124:123 as Mono/None/25%/50% and
+exports framework mix codes 3/0/1/2. Zero status defaults to Mono. Native
+signed PCM remains the same mono sample on both output channels; the option
+selects the framework mix and does not add another game-audio pipeline.
+The host fit and complete functional-netlist HPS regression pass, including
+all four selections and preservation of unrelated status bits. Connected
+CPU/SDRAM host and both-set high-score restore/autosave regressions also pass
+against the new host netlist. See reference/host_audio_mix_synth.json,
+host_netlist_checks.json, platform_host_checks.json and
+platform_hiscore_host_checks.json. Full-shell qualification of the new menu
+and audible physical output remain pending.
