@@ -41,4 +41,8 @@ The expanded native HPS menu now passes its own fitted host and complete protoco
 netlist regression, including every new aspect/scale configuration character,
 video flags, status transfers, controls, ROM-byte and high-score file transfers.
 See reference/host_aspect_synth.json and reference/host_netlist_checks.json.
-A new non-debug full-shell fit is running for the connected metadata revision.
+The connected non-debug full-shell fit 42c1be5 now passes all 144 reported
+checks, scoped pin coverage and fitted clock topology. Minimum setup is
++0.525 ns, hold +0.078 ns, recovery +3.154 ns, removal +0.437 ns and pulse
+width +1.122 ns. See reference/full_shell_aspect_release_checks.json.
+This snapshot predates common flip. Physical HDMI behavior remains unverified.
