@@ -17,7 +17,7 @@ Verification includes:
   Punch attract and Rabio Lepus gameplay, with all 62,208 pixels matching each
   and no underflow. At the production 5.357 ns phase, Rabbit Punch attract and
   Rabio Lepus gameplay at frame 1000 both match exactly.
-- The current non-debug MiSTer fit passes all reported corners at a fitted
+- The accepted CRT/common-flip MiSTer snapshot passes all reported corners at a fitted
   46.667 MHz game clock and 5.357 ns SDRAM phase, with minimum setup/hold
   margins +0.435/+0.042 ns in the accepted CRT/common-flip snapshot. The instrumented CRT snapshot e48d817 at seed 2 also passes all 164 checks (setup +0.288 ns, hold +0.080 ns). The prototype SDRAM budgets and
   inherited peripheral/debug pin coverage scope are explicit in
@@ -26,16 +26,28 @@ Verification includes:
   controls/DIPs and high-score host-file transfers pass subsystem tests. All
   38 real ADPCM sample sequences pass 237,330 decoded-value checks.
 
-The core renders one row ahead into two line banks; it adds no composite frame
-buffer. Provisional geometry and clock assumptions are documented in
+The native game renderer prepares one row ahead into two line banks. Optional
+HDMI rotation captures a separate DDR3 framebuffer before CRT/output effects;
+it defaults to None and uses safe triple buffering, with end-to-end latency
+still unmeasured. Analog output keeps the native line pipeline. Provisional geometry and clock assumptions are documented in
 [video timing](docs/PROVISIONAL_RASTER.md). Sound listening, physical outputs,
 interactive game execution and the remaining standard video features still
 require bring-up. Optional forced doubling, HQ2x and scanline modes now pass
 functional tests and full fits in both revisions. The instrumented seed-2 retry
 passes all 164 reported timing checks. Common CRT/HDMI flip passes both complete rotated-frame comparisons; its
-full build passes all 144 timing checks and the unchanged coverage limits. Combined CRT/HQ2x colour validation remains open; see [analog output and flip](docs/VIDEO_FLIP.md). See [machine integration](docs/MACHINE_INTEGRATION.md),
+full build passes all 144 timing checks and the unchanged coverage limits. Combined CRT/HQ2x matches independent native-framework references at all 1152 flat-field and 1024 patterned output pixels; see [analog output and flip](docs/VIDEO_FLIP.md). See [machine integration](docs/MACHINE_INTEGRATION.md),
 [sound bring-up](docs/SOUND_BRINGUP.md), [prototype limitations](docs/HACKS.md)
 and [read-only debug probes](docs/DEBUG.md) for exact scope.
+
+HDMI None/CW/CCW mode changes, loader ownership, queue flushing, complete-image
+publication and direct-video bypass pass controller regressions. Both native
+288x216 directions pass three complete production-raster frames in RTL around
+qualified donor netlists. A reproduced interaction with doubled analog geometry
+is fixed: rotated integer scaling now measures the native framebuffer raster.
+The corrected complete controller passes standalone timing and functional control
+checks; its complete MiSTer release/debug builds are in progress. See
+[rotation qualification](docs/HDMI_ROTATION.md) for exact source revisions,
+separate netlist/time-limit results and remaining physical tests.
 
 New board logic will use VHDL, with fx68k (SystemVerilog), T80 (VHDL), directly reused JTFRAME
 modules, and approved mixed-language sound/framework dependencies. Target: DE10-nano, Quartus Prime Lite 17.0.2, one
@@ -76,3 +88,4 @@ reference tooling. Simulation and implementation checks are recorded; board
 verification is still required before release. No hardware
 results or release artifacts exist yet. Distribution: GPL-3.0-or-later, preserving
 third-party notices and recording provenance for each added dependency.
+

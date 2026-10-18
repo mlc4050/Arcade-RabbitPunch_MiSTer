@@ -18,19 +18,26 @@ implementation passes; the newest output changes and hardware bring-up remain pe
 | Physical shell timing | Non-debug video-options shell 6397a94 passes all 144 reported checks: setup +0.323 ns, hold +0.100 ns, 14242 ALMs and 180 M10Ks. Prototype SDRAM constraints and inherited peripheral pin coverage gaps are explicit. Debug default seed 1b3e33f fails one inherited HDMI setup path by 0.204 ns; clean scanline-options retry f64d68b seed 2 passes all 164 checks (setup +0.373 ns, hold +0.067 ns). Connected aspect snapshot 42c1be5 also passes all 144 checks (setup +0.525 ns, hold +0.078 ns); common-flip d525db2 has positive slacks but fails the 110-path peripheral coverage cap by one; the accepted reference rebuild identifies only an additional LED[0] indicator path. The registered-indicator b5b14ee rebuild passes all 144 timing checks (setup +0.370 ns, hold +0.078 ns), with 82 untimed output paths under the unchanged 110 cap. |
 | Hardware | No playable board verification, deployment, screenshot, JTAG read or audible output is claimed. RBFs are local timed prototypes; there is no verified release. |
 
-Next work is fitting both connected HDMI-rotation shell revisions and
-completing fitted-controller/expanded-host-menu functional checks. Safe
-mode transitions and rotated aspect/integer controls now pass in RTL.
-Isolated full rotated images, complete-frame publication, production-size guard/
-transport netlists, real frontend handoff and disjoint DDR windows now pass.
-Patterned combined CRT/HQ2x output validation also remains open. The combined flat-field HQ2x issue was a test expectation: the
-correct black-blanking reference matches all 1152 production-width pixels. Connected CRT release and
-instrumented seed-2 shells pass all 144/164 timing and coverage checks. The registered-indicator fit, long synthesized CRT geometry cases,
-exact native raster and both rotated MAME frames pass. Live size/position
-changes recover exact settled pixels after the documented blanking interval.
-The expanded CRT host menu passes the full synthesized protocol regression.
-Then complete remaining output features and hardware bring-up; no routine user
-confirmation is required for the approved local work.
+Next work is completing both corrected HDMI-rotation shell implementations and
+the bounded complete-netlist image/combined-geometry checks. The expanded menu,
+mode/direct/loader controls, normal and rotated integer metadata, complete-frame
+publication and frontend handoff pass. The corrected controller standalone fit
+and functional-netlist controls also pass; both complete native image directions
+pass three scored production-raster frames in RTL around qualified donor netlists.
+The earlier connected shell passes all 144 timing checks but is retained as a
+superseded snapshot: it predates the native-versus-doubled geometry correction.
+The original long production-raster complete-netlist pixel run reached its real
+30-minute limit before a scored frame; it is preserved as incomplete, not passed.
+The separate compressed fixture keeps all 62208 pixels and queued DDR stalls;
+its RTL validation passes and its complete-netlist comparison is running.
+
+Combined CRT/HQ2x matches the independent native-framework reference at 1152
+flat-field and 1024 patterned output pixels. Full native raster, extreme clipping,
+live vertical-shift coverage, physical outputs and end-to-end latency remain open.
+Connected CRT release and instrumented seed-2 snapshots retain their positive
+144/164 timing/coverage baselines. Remaining local output features include crop
+and audio OSD options; hardware bring-up has no recorded result. Continue the
+approved local work without routine confirmation.
 
 Evidence: [ROADMAP timing scope](SDRAM_PIN_TIMING.md),
 [video options](VIDEO_OPTIONS.md), [aspect evaluation](VIDEO_ASPECT.md), [common flip and CRT path](VIDEO_FLIP.md),
@@ -294,3 +301,4 @@ Patterned combined CRT/HQ2x output now passes all 1024 exact known pixels in
 a 64x4 input / 128x8 output fixture against the independent native framework
 (reference/crt_hq_pattern_checks.json). Full native raster, extreme clipping
 and physical display behavior remain separate gates.
+
