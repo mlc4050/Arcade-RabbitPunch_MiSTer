@@ -84,3 +84,12 @@ pulse width +1.122 ns. No constraints or framework logic were changed for
 this retry. See reference/full_shell_video_options_debug_seed2_checks.json.
 This snapshot includes scanline/HQ2x options, but does not connect the later
 HDMI aspect adapter. Physical output remains unverified.
+
+The combined CRT/HQ2x path now also passes an asymmetric patterned comparison:
+64x4 native pixels produce a complete 128x8 output, all 1024 RGB pixels exactly
+matching an independent native qualified-framework run with black blanking.
+The pattern includes diagonals, four-pixel bars, alternating rows and distinct
+colour lanes. Both fixtures use /7 input enables; the enabled CRT adapter has
+H-position +8 and the production size gate disabled in doubled mode. This is
+a compact integration proof against the framework, not MAME's unfiltered frame
+or a full native raster/physical CRT measurement. See reference/crt_hq_pattern_checks.json.

@@ -289,3 +289,8 @@ Original ROM-free diagnostic MRAs are generated locally by build_diagnostic_rom.
 Both complete 32768-word and bounded CPU/bitmap fill diagnostics pass, including
 the deliberate corrupt-ROM branch. Native physical display/SDRAM execution of
 those images remains part of hardware bring-up.
+
+Patterned combined CRT/HQ2x output now passes all 1024 exact known pixels in
+a 64x4 input / 128x8 output fixture against the independent native framework
+(reference/crt_hq_pattern_checks.json). Full native raster, extreme clipping
+and physical display behavior remain separate gates.
