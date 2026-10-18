@@ -364,3 +364,12 @@ against the new host netlist. See reference/host_audio_mix_synth.json,
 host_netlist_checks.json, platform_host_checks.json and
 platform_hiscore_host_checks.json. Full-shell qualification of the new menu
 and audible physical output remain pending.
+
+
+The connected audio-menu release 86c437a (seed 3) passes all 144 full-shell
+timing checks, required hierarchy/MISTER_FB, the fitted clock tree and unchanged
+pin-coverage gates. Minimum setup/hold are +0.139/+0.084 ns; utilization is
+15263 ALMs, 25388 registers, 187 M10Ks, 35 DSPs and three PLLs. The selected
+bitstream/source/timing artifacts are archived in the report's named worktree;
+see reference/full_shell_hdmi_audio_release_checks.json. The instrumented
+seed-2 implementation is still running. No physical audio playback is claimed.

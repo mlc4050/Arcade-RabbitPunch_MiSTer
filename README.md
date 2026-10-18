@@ -6,7 +6,8 @@ as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
 Status: the VHDL CPU, memory, video, audio, ROM-loading, controls and high-score
 services are connected to the MiSTer boundary. Corrected HDMI rotation passes complete release/debug prototype timing gates,
 including native integer geometry, CRT adjustment and common flip. The newer
-audio-menu revision is undergoing full implementation; no hardware-verified
+audio-menu release also passes full implementation; its instrumented build is
+still running; no hardware-verified
 playable RBF or release exists.
 
 Verification includes:
