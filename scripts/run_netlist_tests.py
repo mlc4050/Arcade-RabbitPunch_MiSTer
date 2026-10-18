@@ -18,6 +18,8 @@ from run_baselines import run_case
 
 
 BLOCKS = {
+    "ddr_write_queue": ("ddr_write_queue_tb", "DDR_WRITE_QUEUE_PASS", "sim/video/ddr_write_queue_tb.vhd"),
+    "hdmi_rotation": ("hdmi_rotation_tb", "HDMI_ROTATION_PASS", "sim/video/hdmi_rotation_tb.vhd"),
     "crt_adjust": ("crt_adjust_control_tb", "CRT_ADJUST_CONTROL_PASS", "sim/video/crt_adjust_control_tb.vhd"),
     "video_aspect": ("video_aspect_tb", "VIDEO_ASPECT_PASS", "sim/video/video_aspect_tb.vhd"),
     "memory": ("memory_powerup_tb", "MEMORY_POWERUP_PASS", "sim/memory/memory_powerup_tb.vhd"),
@@ -78,7 +80,7 @@ def main():
             vectors[filename] = hashlib.sha256(source.read_bytes()).hexdigest()
     support = "rtl/rabbitpunch_sdram_types.vhd" if args.block in ("sdram", "rom_requests", "rom_cache", "roms") else "sim/video/tile_test_support.vhd"
     sources = [str(netlist.relative_to(root)).replace("\\", "/")]
-    if args.block not in ("sound_board", "adpcm", "audio", "host", "memory", "video_aspect", "crt_adjust"):
+    if args.block not in ("sound_board", "adpcm", "audio", "host", "memory", "video_aspect", "crt_adjust", "hdmi_rotation", "ddr_write_queue"):
         sources.append(support)
     if args.block in ("sdram", "roms"):
         sources.append("sim/vendor/sdram/sdram_chip_model_wide.sv")

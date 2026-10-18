@@ -364,3 +364,11 @@ The external status LED now has one configuration-initialized game-clock bit.
 It registers loading/download/error/underflow indication only. It is not game
 state and adds no renderer, CPU, audio or RGB latency; underlying debug flags
 remain directly available. It need not be restored as part of a savestate.
+
+
+The isolated HDMI write queue has a 512x101 presentation RAM plus a 101-bit
+output packet, three nine-bit pointers/count and output-valid/overflow bits.
+Initialization discards pending presentation writes and clears overflow; it
+never clears game RAM. Derived framebuffer validity must be discarded and a
+complete image recaptured after queue reset, overflow or ROM replacement.
+This queue and the rotation donor are not yet in the production source list.

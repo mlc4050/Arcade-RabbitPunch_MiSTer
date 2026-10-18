@@ -4,3 +4,4 @@ rtl/cpu/** -text
 rtl/jtframe/*.v -text
 sim/vendor/** -text
 rtl/memory/ddram/** -text
+rtl/video/rotation/*.sv -text

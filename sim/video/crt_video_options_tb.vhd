@@ -4,6 +4,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use std.env.all;
+use std.textio.all;
 
 entity crt_video_options_tb is
     generic (
@@ -12,10 +13,10 @@ entity crt_video_options_tb is
         GINT_TOTAL_WIDTH : positive := 432;
         GINT_HORIZONTAL_SYNC_START : natural := 352;
         GINT_HORIZONTAL_SYNC_END : positive := 392;
-        GINT_VISIBLE_HEIGHT : positive := 6;
-        GINT_TOTAL_HEIGHT : positive := 12;
-        GINT_VERTICAL_SYNC_START : natural := 8;
-        GINT_VERTICAL_SYNC_END : positive := 10
+        GINT_VISIBLE_HEIGHT : positive := 1;
+        GINT_TOTAL_HEIGHT : positive := 4;
+        GINT_VERTICAL_SYNC_START : natural := 2;
+        GINT_VERTICAL_SYNC_END : positive := 3
     );
 end entity;
 
@@ -206,5 +207,17 @@ begin
                 " pixels=" & integer'image(vint_pixels) & " lines=" & integer'image(vint_lines);
             finish;
         end if;
+    end process;
+    progress : process
+        file v_progress : text open write_mode is "progress.txt";
+        variable v_line : line;
+    begin
+        loop
+            wait for 100 us;
+            write(v_line, time'image(now) & "; frame=" & integer'image(sint_frames) &
+                "; row=" & integer'image(sint_y) & "; column=" & integer'image(sint_x));
+            writeline(v_progress, v_line);
+            flush(v_progress);
+        end loop;
     end process;
 end architecture;

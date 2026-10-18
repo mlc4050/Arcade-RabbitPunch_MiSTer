@@ -1,0 +1,60 @@
+{
+  "cases": [
+    {
+      "case": "gate_hdmi_rotation",
+      "pass_marker": "HDMI_ROTATION_PASS",
+      "log": "debug\\baselines\\gate_hdmi_rotation\\result.log",
+      "commit": "fc479ee2edbbb640116f89d77b0165d79f2ef5db",
+      "vectors_sha256": {},
+      "netlist_sha256": "ed7cb1477d6d21a6dfbdea7bf52e10cae5f6962b41463d49a21d77ee781439c9",
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_fc479ee/hdmi_rotation_check.vo": "ed7cb1477d6d21a6dfbdea7bf52e10cae5f6962b41463d49a21d77ee781439c9",
+        "sim/video/hdmi_rotation_tb.vhd": "2c403b224592af5389e26ec2863337fe732631cf8c0c16e2afb881337d05aa31"
+      },
+      "log_sha256": "ed802c484997138f5d5cc14b3a831a78a1d2e833ef9ab369e3ca127cf9e99801",
+      "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest",
+      "counterclockwise": false,
+      "pixels": 128
+    },
+    {
+      "case": "rotation_arrival_true",
+      "pass_marker": "HDMI_ROTATION_PASS",
+      "log": "debug\\baselines\\rotation_arrival_true\\result.log",
+      "counterclockwise": true,
+      "pixels": 128,
+      "full_raster": false,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_fc479ee/hdmi_rotation_check.vo": "ed7cb1477d6d21a6dfbdea7bf52e10cae5f6962b41463d49a21d77ee781439c9",
+        "sim/video/hdmi_rotation_tb.vhd": "2c403b224592af5389e26ec2863337fe732631cf8c0c16e2afb881337d05aa31"
+      },
+      "log_sha256": "b0f02ece689961ac3b64e5b12b2f2d72c0b36987dad5a8f98ff480c49f74e3f8"
+    },
+    {
+      "case": "rotation_arrival_false_full",
+      "pass_marker": "HDMI_ROTATION_PASS",
+      "log": "debug\\baselines\\rotation_arrival_false_full\\result.log",
+      "counterclockwise": false,
+      "pixels": 62208,
+      "full_raster": true,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_fc479ee/hdmi_rotation_check.vo": "ed7cb1477d6d21a6dfbdea7bf52e10cae5f6962b41463d49a21d77ee781439c9",
+        "sim/video/hdmi_rotation_tb.vhd": "2c403b224592af5389e26ec2863337fe732631cf8c0c16e2afb881337d05aa31"
+      },
+      "log_sha256": "e89103949711f4a02cba50a34d8a7df74c852d4685ce8d7f87ce7aa6c763dccd"
+    },
+    {
+      "case": "rotation_arrival_true_full",
+      "pass_marker": "HDMI_ROTATION_PASS",
+      "log": "debug\\baselines\\rotation_arrival_true_full\\result.log",
+      "counterclockwise": true,
+      "pixels": 62208,
+      "full_raster": true,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_fc479ee/hdmi_rotation_check.vo": "ed7cb1477d6d21a6dfbdea7bf52e10cae5f6962b41463d49a21d77ee781439c9",
+        "sim/video/hdmi_rotation_tb.vhd": "2c403b224592af5389e26ec2863337fe732631cf8c0c16e2afb881337d05aa31"
+      },
+      "log_sha256": "94a54bd796fddf7e328b8cc6c2efe011e6a69ea01b9f958329c8a7abe8123256"
+    }
+  ],
+  "scope": "Quartus functional netlist of unchanged donor plus descriptive VHDL boundary. 16x8 controls and full 288x216 images in the 432x256 native raster at /7 enables: all CW/CCW DDR pixel addresses, colours, byte masks, unique pixels, framebuffer dimensions/stride/base and stable write-buffer selection after measurement warm-up. DDR busy is always zero, loader disconnected; no backpressure safety, frame latency or physical output proof."
+}

@@ -45,3 +45,26 @@ buffer selection need their own explicit validation; no eight-frame queue is
 introduced or accepted by this plan. Crop controls must also be chosen for
 this game's native 216 visible lines; copying a 216-of-240 crop menu would
 advertise a no-op here.
+
+Isolated arrival and queue evidence now passes. The unchanged donor's fc479ee
+fit uses 218 ALMs, 193 registers, one DSP, no RAM/PLL, with setup/hold
++9.340/+0.134 ns. Both full 288x216 CW/CCW address/colour/byte-mask scoreboards
+pass all 62208 pixels. The separate 512-write VHDL queue uses one 512x101 RAM
+(51712 bits, six M10Ks), 243 ALMs, 252 registers, no DSP/PLL, with setup/hold
++8.956/+0.149 ns. RTL and fitted-netlist ordering tests check 4497 accepted
+packets, including full capacity, overflow, pointer wraps and reset. Both full
+rotated images also pass through repeated 96/64-clock DDR busy bursts with
+no overflow. These modules remain disconnected; their resource usage is not
+included in the accepted full-shell totals. See reference/hdmi_rotation_arrival_checks.json,
+ddr_write_queue_synth.json, ddr_write_queue_netlist_checks.json and
+hdmi_rotation_queue_checks.json.
+
+A separate expected-failure netlist probe exposes another integration hazard:
+when source VSYNC and FB_VBL rise together, the donor advances both buffer
+selectors from their old values and advertises the same buffer it writes
+(read=1, write=1 in the fixture). This is a simulated donor behaviour, not a
+measured fault in another core. See reference/hdmi_rotation_collision_probe.json.
+The native framework samples hdmi_vbl into fb_vbl on clk_vid; an adapter must
+serialize the buffer-advance events and advertise only complete valid frames.
+The pixel-address and queued-write proofs do not establish safe publication,
+frame latency or loader handoff. Keep rotation disconnected until those pass.
