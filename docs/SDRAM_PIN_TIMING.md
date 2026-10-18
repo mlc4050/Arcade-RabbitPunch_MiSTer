@@ -65,3 +65,11 @@ are unverified. The original runner rejected the new pins; the completed fit was
 then checked retrospectively with the updated gate, without changing constraints
 or recompiling. Twenty-eight acceptance/negative controls include reserved pins
 in the wrong revision, changed debug source and extra untimed SDRAM/path cases.
+
+The independent non-debug full fit 81844b1 also passes: all 144 reported checks,
+minimum setup +0.368 ns and hold +0.076 ns. It has only the four inherited input
+and fifty output pin coverage gaps, with no instrumentation allowance. Fitted
+game frequency/SDRAM phase checks pass. See
+reference/full_shell_81844b1_release_checks.json for exact resources and hashes.
+The production-phase Japanese play1000 scene now matches all 62208 MAME RGB
+pixels as well; the renderer has no scanout underflow in that comparison.

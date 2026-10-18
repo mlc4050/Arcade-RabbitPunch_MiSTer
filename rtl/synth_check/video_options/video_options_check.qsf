@@ -1,0 +1,33 @@
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY rabbitpunch_video_options
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name SYSTEMVERILOG_FILE ../../../sys/hq2x.sv
+set_global_assignment -name VERILOG_FILE ../../../sys/scandoubler.v
+set_global_assignment -name SYSTEMVERILOG_FILE ../../../sys/video_freezer.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../../sys/video_mixer.sv
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_video_options.vhd
+set_global_assignment -name SDC_FILE video_options_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_pixel_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_red[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_green[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_blue[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_horizontal_sync
+set_instance_assignment -name VIRTUAL_PIN ON -to i_vertical_sync
+set_instance_assignment -name VIRTUAL_PIN ON -to i_horizontal_blank
+set_instance_assignment -name VIRTUAL_PIN ON -to i_vertical_blank
+set_instance_assignment -name VIRTUAL_PIN ON -to i_forced_scandoubler
+set_instance_assignment -name VIRTUAL_PIN ON -to i_direct_video
+set_instance_assignment -name VIRTUAL_PIN ON -to iu3_effect[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_pixel_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_red[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_green[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_blue[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_horizontal_sync
+set_instance_assignment -name VIRTUAL_PIN ON -to o_vertical_sync
+set_instance_assignment -name VIRTUAL_PIN ON -to o_data_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to ou2_scanlines[*]
