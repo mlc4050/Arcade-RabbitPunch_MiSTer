@@ -1,0 +1,13 @@
+{
+  "expected_failure": true,
+  "commit": "0f4eefc8d71cb323a26505958375d187ff763a46",
+  "framebuffer_phase": -2,
+  "low_latency_request": true,
+  "source_sha256": {
+    "debug/netlists/hdmi_rotation_0f4eefc/hdmi_rotation_check.vo": "adea57c6e471c3ef50d946347d00974ec7a367979bb787adce04b31a5d9cd31c",
+    "sim/video/hdmi_rotation_buffers_tb.vhd": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5"
+  },
+  "log": "debug/baselines/rotation_low_latency_collision_probe/result.log",
+  "log_sha256": "46ffe0d28da90d9ee03afd62d40084bda3dc2f16531343a2d7aecaf21fb84823",
+  "scope": "Initialized between-edge stimulus; advertised read slot equals a visible write slot in the legacy two-buffer path when FB blank leads source VS by two clocks. Requires a verified genlock/beam-racing contract for low-latency mode. Not a physical fault claim. Production connection remains disabled; safe triple buffering is the supported bring-up policy."
+}

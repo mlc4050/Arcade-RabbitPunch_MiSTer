@@ -9,6 +9,8 @@ use std.textio.all;
 entity hdmi_rotation_tb is
     generic (
         GBOOL_COUNTERCLOCKWISE : boolean := false;
+        GBOOL_LOW_LATENCY : boolean := false;
+        GINT_FRAMEBUFFER_PHASE : integer range -2 to 2 := 0;
         GINT_VISIBLE_WIDTH : positive := 16;
         GINT_VISIBLE_HEIGHT : positive := 8;
         GINT_TOTAL_WIDTH : positive := 24;
@@ -26,6 +28,7 @@ architecture test of hdmi_rotation_tb is
     signal s_clk : std_logic := '0';
     signal s_pixel_enable, s_horizontal_sync, s_vertical_sync, s_data_enable : std_logic;
     signal s_counterclockwise, s_enabled, s_write : std_logic;
+    signal s_low_latency, s_donor_vertical_sync, s_framebuffer_blank : std_logic;
     signal sint_phase : natural range 0 to 6 := 0;
     signal sint_x : natural range 0 to GINT_TOTAL_WIDTH - 1 := 0;
     signal sint_y : natural range 0 to GINT_TOTAL_HEIGHT - 1 := 0;
@@ -45,6 +48,15 @@ begin
     s_vertical_sync <= '1' when sint_y >= GINT_VERTICAL_SYNC_START and sint_y < GINT_VERTICAL_SYNC_END else '0';
     s_data_enable <= '1' when sint_x < GINT_VISIBLE_WIDTH and sint_y < GINT_VISIBLE_HEIGHT else '0';
     s_counterclockwise <= '1' when GBOOL_COUNTERCLOCKWISE else '0';
+    s_low_latency <= '1' when GBOOL_LOW_LATENCY else '0';
+    late_framebuffer : if GINT_FRAMEBUFFER_PHASE >= 0 generate
+        s_donor_vertical_sync <= s_vertical_sync;
+        s_framebuffer_blank <= s_vertical_sync after GINT_FRAMEBUFFER_PHASE * 10 ns;
+    end generate;
+    early_framebuffer : if GINT_FRAMEBUFFER_PHASE < 0 generate
+        s_donor_vertical_sync <= s_vertical_sync after (-GINT_FRAMEBUFFER_PHASE) * 10 ns;
+        s_framebuffer_blank <= s_vertical_sync;
+    end generate;
     su8_red <= to_unsigned(sint_x mod 256, 8);
     su8_green <= to_unsigned(sint_y, 8);
     su8_blue <= ((su8_red xor su8_green) and x"FE") or to_unsigned(sint_x / 256, 8);
@@ -77,12 +89,12 @@ begin
             iu8_green => su8_green,
             iu8_blue => su8_blue,
             i_horizontal_sync => s_horizontal_sync,
-            i_vertical_sync => s_vertical_sync,
+            i_vertical_sync => s_donor_vertical_sync,
             i_data_enable => s_data_enable,
             i_enable => '1',
             i_counterclockwise => s_counterclockwise,
-            i_framebuffer_vertical_blank => s_vertical_sync,
-            i_framebuffer_low_latency => '0',
+            i_framebuffer_vertical_blank => s_framebuffer_blank,
+            i_framebuffer_low_latency => s_low_latency,
             o_enabled => s_enabled,
             ou5_format => su5_format,
             ou12_width => su12_width,
@@ -111,6 +123,8 @@ begin
             assert (su32_base(31 downto 25) = 18 and su32_base(22 downto 0) = 0)
                 report "Rotation framebuffer base outside reserved donor slots" severity failure;
             if (s_write = '1') then
+                assert (su32_base(24 downto 23) /= su29_word_address(21 downto 20))
+                    report "Rotation advertised the buffer currently being written" severity failure;
                 assert (su8_burst_count = 1 and su64_data(63 downto 32) = su64_data(31 downto 0))
                     report "Rotation DDR burst/data lanes mismatch" severity failure;
                 vu32_pixel := su64_data(31 downto 0);

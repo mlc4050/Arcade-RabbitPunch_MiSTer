@@ -1,0 +1,209 @@
+{
+  "cases": [
+    {
+      "case": "rotation_buffers_cw_phase-2",
+      "pass_marker": "HDMI_ROTATION_BUFFERS_PASS",
+      "log": "debug\\baselines\\rotation_buffers_cw_phase-2\\result.log",
+      "commit": "8238d7736a7ec46ecfa65ad782919d79646868d2",
+      "counterclockwise": false,
+      "framebuffer_phase": -2,
+      "low_latency_request": false,
+      "actual_buffer_policy": "triple",
+      "frames": 3,
+      "pixels": 384,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "sim/video/hdmi_rotation_buffers_tb.vhd": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5"
+      },
+      "log_sha256": "2be8db43336420f6bbde5bc262da9f70a70a10e2b608f9bd782b487a2854cba8"
+    },
+    {
+      "case": "rotation_buffers_cw_phase-2_request_low",
+      "pass_marker": "HDMI_ROTATION_BUFFERS_PASS",
+      "log": "debug\\baselines\\rotation_buffers_cw_phase-2_request_low\\result.log",
+      "commit": "8238d7736a7ec46ecfa65ad782919d79646868d2",
+      "counterclockwise": false,
+      "framebuffer_phase": -2,
+      "low_latency_request": true,
+      "actual_buffer_policy": "triple",
+      "frames": 3,
+      "pixels": 384,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "sim/video/hdmi_rotation_buffers_tb.vhd": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5"
+      },
+      "log_sha256": "0d3ffb0471ce33b5b206b834ee6675964ca26506ec48200170ef7a37469439b8"
+    },
+    {
+      "case": "rotation_buffers_cw_phase-1",
+      "pass_marker": "HDMI_ROTATION_BUFFERS_PASS",
+      "log": "debug\\baselines\\rotation_buffers_cw_phase-1\\result.log",
+      "commit": "8238d7736a7ec46ecfa65ad782919d79646868d2",
+      "counterclockwise": false,
+      "framebuffer_phase": -1,
+      "low_latency_request": false,
+      "actual_buffer_policy": "triple",
+      "frames": 3,
+      "pixels": 384,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "sim/video/hdmi_rotation_buffers_tb.vhd": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5"
+      },
+      "log_sha256": "5cfdc84a62ad9f58dccfb2e9a1ebde29adcd217b5120ea0b4e1e69f4967ca5af"
+    },
+    {
+      "case": "rotation_buffers_cw_phase-1_request_low",
+      "pass_marker": "HDMI_ROTATION_BUFFERS_PASS",
+      "log": "debug\\baselines\\rotation_buffers_cw_phase-1_request_low\\result.log",
+      "commit": "8238d7736a7ec46ecfa65ad782919d79646868d2",
+      "counterclockwise": false,
+      "framebuffer_phase": -1,
+      "low_latency_request": true,
+      "actual_buffer_policy": "triple",
+      "frames": 3,
+      "pixels": 384,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "sim/video/hdmi_rotation_buffers_tb.vhd": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5"
+      },
+      "log_sha256": "926ae9c4119516456dc069566506e10e102bbcf983998903c876664504806701"
+    },
+    {
+      "case": "rotation_buffers_cw_phase0",
+      "pass_marker": "HDMI_ROTATION_BUFFERS_PASS",
+      "log": "debug\\baselines\\rotation_buffers_cw_phase0\\result.log",
+      "commit": "8238d7736a7ec46ecfa65ad782919d79646868d2",
+      "counterclockwise": false,
+      "framebuffer_phase": 0,
+      "low_latency_request": false,
+      "actual_buffer_policy": "triple",
+      "frames": 3,
+      "pixels": 384,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "sim/video/hdmi_rotation_buffers_tb.vhd": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5"
+      },
+      "log_sha256": "0065d5e7a0a70c614554e4d8b5b1f491a7ab8377e4844dbcd6c6571af4266f95"
+    },
+    {
+      "case": "rotation_buffers_cw_phase0_request_low",
+      "pass_marker": "HDMI_ROTATION_BUFFERS_PASS",
+      "log": "debug\\baselines\\rotation_buffers_cw_phase0_request_low\\result.log",
+      "commit": "8238d7736a7ec46ecfa65ad782919d79646868d2",
+      "counterclockwise": false,
+      "framebuffer_phase": 0,
+      "low_latency_request": true,
+      "actual_buffer_policy": "triple",
+      "frames": 3,
+      "pixels": 384,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "sim/video/hdmi_rotation_buffers_tb.vhd": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5"
+      },
+      "log_sha256": "ada61b6f8cf7053181d2529fe041c256243ac722d4e3085ddb91a1502db00bba"
+    },
+    {
+      "case": "rotation_buffers_cw_phase1",
+      "pass_marker": "HDMI_ROTATION_BUFFERS_PASS",
+      "log": "debug\\baselines\\rotation_buffers_cw_phase1\\result.log",
+      "commit": "8238d7736a7ec46ecfa65ad782919d79646868d2",
+      "counterclockwise": false,
+      "framebuffer_phase": 1,
+      "low_latency_request": false,
+      "actual_buffer_policy": "triple",
+      "frames": 3,
+      "pixels": 384,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "sim/video/hdmi_rotation_buffers_tb.vhd": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5"
+      },
+      "log_sha256": "b3c41038586f16f07fbf7ec4f0bc5bd60aa176e9b1be8456059d2b076deb71b7"
+    },
+    {
+      "case": "rotation_buffers_cw_phase1_request_low",
+      "pass_marker": "HDMI_ROTATION_BUFFERS_PASS",
+      "log": "debug\\baselines\\rotation_buffers_cw_phase1_request_low\\result.log",
+      "commit": "8238d7736a7ec46ecfa65ad782919d79646868d2",
+      "counterclockwise": false,
+      "framebuffer_phase": 1,
+      "low_latency_request": true,
+      "actual_buffer_policy": "triple",
+      "frames": 3,
+      "pixels": 384,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "sim/video/hdmi_rotation_buffers_tb.vhd": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5"
+      },
+      "log_sha256": "e58ae8b88f782551e1f18d24cc510ee5954e630db5f804f81d59804006fb9593"
+    },
+    {
+      "case": "rotation_buffers_cw_phase2",
+      "pass_marker": "HDMI_ROTATION_BUFFERS_PASS",
+      "log": "debug\\baselines\\rotation_buffers_cw_phase2\\result.log",
+      "commit": "8238d7736a7ec46ecfa65ad782919d79646868d2",
+      "counterclockwise": false,
+      "framebuffer_phase": 2,
+      "low_latency_request": false,
+      "actual_buffer_policy": "triple",
+      "frames": 3,
+      "pixels": 384,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "sim/video/hdmi_rotation_buffers_tb.vhd": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5"
+      },
+      "log_sha256": "013eaf559d49f7040e763c6d9ee6c795f5a4df1657be0043728e531e9085cbba"
+    },
+    {
+      "case": "rotation_buffers_cw_phase2_request_low",
+      "pass_marker": "HDMI_ROTATION_BUFFERS_PASS",
+      "log": "debug\\baselines\\rotation_buffers_cw_phase2_request_low\\result.log",
+      "commit": "8238d7736a7ec46ecfa65ad782919d79646868d2",
+      "counterclockwise": false,
+      "framebuffer_phase": 2,
+      "low_latency_request": true,
+      "actual_buffer_policy": "triple",
+      "frames": 3,
+      "pixels": 384,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "sim/video/hdmi_rotation_buffers_tb.vhd": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5"
+      },
+      "log_sha256": "1b24411006da166f5eadafe7d292597c1b9953e24be1e5cefee26b56670686ee"
+    },
+    {
+      "case": "rotation_buffers_cw_phase0_full",
+      "pass_marker": "HDMI_ROTATION_BUFFERS_PASS",
+      "log": "debug\\baselines\\rotation_buffers_cw_phase0_full\\result.log",
+      "commit": "8238d7736a7ec46ecfa65ad782919d79646868d2",
+      "counterclockwise": false,
+      "framebuffer_phase": 0,
+      "low_latency_request": false,
+      "actual_buffer_policy": "triple",
+      "frames": 3,
+      "pixels": 186624,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "sim/video/hdmi_rotation_buffers_tb.vhd": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5"
+      },
+      "log_sha256": "6c0cca7b6559bd266a5d25ad14a71ac685e55e47d902f135fb75c9ca2797cee5"
+    },
+    {
+      "case": "rotation_buffers_ccw_phase0_full",
+      "pass_marker": "HDMI_ROTATION_BUFFERS_PASS",
+      "log": "debug\\baselines\\rotation_buffers_ccw_phase0_full\\result.log",
+      "commit": "8238d7736a7ec46ecfa65ad782919d79646868d2",
+      "counterclockwise": true,
+      "framebuffer_phase": 0,
+      "low_latency_request": false,
+      "actual_buffer_policy": "triple",
+      "frames": 3,
+      "pixels": 186624,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "sim/video/hdmi_rotation_buffers_tb.vhd": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5"
+      },
+      "log_sha256": "59801c7d97f5180a9aa4ae36397566937817f524aa3f3a13aa8e59693ce6da33"
+    }
+  ],
+  "scope": "Fitted isolated VHDL event serializer plus unchanged rotation donor in safe triple-buffer mode. Three complete scored frames per case: every pixel address/colour/mask, known slot indices, no visible write to the advertised read slot, and at least one read-slot change per frame. VS/FB_VBL stimulus changes between clock edges; compact phases -2..+2 system clocks, including coincident events. Low-latency requests deliberately retain triple buffering. Full native CW/CCW geometry included unless compact-only. No valid-image publication, queue-drain/loader handoff, arbitrary phase/frequency, measured latency or hardware proof."
+}

@@ -1,0 +1,21 @@
+{
+  "case": "load_frontend_rotation",
+  "pass_marker": "LOAD_FRONTEND_ROTATION_PASS",
+  "log": "debug\\baselines\\load_frontend_rotation\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_layout.vhd": "e375b766fa01bf4ae808ccc315f7629488a2dfa4db9e7c8a98f7da993adae14d",
+    "rtl/memory/ddram/ddram_phy.sv": "5a0cc2eeca7d71ba83fbd19d79c38b9983f5956cb737acf4df64e20848d0578c",
+    "rtl/memory/ddram/rom_loader.sv": "01ea1c583107760fedb7457a35cc44e8a77d53e4be7593a4eae85fb4702602d5",
+    "rtl/rabbitpunch_ddr_copy.vhd": "79560a01cdd62a2b0e4ebc935fe8dfd568579c0d38f78dedaa360763931b1dde",
+    "rtl/rabbitpunch_load_frontend.vhd": "cf97440167201fae6c4cb80e83552e1661318e3cb6eb939521ff9dada4a6a2e9",
+    "rtl/rabbitpunch_ddr_write_queue.vhd": "2d6f2617d3f8b3d8e7eb0176c02ded83c02aac193d8bec03039fe3916c8b0648",
+    "rtl/rabbitpunch_frame_publication.vhd": "aeea205f852f1d0c6b43b94a411e98a03d5ad72729f6008155043f1e52ab52f1",
+    "rtl/rabbitpunch_rotation_transport.vhd": "fa41de17a133ddfc7708369f07dac5a9d223a7290ae9f8717708da60289b999a",
+    "debug/load_frontend_rotation_tb.vhd": "22cc98eced8a7e8d048be13ca10675485ad0a94efc1b7c025e75d58a5cd28f31"
+  },
+  "template_sha256": "2bb349e1ba419733c5fb18e8d24f243f0351da08846c0cb89b5e5036a98497fb",
+  "log_sha256": "732eab82017347fef173b022e8ccefd84414ed0b8b41e8b9a5d3d6d27a08ecaa",
+  "ddr_reads": 24,
+  "accepted_words": 129,
+  "scope": "Actual load frontend, unchanged native DDR PHY/copier, word-credit wrapper and VHDL rotation transport/queue/publication. Existing DDR/direct-byte/metadata/reset/overlap/recovery cases retain all expected words and addresses, now with concurrent synthetic presentation traffic, pending-queue takeover, no presentation write while loader owns DDR, and ownership retained through delayed reads and output-word backpressure. Synthetic DDR/word sink and presentation source; not HPS hardware, actual rotator traffic or physical timing."
+}

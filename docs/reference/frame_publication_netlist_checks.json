@@ -1,0 +1,16 @@
+{
+  "case": "gate_frame_publication",
+  "pass_marker": "FRAME_PUBLICATION_PASS",
+  "log": "debug\\baselines\\gate_frame_publication\\result.log",
+  "commit": "7b1b43bda327a5ee09b21c2fd8c5ea44c922e5d0",
+  "vectors_sha256": {},
+  "netlist_sha256": "e5056150581c6cf76b28b94173b59091dae62b407461a7d66d9e6b0d85cdce9d",
+  "source_sha256": {
+    "debug/netlists/frame_publication_7b1b43b/frame_publication_check.vo": "e5056150581c6cf76b28b94173b59091dae62b407461a7d66d9e6b0d85cdce9d",
+    "debug/frame_publication_netlist_tb.vhd": "693130b0125efee2eace58efae1cee99030c52885adfbffcf039afca7bc01204"
+  },
+  "log_sha256": "ad24505e2e75b354c5b2bae7e73095c31bbe9cd0ad01ec9a63b4b25dc5860f3c",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest",
+  "frame_pixels": 62208,
+  "template_sha256": "93d98b5ae271565314f76e17e79976d01c5507f3e3220662cb4f44788031b962"
+}

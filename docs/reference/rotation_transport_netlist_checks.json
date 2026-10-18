@@ -1,0 +1,16 @@
+{
+  "case": "gate_rotation_transport",
+  "pass_marker": "ROTATION_TRANSPORT_PASS",
+  "log": "debug\\baselines\\gate_rotation_transport\\result.log",
+  "commit": "385ef95d5f435a986c44b30ad2941e17ec6c0541",
+  "vectors_sha256": {},
+  "netlist_sha256": "eecf8da05be534de2af37dcd92461a67c206c1a57bc74ee0a0dbc0d882852a9b",
+  "source_sha256": {
+    "debug/netlists/rotation_transport_385ef95/rotation_transport_check.vo": "eecf8da05be534de2af37dcd92461a67c206c1a57bc74ee0a0dbc0d882852a9b",
+    "debug/rotation_transport_netlist_tb.vhd": "6c7ca5050ce9c982a527645f1da42ff6504d0e28d799aa96ffa8d825040744f8"
+  },
+  "log_sha256": "bd7a6e3db883202ae0bb389a3b94df900d7c6396edd6dde3075ed6bbb8dfe643",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest",
+  "frame_pixels": 62208,
+  "template_sha256": "cdf1bd735b996c0a7fe22833182ac47c14718ecb26a8aa74f916eced47b38164"
+}

@@ -1,0 +1,28 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 RabbitPunch contributors
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY rabbitpunch_frame_publication
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_frame_publication.vhd
+set_global_assignment -name SDC_FILE frame_publication_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_initialize
+set_instance_assignment -name VIRTUAL_PIN ON -to i_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to i_game_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to i_loader_active
+set_instance_assignment -name VIRTUAL_PIN ON -to i_vertical_sync
+set_instance_assignment -name VIRTUAL_PIN ON -to i_donor_enabled
+set_instance_assignment -name VIRTUAL_PIN ON -to i_pixel_write
+set_instance_assignment -name VIRTUAL_PIN ON -to iu2_write_buffer[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu2_read_buffer[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_queue_empty
+set_instance_assignment -name VIRTUAL_PIN ON -to i_queue_overflow
+set_instance_assignment -name VIRTUAL_PIN ON -to o_capture_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to o_flush_queue
+set_instance_assignment -name VIRTUAL_PIN ON -to o_framebuffer_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_discard_frame
+set_instance_assignment -name VIRTUAL_PIN ON -to ou3_valid_buffers[*]

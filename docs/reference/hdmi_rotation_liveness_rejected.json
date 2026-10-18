@@ -1,0 +1,20 @@
+{
+  "accepted": false,
+  "expected_negative_control": false,
+  "commit": "0f4eefc",
+  "reason": "Rejected test due unknown delayed sync stimulus at first clock; not evidence of an initialized adapter liveness defect.",
+  "archive": "debug\\fit_archive\\hdmi_rotation_0f4eefc_before_liveness",
+  "source_sha256": {
+    "debug/netlists/hdmi_rotation_0f4eefc/hdmi_rotation_check.vo": "adea57c6e471c3ef50d946347d00974ec7a367979bb787adce04b31a5d9cd31c",
+    "sim/video/hdmi_rotation_buffers_tb.vhd": "2b2856b962031921859d2d054aea56fe35e5cf0c3faae4234ce586b92cdb3801"
+  },
+  "log_sha256": "372de3896b5110cd4553fc8c0887aca40e3f6fee375cbcced97881f6a3749b37",
+  "diagnosis": "Invalid stimulus: delayed VS/FB_VBL inputs were unknown at the first rising clock edge. This report is retained as a rejected test result, not evidence of a stalled initialized adapter.",
+  "resolution": "After initializing both delayed sync inputs to zero, the same 0f4eefc netlist passes the phase -2 three-frame triple-buffer test. A separate initialized low-latency test exposes a real read/write slot collision; see hdmi_rotation_low_latency_probe.json.",
+  "initialized_recheck": {
+    "log": "debug/baselines/rotation_liveness_initialized_0f4eefc/result.log",
+    "log_sha256": "cc3f6ddefd4c03ce86d084a6066d39eae666b8cef2f1bc8bf2426da5cd7b5c4d",
+    "testbench_sha256": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5"
+  },
+  "original_reason": "Stable half-cycle stimulus exposes frozen framebuffer read selection. Earlier single-frame address/inequality tests did not prove publication liveness."
+}
