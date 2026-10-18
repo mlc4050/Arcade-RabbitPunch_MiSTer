@@ -56,9 +56,15 @@ reference/clocked_machine_flip_synth.json. The full d525db2 shell compiles with 
 (minimum setup +0.401 ns and hold +0.083 ns), but remains rejected by the
 coverage guard: its 111 untimed peripheral output paths exceed the previous
 110 cap. The same 4 input/50 output pin names remain scoped, all clocks are
-constrained, and the manual fitted clock check passes. A fresh 42c1be5
-reference build is running to audit the difference before any gate change.
-No exception or cap increase has been applied. See
+constrained, and the manual fitted clock check passes. A fresh 42c1be5 reference rebuild reproduces 110 paths and passes its full
+144-check gate. Complete setup/hold path comparison, normalizing only anonymous
+fitter IDs and duplicate-register suffixes, identifies exactly one additional
+loader-idle indicator path to LED[0]; every other path matches.
+The combined LED indication is now registered in a small VHDL adapter, so its
+status logic is timed internally. Its presentation changes by one system-clock
+cycle; gameplay flags and video are unchanged. No exception, constraint or cap
+change is applied. A new full fit is required. See
+reference/flip_led_coverage_audit.json. See
 reference/full_shell_flip_coverage_rejected.json. Physical output is unverified.
 This implementation does not claim recovery of the C7-01 GGA's internal
 address generation or original-board raster behavior.

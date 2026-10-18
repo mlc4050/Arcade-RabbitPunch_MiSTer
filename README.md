@@ -33,7 +33,8 @@ interactive game execution and the remaining standard video features still
 require bring-up. Optional forced doubling, HQ2x and scanline modes now pass
 functional tests and full fits in both revisions. The instrumented seed-2 retry
 passes all 164 reported timing checks. Common CRT/HDMI flip passes both complete rotated-frame comparisons; its
-new full build remains unqualified pending a peripheral-path coverage audit; see [analog output and flip](docs/VIDEO_FLIP.md). See [machine integration](docs/MACHINE_INTEGRATION.md),
+new full build remains unqualified while the audited LED-only coverage fix
+is refitted; see [analog output and flip](docs/VIDEO_FLIP.md). See [machine integration](docs/MACHINE_INTEGRATION.md),
 [sound bring-up](docs/SOUND_BRINGUP.md), [prototype limitations](docs/HACKS.md)
 and [read-only debug probes](docs/DEBUG.md) for exact scope.
 
