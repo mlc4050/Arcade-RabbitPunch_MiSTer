@@ -22,6 +22,7 @@ architecture test of platform_host_tb is
         o_wide_mode : out std_logic;
         iu16_menu_mask : in unsigned(15 downto 0);
         ou128_status : out unsigned(127 downto 0);
+        ou2_audio_mix : out unsigned(1 downto 0);
         ou32_joystick0 : out unsigned(31 downto 0);
         ou32_joystick1 : out unsigned(31 downto 0);
         ou11_key_event : out unsigned(10 downto 0);
@@ -140,6 +141,7 @@ begin
             o_wide_mode => su46_bus(32),
             iu16_menu_mask => (others => '0'),
             ou128_status => su128_status,
+            ou2_audio_mix => open,
             ou32_joystick0 => su32_joystick0,
             ou32_joystick1 => su32_joystick1,
             ou11_key_event => su11_key_event,

@@ -17,6 +17,7 @@ entity rabbitpunch_host is
         iou46_hps_bus : inout unsigned(45 downto 0);
         iu16_menu_mask : in unsigned(15 downto 0) := (others => '0');
         ou128_status : out unsigned(127 downto 0);
+        ou2_audio_mix : out unsigned(1 downto 0);
         ou32_joystick0 : out unsigned(31 downto 0);
         ou32_joystick1 : out unsigned(31 downto 0);
         ou11_key_event : out unsigned(10 downto 0);
@@ -89,7 +90,12 @@ architecture boundary of rabbitpunch_host is
         );
     end component;
     signal su36_unused_extensions : unsigned(35 downto 0);
+    signal su128_status : unsigned(127 downto 0);
 begin
+    ou128_status <= su128_status;
+    -- OSD Mono/None/25%/50% maps to framework mix 3/0/1/2.
+    ou2_audio_mix <= to_unsigned(3, 2) when su128_status(124 downto 123) = 0 else
+        su128_status(124 downto 123) - 1;
     -- Disable extension overrides of the normal host response bus.
     su36_unused_extensions(32) <= '0';
     su36_unused_extensions(15 downto 0) <= (others => '0');
@@ -112,7 +118,7 @@ begin
             direct_video => o_direct_video,
             video_rotated => '0',
             new_vmode => '0',
-            status => ou128_status,
+            status => su128_status,
             status_in => (others => '0'),
             status_set => '0',
             status_menumask => iu16_menu_mask,

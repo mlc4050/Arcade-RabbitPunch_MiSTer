@@ -17,7 +17,6 @@ assign HDMI_BLACKOUT = 0;
 assign HDMI_BOB_DEINT = 0;
 assign AUDIO_S = 1;
 assign AUDIO_R = AUDIO_L;
-assign AUDIO_MIX = 0;
 assign LED_DISK = 0;
 assign LED_POWER = 0;
 assign BUTTONS = 0;
@@ -71,6 +70,7 @@ rabbitpunch_host host
     .iou46_hps_bus(HPS_BUS),
     .iu16_menu_mask(menu_mask),
     .ou128_status(status),
+    .ou2_audio_mix(AUDIO_MIX),
     .ou32_joystick0(joystick0),
     .ou32_joystick1(joystick1),
     .ou11_key_event(key_event),
