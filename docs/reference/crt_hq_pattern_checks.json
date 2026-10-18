@@ -1,0 +1,34 @@
+{
+  "cases": [
+    {
+      "case": "crt_hq_pattern_native",
+      "pass_marker": "VIDEO_OPTIONS_PASS",
+      "log": "debug\\baselines\\crt_hq_pattern_native\\result.log",
+      "source_sha256": {
+        "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+        "debug/crt_hq_pattern_native_tb.vhd": "529ee8ac6ac69f9010fe0e3ccc8025630aaf2b48b0c1738fe80b7a5135f950af"
+      },
+      "template_sha256": "c5b0a144438bebc42772de4c5c66aec88382472cb853919d2ff5e19e40b7f73b",
+      "log_sha256": "4e6fa2902894506c96edfada35546b86f89f2e598e89cef071e1b3e55050e4e2",
+      "pixels_sha256": "410ec4097c40a16f76c5132b7b8ecbe8b1d6689ca7580708c370d8bd84e19d0a"
+    },
+    {
+      "case": "crt_hq_pattern_adjusted",
+      "pass_marker": "CRT_VIDEO_OPTIONS_PASS",
+      "log": "debug\\baselines\\crt_hq_pattern_adjusted\\result.log",
+      "source_sha256": {
+        "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "aad8878d3ebe44a18a038c86fb7131a09699feae7898256ddc9c193310bb5c7e",
+        "debug/crt_hq_pattern_adjusted_tb.vhd": "0ab5f7dac0a8f0ede1d1d392c2c7f0b4a286ea5e7ab4dc3886cba23709fb53f7"
+      },
+      "template_sha256": "39bcd4194a4a891ffa6c39e52b5572a953b3c65693162660cb576d4cfb21d429",
+      "log_sha256": "7331cf77d44d6770e16253ebde2a703146f05c7515f86f82876d3580c72b9ac2",
+      "pixels_sha256": "410ec4097c40a16f76c5132b7b8ecbe8b1d6689ca7580708c370d8bd84e19d0a"
+    }
+  ],
+  "compared_pixels": 1024,
+  "differing_pixels": 0,
+  "first_differences": [],
+  "scope": "64x4 patterned input, /7 pixel enable, complete 128x8 HQ2x image through enabled CRT horizontal position +8 with size gated off in doubled mode, versus independent native qualified framework with black blanking. Exact algorithm integration comparison; no MAME HQ reference, full native raster, clipping, live transition or physical display claim."
+}
