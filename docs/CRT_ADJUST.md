@@ -126,12 +126,24 @@ Combined full-width/native, forced-doubling and direct-video controls pass;
 see reference/crt_video_options_0_checks.json, crt_video_options_1_checks.json
 and crt_video_options_6_checks.json. The extended six-row run exceeded its
 wall budget after two input frames and is preserved separately. The bounded
-one-row HQ2x case failed its constant-colour assertion and remains
-unqualified while independent black-blanking/edge-filter captures are checked.
-See reference/crt_hq_colour_rejected.json and crt_video_options_wall_timeout.json.
-No passing combined HQ2x claim is made.
+one-row HQ2x constant-colour assertion was an invalid test expectation:
+the CRT donor blacks both horizontal and vertical blanking, and HQ2x filters
+the visible border with black. Native framework captures with the same blanking
+match every one of 256 compact and 1152 production-width output pixels.
+The maintained combined regression now captures HQ2x output and compares every
+pixel to that independent native capture; both sizes pass with zero unknowns
+or differences. No production CRT or vendor HDL changed for this correction.
+See reference/crt_hq_blanking_comparison.json,
+reference/crt_video_options_compact_2_checks.json and
+reference/crt_video_options_2_checks.json. The original failed assertion and
+wall timeout remain in crt_hq_colour_rejected.json and
+crt_video_options_wall_timeout.json with their exact original evidence.
+This is a one-visible-row framework integration proof, not a general HQ2x
+patterned-edge algorithm comparison or unfiltered-MAME image comparison.
+All three combined scanline-strength controls also pass the compact fixture;
+see reference/crt_video_options_compact_3_4_5_checks.json.
 
-Still open: combined HQ2x colour validation,
+Still open: patterned combined HQ2x images,
 extreme-size clipping, live vertical-shift/combined-output transitions and
 actual monitor behavior. Vertical-size ring buffering is omitted: it adds
 multiple rows and its cabinet mode expects at least eight system clocks per
