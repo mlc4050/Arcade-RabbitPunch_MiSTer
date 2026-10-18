@@ -1,0 +1,34 @@
+{
+  "commit": "47a3effac4da51ea34343f60d2b67ca009db6765",
+  "case": "hdmi_presentation_fitted_cw",
+  "passed": false,
+  "failure_kind": "wall_timeout",
+  "wall_timeout_seconds": 1800,
+  "assertion_failure_seen": false,
+  "timeout_teardown_diagnostics": [
+    "vish lost connection to vsim process.",
+    "Exiting VSIM license process.",
+    "Kernel lost connection to front end process."
+  ],
+  "visible": [
+    288,
+    216
+  ],
+  "total": [
+    432,
+    256
+  ],
+  "pixel_divider": 7,
+  "last_progress": "5000000000 ps; frame=0; row=165; column=148",
+  "archive": "debug/fit_archive/hdmi_presentation_47a3eff_production_wall_timeout",
+  "artifact_sha256": {
+    "hdmi_presentation_check.vo": "09f0272802faefc6bafafd24de7f7ef5649aa8298b52906d41ab81035f1d9121",
+    "hdmi_presentation_netlist_pixels_runner.log": "46995652a19bf2d41dd574e8b29d85dc893f7d17e81b5024f240688c58602d6b",
+    "hdmi_presentation_netlist_pixels_tb.vhd": "2a17d4d4091d9bb98130169af369f0d077cedcf59bc9c08d597a47181fd8516b",
+    "progress.txt": "affbf0b4c32b50779f3d3e7305f54f056bb84ca9af3425ec5f69a8b623d1fff3",
+    "result.log": "28c0a4a82dee1bf2cbe92879c6480433744c0b186348d32f623ab81f8af999d1",
+    "run.do": "a6c1169bbf64a80cd5cef50d11b38ee08389d7734f6d0d6fccb1e388e593b25a",
+    "run_hdmi_presentation_netlist_pixels.py": "8d2972f4a5052e067b59eba3b8432bb3a344d11a5bd59c6f067ef8202358af1b"
+  },
+  "scope": "Partial production-raster full-controller functional netlist run; no scored complete frame or pass. Starter capacity warning and bounded real-time timeout, with no assertion failure observed. Compressed-raster and mixed RTL proofs are separate."
+}

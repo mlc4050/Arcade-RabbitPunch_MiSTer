@@ -1,0 +1,56 @@
+{
+  "cases": [
+    {
+      "case": "hdmi_presentation_dense_rtl_cw",
+      "pass_marker": "HDMI_PRESENTATION_PASS",
+      "log": "debug\\baselines\\hdmi_presentation_dense_rtl_cw\\result.log",
+      "counterclockwise": false,
+      "pixels": 62208,
+      "scored_frames": 1,
+      "warmup_frames": 4,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
+        "rtl/rabbitpunch_ddr_write_queue.vhd": "d8a66938e884f6a26f18e3e7c2de7c5f4732ae7c507e745ce91101ce06d592e5",
+        "rtl/rabbitpunch_frame_publication.vhd": "2ab81ea58f2ddbc240095067d4ff6c267675d9213af684a37045e04b16552cb3",
+        "rtl/rabbitpunch_rotation_transport.vhd": "e206e8f6936109de57cba57d91f9dd72b07272e52ce17595210a614a3ba0a179",
+        "rtl/rabbitpunch_hdmi_presentation.vhd": "49ca535104824fc7c08ca37eb886d413e0ef0dadab1f979cbb5d0341e0c10ef4",
+        "debug/hdmi_presentation_dense_rtl_tb.vhd": "ec959594c55e4f069b15763da74fd60d3043298c611dcc5603deaf9a5e4ccd67"
+      },
+      "log_sha256": "ece680386db95a5ee570438bc485c5300c31e12c91bf7ba8a13db1ed24f0f3dc"
+    },
+    {
+      "case": "hdmi_presentation_dense_rtl_ccw",
+      "pass_marker": "HDMI_PRESENTATION_PASS",
+      "log": "debug\\baselines\\hdmi_presentation_dense_rtl_ccw\\result.log",
+      "counterclockwise": true,
+      "pixels": 62208,
+      "scored_frames": 1,
+      "warmup_frames": 4,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
+        "rtl/rabbitpunch_ddr_write_queue.vhd": "d8a66938e884f6a26f18e3e7c2de7c5f4732ae7c507e745ce91101ce06d592e5",
+        "rtl/rabbitpunch_frame_publication.vhd": "2ab81ea58f2ddbc240095067d4ff6c267675d9213af684a37045e04b16552cb3",
+        "rtl/rabbitpunch_rotation_transport.vhd": "e206e8f6936109de57cba57d91f9dd72b07272e52ce17595210a614a3ba0a179",
+        "rtl/rabbitpunch_hdmi_presentation.vhd": "49ca535104824fc7c08ca37eb886d413e0ef0dadab1f979cbb5d0341e0c10ef4",
+        "debug/hdmi_presentation_dense_rtl_tb.vhd": "ec959594c55e4f069b15763da74fd60d3043298c611dcc5603deaf9a5e4ccd67"
+      },
+      "log_sha256": "ad18f5f3591bd2fdb25120382afffa92aa871503281bf306c2bbefd8b6f4c706"
+    }
+  ],
+  "fitted": false,
+  "fitted_commit": null,
+  "visible": [
+    288,
+    216
+  ],
+  "total": [
+    304,
+    224
+  ],
+  "pixel_divider": 1,
+  "busy_cycles_per_512": 4,
+  "template_sha256": "a9b51809a1b9fcb693f4250b388675bd7a3357e2050b0aa5cf4805c11791a816",
+  "scope": "Compressed synthetic stimulus, not production raster or /7 cadence: all 62208 unique native pixels, exact CW/CCW DDR addresses/colours/byte masks, safe known buffer slots, advancing reads, queue drain and complete-image publication. Four-cycle DDR stalls overlap visible traffic and require queued packets. Fixed 62208-pixel fitted guard is unchanged. Functional netlist without SDF when fitted; otherwise controller RTL around qualified donor/aspect netlists. Production raster/stall proofs remain separate; no full-shell, executing-game, physical or measured latency claim."
+}

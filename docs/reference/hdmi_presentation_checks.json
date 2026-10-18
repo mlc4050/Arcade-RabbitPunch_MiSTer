@@ -10,13 +10,13 @@
       "source_sha256": {
         "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
         "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
-        "rtl/rabbitpunch_ddr_write_queue.vhd": "2d6f2617d3f8b3d8e7eb0176c02ded83c02aac193d8bec03039fe3916c8b0648",
-        "rtl/rabbitpunch_frame_publication.vhd": "aeea205f852f1d0c6b43b94a411e98a03d5ad72729f6008155043f1e52ab52f1",
-        "rtl/rabbitpunch_rotation_transport.vhd": "fa41de17a133ddfc7708369f07dac5a9d223a7290ae9f8717708da60289b999a",
-        "rtl/rabbitpunch_hdmi_presentation.vhd": "8e316cf2603cbd424663defd390c728d420f640eee34d13e43ba436e51ac88d4",
+        "rtl/rabbitpunch_ddr_write_queue.vhd": "d8a66938e884f6a26f18e3e7c2de7c5f4732ae7c507e745ce91101ce06d592e5",
+        "rtl/rabbitpunch_frame_publication.vhd": "2ab81ea58f2ddbc240095067d4ff6c267675d9213af684a37045e04b16552cb3",
+        "rtl/rabbitpunch_rotation_transport.vhd": "e206e8f6936109de57cba57d91f9dd72b07272e52ce17595210a614a3ba0a179",
+        "rtl/rabbitpunch_hdmi_presentation.vhd": "49ca535104824fc7c08ca37eb886d413e0ef0dadab1f979cbb5d0341e0c10ef4",
         "debug/hdmi_presentation_tb.vhd": "a9b51809a1b9fcb693f4250b388675bd7a3357e2050b0aa5cf4805c11791a816"
       },
-      "log_sha256": "e64418573103e85ea1df15cc99fb786c08d631ec46c0da068b862c02bab528a3"
+      "log_sha256": "062f864ed07a7ecace7144b50e9c42d4944c1562ec41eb973ecbd145bf90689d"
     },
     {
       "case": "hdmi_presentation_ccw",
@@ -28,13 +28,13 @@
       "source_sha256": {
         "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
         "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
-        "rtl/rabbitpunch_ddr_write_queue.vhd": "2d6f2617d3f8b3d8e7eb0176c02ded83c02aac193d8bec03039fe3916c8b0648",
-        "rtl/rabbitpunch_frame_publication.vhd": "aeea205f852f1d0c6b43b94a411e98a03d5ad72729f6008155043f1e52ab52f1",
-        "rtl/rabbitpunch_rotation_transport.vhd": "fa41de17a133ddfc7708369f07dac5a9d223a7290ae9f8717708da60289b999a",
-        "rtl/rabbitpunch_hdmi_presentation.vhd": "8e316cf2603cbd424663defd390c728d420f640eee34d13e43ba436e51ac88d4",
+        "rtl/rabbitpunch_ddr_write_queue.vhd": "d8a66938e884f6a26f18e3e7c2de7c5f4732ae7c507e745ce91101ce06d592e5",
+        "rtl/rabbitpunch_frame_publication.vhd": "2ab81ea58f2ddbc240095067d4ff6c267675d9213af684a37045e04b16552cb3",
+        "rtl/rabbitpunch_rotation_transport.vhd": "e206e8f6936109de57cba57d91f9dd72b07272e52ce17595210a614a3ba0a179",
+        "rtl/rabbitpunch_hdmi_presentation.vhd": "49ca535104824fc7c08ca37eb886d413e0ef0dadab1f979cbb5d0341e0c10ef4",
         "debug/hdmi_presentation_tb.vhd": "a9b51809a1b9fcb693f4250b388675bd7a3357e2050b0aa5cf4805c11791a816"
       },
-      "log_sha256": "db8b259465c545cd60484459e7965c2beb5591128108447ed9d4c4387d08df1e"
+      "log_sha256": "c8e230d5651c9d18d2d0d58062d6f1026ef7ff47949db4fe258c19a1c4de41af"
     },
     {
       "case": "hdmi_presentation_cw_full",
@@ -46,13 +46,13 @@
       "source_sha256": {
         "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
         "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
-        "rtl/rabbitpunch_ddr_write_queue.vhd": "2d6f2617d3f8b3d8e7eb0176c02ded83c02aac193d8bec03039fe3916c8b0648",
-        "rtl/rabbitpunch_frame_publication.vhd": "aeea205f852f1d0c6b43b94a411e98a03d5ad72729f6008155043f1e52ab52f1",
-        "rtl/rabbitpunch_rotation_transport.vhd": "fa41de17a133ddfc7708369f07dac5a9d223a7290ae9f8717708da60289b999a",
-        "rtl/rabbitpunch_hdmi_presentation.vhd": "8e316cf2603cbd424663defd390c728d420f640eee34d13e43ba436e51ac88d4",
+        "rtl/rabbitpunch_ddr_write_queue.vhd": "d8a66938e884f6a26f18e3e7c2de7c5f4732ae7c507e745ce91101ce06d592e5",
+        "rtl/rabbitpunch_frame_publication.vhd": "2ab81ea58f2ddbc240095067d4ff6c267675d9213af684a37045e04b16552cb3",
+        "rtl/rabbitpunch_rotation_transport.vhd": "e206e8f6936109de57cba57d91f9dd72b07272e52ce17595210a614a3ba0a179",
+        "rtl/rabbitpunch_hdmi_presentation.vhd": "49ca535104824fc7c08ca37eb886d413e0ef0dadab1f979cbb5d0341e0c10ef4",
         "debug/hdmi_presentation_tb.vhd": "a9b51809a1b9fcb693f4250b388675bd7a3357e2050b0aa5cf4805c11791a816"
       },
-      "log_sha256": "c930d3888a7ab4cc89d743c18c36c21dfd4cf0678e72052225b91393746e157f"
+      "log_sha256": "7029128f4b20293dff265127f6493286a55de2db34028198509903d1148e4911"
     },
     {
       "case": "hdmi_presentation_ccw_full",
@@ -64,15 +64,15 @@
       "source_sha256": {
         "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
         "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
-        "rtl/rabbitpunch_ddr_write_queue.vhd": "2d6f2617d3f8b3d8e7eb0176c02ded83c02aac193d8bec03039fe3916c8b0648",
-        "rtl/rabbitpunch_frame_publication.vhd": "aeea205f852f1d0c6b43b94a411e98a03d5ad72729f6008155043f1e52ab52f1",
-        "rtl/rabbitpunch_rotation_transport.vhd": "fa41de17a133ddfc7708369f07dac5a9d223a7290ae9f8717708da60289b999a",
-        "rtl/rabbitpunch_hdmi_presentation.vhd": "8e316cf2603cbd424663defd390c728d420f640eee34d13e43ba436e51ac88d4",
+        "rtl/rabbitpunch_ddr_write_queue.vhd": "d8a66938e884f6a26f18e3e7c2de7c5f4732ae7c507e745ce91101ce06d592e5",
+        "rtl/rabbitpunch_frame_publication.vhd": "2ab81ea58f2ddbc240095067d4ff6c267675d9213af684a37045e04b16552cb3",
+        "rtl/rabbitpunch_rotation_transport.vhd": "e206e8f6936109de57cba57d91f9dd72b07272e52ce17595210a614a3ba0a179",
+        "rtl/rabbitpunch_hdmi_presentation.vhd": "49ca535104824fc7c08ca37eb886d413e0ef0dadab1f979cbb5d0341e0c10ef4",
         "debug/hdmi_presentation_tb.vhd": "a9b51809a1b9fcb693f4250b388675bd7a3357e2050b0aa5cf4805c11791a816"
       },
-      "log_sha256": "33764d8d4d9fe6485805c5eddc1144ca764a7129e075f29719f160f3e638262b"
+      "log_sha256": "674d0d7f7bf63ba4b699daa7893c6277c1b5e56622aef20032ea399ab9166d58"
     }
   ],
-  "template_sha256": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5",
+  "template_sha256": "8a27636ef992474cb1c9d808f00b7588fee84c2a4504330adf1529d317ca60af",
   "scope": "Complete HDMI controller RTL around qualified rotation/aspect netlists and actual transport/queue/publication RTL. Three scored frames per CW/CCW case: every pixel address/colour/mask, slot safety/progress, queue drain, positive sync normalization, frame-latched mode, 3:4 normal aspect and complete-image publication under bounded DDR stalls. Not a full-shell fit, live mode-transition/integer-size test, executing game, arbitrary FB phase/frequency or hardware/latency proof."
 }

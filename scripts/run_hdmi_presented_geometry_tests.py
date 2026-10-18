@@ -9,10 +9,11 @@ from run_baselines import run_case
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--expect-rejection', action='store_true')
+parser.add_argument('--fitted', action='store_true', help='Use the latest complete controller fit rather than controller RTL')
 args = parser.parse_args()
 root = core_root()
 sources = []
-for name in ('hdmi_rotation', 'video_aspect'):
+for name in (('video_aspect',) if args.fitted else ('hdmi_rotation', 'video_aspect')):
     proof = json.loads((root / 'docs/reference' / (name + '_netlist_checks.json')).read_text())
     netlist = 'debug/netlists/' + name + '_' + proof['commit'][:7] + '/' + name + '_check.vo'
     assert sha256(root / netlist) == proof['netlist_sha256']
@@ -85,12 +86,25 @@ text = text[:start] + '''    stimulus : process
     end process;
 end architecture;
 '''
-bench = root / 'debug/hdmi_presented_geometry_tb.vhd'
+if args.fitted:
+    fit = json.loads((root / 'debug/hdmi_presentation_synth.json').read_text())
+    netlist = 'debug/netlists/hdmi_presentation_' + fit['commit'][:7] + '/hdmi_presentation_check.vo'
+    sources.insert(0, netlist)
+    generic_map = '        generic map (\n            GINT_FRAME_PIXELS => GINT_FRAME_PIXELS\n        )\n'
+    assert text.count(generic_map) == 1
+    text = text.replace(generic_map, '')
+    # The fitted guard retains its production 62208-pixel count. This fixture
+    # tests metadata only; complete image publication is scored separately.
+else:
+    sources += ['rtl/rabbitpunch_ddr_write_queue.vhd', 'rtl/rabbitpunch_frame_publication.vhd',
+                'rtl/rabbitpunch_rotation_transport.vhd', 'rtl/rabbitpunch_hdmi_presentation.vhd']
+bench = root / ('debug/hdmi_presented_geometry_fitted_tb.vhd' if args.fitted else 'debug/hdmi_presented_geometry_tb.vhd')
 bench.write_text(text)
-sources += ['rtl/rabbitpunch_ddr_write_queue.vhd', 'rtl/rabbitpunch_frame_publication.vhd',
-            'rtl/rabbitpunch_rotation_transport.vhd', 'rtl/rabbitpunch_hdmi_presentation.vhd', bench.relative_to(root).as_posix()]
+sources.append(bench.relative_to(root).as_posix())
 hashes = {name: sha256(root / name) for name in sources}
 name = 'hdmi_presented_geometry_rejected' if args.expect_rejection else 'hdmi_presented_geometry'
+if args.fitted:
+    name += '_fitted'
 try:
     result = run_case(name, sources, 'hdmi_presentation_control_tb', '5 ms',
                       'HDMI_PRESENTED_GEOMETRY_PASS', sim_args=LIBRARIES, wall_timeout=600)
@@ -103,8 +117,12 @@ else:
     if args.expect_rejection:
         raise SystemExit('Expected doubled-geometry regression was not reproduced')
 assert hashes == {name: sha256(root / name) for name in sources}
-result.update(source_sha256=hashes, log_sha256=sha256(root / result['log']),
-              scope='Complete controller RTL with qualified rotation/aspect netlists, native 32x20 /7 raster and independently doubled 64x40 analog presentation, both directions and four integer modes versus independent native transposed aspect. Synthetic geometry seam, not actual effects or hardware.')
+result.update(fitted=args.fitted, commit=fit['commit'] if args.fitted else None,
+              source_sha256=hashes, log_sha256=sha256(root / result['log']),
+              scope=('Complete controller functional netlist without SDF and independent qualified aspect reference; ' if args.fitted else 'Complete controller RTL with qualified rotation/aspect netlists; ') + 'Native 32x20 /7 raster and independently doubled 64x40 analog presentation, both directions and four integer modes versus independent native transposed aspect. Synthetic geometry seam, not actual effects or hardware.')
 (root / 'docs/reference' / (name + '_checks.json')).write_text(json.dumps(result, indent=2) + '\n')
 print('PASS expected geometry rejection' if args.expect_rejection else 'PASS rotated geometry selection')
+
+
+
 
