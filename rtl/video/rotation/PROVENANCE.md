@@ -12,3 +12,13 @@ This file is not in files.qip and is not connected to production.
 This exact revision does not read DDRAM_BUSY. A buffering/ownership wrapper
 and verified loader isolation are required before connection. The adapter
 renames pins; it does not itself make DDR writes lossless under backpressure.
+
+The isolated fc479ee fit passes all reported corners and six coverage categories
+at 48 MHz: 218 ALMs, 193 registers, zero RAM/PLLs and one inherited DSP.
+Minimum setup/hold slack is +9.340/+0.134 ns. The functional netlist passes
+the VHDL 16x8 nonuniform-pixel arrival scoreboard for CW and CCW, including
+every address, colour, byte mask and framebuffer dimensions/stride/base.
+See docs/reference/hdmi_rotation_synth.json and hdmi_rotation_arrival_checks.json.
+The installed ModelSim cannot parse the donor's forward declarations and
+implicitly static initializers; Quartus compiles it unchanged and supplies
+the functional netlist. This is not a backpressure or hardware validation.

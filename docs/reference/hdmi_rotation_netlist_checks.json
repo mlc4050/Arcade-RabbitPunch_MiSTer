@@ -1,0 +1,14 @@
+{
+  "case": "gate_hdmi_rotation",
+  "pass_marker": "HDMI_ROTATION_PASS",
+  "log": "debug\\baselines\\gate_hdmi_rotation\\result.log",
+  "commit": "fc479ee2edbbb640116f89d77b0165d79f2ef5db",
+  "vectors_sha256": {},
+  "netlist_sha256": "12c3e24c42b89924f5695404f1bfed5e6fd9af049bc7902b888b4a55dbe567e7",
+  "source_sha256": {
+    "debug/netlists/hdmi_rotation_fc479ee/hdmi_rotation_check.vo": "12c3e24c42b89924f5695404f1bfed5e6fd9af049bc7902b888b4a55dbe567e7",
+    "sim/video/hdmi_rotation_tb.vhd": "92dbace8fd20520a1a9897cc8277ae880098e86ce42be857097e696e4400dc4a"
+  },
+  "log_sha256": "d7ebc3f9199e7fb69547972f193bf6a68ee49f4454b366a59cb21068e8365f4a",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
+}
