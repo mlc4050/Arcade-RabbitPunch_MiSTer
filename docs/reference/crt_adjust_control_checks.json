@@ -1,0 +1,12 @@
+{
+  "case": "crt_adjust_control",
+  "pass_marker": "CRT_ADJUST_CONTROL_PASS",
+  "log": "debug\\baselines\\crt_adjust_control\\result.log",
+  "source_sha256": {
+    "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+    "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
+    "sim/video/crt_adjust_control_tb.vhd": "635b1f7a1e5da9d1d8c2c2e71fd10833c223751f44f43f4fd59a528d339e97ae"
+  },
+  "log_sha256": "9a6b398528cbd59eeefe78ae4057eb2dba03b8ec02d8cd5766f2eb28f0d01f6e",
+  "scope": "Isolated unchanged CRT Adjust with VHDL adapter: every-clock native bypass, 32 signed horizontal-size read-enable densities and size-disable gate. No active-image geometry, row latency, routed implementation or CRT hardware proof; not connected to production."
+}
