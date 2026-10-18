@@ -43,3 +43,10 @@ the raw captured frame explicitly rotated 180 degrees. Both full-renderer
 comparisons, routed integrated timing and physical output are still pending.
 This implementation does not claim recovery of the C7-01 GGA's internal
 address generation or original-board raster behavior.
+
+
+The native HPS host also passes a fresh standalone fit and complete functional
+netlist protocol test with the always-visible Flip Screen menu. Every config
+character, status transfer, keyboard/pad input and ROM/high-score file transfer
+passes. See reference/host_flip_synth.json and reference/host_netlist_checks.json.
+Physical ARM/menu operation remains part of hardware bring-up.
