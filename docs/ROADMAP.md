@@ -332,3 +332,9 @@ with 3877 RAM values exact and four disassembly-audited reset-dependent stack
 save bytes reported separately. The comparator has four negative controls per
 set. This strengthens reset bring-up evidence; audible hardware/game audio
 remains open. See SOUND_BRINGUP.md and reference/sound_board_native_reset_checks.json.
+
+Connected optional video now has an independently timed non-debug full shell
+(6397a94): all 144 checks pass, minimum setup +0.323 ns/hold +0.100 ns and 180
+M10Ks. The corresponding instrumented default placement fails one inherited
+HDMI path by 0.204 ns, while game/SDRAM timing passes; another seed remains to
+be checked. Physical output and hardware playability are still open.
