@@ -47,7 +47,7 @@ no pass is claimed for that interrupted run.
 The corrected standalone bf511c5 fit passes at 48 MHz with 767 ALMs, 1373
 registers, 70080 RAM bits in 14 M10Ks, zero DSPs and no PLL. All reported corner
 checks and all six timing-coverage categories pass. Minimum setup is +5.816 ns
-and minimum hold is +0.125 ns. This virtual-I/O fit is not full-shell timing.
+and minimum hold is +0.111 ns. This virtual-I/O fit is not full-shell timing.
 See reference/video_options_synth.json. Native bypass, forced doubling and HQ2x
 compact tests have passed; the remaining effect/direct modes and separate
 full-width control are running before shell integration.
