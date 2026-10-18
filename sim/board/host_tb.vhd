@@ -22,6 +22,7 @@ architecture test of host_tb is
         o_wide_mode : out std_logic;
         iu16_menu_mask : in unsigned(15 downto 0);
         ou128_status : out unsigned(127 downto 0);
+        ou2_audio_mix : out unsigned(1 downto 0);
         ou32_joystick0 : out unsigned(31 downto 0);
         ou32_joystick1 : out unsigned(31 downto 0);
         ou11_key_event : out unsigned(10 downto 0);
@@ -49,6 +50,7 @@ architecture test of host_tb is
     signal su32_joystick0, su32_joystick1 : unsigned(31 downto 0);
     signal su11_key : unsigned(10 downto 0);
     signal su2_buttons : unsigned(1 downto 0);
+    signal su2_audio_mix : unsigned(1 downto 0);
     signal s_scandoubler, s_direct, s_download, s_write : std_logic;
     signal s_wait : std_logic := '0';
     signal su16_sdram, su16_index : unsigned(15 downto 0);
@@ -74,6 +76,7 @@ begin
             o_wide_mode => su46_bus(32),
             iu16_menu_mask => (others => '0'),
             ou128_status => su128_status,
+            ou2_audio_mix => su2_audio_mix,
             ou32_joystick0 => su32_joystick0,
             ou32_joystick1 => su32_joystick1,
             ou11_key_event => su11_key,
@@ -183,6 +186,22 @@ begin
             assert (su128_status(vint_word * 16 + 15 downto vint_word * 16) = 16#1000# + vint_word)
                 report "Host 128-bit status word ordering mismatch" severity failure;
         end loop;
+        -- Drive every menu selection through native HPS status transport.
+        -- Keep all unrelated lower status words at their preceding values.
+        for vint_selection in 0 to 3 loop
+            uio_begin(16#1E#);
+            for vint_word in 0 to 7 loop
+                if (vint_word = 7) then
+                    word(7 + vint_selection * 2048);
+                else
+                    word(16#1000# + vint_word);
+                end if;
+            end loop;
+            uio_end;
+            assert (su2_audio_mix = (vint_selection + 3) mod 4 and
+                su128_status(122 downto 112) = 7 and su128_status(15 downto 0) = 16#1000#)
+                report "Audio menu/framework mix mapping or unrelated status changed" severity failure;
+        end loop;
         uio_begin(5);
         word(16#06#);
         uio_end;
@@ -263,7 +282,7 @@ begin
         file_command(16#53#, 0);
         assert (s_upload = '0' and s_download = '0')
             report "Native upload did not end" severity failure;
-        report "HOST_PASS native_hps_io=checked config_string=checked joystick_status_order=checked byte_download=8 byte_upload=119 upload_request_rearm=checked synchronous_read=checked wait_pin=checked keyboard_press_release=checked";
+        report "HOST_PASS native_hps_io=checked config_string=checked audio_mix_selections=4 joystick_status_order=checked byte_download=8 byte_upload=119 upload_request_rearm=checked synchronous_read=checked wait_pin=checked keyboard_press_release=checked";
         finish;
         wait;
     end process;

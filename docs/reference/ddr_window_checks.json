@@ -38,13 +38,23 @@
     "sys/ascal.vhd": "b460748da9c97fdb0efa5949ba55437eb7778112b3d683c39649427ea1a893af",
     "rtl/video/rotation/screen_rotate_two.sv": "a704b114cc7d7c1684eb273ab98b436350a3ffb957b350fad975bb322ba11f9e",
     "rtl/memory/ddram/ddram_phy.sv": "5a0cc2eeca7d71ba83fbd19d79c38b9983f5956cb737acf4df64e20848d0578c",
-    "rtl/rabbitpunch_layout.vhd": "e375b766fa01bf4ae808ccc315f7629488a2dfa4db9e7c8a98f7da993adae14d",
-    "RabbitPunch.qsf": "a656e08552110dee96532961615a2b25388e285f047b89a9f06bc6b20537227d",
-    "RabbitPunch_stp.qsf": "a8b29cbe65d03fecfee67ad762df8264c31fc64045c6f2a3c16b6f932c14547a",
-    "releases/_dev/Rabbit Punch (US).mra": "cc4e350448ba6b8268f7baad4da9dea96a585d9a18104c6e173f05e13b3bec84",
-    "releases/_dev/Rabio Lepus (Japan).mra": "207e83b4588cd0c6e366c45bf101f2e16e4c3e2e0cf37b56b47be2c740b22afa"
+    "rtl/rabbitpunch_layout.vhd": "f73fef06fcb184261be74ba93fe262e144bbf7c26588fae32d8f364bd1ddaecc",
+    "RabbitPunch.qsf": "05c443626c871b9acf237ff57e4e9f4fd8b5132a0e1a3a307925178df2364fbd",
+    "RabbitPunch_stp.qsf": "3cd218643b4f997a83aac924b4fa0c10b60308257fc3267ce28d3b485be1967e",
+    "releases/_dev/_ddr/Rabbit Punch (US) - DDR load.mra": "a055c969ef98eea7a39c28b27251c5a0e68b25a4e14db7ebc29cd9819c706d59",
+    "releases/_dev/_ddr/Rabio Lepus (Japan) - DDR load.mra": "d1f50c48c3f13f6900f07e5175df6b6e7ffa0582bb108db8ebb048d55430024d",
+    "releases/_dev/Rabbit Punch (US).mra": "4d8ac6cdccd73e23b9749265471a2da400cc634ddcd2799a69c987e155d5b81f",
+    "releases/_dev/Rabio Lepus (Japan).mra": "ad431b6ce49f28cff95b43fefe783c6b1cf7c1394cd3a2ba5caa413963f81420"
   },
   "mras": [
+    {
+      "path": "releases/_dev/_ddr/Rabbit Punch (US) - DDR load.mra",
+      "ddr_address": "0x30000000"
+    },
+    {
+      "path": "releases/_dev/_ddr/Rabio Lepus (Japan) - DDR load.mra",
+      "ddr_address": "0x30000000"
+    },
     {
       "path": "releases/_dev/Rabbit Punch (US).mra",
       "ddr_address": null

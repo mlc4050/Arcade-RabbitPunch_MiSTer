@@ -1,0 +1,981 @@
+{
+  "commit": "34441d07bc89718f6d75137a56bed0c2727604c9",
+  "revision": "RabbitPunch_stp",
+  "seed": 2,
+  "accepted": false,
+  "timing_accepted": true,
+  "superseded_by": "b4216ea22d25cd47666f4c3f694970672300a5ad",
+  "reason": "Predates the separately reproduced rotated integer metadata correction. Earlier timed debug prototype, not the current functional candidate.",
+  "timing_checks": 164,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.357
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'sdram_pin'",
+      "slack_ns": 0.761
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 1.04
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 3.334
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'spi_sck'",
+      "slack_ns": 6.304
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'FPGA_CLK1_50'",
+      "slack_ns": 8.918
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'FPGA_CLK2_50'",
+      "slack_ns": 10.874
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'altera_reserved_tck'",
+      "slack_ns": 12.422
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 14.761
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.179
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.246
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.305
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 0.315
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'spi_sck'",
+      "slack_ns": 0.321
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'FPGA_CLK1_50'",
+      "slack_ns": 0.336
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'FPGA_CLK2_50'",
+      "slack_ns": 0.343
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'altera_reserved_tck'",
+      "slack_ns": 0.44
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'sdram_pin'",
+      "slack_ns": 11.47
+    },
+    {
+      "type": "Slow 1100mV 100C Model Recovery 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 2.715
+    },
+    {
+      "type": "Slow 1100mV 100C Model Recovery 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 6.913
+    },
+    {
+      "type": "Slow 1100mV 100C Model Recovery 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 11.946
+    },
+    {
+      "type": "Slow 1100mV 100C Model Recovery 'FPGA_CLK1_50'",
+      "slack_ns": 16.726
+    },
+    {
+      "type": "Slow 1100mV 100C Model Recovery 'altera_reserved_tck'",
+      "slack_ns": 25.869
+    },
+    {
+      "type": "Slow 1100mV 100C Model Removal 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.406
+    },
+    {
+      "type": "Slow 1100mV 100C Model Removal 'FPGA_CLK1_50'",
+      "slack_ns": 0.81
+    },
+    {
+      "type": "Slow 1100mV 100C Model Removal 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.914
+    },
+    {
+      "type": "Slow 1100mV 100C Model Removal 'altera_reserved_tck'",
+      "slack_ns": 0.993
+    },
+    {
+      "type": "Slow 1100mV 100C Model Removal 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 1.464
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|fpll_0|fpll|vcoph[0]'",
+      "slack_ns": 1.122
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.19
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.196
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 1.937
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 3.586
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'spi_sck'",
+      "slack_ns": 4.209
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'FPGA_CLK1_50'",
+      "slack_ns": 9.211
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'FPGA_CLK2_50'",
+      "slack_ns": 9.212
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 9.28
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'FPGA_CLK3_50'",
+      "slack_ns": 9.73
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 10.509
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'altera_reserved_tck'",
+      "slack_ns": 15.782
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 18.894
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.304
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'sdram_pin'",
+      "slack_ns": 0.844
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 1.466
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 3.449
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'spi_sck'",
+      "slack_ns": 6.41
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'FPGA_CLK1_50'",
+      "slack_ns": 8.493
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'FPGA_CLK2_50'",
+      "slack_ns": 11.243
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'altera_reserved_tck'",
+      "slack_ns": 12.538
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 13.971
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.065
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.153
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.285
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 0.285
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'spi_sck'",
+      "slack_ns": 0.31
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'FPGA_CLK2_50'",
+      "slack_ns": 0.324
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'FPGA_CLK1_50'",
+      "slack_ns": 0.326
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'altera_reserved_tck'",
+      "slack_ns": 0.468
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'sdram_pin'",
+      "slack_ns": 11.622
+    },
+    {
+      "type": "Slow 1100mV -40C Model Recovery 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 2.98
+    },
+    {
+      "type": "Slow 1100mV -40C Model Recovery 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 7.028
+    },
+    {
+      "type": "Slow 1100mV -40C Model Recovery 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 12.222
+    },
+    {
+      "type": "Slow 1100mV -40C Model Recovery 'FPGA_CLK1_50'",
+      "slack_ns": 16.915
+    },
+    {
+      "type": "Slow 1100mV -40C Model Recovery 'altera_reserved_tck'",
+      "slack_ns": 26.14
+    },
+    {
+      "type": "Slow 1100mV -40C Model Removal 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.395
+    },
+    {
+      "type": "Slow 1100mV -40C Model Removal 'FPGA_CLK1_50'",
+      "slack_ns": 0.77
+    },
+    {
+      "type": "Slow 1100mV -40C Model Removal 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.848
+    },
+    {
+      "type": "Slow 1100mV -40C Model Removal 'altera_reserved_tck'",
+      "slack_ns": 0.923
+    },
+    {
+      "type": "Slow 1100mV -40C Model Removal 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 1.38
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|fpll_0|fpll|vcoph[0]'",
+      "slack_ns": 1.122
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.19
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.196
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 1.921
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 3.565
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'spi_sck'",
+      "slack_ns": 4.214
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 9.261
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'FPGA_CLK1_50'",
+      "slack_ns": 9.312
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'FPGA_CLK2_50'",
+      "slack_ns": 9.322
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'FPGA_CLK3_50'",
+      "slack_ns": 9.754
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 10.482
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'altera_reserved_tck'",
+      "slack_ns": 15.749
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 18.891
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'sdram_pin'",
+      "slack_ns": 1.699
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 3.234
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 4.247
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 6.092
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'spi_sck'",
+      "slack_ns": 7.839
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'FPGA_CLK1_50'",
+      "slack_ns": 13.567
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'FPGA_CLK2_50'",
+      "slack_ns": 14.551
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'altera_reserved_tck'",
+      "slack_ns": 14.812
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 27.708
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.098
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.136
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'spi_sck'",
+      "slack_ns": 0.164
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 0.165
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.167
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'FPGA_CLK1_50'",
+      "slack_ns": 0.177
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'FPGA_CLK2_50'",
+      "slack_ns": 0.18
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'altera_reserved_tck'",
+      "slack_ns": 0.18
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'sdram_pin'",
+      "slack_ns": 12.879
+    },
+    {
+      "type": "Fast 1100mV 100C Model Recovery 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 4.228
+    },
+    {
+      "type": "Fast 1100mV 100C Model Recovery 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 8.381
+    },
+    {
+      "type": "Fast 1100mV 100C Model Recovery 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 15.905
+    },
+    {
+      "type": "Fast 1100mV 100C Model Recovery 'FPGA_CLK1_50'",
+      "slack_ns": 18.148
+    },
+    {
+      "type": "Fast 1100mV 100C Model Recovery 'altera_reserved_tck'",
+      "slack_ns": 28.938
+    },
+    {
+      "type": "Fast 1100mV 100C Model Removal 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.194
+    },
+    {
+      "type": "Fast 1100mV 100C Model Removal 'FPGA_CLK1_50'",
+      "slack_ns": 0.362
+    },
+    {
+      "type": "Fast 1100mV 100C Model Removal 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.478
+    },
+    {
+      "type": "Fast 1100mV 100C Model Removal 'altera_reserved_tck'",
+      "slack_ns": 0.484
+    },
+    {
+      "type": "Fast 1100mV 100C Model Removal 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 0.721
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|fpll_0|fpll|vcoph[0]'",
+      "slack_ns": 1.122
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.19
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.196
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 2.247
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 3.896
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'spi_sck'",
+      "slack_ns": 4.584
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'FPGA_CLK2_50'",
+      "slack_ns": 9.138
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'FPGA_CLK1_50'",
+      "slack_ns": 9.139
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'FPGA_CLK3_50'",
+      "slack_ns": 9.347
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 9.592
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 10.625
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'altera_reserved_tck'",
+      "slack_ns": 15.626
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 19.216
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'sdram_pin'",
+      "slack_ns": 1.764
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 3.57
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 4.644
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 6.674
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'spi_sck'",
+      "slack_ns": 8.202
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'FPGA_CLK1_50'",
+      "slack_ns": 14.174
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'altera_reserved_tck'",
+      "slack_ns": 15.334
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'FPGA_CLK2_50'",
+      "slack_ns": 15.591
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 29.234
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.078
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.097
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'spi_sck'",
+      "slack_ns": 0.141
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.146
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'FPGA_CLK2_50'",
+      "slack_ns": 0.158
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'FPGA_CLK1_50'",
+      "slack_ns": 0.159
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 0.162
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'altera_reserved_tck'",
+      "slack_ns": 0.167
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'sdram_pin'",
+      "slack_ns": 12.93
+    },
+    {
+      "type": "Fast 1100mV -40C Model Recovery 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 4.673
+    },
+    {
+      "type": "Fast 1100mV -40C Model Recovery 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 8.602
+    },
+    {
+      "type": "Fast 1100mV -40C Model Recovery 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 16.821
+    },
+    {
+      "type": "Fast 1100mV -40C Model Recovery 'FPGA_CLK1_50'",
+      "slack_ns": 18.428
+    },
+    {
+      "type": "Fast 1100mV -40C Model Recovery 'altera_reserved_tck'",
+      "slack_ns": 29.676
+    },
+    {
+      "type": "Fast 1100mV -40C Model Removal 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.138
+    },
+    {
+      "type": "Fast 1100mV -40C Model Removal 'FPGA_CLK1_50'",
+      "slack_ns": 0.316
+    },
+    {
+      "type": "Fast 1100mV -40C Model Removal 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.388
+    },
+    {
+      "type": "Fast 1100mV -40C Model Removal 'altera_reserved_tck'",
+      "slack_ns": 0.412
+    },
+    {
+      "type": "Fast 1100mV -40C Model Removal 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 0.567
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|fpll_0|fpll|vcoph[0]'",
+      "slack_ns": 1.122
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.19
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.196
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 2.254
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 3.9
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'spi_sck'",
+      "slack_ns": 4.572
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'FPGA_CLK1_50'",
+      "slack_ns": 9.077
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'FPGA_CLK2_50'",
+      "slack_ns": 9.078
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'FPGA_CLK3_50'",
+      "slack_ns": 9.274
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 9.601
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 10.61
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'altera_reserved_tck'",
+      "slack_ns": 15.512
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 19.221
+    }
+  ],
+  "clock_tree": {
+    "commit": "34441d07bc89718f6d75137a56bed0c2727604c9",
+    "revision": "RabbitPunch_stp",
+    "nominal_game_frequency_hz": 46666666.666666664,
+    "sdram_phase_ns": 5.357,
+    "clocks": [
+      {
+        "name": "altera_reserved_tck",
+        "period_ns": 33.333,
+        "rise_ns": 0.0,
+        "fall_ns": 16.666,
+        "positive_timing_endpoints": 621,
+        "negative_timing_endpoints": 8,
+        "multiply_by": 1,
+        "divide_by": 1
+      },
+      {
+        "name": "FPGA_CLK1_50",
+        "period_ns": 20.0,
+        "rise_ns": 0.0,
+        "fall_ns": 10.0,
+        "positive_timing_endpoints": 708,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 1
+      },
+      {
+        "name": "FPGA_CLK2_50",
+        "period_ns": 20.0,
+        "rise_ns": 0.0,
+        "fall_ns": 10.0,
+        "positive_timing_endpoints": 204,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 1
+      },
+      {
+        "name": "FPGA_CLK3_50",
+        "period_ns": 20.0,
+        "rise_ns": 0.0,
+        "fall_ns": 10.0,
+        "positive_timing_endpoints": 1,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 1
+      },
+      {
+        "name": "sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk",
+        "period_ns": 10.0,
+        "rise_ns": 0.0,
+        "fall_ns": 5.0,
+        "positive_timing_endpoints": 1363,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 1
+      },
+      {
+        "name": "spi_sck",
+        "period_ns": 10.0,
+        "rise_ns": 0.0,
+        "fall_ns": 5.0,
+        "positive_timing_endpoints": 132,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 1
+      },
+      {
+        "name": "hdmi_sck",
+        "period_ns": 100.0,
+        "rise_ns": 0.0,
+        "fall_ns": 50.0,
+        "positive_timing_endpoints": 0,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 1
+      },
+      {
+        "name": "pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk",
+        "period_ns": 6.732,
+        "rise_ns": 0.0,
+        "fall_ns": 3.366,
+        "positive_timing_endpoints": 6512,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 3
+      },
+      {
+        "name": "pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|fpll_0|fpll|vcoph[0]",
+        "period_ns": 2.244,
+        "rise_ns": 0.0,
+        "fall_ns": 1.122,
+        "positive_timing_endpoints": 1,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 4563,
+        "divide_by": 512
+      },
+      {
+        "name": "emu|machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]",
+        "period_ns": 2.38,
+        "rise_ns": 0.0,
+        "fall_ns": 1.19,
+        "positive_timing_endpoints": 2,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 42,
+        "divide_by": 5
+      },
+      {
+        "name": "emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk",
+        "period_ns": 21.428,
+        "rise_ns": 0.0,
+        "fall_ns": 10.714,
+        "positive_timing_endpoints": 27655,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 9
+      },
+      {
+        "name": "emu|machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk",
+        "period_ns": 21.428,
+        "rise_ns": 5.357,
+        "fall_ns": 16.071,
+        "positive_timing_endpoints": 1,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 9
+      },
+      {
+        "name": "pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]",
+        "period_ns": 2.393,
+        "rise_ns": 0.0,
+        "fall_ns": 1.196,
+        "positive_timing_endpoints": 1,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 4279,
+        "divide_by": 512
+      },
+      {
+        "name": "pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk",
+        "period_ns": 40.682,
+        "rise_ns": 0.0,
+        "fall_ns": 20.341,
+        "positive_timing_endpoints": 1987,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 17
+      },
+      {
+        "name": "sdram_pin",
+        "period_ns": 21.428,
+        "rise_ns": 5.357,
+        "fall_ns": 16.071,
+        "positive_timing_endpoints": 0,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 1
+      }
+    ],
+    "inspector_sha256": "60c030103ec5a2d0b93802310c0de99595d619f35838498f054f8dc158b4d1ce",
+    "validator_sha256": "d933cbfbc2008d4c06dda94f4a22a8337c16a257771a1774657c6ff40f40733f",
+    "scope": "Fitted game PLL ratios, system domain, forwarded quarter-period SDRAM clock and absence of functional users on its shifted output; framework/JTAG clocks remain separate; not an electrical or hardware execution proof"
+  },
+  "timing_coverage": {
+    "scope": "Inherited Template MiSTer peripheral pin paths left untimed by upstream sys_top.sdc; explicit source-locked scope, not a claim of HDMI/audio/SD/I2C electrical timing. No SDRAM or game-internal clock/path is excluded.",
+    "input_ports": [
+      "HDMI_I2C_SDA",
+      "HDMI_TX_INT",
+      "IO_SDA",
+      "SDCD_SPDIF",
+      "altera_reserved_tdi",
+      "altera_reserved_tms"
+    ],
+    "output_ports": [
+      "HDMI_I2C_SCL",
+      "HDMI_I2C_SDA",
+      "HDMI_I2S",
+      "HDMI_LRCLK",
+      "HDMI_MCLK",
+      "HDMI_SCLK",
+      "HDMI_TX_CLK",
+      "HDMI_TX_DE",
+      "HDMI_TX_D[0]",
+      "HDMI_TX_D[10]",
+      "HDMI_TX_D[11]",
+      "HDMI_TX_D[12]",
+      "HDMI_TX_D[13]",
+      "HDMI_TX_D[14]",
+      "HDMI_TX_D[15]",
+      "HDMI_TX_D[16]",
+      "HDMI_TX_D[17]",
+      "HDMI_TX_D[18]",
+      "HDMI_TX_D[19]",
+      "HDMI_TX_D[1]",
+      "HDMI_TX_D[20]",
+      "HDMI_TX_D[21]",
+      "HDMI_TX_D[22]",
+      "HDMI_TX_D[23]",
+      "HDMI_TX_D[2]",
+      "HDMI_TX_D[3]",
+      "HDMI_TX_D[4]",
+      "HDMI_TX_D[5]",
+      "HDMI_TX_D[6]",
+      "HDMI_TX_D[7]",
+      "HDMI_TX_D[8]",
+      "HDMI_TX_D[9]",
+      "HDMI_TX_HS",
+      "HDMI_TX_VS",
+      "IO_SCL",
+      "IO_SDA",
+      "LED[0]",
+      "LED[2]",
+      "LED[6]",
+      "SDCD_SPDIF",
+      "SDIO_CLK",
+      "SDIO_CMD",
+      "SDIO_DAT[0]",
+      "SDIO_DAT[1]",
+      "SDIO_DAT[2]",
+      "SDIO_DAT[3]",
+      "SD_SPI_CS",
+      "USER_IO[2]",
+      "USER_IO[4]",
+      "USER_IO[5]",
+      "altera_reserved_tdo"
+    ],
+    "raw_coverage": {
+      "Illegal Clocks": [
+        0,
+        0
+      ],
+      "Unconstrained Clocks": [
+        0,
+        0
+      ],
+      "Unconstrained Input Ports": [
+        6,
+        6
+      ],
+      "Unconstrained Input Port Paths": [
+        59,
+        59
+      ],
+      "Unconstrained Output Ports": [
+        51,
+        51
+      ],
+      "Unconstrained Output Port Paths": [
+        87,
+        87
+      ]
+    },
+    "instrumented_jtag_scope": "Only instrumented revision: dedicated Intel-generated TAP pins TDI/TMS/TDO lack external cable delays. TCK and internal debug timing remain checked; no game or SDRAM path excluded. Reference full fit 90e053c."
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Sun Oct 18 15:33:29 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : RabbitPunch_stp",
+    "Top-level Entity Name : sys_top",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 15,685 / 41,910 ( 37 % )",
+    "Total registers : 26522",
+    "Total pins : 145 / 314 ( 46 % )",
+    "Total virtual pins : 0",
+    "Total block memory bits : 1,445,728 / 5,662,720 ( 26 % )",
+    "Total RAM Blocks : 187 / 553 ( 34 % )",
+    "Total DSP Blocks : 35 / 112 ( 31 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 3 / 6 ( 50 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "archive": "debug/fit_archive/full_shell_34441d0_hdmi_pre_geometry_debug_seed2",
+  "artifact_sha256": {
+    "BUILT_COMMIT": "028b2ce05e625fbb355de22979a90e5fd91541887c75dd060ea96803bad2b329",
+    "clock_tree.tsv": "ef4c11cf9b9fcc2bf267a95177dcd8851085804f6e40a6ad0872755edc5c29e5",
+    "framework_timing_scope.json": "900b2522dafdf6107803f54293a7782fc6fdf4c704261ceee3e59bbc14b5ca90",
+    "full_clock_tree.json": "7e5604850618e8164a34e6315381f4523e5fe6eefb827f56a4c759d987fd201b",
+    "full_clock_tree.log": "8e6111b4f138ae8395e2385342a5e39b1037db08deb6fd94de093df7c07f2c8f",
+    "full_hdmi_debug_seed2_runner.log": "f609794736c031e6b071407127f6143ce581803d0014efc37d626395491b6f40",
+    "q_staged.log": "3384879fa7fe055a1b955cbec9c78f9a69f51e9b117c7111b4b76b81c9235567",
+    "RabbitPunch_stp.asm.rpt": "bc91a8251d88e4b3c98207fe9471baeb25fff099025319ac046a23fc4f84a740",
+    "RabbitPunch_stp.done": "7f6fc2a8ed7fb6bf54122a6f3ede1c7b2023e68cd06a463cd1547b41cfc8ae9f",
+    "RabbitPunch_stp.fit.rpt": "718a5ad3dd6ef546efa031d37afa1a47b54098ef55562714be95923fa75cd564",
+    "RabbitPunch_stp.fit.smsg": "6523fa00273f83d313a806b43816c131266b0191f9f5b2f3b8fc82bd259ffbf2",
+    "RabbitPunch_stp.fit.summary": "9d5813a322d6916728d6aa1891c10511d20f5721d496a628f5a6071472ad8883",
+    "RabbitPunch_stp.flow.rpt": "df634cb0c812d31c0579c5451bc93c515596f40743aea1b4e1fa2d6b1651716b",
+    "RabbitPunch_stp.jdi": "c19bf75d91f05f7e175d6f00907fde01cb610e23a0d2969e609aa9081e4c7774",
+    "RabbitPunch_stp.map.rpt": "6c6a07e197a370880cee898aa2beb99dce07e4858eddb34dc42a7bfd82e79095",
+    "RabbitPunch_stp.map.smsg": "f1037fff628eecff723d780a48887aef46822855c038e80867402cac2a429f05",
+    "RabbitPunch_stp.map.summary": "491afa590343018703d117b70f97d2f2d09503d28fa3f939c89dee0158061618",
+    "RabbitPunch_stp.pin": "d9f9d627a00783be8f85b3fccc00b2b7ee25b02ca86484d3ce962eeb900cd335",
+    "RabbitPunch_stp.rbf": "1f5669d392bdaa1f7f28ee5b0ab2f13934fa98d81c7e04c3b7a3479e20a2e4af",
+    "RabbitPunch_stp.sld": "26c99632c6cf724fbcec35159a6ff6715740c9791054a9065ecdaf6bffc2e22d",
+    "RabbitPunch_stp.sof": "45d4c342dcd4aa8a0def2fc8fdc77182bd2ce029cb9a4677c956868c411f6757",
+    "RabbitPunch_stp.sta.rpt": "20857206ee40fb2b72b53650c4bae61c1a5b06f7b76d548979b72477f9220153",
+    "RabbitPunch_stp.sta.summary": "d426d927d4237c5f670d4ff63465408387051f59e55e538db2da4f4d384cb0f8",
+    "source/files.qip": "19b0124efaeaf22a5d51abc150c8dbe01cee914d5cd67168ecfcb5ac4b61e862",
+    "source/RabbitPunch.sdc": "9fc30157a6725de440d256959690d6a063d0171a95afcd38f1bb0925ac64317d",
+    "source/RabbitPunch.sv": "3bbb4c318329bf1f4f3903f4b4f623ca91ea962ed79c80585918b59e5ba15042",
+    "source/RabbitPunch_stp.qsf": "f0395caa8081ba7a4731778ce93f4bf4d8438605b89f5853e9da342d7a809c00",
+    "source/rtl/rabbitpunch_ddr_write_queue.vhd": "d8a66938e884f6a26f18e3e7c2de7c5f4732ae7c507e745ce91101ce06d592e5",
+    "source/rtl/rabbitpunch_debug.vhd": "6a85b120b16792baa22b389a8576fd46f73b4b81c0ce65306ab5fd3063e14938",
+    "source/rtl/rabbitpunch_frame_publication.vhd": "2ab81ea58f2ddbc240095067d4ff6c267675d9213af684a37045e04b16552cb3",
+    "source/rtl/rabbitpunch_hdmi_presentation.vhd": "5fdd79e453e3e1758c7f83e3d3f79100dc5319864fb0a84b0c587338413dc940",
+    "source/rtl/rabbitpunch_hdmi_rotation.vhd": "769a309dcdc4422f0801e1149d0f3a621d15c3313c1f5f600d01f36bc88eb17c",
+    "source/rtl/rabbitpunch_rotation_transport.vhd": "e206e8f6936109de57cba57d91f9dd72b07272e52ce17595210a614a3ba0a179",
+    "source/scripts/build_staged.py": "d933cbfbc2008d4c06dda94f4a22a8337c16a257771a1774657c6ff40f40733f",
+    "source/scripts/framework_timing_scope.json": "53118c422c65a6f528b6eb2d3711b1d2e928e38060489888d06d08fede6e1423"
+  },
+  "scope": "Earlier connected HDMI rotation debug shell passes timing, required hierarchy/MISTER_FB and unchanged clock/pin gates with scoped reserved JTAG. Superseded metadata source. No physical display, probe read, SDRAM margin or executing-gameplay proof."
+}

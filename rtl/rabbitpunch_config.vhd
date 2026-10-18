@@ -26,6 +26,7 @@ package rabbitpunch_config is
         "H5O[114:113],HDMI Rotate,None,CW,CCW;" &
         "H5O[122:121],Aspect ratio,Original,Full Screen,[ARC1],[ARC2];" &
         "H5O[68:66],Scale,Normal,V-Integer,Narrower HV-Integer,Wider HV-Integer,HV-Integer;" &
+        "O[124:123],Audio mix,Mono,None,25%,50%;" &
         "J1,Missile,Shoot,-,-,-,-,Start,Coin,Pause,Service,Test;" &
         "V,v0.1-dev;";
 end package;

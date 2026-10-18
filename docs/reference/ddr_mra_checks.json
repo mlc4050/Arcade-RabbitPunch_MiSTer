@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "set": "rabiolep",
+      "mameversion": "0289",
+      "bytes": 2162688,
+      "image_sha256": "f99fedd7cee90bf4dcc0fd4c6aeb27bcaedbf9f0e07061b12f441017b80c7386",
+      "source_mra": "releases/_dev/Rabio Lepus (Japan).mra",
+      "source_mra_sha256": "ad431b6ce49f28cff95b43fefe783c6b1cf7c1394cd3a2ba5caa413963f81420",
+      "mra": "releases/_dev/_ddr/Rabio Lepus (Japan) - DDR load.mra",
+      "mra_sha256": "d1f50c48c3f13f6900f07e5175df6b6e7ffa0582bb108db8ebb048d55430024d",
+      "ddr_address": "0x30000000",
+      "ddr_last_byte": "0x3020ffff",
+      "direct_and_ddr_images_identical": true,
+      "other_metadata_unchanged": true,
+      "load_order": [
+        "rom0",
+        "config3",
+        "nvram4"
+      ]
+    },
+    {
+      "set": "rpunch",
+      "mameversion": "0289",
+      "bytes": 2162688,
+      "image_sha256": "cf849688f863acfc771cfeca8e9812cbfee62d025966b997bdbf2f9efc5e3117",
+      "source_mra": "releases/_dev/Rabbit Punch (US).mra",
+      "source_mra_sha256": "4d8ac6cdccd73e23b9749265471a2da400cc634ddcd2799a69c987e155d5b81f",
+      "mra": "releases/_dev/_ddr/Rabbit Punch (US) - DDR load.mra",
+      "mra_sha256": "a055c969ef98eea7a39c28b27251c5a0e68b25a4e14db7ebc29cd9819c706d59",
+      "ddr_address": "0x30000000",
+      "ddr_last_byte": "0x3020ffff",
+      "direct_and_ddr_images_identical": true,
+      "other_metadata_unchanged": true,
+      "load_order": [
+        "rom0",
+        "config3",
+        "nvram4"
+      ]
+    }
+  ],
+  "loader_source_sha256": "5a0cc2eeca7d71ba83fbd19d79c38b9983f5956cb737acf4df64e20848d0578c",
+  "scope": "Optional unpublished DDR-load MRAs from the verified direct-load definitions. Actual local merged-ROM assembly is byte-identical, MAME version/validation pass, score/DIP/button metadata and section order retained, staging address derived from loader RTL. No physical HPS/DDR transfer, full-image copier throughput or speed measurement claim."
+}

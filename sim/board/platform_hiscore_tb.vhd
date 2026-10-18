@@ -24,6 +24,7 @@ architecture test of platform_hiscore_tb is
         o_wide_mode : out std_logic;
         iu16_menu_mask : in unsigned(15 downto 0);
         ou128_status : out unsigned(127 downto 0);
+        ou2_audio_mix : out unsigned(1 downto 0);
         ou32_joystick0 : out unsigned(31 downto 0);
         ou32_joystick1 : out unsigned(31 downto 0);
         ou11_key_event : out unsigned(10 downto 0);
@@ -169,6 +170,7 @@ begin
                 o_wide_mode => open,
                 iu16_menu_mask => su16_menu_mask,
                 ou128_status => open,
+                ou2_audio_mix => open,
                 ou32_joystick0 => open,
                 ou32_joystick1 => open,
                 ou11_key_event => open,
