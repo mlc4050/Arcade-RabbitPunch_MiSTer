@@ -7,9 +7,11 @@ import re
 from coretools import core_root
 from run_baselines import run_case
 root = core_root()
-proof = json.loads((root / 'docs/reference/hdmi_rotation_netlist_checks.json').read_text())
-netlist = 'debug/netlists/hdmi_rotation_' + proof['commit'][:7] + '/hdmi_rotation_check.vo'
-assert hashlib.sha256((root / netlist).read_bytes()).hexdigest() == proof['netlist_sha256']
+# Pin the pre-serialization netlist: this is an expected-failure baseline,
+# independent of the current fitted adapter and its positive regression.
+proof = dict(commit='fc479ee2edbbb640116f89d77b0165d79f2ef5db')
+netlist = 'debug/netlists/hdmi_rotation_fc479ee/hdmi_rotation_check.vo'
+assert hashlib.sha256((root / netlist).read_bytes()).hexdigest() == 'ed7cb1477d6d21a6dfbdea7bf52e10cae5f6962b41463d49a21d77ee781439c9'
 template_path = root / 'sim/video/hdmi_rotation_tb.vhd'
 template = template_path.read_text()
 marker = "            if (s_write = '1') then"

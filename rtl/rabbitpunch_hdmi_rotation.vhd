@@ -69,7 +69,30 @@ architecture rtl of rabbitpunch_hdmi_rotation is
             DDRAM_RD : out std_logic
         );
     end component;
+    signal s_previous_video_sync, s_previous_framebuffer_blank : std_logic := '0';
+    signal s_previous_framebuffer_pulse, s_pending_framebuffer_advance : std_logic := '0';
+    signal s_video_sync_rise, s_framebuffer_blank_rise, s_framebuffer_advance : std_logic;
 begin
+    -- FB_VBL is already sampled on CLK_VIDEO by sys_top. The donor advances
+    -- both buffer indices at every system edge, independent of pixel enable.
+    -- A simultaneous advance would choose the same third buffer for both.
+    s_video_sync_rise <= i_vertical_sync and not s_previous_video_sync;
+    s_framebuffer_blank_rise <= i_framebuffer_vertical_blank and not s_previous_framebuffer_blank;
+    s_framebuffer_advance <= (s_pending_framebuffer_advance or s_framebuffer_blank_rise) and
+        not s_video_sync_rise and not s_previous_framebuffer_pulse;
+    serialize_framebuffer_advance : process(i_clk)
+    begin
+        if (rising_edge(i_clk)) then
+            s_previous_video_sync <= i_vertical_sync;
+            s_previous_framebuffer_blank <= i_framebuffer_vertical_blank;
+            s_previous_framebuffer_pulse <= s_framebuffer_advance;
+            if (s_framebuffer_advance = '1') then
+                s_pending_framebuffer_advance <= '0';
+            elsif (s_framebuffer_blank_rise = '1') then
+                s_pending_framebuffer_advance <= '1';
+            end if;
+        end if;
+    end process;
     rotation : screen_rotate_two
         port map (
             CLK_VIDEO => i_clk,
@@ -91,7 +114,7 @@ begin
             FB_HEIGHT => ou12_height,
             FB_BASE => ou32_base,
             FB_STRIDE => ou14_stride,
-            FB_VBL => i_framebuffer_vertical_blank,
+            FB_VBL => s_framebuffer_advance,
             FB_LL => i_framebuffer_low_latency,
             DDRAM_CLK => open,
             DDRAM_BUSY => i_ddr_busy,
