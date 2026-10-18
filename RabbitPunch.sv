@@ -9,7 +9,6 @@ assign ADC_BUS = 'Z;
 assign USER_OUT = '1;
 assign {UART_RTS, UART_TXD, UART_DTR} = '0;
 assign {SD_SCK, SD_MOSI, SD_CS} = 'Z;
-assign VGA_SL = 0;
 assign VGA_F1 = 0;
 assign VGA_SCALER = 0;
 assign VGA_DISABLE = 0;
@@ -38,11 +37,14 @@ wire [127:0] status;
 wire [31:0] joystick0, joystick1;
 wire [10:0] key_event;
 wire [1:0] host_buttons, sdram_byte_mask;
-wire [15:0] menu_mask, file_index;
+wire [15:0] menu_mask, score_menu_mask, file_index;
 wire [26:0] file_address;
 wire [7:0] file_data, upload_data;
 wire file_download, file_upload, file_write, file_wait, upload_request;
 wire horizontal_blank, vertical_blank;
+wire native_pixel_enable, native_horizontal_sync, native_vertical_sync;
+wire forced_scandoubler, direct_video;
+wire [7:0] native_red, native_green, native_blue;
 wire loading, downloading, ready, error, underflow, pll_locked;
 wire paused, scanout_armed, audio_sample, adpcm_busy;
 wire cpu_request, cpu_write, sound_request, sound_write;
@@ -53,9 +55,8 @@ wire [1:0] cpu_bytes;
 wire [8:0] beam_x, beam_y;
 assign CLK_VIDEO = clk_sys;
 assign DDRAM_CLK = clk_sys;
-// Preserve the physical data-enable window during loading/reset. RGB is black
-// until a prepared line is valid; blanking and sync retain the raster cadence.
-assign VGA_DE = ~(horizontal_blank | vertical_blank);
+// Hide HDMI/output-effect controls under direct video, preserving score masks.
+assign menu_mask = score_menu_mask | {10'd0, direct_video, 5'd0};
 assign {SDRAM_DQMH, SDRAM_DQML} = sdram_byte_mask;
 assign LED_USER = loading | downloading | error | underflow;
 
@@ -69,8 +70,8 @@ rabbitpunch_host host
     .ou32_joystick1(joystick1),
     .ou11_key_event(key_event),
     .ou2_buttons(host_buttons),
-    .o_forced_scandoubler(),
-    .o_direct_video(),
+    .o_forced_scandoubler(forced_scandoubler),
+    .o_direct_video(direct_video),
     .ou16_sdram_configuration(),
     .o_file_download(file_download),
     .ou16_file_index(file_index),
@@ -105,7 +106,7 @@ rabbitpunch_clocked_machine machine
     .i_host_upload(file_upload),
     .o_host_upload_request(upload_request),
     .ou8_host_upload_data(upload_data),
-    .ou16_host_menu_mask(menu_mask),
+    .ou16_host_menu_mask(score_menu_mask),
     .o_hiscore_enabled(),
     .o_hiscore_config_error(),
     .o_hiscore_initialized(),
@@ -198,21 +199,46 @@ rabbitpunch_clocked_machine machine
     .o_sdram_clock_enable(SDRAM_CKE),
     .o_ready(ready),
     .o_loading(loading),
-    .o_pixel_enable(CE_PIXEL),
+    .o_pixel_enable(native_pixel_enable),
     .o_active(),
-    .o_hsync(VGA_HS),
-    .o_vsync(VGA_VS),
+    .o_hsync(native_horizontal_sync),
+    .o_vsync(native_vertical_sync),
     .o_hblank(horizontal_blank),
     .o_vblank(vertical_blank),
     .ou9_output_x(),
     .ou8_output_y(),
-    .ou8_red(VGA_R),
-    .ou8_green(VGA_G),
-    .ou8_blue(VGA_B),
+    .ou8_red(native_red),
+    .ou8_green(native_green),
+    .ou8_blue(native_blue),
     .ou9_horizontal_position(beam_x),
     .ou9_vertical_position(beam_y),
     .o_scanout_armed(scanout_armed),
     .o_scanout_underflow(underflow)
+);
+// Optional effects remain after the native renderer. Its clocks and line
+// ownership are independent of this presentation path.
+rabbitpunch_video_options video_options
+(
+    .i_clk(clk_sys),
+    .i_pixel_enable(native_pixel_enable),
+    .iu8_red(native_red),
+    .iu8_green(native_green),
+    .iu8_blue(native_blue),
+    .i_horizontal_sync(native_horizontal_sync),
+    .i_vertical_sync(native_vertical_sync),
+    .i_horizontal_blank(horizontal_blank),
+    .i_vertical_blank(vertical_blank),
+    .i_forced_scandoubler(forced_scandoubler),
+    .i_direct_video(direct_video),
+    .iu3_effect(status[46:44]),
+    .o_pixel_enable(CE_PIXEL),
+    .ou8_red(VGA_R),
+    .ou8_green(VGA_G),
+    .ou8_blue(VGA_B),
+    .o_horizontal_sync(VGA_HS),
+    .o_vertical_sync(VGA_VS),
+    .o_data_enable(VGA_DE),
+    .ou2_scanlines(VGA_SL)
 );
 `ifdef DEBUG_ISSP
 `ifndef RABBITPUNCH_BUILD_ID
@@ -221,9 +247,9 @@ rabbitpunch_clocked_machine machine
 rabbitpunch_debug #(.GU32_BUILD_ID(`RABBITPUNCH_BUILD_ID)) debug_probe
 (
     .i_clk(clk_sys),
-    .i_pixel_enable(CE_PIXEL),
-    .i_visible(VGA_DE),
-    .i_vertical_sync(VGA_VS),
+    .i_pixel_enable(native_pixel_enable),
+    .i_visible(~(horizontal_blank | vertical_blank)),
+    .i_vertical_sync(native_vertical_sync),
     .iu9_beam_x(beam_x),
     .iu9_beam_y(beam_y),
     .iu16_status({5'd0, RESET, adpcm_busy, file_download, paused, scanout_armed,

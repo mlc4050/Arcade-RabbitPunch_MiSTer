@@ -66,8 +66,10 @@ physical board startup verification remains open.
 ## First physical-shell prototype
 
 The framework boundary is being connected for first hardware bring-up. It exposes
-the native 288x216 raster and signed mono audio. Forced scandoubling, CRT Adjust,
-HDMI rotation/flip and expanded video/audio OSD options are still unconnected;
+the native 288x216 raster and signed mono audio. Forced scandoubling, HQ2x and
+CRT scanline levels are connected through a tested VHDL wrapper; the new shell
+fit and physical output remain pending. CRT Adjust, HDMI rotation/flip and
+expanded video/audio OSD options are still unconnected;
 this is not the final standard-feature set. The framework HDMI scaler remains
 available. DDR currently has only the load-time copier as a client; introducing a
 rotator requires an ownership mux and contention verification before use. No game

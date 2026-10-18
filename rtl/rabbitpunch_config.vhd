@@ -5,7 +5,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 -- Development host contract: expose only controls implemented by the logical
--- platform. Physical video/scaler/audio options belong to later shell wiring.
+-- platform plus the optional framework presentation path.
 package rabbitpunch_config is
     constant CINT_STATUS_RESET_BIT : natural := 0;
     constant CINT_STATUS_PAUSE_BIT : natural := 1;
@@ -17,6 +17,7 @@ package rabbitpunch_config is
         "O1,Pause,Off,On;" &
         "O2,Pause when OSD is open,Off,On;" &
         "H3O3,Autosave high scores,Off,On;" &
+        "H5O[46:44],Scandoubler Fx,None,HQ2x,CRT 25%,CRT 50%,CRT 75%;" &
         "J1,Missile,Shoot,-,-,-,-,Start,Coin,Pause,Service,Test;" &
         "V,v0.1-dev;";
 end package;

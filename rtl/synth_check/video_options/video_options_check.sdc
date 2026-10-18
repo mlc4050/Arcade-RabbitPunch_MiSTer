@@ -1,4 +1,6 @@
-# Standalone arithmetic check with synthetic inputs halfway between clock edges.
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 RabbitPunch contributors
+# Standalone video-path check with synthetic inputs halfway between clock edges.
 # Not final MiSTer video/pin timing. All paths remain single-cycle timed.
 create_clock -name clk_sys -period 20.833333 [get_ports i_clk]
 derive_clock_uncertainty

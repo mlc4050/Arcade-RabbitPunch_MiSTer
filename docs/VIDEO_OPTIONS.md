@@ -1,7 +1,7 @@
 # Optional video output path
 
-The VHDL rabbitpunch_video_options adapter is currently an isolated evaluation;
-it is not yet connected to RabbitPunch.sv. Native RGB, data enable and pixel
+The VHDL rabbitpunch_video_options adapter now connects the native machine to
+RabbitPunch.sv output ports; a new full-shell fit is pending. Native RGB, data enable and pixel
 enable pass through without storage. Active-low native sync is normalized to
 active-high pulses expected by the MiSTer mixer. Direct video overrides all
 optional effects and forced doubling. Reserved effect values disable the effect.
@@ -48,6 +48,8 @@ The corrected standalone bf511c5 fit passes at 48 MHz with 767 ALMs, 1373
 registers, 70080 RAM bits in 14 M10Ks, zero DSPs and no PLL. All reported corner
 checks and all six timing-coverage categories pass. Minimum setup is +5.816 ns
 and minimum hold is +0.111 ns. This virtual-I/O fit is not full-shell timing.
-See reference/video_options_synth.json. Native bypass, forced doubling and HQ2x
-compact tests have passed; the remaining effect/direct modes and separate
-full-width control are running before shell integration.
+See reference/video_options_synth.json. All seven compact tests pass: native bypass, forced doubling, HQ2x, three
+scanline strengths, and direct-video override. The separate full-width control
+is running. The connected shell now exposes the Scandoubler Fx menu at status
+bits 46:44, hides it under direct video, and honors forced doubling when direct
+video is off. Native renderer telemetry stays before this presentation path.
