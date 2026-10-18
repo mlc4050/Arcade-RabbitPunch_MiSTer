@@ -68,5 +68,24 @@
     "hold_input": 14,
     "setup_output": 110,
     "hold_output": 110
+  },
+  "instrumented_jtag": {
+    "scope": "Only instrumented revision: dedicated Intel-generated TAP pins TDI/TMS/TDO lack external cable delays. TCK and internal debug timing remain checked; no game or SDRAM path excluded. Reference full fit 90e053c.",
+    "input_ports": [
+      "altera_reserved_tdi",
+      "altera_reserved_tms"
+    ],
+    "output_ports": [
+      "altera_reserved_tdo"
+    ],
+    "additional_unconstrained_paths": {
+      "setup_input": 45,
+      "hold_input": 45,
+      "setup_output": 5,
+      "hold_output": 5
+    },
+    "source_sha256": {
+      "rtl/rabbitpunch_debug.vhd": "6a85b120b16792baa22b389a8576fd46f73b4b81c0ce65306ab5fd3063e14938"
+    }
   }
 }

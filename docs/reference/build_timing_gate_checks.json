@@ -83,10 +83,38 @@
     {
       "case": "reject_changed_framework_source",
       "rejected": true
+    },
+    {
+      "case": "instrumented_reserved_jtag_scope",
+      "rejected": false
+    },
+    {
+      "case": "release_rejects_reserved_jtag_scope",
+      "rejected": true
+    },
+    {
+      "case": "instrumented_rejects_untimed_sdram",
+      "rejected": true
+    },
+    {
+      "case": "instrumented_rejects_extra_paths",
+      "rejected": true
+    },
+    {
+      "case": "instrumented_rejects_changed_debug_source",
+      "rejected": true
+    },
+    {
+      "case": "clear_only_selected_stale_bitstreams",
+      "rejected": false
+    },
+    {
+      "case": "reject_bitstream_path_traversal",
+      "rejected": true
     }
   ],
   "reference_summary_sha256": "176d7c808c09cfe3c7248b00dc5683e0f895a612e95ebb44e8c82adff3756a41",
   "reference_coverage_sha256": "e636dede4cf09d0c26c66c482038c6af8915d896f3fa53b74f73de5dc816dc61",
-  "script_sha256": "6e85a277518f341f73150ff8d09affc145979a2b5389ad863a28973920749c32",
+  "script_sha256": "b70a195ab9a5d14c02c67e66e8341c9ca6390a24e10b1285d9602d7a64793ea2",
   "scope": "Real accepted Quartus report plus controlled missing/negative timing and coverage mutations; no compile or hardware claim"
 }

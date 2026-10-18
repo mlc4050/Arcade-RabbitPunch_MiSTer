@@ -15,14 +15,21 @@ create_timing_netlist
 read_sdc
 update_timing_netlist
 
-# --- core-specific: edit for this core -------------------------------------
-# The main core clock, as the STA names it. This is the MiSTer framework's
-# emu PLL output 0 and is the same on every core built from the template.
-set clk "emu|pll|pll_inst|altera_pll_i|general\[0\].gpll~PLL_OUTPUT_COUNTER|divclk"
-# ---------------------------------------------------------------------------
+# Resolve the current VHDL game PLL uniquely; never emit an empty timing report.
+set game_clock [list]
+foreach_in_collection clock [get_clocks -nowarn {*|machine|pll|clock_generator*}] {
+    set period [get_clock_info -period $clock]
+    set edges [get_clock_info -waveform $clock]
+    if {$period > 21.42 && $period < 21.44 && abs([lindex $edges 0]) < 0.03} {
+        lappend game_clock $clock
+    }
+}
+if {[llength $game_clock] != 1} { error "Expected one zero-phase game clock" }
+set clk [lindex $game_clock 0]
 
-report_timing -setup -npaths 15 -detail full_path -from_clock $clk -to_clock $clk \
-    -panel_name "Worst 15 setup paths (clk_sys)" -file "output_files/worst_paths_$rev.rpt"
+
+report_timing -setup -npaths 15 -detail full_path -to_clock $clk \
+    -panel_name "Worst 15 setup paths to game clock (including SDRAM inputs)" -file "output_files/worst_paths_$rev.rpt"
 
 delete_timing_netlist
 # -dont_export_assignments: project_close otherwise RE-SAVES the .qsf,

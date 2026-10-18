@@ -33,13 +33,17 @@ than the system capture clock. Internal game paths pass (+4.823 ns worst at the
 100 C slow corner); this failure is the external clock relationship. The initial
 10714 ps phase is rejected for this physical shell.
 
-A 5357 ps (quarter-period) phase is the next candidate. Holding measured insertion/routing fixed,
-the old input setup slack improves by 5.357 ns and output setup worsens by the
-same amount, projecting about +1.019/+0.801 ns respectively. Those are sensitivity
-estimates, not a fitted result. Re-run real PLL/chip-clock tests and full
-placement/routing/timing before accepting this choice. The low-level PLL default
-remains 10714 ps for historical tests; the production clocked-machine wrapper
-explicitly selects 5357 ps.
+The 5357 ps (quarter-period) candidate passes the instrumented full-shell fit
+90e053c. All 164 reported checks pass: minimum setup +0.367 ns, hold +0.078 ns,
+recovery +4.368 ns, removal +0.393 ns and minimum pulse width +1.122 ns. The
+fitted game clock is exactly 140/3 MHz by PLL ratios; only the forwarded SDRAM
+pin uses the shifted output. The production-phase attract comparison matches
+all 62208 MAME RGB pixels with no underflow and a 2484/3024-clock worst row.
+See reference/full_shell_90e053c_timing_checks.json and
+reference/scanout_pll_5357ps_rpunch_attract_checks.json. These results qualify the
+prototype budgets, not the actual module's electrical margin. The low-level PLL
+default remains 10714 ps for historical tests; the production clocked-machine
+wrapper explicitly selects 5357 ps.
 
 The inherited MiSTer SDC leaves four peripheral input pins and fifty output pins
 untimed (HDMI video/audio, I2C, LEDs and multiplexed SD/user ports). They are
@@ -50,3 +54,14 @@ any increased path count and every reported negative slack. The independent
 block gates still require zero in all six coverage categories. No broad false
 paths were added to make this pass; HDMI/peripheral electrical margins remain
 outside the full-build timing claim. The raw counts remain in the output report.
+
+The instrumented fit adds Intel-generated dedicated TDI/TMS/TDO pins. Its six
+untimed inputs/51 outputs include those reserved pins; input/output path counts
+are 59/115. The instrumented-only scope permits exactly the reserved pin names,
+requires DEBUG_ISSP and a source-locked debug wrapper, and bounds the additional
+paths to 45 input/five output paths. Release builds receive no such allowance.
+TCK and internal debug clocks/checks remain timed. External JTAG cable delays
+are unverified. The original runner rejected the new pins; the completed fit was
+then checked retrospectively with the updated gate, without changing constraints
+or recompiling. Twenty-eight acceptance/negative controls include reserved pins
+in the wrong revision, changed debug source and extra untimed SDRAM/path cases.

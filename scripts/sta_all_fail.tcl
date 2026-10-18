@@ -13,9 +13,17 @@ create_timing_netlist
 set_operating_conditions 7_slow_1100mv_100c
 read_sdc
 update_timing_netlist
-# --- core-specific: edit for this core -------------------------------------
-# The main core clock (the framework's emu PLL output 0; same on every core).
-set ck {emu|pll|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}
-# ---------------------------------------------------------------------------
-report_timing -setup -npaths 600 -detail summary -from_clock $ck -to_clock $ck -file sta_all_fail.rpt
+# Resolve the current VHDL game PLL uniquely; never emit an empty timing report.
+set game_clock [list]
+foreach_in_collection clock [get_clocks -nowarn {*|machine|pll|clock_generator*}] {
+    set period [get_clock_info -period $clock]
+    set edges [get_clock_info -waveform $clock]
+    if {$period > 21.42 && $period < 21.44 && abs([lindex $edges 0]) < 0.03} {
+        lappend game_clock $clock
+    }
+}
+if {[llength $game_clock] != 1} { error "Expected one zero-phase game clock" }
+set ck [lindex $game_clock 0]
+
+report_timing -setup -npaths 600 -detail summary -to_clock $ck -file sta_all_fail.rpt
 project_close -dont_export_assignments
