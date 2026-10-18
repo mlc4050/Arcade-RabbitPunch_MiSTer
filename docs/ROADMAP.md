@@ -325,3 +325,9 @@ bypass and direct-video override. A VHDL adapter and H5 OSD option are connected
 at the shell; native telemetry remains before it. The standalone target passes
 48 MHz timing/coverage (767 ALMs, 14 M10Ks, no DSPs). Full-width output and the
 new connected-shell full fit are pending; see VIDEO_OPTIONS.md.
+
+The optional forced-scandoubler full-width functional-netlist control now passes
+all 288 source pixel positions, exact RGB and duplicated row geometry. Together
+with all seven compact effect-mode cases and the expanded native HPS regression,
+it clears functional integration checks. Both newly connected full-shell fits
+are running; their timing results remain pending.

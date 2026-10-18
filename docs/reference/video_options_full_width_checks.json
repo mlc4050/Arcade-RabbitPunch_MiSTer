@@ -1,0 +1,17 @@
+{
+  "case": "video_options_1_wide",
+  "pass_marker": "VIDEO_OPTIONS_PASS",
+  "log": "debug\\baselines\\video_options_1_wide\\result.log",
+  "mode": 1,
+  "visible_width": 288,
+  "total_width": 432,
+  "visible_height": 1,
+  "total_height": 4,
+  "fitted_commit": "bf511c5fddc43aec228fcb9b6723709076d2610b",
+  "source_sha256": {
+    "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+    "sim/video/video_options_tb.vhd": "c5b0a144438bebc42772de4c5c66aec88382472cb853919d2ff5e19e40b7f73b"
+  },
+  "log_sha256": "1b0257fdc37b0a6f52642f99db786f11a957a3f8cad1b815567cec0f66f8a336",
+  "scope": "Quartus functional-netlist forced scandoubler with full production horizontal width, /7 enables, one visible line/four total vertical lines after two startup frames; exact colour and repeated row geometry; no full-height or physical-output proof"
+}
