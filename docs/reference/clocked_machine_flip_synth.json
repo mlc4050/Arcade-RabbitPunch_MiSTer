@@ -1,0 +1,316 @@
+{
+  "commit": "7cc03696494056758eedeb043b023ff3360f80a9",
+  "device": "5CSEBA6U23I7",
+  "project": "clocked_machine_check",
+  "constraint_mhz": 46.6666666667,
+  "seed": 3,
+  "memory_bits": 929387,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 4.614
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.256
+    },
+    {
+      "type": "Slow 1100mV 100C Model Recovery 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 11.498
+    },
+    {
+      "type": "Slow 1100mV 100C Model Removal 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 1.119
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.19
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 9.29
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'reference_50'",
+      "slack_ns": 9.73
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 10.521
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 3.627
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.239
+    },
+    {
+      "type": "Slow 1100mV -40C Model Recovery 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 11.667
+    },
+    {
+      "type": "Slow 1100mV -40C Model Removal 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 1.045
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.19
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 9.268
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'reference_50'",
+      "slack_ns": 9.754
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 10.488
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 8.239
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.121
+    },
+    {
+      "type": "Fast 1100mV 100C Model Recovery 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 15.924
+    },
+    {
+      "type": "Fast 1100mV 100C Model Removal 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.547
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.19
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'reference_50'",
+      "slack_ns": 9.347
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 9.596
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 10.625
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 8.555
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.082
+    },
+    {
+      "type": "Fast 1100mV -40C Model Recovery 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 16.817
+    },
+    {
+      "type": "Fast 1100mV -40C Model Removal 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.466
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.19
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'reference_50'",
+      "slack_ns": 9.274
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 9.606
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 10.612
+    }
+  ],
+  "timing_coverage": {
+    "Illegal Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Port Paths": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Port Paths": {
+      "setup": 0,
+      "hold": 0
+    }
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Sat Oct 17 23:36:30 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : clocked_machine_check",
+    "Top-level Entity Name : clocked_machine_check",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 6,719 / 41,910 ( 16 % )",
+    "Total registers : 8386",
+    "Total pins : 40 / 314 ( 13 % )",
+    "Total virtual pins : 942",
+    "Total block memory bits : 929,387 / 5,662,720 ( 16 % )",
+    "Total RAM Blocks : 124 / 553 ( 22 % )",
+    "Total DSP Blocks : 1 / 112 ( < 1 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 1 / 6 ( 17 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "log_sha256": "48d8d0ea5856cdf68bf1634b06b1a618136a699be05de630a1a73bca3eec47cd",
+  "scope": "Actual 50 MHz PLL input and two fitted 46.6667 MHz outputs, one functional system-clock domain and 5.357 ns SDRAM output phase only; registered logical test boundaries and hypothetical external I/O timing; no physical HPS/DDR mux, full MiSTer shell or PCB electrical timing proof",
+  "pll_count": 1,
+  "clock_tree": [
+    {
+      "name": "reference_50",
+      "period_ns": 20.0,
+      "rise_ns": 0.0,
+      "fall_ns": 10.0,
+      "positive_timing_endpoints": 1,
+      "negative_timing_endpoints": 0,
+      "multiply_by": 1,
+      "divide_by": 1
+    },
+    {
+      "name": "machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]",
+      "period_ns": 2.38,
+      "rise_ns": 0.0,
+      "fall_ns": 1.19,
+      "positive_timing_endpoints": 2,
+      "negative_timing_endpoints": 0,
+      "multiply_by": 42,
+      "divide_by": 5
+    },
+    {
+      "name": "machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk",
+      "period_ns": 21.428,
+      "rise_ns": 0.0,
+      "fall_ns": 10.714,
+      "positive_timing_endpoints": 15926,
+      "negative_timing_endpoints": 0,
+      "multiply_by": 1,
+      "divide_by": 9
+    },
+    {
+      "name": "machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk",
+      "period_ns": 21.428,
+      "rise_ns": 5.357,
+      "fall_ns": 16.071,
+      "positive_timing_endpoints": 1,
+      "negative_timing_endpoints": 0,
+      "multiply_by": 1,
+      "divide_by": 9
+    },
+    {
+      "name": "sdram_pin",
+      "period_ns": 21.428,
+      "rise_ns": 5.357,
+      "fall_ns": 16.071,
+      "positive_timing_endpoints": 0,
+      "negative_timing_endpoints": 0,
+      "multiply_by": 1,
+      "divide_by": 1
+    }
+  ],
+  "nominal_frequency_hz": 46666666.666666664,
+  "validation_script_sha256": "51c6b7ff18646a7f596ca2d25a0b818cccea273539db964c4466d53093d9000d",
+  "sound_memory": [
+    {
+      "instance": "rabbitpunch_ram8:sound_ram",
+      "depth": 2048,
+      "width": 8,
+      "bits": 16384
+    },
+    {
+      "instance": "jt51_sh:u_acc",
+      "depth": 8,
+      "width": 68,
+      "bits": 544
+    },
+    {
+      "instance": "altshift_taps:eg_VIII_rtl_0",
+      "depth": 4,
+      "width": 21,
+      "bits": 84
+    },
+    {
+      "instance": "jt51_sh:u_eg1sh",
+      "depth": 27,
+      "width": 10,
+      "bits": 270
+    },
+    {
+      "instance": "jt51_sh:u_statesh",
+      "depth": 28,
+      "width": 2,
+      "bits": 56
+    },
+    {
+      "instance": "jt51_sh:u_reg1op",
+      "depth": 32,
+      "width": 45,
+      "bits": 1440
+    },
+    {
+      "instance": "jt51_sh:out_padding",
+      "depth": 3,
+      "width": 15,
+      "bits": 45
+    },
+    {
+      "instance": "jt51_sh:u_phsh",
+      "depth": 29,
+      "width": 20,
+      "bits": 580
+    }
+  ],
+  "archive": "debug/fit_archive/clocked_machine_7cc0369_common_flip",
+  "artifact_sha256": {
+    "BUILT_COMMIT": "974993f0ebde5bc0e53bdb4f2b63f0b98977715ac2688c1765db0b9f3b0bf139",
+    "clocked_machine_check.asm.rpt": "7c1f50ffb1efa7465b86ca79926d336eb60d7195dda568437eaf8be0eebb02f5",
+    "clocked_machine_check.done": "f550332175641cd2da0476db02e3dcdd5c692e737f9eb3edf93a914e03e16fe5",
+    "clocked_machine_check.fit.rpt": "6527e6bc48788a2f8f89dc063d7db977b8b28b3b9da3085d2ba30d9055ee31bd",
+    "clocked_machine_check.fit.smsg": "d41fedc43df491b98368049ad3b6ffcc74efe806a6ed495dbb30294481fbd8a9",
+    "clocked_machine_check.fit.summary": "d6ddc071cc87bb1529a1fd6bd6146dd109726f0330ce0f02fc39a6bba529d1ee",
+    "clocked_machine_check.flow.rpt": "29ed5d58aec50442da04c73f7789c2385a3d18f197ceb1a003d8064ebd362815",
+    "clocked_machine_check.jdi": "1aeda87d4cc9feada80e292d246cbc6a9341c5dcb0e13d2d1244efa0b941e536",
+    "clocked_machine_check.map.rpt": "b2271aa8ed1bcfc3e0dc045fdb78fee4ccc4b27b4812b4bb5814d2edc7c73d07",
+    "clocked_machine_check.map.smsg": "61640ce9e902a3f1c061447802d367a8372a951c91ca1033280c3d635fb1acd4",
+    "clocked_machine_check.map.summary": "70f6467a09780e6f313fe07ef62773d4bb5ca07aaa088add2da8d6be60d2e9e9",
+    "clocked_machine_check.pin": "1a8c514f0542b04c0f8f6aaa0dd61e6eb1c064377e82c4878104c81bd9ee79c2",
+    "clocked_machine_check.sld": "c7de3cc5544a1144192d6825eb69cf5e065bf99f16fb9acb42fadd23adede991",
+    "clocked_machine_check.sof": "ba1122c2072c37747ad004c1a5b533598d9084b3d4cb397acdd1c2761f4a1279",
+    "clocked_machine_check.sta.rpt": "ce5172918158458beaceac7b7997c60fb649e41f21f7959832136955098d51dc",
+    "clocked_machine_check.sta.summary": "9acba45b48ae8f4dcadba4618acabded109da7b85183e6bc100f1e3b39a1b71b",
+    "clocked_machine_synth.json": "fcbc8032b8d7f41b151c7c0f38522b50a2ee4d93cebe20af650e5abce24189bb",
+    "clock_tree.log": "c90f6c4d5792d1e4252c664c885505af5c16c5d38bc817abafb7c48e1e3f355d",
+    "clock_tree.tsv": "dc7bf0d26d06cbc77e3de003d4451da98907a62528a37254cbf32150290c681c",
+    "q_clocked_machine_check.log": "48d8d0ea5856cdf68bf1634b06b1a618136a699be05de630a1a73bca3eec47cd"
+  }
+}
