@@ -4,8 +4,8 @@ Early development for Video System's 1987 arcade hardware, using MAME's rpunch.c
 as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
 
 Status: the VHDL CPU, memory, video, audio, ROM-loading, controls and high-score
-services are connected to the MiSTer boundary. The full MiSTer build is in
-progress; no hardware-verified playable RBF or release exists.
+services are connected to the MiSTer boundary. Both debug and non-debug full builds pass the documented prototype timing
+gates; no hardware-verified playable RBF or release exists.
 
 Verification includes:
 
@@ -15,10 +15,13 @@ Verification includes:
 - Six static graphics scenes match MAME through shared SDRAM and concurrent
   synthetic CPU traffic. Continuous PLL-driven scanout currently passes Rabbit
   Punch attract and Rabio Lepus gameplay, with all 62,208 pixels matching each
-  and no underflow; remaining scenes are being checked.
-- The actual-PLL isolated machine fit passes every reported timing corner and
-  six coverage categories: setup +2.141 ns, hold +0.091 ns, 6,703 ALMs and
-  124 M10K blocks. These are evaluation constraints, not final PCB timing.
+  and no underflow. At the production 5.357 ns phase, Rabbit Punch attract and
+  Rabio Lepus gameplay at frame 1000 both match exactly.
+- Full debug and non-debug MiSTer fits pass all reported corners at a fitted
+  46.667 MHz game clock and 5.357 ns SDRAM phase. The non-debug build's minimum
+  setup/hold margins are +0.368/+0.076 ns. The prototype SDRAM budgets and
+  inherited peripheral/debug pin coverage scope are explicit in
+  [SDRAM pin timing](docs/SDRAM_PIN_TIMING.md); physical margins remain unverified.
 - Native RAM startup contents, DDR/direct ROM loading, replacement/reset/pause,
   controls/DIPs and high-score host-file transfers pass subsystem tests. All
   38 real ADPCM sample sequences pass 237,330 decoded-value checks.
