@@ -56,7 +56,15 @@ assign DDRAM_CLK = clk_sys;
 // Hide HDMI/output-effect controls under direct video, preserving score masks.
 assign menu_mask = score_menu_mask | {10'd0, direct_video, 5'd0};
 assign {SDRAM_DQMH, SDRAM_DQML} = sdram_byte_mask;
-assign LED_USER = loading | downloading | error | underflow;
+rabbitpunch_status_led status_led
+(
+    .i_clk(clk_sys),
+    .i_loading(loading),
+    .i_downloading(downloading),
+    .i_error(error),
+    .i_underflow(underflow),
+    .o_led(LED_USER)
+);
 
 rabbitpunch_host host
 (

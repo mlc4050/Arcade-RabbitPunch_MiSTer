@@ -19,7 +19,7 @@ Verification includes:
   Rabio Lepus gameplay at frame 1000 both match exactly.
 - The current non-debug MiSTer fit passes all reported corners at a fitted
   46.667 MHz game clock and 5.357 ns SDRAM phase, with minimum setup/hold
-  margins +0.323/+0.100 ns. The prior native-output debug baseline also passes. The prototype SDRAM budgets and
+  margins +0.525/+0.078 ns in the accepted aspect-control snapshot. The prior native-output debug baseline also passes. The prototype SDRAM budgets and
   inherited peripheral/debug pin coverage scope are explicit in
   [SDRAM pin timing](docs/SDRAM_PIN_TIMING.md); physical margins remain unverified.
 - Native RAM startup contents, DDR/direct ROM loading, replacement/reset/pause,
@@ -32,8 +32,9 @@ buffer. Provisional geometry and clock assumptions are documented in
 interactive game execution and the remaining standard video features still
 require bring-up. Optional forced doubling, HQ2x and scanline modes now pass
 functional tests and full fits in both revisions. The instrumented seed-2 retry
-passes all 164 reported timing checks. Common CRT/HDMI flip is connected with
-full-renderer checks pending; see [analog output and flip](docs/VIDEO_FLIP.md). See [machine integration](docs/MACHINE_INTEGRATION.md),
+passes all 164 reported timing checks. Common CRT/HDMI flip passes both complete rotated-frame comparisons; its
+new full build remains unqualified while the audited LED-only coverage fix
+is refitted; see [analog output and flip](docs/VIDEO_FLIP.md). See [machine integration](docs/MACHINE_INTEGRATION.md),
 [sound bring-up](docs/SOUND_BRINGUP.md), [prototype limitations](docs/HACKS.md)
 and [read-only debug probes](docs/DEBUG.md) for exact scope.
 

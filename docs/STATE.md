@@ -358,3 +358,9 @@ and horizontal/vertical sync history. Initialization resets wrapper state;
 native Off bypass does not read any of that history. Optional adjusted output
 must rebuild line/sync history after restore. This is not emulated board RAM
 and is not connected to the production savestate surface.
+
+
+The external status LED now has one configuration-initialized game-clock bit.
+It registers loading/download/error/underflow indication only. It is not game
+state and adds no renderer, CPU, audio or RGB latency; underlying debug flags
+remain directly available. It need not be restored as part of a savestate.

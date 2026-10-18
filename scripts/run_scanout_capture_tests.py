@@ -19,6 +19,7 @@ def main():
     parser.add_argument('--phase-ps', type=int, default=10714, help='PLL chip-clock phase; nondefault phases use a private generated bench')
     parser.add_argument('--flip-screen', action='store_true', help='Apply the common presentation flip in addition to the captured game flip flag')
     parser.add_argument('--fixtures', type=Path, help='Fixture manifest; default the six canonical scenes')
+    parser.add_argument('--crt-adjust',action='store_true',help='Compare the native renderer through enabled zero-offset CRT adjustment')
     args = parser.parse_args()
     if not 1 <= args.phase_ps < 21428 or (not args.pll_clock and args.phase_ps != 10714):
         parser.error('A phase inside one period requires --pll-clock')
@@ -44,7 +45,8 @@ def main():
     sources += ["rtl/rabbitpunch_rom_cache.vhd", "rtl/rabbitpunch_clock_enables.vhd",
         "rtl/rabbitpunch_raster.vhd", "rtl/rabbitpunch_scanline_scheduler.vhd",
         "rtl/rabbitpunch_video_output.vhd", "rtl/rabbitpunch_scanout.vhd", "rtl/rabbitpunch_view_flip.vhd",
-        "rtl/rabbitpunch_pll.vhd", "sim/video/scanout_capture_tb.vhd"]
+        "rtl/rabbitpunch_pll.vhd", "rtl/video/crt_adjust/crt_adjust.sv",
+        "rtl/rabbitpunch_crt_adjust.vhd", "sim/video/scanout_capture_tb.vhd"]
     template = root / 'sim/video/scanout_capture_tb.vhd'
     template_hash = hashlib.sha256(template.read_bytes()).hexdigest()
     if args.pll_clock and args.phase_ps != 10714:
@@ -64,6 +66,8 @@ def main():
         prefix = f"scanout_pll_{args.phase_ps}ps_"
     if args.flip_screen:
         prefix += "flip_"
+    if args.crt_adjust:
+        prefix += "crt_"
     hashes = {p: hashlib.sha256((root/p).read_bytes()).hexdigest() for p in sources}
     reports = []
     for fixture in fixtures:
@@ -101,7 +105,7 @@ def main():
         setup = [f"mem load -format mti -infile {{{memory_file.as_posix()}}} /{top}/shared_roms/chip/mem"]
         libraries = [item for name in ("altera_lnsim_ver", "altera_ver", "lpm_ver") for item in ("-L", name)]
         result = run_case(case, sources, top, "80 ms", marker,
-                          sim_args=libraries + (["-gGBOOL_PLL_CLOCK=true"] if args.pll_clock else []) + (["-gGBOOL_FLIP_SCREEN=true"] if args.flip_screen else []),
+                          sim_args=libraries + (["-gGBOOL_PLL_CLOCK=true"] if args.pll_clock else []) + (["-gGBOOL_FLIP_SCREEN=true"] if args.flip_screen else []) + (["-gGBOOL_CRT_ADJUST=true"] if args.crt_adjust else []),
                           wall_timeout=1800, setup_commands=setup)
         assert hashes == {p: hashlib.sha256((root/p).read_bytes()).hexdigest() for p in sources}
         pixels = [int(word, 16) for word in (directory / "pixels.hex").read_text().splitlines()]
@@ -118,7 +122,7 @@ def main():
         write_rgb(directory / "video.png", width, height, actual)
         assert differing == 0, f"{case}: {differing} RGB pixels differ from MAME"
         log = (root / result["log"]).read_text()
-        result.update(osd_flip=args.flip_screen, game_flip_flag=game_flip, effective_flip=effective_flip,
+        result.update(crt_adjust=args.crt_adjust,osd_flip=args.flip_screen, game_flip_flag=game_flip, effective_flip=effective_flip,
             mame_rgb_sha256=mame_rgb_hash,
             expected_transform="rotate180" if effective_flip else "identity",
             flip_scope="MAME renderer ignores global video flag bit 12; expected image is the captured frame explicitly rotated 180 degrees when effective flip is set")
@@ -132,7 +136,7 @@ def main():
                 for name in ("maincpu.hex", "video_settings.hex", "spriteram.hex", "vram.hex", "bitmap.hex", "palette.hex")},
             source_sha256={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in sources},
             log_sha256=hashlib.sha256((root / result["log"]).read_bytes()).hexdigest(),
-            scope=(f"Vendor PLL and {args.phase_ps} ps shifted SDRAM clock with early runtime read capture; " if args.pll_clock else "Synthetic same-phase system/chip clock; ") + "Continuous provisional raster and real graphics/shared SDRAM command model; static MAME snapshot, synthetic RAM writes/ROM reads, direct ROM preload; no CPU execution or hardware/electrical timing proof")
+            scope=(f"Vendor PLL and {args.phase_ps} ps shifted SDRAM clock with early runtime read capture; " if args.pll_clock else "Synthetic same-phase system/chip clock; ") + ("Enabled CRT line-buffer path after native scanout; " if args.crt_adjust else "") + "Continuous provisional raster and real graphics/shared SDRAM command model; static MAME snapshot, synthetic RAM writes/ROM reads, direct ROM preload; no CPU execution or hardware/electrical timing proof")
         assert template_hash == hashlib.sha256(template.read_bytes()).hexdigest(), 'Bench template changed during simulation'
         result.update(sdram_phase_ps=args.phase_ps if args.pll_clock else 0, template_sha256=template_hash)
         result.update(pll_clock=args.pll_clock, sdram_read_capture_adjust=int(args.pll_clock),
