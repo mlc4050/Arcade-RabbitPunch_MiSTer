@@ -1,0 +1,81 @@
+{
+  "cases": [
+    {
+      "case": "gate_crt_adjust_geometry_production256",
+      "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+      "log": "debug\\baselines\\gate_crt_adjust_geometry_production256\\result.log",
+      "source_sha256": {
+        "debug/netlists/crt_adjust_d9dfc8a/crt_adjust_check.vo": "3b297509ff56c68293901f6e744455123c37a54bb35c43c5ac28f66160606db5",
+        "sim/video/crt_adjust_geometry_tb.vhd": "ff1a5758f1cf7fe4b8f0d2b3669ed80a05f8b86be2593c7595c8f6208c3f7f5a"
+      },
+      "horizontal_size_index": 0,
+      "horizontal_position_index": 0,
+      "rows": 6,
+      "pixels": 1728,
+      "log_sha256": "361a9298704c94ba7427c8be1f26ee5879478c23dd16d82c552defeade931577",
+      "vertical_shift_index": 0,
+      "frame_lines": 256,
+      "sync_metrics": {
+        "hperiod": 3024,
+        "hwidth": 280,
+        "vperiod": 774144,
+        "vwidth": 6048,
+        "vphase": 764525
+      }
+    },
+    {
+      "case": "gate_crt_adjust_geometry_down1",
+      "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+      "log": "debug\\baselines\\gate_crt_adjust_geometry_down1\\result.log",
+      "source_sha256": {
+        "debug/netlists/crt_adjust_d9dfc8a/crt_adjust_check.vo": "3b297509ff56c68293901f6e744455123c37a54bb35c43c5ac28f66160606db5",
+        "sim/video/crt_adjust_geometry_tb.vhd": "ff1a5758f1cf7fe4b8f0d2b3669ed80a05f8b86be2593c7595c8f6208c3f7f5a"
+      },
+      "horizontal_size_index": 0,
+      "horizontal_position_index": 0,
+      "rows": 6,
+      "pixels": 1728,
+      "log_sha256": "2d753d9128a964cc8aa14aefacedd50e81fe2273c44772d605675defb25d5b42",
+      "vertical_shift_index": 1,
+      "frame_lines": 256,
+      "sync_metrics": {
+        "hperiod": 3024,
+        "hwidth": 280,
+        "vperiod": 774144,
+        "vwidth": 6048,
+        "vphase": 767549
+      }
+    },
+    {
+      "case": "gate_crt_adjust_geometry_up1",
+      "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+      "log": "debug\\baselines\\gate_crt_adjust_geometry_up1\\result.log",
+      "source_sha256": {
+        "debug/netlists/crt_adjust_d9dfc8a/crt_adjust_check.vo": "3b297509ff56c68293901f6e744455123c37a54bb35c43c5ac28f66160606db5",
+        "sim/video/crt_adjust_geometry_tb.vhd": "ff1a5758f1cf7fe4b8f0d2b3669ed80a05f8b86be2593c7595c8f6208c3f7f5a"
+      },
+      "horizontal_size_index": 0,
+      "horizontal_position_index": 0,
+      "rows": 6,
+      "pixels": 1728,
+      "log_sha256": "bf9dcabfda14e937e00bbc7bd4e4bd27aea4c41368ea8f23e38788fb1fa2ec57",
+      "vertical_shift_index": 63,
+      "frame_lines": 256,
+      "sync_metrics": {
+        "hperiod": 3024,
+        "hwidth": 280,
+        "vperiod": 774144,
+        "vwidth": 6048,
+        "vphase": 761501
+      }
+    }
+  ],
+  "fit_commit": "d9dfc8ac4e5441a41d00c1790f42cd047c0bd12f",
+  "full_height": false,
+  "requested_cases": [
+    "production256",
+    "down1",
+    "up1"
+  ],
+  "scope": "Isolated unchanged CRT Adjust and VHDL adapter with corrected VBlank tags: 288 visible/432 total pixels at /7 enable. Each listed case records visible and total rows; the DUT uses its production 256-line generic. Exact source-pixel order, row boundaries, sync periods and bounded sync-width quantization are checked after warm-up. Non-full-height suite also checks position, size and exact +/-1-line vertical phase changes. No extreme-size clipping, setting-change or physical CRT proof; disconnected from production."
+}

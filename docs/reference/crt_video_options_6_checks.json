@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "case": "crt_video_options_6_short",
+      "pass_marker": "CRT_VIDEO_OPTIONS_PASS",
+      "log": "debug\\baselines\\crt_video_options_6_short\\result.log",
+      "mode": 6,
+      "source_sha256": {
+        "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "aad8878d3ebe44a18a038c86fb7131a09699feae7898256ddc9c193310bb5c7e",
+        "sim/video/crt_video_options_tb.vhd": "0e23d6664eab1dd891955b28cd79679b4b3b535a66d6bfe33a7e44e9b38720c8"
+      },
+      "effects_fit_commit": "bf511c5fddc43aec228fcb9b6723709076d2610b",
+      "log_sha256": "46aea5b344842e80cf2b4533a19e24d343d762703c120593e4792270de4d74f5"
+    }
+  ],
+  "visible": [
+    288,
+    1
+  ],
+  "total": [
+    432,
+    4
+  ],
+  "pixel_divider": 7,
+  "requested_horizontal_size": 2,
+  "requested_horizontal_position": 8,
+  "scope": "Enabled CRT RTL plus qualified synthesized framework effects. Production horizontal geometry; bounded vertical fixture. Exact flat-field RGB, line widths and visible totals; native/direct every-clock effects bypass; signed size disabled before doubling/HQ2x/scanline modes and retained in direct/native modes. No HQ2x edge-filter, extreme clipping, live-setting transition or physical monitor proof."
+}

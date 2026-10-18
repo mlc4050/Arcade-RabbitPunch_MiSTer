@@ -1,0 +1,230 @@
+-- SPDX-License-Identifier: GPL-3.0-or-later
+-- Copyright (C) 2026 RabbitPunch contributors
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use std.env.all;
+use std.textio.all;
+
+entity crt_video_options_tb is
+    generic (
+        GINT_MODE : natural := 0;
+        GINT_VISIBLE_WIDTH : positive := 288;
+        GINT_TOTAL_WIDTH : positive := 432;
+        GINT_HORIZONTAL_SYNC_START : natural := 352;
+        GINT_HORIZONTAL_SYNC_END : positive := 392;
+        GINT_VISIBLE_HEIGHT : positive := 1;
+        GINT_TOTAL_HEIGHT : positive := 4;
+        GINT_VERTICAL_SYNC_START : natural := 2;
+        GINT_VERTICAL_SYNC_END : positive := 3
+    );
+end entity;
+
+architecture test of crt_video_options_tb is
+    component rabbitpunch_video_options is
+        port (
+            i_clk : in std_logic;
+            i_pixel_enable : in std_logic;
+            iu8_red : in unsigned(7 downto 0);
+            iu8_green : in unsigned(7 downto 0);
+            iu8_blue : in unsigned(7 downto 0);
+            i_horizontal_sync : in std_logic;
+            i_vertical_sync : in std_logic;
+            i_horizontal_blank : in std_logic;
+            i_vertical_blank : in std_logic;
+            i_forced_scandoubler : in std_logic;
+            i_direct_video : in std_logic;
+            iu3_effect : in unsigned(2 downto 0);
+            o_pixel_enable : out std_logic;
+            ou8_red : out unsigned(7 downto 0);
+            ou8_green : out unsigned(7 downto 0);
+            ou8_blue : out unsigned(7 downto 0);
+            o_horizontal_sync : out std_logic;
+            o_vertical_sync : out std_logic;
+            o_data_enable : out std_logic;
+            ou2_scanlines : out unsigned(1 downto 0)
+        );
+    end component;
+    signal s_clk : std_logic := '0';
+    signal s_ce : std_logic := '0';
+    signal sint_phase : natural range 0 to 6 := 0;
+    signal sint_x : natural range 0 to GINT_TOTAL_WIDTH - 1 := 0;
+    signal sint_y : natural range 0 to GINT_TOTAL_HEIGHT - 1 := 0;
+    signal sint_frames : natural := 0;
+    signal s_hs, s_vs, s_hb, s_vb, s_forced, s_direct : std_logic;
+    signal su3_effect : unsigned(2 downto 0);
+    signal su8_red, su8_green, su8_blue : unsigned(7 downto 0);
+    signal s_output_ce, s_output_hs, s_output_vs, s_output_de : std_logic;
+    signal su8_output_red, su8_output_green, su8_output_blue : unsigned(7 downto 0);
+    signal su2_scanlines : unsigned(1 downto 0);
+    signal s_initialize : std_logic := '1';
+    signal s_crt_ce, s_crt_hs, s_crt_vs, s_crt_hb, s_crt_vb : std_logic;
+    signal s_size_enable : std_logic;
+    signal su8_crt_red, su8_crt_green, su8_crt_blue : unsigned(7 downto 0);
+begin
+    s_initialize <= '0' after 30 ns;
+    s_size_enable <= s_direct or (not s_forced and not (su3_effect(0) or su3_effect(1) or su3_effect(2)));
+    s_clk <= not s_clk after 5 ns;
+    s_ce <= '1' when sint_phase = 6 else '0';
+    s_hs <= '0' when sint_x >= GINT_HORIZONTAL_SYNC_START and sint_x < GINT_HORIZONTAL_SYNC_END else '1';
+    s_vs <= '0' when sint_y >= GINT_VERTICAL_SYNC_START and sint_y < GINT_VERTICAL_SYNC_END else '1';
+    s_hb <= '0' when sint_x < GINT_VISIBLE_WIDTH else '1';
+    s_vb <= '0' when sint_y < GINT_VISIBLE_HEIGHT else '1';
+    -- Distinct colour lanes catch swaps. HQ2x also filters the black blanking
+    -- border; the runner compares its pixels against a separate native capture.
+    su8_red <= x"31";
+    su8_green <= x"79";
+    su8_blue <= x"C5";
+    s_forced <= '1' when GINT_MODE = 1 or GINT_MODE = 6 else '0';
+    s_direct <= '1' when GINT_MODE = 6 else '0';
+    su3_effect <= to_unsigned(GINT_MODE - 1, 3) when GINT_MODE >= 2 and GINT_MODE <= 5 else
+        to_unsigned(4, 3) when GINT_MODE = 6 else (others => '0');
+    -- Request a nonzero size even in doubled modes: the production gate must
+    -- restore a steady /7 enable before the framework effects wrapper.
+    geometry : entity work.rabbitpunch_crt_adjust
+        port map (
+            i_clk => s_clk,
+            i_initialize => s_initialize,
+            i_pixel_enable => s_ce,
+            i_adjust => '1',
+            i_size_enable => s_size_enable,
+            iu5_horizontal_size => to_unsigned(2, 5),
+            iu7_horizontal_position => to_unsigned(8, 7),
+            iu6_vertical_shift => to_unsigned(0, 6),
+            iu8_red => su8_red,
+            iu8_green => su8_green,
+            iu8_blue => su8_blue,
+            i_horizontal_sync => s_hs,
+            i_vertical_sync => s_vs,
+            i_horizontal_blank => s_hb,
+            i_vertical_blank => s_vb,
+            o_pixel_enable => s_crt_ce,
+            ou8_red => su8_crt_red,
+            ou8_green => su8_crt_green,
+            ou8_blue => su8_crt_blue,
+            o_horizontal_sync => s_crt_hs,
+            o_vertical_sync => s_crt_vs,
+            o_horizontal_blank => s_crt_hb,
+            o_vertical_blank => s_crt_vb
+        );
+    dut : rabbitpunch_video_options
+        port map (
+            i_clk => s_clk,
+            i_pixel_enable => s_crt_ce,
+            iu8_red => su8_crt_red,
+            iu8_green => su8_crt_green,
+            iu8_blue => su8_crt_blue,
+            i_horizontal_sync => s_crt_hs,
+            i_vertical_sync => s_crt_vs,
+            i_horizontal_blank => s_crt_hb,
+            i_vertical_blank => s_crt_vb,
+            i_forced_scandoubler => s_forced,
+            i_direct_video => s_direct,
+            iu3_effect => su3_effect,
+            o_pixel_enable => s_output_ce,
+            ou8_red => su8_output_red,
+            ou8_green => su8_output_green,
+            ou8_blue => su8_output_blue,
+            o_horizontal_sync => s_output_hs,
+            o_vertical_sync => s_output_vs,
+            o_data_enable => s_output_de,
+            ou2_scanlines => su2_scanlines
+        );
+    stimulus : process(s_clk)
+    begin
+        if (rising_edge(s_clk)) then
+            if (sint_phase = 6) then
+                sint_phase <= 0;
+                if (sint_x = GINT_TOTAL_WIDTH - 1) then
+                    sint_x <= 0;
+                    if (sint_y = GINT_TOTAL_HEIGHT - 1) then
+                        sint_y <= 0;
+                        sint_frames <= sint_frames + 1;
+                        report "VIDEO_FRAME " & integer'image(sint_frames + 1);
+                    else
+                        sint_y <= sint_y + 1;
+                    end if;
+                else
+                    sint_x <= sint_x + 1;
+                end if;
+            else
+                sint_phase <= sint_phase + 1;
+            end if;
+        end if;
+    end process;
+    monitor : process
+        file v_hq_pixels : text open write_mode is "hq_pixels.hex";
+        variable v_line : line;
+        variable vint_pixels : natural := 0;
+        variable vint_lines : natural := 0;
+        variable vint_line_pixels : natural := 0;
+        variable vint_expected_width : natural := GINT_VISIBLE_WIDTH;
+        variable vint_expected_pixels : natural := GINT_VISIBLE_WIDTH * GINT_VISIBLE_HEIGHT;
+        variable vint_expected_lines : natural := GINT_VISIBLE_HEIGHT;
+        variable v_previous_de : std_logic := '0';
+    begin
+        wait until falling_edge(s_clk);
+        if (GINT_MODE = 0 or GINT_MODE = 6) then
+            assert (s_output_ce = s_crt_ce and s_output_de = not (s_crt_hb or s_crt_vb) and
+                s_output_hs = not s_crt_hs and s_output_vs = not s_crt_vs and
+                su8_output_red = su8_crt_red and su8_output_green = su8_crt_green and su8_output_blue = su8_crt_blue)
+                report "Native/direct video bypass changed input" severity failure;
+            assert (su2_scanlines = 0) report "Native/direct video retained scanline effect" severity failure;
+        end if;
+        if (GINT_MODE >= 3 and GINT_MODE <= 5) then
+            assert (su2_scanlines = GINT_MODE - 2)
+                report "Incorrect scanline strength" severity failure;
+        elsif (GINT_MODE /= 6) then
+            assert (su2_scanlines = 0)
+                report "Unexpected scanline strength" severity failure;
+        end if;
+        if (sint_frames >= 2 and sint_frames < 3 and s_output_ce = '1') then
+            if (s_output_de = '1') then
+                if (GINT_MODE = 2) then
+                    write(v_line, to_hstring(su8_output_red & su8_output_green & su8_output_blue));
+                    writeline(v_hq_pixels, v_line);
+                else
+                    assert (su8_output_red = x"31" and su8_output_green = x"79" and su8_output_blue = x"C5")
+                        report "Video mixer changed flat-field colour or emitted unknown pixels" severity failure;
+                end if;
+                vint_pixels := vint_pixels + 1;
+                vint_line_pixels := vint_line_pixels + 1;
+            elsif (v_previous_de = '1') then
+                if (GINT_MODE = 2) then
+                    vint_expected_width := 2 * GINT_VISIBLE_WIDTH;
+                end if;
+                assert (vint_line_pixels = vint_expected_width)
+                    report "Incorrect output line width " & integer'image(vint_line_pixels) severity failure;
+                vint_lines := vint_lines + 1;
+                vint_line_pixels := 0;
+            end if;
+            v_previous_de := s_output_de;
+        end if;
+        if (sint_frames = 3) then
+            if (GINT_MODE = 2) then
+                vint_expected_pixels := 4 * GINT_VISIBLE_WIDTH * GINT_VISIBLE_HEIGHT;
+                vint_expected_lines := 2 * GINT_VISIBLE_HEIGHT;
+            elsif (GINT_MODE >= 1 and GINT_MODE <= 5) then
+                vint_expected_pixels := 2 * GINT_VISIBLE_WIDTH * GINT_VISIBLE_HEIGHT;
+                vint_expected_lines := 2 * GINT_VISIBLE_HEIGHT;
+            end if;
+            assert (vint_pixels = vint_expected_pixels and vint_lines = vint_expected_lines)
+                report "Insufficient visible video output" severity failure;
+            report "CRT_VIDEO_OPTIONS_PASS mode=" & integer'image(GINT_MODE) &
+                " pixels=" & integer'image(vint_pixels) & " lines=" & integer'image(vint_lines);
+            finish;
+        end if;
+    end process;
+    progress : process
+        file v_progress : text open write_mode is "progress.txt";
+        variable v_line : line;
+    begin
+        loop
+            wait for 100 us;
+            write(v_line, time'image(now) & "; frame=" & integer'image(sint_frames) &
+                "; row=" & integer'image(sint_y) & "; column=" & integer'image(sint_x));
+            writeline(v_progress, v_line);
+            flush(v_progress);
+        end loop;
+    end process;
+end architecture;

@@ -6,7 +6,11 @@ from run_baselines import run_case
 parser=argparse.ArgumentParser()
 parser.add_argument('--netlist',type=Path,help='Use the current fitted CRT functional netlist instead of implementation RTL')
 parser.add_argument('--full-height',action='store_true',help='Check all 216 visible rows in the production 256-line raster')
+parser.add_argument('--only',nargs='+',help='Run only these named geometry cases')
+parser.add_argument('--wall-timeout',type=int,default=300,help='Maximum real seconds per simulation')
 args=parser.parse_args()
+if args.wall_timeout <= 0:
+    parser.error('Wall timeout must be positive')
 root=core_root()
 sources=['rtl/video/crt_adjust/crt_adjust.sv','rtl/rabbitpunch_crt_adjust.vhd','sim/video/crt_adjust_geometry_tb.vhd']
 libraries=[]
@@ -24,9 +28,13 @@ cases=[('normal',0,0,0,12),('right8',0,8,0,12),('left8',0,89,0,12),('wider2',2,0
 visible_lines=216 if args.full_height else 6
 if args.full_height:
     cases=[('full216',0,0,0,256)]
+if args.only:
+    unknown=set(args.only)-{case[0] for case in cases}
+    if unknown:parser.error('Unknown case(s): '+', '.join(sorted(unknown)))
+    cases=[case for case in cases if case[0] in args.only]
 for name,size,pos,shift,lines in cases:
     result=run_case(('gate_' if args.netlist else '')+'crt_adjust_geometry_'+name,sources,'crt_adjust_geometry_tb','100 ms','CRT_ADJUST_GEOMETRY_PASS',
-        sim_args=libraries+['-gGU5_HORIZONTAL_SIZE='+format(size,'05b'),'-gGU7_HORIZONTAL_POSITION='+format(pos,'07b'),'-gGU6_VERTICAL_SHIFT='+format(shift,'06b'),'-gGINT_TEST_FRAME_LINES='+str(lines),'-gGINT_VISIBLE_LINES='+str(visible_lines)],wall_timeout=300)
+        sim_args=libraries+['-gGU5_HORIZONTAL_SIZE='+format(size,'05b'),'-gGU7_HORIZONTAL_POSITION='+format(pos,'07b'),'-gGU6_VERTICAL_SHIFT='+format(shift,'06b'),'-gGINT_TEST_FRAME_LINES='+str(lines),'-gGINT_VISIBLE_LINES='+str(visible_lines)],wall_timeout=args.wall_timeout)
     assert hashes=={p:hashlib.sha256((root/p).read_bytes()).hexdigest() for p in sources}
     result.update(source_sha256=hashes,horizontal_size_index=size,horizontal_position_index=pos,rows=visible_lines,pixels=288*visible_lines,
         log_sha256=hashlib.sha256((root/result['log']).read_bytes()).hexdigest())
@@ -35,10 +43,12 @@ for name,size,pos,shift,lines in cases:
     assert len(metrics)==5
     result.update(vertical_shift_index=shift,frame_lines=lines,sync_metrics=metrics)
     results.append(result)
-if not args.full_height:
+    partial_name='crt_geometry_'+('_'.join(args.only) if args.only else 'full_height' if args.full_height else 'all')+('_gate' if args.netlist else '_rtl')+'_partial.json'
+    (root/'debug'/partial_name).write_text(json.dumps(dict(completed=results,fit_commit=fit_commit),indent=2)+'\n',encoding='utf-8')
+if not args.full_height and {'production256','down1','up1'} <= {case[0] for case in cases}:
     normal_phase=results[-3]['sync_metrics']['vphase']
     assert (results[-2]['sync_metrics']['vphase']-normal_phase)%774144==3024
     assert (normal_phase-results[-1]['sync_metrics']['vphase'])%774144==3024
-report=dict(cases=results,fit_commit=fit_commit,full_height=args.full_height,scope='Isolated unchanged CRT Adjust and VHDL adapter with corrected VBlank tags: 288 visible/432 total pixels at /7 enable. Each listed case records visible and total rows; the DUT uses its production 256-line generic. Exact source-pixel order, row boundaries, sync periods and bounded sync-width quantization are checked after warm-up. Non-full-height suite also checks position, size and exact +/-1-line vertical phase changes. No extreme-size clipping, setting-change or physical CRT proof; disconnected from production.')
-stem='crt_adjust_geometry'+('_netlist' if args.netlist else '')+('_full_height' if args.full_height else '')+'_checks.json'
+report=dict(cases=results,fit_commit=fit_commit,full_height=args.full_height,requested_cases=[case[0] for case in cases],scope='Isolated unchanged CRT Adjust and VHDL adapter with corrected VBlank tags: 288 visible/432 total pixels at /7 enable. Each listed case records visible and total rows; the DUT uses its production 256-line generic. Exact source-pixel order, row boundaries, sync periods and bounded sync-width quantization are checked after warm-up. Non-full-height suite also checks position, size and exact +/-1-line vertical phase changes. No extreme-size clipping, setting-change or physical CRT proof; disconnected from production.')
+stem='crt_adjust_geometry'+('_netlist' if args.netlist else '')+('_full_height' if args.full_height else '')+('_selected' if args.only else '')+'_checks.json'
 (root/'docs/reference'/stem).write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')

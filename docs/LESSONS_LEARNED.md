@@ -733,6 +733,22 @@ pair before the RTL around it.
 
 ## Testbench discipline
 
+- **[RabbitPunch] A flat visible field is not flat across a black blanking border.** The
+  enabled CRT adapter correctly blacked RGB in HBlank/VBlank, while a combined HQ2x
+  test expected unchanged colour at every visible pixel. An independent native
+  framework capture with matching black blanking agreed at all 256 compact and
+  1152 full-width pixels; the earlier reference that blacked VBlank alone differed
+  at the last pixel of each compact output row. Compare filtered output with the
+  same border conditions, and retain the failed expectation as evidence rather
+  than changing production RTL to satisfy it. See crt_hq_blanking_comparison.json.
+- **[RabbitPunch] Initialize delayed VHDL stimulus before the first clock edge.** A
+  half-cycle-delayed sync signal started at U and arrived at the first rising edge.
+  It contaminated configuration-initialized gate-level feedback and produced a
+  false frozen-buffer diagnosis. Initializing the delayed sync inputs to zero
+  made the same netlist progress. Then the initialized multi-frame test exposed a
+  separate real two-buffer read/write collision. Keep unknown-index, liveness and
+  slot-exclusion checks distinct; an inequality alone can pass with unknown bits.
+
 - **[BallySente] A vendored module's compile WARNING can be a latent fatal.** T80 has carried a
   vcom-1275 "arguments of overloaded `and` are not the same length" warning through several
   sibling cores, noted and ignored. It is a real bug: `T80.vhd:685` masks a 9-bit vector with a
@@ -861,6 +877,22 @@ pair before the RTL around it.
   the comparison script refuse a mismatch.
 
 ## Timing closure
+
+### [RabbitPunch] Compare complete untimed path sets before changing a coverage cap
+
+The common-flip shell had positive slack but failed its existing peripheral
+coverage cap: 111 output paths versus 110. Rebuilding the accepted reference
+reproduced 110. A complete setup/hold path multiset comparison, normalizing only
+anonymous fitter IDs and duplicate-register suffixes, found exactly one new
+loader-idle path to LED[0]; every other path matched. Registering the combined
+indicator moved its status logic behind a timed clock boundary. The clean full
+rebuild passed all 144 timing checks and reduced peripheral output paths to 82,
+with the original cap, pin list and constraints unchanged. The external LED
+changes one clock later; game flags and video retain their original latency.
+Evidence: reference/flip_led_coverage_audit.json and
+reference/full_shell_flip_release_checks.json. A positive slack summary alone
+would have missed the changed untimed logic cone.
+
 
 - **[BallySente] Ask the timing analyser which path fails; do not reason about it.** A filter
   missed 25 ns by 0.182 ns. The critical path "obviously" ran through the shared multiplier, so

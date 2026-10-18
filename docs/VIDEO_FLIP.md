@@ -3,7 +3,8 @@
 The native machine generates RGB and sync for the MiSTer framework's analog
 I/O-board path. Standard 15 kHz CRT operation uses native output with forced
 scandoubling and HQ2x disabled. HDMI aspect/integer-size metadata is separate
-from this native stream. Physical CRT operation and CRT Adjust remain open.
+from this native stream. Optional CRT adjustment is connected and being
+qualified separately in CRT_ADJUST.md; physical CRT operation remains open.
 
 `rabbitpunch_view_flip` transforms coordinates at the existing renderer/scanout
 boundary before analog and HDMI diverge. The visible viewport is X=8..295 and

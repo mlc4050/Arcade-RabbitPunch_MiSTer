@@ -1,6 +1,10 @@
-# CRT Adjust evaluation
+# CRT Adjust
 
-The optional CRT adapter remains disconnected from the production output.
+The optional CRT adapter is connected before the existing output-effects wrapper.
+The main OSD exposes Adjust, horizontal size/position and vertical sync shift.
+Adjust defaults Off; position/shift are hidden until enabled, and size is also
+hidden and disabled during forced doubling or output effects. Direct video
+uses the native effect-free path, so size remains available.
 Native analog output already uses the framework RGB/sync path. These tests do
 not establish physical CRT operation.
 
@@ -14,9 +18,14 @@ Off is a direct RGB/sync/blanking/enable bypass, with no extra pipeline or
 memory latency. On uses the donor's two 512-pixel line banks (1024 x 24 bits),
 reading the completed row while writing the next. This optional path adds
 one buffered row plus pixel/read-rate alignment; it is separate from the
-native one-row-ahead game renderer. It adds no complete frame buffer. The first fit reports 24576 RGB bits plus 129 bits of inferred VSYNC history
-(24705 total, four M10Ks). The original 24576-bit estimate was rejected by
-the RAM gate; the exact two-bank/sync geometry is now audited before refitting.
+native one-row-ahead game renderer. It adds no complete frame buffer. The qualified d9dfc8a standalone fit uses 24705 bits in four M10Ks:
+1024x24 RGB and 129x1 inferred VSYNC history, both checked exactly. It uses
+199 ALMs, 288 registers, zero DSPs and no PLL at a conservative 48 MHz.
+All reported corners and all six timing-coverage categories pass, with minimum
+setup +6.297 ns and hold +0.145 ns. The original 24576-bit estimate was
+rejected before the sync RAM was audited; that failure is preserved in
+reference/crt_adjust_budget_rejected.json. No donor change was made.
+See reference/crt_adjust_synth.json.
 
 Horizontal size changes the read enable, not a generated clock. The fixed
 /7 native cadence gives a period of 140 twentieths of a system clock. Each
@@ -52,12 +61,91 @@ Evidence: reference/crt_adjust_control_checks.json and
 reference/crt_adjust_geometry_checks.json. These synthetic geometry tests
 complement the game-renderer MAME comparisons; they are not MAME captures.
 
-A full-height RTL control now checks all 62208 pixels across 216 visible
+Full-height RTL and synthesized-netlist controls now check all 62208 pixels across 216 visible
 rows in a 256-line frame with no missing first or last row. Evidence:
-reference/crt_adjust_geometry_full_height_checks.json.
+reference/crt_adjust_geometry_full_height_checks.json and
+reference/crt_adjust_geometry_netlist_full_height_checks.json.
 
-Still open: functional-netlist geometry replay, extreme-size clipping, setting
-changes, main-OSD wiring and actual monitor behavior. No CRT Adjust option is
-advertised by the production menu yet. Vertical-size ring buffering is not
-included in this evaluation: it adds multiple rows and its cabinet mode expects
-at least eight system clocks per native pixel, whereas this core uses seven.
+The synthesized bypass/all-32-rate control also passes. Five compact netlist
+picture cases pass, and the longer production-256-line control plus positive/
+negative one-line vertical shifts now pass, including exact phase comparisons.
+The initial 300-second wall timeout was a performance limit; completed compact
+cases and the uncompleted transcript were preserved, and only unfinished cases
+were retried with progress logging and a larger budget. See
+reference/crt_adjust_netlist_checks.json,
+reference/crt_adjust_geometry_netlist_compact_checks.json and
+reference/crt_adjust_geometry_netlist_selected_checks.json.
+
+The exact provisional native raster also passes the synthesized scoreboard:
+432x256 total, 288x216 visible, HSync 352..392 and VSync 232..240. All 62208
+source pixels and sync periods pass; see
+reference/crt_adjust_native_raster_netlist_checks.json.
+
+The actual renderer, shared SDRAM and production PLL also pass through the
+enabled zero-adjustment path: all 62208 Rabbit Punch attract pixels match
+the raw MAME image, with no underflow and maximum 2484/3024 cycles per row.
+This is a captured static scene with synthetic competing CPU traffic, not
+executing-CPU gameplay. See
+reference/scanout_pll_5357ps_crt_rpunch_attract_checks.json.
+
+The production controls use status bit 94 (enable), 99:95 (signed horizontal
+size), 106:100 (the 97-entry horizontal position index) and 112:107 (signed
+vertical sync shift). Menu masks H6 and H7 control visibility. All encoded
+fields default to zero; no offset is implied by an untouched configuration.
+
+The expanded production menu also passes a fresh standalone host fit and
+functional synthesized HPS protocol test, including every configuration
+character, status and file transfers. See reference/host_crt_synth.json and
+reference/host_netlist_checks.json.
+
+Live size/position changes in vertical blank recover exact source pixels and
+sync periods after two bounded fixture frames. Disabling the optional path
+also restores exact native bypass on every tested system clock before reenable.
+See reference/crt_live_controls_checks.json. This checks settled recovery; it
+does not promise a glitch-free picture while changing a setting.
+
+The connected non-debug full shell 77a7ff0 passes all 144 timing checks and
+the unchanged clock/pin coverage gates: minimum setup +0.435 ns, hold
++0.042 ns, recovery +3.606 ns, removal +0.366 ns and pulse width +1.122 ns.
+It uses 14877 ALMs, 24829 registers, 183 M10Ks, 1404768 RAM bits, 34 DSPs
+and three PLLs. The full shell places the 1024x24 CRT RGB store in three
+M10Ks and uses registers for sync history; the isolated fit instead inferred
+a separate 129-bit sync RAM. Both resource results are recorded at their
+exact build commits. See reference/full_shell_crt_release_checks.json.
+
+The instrumented e48d817 shell at seed 2 also passes all 164 timing checks,
+required probes and unchanged coverage limits: minimum setup +0.288 ns,
+hold +0.080 ns, 15366 ALMs, 26152 registers and the same 183 M10Ks.
+See reference/full_shell_crt_debug_seed2_checks.json.
+
+The Rabio Lepus gameplay capture also matches all 62208 pixels through the
+CRT path, with no underflow and maximum 1966/3024 clocks per row; see
+reference/scanout_pll_5357ps_crt_rabiolep_play1000_checks.json.
+
+Combined full-width/native, forced-doubling and direct-video controls pass;
+see reference/crt_video_options_0_checks.json, crt_video_options_1_checks.json
+and crt_video_options_6_checks.json. The extended six-row run exceeded its
+wall budget after two input frames and is preserved separately. The bounded
+one-row HQ2x constant-colour assertion was an invalid test expectation:
+the CRT donor blacks both horizontal and vertical blanking, and HQ2x filters
+the visible border with black. Native framework captures with the same blanking
+match every one of 256 compact and 1152 production-width output pixels.
+The maintained combined regression now captures HQ2x output and compares every
+pixel to that independent native capture; both sizes pass with zero unknowns
+or differences. No production CRT or vendor HDL changed for this correction.
+See reference/crt_hq_blanking_comparison.json,
+reference/crt_video_options_compact_2_checks.json and
+reference/crt_video_options_2_checks.json. The original failed assertion and
+wall timeout remain in crt_hq_colour_rejected.json and
+crt_video_options_wall_timeout.json with their exact original evidence.
+This is a one-visible-row framework integration proof, not a general HQ2x
+patterned-edge algorithm comparison or unfiltered-MAME image comparison.
+All three combined scanline-strength controls also pass the compact fixture;
+see reference/crt_video_options_compact_3_4_5_checks.json.
+
+Still open: patterned combined HQ2x images,
+extreme-size clipping, live vertical-shift/combined-output transitions and
+actual monitor behavior. Vertical-size ring buffering is omitted: it adds
+multiple rows and its cabinet mode expects at least eight system clocks per
+native pixel, whereas this core uses seven. V-Shift changes sync phase,
+not vertical picture size.

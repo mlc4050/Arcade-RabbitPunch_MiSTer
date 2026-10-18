@@ -5,7 +5,7 @@ as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
 
 Status: the VHDL CPU, memory, video, audio, ROM-loading, controls and high-score
 services are connected to the MiSTer boundary. The preceding non-debug full build passes prototype timing
-gates. HDMI sizing metadata and common screen flip are being checked; no hardware-verified playable RBF or release exists.
+gates including HDMI sizing metadata and common screen flip. Optional CRT adjustment also passes a full-shell fit; no hardware-verified playable RBF or release exists.
 
 Verification includes:
 
@@ -19,7 +19,7 @@ Verification includes:
   Rabio Lepus gameplay at frame 1000 both match exactly.
 - The current non-debug MiSTer fit passes all reported corners at a fitted
   46.667 MHz game clock and 5.357 ns SDRAM phase, with minimum setup/hold
-  margins +0.525/+0.078 ns in the accepted aspect-control snapshot. The prior native-output debug baseline also passes. The prototype SDRAM budgets and
+  margins +0.435/+0.042 ns in the accepted CRT/common-flip snapshot. The instrumented CRT snapshot e48d817 at seed 2 also passes all 164 checks (setup +0.288 ns, hold +0.080 ns). The prototype SDRAM budgets and
   inherited peripheral/debug pin coverage scope are explicit in
   [SDRAM pin timing](docs/SDRAM_PIN_TIMING.md); physical margins remain unverified.
 - Native RAM startup contents, DDR/direct ROM loading, replacement/reset/pause,
@@ -33,8 +33,7 @@ interactive game execution and the remaining standard video features still
 require bring-up. Optional forced doubling, HQ2x and scanline modes now pass
 functional tests and full fits in both revisions. The instrumented seed-2 retry
 passes all 164 reported timing checks. Common CRT/HDMI flip passes both complete rotated-frame comparisons; its
-new full build remains unqualified while the audited LED-only coverage fix
-is refitted; see [analog output and flip](docs/VIDEO_FLIP.md). See [machine integration](docs/MACHINE_INTEGRATION.md),
+full build passes all 144 timing checks and the unchanged coverage limits. Combined CRT/HQ2x colour validation remains open; see [analog output and flip](docs/VIDEO_FLIP.md). See [machine integration](docs/MACHINE_INTEGRATION.md),
 [sound bring-up](docs/SOUND_BRINGUP.md), [prototype limitations](docs/HACKS.md)
 and [read-only debug probes](docs/DEBUG.md) for exact scope.
 

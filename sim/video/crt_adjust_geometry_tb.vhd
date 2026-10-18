@@ -3,6 +3,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use std.textio.all;
 
 entity crt_adjust_geometry_tb is
     generic (
@@ -171,6 +172,18 @@ begin
                 v_previous_active := v_active;
             end if;
         end if;
+    end process;
+    progress : process
+        file v_progress : text open write_mode is "progress.txt";
+        variable v_line : line;
+    begin
+        loop
+            wait for 1 ms;
+            write(v_line, time'image(now) & "; frame=" & integer'image(sint_frames) &
+                "; row=" & integer'image(sint_y) & "; column=" & integer'image(sint_x));
+            writeline(v_progress, v_line);
+            flush(v_progress);
+        end loop;
     end process;
     watchdog : process
     begin

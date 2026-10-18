@@ -1,0 +1,23 @@
+{
+  "accepted": false,
+  "reason": "Flat-field colour assertion at 318360 ns in combined CRT/HQ2x one-row fixture",
+  "fixture": [
+    288,
+    1,
+    432,
+    4
+  ],
+  "source_commit": "d6074c8",
+  "archive": "debug/fit_archive/crt_hq_d6074c8_colour_failure",
+  "source_sha256": {
+    "sim/video/crt_video_options_tb.vhd": "0e23d6664eab1dd891955b28cd79679b4b3b535a66d6bfe33a7e44e9b38720c8",
+    "rtl/rabbitpunch_crt_adjust.vhd": "aad8878d3ebe44a18a038c86fb7131a09699feae7898256ddc9c193310bb5c7e",
+    "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+    "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+    "debug/baselines/crt_video_options_2_short/result.log": "65196fe41e722e504e7f649bb2d4495b1e56fa51142439b5094526e2b90be339",
+    "debug/baselines/crt_video_options_2_short/run.do": "58af9b9f9908f20507ddb153a95f0c28e062b48dc69a63facf0a72a339ecdd5c",
+    "debug/crt_video_options_2_short_runner.log": "d4883c354ce03260778390a2573f6cccfd4ed623112ed7eccebe8f79a0c6c1dc"
+  },
+  "scope": "Historical rejected test assertion retained verbatim in its archive. Resolved by matching the native reference horizontal/vertical blanking, not by changing production or vendor HDL. Not a hardware failure.",
+  "resolution": "Invalid constant-colour expectation at a black blanking border. Independent native framework captures and maintained combined tests match all 256 compact/1152 full-width pixels, with no production HDL change. See crt_hq_blanking_comparison.json and crt_video_options_2_checks.json."
+}

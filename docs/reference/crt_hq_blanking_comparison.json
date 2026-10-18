@@ -1,0 +1,123 @@
+{
+  "accepted": true,
+  "cases": [
+    {
+      "visible_width": 64,
+      "compared_pixels": 256,
+      "differing_pixels": 0,
+      "captures": {
+        "reference_both": {
+          "evidence": {
+            "case": "diag_crt_hq_reference_both",
+            "pass_marker": "HQ_REFERENCE_BOTH_CAPTURE_PASS",
+            "log": "debug\\baselines\\diag_crt_hq_reference_both\\result.log",
+            "source_sha256": {
+              "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+              "debug/diag_crt_hq_reference_both_tb.vhd": "3d57f25d64850e7976d2e02f06173924b88b7e4d048671413609d0d427be22ae"
+            },
+            "pixels": 256,
+            "unknown_pixels": 0,
+            "scope": "Native qualified HQ2x capture with black horizontal and vertical blanking; no CRT adapter. Framework reference, not unfiltered MAME.",
+            "pixels_sha256": "552ab2e7a66a0b839822993ad1b8f3a76ea7370c9622b88820259ddc2efebce5",
+            "log_sha256": "2b7629ab045bd324344164a460af983632798a76db75585f04f285aebd16def6",
+            "template_sha256": "c5b0a144438bebc42772de4c5c66aec88382472cb853919d2ff5e19e40b7f73b",
+            "visible": [
+              64,
+              1
+            ]
+          },
+          "pixels_sha256": "552ab2e7a66a0b839822993ad1b8f3a76ea7370c9622b88820259ddc2efebce5",
+          "log_sha256": "2b7629ab045bd324344164a460af983632798a76db75585f04f285aebd16def6",
+          "colours": {
+            "2A69AC": 4,
+            "3179C5": 252
+          }
+        },
+        "adjusted": {
+          "evidence": {
+            "case": "diag_crt_hq_adjusted",
+            "pass_marker": "HQ_ADJUSTED_CAPTURE_PASS",
+            "log": "debug\\baselines\\diag_crt_hq_adjusted\\result.log",
+            "source_sha256": {
+              "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+              "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+              "rtl/rabbitpunch_crt_adjust.vhd": "aad8878d3ebe44a18a038c86fb7131a09699feae7898256ddc9c193310bb5c7e",
+              "debug/diag_crt_hq_adjusted_tb.vhd": "c72833583d9827345ec4bf881754f14f694e84787421fbecc5f44eeac7be3f23"
+            },
+            "pixels": 256,
+            "unknown_pixels": 0,
+            "scope": "Diagnostic capture only; pixel-value comparison remains pending"
+          },
+          "pixels_sha256": "552ab2e7a66a0b839822993ad1b8f3a76ea7370c9622b88820259ddc2efebce5",
+          "log_sha256": "f1c44182edb760975b10b9e2c7f194ba3ddaadac864cbd43e0ac6faa2abeef47",
+          "colours": {
+            "2A69AC": 4,
+            "3179C5": 252
+          }
+        }
+      }
+    },
+    {
+      "visible_width": 288,
+      "compared_pixels": 1152,
+      "differing_pixels": 0,
+      "captures": {
+        "reference_both": {
+          "evidence": {
+            "case": "diag_crt_hq_reference_both_wide",
+            "pass_marker": "HQ_REFERENCE_BOTH_CAPTURE_PASS",
+            "log": "debug\\baselines\\diag_crt_hq_reference_both_wide\\result.log",
+            "source_sha256": {
+              "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+              "debug/diag_crt_hq_reference_both_wide_tb.vhd": "555a603db9116c86ae53f13c8ba66e9fc70038801bacc661f95a4063c57f0857"
+            },
+            "pixels": 1152,
+            "unknown_pixels": 0,
+            "scope": "Native qualified HQ2x capture with black horizontal and vertical blanking; no CRT adapter. Framework reference, not unfiltered MAME.",
+            "pixels_sha256": "24d6b00bb5bb9d18bf8e8098646d9eeb1ae243ade91fc47052f67bbcee255412",
+            "log_sha256": "48a410caf8ffdbd863c589cd64e41f708a0bb0b88a568537fdfb4fadc237de00",
+            "template_sha256": "c5b0a144438bebc42772de4c5c66aec88382472cb853919d2ff5e19e40b7f73b",
+            "visible": [
+              288,
+              1
+            ]
+          },
+          "pixels_sha256": "24d6b00bb5bb9d18bf8e8098646d9eeb1ae243ade91fc47052f67bbcee255412",
+          "log_sha256": "48a410caf8ffdbd863c589cd64e41f708a0bb0b88a568537fdfb4fadc237de00",
+          "colours": {
+            "2A69AC": 4,
+            "3179C5": 1148
+          }
+        },
+        "adjusted": {
+          "evidence": {
+            "case": "diag_crt_hq_adjusted_wide",
+            "pass_marker": "HQ_ADJUSTED_CAPTURE_PASS",
+            "log": "debug\\baselines\\diag_crt_hq_adjusted_wide\\result.log",
+            "source_sha256": {
+              "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+              "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+              "rtl/rabbitpunch_crt_adjust.vhd": "aad8878d3ebe44a18a038c86fb7131a09699feae7898256ddc9c193310bb5c7e",
+              "debug/diag_crt_hq_adjusted_wide_tb.vhd": "9115f6eb31747b8a40cb838294db155c582f826fe9590ca2a0ff5643e7860b61"
+            },
+            "pixels": 1152,
+            "unknown_pixels": 0,
+            "scope": "Diagnostic capture only; pixel-value comparison remains pending"
+          },
+          "pixels_sha256": "24d6b00bb5bb9d18bf8e8098646d9eeb1ae243ade91fc47052f67bbcee255412",
+          "log_sha256": "40311559a2c5bbd113169b7136b450ecb9d41ec46d536be98fc0b509de77fa51",
+          "colours": {
+            "2A69AC": 4,
+            "3179C5": 1148
+          }
+        }
+      }
+    }
+  ],
+  "vblank_only_reference_differences": [
+    127,
+    255
+  ],
+  "diagnosis": "The enabled CRT donor blacks RGB outside horizontal and vertical blanking. HQ2x blends the visible border with black. A native framework reference with matching black blanking produces byte-identical pixels; the earlier constant-colour expectation was invalid. No production RTL or vendor change was required.",
+  "scope": "Independent native and enabled-CRT captures through the same qualified framework effects netlist. Compact and production horizontal widths, one visible row, /7 enables, all known pixels. Framework integration reference, not unfiltered MAME, a general HQ2x algorithm proof or physical monitor validation."
+}

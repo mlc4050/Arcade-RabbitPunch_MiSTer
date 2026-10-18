@@ -1,0 +1,29 @@
+{
+  "accepted": false,
+  "reason": "1800-second wall-clock limit",
+  "functional_assertion_failure": false,
+  "completed_input_frames": 2,
+  "required_input_frames": 3,
+  "visible": [
+    288,
+    6
+  ],
+  "total": [
+    432,
+    12
+  ],
+  "source_snapshot": "e48d817",
+  "log": "debug/baselines/crt_video_options_0/result.log",
+  "archive": "debug/fit_archive/crt_video_options_e48d817_six_rows_timeout",
+  "source_sha256": {
+    "sim/video/crt_video_options_tb.vhd": "d4e126f43056be606f2f024c161bc2a99ecc6d137dbfdb0bf468d826c5e55ed1",
+    "scripts/run_crt_video_options_tests.py": "97e5590be087f09fd884ab1061b1520d7e7031ee33ffd78aee2a30847cf4cfeb",
+    "rtl/rabbitpunch_crt_adjust.vhd": "aad8878d3ebe44a18a038c86fb7131a09699feae7898256ddc9c193310bb5c7e",
+    "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+    "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+    "debug/baselines/crt_video_options_0/result.log": "b2634fadd9d308e3c7324476d6f5332397ea62f1b0adc3c164519cbc949ea5d7",
+    "debug/baselines/crt_video_options_0/run.do": "04861c755d9fd361a76dafbb09e7dc165878e59f2e44ed6517b2c9cd07db4f8a",
+    "debug/crt_video_options_runner.log": "c9767ca865c6d6c224fa52692b4944f292f3935b513efbaffad4c9aa83ca2b33"
+  },
+  "scope": "Combined CRT RTL and qualified effects netlist exceeded ModelSim Starter runtime budget after two frame markers; no pass marker or functional assertion. Parser/compiler succeeded. No passing claim. Retried with bounded vertical geometry, preserving production horizontal width."
+}
