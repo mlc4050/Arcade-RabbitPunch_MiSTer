@@ -19,12 +19,13 @@ hashes = {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name 
 first.update(counterclockwise=False, pixels=128)
 libraries = [item for name in ('cyclonev_ver','altera_ver','altera_lnsim_ver','lpm_ver','sgate_ver') for item in ('-L',name)]
 results = [first]
-for direction in ('true',):
-    result = run_case('rotation_arrival_' + direction, sources, 'hdmi_rotation_tb', '1 ms',
-                      'HDMI_ROTATION_PASS', sim_args=libraries + ['-gGBOOL_COUNTERCLOCKWISE=' + direction], wall_timeout=120)
+for direction, full in (('true', False), ('false', True), ('true', True)):
+    result = run_case('rotation_arrival_' + direction + ('_full' if full else ''), sources, 'hdmi_rotation_tb', '100 ms',
+                      'HDMI_ROTATION_PASS', sim_args=libraries + ['-gGBOOL_COUNTERCLOCKWISE=' + direction] + (['-gGINT_VISIBLE_WIDTH=288', '-gGINT_VISIBLE_HEIGHT=216', '-gGINT_TOTAL_WIDTH=432', '-gGINT_TOTAL_HEIGHT=256', '-gGINT_HORIZONTAL_SYNC_START=352', '-gGINT_HORIZONTAL_SYNC_END=392', '-gGINT_VERTICAL_SYNC_START=232', '-gGINT_VERTICAL_SYNC_END=240'] if full else []), wall_timeout=1800)
     assert hashes == {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in sources}
-    result.update(counterclockwise=direction == 'true', pixels=128, source_sha256=hashes,
+    result.update(counterclockwise=direction == 'true', pixels=62208 if full else 128, full_raster=full, source_sha256=hashes,
                   log_sha256=hashlib.sha256((root / result['log']).read_bytes()).hexdigest())
     results.append(result)
+    (root / "debug/hdmi_rotation_arrival_partial_checks.json").write_text(json.dumps(results, indent=2) + "\n")
 (root / 'docs/reference/hdmi_rotation_arrival_checks.json').write_text(json.dumps(dict(cases=results,
-    scope='Quartus functional netlist of unchanged donor plus descriptive VHDL boundary. 16x8 nonuniform image at /7 enables: all CW/CCW DDR pixel addresses, colours, byte masks, unique pixels, framebuffer dimensions/stride/base and stable write-buffer selection after measurement warm-up. DDR busy is always zero, loader disconnected; no backpressure safety, full-size image, frame latency or physical output proof.'), indent=2) + '\n')
+    scope='Quartus functional netlist of unchanged donor plus descriptive VHDL boundary. 16x8 controls and full 288x216 images in the 432x256 native raster at /7 enables: all CW/CCW DDR pixel addresses, colours, byte masks, unique pixels, framebuffer dimensions/stride/base and stable write-buffer selection after measurement warm-up. DDR busy is always zero, loader disconnected; no backpressure safety, frame latency or physical output proof.'), indent=2) + '\n')
