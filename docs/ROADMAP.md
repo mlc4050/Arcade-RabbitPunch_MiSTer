@@ -137,18 +137,19 @@ is excluded from the first scope. No remote repository has been created or publi
 The expanded local survey and MRA deliverables are in [REUSE_SURVEY.md](REUSE_SURVEY.md).
 It distinguishes reused chip cores, adapted video pipeline designs, and new VHDL board glue.
 
-These are inspected local candidates, not vendored or validated for Rabbit Punch yet.
-Exact donor commits, dirty-tree checks, copied file hashes, full dependency lists, and
-unaltered baseline tests must be captured before accepting them.
+The table records the selected local dependencies; TG68K remains evaluation only.
+Exact donor commits, selected-file cleanliness and copied byte hashes are recorded
+in reference/vendor_manifest.json and each PROVENANCE.md. Behavioral and fitted
+validation scopes are recorded separately in BASELINES.md and subsystem documents.
 
 | Block | Candidate | Evidence / licence |
 |---|---|---|
 | 68000 | `rtl/cpu/fx68k/`, from Seta | GPLv3; unchanged donor loop test matches 14 clocks; TG68K evaluation retained for comparison only |
 | Z80 | `D:/git/Arcade-Psikyo_MiSTer/rtl/cpu/t80/` | PROVENANCE.md; MiSTer T80 830fd0315f0af5cdbcb0e703f1cea3ce4e91f538; BSD-style; VHDL |
-| YM2151 | `D:/git/Arcade-JalecoMS1BCD_MiSTer/rtl/third_party/jt51/hdl/jt51.v` | Header GPLv3+; Verilog; exact donor version pending |
-| uPD7759 | `D:/git/Arcade-SystemC2_MiSTer/rtl/jt7759/hdl/jt7759.v` | Header GPLv3+; Verilog; standalone mode, bank/reset/start adaptation required |
-| SDRAM | `D:/git/Arcade-Seta_MiSTer/rtl/memory/sdram/` | PROVENANCE.md; GPLv3+ inherited transport; verify supported geometry and read-data fixes |
-| Framework | MiSTer-devel/Template_MiSTer | Fetch and pin at bootstrap; wrapper uses framework HDL; no sys edits |
+| YM2151 | `rtl/sound/jt51/` | GPLv3+; unchanged from JalecoMS1BCD f16ec2b; donor does not record exact upstream JT51 revision |
+| uPD7759 | `rtl/sound/jt7759/` | GPLv3+; selected SNK68 5661336, replacing the SystemC2 candidate; bank/reset/start wrapper integrated |
+| SDRAM | `rtl/memory/sdram/` | GPLv3+; unchanged Vamphalf 8f9d15b; native transport and production-phase command-model checks pass |
+| Framework | MiSTer-devel/Template_MiSTer | Pinned Template 9c8eadb; wrapper uses framework HDL; no sys edits |
 | Tile/sprite primitives | Direct JTFRAME module reuse with VHDL board adapters | See FRAMEWORK_DECISION.md for candidate versions and test gates |
 | Board bitmap/mixer/GGA/bus | New VHDL | MAME behavioral reference; no certified board video RTL has been identified |
 

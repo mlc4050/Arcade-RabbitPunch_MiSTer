@@ -13,6 +13,11 @@ this does not change any imported component's own licence.
 | TG68K.C evaluation copy | LGPL-3.0-or-later; Tobias Gubener and contributors | rtl/cpu/tg68k/PROVENANCE.md and retained source headers |
 | Donor CPU testbenches | Copied from the named local core repositories | sim/vendor/PROVENANCE.md and source manifest |
 | DDR PHY and word-copy engine | GPL v3 in the Psikyo donor README/LICENSE; unchanged | rtl/memory/ddram/PROVENANCE.md and retained LICENSE/UPSTREAM_README.md |
+| JT51 / YM2151 | GPL-3.0-or-later; Jose Tejada Gomez | rtl/sound/jt51/PROVENANCE.md and retained LICENSE/README |
+| JT7759 / uPD7759 | GPL-3.0-or-later; Jose Tejada Gomez | rtl/sound/jt7759/PROVENANCE.md and retained LICENSE/README |
+| SDRAM controller and command model | GPL-3.0-or-later; Sorgelig and donor contributors | rtl/memory/sdram/PROVENANCE.md and sim/vendor/sdram/ |
+| CRT Adjust | GPL-3.0-or-later; Umberto Parisi, Andrea Bogazzi | rtl/video/crt_adjust/PROVENANCE.md and source notices |
+| HDMI screen_rotate_two | GPL-2.0-or-later; Sorgelig | rtl/video/rotation/PROVENANCE.md and source notices |
 | Skill tooling and workflow assets | Inherited from MiSTer-CoreSkill | Bootstrap history and original file notices |
 
 Exact donor commits, source paths and file hashes are in
@@ -27,3 +32,10 @@ are kept in a separate reference snapshot with their own original notices.
 
 Full component notices/licence texts and build-source obligations must be audited
 before distribution. This development checkpoint is not a binary release.
+
+Local vendor-file integrity passes for every entry in
+[the pinned manifest](docs/reference/vendor_manifest.json); the checked byte hashes
+and file count are retained in
+[the integrity report](docs/reference/vendor_integrity_checks.json).
+The JT51/JT7759 records pin the selected donor commits and file bytes; they do
+not claim an exact upstream chip-repository revision where the donor omits it.

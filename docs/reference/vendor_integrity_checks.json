@@ -1,0 +1,312 @@
+{
+  "accepted": true,
+  "checked_files": 76,
+  "manifest_sha256": "07af91c9d12e751e75982559ec1594b5e57d913bc29cf457d9a21516ba0eb831",
+  "files": [
+    {
+      "path": "rtl/cpu/tg68k/TG68K_Pack.vhd",
+      "sha256": "7cb63abfe750563cc547a31fc80dac31c684fc30e4968d3fa534c276b6c86f7c"
+    },
+    {
+      "path": "rtl/cpu/tg68k/TG68K_ALU.vhd",
+      "sha256": "fa46f7dc48459b2a1b1c6c4e9becd2f7eda8bc2844756e52911152bb9629e594"
+    },
+    {
+      "path": "rtl/cpu/tg68k/TG68KdotC_Kernel.vhd",
+      "sha256": "7788d15cf23a4f62392666764bc82b86ba6965f7f5321e8b0047b5013ef57038"
+    },
+    {
+      "path": "rtl/cpu/tg68k/TG68K.vhd",
+      "sha256": "a4877cb7013ec6eedb7558d45ebc9700085f5cb1f4e60ed210994d4fbd656876"
+    },
+    {
+      "path": "rtl/cpu/tg68k/DONOR_NOTES.md",
+      "sha256": "b5ede570f97c9da3595f6b4af12a6913462885b0a108914f30d28df270307dab"
+    },
+    {
+      "path": "rtl/cpu/t80/T80_Pack.vhd",
+      "sha256": "f0e6aff273f25d904fd55e53372e44b52d07a82b8c6cb58fe73ea7fde06ec22d"
+    },
+    {
+      "path": "rtl/cpu/t80/T80_Reg.vhd",
+      "sha256": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783"
+    },
+    {
+      "path": "rtl/cpu/t80/T80_MCode.vhd",
+      "sha256": "d4f03ddd9693e341ace2a685153838aec39085826fd2f6128ece1a9f8852f02e"
+    },
+    {
+      "path": "rtl/cpu/t80/T80_ALU.vhd",
+      "sha256": "823a062b8be873505ac16e627351a5105101243a11483bf8f2446214893b739e"
+    },
+    {
+      "path": "rtl/cpu/t80/T80.vhd",
+      "sha256": "ba63aaa402eadfc0d47e59e9747c516a22b7454ad0b27430e99d968efcae6ec0"
+    },
+    {
+      "path": "rtl/cpu/t80/T80se.vhd",
+      "sha256": "d528be5e4a75a8e45d1965740bcd6c77180bd54e1862b8e177bea8a432e58588"
+    },
+    {
+      "path": "rtl/cpu/t80/DONOR_NOTES.md",
+      "sha256": "51ab9ddcdaa8838be73bac002f7977087eed4fc98bae33323d77b6a4ab5b21aa"
+    },
+    {
+      "path": "rtl/jtframe/jtframe_obj_buffer.v",
+      "sha256": "3ea75f439a67b0f30ef48222d49bff86f496b0ab3d1f95d9931f08fa6a0f85f0"
+    },
+    {
+      "path": "rtl/jtframe/jtframe_dual_ram.v",
+      "sha256": "c92fbad5e7504cdb365ccde2f8d385f2154a89b4cae37d93230fcb3ee2971d13"
+    },
+    {
+      "path": "rtl/jtframe/jtframe_draw.v",
+      "sha256": "2c52e8735ddf3eb0925c42d8f893035fb4180ed69f61cd5eaa7120b519be8edc"
+    },
+    {
+      "path": "rtl/jtframe/DONOR_NOTES.md",
+      "sha256": "8029639f918f507c2f6825e94d0a3f2698c9a18475ee731661fae337ac94d7a1"
+    },
+    {
+      "path": "sim/vendor/tg68k/tb_tg68k_boot.vhd",
+      "sha256": "53de29932fbf45f527985bb8193b8dcc5cb7efd4d9addaa5832ae9fac27012e0"
+    },
+    {
+      "path": "sim/vendor/t80/tb_t80_boot.vhd",
+      "sha256": "80be58950d77052dd4e4f9c8c22974b83bf48f237563cb8cd48743758e7ba3d8"
+    },
+    {
+      "path": "sim/vendor/tg68k/tb_tg68k_smoke.sv",
+      "sha256": "57fb442b444d9f84b8b255b144730715db2adc19e4f9285f6521b369cecf5e8a"
+    },
+    {
+      "path": "sim/vendor/tg68k/tb_tg68k_ccr.sv",
+      "sha256": "b05c4c4e012e96970ece63177b2dde3109932a047bf48c5d5becb359389dd915"
+    },
+    {
+      "path": "sim/vendor/tg68k/tb_tg68k_pace.sv",
+      "sha256": "d020da4834dcac7f2eb5e6de18335a6749c2527c1336f8c6b0fb10e312702ff7"
+    },
+    {
+      "path": "rtl/cpu/fx68k/fx68k.sv",
+      "sha256": "846602cd0fc25a9eee04f641ba5e6fcfa05a80a1db417898040c78b1f7449a33"
+    },
+    {
+      "path": "rtl/cpu/fx68k/fx68kAlu.sv",
+      "sha256": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775"
+    },
+    {
+      "path": "rtl/cpu/fx68k/uaddrPla.sv",
+      "sha256": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a"
+    },
+    {
+      "path": "rtl/cpu/fx68k/microrom.mem",
+      "sha256": "06b3325e369b5bbf9ed2ec76737fe19aea12573775858a4ca62b8e5bcc173d0a"
+    },
+    {
+      "path": "rtl/cpu/fx68k/nanorom.mem",
+      "sha256": "46ef9dea89372021949a78674aa67cf46a485d9524e3df9655dabc5126170457"
+    },
+    {
+      "path": "rtl/cpu/fx68k/LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "rtl/cpu/fx68k/README.md",
+      "sha256": "c96263ece59f55f759c046ca8027b67a6805e9cb31995f0a1bc175a826e15f96"
+    },
+    {
+      "path": "rtl/cpu/fx68k/DONOR_NOTES.md",
+      "sha256": "8b564622d7c2ac4ed278faf46a502c9a63d82baa3c43ab39de47614314c46126"
+    },
+    {
+      "path": "sim/vendor/fx68k/tb_fx68k_pace.sv",
+      "sha256": "c5689b9a7aa037556ddd3011cadb64329cbb9c62b5531346957ab1c477a28199"
+    },
+    {
+      "path": "rtl/memory/sdram/sdram.sv",
+      "sha256": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495"
+    },
+    {
+      "path": "sim/vendor/sdram/sdram_chip_model_wide.sv",
+      "sha256": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_acc.v",
+      "sha256": "633319a0e89a78d390cba54a24aabf6f1019b705b378b636e246dcf44c8829f8"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_eg.v",
+      "sha256": "6e7c5f315edc82b70918ea61d6d5c992204d4e8b272e33fb3ce539a9843cac5e"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_exp2lin.v",
+      "sha256": "cecc44acf6d7c8a81e80638e4a6eeb46f17d6c8d809e7a928338553bb23fb400"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_exprom.v",
+      "sha256": "c9f33ede4c1c0af6f54ae45620d986a2c5a2f0ef16b453dc7d2eeeac85f8cbb5"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_kon.v",
+      "sha256": "e1bb08fe65a53d2dc871459cc91e4beeec9efb9e839b3a39a941fa27ac19ba0f"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_lfo.v",
+      "sha256": "2bb0e19b51982f761fd50eb992c90f6dbadf467528ac09fa033b48020cd8d193"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_lin2exp.v",
+      "sha256": "c4351ea7711364ab394ab510326111dc5047f4e57830bddef15163cbc4dcb98e"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_mmr.v",
+      "sha256": "db3a6506091e6ea99a17ad2f5b8b11ecf36d97f74dbf0c1098cf6db601d6fdd6"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_mod.v",
+      "sha256": "1a04fe51a56756a98b577547bbd95cf984283288f2da2e4946d75063a69d357c"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_noise_lfsr.v",
+      "sha256": "6b58949a51dbfe8c96f19eac3aa84aaace7fcc5cc4e1902c084a93d3d1c4da91"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_noise.v",
+      "sha256": "87b70082becc58ece4c223ea5ed01b0c0bc0b05ae95ace9b498768429232f360"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_op.v",
+      "sha256": "5dbb743c49af67e6dff7e6c65691a66371aaf5a126834525f9501a8af1420bbf"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_pg.v",
+      "sha256": "d52c369e535196ee260243b2342c6a526a1d95425440512037f3f3b5185f0a8a"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_phinc_rom.v",
+      "sha256": "41fefe0b9bc9a3b71a036d12d723666e4b588c57625228eee278f9704a6f53b1"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_phrom.v",
+      "sha256": "b3fb0623737dd22befa0bfa9a130d7b1437e81ff3e1842538251d5cd29a75c89"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_pm.v",
+      "sha256": "9625bda77a523371fc4704ac66cfec95a9d1aff343c2e770ea5aba11eb50c8f3"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_reg_ch.v",
+      "sha256": "2303d898fa49bf67fa8aace6c1a1e00e48d2951f9a221e75058233953f670aad"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_csr_op.v",
+      "sha256": "b129bf97cc155bc0e4312287af79b2c7985852ef65c1768f23ffa31badd5b648"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_reg.v",
+      "sha256": "a9913cb08f562046c2f9375fd6f7a4a5a0eb4d46266df303875059761f304de7"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_sh.v",
+      "sha256": "71246f6b6989f922220cdd370cee52ecd56c7244e11073ddc618028a4136f0aa"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51_timers.v",
+      "sha256": "e885ffd11d62c2bf42aafb90eb30e681c3d98ae9c4fe6714b13d72f491347e70"
+    },
+    {
+      "path": "rtl/sound/jt51/hdl/jt51.v",
+      "sha256": "4c5f80dae49f435686d3f917897df867ba7725a44bd52c5d652658ba178689b0"
+    },
+    {
+      "path": "rtl/sound/jt51/LICENSE",
+      "sha256": "589ed823e9a84c56feb95ac58e7cf384626b9cbf4fda2a907bc36e103de1bad2"
+    },
+    {
+      "path": "rtl/sound/jt51/README.md",
+      "sha256": "84796dec6271dff44c55efbbe97f0e8cc3dfa796b3b8c5b8fbc30438cb8bdc81"
+    },
+    {
+      "path": "sim/vendor/jt51/sep32.v",
+      "sha256": "e1f1733d87094bc51a31d39a34c27c71d408541939bfd4c7db00a248a02b85a1"
+    },
+    {
+      "path": "sim/vendor/jt51/sep32_cnt.v",
+      "sha256": "cc15f156e3bbf72f19956c6fca34c4d17986a576209d1ae890450519692edce7"
+    },
+    {
+      "path": "rtl/sound/jt7759/hdl/jt7759.v",
+      "sha256": "a4defeee8f5b5fec795af00d6185aa941f4135ab72ae5f7fece31908c3c48c1a"
+    },
+    {
+      "path": "rtl/sound/jt7759/hdl/jt7759_adpcm.v",
+      "sha256": "41d795e33e2085d3d07ee0acab23e85f495f3766e61bd91f177c46e84072380d"
+    },
+    {
+      "path": "rtl/sound/jt7759/hdl/jt7759_ctrl.v",
+      "sha256": "19ad3a6572dec4e61d0046b222b6af53660cb558123b985f43db86dd5ed98aa9"
+    },
+    {
+      "path": "rtl/sound/jt7759/hdl/jt7759_data.v",
+      "sha256": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d"
+    },
+    {
+      "path": "rtl/sound/jt7759/hdl/jt7759_div.v",
+      "sha256": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862"
+    },
+    {
+      "path": "rtl/sound/jt7759/hdl/jt7759.qip",
+      "sha256": "539b5a33937ef2ee2f77e698dc683576092312278e9841a92b5f3e1fbe9beab1"
+    },
+    {
+      "path": "rtl/sound/jt7759/LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "rtl/sound/jt7759/README.md",
+      "sha256": "b3679b1270391a33788feab278bcabfb8014452655e741cb3af14cf9cd07e4b4"
+    },
+    {
+      "path": "sim/vendor/jt7759/test.v",
+      "sha256": "4d7d3e1bda680f69c13ae7e5d8bb5ba9384b9a4bd411efc93cdb350abdf4676f"
+    },
+    {
+      "path": "sim/vendor/jt7759/go.sh",
+      "sha256": "ac886fe2888e6718fa66eb1b8cca5429ee597d24755f3fd15858fd63b94ec812"
+    },
+    {
+      "path": "rtl/memory/ddram/ddram_phy.sv",
+      "sha256": "5a0cc2eeca7d71ba83fbd19d79c38b9983f5956cb737acf4df64e20848d0578c"
+    },
+    {
+      "path": "rtl/memory/ddram/rom_loader.sv",
+      "sha256": "01ea1c583107760fedb7457a35cc44e8a77d53e4be7593a4eae85fb4702602d5"
+    },
+    {
+      "path": "rtl/memory/ddram/LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "rtl/memory/ddram/UPSTREAM_README.md",
+      "sha256": "5f4423a7f5169a9179edc450e3d476939ef9c1be28efa67472ce30904c0f831b"
+    },
+    {
+      "path": "sim/vendor/ddram/tb_ddram_phy.sv",
+      "sha256": "8a62fd56ff878a05afa4fa7ec287902043be4fb49adb4b6a3b5dbb862c5e8360"
+    },
+    {
+      "path": "sim/vendor/ddram/ddram_model.sv",
+      "sha256": "f50424e93d41543de3e9598b6c62a5ab52c68547085c47fca3f3d8d46c9a76ad"
+    },
+    {
+      "path": "rtl/video/crt_adjust/crt_adjust.sv",
+      "sha256": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90"
+    },
+    {
+      "path": "rtl/video/rotation/screen_rotate_two.sv",
+      "sha256": "a704b114cc7d7c1684eb273ab98b436350a3ffb957b350fad975bb322ba11f9e"
+    }
+  ],
+  "scope": "Local pinned vendor-file byte integrity only. Does not establish upstream version identity beyond the recorded donor commits, license compatibility, simulation correctness or hardware operation."
+}
