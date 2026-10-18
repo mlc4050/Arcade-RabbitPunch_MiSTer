@@ -191,3 +191,20 @@ no PLL. Minimum setup is +5.375 ns and hold +0.118 ns, with all six timing
 coverage categories clean. See reference/hdmi_presentation_native_geometry_synth.json.
 The full-controller functional netlist and corrected full-shell timing checks
 remain pending; earlier fit snapshots do not include this correction.
+
+The corrected c7ecb10 complete functional netlist passes the existing control
+regression: native and rotated integer modes, custom/full selectors, mode latch,
+direction flush, loader hold, direct-video override and reserved encodings.
+It retains the production 62208-pixel validity counter; the bounded control
+fixture is partial and cannot establish positive image publication.
+See reference/hdmi_presentation_netlist_checks.json.
+
+The corrected controller RTL also passes both native 288x216 directions with
+three scored production-raster frames each: 373248 pixels total across those
+two cases, exact addresses/colours/byte masks and complete publication under
+the original /7 enable and 96/64-cycle DDR stalls. Compact controls also pass.
+The separate compressed 304x224 raster /1 fixture passes both directions with
+four-cycle busy bursts and all 62208 pixels per case; its synthetic cadence
+is explicitly separate from the production proof. See hdmi_presentation_checks.json
+and hdmi_presentation_dense_rtl_checks.json. Dense complete-netlist images and
+the doubled-presentation netlist seam remain in progress.
