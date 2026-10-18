@@ -63,7 +63,12 @@ loader-idle indicator path to LED[0]; every other path matches.
 The combined LED indication is now registered in a small VHDL adapter, so its
 status logic is timed internally. Its presentation changes by one system-clock
 cycle; gameplay flags and video are unchanged. No exception, constraint or cap
-change is applied. A new full fit is required. See
+change is applied. The clean b5b14ee release rebuild passes all 144 timing
+checks, with minimum setup +0.370 ns and hold +0.078 ns. Untimed output paths
+fall to 82 under the unchanged 110 cap; the same 4 input/50 output pins and
+14 input paths remain explicitly scoped. The fit uses 14666 ALMs, 24406
+registers and 180 M10Ks (1380192 bits). See
+reference/full_shell_flip_release_checks.json and
 reference/flip_led_coverage_audit.json. See
 reference/full_shell_flip_coverage_rejected.json. Physical output is unverified.
 This implementation does not claim recovery of the C7-01 GGA's internal

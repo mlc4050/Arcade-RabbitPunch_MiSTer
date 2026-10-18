@@ -55,5 +55,16 @@
     }
   },
   "resolution": "Register the combined external LED status in VHDL; retain every existing timing constraint and peripheral path-count limit. New full fit required; old d525db2 remains unqualified.",
-  "scope": "Complete setup/hold unconstrained output path comparison from two fitted netlists. Additional path is the load-frontend idle indicator to LED[0], not a new SDRAM/game-internal timing exemption. No physical/electrical timing proof."
+  "scope": "Complete setup/hold unconstrained output path comparison from two fitted netlists. Additional path is the load-frontend idle indicator to LED[0], not a new SDRAM/game-internal timing exemption. No physical/electrical timing proof.",
+  "registered_indicator_result": {
+    "commit": "b5b14ee7dae7ae60ab0d194f08a4aa33819f9acd",
+    "accepted": true,
+    "timing_checks": 144,
+    "minimum_setup_ns": 0.37,
+    "minimum_hold_ns": 0.078,
+    "untimed_output_paths": 82,
+    "unchanged_output_path_cap": 110,
+    "evidence": "docs/reference/full_shell_flip_release_checks.json",
+    "scope": "Full routed release shell including common flip; CRT Adjust is not connected in this snapshot; no physical hardware claim"
+  }
 }
