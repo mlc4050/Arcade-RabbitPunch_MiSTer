@@ -68,14 +68,15 @@ REQUIRED_INSTANCES = (
     "rabbitpunch_scanline_scheduler", "rabbitpunch_rom_cache", "fx68k",
     "T80se", "jt51", "jt7759", "jtframe_draw", "rabbitpunch_hiscore_service", "rabbitpunch_video_options",
     "video_mixer", "scandoubler", "Hq2x", "rabbitpunch_video_aspect", "video_freak", "rabbitpunch_view_flip", "rabbitpunch_status_led", "rabbitpunch_crt_adjust", "crt_adjust:geometry",
-    # "fx68k", "sdram", "arcade_video", "Hq2x", "screen_rotate_two", ...
+    "rabbitpunch_hdmi_presentation", "rabbitpunch_hdmi_rotation", "screen_rotate_two",
+    "rabbitpunch_rotation_transport", "rabbitpunch_ddr_write_queue", "rabbitpunch_frame_publication",
 )
 
 # Macros the design needs defined in the .qsf, and what breaks without each.
 # Presence is not connection: a module can stay in the netlist with its ports
 # bound to implicitly declared wires because a VERILOG_MACRO went missing.
 REQUIRED_MACROS = {
-    # "MISTER_FB": "HDMI rotation and 180 flip need the FB_* ports",
+    "MISTER_FB": "HDMI rotation needs framebuffer metadata, feedback blanking and force-blank ports",
 }
 
 # Files the compile expects in the project directory that the repo keeps

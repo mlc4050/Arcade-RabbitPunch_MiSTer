@@ -108,3 +108,10 @@ write occurs during frontend ownership; queued pixels are discarded and a
 fresh complete frame is required afterward. See HDMI_ROTATION.md and
 reference/load_frontend_rotation_checks.json. This is not yet the connected
 production shell or a physical HPS/DDR test.
+
+
+The experimental source shell now connects the qualified presentation transport.
+Its ownership signal is downloading OR system-loading, keeping presentation
+blank/flushed through the downstream final SDRAM acknowledgment. MISTER_FB
+and the complete controller hierarchy are mandatory full-build gates; the new
+connected full-shell implementation and physical HPS/DDR tests remain pending.
