@@ -1,0 +1,78 @@
+{
+  "cases": [
+    {
+      "case": "hdmi_presentation_cw",
+      "pass_marker": "HDMI_PRESENTATION_PASS",
+      "log": "debug\\baselines\\hdmi_presentation_cw\\result.log",
+      "counterclockwise": false,
+      "frames": 3,
+      "pixels": 384,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
+        "rtl/rabbitpunch_ddr_write_queue.vhd": "2d6f2617d3f8b3d8e7eb0176c02ded83c02aac193d8bec03039fe3916c8b0648",
+        "rtl/rabbitpunch_frame_publication.vhd": "aeea205f852f1d0c6b43b94a411e98a03d5ad72729f6008155043f1e52ab52f1",
+        "rtl/rabbitpunch_rotation_transport.vhd": "fa41de17a133ddfc7708369f07dac5a9d223a7290ae9f8717708da60289b999a",
+        "rtl/rabbitpunch_hdmi_presentation.vhd": "8e316cf2603cbd424663defd390c728d420f640eee34d13e43ba436e51ac88d4",
+        "debug/hdmi_presentation_tb.vhd": "a9b51809a1b9fcb693f4250b388675bd7a3357e2050b0aa5cf4805c11791a816"
+      },
+      "log_sha256": "e64418573103e85ea1df15cc99fb786c08d631ec46c0da068b862c02bab528a3"
+    },
+    {
+      "case": "hdmi_presentation_ccw",
+      "pass_marker": "HDMI_PRESENTATION_PASS",
+      "log": "debug\\baselines\\hdmi_presentation_ccw\\result.log",
+      "counterclockwise": true,
+      "frames": 3,
+      "pixels": 384,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
+        "rtl/rabbitpunch_ddr_write_queue.vhd": "2d6f2617d3f8b3d8e7eb0176c02ded83c02aac193d8bec03039fe3916c8b0648",
+        "rtl/rabbitpunch_frame_publication.vhd": "aeea205f852f1d0c6b43b94a411e98a03d5ad72729f6008155043f1e52ab52f1",
+        "rtl/rabbitpunch_rotation_transport.vhd": "fa41de17a133ddfc7708369f07dac5a9d223a7290ae9f8717708da60289b999a",
+        "rtl/rabbitpunch_hdmi_presentation.vhd": "8e316cf2603cbd424663defd390c728d420f640eee34d13e43ba436e51ac88d4",
+        "debug/hdmi_presentation_tb.vhd": "a9b51809a1b9fcb693f4250b388675bd7a3357e2050b0aa5cf4805c11791a816"
+      },
+      "log_sha256": "db8b259465c545cd60484459e7965c2beb5591128108447ed9d4c4387d08df1e"
+    },
+    {
+      "case": "hdmi_presentation_cw_full",
+      "pass_marker": "HDMI_PRESENTATION_PASS",
+      "log": "debug\\baselines\\hdmi_presentation_cw_full\\result.log",
+      "counterclockwise": false,
+      "frames": 3,
+      "pixels": 186624,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
+        "rtl/rabbitpunch_ddr_write_queue.vhd": "2d6f2617d3f8b3d8e7eb0176c02ded83c02aac193d8bec03039fe3916c8b0648",
+        "rtl/rabbitpunch_frame_publication.vhd": "aeea205f852f1d0c6b43b94a411e98a03d5ad72729f6008155043f1e52ab52f1",
+        "rtl/rabbitpunch_rotation_transport.vhd": "fa41de17a133ddfc7708369f07dac5a9d223a7290ae9f8717708da60289b999a",
+        "rtl/rabbitpunch_hdmi_presentation.vhd": "8e316cf2603cbd424663defd390c728d420f640eee34d13e43ba436e51ac88d4",
+        "debug/hdmi_presentation_tb.vhd": "a9b51809a1b9fcb693f4250b388675bd7a3357e2050b0aa5cf4805c11791a816"
+      },
+      "log_sha256": "c930d3888a7ab4cc89d743c18c36c21dfd4cf0678e72052225b91393746e157f"
+    },
+    {
+      "case": "hdmi_presentation_ccw_full",
+      "pass_marker": "HDMI_PRESENTATION_PASS",
+      "log": "debug\\baselines\\hdmi_presentation_ccw_full\\result.log",
+      "counterclockwise": true,
+      "frames": 3,
+      "pixels": 186624,
+      "source_sha256": {
+        "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+        "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
+        "rtl/rabbitpunch_ddr_write_queue.vhd": "2d6f2617d3f8b3d8e7eb0176c02ded83c02aac193d8bec03039fe3916c8b0648",
+        "rtl/rabbitpunch_frame_publication.vhd": "aeea205f852f1d0c6b43b94a411e98a03d5ad72729f6008155043f1e52ab52f1",
+        "rtl/rabbitpunch_rotation_transport.vhd": "fa41de17a133ddfc7708369f07dac5a9d223a7290ae9f8717708da60289b999a",
+        "rtl/rabbitpunch_hdmi_presentation.vhd": "8e316cf2603cbd424663defd390c728d420f640eee34d13e43ba436e51ac88d4",
+        "debug/hdmi_presentation_tb.vhd": "a9b51809a1b9fcb693f4250b388675bd7a3357e2050b0aa5cf4805c11791a816"
+      },
+      "log_sha256": "33764d8d4d9fe6485805c5eddc1144ca764a7129e075f29719f160f3e638262b"
+    }
+  ],
+  "template_sha256": "fd72155918586f8b28732b7731dd794687332586e7c4f0bc5f16c15578bcdfb5",
+  "scope": "Complete HDMI controller RTL around qualified rotation/aspect netlists and actual transport/queue/publication RTL. Three scored frames per CW/CCW case: every pixel address/colour/mask, slot safety/progress, queue drain, positive sync normalization, frame-latched mode, 3:4 normal aspect and complete-image publication under bounded DDR stalls. Not a full-shell fit, live mode-transition/integer-size test, executing game, arbitrary FB phase/frequency or hardware/latency proof."
+}

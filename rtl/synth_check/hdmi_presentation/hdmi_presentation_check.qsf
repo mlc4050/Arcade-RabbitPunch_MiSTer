@@ -1,0 +1,72 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 RabbitPunch contributors
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY rabbitpunch_hdmi_presentation
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name SYSTEMVERILOG_FILE ../../../sys/math.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../../sys/video_freak.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../video/rotation/screen_rotate_two.sv
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_hdmi_rotation.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_ddr_write_queue.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_frame_publication.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_rotation_transport.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_video_aspect.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_hdmi_presentation.vhd
+set_global_assignment -name SDC_FILE hdmi_presentation_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_initialize
+set_instance_assignment -name VIRTUAL_PIN ON -to i_game_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to i_loader_active
+set_instance_assignment -name VIRTUAL_PIN ON -to i_direct_video
+set_instance_assignment -name VIRTUAL_PIN ON -to iu2_rotation[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_native_pixel_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_native_red[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_native_green[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_native_blue[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_native_horizontal_sync_n
+set_instance_assignment -name VIRTUAL_PIN ON -to i_native_vertical_sync_n
+set_instance_assignment -name VIRTUAL_PIN ON -to i_native_data_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to i_presented_pixel_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to i_presented_vertical_sync
+set_instance_assignment -name VIRTUAL_PIN ON -to i_presented_data_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to iu12_hdmi_width[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu12_hdmi_height[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu2_aspect[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu3_scale[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou13_aspect_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou13_aspect_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_framebuffer_vertical_blank
+set_instance_assignment -name VIRTUAL_PIN ON -to o_framebuffer_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to o_framebuffer_force_blank
+set_instance_assignment -name VIRTUAL_PIN ON -to ou5_framebuffer_format[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou12_framebuffer_width[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou12_framebuffer_height[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou32_framebuffer_base[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou14_framebuffer_stride[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_rotation_active
+set_instance_assignment -name VIRTUAL_PIN ON -to ou2_applied_rotation[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_discard_frame
+set_instance_assignment -name VIRTUAL_PIN ON -to o_queue_overflow
+set_instance_assignment -name VIRTUAL_PIN ON -to o_queue_empty
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_loader_burst_count[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu29_loader_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu64_loader_write_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_loader_byte_enables[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_loader_read
+set_instance_assignment -name VIRTUAL_PIN ON -to i_loader_write
+set_instance_assignment -name VIRTUAL_PIN ON -to o_loader_busy
+set_instance_assignment -name VIRTUAL_PIN ON -to o_loader_read_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to ou64_loader_read_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_ddr_busy
+set_instance_assignment -name VIRTUAL_PIN ON -to i_ddr_read_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to iu64_ddr_read_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_ddr_burst_count[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou29_ddr_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou64_ddr_write_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_ddr_byte_enables[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_ddr_read
+set_instance_assignment -name VIRTUAL_PIN ON -to o_ddr_write

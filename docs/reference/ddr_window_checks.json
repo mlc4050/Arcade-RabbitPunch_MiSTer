@@ -39,8 +39,8 @@
     "rtl/video/rotation/screen_rotate_two.sv": "a704b114cc7d7c1684eb273ab98b436350a3ffb957b350fad975bb322ba11f9e",
     "rtl/memory/ddram/ddram_phy.sv": "5a0cc2eeca7d71ba83fbd19d79c38b9983f5956cb737acf4df64e20848d0578c",
     "rtl/rabbitpunch_layout.vhd": "e375b766fa01bf4ae808ccc315f7629488a2dfa4db9e7c8a98f7da993adae14d",
-    "RabbitPunch.qsf": "02c671cd0b89aecc41af42f77faba86047dda596939a1cbe404aea7b21066e51",
-    "RabbitPunch_stp.qsf": "c75ea5f29730fcf40ad97c88ecfac738084d4ad8ffbb6b4b3835a66d7f28c189",
+    "RabbitPunch.qsf": "a656e08552110dee96532961615a2b25388e285f047b89a9f06bc6b20537227d",
+    "RabbitPunch_stp.qsf": "a8b29cbe65d03fecfee67ad762df8264c31fc64045c6f2a3c16b6f932c14547a",
     "releases/_dev/Rabbit Punch (US).mra": "cc4e350448ba6b8268f7baad4da9dea96a585d9a18104c6e173f05e13b3bec84",
     "releases/_dev/Rabio Lepus (Japan).mra": "207e83b4588cd0c6e366c45bf101f2e16e4c3e2e0cf37b56b47be2c740b22afa"
   },

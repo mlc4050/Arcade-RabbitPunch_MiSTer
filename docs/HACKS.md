@@ -69,12 +69,13 @@ physical board startup verification remains open.
 The framework boundary is being connected for first hardware bring-up. It exposes
 the native 288x216 raster and signed mono audio. Forced scandoubling, HQ2x and
 CRT scanline levels are connected through a tested VHDL wrapper; the new shell
-fits pass, while physical output remains pending. HDMI rotation and
-remaining crop/audio OSD options are still unconnected. HDMI aspect/integer
+fits pass, while physical output remains pending. HDMI rotation is connected experimentally, with its full-shell qualification
+pending; remaining crop/audio OSD options are still unconnected. HDMI aspect/integer
 metadata and common screen flip pass their full-shell gates;
 this is not the final standard-feature set. The framework HDMI scaler remains
-available. DDR currently has only the load-time copier as a client; introducing a
-rotator requires an ownership mux and contention verification before use. No game
+available. The optional rotator now shares DDR through a loader-priority queue/publication
+boundary verified in isolation with the real frontend; full-shell and physical
+contention checks remain pending. No game
 ROM fetch uses DDR during play. Physical output and audible game audio are untested.
 
 

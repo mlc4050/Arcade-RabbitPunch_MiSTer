@@ -1,6 +1,7 @@
 # HDMI rotation bring-up boundary
 
-Rotation is approved work but remains disconnected. The native analog path
+Rotation is now connected in the experimental source shell; full-shell fit
+and hardware qualification are pending. The native analog path
 and its common screen flip remain independent of the HDMI framebuffer tap.
 Both games are horizontal, so Auto must leave rotation disabled; explicit
 CW/CCW is an optional presentation mode. A rotated output advertises 3:4.
@@ -134,3 +135,52 @@ and control changes, then fit both complete MiSTer revisions. Actual CRT/HDMI
 hardware, arbitrary source/output phase/frequency, full end-to-end latency and
 physical DDR acceptance remain unverified. Native rendering keeps its existing
 one-row pipeline; optional HDMI rotation is the only new framebuffer path.
+
+
+The complete VHDL HDMI controller now latches None/CW/CCW requests at native
+vertical sync while the loader is idle. A direction change registers a flush
+pulse and requires a fresh complete image. Direct video immediately disables
+framebuffer output/blanking and preserves native metadata. The native RGB tap
+has no analog output port. All existing native aspect/integer cases, four
+rotated integer modes against an independent transposed qualified framework
+reference, 3:4 aspect, custom selector encoding, midframe requests, direction
+flush, loader mode hold and reserved settings pass. Both full native directions
+also pass three complete image frames through this complete RTL controller.
+See hdmi_presentation_control_checks.json and hdmi_presentation_checks.json.
+
+The complete-controller 47a3eff standalone fit passes with one exact 512x80
+queue RAM (40960 bits, four M10Ks). The general queue's 101-bit packet has 21
+fixed-zero columns here: five from the donor address base and sixteen from
+the two 32-bit RGB words' zero high bytes. The audited gate derives those
+columns from the unchanged donor and requires exactly one 512x80 memory;
+capacity and every remaining packet field are retained. The original 51712-bit
+estimate was rejected and archived, not accepted by widening a cap. See
+hdmi_presentation_synth.json and hdmi_presentation_ram_rejected.json. Complete
+fitted-controller functional control/image checks remain in progress.
+
+Prototype shell wiring now enables MISTER_FB in both revisions and connects
+status 114:113 to the HDMI-only controller (None=0, CW=1, CCW=2; 3 disables).
+H5 hides the menu under direct video. Native analog RGB/sync stay on the
+existing video-options path; the tap is before CRT/effects. The loader owns
+DDR throughout downloading OR final system-loading drain. The complete
+controller and framebuffer macro are required by the full-build gates.
+No accepted full-shell rotation fit or physical result is claimed yet.
+
+The 10c7995 host fit and synthesized HPS protocol bench pass with the new
+HDMI None/CW/CCW configuration string checked byte for byte and all 128 status
+bits transported. The standalone host uses 479 ALMs, 403 registers and no RAM;
+minimum setup is +7.133 ns and hold +0.167 ns at its 48 MHz evaluation clock.
+See reference/host_hdmi_menu_synth.json and reference/host_netlist_checks.json.
+This does not establish physical ARM menu behavior or a complete shell fit.
+
+A doubled-presentation regression found that integer rotation metadata measured
+the analog HQ2x geometry even though the rotator captures native pixels. In the
+32x20 native / 64x40 presented fixture at a 1900x1080 destination, the old V-integer
+output was 640x1080 instead of the native reference's 660x1080. The failing source,
+fixture and transcript are preserved under debug/fit_archive/hdmi_presented_geometry_34441d0_rejected/.
+The controller now selects native CE/VS/DE while rotated, retaining the presented
+geometry when rotation is off. Both directions and all four integer modes pass
+the independent native-aspect comparison; the complete existing mode/loader/direct
+control regression also passes. See reference/hdmi_presented_geometry_checks.json
+and hdmi_presented_geometry_rejected_checks.json. Earlier fitted-controller and
+full-shell jobs predate this metadata correction; fresh synthesis/timing is required.

@@ -116,6 +116,12 @@ set_global_assignment -name VHDL_FILE rtl/rabbitpunch_crt_adjust.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_video_options.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_video_aspect.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_status_led.vhd
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/video/rotation/screen_rotate_two.sv
+set_global_assignment -name VHDL_FILE rtl/rabbitpunch_hdmi_rotation.vhd
+set_global_assignment -name VHDL_FILE rtl/rabbitpunch_ddr_write_queue.vhd
+set_global_assignment -name VHDL_FILE rtl/rabbitpunch_frame_publication.vhd
+set_global_assignment -name VHDL_FILE rtl/rabbitpunch_rotation_transport.vhd
+set_global_assignment -name VHDL_FILE rtl/rabbitpunch_hdmi_presentation.vhd
 set_global_assignment -name SYSTEMVERILOG_FILE RabbitPunch.sv
 
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_debug.vhd

@@ -1,0 +1,16 @@
+{
+  "case": "hdmi_presentation_controls",
+  "pass_marker": "HDMI_PRESENTATION_CONTROL_PASS",
+  "log": "debug\\baselines\\hdmi_presentation_controls\\result.log",
+  "source_sha256": {
+    "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+    "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
+    "rtl/rabbitpunch_ddr_write_queue.vhd": "d8a66938e884f6a26f18e3e7c2de7c5f4732ae7c507e745ce91101ce06d592e5",
+    "rtl/rabbitpunch_frame_publication.vhd": "2ab81ea58f2ddbc240095067d4ff6c267675d9213af684a37045e04b16552cb3",
+    "rtl/rabbitpunch_rotation_transport.vhd": "e206e8f6936109de57cba57d91f9dd72b07272e52ce17595210a614a3ba0a179",
+    "rtl/rabbitpunch_hdmi_presentation.vhd": "00e92eb4d0d5294a002420e7b968b81a7b81cbaee771ef5deb0025fb41990144",
+    "sim/video/hdmi_presentation_control_tb.vhd": "b874fff981f78299d58cb364640721cb21a39f79481c410cc9287990459495a0"
+  },
+  "log_sha256": "2a8b36d7f18068ee36770b8ccdeffe9bf69cdd045bb182a88496cb5b25d7e364",
+  "scope": "Complete controller RTL around qualified donor/aspect netlists. Retains existing exact native aspect/full/custom/four-integer/resize/direct/invalid-scale checks; adds frame-boundary CW/CCW/None and reserved selection, old-image invalidation, mode hold/queue flush during loader ownership, direct-video native override, 3:4 normal aspect, unchanged custom selector encoding, and four rotated integer modes versus an independent transposed qualified-aspect instance with output bounds. No pixel-image, full-shell or physical monitor proof in this test."
+}

@@ -18,6 +18,7 @@ from run_baselines import run_case
 
 
 BLOCKS = {
+    "hdmi_presentation": ("hdmi_presentation_control_tb", "HDMI_PRESENTATION_CONTROL_PASS", "sim/video/hdmi_presentation_control_tb.vhd"),
     "rotation_transport": ("rotation_transport_tb", "ROTATION_TRANSPORT_PASS", "sim/video/rotation_transport_tb.vhd"),
     "frame_publication": ("frame_publication_tb", "FRAME_PUBLICATION_PASS", "sim/video/frame_publication_tb.vhd"),
     "ddr_write_queue": ("ddr_write_queue_tb", "DDR_WRITE_QUEUE_PASS", "sim/video/ddr_write_queue_tb.vhd"),
@@ -82,7 +83,7 @@ def main():
             vectors[filename] = hashlib.sha256(source.read_bytes()).hexdigest()
     support = "rtl/rabbitpunch_sdram_types.vhd" if args.block in ("sdram", "rom_requests", "rom_cache", "roms") else "sim/video/tile_test_support.vhd"
     sources = [str(netlist.relative_to(root)).replace("\\", "/")]
-    if args.block not in ("rotation_transport", "frame_publication", "sound_board", "adpcm", "audio", "host", "memory", "video_aspect", "crt_adjust", "hdmi_rotation", "ddr_write_queue"):
+    if args.block not in ("hdmi_presentation", "rotation_transport", "frame_publication", "sound_board", "adpcm", "audio", "host", "memory", "video_aspect", "crt_adjust", "hdmi_rotation", "ddr_write_queue"):
         sources.append(support)
     if args.block in ("sdram", "roms"):
         sources.append("sim/vendor/sdram/sdram_chip_model_wide.sv")
@@ -102,6 +103,16 @@ def main():
         template = template.replace(generic_map, "").replace("GINT_FRAME_PIXELS : positive := 4", "GINT_FRAME_PIXELS : positive := 62208")
         bench = f"debug/{args.block}_netlist_tb.vhd"
         (root / bench).write_text(template, encoding="utf-8")
+    if args.block == "hdmi_presentation":
+        template = (root / bench).read_text(encoding="utf-8")
+        generic_map = "        generic map (\n            GINT_FRAME_PIXELS => GINT_FRAME_PIXELS\n        )\n"
+        assert template.count(generic_map) == 1
+        bench = "debug/hdmi_presentation_netlist_control_tb.vhd"
+        (root / bench).write_text(template.replace(generic_map, ""), encoding="utf-8")
+        reference = json.loads((root / "docs/reference/video_aspect_netlist_checks.json").read_text(encoding="utf-8"))
+        aspect = "debug/netlists/video_aspect_" + reference["commit"][:7] + "/video_aspect_check.vo"
+        assert hashlib.sha256((root / aspect).read_bytes()).hexdigest() == reference["netlist_sha256"]
+        sources.append(aspect)
     sources.append(bench)
     libraries = [item for library in ("cyclonev_ver", "altera_ver", "altera_lnsim_ver", "lpm_ver", "sgate_ver")
                  for item in ("-L", library)]
@@ -114,6 +125,9 @@ def main():
     if args.block in ("rotation_transport", "frame_publication"):
         check.update(frame_pixels=62208,
                      template_sha256=hashlib.sha256((root / BLOCKS[args.block][2]).read_bytes()).hexdigest())
+    if args.block == "hdmi_presentation":
+        check.update(template_sha256=hashlib.sha256((root / BLOCKS[args.block][2]).read_bytes()).hexdigest(),
+                     scope=check["scope"] + "; mode/direct/loader and native/rotated integer metadata against independent qualified-aspect reference; partial 640-pixel fixture cannot publish under the fitted 62208-pixel count; complete image proofs are separate")
     if args.block == "memory":
         check.update(memory_initialization_addresses=408, memory_initialization_reads=816, exhaustive=False,
                      scope=check["scope"] + "; all five banks: first/last word of every 256-word region through both CPU and inspection, plus masked writes; full-address coverage is RTL only")

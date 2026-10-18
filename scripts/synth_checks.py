@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "hdmi_presentation": (40960, ("rabbitpunch_hdmi_presentation", "rabbitpunch_hdmi_rotation", "screen_rotate_two", "rabbitpunch_rotation_transport", "rabbitpunch_frame_publication", "rabbitpunch_ddr_write_queue", "rabbitpunch_video_aspect", "video_freak", "sys_umul", "sys_udiv")),
     "rotation_transport": (51712, ("rabbitpunch_rotation_transport", "rabbitpunch_frame_publication", "rabbitpunch_ddr_write_queue")),
     "frame_publication": (0, ("rabbitpunch_frame_publication",)),
     "ddr_write_queue": (51712, ("rabbitpunch_ddr_write_queue",)),
@@ -126,6 +127,29 @@ def run_check(stage, quartus_bin, stamp, name):
                 crt_memory.append(dict(instance=key, depth=depth, width=width, bits=depth*width))
         if len(crt_memory) != 2 or len({row["instance"] for row in crt_memory}) != 2:
             raise SystemExit("CRT line or sync history RAM missing or duplicated")
+    rotation_memory = []
+    rotation_zero_columns = []
+    if name == "hdmi_presentation":
+        # The 101-bit queue packet packs address[28:0], data[63:0], BE[7:0].
+        # This donor fixes five address columns and sixteen data columns to
+        # zero. Preserve capacity and every other column; do not accept an
+        # arbitrary smaller memory merely because it fits the total budget.
+        donor = (stage / "rtl/video/rotation/screen_rotate_two.sv").read_text(encoding="utf-8")
+        base = re.search(r"parameter MEM_BASE\s*=\s*7'b([01]{7})", donor)[1]
+        if not re.search(r"ram_data\s*<=\s*\{8'd0,VGA_B,VGA_G,VGA_R\}", donor) or not re.search(r"DDRAM_DIN\s*=\s*\{ram_data,ram_data\}", donor):
+            raise SystemExit("Rotation packet zero-column assumptions changed")
+        rotation_zero_columns = sorted([72 + 22 + bit for bit, char in enumerate(reversed(base)) if char == "0"] +
+                                       list(range(32, 40)) + list(range(64, 72)))
+        if len(rotation_zero_columns) != 21 or len(set(rotation_zero_columns)) != 21:
+            raise SystemExit("Rotation queue fixed-zero column count changed")
+        for line in hierarchy.splitlines():
+            columns = [value.strip() for value in line.split(";")[1:-1]]
+            if len(columns) == 9 and columns[1] in ("M10K block", "AUTO"):
+                if "rabbitpunch_ddr_write_queue:pixels|" not in columns[0] or tuple(map(int, columns[3:8])) != (512, 80, 512, 80, 40960):
+                    raise SystemExit(f"Unexpected optimized rotation memory: {columns[0]}")
+                rotation_memory.append(dict(instance=columns[0], depth=512, width=80, bits=40960))
+        if len(rotation_memory) != 1:
+            raise SystemExit("Optimized rotation queue memory missing or duplicated")
     sound_memory = []
     if name in ("sound_board", "audio", "system", "platform", "machine", "clocked_machine"):
         expected_sound_memory = {
@@ -201,6 +225,9 @@ def run_check(stage, quartus_bin, stamp, name):
             "timing_coverage":coverage,
             "fit_summary":fit.splitlines(),"log_sha256":hashlib.sha256(log_path.read_bytes()).hexdigest(),
             "scope":scope}
+    if name == "hdmi_presentation":
+        report.update(rotation_queue_memory=rotation_memory, logical_queue_packet_width=101,
+                      constant_zero_packet_columns=rotation_zero_columns)
     if name == "clocked_machine":
         clocks_log = project / "clock_tree.log"
         with clocks_log.open("w", encoding="utf-8") as log:

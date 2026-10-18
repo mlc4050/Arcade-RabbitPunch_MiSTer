@@ -21,15 +21,6 @@ assign AUDIO_MIX = 0;
 assign LED_DISK = 0;
 assign LED_POWER = 0;
 assign BUTTONS = 0;
-`ifdef MISTER_FB
-assign FB_EN = 0;
-assign FB_FORMAT = 0;
-assign FB_WIDTH = 0;
-assign FB_HEIGHT = 0;
-assign FB_BASE = 0;
-assign FB_STRIDE = 0;
-assign FB_FORCE_BLANK = 0;
-`endif
 wire clk_sys;
 wire [127:0] status;
 wire [31:0] joystick0, joystick1;
@@ -42,6 +33,10 @@ wire file_download, file_upload, file_write, file_wait, upload_request;
 wire horizontal_blank, vertical_blank;
 wire native_pixel_enable, native_horizontal_sync, native_vertical_sync;
 wire forced_scandoubler, direct_video;
+wire loader_busy, loader_read_valid, loader_read, loader_write;
+wire [7:0] loader_burst_count, loader_byte_enables;
+wire [28:0] loader_word_address;
+wire [63:0] loader_read_data, loader_write_data;
 wire crt_pixel_enable, crt_horizontal_sync, crt_vertical_sync;
 wire crt_horizontal_blank, crt_vertical_blank;
 wire [7:0] crt_red, crt_green, crt_blue;
@@ -145,15 +140,15 @@ rabbitpunch_clocked_machine machine
     .ou8_service(),
     .ou16_dips(),
     .o_ddr_mode(),
-    .i_ddr_busy(DDRAM_BUSY),
-    .ou8_ddr_burst_count(DDRAM_BURSTCNT),
-    .ou29_ddr_word_address(DDRAM_ADDR),
-    .iu64_ddr_read_data(DDRAM_DOUT),
-    .i_ddr_read_valid(DDRAM_DOUT_READY),
-    .o_ddr_read(DDRAM_RD),
-    .ou64_ddr_write_data(DDRAM_DIN),
-    .ou8_ddr_byte_enables(DDRAM_BE),
-    .o_ddr_write(DDRAM_WE),
+    .i_ddr_busy(loader_busy),
+    .ou8_ddr_burst_count(loader_burst_count),
+    .ou29_ddr_word_address(loader_word_address),
+    .iu64_ddr_read_data(loader_read_data),
+    .i_ddr_read_valid(loader_read_valid),
+    .o_ddr_read(loader_read),
+    .ou64_ddr_write_data(loader_write_data),
+    .ou8_ddr_byte_enables(loader_byte_enables),
+    .o_ddr_write(loader_write),
     .o_paused(paused),
     .i_view_enable('0),
     .iu5_view_target('0),
@@ -282,21 +277,63 @@ rabbitpunch_video_options video_options
     .o_data_enable(VGA_DE),
     .ou2_scanlines(VGA_SL)
 );
-// Aspect/integer-size metadata is measured from the presented raster. It
-// never intercepts or stores pixels and remains disabled under direct video.
-rabbitpunch_video_aspect video_aspect
+// HDMI-only native tap. Native analog RGB/sync remain on video_options above.
+// Loader ownership includes the downstream final SDRAM write drain.
+rabbitpunch_hdmi_presentation hdmi_presentation
 (
     .i_clk(clk_sys),
-    .i_pixel_enable(CE_PIXEL),
-    .i_vertical_sync(VGA_VS),
-    .i_data_enable(VGA_DE),
+    .i_initialize(~pll_locked),
+    .i_game_ready(ready & ~loading & ~error),
+    .i_loader_active(downloading | loading),
     .i_direct_video(direct_video),
+    .iu2_rotation(status[114:113]),
+    .i_native_pixel_enable(native_pixel_enable),
+    .iu8_native_red(native_red),
+    .iu8_native_green(native_green),
+    .iu8_native_blue(native_blue),
+    .i_native_horizontal_sync_n(native_horizontal_sync),
+    .i_native_vertical_sync_n(native_vertical_sync),
+    .i_native_data_enable(~(horizontal_blank | vertical_blank)),
+    .i_presented_pixel_enable(CE_PIXEL),
+    .i_presented_vertical_sync(VGA_VS),
+    .i_presented_data_enable(VGA_DE),
     .iu12_hdmi_width(HDMI_WIDTH),
     .iu12_hdmi_height(HDMI_HEIGHT),
     .iu2_aspect(status[122:121]),
     .iu3_scale(status[68:66]),
     .ou13_aspect_x(VIDEO_ARX),
-    .ou13_aspect_y(VIDEO_ARY)
+    .ou13_aspect_y(VIDEO_ARY),
+    .i_framebuffer_vertical_blank(FB_VBL),
+    .o_framebuffer_enable(FB_EN),
+    .o_framebuffer_force_blank(FB_FORCE_BLANK),
+    .ou5_framebuffer_format(FB_FORMAT),
+    .ou12_framebuffer_width(FB_WIDTH),
+    .ou12_framebuffer_height(FB_HEIGHT),
+    .ou32_framebuffer_base(FB_BASE),
+    .ou14_framebuffer_stride(FB_STRIDE),
+    .o_rotation_active(),
+    .ou2_applied_rotation(),
+    .o_discard_frame(),
+    .o_queue_overflow(),
+    .o_queue_empty(),
+    .iu8_loader_burst_count(loader_burst_count),
+    .iu29_loader_word_address(loader_word_address),
+    .iu64_loader_write_data(loader_write_data),
+    .iu8_loader_byte_enables(loader_byte_enables),
+    .i_loader_read(loader_read),
+    .i_loader_write(loader_write),
+    .o_loader_busy(loader_busy),
+    .o_loader_read_valid(loader_read_valid),
+    .ou64_loader_read_data(loader_read_data),
+    .i_ddr_busy(DDRAM_BUSY),
+    .i_ddr_read_valid(DDRAM_DOUT_READY),
+    .iu64_ddr_read_data(DDRAM_DOUT),
+    .ou8_ddr_burst_count(DDRAM_BURSTCNT),
+    .ou29_ddr_word_address(DDRAM_ADDR),
+    .ou64_ddr_write_data(DDRAM_DIN),
+    .ou8_ddr_byte_enables(DDRAM_BE),
+    .o_ddr_read(DDRAM_RD),
+    .o_ddr_write(DDRAM_WE)
 );
 `ifdef DEBUG_ISSP
 `ifndef RABBITPUNCH_BUILD_ID

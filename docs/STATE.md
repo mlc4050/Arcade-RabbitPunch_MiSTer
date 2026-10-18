@@ -371,7 +371,8 @@ output packet, three nine-bit pointers/count and output-valid/overflow bits.
 Initialization discards pending presentation writes and clears overflow; it
 never clears game RAM. Derived framebuffer validity must be discarded and a
 complete image recaptured after queue reset, overflow or ROM replacement.
-This queue and the rotation donor are not yet in the production source list.
+The queue and rotation donor are now in the experimental production source
+list behind the HDMI-only option; full-shell qualification is pending.
 
 
 The isolated HDMI rotation adapter adds four configuration-initialized event
@@ -382,4 +383,13 @@ combines that derived state with the existing 512x101 presentation queue;
 loader priority is a combinational mux and does not cancel read responses.
 Discard all presentation validity/queued writes after restore, overflow or ROM
 replacement and recapture a complete image at a clean frame boundary. These
-blocks remain disconnected from production and the game savestate surface.
+blocks are derived presentation state outside the game savestate surface.
+
+
+The connected HDMI controller adds a two-bit applied mode, native sync history
+and a one-cycle registered mode-change flush. Requests latch only at a clean
+native sync boundary with the loader idle. None/direct video never inserts
+storage into the analog pixel stream. Normal ratio metadata becomes 3:4 only
+while rotation is applied; integer geometry is calculated against transposed
+HDMI dimensions and transposed back. This is presentation state to discard on
+restore, not original-board memory.

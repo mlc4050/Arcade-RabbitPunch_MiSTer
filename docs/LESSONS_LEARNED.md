@@ -1452,3 +1452,14 @@ balanced the input/output windows; the full instrumented 90e053c fit passes all
 164 reported checks. Check both input and output pin timing after routing and
 repeat chip-clock simulation at the selected phase. Internal clock-enable
 frequency and an ideal same-edge memory model cannot establish this margin.
+
+### [RabbitPunch] Measure integer scaling on the raster actually sent to the scaler
+
+A native rotation tap precedes analog CRT/HQ effects. Measuring the doubled analog
+stream for that native framebuffer can silently constrain scaling to doubled
+integer steps. A 32x20/64x40 seam test looked identical at a 1050-line destination
+but exposed a 20-pixel width error at 1080, where the native multiplier is odd.
+Select native CE/VS/DE during rotation and preserve presented measurements for
+unrotated output. Both CW/CCW and all integer modes now match the independent
+native aspect reference (hdmi_presented_geometry_checks.json); the rejected
+fixture/transcript are retained separately.
