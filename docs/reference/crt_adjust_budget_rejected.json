@@ -1,0 +1,24 @@
+{
+  "commit": "7f45f2a4b1b966b7ade4c8991645b8fe5073b085",
+  "accepted": false,
+  "reason": "Budget estimate omitted 129x1 inferred VSYNC history RAM; compiled total is 24576 RGB bits plus 129 sync bits = 24705",
+  "archive": "debug/fit_archive/crt_adjust_7f45f2a_budget_rejected",
+  "artifact_sha256": {
+    "BUILT_COMMIT": "2aaae1ebb10dfa5ac4cf1145f3c019bfcf41d7cfceef189cb6e403524c151d68",
+    "crt_adjust_check.asm.rpt": "dd59ec11f6dbfbd2dde3f638b3db31f9105a14854fb623a37ead4406e824c533",
+    "crt_adjust_check.done": "5f49300b2b5ca253b612a00d87ea7743007c9636da2493f7cc2f235ffa5187de",
+    "crt_adjust_check.fit.rpt": "15917d06ff6cc8a5309378a222fac2dd969cc59e408db6ababf7b0bb55d7a914",
+    "crt_adjust_check.fit.smsg": "d41fedc43df491b98368049ad3b6ffcc74efe806a6ed495dbb30294481fbd8a9",
+    "crt_adjust_check.fit.summary": "0d02cba10868111aed7f5910e0bde41f69d06f4801741192df3d9538ec89f3c9",
+    "crt_adjust_check.flow.rpt": "40c530c06137704ce0df6f217e217569b49e2bdfa70470a0c4b98c5f87565269",
+    "crt_adjust_check.jdi": "ea0e66f6843d8938bd7130b9d26d06fd997442b6cc535711402ce7a6d1ca2270",
+    "crt_adjust_check.map.rpt": "89e2b67cf1f2e67f10a8456a8b10cdd9ef48b47f8fa1e07c4b82fbe36b1cfe2d",
+    "crt_adjust_check.map.summary": "f95e53470a6b212c5ef7135ac450e0cd80cf47cb0e5dd2f7dbae3fc58522c356",
+    "crt_adjust_check.pin": "395bd4e6daf8fed8782c1c499d088c44bf3b22e3dda7fba615e04ccea73d81b2",
+    "crt_adjust_check.sld": "c7de3cc5544a1144192d6825eb69cf5e065bf99f16fb9acb42fadd23adede991",
+    "crt_adjust_check.sof": "694ff2b70c94579fd4c200e679aeabd4e87c0f76fd58c45594d5a66e30fed027",
+    "crt_adjust_check.sta.rpt": "85d92d0181118ec3a534d8191b9daa19705e8daa3ceeb0defe7d80be2623a5b8",
+    "crt_adjust_check.sta.summary": "9779c73e9851e7c7c9a52bfdf5697bd076de8d77544e400905f98add32dea43d",
+    "q_crt_adjust_check.log": "98052d99f2b6cdf5349ba3673c7cfa6fb7a65d1b9c9e606af252c905d16295ed"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "case": "gate_crt_adjust",
+  "pass_marker": "CRT_ADJUST_CONTROL_PASS",
+  "log": "debug\\baselines\\gate_crt_adjust\\result.log",
+  "commit": "d9dfc8ac4e5441a41d00c1790f42cd047c0bd12f",
+  "vectors_sha256": {},
+  "netlist_sha256": "3b297509ff56c68293901f6e744455123c37a54bb35c43c5ac28f66160606db5",
+  "source_sha256": {
+    "debug/netlists/crt_adjust_d9dfc8a/crt_adjust_check.vo": "3b297509ff56c68293901f6e744455123c37a54bb35c43c5ac28f66160606db5",
+    "sim/video/crt_adjust_control_tb.vhd": "798f183b2b508c1ef0e64b3090c2f231a57b68882b529636a10cfc494d1d311b"
+  },
+  "log_sha256": "9013e54432cbd969109b874823554dda0e7708de619614974a5ee66b4a5af054",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest"
+}
