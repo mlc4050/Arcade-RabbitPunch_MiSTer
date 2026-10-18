@@ -102,3 +102,27 @@ OSS_CAD_ROOT and CXX_BIN in mister.env. --reference-root selects the worktree
 holding the already-qualified compact captures. --negative-width must pass as
 an expected rejection; --full-raster checks the exact runner's qualification
 hashes before starting. Every generated file and compiler cache stays on D:.
+
+
+## Fast logical RAM contract
+
+sim/fast/rabbitpunch_ram16_model.vhd and rabbitpunch_ram8_model.vhd deliberately
+implement only the tested enabled-read/write RAM contract. Their entities use the
+production names inside an isolated fast library; source lists select one
+implementation. They never enter files.qip. Native comparison uses generated
+renamed entities to instantiate each model beside the real Intel primitive.
+
+run_fast_ram_tests.py passes that simultaneous 256-address native comparison,
+including three initial word patterns, both byte lanes, both read ports and
+output-enable retention. The unchanged all-bank VHDL contract also passes all
+52224 configured words through CPU/inspection, totaling 104553 checks. Exact
+inputs, generated comparison fixture and logs are in
+reference/fast_ram_contract_checks.json and fast_ram_contract_archive.json.
+Same-word mixed-port writes are rejected; X/unknown behavior and native
+read-during-write collisions remain outside the abstraction.
+
+The unchanged installed Intel Verilog RAM simulation library cannot be directly
+used by this fast backend: its event-based write eligibility logic includes a
+self-referential wire rejected by Verilator. The native ModelSim tests continue
+to use Intel's actual simulation model. A fast diagnostic using these logical
+RAMs must identify that boundary and cannot be called a native M10K proof.

@@ -143,8 +143,10 @@ patterned-edge algorithm comparison or unfiltered-MAME image comparison.
 All three combined scanline-strength controls also pass the compact fixture;
 see reference/crt_video_options_compact_3_4_5_checks.json.
 
-Still open: patterned combined HQ2x images,
-extreme-size clipping, live vertical-shift/combined-output transitions and
+Patterned combined HQ2x now matches all 1024 compact netlist pixels and all
+248832 full-raster pixels in the separately qualified fast RTL backend; see
+VIDEO_OPTIONS.md for exact scope and the incomplete full-raster Starter run.
+Still open: extreme-size clipping, live vertical-shift/combined-output transitions and
 actual monitor behavior. Vertical-size ring buffering is omitted: it adds
 multiple rows and its cabinet mode expects at least eight system clocks per
 native pixel, whereas this core uses seven. V-Shift changes sync phase,
