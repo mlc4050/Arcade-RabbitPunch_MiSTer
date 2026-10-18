@@ -312,7 +312,7 @@ def inspect_full_clock_tree(stage, quartus_tools, rev):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--synth-check", choices=["crt_adjust", "video_aspect", "video_options", "clocked_machine", "machine", "raster", "hiscore_service", "hiscore", "maintenance", "video_output", "platform", "controls", "host", "load_frontend", "ddr_copy", "audio_mixer", "audio_rom_transport", "audio", "adpcm", "sound_board", "soundcpu", "memory", "tiles", "sprites", "sprite_scan", "priority", "sprite_line", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "download", "system", "sdram", "rom_requests", "rom_cache", "roms"],
+    ap.add_argument("--synth-check", choices=["ddr_write_queue", "hdmi_rotation", "crt_adjust", "video_aspect", "video_options", "clocked_machine", "machine", "raster", "hiscore_service", "hiscore", "maintenance", "video_output", "platform", "controls", "host", "load_frontend", "ddr_copy", "audio_mixer", "audio_rom_transport", "audio", "adpcm", "sound_board", "soundcpu", "memory", "tiles", "sprites", "sprite_scan", "priority", "sprite_line", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "download", "system", "sdram", "rom_requests", "rom_cache", "roms"],
                     help="fit an isolated block from HEAD instead of the MiSTer core")
     ap.add_argument("--rev", help="Quartus revision (default: CORE_REV, else the one "
                                   ".qsf in the core root, else the .qpf's last)")

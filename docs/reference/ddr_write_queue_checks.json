@@ -1,0 +1,11 @@
+{
+  "case": "ddr_write_queue",
+  "pass_marker": "DDR_WRITE_QUEUE_PASS",
+  "log": "debug\\baselines\\ddr_write_queue\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_ddr_write_queue.vhd": "2d6f2617d3f8b3d8e7eb0176c02ded83c02aac193d8bec03039fe3916c8b0648",
+    "sim/video/ddr_write_queue_tb.vhd": "c3e18326242086ce370eb70a86f1eedfdb8327496c2928798bb691807a6956d2"
+  },
+  "log_sha256": "f9595744c343dd72d70112f5c11faad80569399a4eb739f2a8bd4e759c544c6f",
+  "scope": "Isolated unsigned VHDL RTL queue: exact 512-packet stalled capacity, sticky overflow without overwriting accepted packets, independent ordered scoreboard through 8000 pseudo-random cycles including simultaneous enqueue/dequeue and pointer wraparound, stable stalled outputs, reset discards pending presentation writes. No fitted memory/timing, rotator ownership, loader isolation or physical DDR proof; disconnected from production."
+}
