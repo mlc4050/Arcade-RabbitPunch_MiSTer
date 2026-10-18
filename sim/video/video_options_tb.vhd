@@ -13,31 +13,28 @@ end entity;
 
 architecture test of video_options_tb is
     component rabbitpunch_video_options is
-    generic (
-        GINT_VISIBLE_WIDTH : positive := 288
-    );
-    port (
-        i_clk : in std_logic;
-        i_pixel_enable : in std_logic;
-        iu8_red : in unsigned(7 downto 0);
-        iu8_green : in unsigned(7 downto 0);
-        iu8_blue : in unsigned(7 downto 0);
-        i_horizontal_sync : in std_logic;
-        i_vertical_sync : in std_logic;
-        i_horizontal_blank : in std_logic;
-        i_vertical_blank : in std_logic;
-        i_forced_scandoubler : in std_logic;
-        i_direct_video : in std_logic;
-        iu3_effect : in unsigned(2 downto 0);
-        o_pixel_enable : out std_logic;
-        ou8_red : out unsigned(7 downto 0);
-        ou8_green : out unsigned(7 downto 0);
-        ou8_blue : out unsigned(7 downto 0);
-        o_horizontal_sync : out std_logic;
-        o_vertical_sync : out std_logic;
-        o_data_enable : out std_logic;
-        ou2_scanlines : out unsigned(1 downto 0)
-    );
+        port (
+            i_clk : in std_logic;
+            i_pixel_enable : in std_logic;
+            iu8_red : in unsigned(7 downto 0);
+            iu8_green : in unsigned(7 downto 0);
+            iu8_blue : in unsigned(7 downto 0);
+            i_horizontal_sync : in std_logic;
+            i_vertical_sync : in std_logic;
+            i_horizontal_blank : in std_logic;
+            i_vertical_blank : in std_logic;
+            i_forced_scandoubler : in std_logic;
+            i_direct_video : in std_logic;
+            iu3_effect : in unsigned(2 downto 0);
+            o_pixel_enable : out std_logic;
+            ou8_red : out unsigned(7 downto 0);
+            ou8_green : out unsigned(7 downto 0);
+            ou8_blue : out unsigned(7 downto 0);
+            o_horizontal_sync : out std_logic;
+            o_vertical_sync : out std_logic;
+            o_data_enable : out std_logic;
+            ou2_scanlines : out unsigned(1 downto 0)
+        );
     end component;
     signal s_clk : std_logic := '0';
     signal s_ce : std_logic := '0';
@@ -116,6 +113,8 @@ begin
         variable vint_lines : natural := 0;
         variable vint_line_pixels : natural := 0;
         variable vint_expected_width : natural := 288;
+        variable vint_expected_pixels : natural := 62208;
+        variable vint_expected_lines : natural := 216;
         variable v_previous_de : std_logic := '0';
     begin
         wait until falling_edge(s_clk);
@@ -125,6 +124,13 @@ begin
                 su8_output_red = su8_red and su8_output_green = su8_green and su8_output_blue = su8_blue)
                 report "Native/direct video bypass changed input" severity failure;
             assert (su2_scanlines = 0) report "Native/direct video retained scanline effect" severity failure;
+        end if;
+        if (GINT_MODE >= 3 and GINT_MODE <= 5) then
+            assert (su2_scanlines = GINT_MODE - 2)
+                report "Incorrect scanline strength" severity failure;
+        elsif (GINT_MODE /= 6) then
+            assert (su2_scanlines = 0)
+                report "Unexpected scanline strength" severity failure;
         end if;
         if (sint_frames >= 2 and sint_frames < 3 and s_output_ce = '1') then
             if (s_output_de = '1') then
@@ -144,7 +150,14 @@ begin
             v_previous_de := s_output_de;
         end if;
         if (sint_frames = 3) then
-            assert (vint_pixels >= 62208 and vint_lines >= 216)
+            if (GINT_MODE = 2) then
+                vint_expected_pixels := 248832;
+                vint_expected_lines := 432;
+            elsif (GINT_MODE >= 1 and GINT_MODE <= 5) then
+                vint_expected_pixels := 124416;
+                vint_expected_lines := 432;
+            end if;
+            assert (vint_pixels = vint_expected_pixels and vint_lines = vint_expected_lines)
                 report "Insufficient visible video output" severity failure;
             report "VIDEO_OPTIONS_PASS mode=" & integer'image(GINT_MODE) &
                 " pixels=" & integer'image(vint_pixels) & " lines=" & integer'image(vint_lines);
