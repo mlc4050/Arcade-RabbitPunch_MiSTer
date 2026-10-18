@@ -113,7 +113,25 @@ M10Ks and uses registers for sync history; the isolated fit instead inferred
 a separate 129-bit sync RAM. Both resource results are recorded at their
 exact build commits. See reference/full_shell_crt_release_checks.json.
 
-Still open: instrumented-shell and combined-effects validation,
+The instrumented e48d817 shell at seed 2 also passes all 164 timing checks,
+required probes and unchanged coverage limits: minimum setup +0.288 ns,
+hold +0.080 ns, 15366 ALMs, 26152 registers and the same 183 M10Ks.
+See reference/full_shell_crt_debug_seed2_checks.json.
+
+The Rabio Lepus gameplay capture also matches all 62208 pixels through the
+CRT path, with no underflow and maximum 1966/3024 clocks per row; see
+reference/scanout_pll_5357ps_crt_rabiolep_play1000_checks.json.
+
+Combined full-width/native, forced-doubling and direct-video controls pass;
+see reference/crt_video_options_0_checks.json, crt_video_options_1_checks.json
+and crt_video_options_6_checks.json. The extended six-row run exceeded its
+wall budget after two input frames and is preserved separately. The bounded
+one-row HQ2x case failed its constant-colour assertion and remains
+unqualified while independent black-blanking/edge-filter captures are checked.
+See reference/crt_hq_colour_rejected.json and crt_video_options_wall_timeout.json.
+No passing combined HQ2x claim is made.
+
+Still open: combined HQ2x colour validation,
 extreme-size clipping, live vertical-shift/combined-output transitions and
 actual monitor behavior. Vertical-size ring buffering is omitted: it adds
 multiple rows and its cabinet mode expects at least eight system clocks per
