@@ -1,6 +1,10 @@
-# CRT Adjust evaluation
+# CRT Adjust
 
-The optional CRT adapter remains disconnected from the production output.
+The optional CRT adapter is connected before the existing output-effects wrapper.
+The main OSD exposes Adjust, horizontal size/position and vertical sync shift.
+Adjust defaults Off; position/shift are hidden until enabled, and size is also
+hidden and disabled during forced doubling or output effects. Direct video
+uses the native effect-free path, so size remains available.
 Native analog output already uses the framework RGB/sync path. These tests do
 not establish physical CRT operation.
 
@@ -77,9 +81,21 @@ The exact provisional native raster also passes the synthesized scoreboard:
 source pixels and sync periods pass; see
 reference/crt_adjust_native_raster_netlist_checks.json.
 
-Still open: real-renderer MAME comparison,
-extreme-size clipping, setting
-changes, main-OSD wiring and actual monitor behavior. No CRT Adjust option is
-advertised by the production menu yet. Vertical-size ring buffering is not
-included in this evaluation: it adds multiple rows and its cabinet mode expects
-at least eight system clocks per native pixel, whereas this core uses seven.
+The actual renderer, shared SDRAM and production PLL also pass through the
+enabled zero-adjustment path: all 62208 Rabbit Punch attract pixels match
+the raw MAME image, with no underflow and maximum 2484/3024 cycles per row.
+This is a captured static scene with synthetic competing CPU traffic, not
+executing-CPU gameplay. See
+reference/scanout_pll_5357ps_crt_rpunch_attract_checks.json.
+
+The production controls use status bit 94 (enable), 99:95 (signed horizontal
+size), 106:100 (the 97-entry horizontal position index) and 112:107 (signed
+vertical sync shift). Menu masks H6 and H7 control visibility. All encoded
+fields default to zero; no offset is implied by an untouched configuration.
+
+Still open: the newly connected host/full-shell implementation checks,
+extreme-size clipping, live setting changes, combined output effects and
+actual monitor behavior. Vertical-size ring buffering is omitted: it adds
+multiple rows and its cabinet mode expects at least eight system clocks per
+native pixel, whereas this core uses seven. V-Shift changes sync phase,
+not vertical picture size.
