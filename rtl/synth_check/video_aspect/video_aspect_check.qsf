@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 RabbitPunch contributors
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY rabbitpunch_video_aspect
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name SYSTEMVERILOG_FILE ../../../sys/math.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../../sys/video_freak.sv
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_video_aspect.vhd
+set_global_assignment -name SDC_FILE video_aspect_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_pixel_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to i_vertical_sync
+set_instance_assignment -name VIRTUAL_PIN ON -to i_data_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to i_direct_video
+set_instance_assignment -name VIRTUAL_PIN ON -to iu12_hdmi_width[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu12_hdmi_height[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu2_aspect[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu3_scale[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou13_aspect_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou13_aspect_y[*]
