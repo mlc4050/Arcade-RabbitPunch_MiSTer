@@ -1,0 +1,16 @@
+{
+  "case": "gate_hdmi_presentation",
+  "pass_marker": "HDMI_PRESENTATION_CONTROL_PASS",
+  "log": "debug\\baselines\\gate_hdmi_presentation\\result.log",
+  "commit": "47a3effac4da51ea34343f60d2b67ca009db6765",
+  "vectors_sha256": {},
+  "netlist_sha256": "09f0272802faefc6bafafd24de7f7ef5649aa8298b52906d41ab81035f1d9121",
+  "source_sha256": {
+    "debug/netlists/hdmi_presentation_47a3eff/hdmi_presentation_check.vo": "09f0272802faefc6bafafd24de7f7ef5649aa8298b52906d41ab81035f1d9121",
+    "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
+    "debug/hdmi_presentation_netlist_control_tb.vhd": "3667a1cc06320be9d73684b9567223bf19a56c06db3db63bbc41ee3ea168834d"
+  },
+  "log_sha256": "db271a39ce78edaebc50bd404e58b276c95129fd8f721261f8edef7a385e94cf",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest; mode/direct/loader and native/rotated integer metadata against independent qualified-aspect reference; partial 640-pixel fixture cannot publish under the fitted 62208-pixel count; complete image proofs are separate",
+  "template_sha256": "c1b3f6592878e5d4c2ca08daf8f780f0f404d5e217ed01029157f7bb56b32ada"
+}
