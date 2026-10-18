@@ -1,0 +1,30 @@
+{
+  "accepted": true,
+  "assets": [
+    {
+      "tool_directory": ".local/tools/ghdl-6.0.0",
+      "archive": "ghdl-mcode-6.0.0-mingw64.zip",
+      "bytes": 24053403,
+      "sha256": "c1562b2a4767e34d33159b536b5e36a8a38ebdb6e7672aa9969a4f4ac2cadffe",
+      "official_asset_url": "https://github.com/ghdl/ghdl/releases/download/v6.0.0/ghdl-mcode-6.0.0-mingw64.zip",
+      "official_release_digest_matched": true
+    },
+    {
+      "tool_directory": ".local/tools/oss-cad-suite-20261018",
+      "archive": "oss-cad-suite-windows-x64-20261018.tgz",
+      "bytes": 604040523,
+      "sha256": "c9e2461fdeeee8e186d46951ef64f88fed8c59668ba5f49b4db74ebb23d9da24",
+      "official_asset_url": "https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2026-10-18/oss-cad-suite-windows-x64-20261018.tgz",
+      "official_release_digest_matched": true
+    },
+    {
+      "tool_directory": ".local/tools/w64devkit-2.10.1",
+      "archive": "w64devkit-x64-2.10.1.7z.exe",
+      "bytes": 67263552,
+      "sha256": "add1edf984ce4d473cfeb7c52e0ab38db73a855bba6c7f564d5e16648eb2896a",
+      "official_asset_url": "https://github.com/skeeto/w64devkit/releases/download/v2.10.1/w64devkit-x64-2.10.1.7z.exe",
+      "official_release_digest_matched": true
+    }
+  ],
+  "scope": "Official release asset bytes match their GitHub release SHA256 digest and size before local extraction. Tools and all scratch are under the D-drive checkout; no system PATH or registry installation. This is package integrity, not HDL equivalence or electrical verification."
+}

@@ -733,6 +733,18 @@ pair before the RTL around it.
 
 ## Testbench discipline
 
+- **[RabbitPunch] A fast model needs a pixel cross-check before its own geometry
+  assertions are evidence.** The initial GHDL/Verilator HQ2x fixture counted all
+  1024 output pixels in each path, yet every pixel differed from the qualified
+  Quartus/ModelSim captures. The framework declares RGB wires inside generate
+  branches and refers to them outside; Verilator created implicit scalar nets
+  where Quartus selected the full-width declarations. A clearly marked tool-only
+  scope normalization, leaving the original vendor source unchanged, matches both
+  complete compact captures. The fixed-GAMMA-zero export boundary is explicit;
+  a deliberately wrong expected width also trips the retained VHDL assertion.
+  Fast full-raster runs require both controls at the exact runner/source hashes.
+  See fast_hq_initial_scope_rejected.json and fast_crt_hq_compact_checks.json.
+
 - **[RabbitPunch] A flat visible field is not flat across a black blanking border.** The
   enabled CRT adapter correctly blacked RGB in HBlank/VBlank, while a combined HQ2x
   test expected unchanged colour at every visible pixel. An independent native

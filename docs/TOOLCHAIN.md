@@ -61,3 +61,44 @@ frame; palette writes concentrate in its 8-line vblank. These are emulation timi
 not a measured PCB raster. Before any buffering decision, subdivide sprite writes by
 descriptor field and register writes by function, and extend active-play coverage
 using continuing/restarted input or scripted scenes. No snapshot/latch policy is chosen yet.
+
+
+## Optional fast VHDL simulation backend
+
+Portable GHDL 6.0.0 (mcode), Verilator 5.053 devel from OSS CAD Suite 20261018,
+and w64devkit 2.10.1 / GCC 16.2.0 are extracted under this core's
+.local/tools/ on D:. All three archive bytes match their official release
+asset SHA256 digests; see reference/portable_tool_archive_checks.json.
+No machine-wide PATH or registry setting was changed. The recorded tool version
+strings include the official binaries' `dirty`/`mod` build labels rather than
+silently relabeling them as clean builds.
+
+Sources: [GHDL 6.0.0](https://github.com/ghdl/ghdl/releases/tag/v6.0.0),
+[OSS CAD Suite 20261018](https://github.com/YosysHQ/oss-cad-suite-build/releases/tag/2026-10-18),
+[w64devkit 2.10.1](https://github.com/skeeto/w64devkit/releases/tag/v2.10.1).
+GHDL's [synthesis/export interface](https://ghdl.github.io/ghdl/using/Synthesis.html)
+is experimental; our conversion boundaries are verified per fixture.
+
+The existing VHDL clock-enable bench passes 175065 checks under GHDL and its
+clock-enable RTL exports to Verilog. For the video test, VHDL retains stimulus,
+raster generation and assertions. A generated C++ bridge advances the clock,
+captures RGB and exits cleanly on an HDL assertion. It contains no video oracle.
+run_crt_hq_fast_tests.py bootstraps against both pinned 1024-pixel compact
+ModelSim/Quartus captures and requires a wrong-width VHDL assertion control
+before the full-raster mode can run. Tool executable hashes, source hashes,
+generated files, version strings and measured run times accompany each report.
+
+The tool-only VHDL export specializes unused gamma support output bit 21 for
+GAMMA=0. The simulation copy of video_mixer hoists the selected RGB declarations
+to module scope to reproduce Quartus lookup; the original sys source is unchanged.
+The initial unnormalized model produced 1024 wrong pixels in each path and is
+explicitly rejected in reference/fast_hq_initial_scope_rejected.json. The known
+legacy procedural-wire diagnostic is allowed only in this tool invocation;
+HDL assertions remain enabled. This two-state RTL path complements four-state
+ModelSim and Quartus implementation; it does not replace either.
+
+Run through scripts/d_drive.ps1. Tool paths may be overridden with GHDL_EXE,
+OSS_CAD_ROOT and CXX_BIN in mister.env. --reference-root selects the worktree
+holding the already-qualified compact captures. --negative-width must pass as
+an expected rejection; --full-raster checks the exact runner's qualification
+hashes before starting. Every generated file and compiler cache stays on D:.

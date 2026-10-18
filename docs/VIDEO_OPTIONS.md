@@ -93,3 +93,22 @@ colour lanes. Both fixtures use /7 input enables; the enabled CRT adapter has
 H-position +8 and the production size gate disabled in doubled mode. This is
 a compact integration proof against the framework, not MAME's unfiltered frame
 or a full native raster/physical CRT measurement. See reference/crt_hq_pattern_checks.json.
+
+
+The complete native geometry now passes a separate fast RTL comparison:
+288x216 visible /432x256 total input, steady /7 enables, produces 576x432 HQ2x
+output. All 248832 pixels through enabled CRT H-position +8 match the independent
+native-framework path; size remains gated off while doubled. The pattern covers
+all rows with asymmetric colours/bars/diagonals. Measured simulations take
+1.724/1.406 seconds after compilation. See
+reference/fast_crt_hq_full_raster_checks.json and
+reference/fast_crt_hq_qualification_archive.json.
+
+This path first matches both existing compact ModelSim/Quartus captures exactly,
+then proves a deliberately wrong width trips its retained VHDL assertion.
+GHDL export and two explicit simulation-only interface/scope specializations
+are documented in TOOLCHAIN.md; original production/vendor files are unchanged.
+The stopped full-raster Starter ModelSim attempt remains incomplete, separately
+recorded in reference/crt_hq_full_raster_starter_progress.json. This fast RTL
+proof does not turn that complete-netlist attempt into a pass. Absolute pixel
+frequency, live vertical shift, extreme clipping and physical output remain open.

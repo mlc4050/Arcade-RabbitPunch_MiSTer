@@ -1,0 +1,74 @@
+{
+  "accepted": true,
+  "cases": [
+    {
+      "case": "native",
+      "pixels": 248832,
+      "run_seconds": 1.7237104999949224,
+      "pixels_sha256": "d567796267a43d900e202512ffefbfe36c20741538178907e88843165f169bce",
+      "returncode": 0
+    },
+    {
+      "case": "adjusted",
+      "pixels": 248832,
+      "run_seconds": 1.4055801999929827,
+      "pixels_sha256": "d567796267a43d900e202512ffefbfe36c20741538178907e88843165f169bce",
+      "returncode": 0
+    }
+  ],
+  "source_sha256": {
+    "scripts/run_crt_hq_fast_tests.py": "38a2ba3817b251bc114b6f8e441bf9086b9a43018685f6804d3ee4681e4ae2b4",
+    "sim/video/video_options_tb.vhd": "69078785ce45ac499182887d982183126126d40e8b6942fd6984c0e792a8cc5f",
+    "sim/video/crt_video_options_tb.vhd": "0ab951af912cc986d9b2e34bc8e0fc907208be41a6d83a303e9c4844b40f4f35",
+    "rtl/rabbitpunch_video_options.vhd": "e418ce32749d0474ffa5e5586a3403928b0c91cb504c7cc7e5136e4340be2bf2",
+    "rtl/rabbitpunch_crt_adjust.vhd": "aad8878d3ebe44a18a038c86fb7131a09699feae7898256ddc9c193310bb5c7e",
+    "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+    "sys/video_mixer.sv": "31ed2c917bd6680b4d60328e71a4f28015bd5fcec21e15b290eacec88971167d",
+    "sys/scandoubler.v": "d36181c5fde9df0a504c547e23f60bcf201420052ada2682f081b00fd9485e6b",
+    "sys/hq2x.sv": "2146b69cf63c26a4b41407e9ac1b4462db4d7e3ea6d8a99f31ba12712d68f975",
+    "sys/video_freezer.sv": "0f3f4710b072b7e90b0b6bfe7607dec18dbd6bed78d1994f32d6fa72a6b7aef3"
+  },
+  "generated_sha256": {
+    "hq_fast_adjusted.v": "89f59481c411ececaca53ed8d6320d5cd34d11bef62d6e4752dc964d2c8fdba4",
+    "hq_fast_adjusted.vhd": "3055366b9cc3614a62d135e3bec0196440a9d7248bebc923aa9473db6e69a30b",
+    "hq_fast_adjusted_bridge.cpp": "c5cab4152c8c11f19509837ce02293f618fbc3dd05a276b0f1137b51629e07d3",
+    "hq_fast_adjusted_build.log": "203e90a2c7368293ba8ea9dca9705ada2e35cea3dd3ce92b1e9f16386f097821",
+    "hq_fast_adjusted_export.log": "b381c3320c146adcaae4deeac93dc394e12d6f4bb288c8d2b3d28512488b9a64",
+    "hq_fast_adjusted_pixels.hex": "d567796267a43d900e202512ffefbfe36c20741538178907e88843165f169bce",
+    "hq_fast_adjusted_run.log": "dc71ff9bf715235f3b1f4d929f3dd7b41d91574cd94255cdf92d50f0f649ee15",
+    "hq_fast_native.v": "a807f4c81f3e4fd869e007dd396b32695a9a3a4420a43ade92d32b4b9de4aca5",
+    "hq_fast_native.vhd": "4a5dc812ef60efbd4eda67838378e16de677f1e22e4b28b4e3c21b078533bba5",
+    "hq_fast_native_bridge.cpp": "bd5cc4177477396b7bdfc7ba1e06a76b2626121f1dbbb45b72551f58f80f1ab3",
+    "hq_fast_native_build.log": "d3774508a19e560b1ab13e903f4f344afd6b280bc40cd65fa165afb96c969486",
+    "hq_fast_native_export.log": "f6fde5dea2e17611f8cbafd4d7ab59dbbb15043e018e65eaa185a0ebe6346f26",
+    "hq_fast_native_pixels.hex": "d567796267a43d900e202512ffefbfe36c20741538178907e88843165f169bce",
+    "hq_fast_native_run.log": "dc71ff9bf715235f3b1f4d929f3dd7b41d91574cd94255cdf92d50f0f649ee15",
+    "rabbitpunch_video_options.vhd": "d2dd521242283000318c084bcf92fa15b2c03adbb723320554d6ce3880b48789",
+    "video_mixer_quartus_scope.sv": "142f2a8c224e4dbacb302418f3873f06392f3bcf97c52c032772108a9a098693"
+  },
+  "tools": {
+    "ghdl": {
+      "output": "GHDL 6.0.0 (6.0.0.r0.ge589c698c.dirty) [Dunoon edition]\n Compiled with GNAT Version: 15.2.0\n static elaboration, mcode JIT code generator\nWritten by Tristan Gingold.\n\nCopyright (C) 2003 - 2026 Tristan Gingold.\nGHDL is free software, covered by the GNU General Public License.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n",
+      "executable_sha256": "dc983e37f4a606d9803557f728902b8e2bcb96cd9fb3f117307fb4de129e6a91"
+    },
+    "verilator": {
+      "output": "Verilator 5.053 devel rev v5.052-472-g1cfb3b89a (mod)\n",
+      "executable_sha256": "f750ce230db972ca885d795f2d3be03711c2c7cddb2fc898819df46e6573132c"
+    },
+    "cxx": {
+      "output": "g++.exe (GCC) 16.2.0\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "executable_sha256": "671ca52a98e6f0c44411f72ad1be386f03c193f83970f7dbd235f4b974e728d2"
+    }
+  },
+  "visible": [
+    288,
+    216
+  ],
+  "output": [
+    576,
+    432
+  ],
+  "full_raster": true,
+  "negative_width": false,
+  "scope": "Two-state Verilator RTL model from generated VHDL fixtures and adapters, fixed-GAMMA-zero export, explicit simulation-only Quartus generate-scope normalization and unchanged original vendor sources. VHDL stimulus/geometry assertions retained; generated C++ transports only clocks/files and clean assertion exit. Compact pixels must match pinned ModelSim/Quartus captures; full raster additionally requires that exact runner compact pass and wrong-width assertion control. No four-state, full fitted-netlist, SDF, absolute-frequency, clipping/live-transition, physical-output or MAME-HQ accuracy claim."
+}

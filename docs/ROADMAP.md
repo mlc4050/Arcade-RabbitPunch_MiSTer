@@ -21,7 +21,8 @@ The newer audio-menu release/debug revisions pass all 144/164 timing checks
 | Hardware | No playable board verification, deployment, screenshot, JTAG read or audible output is claimed. RBFs are local timed prototypes; there is no verified release. |
 
 Next work is the original ROM-free diagnostic's native CPU-to-video path and
-full-raster CRT/HQ2x comparison with a qualified faster simulation backend. Audio mix defaults to
+remaining native integration checks. Full-raster CRT/HQ2x now matches all
+248832 pixels in the qualified fast RTL backend. Audio mix defaults to
 Mono; all four settings pass synthesized-host and connected HPS regressions.
 Development DDR-load MRAs preserve each verified 0x210000-byte image and change
 only the staging address/display description; the default direct MRAs remain.
@@ -36,7 +37,9 @@ The original production-raster complete-netlist image run remains incomplete
 at its wall timeout; the compressed proof does not replace that scope.
 
 Combined CRT/HQ2x matches the independent native-framework reference at 1152
-flat-field and 1024 patterned output pixels. Full native raster, extreme clipping,
+flat-field and 1024 patterned output pixels. The qualified two-state fast RTL path also matches all 248832 full-raster
+patterned HQ2x pixels, with compact cross-tool and negative assertion controls.
+The complete-netlist Starter run remains separately incomplete. Extreme clipping,
 live vertical-shift coverage, physical outputs and end-to-end latency remain open.
 Crop remains open: the framework shares core DE with analog output, so routing
 HDMI crop through that DE would also change CRT pixels. Preserve the native
