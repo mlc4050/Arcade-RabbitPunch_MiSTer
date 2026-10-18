@@ -17,8 +17,8 @@ def compare_startup(expected, actual, native_reset=False):
     """Keep every address/mask strict; expose only audited bootstrap save bytes."""
     if len(expected) != len(actual):
         raise SystemExit(f'Sound startup write count mismatch: {len(actual)} != {len(expected)}')
-    # Pinned program: PUSH AF/PUSH BC at 081A/081B, then the two PUSH AF
-    # instructions at 0836. Reset-dependent F/B and inherited flags are saved
+    # Pinned program: PUSH AF/PUSH BC at 081A/081B (Japan) or 0817/0818 (US),
+    # then PUSH AF at 0836 (Japan) or 0833 (US). Reset-dependent F/B and inherited flags are saved
     # before XOR A (0013) and LD BC (0014) establish the program's own state.
     allowed = {4: 0xFFFC, 5: 0xFFFB, 13: 0xFFF8, 18: 0xFFF8}
     differences = []
@@ -60,6 +60,13 @@ def main():
         rom = root/'debug/rom_regions'/game/'audiocpu.bin'
         trace = root/reference['trace']
         assert sha(rom) == reference['audiocpu_sha256'] and sha(trace) == reference['trace_sha256']
+        bootstrap_hash = hashlib.sha256(rom.read_bytes()[:0x867]).hexdigest()
+        if args.native_reset:
+            audited = {
+                'rabiolep': '33e51d367c3298887142ff73f661a701c7951b7c294777ab6a9a3306a5524928',
+                'rpunch': '2cc30a008dfbfc9e25a4edf2b229d9c86030dcfdfb016fb8eb21b98c9c60302a',
+            }
+            assert bootstrap_hash == audited[game], 'Bootstrap ROM changed; re-audit the native-reset exceptions'
         case = f'sound_board_native_{game}' if args.native_reset else f'sound_board_boot_{game}'
         out = root/'debug/baselines'/case
         out.mkdir(parents=True, exist_ok=True)
@@ -120,7 +127,7 @@ def main():
         result.update(set=game, writes_compared=len(actual), audiocpu_sha256=sha(rom), mame_trace_sha256=sha(trace), reset_state_sha256=sha(state_file),
             simulation_cpu_seed='none; unchanged T80 reset' if args.native_reset else 'Vendor DIR state-load input initialized from captured MAME reset state after reset; no production RTL reset change',
             simulation_ram_seed='none; production RAM configuration' if args.native_reset else 'explicit zero RAM deposits',
-            retrospective_audit=args.reuse_existing, comparator_sha256=sha(Path(__file__)),
+            retrospective_audit=args.reuse_existing, audited_bootstrap_sha256=bootstrap_hash if args.native_reset else None, comparator_sha256=sha(Path(__file__)),
             rtl_trace_sha256=sha(out/'rtl_sound_writes.txt'), log_sha256=sha(root/result['log']),
             source_sha256={name: sha(root/name) for name in sources},
             scope='Connected T80, production sound bus, native 2048-byte RAM and actual JT51; behavioral audio-ROM transport with periodic 53-clock replies; ' + ('native CPU reset and production RAM configuration, all startup addresses/masks and peripheral data exact; four explicitly audited reset-dependent stack-save byte positions reported separately; ' if args.native_reset else 'explicitly normalized MAME CPU/RAM seed; ') + 'startup only, no main commands/uPD/SDRAM/physical timing or audible-game proof')

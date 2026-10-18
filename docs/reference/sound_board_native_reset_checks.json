@@ -88,7 +88,8 @@
     "simulation_cpu_seed": "none; unchanged T80 reset",
     "simulation_ram_seed": "none; production RAM configuration",
     "retrospective_audit": true,
-    "comparator_sha256": "fa1625810518fb4c5815288eb661ca9d2f778638889a289a6c4ff9e147f4899d",
+    "audited_bootstrap_sha256": "33e51d367c3298887142ff73f661a701c7951b7c294777ab6a9a3306a5524928",
+    "comparator_sha256": "4319ad95b7c3bb38409049423ffbf72fc89ca45e99727945110793818abe36d8",
     "rtl_trace_sha256": "2a31890ccf6f134fe4e9928575ce57110bab9b9ca8fdd4ea6afaa01c2c9dcb85"
   },
   {
@@ -180,7 +181,8 @@
     "simulation_cpu_seed": "none; unchanged T80 reset",
     "simulation_ram_seed": "none; production RAM configuration",
     "retrospective_audit": true,
-    "comparator_sha256": "fa1625810518fb4c5815288eb661ca9d2f778638889a289a6c4ff9e147f4899d",
+    "audited_bootstrap_sha256": "2cc30a008dfbfc9e25a4edf2b229d9c86030dcfdfb016fb8eb21b98c9c60302a",
+    "comparator_sha256": "4319ad95b7c3bb38409049423ffbf72fc89ca45e99727945110793818abe36d8",
     "rtl_trace_sha256": "488d9910c1e8d7a7fa53b150e6baedd7ee54327d7dfa7918a7e9faee8285c986"
   }
 ]

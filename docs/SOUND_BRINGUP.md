@@ -318,9 +318,9 @@ early stack-save bytes are reported separately, not counted as exact data:
 
 | Zero-based write index | Address | MAME | Native T80 | Source |
 |---|---|---|---|---|
-| 4 | FFFC | 00 | FF | PUSH AF at 081A, reset-dependent flags after EX AF,AF' |
-| 5 | FFFB | 00 | XX | PUSH BC at 081B, B not initialized by the program yet |
-| 13 | FFF8 | 28 | EC | PUSH AF at 0836, inherited flag bits after ADD HL,BC |
+| 4 | FFFC | 00 | FF | PUSH AF at 081A (Japan)/0817 (US), reset-dependent flags after EX AF,AF' |
+| 5 | FFFB | 00 | XX | PUSH BC at 081B (Japan)/0818 (US), B not initialized by the program yet |
+| 13 | FFF8 | 28 | EC | PUSH AF at 0836 (Japan)/0833 (US), inherited flag bits after ADD HL,BC |
 | 18 | FFF8 | 28 | EC | Same save in the second YM wait call |
 
 This audit comes from local disassembly of the supplied pinned sound ROM. The
@@ -343,3 +343,10 @@ native configuration-initialized RAM and JT51, with a behavioral delayed ROM
 transport at the legacy 48 MHz/4 MHz enable ratio. No main-game commands,
 ADPCM playback, production SDRAM/PLL timing, long-run game audio or audible
 hardware verification is established by this prefix.
+
+The bootstrap audit covers both ROMs separately. Rabbit Punch's configure entry
+is 085E and save routine 0817, three bytes before the Japanese 0861/081A entries;
+the corresponding save/wait instruction blocks are byte-identical. The shared
+0013/0014/001E initialization/clear path is also identical. Native exceptions
+are locked to separate hashes of each ROM's first 0x867 bytes; changing that
+code requires a fresh audit rather than silently retaining the exceptions.
