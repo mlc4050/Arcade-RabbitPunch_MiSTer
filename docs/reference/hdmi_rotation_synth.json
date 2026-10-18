@@ -1,5 +1,5 @@
 {
-  "commit": "fc479ee2edbbb640116f89d77b0165d79f2ef5db",
+  "commit": "8238d7736a7ec46ecfa65ad782919d79646868d2",
   "device": "5CSEBA6U23I7",
   "project": "hdmi_rotation_check",
   "constraint_mhz": 48,
@@ -8,51 +8,51 @@
   "timings": [
     {
       "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 9.396
+      "slack_ns": 8.085
     },
     {
       "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.342
+      "slack_ns": 0.347
     },
     {
       "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.721
+      "slack_ns": 9.745
     },
     {
       "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 9.34
+      "slack_ns": 8.117
     },
     {
       "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.327
+      "slack_ns": 0.328
     },
     {
       "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.571
+      "slack_ns": 9.604
     },
     {
       "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
-      "slack_ns": 9.825
+      "slack_ns": 8.854
     },
     {
       "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
-      "slack_ns": 0.183
+      "slack_ns": 0.185
     },
     {
       "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.822
+      "slack_ns": 9.82
     },
     {
       "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
-      "slack_ns": 10.004
+      "slack_ns": 9.224
     },
     {
       "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
-      "slack_ns": 0.134
+      "slack_ns": 0.164
     },
     {
       "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
-      "slack_ns": 9.824
+      "slack_ns": 9.823
     }
   ],
   "timing_coverage": {
@@ -82,15 +82,15 @@
     }
   },
   "fit_summary": [
-    "Fitter Status : Successful - Sun Oct 18 05:09:42 2026",
+    "Fitter Status : Successful - Sun Oct 18 14:12:51 2026",
     "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
     "Revision Name : hdmi_rotation_check",
     "Top-level Entity Name : rabbitpunch_hdmi_rotation",
     "Family : Cyclone V",
     "Device : 5CSEBA6U23I7",
     "Timing Models : Final",
-    "Logic utilization (in ALMs) : 218 / 41,910 ( < 1 % )",
-    "Total registers : 193",
+    "Logic utilization (in ALMs) : 220 / 41,910 ( < 1 % )",
+    "Total registers : 196",
     "Total pins : 1 / 314 ( < 1 % )",
     "Total virtual pins : 219",
     "Total block memory bits : 0 / 5,662,720 ( 0 % )",
@@ -103,6 +103,6 @@
     "Total PLLs : 0 / 6 ( 0 % )",
     "Total DLLs : 0 / 4 ( 0 % )"
   ],
-  "log_sha256": "eca6014185741551063b87ad80f8e13259fc79f53c8554cc6453122e943308e1",
+  "log_sha256": "4371290bac65e3c9f3a089bc88aac8c2991f0aa4325b6189b51efacea5dc0947",
   "scope": "Standalone hdmi_rotation block with virtual I/O; not a complete core or hardware release"
 }

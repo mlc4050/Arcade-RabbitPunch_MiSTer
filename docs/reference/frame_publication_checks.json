@@ -1,0 +1,11 @@
+{
+  "case": "frame_publication",
+  "pass_marker": "FRAME_PUBLICATION_PASS",
+  "log": "debug\\baselines\\frame_publication\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_frame_publication.vhd": "aeea205f852f1d0c6b43b94a411e98a03d5ad72729f6008155043f1e52ab52f1",
+    "sim/video/frame_publication_tb.vhd": "93d98b5ae271565314f76e17e79976d01c5507f3e3220662cb4f44788031b962"
+  },
+  "log_sha256": "c4efb9d6e1423e6adfa528a3228f898a75353818c4f4a99962a4b9bbc1c0e5d5",
+  "scope": "Isolated VHDL presentation-validity control with four-pixel frames. Complete/drained publication, startup and post-load frame alignment, first-overwrite invalidation, short/long/mixed-slot rejection, queue-busy rejection, immediate load/overflow blank/flush, overflow recovery and enable/game-ready gates. Not connected to the real rotator/queue/DDR and not yet fitted; no hardware or latency claim."
+}
