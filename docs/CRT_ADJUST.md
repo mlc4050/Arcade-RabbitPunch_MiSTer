@@ -93,8 +93,19 @@ size), 106:100 (the 97-entry horizontal position index) and 112:107 (signed
 vertical sync shift). Menu masks H6 and H7 control visibility. All encoded
 fields default to zero; no offset is implied by an untouched configuration.
 
-Still open: the newly connected host/full-shell implementation checks,
-extreme-size clipping, live setting changes, combined output effects and
+The expanded production menu also passes a fresh standalone host fit and
+functional synthesized HPS protocol test, including every configuration
+character, status and file transfers. See reference/host_crt_synth.json and
+reference/host_netlist_checks.json.
+
+Live size/position changes in vertical blank recover exact source pixels and
+sync periods after two bounded fixture frames. Disabling the optional path
+also restores exact native bypass on every tested system clock before reenable.
+See reference/crt_live_controls_checks.json. This checks settled recovery; it
+does not promise a glitch-free picture while changing a setting.
+
+Still open: the newly connected full-shell implementation checks,
+extreme-size clipping, live vertical-shift/combined-output transitions and
 actual monitor behavior. Vertical-size ring buffering is omitted: it adds
 multiple rows and its cabinet mode expects at least eight system clocks per
 native pixel, whereas this core uses seven. V-Shift changes sync phase,
