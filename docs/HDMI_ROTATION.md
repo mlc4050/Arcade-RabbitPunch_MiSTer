@@ -165,3 +165,10 @@ existing video-options path; the tap is before CRT/effects. The loader owns
 DDR throughout downloading OR final system-loading drain. The complete
 controller and framebuffer macro are required by the full-build gates.
 No accepted full-shell rotation fit or physical result is claimed yet.
+
+The 10c7995 host fit and synthesized HPS protocol bench pass with the new
+HDMI None/CW/CCW configuration string checked byte for byte and all 128 status
+bits transported. The standalone host uses 479 ALMs, 403 registers and no RAM;
+minimum setup is +7.133 ns and hold +0.167 ns at its 48 MHz evaluation clock.
+See reference/host_hdmi_menu_synth.json and reference/host_netlist_checks.json.
+This does not establish physical ARM menu behavior or a complete shell fit.
