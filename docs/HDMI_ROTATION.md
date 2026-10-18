@@ -165,3 +165,29 @@ existing video-options path; the tap is before CRT/effects. The loader owns
 DDR throughout downloading OR final system-loading drain. The complete
 controller and framebuffer macro are required by the full-build gates.
 No accepted full-shell rotation fit or physical result is claimed yet.
+
+The 10c7995 host fit and synthesized HPS protocol bench pass with the new
+HDMI None/CW/CCW configuration string checked byte for byte and all 128 status
+bits transported. The standalone host uses 479 ALMs, 403 registers and no RAM;
+minimum setup is +7.133 ns and hold +0.167 ns at its 48 MHz evaluation clock.
+See reference/host_hdmi_menu_synth.json and reference/host_netlist_checks.json.
+This does not establish physical ARM menu behavior or a complete shell fit.
+
+A doubled-presentation regression found that integer rotation metadata measured
+the analog HQ2x geometry even though the rotator captures native pixels. In the
+32x20 native / 64x40 presented fixture at a 1900x1080 destination, the old V-integer
+output was 640x1080 instead of the native reference's 660x1080. The failing source,
+fixture and transcript are preserved under debug/fit_archive/hdmi_presented_geometry_34441d0_rejected/.
+The controller now selects native CE/VS/DE while rotated, retaining the presented
+geometry when rotation is off. Both directions and all four integer modes pass
+the independent native-aspect comparison; the complete existing mode/loader/direct
+control regression also passes. See reference/hdmi_presented_geometry_checks.json
+and hdmi_presented_geometry_rejected_checks.json. Earlier fitted-controller and
+full-shell jobs predate this metadata correction; fresh synthesis/timing is required.
+
+The corrected native-geometry controller c7ecb10 passes standalone 48 MHz
+implementation: 795 ALMs, 877 registers, four M10Ks (one 512x80 queue), one DSP,
+no PLL. Minimum setup is +5.375 ns and hold +0.118 ns, with all six timing
+coverage categories clean. See reference/hdmi_presentation_native_geometry_synth.json.
+The full-controller functional netlist and corrected full-shell timing checks
+remain pending; earlier fit snapshots do not include this correction.

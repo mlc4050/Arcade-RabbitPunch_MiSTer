@@ -1,0 +1,140 @@
+{
+  "commit": "c7ecb10dd18663171870dd6024e880f47f622942",
+  "device": "5CSEBA6U23I7",
+  "project": "hdmi_presentation_check",
+  "constraint_mhz": 48,
+  "seed": 3,
+  "memory_bits": 40960,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 5.375
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.254
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.04
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 5.585
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.244
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 8.957
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 7.429
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.136
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.212
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 7.958
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.118
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.202
+    }
+  ],
+  "timing_coverage": {
+    "Illegal Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Port Paths": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Port Paths": {
+      "setup": 0,
+      "hold": 0
+    }
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Sun Oct 18 15:15:12 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : hdmi_presentation_check",
+    "Top-level Entity Name : rabbitpunch_hdmi_presentation",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 795 / 41,910 ( 2 % )",
+    "Total registers : 877",
+    "Total pins : 1 / 314 ( < 1 % )",
+    "Total virtual pins : 530",
+    "Total block memory bits : 40,960 / 5,662,720 ( < 1 % )",
+    "Total RAM Blocks : 4 / 553 ( < 1 % )",
+    "Total DSP Blocks : 1 / 112 ( < 1 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 0 / 6 ( 0 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "log_sha256": "404f85f0fbcb733400532f353ea9a3efe5670a39994b83dbcfce5d5e9a2cf4fa",
+  "scope": "Standalone hdmi_presentation block with virtual I/O; not a complete core or hardware release",
+  "rotation_queue_memory": [
+    {
+      "instance": "rabbitpunch_rotation_transport:ddr_transport|rabbitpunch_ddr_write_queue:pixels|altsyncram:su101_memory_rtl_0|altsyncram_i6n1:auto_generated|ALTSYNCRAM",
+      "depth": 512,
+      "width": 80,
+      "bits": 40960
+    }
+  ],
+  "logical_queue_packet_width": 101,
+  "constant_zero_packet_columns": [
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    94,
+    96,
+    97,
+    99,
+    100
+  ]
+}

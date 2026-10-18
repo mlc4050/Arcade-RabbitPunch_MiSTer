@@ -1,0 +1,16 @@
+{
+  "case": "hdmi_presented_geometry",
+  "pass_marker": "HDMI_PRESENTED_GEOMETRY_PASS",
+  "log": "debug\\baselines\\hdmi_presented_geometry\\result.log",
+  "source_sha256": {
+    "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+    "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
+    "rtl/rabbitpunch_ddr_write_queue.vhd": "d8a66938e884f6a26f18e3e7c2de7c5f4732ae7c507e745ce91101ce06d592e5",
+    "rtl/rabbitpunch_frame_publication.vhd": "2ab81ea58f2ddbc240095067d4ff6c267675d9213af684a37045e04b16552cb3",
+    "rtl/rabbitpunch_rotation_transport.vhd": "e206e8f6936109de57cba57d91f9dd72b07272e52ce17595210a614a3ba0a179",
+    "rtl/rabbitpunch_hdmi_presentation.vhd": "00e92eb4d0d5294a002420e7b968b81a7b81cbaee771ef5deb0025fb41990144",
+    "debug/hdmi_presented_geometry_tb.vhd": "1e6a2b9c5d46c5931630e5824b2aadd1ec7edc7d69c29058167c9838f742812d"
+  },
+  "log_sha256": "95fc6f624e6273fa5c96e02edfc6ceabe1e9a2e67bf08d305b217edbe0e962a5",
+  "scope": "Complete controller RTL with qualified rotation/aspect netlists, native 32x20 /7 raster and independently doubled 64x40 analog presentation, both directions and four integer modes versus independent native transposed aspect. Synthetic geometry seam, not actual effects or hardware."
+}
