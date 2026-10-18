@@ -733,6 +733,14 @@ pair before the RTL around it.
 
 ## Testbench discipline
 
+- **[RabbitPunch] Zero-filled ROM space needs an adversarial initial memory value.**
+  Exact full-image readback from a two-state zero-initialized chip model cannot
+  establish that unused zero words were written. Poison every image word with a
+  nonzero value absent from the expected image before loading, then compare the
+  entire result. Both complete diagnostic branches now pass all 2162688 bytes;
+  the original zero-initial-memory result retains its weaker scope. See
+  fast_diagnostic_word_archive.json.
+
 - **[RabbitPunch] A fast model needs a pixel cross-check before its own geometry
   assertions are evidence.** The initial GHDL/Verilator HQ2x fixture counted all
   1024 output pixels in each path, yet every pixel differed from the qualified

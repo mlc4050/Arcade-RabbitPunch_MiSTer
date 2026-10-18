@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<misterromdescription>
+    <name>Rabbit Punch hardware diagnostic</name>
+    <setname>rpdiag</setname>
+    <rbf>RabbitPunch</rbf>
+    <mameversion>0289</mameversion>
+    <year>2026</year>
+    <manufacturer>RabbitPunch contributors</manufacturer>
+    <rotation>horizontal</rotation>
+    <players>2</players>
+    <about>Original ROM-free development diagnostic; hardware output unverified. No game ROMs required.</about>
+    <rom index="0" md5="None">
+        <part>00 0F FF FC 00 00 00 08 33 FC 7C 00 00 0A 04 02 33 FC 03 E0 00 0A 04 04 33 FC 00 1F 00 0A 04 06 33 FC 7F FF 00 0A 04 08 33 FC 00 00 00 0C 00 0C 33 FC 00 00 00 0C 00 10 41 F9 00 04 00 00 30 3C 7F FF 30 FC 12 34 51 C8 FF FA 32 39 00 02 00 00 0C 41 A5 5A 66 00 00 34 33 FC CA FE 00 0F C0 00 33 F9 00 0C 00 18 00 0F C0 02 33 F9 00 0C 00 1A 00 0F C0 04 33 F9 00 0C 00 1C 00 0F C0 06 33 FC BE EF 00 0F C0 08 60 00 FF D8 33 FC 7C 00 00 0A 04 08 33 FC DE AD 00 0F C0 00 60 00 FF EE</part>
+        <part repeat="0x1ff62">00</part>
+        <part>A5 5A</part>
+        <part repeat="0x1fffe">00</part>
+        <part>F3 C3 01 00</part>
+        <part repeat="0x1cfffc">00</part>
+    </rom>
+</misterromdescription>

@@ -20,8 +20,9 @@ The newer audio-menu release/debug revisions pass all 144/164 timing checks
 | Physical shell timing | Non-debug video-options shell 6397a94 passes all 144 reported checks: setup +0.323 ns, hold +0.100 ns, 14242 ALMs and 180 M10Ks. Prototype SDRAM constraints and inherited peripheral pin coverage gaps are explicit. Debug default seed 1b3e33f fails one inherited HDMI setup path by 0.204 ns; clean scanline-options retry f64d68b seed 2 passes all 164 checks (setup +0.373 ns, hold +0.067 ns). Connected aspect snapshot 42c1be5 also passes all 144 checks (setup +0.525 ns, hold +0.078 ns); common-flip d525db2 has positive slacks but fails the 110-path peripheral coverage cap by one; the accepted reference rebuild identifies only an additional LED[0] indicator path. The registered-indicator b5b14ee rebuild passes all 144 timing checks (setup +0.370 ns, hold +0.078 ns), with 82 untimed output paths under the unchanged 110 cap. |
 | Hardware | No playable board verification, deployment, screenshot, JTAG read or audible output is claimed. RBFs are local timed prototypes; there is no verified release. |
 
-Next work is the original ROM-free diagnostic's native CPU-to-video path and
-remaining native integration checks. Full-raster CRT/HQ2x now matches all
+The fast original diagnostic now passes full poisoned-image download/readback,
+32768 executed bitmap writes and all 62208 RGB pixels in both ROM-check branches.
+Native Intel/PLL completion and full host/DDR-loader integration remain open. Full-raster CRT/HQ2x now matches all
 248832 pixels in the qualified fast RTL backend. Audio mix defaults to
 Mono; all four settings pass synthesized-host and connected HPS regressions.
 Development DDR-load MRAs preserve each verified 0x210000-byte image and change
@@ -302,8 +303,10 @@ made for the temporary saved bytes.
 
 Original ROM-free diagnostic MRAs are generated locally by build_diagnostic_rom.py.
 Both complete 32768-word and bounded CPU/bitmap fill diagnostics pass, including
-the deliberate corrupt-ROM branch. Native physical display/SDRAM execution of
-those images remains part of hardware bring-up.
+the deliberate corrupt-ROM branch. The qualified fast main-board model now passes complete poisoned-image
+loading/readback and all 62208 RGB pixels for both branches, using explicitly
+scoped logical on-chip RAMs and idle sound. Native Intel/PLL completion and
+physical display/SDRAM execution remain separate gates.
 
 Patterned combined CRT/HQ2x output now passes all 1024 exact known pixels in
 a 64x4 input / 128x8 output fixture against the independent native framework

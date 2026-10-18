@@ -59,9 +59,12 @@ def program(fill_words=32768):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--test-short', action='store_true', help='64-word bitmap fill for bounded CPU validation')
+    parser.add_argument('--output-dir', type=Path, help='Private output directory for an isolated simulation fixture')
     args = parser.parse_args()
     root = core_root()
-    out = root / 'debug/diagnostic' / ('short' if args.test_short else 'full')
+    out = args.output_dir if args.output_dir is not None else root / 'debug/diagnostic' / ('short' if args.test_short else 'full')
+    if not out.is_absolute():
+        out = root / out
     out.mkdir(parents=True, exist_ok=True)
     sizes = layout()
     words, labels = program(64 if args.test_short else 32768)
@@ -77,9 +80,12 @@ def main():
     (out / 'maincpu.bin').write_bytes(cpu_bytes)
     (out / 'maincpu.hex').write_text(''.join(f'{value[0]:04X}\n' for value in struct.iter_unpack('<H', main_rom)))
     (out / 'image.bin').write_bytes(image)
+    version = mame_version()
+    if version is None:
+        raise SystemExit('Configured MAME version is required for diagnostic MRA metadata')
     desc = ET.Element('misterromdescription')
     for tag, value in (('name', 'Rabbit Punch hardware diagnostic'), ('setname', 'rpdiag'),
-                       ('rbf', 'RabbitPunch'), ('mameversion', mame_version(mame_exe())),
+                       ('rbf', 'RabbitPunch'), ('mameversion', version),
                        ('year', '2026'), ('manufacturer', 'RabbitPunch contributors'),
                        ('rotation', 'horizontal'), ('players', '2'),
                        ('about', 'Original ROM-free development diagnostic; hardware output unverified. No game ROMs required.')):
@@ -96,12 +102,13 @@ def main():
     ET.ElementTree(desc).write(path, encoding='utf-8', xml_declaration=True)
     assembled = mra.build_image(path, [], size=sizes['ROM_IMAGE_SIZE'])
     assert assembled == image
+    assert ET.parse(path).getroot().findtext('mameversion') == version
     # The disassembler consumes CPU big-endian bytes, independently of loader order.
     tool = mame_exe().with_name('unidasm.exe')
     listing = subprocess.check_output([str(tool), str(out / 'maincpu.bin'), '-arch', 'm68000'], text=True, **NO_WINDOW)
     (out / 'maincpu.disasm').write_text(listing)
     assert 'dbra' in listing.lower() and 'cmpi.w' in listing.lower()
-    report = dict(bitmap_fill_words=64 if args.test_short else 32768, program_bytes=len(cpu_bytes),
+    report = dict(mameversion=version, bitmap_fill_words=64 if args.test_short else 32768, program_bytes=len(cpu_bytes),
         image_bytes=len(image), image_sha256=hashlib.sha256(image).hexdigest(), labels=labels,
         mra_round_trip=True, mra_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
         scope='Original generated 68000/Z80 diagnostic and inline MRA byte assembly; independent 68000 disassembly; no execution or hardware claim')

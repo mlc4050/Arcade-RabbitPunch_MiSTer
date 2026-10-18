@@ -28,6 +28,11 @@ Verification includes:
   controls/DIPs and high-score host-file transfers pass subsystem tests. All
   38 real ADPCM sample sequences pass 237,330 decoded-value checks.
 
+The original ROM-free development diagnostic also passes full poisoned-SDRAM
+image readback and a complete 62208-pixel executed frame in the qualified fast
+main-board model, for both normal/corrupt ROM branches. Its logical-RAM/idle-audio
+scope and local test MRA are explicit in [diagnostic firmware](docs/DIAGNOSTIC_ROM.md).
+
 The native game renderer prepares one row ahead into two line banks. Optional
 HDMI rotation captures a separate DDR3 framebuffer before CRT/output effects;
 it defaults to None and uses safe triple buffering, with end-to-end latency

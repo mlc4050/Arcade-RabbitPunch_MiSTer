@@ -25,7 +25,8 @@ delayed behavioral bus replies. The 64-word bounded test passes both normal and
 corrupted-ROM branches, including exact sequential bitmap writes and input/DIP
 copies. Both complete 32768-word cases also pass (reference/diagnostic_rom_full_checks.json). These tests validate instruction encoding/control flow and bus accesses,
 not the native RAM/controller, visible RGB, full SDRAM capacity or hardware pins.
-The full RGB image remains unverified until a native-renderer or board capture.
+The full RGB image now passes the separately scoped fast main-board test below;
+the native Intel/PLL run and physical capture remain open.
 
 Generate with scripts/d_drive.ps1 scripts/build_diagnostic_rom.py. The shorter
 --test-short image is for simulation and is kept in a separate directory; do not
@@ -54,3 +55,50 @@ insufficient for the full fill and frame capture. Its source and partial transcr
 are retained in reference/diagnostic_video_initial_progress_measurement.json;
 this is an incomplete measurement, not an HDL assertion failure or a timed-out
 pass. Unchanged checks are being rerun with --wall-timeout 18000.
+
+
+## Complete fast main-board result
+
+run_fast_diagnostic_tests.py passes the normal image and --corrupt variant.
+Every one of the 1081344 external SDRAM image words starts at 0x5A3C, a value
+absent from every expected word. The entire original 0x210000-byte image then
+traverses the production native-word loader, SDRAM controller and unchanged chip
+command model. Complete readback matches exactly, including unused zero-filled
+areas. No ROM preload or CPU/board-RAM state deposit supplies the program.
+
+The unchanged fx68k executes all 32768 ordered bitmap writes, the checked-ROM
+branch and completion/heartbeat loop. Native scanout matches all 62208 RGB pixels;
+the corrupt ROM produces DEAD and changes the white stripes to red. Retained VHDL
+checks enforce coordinates, no underflow/overlapping rows, the 3024-clock row
+budget and the signature through drained RAM inspection. A separate Python RGB
+oracle and complete SDRAM-image comparison also pass. The normal/corrupt cases
+complete in 25424808/25424796 system cycles. Exact source, microcode, tool hashes,
+compiled fixtures and firmware are archived in
+reference/fast_diagnostic_word_archive.json; per-case reports are
+reference/fast_diagnostic_known_checks.json and fast_diagnostic_corrupt_checks.json.
+
+This supplements the native test: on-chip RAM uses the separately qualified
+logical abstraction; sound is explicitly idle/excluded; the bridge supplies a
+synthetic 21428-ps system period and 5357-ps chip phase. Tool-only copies normalize
+tile-port expressions and transparent bidirectional aliases. Vendor reset-time
+unique-case checks are disabled independently of explicit VHDL assertions.
+It is a two-state main-board diagnostic, with no native M10K/PLL, four-state,
+HPS/DDR frontend, audio, executing game-ROM, SDF/electrical or hardware claim.
+The original zero-initial-memory result is retained separately, with its weaker
+zero-filled-area scope; poisoning closes that gap.
+
+## Local development MRA
+
+releases/_dev/_diagnostic/RabbitPunch_Diagnostic.mra contains only original inline
+firmware and repeats. It needs no ROM ZIP. Its XML and exact 2162688-byte assembly
+match the tested image; reference/diagnostic_mra_checks.json records the hashes.
+It is an unpublished diagnostic, with no deployed or hardware-qualified RBF.
+Use default video options when comparing the expected one-pixel stripe pattern.
+
+Regenerate with build_diagnostic_rom.py, then copy its RabbitPunch_Diagnostic.mra
+from debug/diagnostic/full/ to that development directory. --output-dir selects
+an isolated fixture directory without changing the image. The generator derives
+the required 0289 tag from configured MAME and checks it after writing the XML.
+The earlier empty-version diagnostic is rejected and archived separately in
+reference/diagnostic_mra_missing_version_rejected.json. Original rpdiag firmware
+uses inline-image validation rather than the MAME game-set ROM validator.
