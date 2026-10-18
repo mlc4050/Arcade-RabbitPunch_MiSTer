@@ -70,8 +70,8 @@ begin
     s_vs <= '0' when sint_y >= GINT_VERTICAL_SYNC_START and sint_y < GINT_VERTICAL_SYNC_END else '1';
     s_hb <= '0' when sint_x < GINT_VISIBLE_WIDTH else '1';
     s_vb <= '0' when sint_y < GINT_VISIBLE_HEIGHT else '1';
-    -- Three distinct colour lanes catch swaps; flat fields also permit exact
-    -- comparison through HQ2x without an independent smoothing algorithm.
+    -- Distinct colour lanes catch swaps. HQ2x also filters the black blanking
+    -- border; the runner compares its pixels against a separate native capture.
     su8_red <= x"31";
     su8_green <= x"79";
     su8_blue <= x"C5";
@@ -153,6 +153,8 @@ begin
         end if;
     end process;
     monitor : process
+        file v_hq_pixels : text open write_mode is "hq_pixels.hex";
+        variable v_line : line;
         variable vint_pixels : natural := 0;
         variable vint_lines : natural := 0;
         variable vint_line_pixels : natural := 0;
@@ -178,8 +180,13 @@ begin
         end if;
         if (sint_frames >= 2 and sint_frames < 3 and s_output_ce = '1') then
             if (s_output_de = '1') then
-                assert (su8_output_red = x"31" and su8_output_green = x"79" and su8_output_blue = x"C5")
-                    report "Video mixer changed flat-field colour or emitted unknown pixels" severity failure;
+                if (GINT_MODE = 2) then
+                    write(v_line, to_hstring(su8_output_red & su8_output_green & su8_output_blue));
+                    writeline(v_hq_pixels, v_line);
+                else
+                    assert (su8_output_red = x"31" and su8_output_green = x"79" and su8_output_blue = x"C5")
+                        report "Video mixer changed flat-field colour or emitted unknown pixels" severity failure;
+                end if;
                 vint_pixels := vint_pixels + 1;
                 vint_line_pixels := vint_line_pixels + 1;
             elsif (v_previous_de = '1') then

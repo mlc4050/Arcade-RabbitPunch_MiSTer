@@ -1,0 +1,58 @@
+{
+  "cases": [
+    {
+      "case": "crt_video_options_3_compact_short",
+      "pass_marker": "CRT_VIDEO_OPTIONS_PASS",
+      "log": "debug\\baselines\\crt_video_options_3_compact_short\\result.log",
+      "mode": 3,
+      "source_sha256": {
+        "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "aad8878d3ebe44a18a038c86fb7131a09699feae7898256ddc9c193310bb5c7e",
+        "sim/video/crt_video_options_tb.vhd": "39bcd4194a4a891ffa6c39e52b5572a953b3c65693162660cb576d4cfb21d429"
+      },
+      "effects_fit_commit": "bf511c5fddc43aec228fcb9b6723709076d2610b",
+      "log_sha256": "927adc84d89dba40c87cf348753da9ceadfe23d40705fa9d425dc4474f996556"
+    },
+    {
+      "case": "crt_video_options_4_compact_short",
+      "pass_marker": "CRT_VIDEO_OPTIONS_PASS",
+      "log": "debug\\baselines\\crt_video_options_4_compact_short\\result.log",
+      "mode": 4,
+      "source_sha256": {
+        "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "aad8878d3ebe44a18a038c86fb7131a09699feae7898256ddc9c193310bb5c7e",
+        "sim/video/crt_video_options_tb.vhd": "39bcd4194a4a891ffa6c39e52b5572a953b3c65693162660cb576d4cfb21d429"
+      },
+      "effects_fit_commit": "bf511c5fddc43aec228fcb9b6723709076d2610b",
+      "log_sha256": "7d4c2a595a2136dc44a68579699adc31f56a08b7f54a5f08fc36f0a2533cc8cd"
+    },
+    {
+      "case": "crt_video_options_5_compact_short",
+      "pass_marker": "CRT_VIDEO_OPTIONS_PASS",
+      "log": "debug\\baselines\\crt_video_options_5_compact_short\\result.log",
+      "mode": 5,
+      "source_sha256": {
+        "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "aad8878d3ebe44a18a038c86fb7131a09699feae7898256ddc9c193310bb5c7e",
+        "sim/video/crt_video_options_tb.vhd": "39bcd4194a4a891ffa6c39e52b5572a953b3c65693162660cb576d4cfb21d429"
+      },
+      "effects_fit_commit": "bf511c5fddc43aec228fcb9b6723709076d2610b",
+      "log_sha256": "d5ec0068e7e91744eb94db1aeabeb4a6fd3841d445ef806421e4773ae33ee93c"
+    }
+  ],
+  "visible": [
+    64,
+    1
+  ],
+  "total": [
+    96,
+    4
+  ],
+  "pixel_divider": 7,
+  "requested_horizontal_size": 2,
+  "requested_horizontal_position": 8,
+  "scope": "Enabled CRT RTL plus qualified synthesized framework effects. Bounded vertical fixture. HQ2x compares every pixel to an independent native framework capture with black blanking, not raw MAME; other modes check flat RGB. All modes check line widths and visible totals. Native/direct checks every-clock effects bypass. No patterned-edge algorithm, extreme clipping, live-setting transition or physical monitor proof."
+}

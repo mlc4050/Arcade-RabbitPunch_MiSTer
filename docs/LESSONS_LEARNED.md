@@ -733,6 +733,22 @@ pair before the RTL around it.
 
 ## Testbench discipline
 
+- **[RabbitPunch] A flat visible field is not flat across a black blanking border.** The
+  enabled CRT adapter correctly blacked RGB in HBlank/VBlank, while a combined HQ2x
+  test expected unchanged colour at every visible pixel. An independent native
+  framework capture with matching black blanking agreed at all 256 compact and
+  1152 full-width pixels; the earlier reference that blacked VBlank alone differed
+  at the last pixel of each compact output row. Compare filtered output with the
+  same border conditions, and retain the failed expectation as evidence rather
+  than changing production RTL to satisfy it. See crt_hq_blanking_comparison.json.
+- **[RabbitPunch] Initialize delayed VHDL stimulus before the first clock edge.** A
+  half-cycle-delayed sync signal started at U and arrived at the first rising edge.
+  It contaminated configuration-initialized gate-level feedback and produced a
+  false frozen-buffer diagnosis. Initializing the delayed sync inputs to zero
+  made the same netlist progress. Then the initialized multi-frame test exposed a
+  separate real two-buffer read/write collision. Keep unknown-index, liveness and
+  slot-exclusion checks distinct; an inequality alone can pass with unknown bits.
+
 - **[BallySente] A vendored module's compile WARNING can be a latent fatal.** T80 has carried a
   vcom-1275 "arguments of overloaded `and` are not the same length" warning through several
   sibling cores, noted and ignored. It is a real bug: `T80.vhd:685` masks a 9-bit vector with a

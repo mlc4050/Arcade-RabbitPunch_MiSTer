@@ -95,6 +95,9 @@ donor's extra vertical RGB gate and leaves the imported file unchanged.
 The first-row correction passes full-height RTL and synthesized-netlist checks,
 exact native sync geometry and all 62208 pixels of a real renderer/MAME scene.
 Standalone and both full-shell revisions pass routed timing. The combined
-CRT/HQ2x one-row flat-field colour assertion is under investigation; native,
-forced-doubled and direct combined cases pass. Live vertical-shift changes,
-extreme clipping, combined effects and physical monitor checks remain open; see CRT_ADJUST.md. Native Off bypass is direct.
+CRT/HQ2x one-row colour assertion was an invalid flat-field expectation at the
+black blanking border. Compact and production-width captures now match every
+pixel of an independent native framework reference; no production HDL changed.
+Native, forced-doubled and direct combined cases also pass. Patterned combined
+HQ2x images, live vertical-shift changes, extreme clipping and physical monitor
+checks remain open; see CRT_ADJUST.md. Native Off bypass is direct.

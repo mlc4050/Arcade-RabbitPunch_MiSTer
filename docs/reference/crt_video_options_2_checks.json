@@ -1,0 +1,52 @@
+{
+  "cases": [
+    {
+      "case": "crt_video_options_2_short",
+      "pass_marker": "CRT_VIDEO_OPTIONS_PASS",
+      "log": "debug\\baselines\\crt_video_options_2_short\\result.log",
+      "compared_pixels": 1152,
+      "differing_pixels": 0,
+      "pixels_sha256": "24d6b00bb5bb9d18bf8e8098646d9eeb1ae243ade91fc47052f67bbcee255412",
+      "reference": {
+        "case": "diag_crt_hq_reference_both_wide",
+        "pass_marker": "HQ_REFERENCE_BOTH_CAPTURE_PASS",
+        "log": "debug\\baselines\\diag_crt_hq_reference_both_wide\\result.log",
+        "source_sha256": {
+          "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+          "debug/diag_crt_hq_reference_both_wide_tb.vhd": "555a603db9116c86ae53f13c8ba66e9fc70038801bacc661f95a4063c57f0857"
+        },
+        "pixels": 1152,
+        "unknown_pixels": 0,
+        "scope": "Native qualified HQ2x capture with black horizontal and vertical blanking; no CRT adapter. Framework reference, not unfiltered MAME.",
+        "pixels_sha256": "24d6b00bb5bb9d18bf8e8098646d9eeb1ae243ade91fc47052f67bbcee255412",
+        "log_sha256": "48a410caf8ffdbd863c589cd64e41f708a0bb0b88a568537fdfb4fadc237de00",
+        "template_sha256": "c5b0a144438bebc42772de4c5c66aec88382472cb853919d2ff5e19e40b7f73b",
+        "visible": [
+          288,
+          1
+        ]
+      },
+      "mode": 2,
+      "source_sha256": {
+        "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "aad8878d3ebe44a18a038c86fb7131a09699feae7898256ddc9c193310bb5c7e",
+        "sim/video/crt_video_options_tb.vhd": "39bcd4194a4a891ffa6c39e52b5572a953b3c65693162660cb576d4cfb21d429"
+      },
+      "effects_fit_commit": "bf511c5fddc43aec228fcb9b6723709076d2610b",
+      "log_sha256": "452a5400f8b24b4349b07d38e285efba58739e875c1b65f35f4f6ae842916003"
+    }
+  ],
+  "visible": [
+    288,
+    1
+  ],
+  "total": [
+    432,
+    4
+  ],
+  "pixel_divider": 7,
+  "requested_horizontal_size": 2,
+  "requested_horizontal_position": 8,
+  "scope": "Enabled CRT RTL plus qualified synthesized framework effects. Bounded vertical fixture. HQ2x compares every pixel to an independent native framework capture with black blanking, not raw MAME; other modes check flat RGB. All modes check line widths and visible totals. Native/direct checks every-clock effects bypass. No patterned-edge algorithm, extreme clipping, live-setting transition or physical monitor proof."
+}

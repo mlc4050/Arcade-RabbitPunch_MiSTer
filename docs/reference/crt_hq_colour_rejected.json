@@ -18,5 +18,6 @@
     "debug/baselines/crt_video_options_2_short/run.do": "58af9b9f9908f20507ddb153a95f0c28e062b48dc69a63facf0a72a339ecdd5c",
     "debug/crt_video_options_2_short_runner.log": "d4883c354ce03260778390a2573f6cccfd4ed623112ed7eccebe8f79a0c6c1dc"
   },
-  "scope": "Native, forced-doubled and direct combined cases pass separately. This HQ2x combination is unqualified; investigating reference edge-filter/blanking behaviour before a production change. No hardware failure claim."
+  "scope": "Historical rejected test assertion retained verbatim in its archive. Resolved by matching the native reference horizontal/vertical blanking, not by changing production or vendor HDL. Not a hardware failure.",
+  "resolution": "Invalid constant-colour expectation at a black blanking border. Independent native framework captures and maintained combined tests match all 256 compact/1152 full-width pixels, with no production HDL change. See crt_hq_blanking_comparison.json and crt_video_options_2_checks.json."
 }
