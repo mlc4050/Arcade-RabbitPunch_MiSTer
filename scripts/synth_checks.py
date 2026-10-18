@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "hdmi_rotation": (0, ("rabbitpunch_hdmi_rotation", "screen_rotate_two")),
     "crt_adjust": (24705, ("rabbitpunch_crt_adjust", "crt_adjust:geometry", "altshift_taps:vsync_line_shreg_rtl_0")),
     "video_aspect": (0, ("rabbitpunch_video_aspect", "video_freak", "video_scale_int", "sys_udiv", "sys_umul")),
     "video_options": (70080, ("rabbitpunch_video_options", "video_mixer", "scandoubler", "Hq2x")),

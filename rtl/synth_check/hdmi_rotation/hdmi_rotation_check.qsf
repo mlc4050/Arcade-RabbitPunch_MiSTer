@@ -1,0 +1,36 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 RabbitPunch contributors
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY rabbitpunch_hdmi_rotation
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name SYSTEMVERILOG_FILE ../../video/rotation/screen_rotate_two.sv
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_hdmi_rotation.vhd
+set_global_assignment -name SDC_FILE hdmi_rotation_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_pixel_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_red[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_green[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_blue[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_horizontal_sync
+set_instance_assignment -name VIRTUAL_PIN ON -to i_vertical_sync
+set_instance_assignment -name VIRTUAL_PIN ON -to i_data_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to i_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to i_counterclockwise
+set_instance_assignment -name VIRTUAL_PIN ON -to i_framebuffer_vertical_blank
+set_instance_assignment -name VIRTUAL_PIN ON -to i_framebuffer_low_latency
+set_instance_assignment -name VIRTUAL_PIN ON -to o_enabled
+set_instance_assignment -name VIRTUAL_PIN ON -to ou5_format[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou12_width[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou12_height[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou32_base[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou14_stride[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_ddr_busy
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_ddr_burst_count[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou29_ddr_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou64_ddr_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_ddr_byte_enables[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_ddr_write

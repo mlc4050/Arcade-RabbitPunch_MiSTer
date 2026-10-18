@@ -496,6 +496,12 @@
       "source": "rtl/video/crt_adjust.sv",
       "target": "rtl/video/crt_adjust/crt_adjust.sv",
       "sha256": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90"
+    },
+    {
+      "donor": "seta",
+      "source": "rtl/video/screen_rotate_two.sv",
+      "target": "rtl/video/rotation/screen_rotate_two.sv",
+      "sha256": "a704b114cc7d7c1684eb273ab98b436350a3ffb957b350fad975bb322ba11f9e"
     }
   ]
 }
