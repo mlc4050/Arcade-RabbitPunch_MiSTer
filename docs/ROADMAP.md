@@ -318,3 +318,10 @@ The production-phase Rabio Lepus play1000 scene also passes all 62208 MAME RGB
 pixels; see reference/scanout_pll_5357ps_rabiolep_play1000_checks.json. Optional
 scandoubler/HQ2x/scanline output remains an isolated evaluation on the
 codex/video-options branch until its VHDL/netlist tests pass.
+
+Optional forced scandoubling, HQ2x and three CRT scanline strengths now pass a
+seven-mode VHDL/Quartus-functional-netlist suite, including exact native/direct
+bypass and direct-video override. A VHDL adapter and H5 OSD option are connected
+at the shell; native telemetry remains before it. The standalone target passes
+48 MHz timing/coverage (767 ALMs, 14 M10Ks, no DSPs). Full-width output and the
+new connected-shell full fit are pending; see VIDEO_OPTIONS.md.

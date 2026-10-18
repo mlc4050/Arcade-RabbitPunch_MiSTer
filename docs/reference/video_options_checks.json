@@ -1,0 +1,121 @@
+[
+  {
+    "case": "video_options_0_compact",
+    "pass_marker": "VIDEO_OPTIONS_PASS",
+    "log": "debug\\baselines\\video_options_0_compact\\result.log",
+    "mode": 0,
+    "visible_width": 32,
+    "total_width": 48,
+    "visible_height": 1,
+    "total_height": 4,
+    "fitted_commit": "bf511c5fddc43aec228fcb9b6723709076d2610b",
+    "source_sha256": {
+      "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+      "sim/video/video_options_tb.vhd": "c5b0a144438bebc42772de4c5c66aec88382472cb853919d2ff5e19e40b7f73b"
+    },
+    "log_sha256": "f6992d098ba24fc6229ae2c5b72b47816373b49a2a314dfb47b7ebbf27a0bd8d",
+    "scope": "Quartus-generated functional netlist, no SDF; native/direct bypass every clock; framework forced doubling, HQ2x and scanline modes with /7 clock enables and geometry recorded separately; flat-field RGB and visible line widths after two startup frames; no detailed HQ edge-filter or physical-output proof"
+  },
+  {
+    "case": "video_options_1_compact",
+    "pass_marker": "VIDEO_OPTIONS_PASS",
+    "log": "debug\\baselines\\video_options_1_compact\\result.log",
+    "mode": 1,
+    "visible_width": 32,
+    "total_width": 48,
+    "visible_height": 1,
+    "total_height": 4,
+    "fitted_commit": "bf511c5fddc43aec228fcb9b6723709076d2610b",
+    "source_sha256": {
+      "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+      "sim/video/video_options_tb.vhd": "c5b0a144438bebc42772de4c5c66aec88382472cb853919d2ff5e19e40b7f73b"
+    },
+    "log_sha256": "304dcdbab26d47e388ce52b449a12a13cf8b59a8b27741b1eee97d13725aa00e",
+    "scope": "Quartus-generated functional netlist, no SDF; native/direct bypass every clock; framework forced doubling, HQ2x and scanline modes with /7 clock enables and geometry recorded separately; flat-field RGB and visible line widths after two startup frames; no detailed HQ edge-filter or physical-output proof"
+  },
+  {
+    "case": "video_options_2_compact",
+    "pass_marker": "VIDEO_OPTIONS_PASS",
+    "log": "debug\\baselines\\video_options_2_compact\\result.log",
+    "mode": 2,
+    "visible_width": 32,
+    "total_width": 48,
+    "visible_height": 1,
+    "total_height": 4,
+    "fitted_commit": "bf511c5fddc43aec228fcb9b6723709076d2610b",
+    "source_sha256": {
+      "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+      "sim/video/video_options_tb.vhd": "c5b0a144438bebc42772de4c5c66aec88382472cb853919d2ff5e19e40b7f73b"
+    },
+    "log_sha256": "76bb0968785fac2f66f470d568cbada85818534e6b2c580fd68ba394e7b33284",
+    "scope": "Quartus-generated functional netlist, no SDF; native/direct bypass every clock; framework forced doubling, HQ2x and scanline modes with /7 clock enables and geometry recorded separately; flat-field RGB and visible line widths after two startup frames; no detailed HQ edge-filter or physical-output proof"
+  },
+  {
+    "case": "video_options_3_compact",
+    "pass_marker": "VIDEO_OPTIONS_PASS",
+    "log": "debug\\baselines\\video_options_3_compact\\result.log",
+    "mode": 3,
+    "visible_width": 32,
+    "total_width": 48,
+    "visible_height": 1,
+    "total_height": 4,
+    "fitted_commit": "bf511c5fddc43aec228fcb9b6723709076d2610b",
+    "source_sha256": {
+      "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+      "sim/video/video_options_tb.vhd": "c5b0a144438bebc42772de4c5c66aec88382472cb853919d2ff5e19e40b7f73b"
+    },
+    "log_sha256": "7c6711e15a34da505e88d7c2635c62d56af947b8aca62f2a36bf5c37c105f38f",
+    "scope": "Quartus-generated functional netlist, no SDF; native/direct bypass every clock; framework forced doubling, HQ2x and scanline modes with /7 clock enables and geometry recorded separately; flat-field RGB and visible line widths after two startup frames; no detailed HQ edge-filter or physical-output proof"
+  },
+  {
+    "case": "video_options_4_compact",
+    "pass_marker": "VIDEO_OPTIONS_PASS",
+    "log": "debug\\baselines\\video_options_4_compact\\result.log",
+    "mode": 4,
+    "visible_width": 32,
+    "total_width": 48,
+    "visible_height": 1,
+    "total_height": 4,
+    "fitted_commit": "bf511c5fddc43aec228fcb9b6723709076d2610b",
+    "source_sha256": {
+      "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+      "sim/video/video_options_tb.vhd": "c5b0a144438bebc42772de4c5c66aec88382472cb853919d2ff5e19e40b7f73b"
+    },
+    "log_sha256": "f31127ceb90f755c36e6c25fdc40098655bccf6de8a87a54e84d7de87e0d2b34",
+    "scope": "Quartus-generated functional netlist, no SDF; native/direct bypass every clock; framework forced doubling, HQ2x and scanline modes with /7 clock enables and geometry recorded separately; flat-field RGB and visible line widths after two startup frames; no detailed HQ edge-filter or physical-output proof"
+  },
+  {
+    "case": "video_options_5_compact",
+    "pass_marker": "VIDEO_OPTIONS_PASS",
+    "log": "debug\\baselines\\video_options_5_compact\\result.log",
+    "mode": 5,
+    "visible_width": 32,
+    "total_width": 48,
+    "visible_height": 1,
+    "total_height": 4,
+    "fitted_commit": "bf511c5fddc43aec228fcb9b6723709076d2610b",
+    "source_sha256": {
+      "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+      "sim/video/video_options_tb.vhd": "c5b0a144438bebc42772de4c5c66aec88382472cb853919d2ff5e19e40b7f73b"
+    },
+    "log_sha256": "f1080c3eb514489bc219892fba2f5aaff147893ad23847e6c5d12aa69c5fe99f",
+    "scope": "Quartus-generated functional netlist, no SDF; native/direct bypass every clock; framework forced doubling, HQ2x and scanline modes with /7 clock enables and geometry recorded separately; flat-field RGB and visible line widths after two startup frames; no detailed HQ edge-filter or physical-output proof"
+  },
+  {
+    "case": "video_options_6_compact",
+    "pass_marker": "VIDEO_OPTIONS_PASS",
+    "log": "debug\\baselines\\video_options_6_compact\\result.log",
+    "mode": 6,
+    "visible_width": 32,
+    "total_width": 48,
+    "visible_height": 1,
+    "total_height": 4,
+    "fitted_commit": "bf511c5fddc43aec228fcb9b6723709076d2610b",
+    "source_sha256": {
+      "debug/netlists/video_options_bf511c5/video_options_check.vo": "4a0878797ca94dd6902fdc48f582675993045f054429b7542cc1e5455659250f",
+      "sim/video/video_options_tb.vhd": "c5b0a144438bebc42772de4c5c66aec88382472cb853919d2ff5e19e40b7f73b"
+    },
+    "log_sha256": "2476a2435038a8086310edbb6938b6182634ee39dbbaf69c8b254f921f24a6ed",
+    "scope": "Quartus-generated functional netlist, no SDF; native/direct bypass every clock; framework forced doubling, HQ2x and scanline modes with /7 clock enables and geometry recorded separately; flat-field RGB and visible line widths after two startup frames; no detailed HQ edge-filter or physical-output proof"
+  }
+]
