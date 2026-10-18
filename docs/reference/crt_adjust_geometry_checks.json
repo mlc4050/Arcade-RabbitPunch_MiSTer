@@ -1,0 +1,80 @@
+{
+  "cases": [
+    {
+      "case": "crt_adjust_geometry_normal",
+      "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+      "log": "debug\\baselines\\crt_adjust_geometry_normal\\result.log",
+      "source_sha256": {
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
+        "sim/video/crt_adjust_geometry_tb.vhd": "462a7856caa017faaee343f417e82e115bc60f2cf6601acfc9bb40294e12b956"
+      },
+      "horizontal_size_index": 0,
+      "horizontal_position_index": 0,
+      "rows": 6,
+      "pixels": 1728,
+      "log_sha256": "2a928f0c533b66b155b7ea90e1edb38c736081d1164f5684ea53bdceb4e90888"
+    },
+    {
+      "case": "crt_adjust_geometry_right8",
+      "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+      "log": "debug\\baselines\\crt_adjust_geometry_right8\\result.log",
+      "source_sha256": {
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
+        "sim/video/crt_adjust_geometry_tb.vhd": "462a7856caa017faaee343f417e82e115bc60f2cf6601acfc9bb40294e12b956"
+      },
+      "horizontal_size_index": 0,
+      "horizontal_position_index": 8,
+      "rows": 6,
+      "pixels": 1728,
+      "log_sha256": "58caf0f29554bb0cfec22d7565c1407e2174284b6dfc0f876186cd3d9fa8da4e"
+    },
+    {
+      "case": "crt_adjust_geometry_left8",
+      "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+      "log": "debug\\baselines\\crt_adjust_geometry_left8\\result.log",
+      "source_sha256": {
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
+        "sim/video/crt_adjust_geometry_tb.vhd": "462a7856caa017faaee343f417e82e115bc60f2cf6601acfc9bb40294e12b956"
+      },
+      "horizontal_size_index": 0,
+      "horizontal_position_index": 89,
+      "rows": 6,
+      "pixels": 1728,
+      "log_sha256": "2351d344f247815deac689ca7e96ea67b580c4e40f0097a59ff5dd568257f925"
+    },
+    {
+      "case": "crt_adjust_geometry_wider2",
+      "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+      "log": "debug\\baselines\\crt_adjust_geometry_wider2\\result.log",
+      "source_sha256": {
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
+        "sim/video/crt_adjust_geometry_tb.vhd": "462a7856caa017faaee343f417e82e115bc60f2cf6601acfc9bb40294e12b956"
+      },
+      "horizontal_size_index": 2,
+      "horizontal_position_index": 0,
+      "rows": 6,
+      "pixels": 1728,
+      "log_sha256": "16bc53b309cada5cbe6197eeaba313c183e292bbaeaf95e3f7a3a75a354198bf"
+    },
+    {
+      "case": "crt_adjust_geometry_narrower2",
+      "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+      "log": "debug\\baselines\\crt_adjust_geometry_narrower2\\result.log",
+      "source_sha256": {
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
+        "sim/video/crt_adjust_geometry_tb.vhd": "462a7856caa017faaee343f417e82e115bc60f2cf6601acfc9bb40294e12b956"
+      },
+      "horizontal_size_index": 30,
+      "horizontal_position_index": 0,
+      "rows": 6,
+      "pixels": 1728,
+      "log_sha256": "a7b189e9e53abaca4efe6c81162765512f7cab73ca133aabf0a4f2e7a31a5033"
+    }
+  ],
+  "scope": "Isolated CRT Adjust with corrected VBlank row tags: 288 visible/432 total pixels at /7 enable, six visible/twelve total rows, normal and +/-8 position, +/-2 size. Every source pixel and first/last visible rows checked after warm-up. No vertical-shift, extreme-size clipping, routed fit or physical CRT proof; disconnected from production."
+}

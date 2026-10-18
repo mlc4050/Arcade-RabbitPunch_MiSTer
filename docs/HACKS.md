@@ -83,5 +83,16 @@ Common screen flip uses a visible-viewport coordinate mirror at the existing
 random-access line-buffer boundary, including bitmap requests and inverse RGB
 tags. It adds no composite framebuffer. This is a presentation implementation,
 not recovered C7-01 GGA circuitry; MAME's ignored global-flip bit is documented
-in MAME_KLUDGES.md. The coordinate/transaction unit test passes; full-renderer
-MAME image-rotation comparisons and routed integration timing are pending.
+in MAME_KLUDGES.md. The coordinate/transaction unit test and both complete 62208-pixel rotated
+MAME comparisons pass, along with a clocked-machine fit requiring unchanged
+RAM usage. Full-shell flip timing and physical CRT/HDMI operation remain open;
+see VIDEO_FLIP.md for the exact scope.
+
+
+The disconnected CRT Adjust evaluation corrects the donor's vertical-blank
+alignment at its wrapper for our HSync-after-visible raster. It carries the
+completed bank's VBlank tag through the two read-enable stages, disables the
+donor's extra vertical RGB gate and leaves the imported file unchanged.
+The initially failing first-row test now passes all source pixels in five
+full-width geometry cases. Full-height, sync/vertical-shift, routed and monitor
+validation remain open; see CRT_ADJUST.md. Native Off bypass is direct.

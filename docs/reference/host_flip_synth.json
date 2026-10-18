@@ -1,0 +1,129 @@
+{
+  "commit": "caf1b3a0928f3c596e9bfe4576c3ba5be437f001",
+  "device": "5CSEBA6U23I7",
+  "project": "host_check",
+  "constraint_mhz": 48,
+  "seed": 3,
+  "memory_bits": 0,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 7.74
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.419
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.722
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 7.842
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.442
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.57
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 8.784
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.182
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.82
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 9.047
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.168
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.822
+    }
+  ],
+  "timing_coverage": {
+    "Illegal Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Port Paths": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Port Paths": {
+      "setup": 0,
+      "hold": 0
+    }
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Sat Oct 17 23:33:41 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : host_check",
+    "Top-level Entity Name : host_check",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 384 / 41,910 ( < 1 % )",
+    "Total registers : 403",
+    "Total pins : 1 / 314 ( < 1 % )",
+    "Total virtual pins : 349",
+    "Total block memory bits : 0 / 5,662,720 ( 0 % )",
+    "Total RAM Blocks : 0 / 553 ( 0 % )",
+    "Total DSP Blocks : 0 / 112 ( 0 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 0 / 6 ( 0 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "log_sha256": "a4f580a3441a684eaa96900672fed6b6aafc805e9916e0b0b63f5c178c9cf53c",
+  "scope": "Standalone host block with virtual I/O; not a complete core or hardware release",
+  "archive": "debug/fit_archive/host_caf1b3a_common_flip_menu",
+  "artifact_sha256": {
+    "BUILT_COMMIT": "9731c64d7e3aa7684202680f5d1d6be3cc42c65a2a606689e9a0fd4a00aa4169",
+    "host_check.asm.rpt": "857def7350f7dee13f5f60064cb9934e74dfdae894e86cc3939bf264a428e544",
+    "host_check.done": "dd70a4028cf26cd24c2ca3da883f0a92655627f99806e0ee7e6cf64883cbbe5e",
+    "host_check.eda.rpt": "331ca9f17e8790ee92a5c310a55ceedbe881641f4c8439b8cfeba7679fca4999",
+    "host_check.fit.rpt": "15f12285d7ec1fdb2ddfce0d0e7894d4acd136c7881071885b329616fe36f3dd",
+    "host_check.fit.smsg": "d41fedc43df491b98368049ad3b6ffcc74efe806a6ed495dbb30294481fbd8a9",
+    "host_check.fit.summary": "06326bcc96397c0d1218359f86ec203d7046c175f9eca4886280b3c8881685b6",
+    "host_check.flow.rpt": "7a8007275bdd63ee6a9b45ca4b75290ef68f732a40c53feebc4f3e2b3d4811dd",
+    "host_check.jdi": "b50fc5af0185950b5a4a7fc9892dee20064831fd2f9199ec48c8d89abce3b5b2",
+    "host_check.map.rpt": "4cbe3d4aaadb274d0b4cba594235f550f84b26cde46cb0f4bd4278bff2c09ae5",
+    "host_check.map.summary": "f75c28575da83860d60af883289943bebfe6dd431e3f6398fe1f197950f6cbce",
+    "host_check.pin": "9f345fc547e7bc8a32c0c4e2105ca567658c48ce65d66f4ff18d5f8551bcff2e",
+    "host_check.sld": "c7de3cc5544a1144192d6825eb69cf5e065bf99f16fb9acb42fadd23adede991",
+    "host_check.sof": "928bd17227c6eaa55a17e20b71b442b351ae55a5b2433761d33279797d2bea74",
+    "host_check.sta.rpt": "de8cf906dad49a4e0f760453d7f6c8055a3703d3cb200280ee99d0b7de8b6b5a",
+    "host_check.sta.summary": "176810a86f8332360ea21fc2db3916bcfdf17d54487c5189fa417fc9809acd22",
+    "host_synth.json": "f327140d0de5dc741b45126d99905cb90f704980048ca5eb4fb2dab2067ad839",
+    "q_host_check.log": "a4f580a3441a684eaa96900672fed6b6aafc805e9916e0b0b63f5c178c9cf53c"
+  }
+}

@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 RabbitPunch contributors
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY rabbitpunch_crt_adjust
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name SYSTEMVERILOG_FILE ../../video/crt_adjust/crt_adjust.sv
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_crt_adjust.vhd
+set_global_assignment -name SDC_FILE crt_adjust_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_initialize
+set_instance_assignment -name VIRTUAL_PIN ON -to i_pixel_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to i_adjust
+set_instance_assignment -name VIRTUAL_PIN ON -to i_size_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to iu5_horizontal_size[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu7_horizontal_position[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu6_vertical_shift[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_red[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_green[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_blue[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_horizontal_sync
+set_instance_assignment -name VIRTUAL_PIN ON -to i_vertical_sync
+set_instance_assignment -name VIRTUAL_PIN ON -to i_horizontal_blank
+set_instance_assignment -name VIRTUAL_PIN ON -to i_vertical_blank
+set_instance_assignment -name VIRTUAL_PIN ON -to o_pixel_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_red[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_green[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_blue[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_horizontal_sync
+set_instance_assignment -name VIRTUAL_PIN ON -to o_vertical_sync
+set_instance_assignment -name VIRTUAL_PIN ON -to o_horizontal_blank
+set_instance_assignment -name VIRTUAL_PIN ON -to o_vertical_blank
