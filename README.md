@@ -5,7 +5,7 @@ as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
 
 Status: the VHDL CPU, memory, video, audio, ROM-loading, controls and high-score
 services are connected to the MiSTer boundary. The preceding non-debug full build passes prototype timing
-gates including HDMI sizing metadata and common screen flip. Optional CRT adjustment is connected and awaiting a fresh full-shell fit; no hardware-verified playable RBF or release exists.
+gates including HDMI sizing metadata and common screen flip. Optional CRT adjustment also passes a full-shell fit; no hardware-verified playable RBF or release exists.
 
 Verification includes:
 
@@ -19,7 +19,7 @@ Verification includes:
   Rabio Lepus gameplay at frame 1000 both match exactly.
 - The current non-debug MiSTer fit passes all reported corners at a fitted
   46.667 MHz game clock and 5.357 ns SDRAM phase, with minimum setup/hold
-  margins +0.370/+0.078 ns in the accepted common-flip/registered-indicator snapshot. The prior native-output debug baseline also passes. The prototype SDRAM budgets and
+  margins +0.435/+0.042 ns in the accepted CRT/common-flip snapshot. The prior native-output debug baseline also passes. The prototype SDRAM budgets and
   inherited peripheral/debug pin coverage scope are explicit in
   [SDRAM pin timing](docs/SDRAM_PIN_TIMING.md); physical margins remain unverified.
 - Native RAM startup contents, DDR/direct ROM loading, replacement/reset/pause,
