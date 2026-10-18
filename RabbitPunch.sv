@@ -42,6 +42,10 @@ wire file_download, file_upload, file_write, file_wait, upload_request;
 wire horizontal_blank, vertical_blank;
 wire native_pixel_enable, native_horizontal_sync, native_vertical_sync;
 wire forced_scandoubler, direct_video;
+wire crt_pixel_enable, crt_horizontal_sync, crt_vertical_sync;
+wire crt_horizontal_blank, crt_vertical_blank;
+wire [7:0] crt_red, crt_green, crt_blue;
+wire crt_size_enable = direct_video | (~forced_scandoubler & ~(|status[46:44]));
 wire [7:0] native_red, native_green, native_blue;
 wire loading, downloading, ready, error, underflow, pll_locked;
 wire paused, scanout_armed, audio_sample, adpcm_busy;
@@ -54,9 +58,17 @@ wire [8:0] beam_x, beam_y;
 assign CLK_VIDEO = clk_sys;
 assign DDRAM_CLK = clk_sys;
 // Hide HDMI/output-effect controls under direct video, preserving score masks.
-assign menu_mask = score_menu_mask | {10'd0, direct_video, 5'd0};
+assign menu_mask = score_menu_mask | {8'd0, (~status[94] | ~crt_size_enable), ~status[94], direct_video, 5'd0};
 assign {SDRAM_DQMH, SDRAM_DQML} = sdram_byte_mask;
-assign LED_USER = loading | downloading | error | underflow;
+rabbitpunch_status_led status_led
+(
+    .i_clk(clk_sys),
+    .i_loading(loading),
+    .i_downloading(downloading),
+    .i_error(error),
+    .i_underflow(underflow),
+    .o_led(LED_USER)
+);
 
 rabbitpunch_host host
 (
@@ -213,12 +225,22 @@ rabbitpunch_clocked_machine machine
     .o_scanout_armed(scanout_armed),
     .o_scanout_underflow(underflow)
 );
-// Optional effects remain after the native renderer. Its clocks and line
-// ownership are independent of this presentation path.
-rabbitpunch_video_options video_options
+// Optional CRT geometry keeps a direct native bypass when disabled.
+rabbitpunch_crt_adjust
+#(
+    .GINT_PIXEL_DIVIDER(7),
+    .GINT_LINE_PIXELS(432),
+    .GINT_FRAME_LINES(256)
+) crt_geometry
 (
     .i_clk(clk_sys),
+    .i_initialize(~pll_locked),
     .i_pixel_enable(native_pixel_enable),
+    .i_adjust(status[94]),
+    .i_size_enable(crt_size_enable),
+    .iu5_horizontal_size(status[99:95]),
+    .iu7_horizontal_position(status[106:100]),
+    .iu6_vertical_shift(status[112:107]),
     .iu8_red(native_red),
     .iu8_green(native_green),
     .iu8_blue(native_blue),
@@ -226,6 +248,28 @@ rabbitpunch_video_options video_options
     .i_vertical_sync(native_vertical_sync),
     .i_horizontal_blank(horizontal_blank),
     .i_vertical_blank(vertical_blank),
+    .o_pixel_enable(crt_pixel_enable),
+    .ou8_red(crt_red),
+    .ou8_green(crt_green),
+    .ou8_blue(crt_blue),
+    .o_horizontal_sync(crt_horizontal_sync),
+    .o_vertical_sync(crt_vertical_sync),
+    .o_horizontal_blank(crt_horizontal_blank),
+    .o_vertical_blank(crt_vertical_blank)
+);
+// Optional effects remain after the native renderer. Its clocks and line
+// ownership are independent of this presentation path.
+rabbitpunch_video_options video_options
+(
+    .i_clk(clk_sys),
+    .i_pixel_enable(crt_pixel_enable),
+    .iu8_red(crt_red),
+    .iu8_green(crt_green),
+    .iu8_blue(crt_blue),
+    .i_horizontal_sync(crt_horizontal_sync),
+    .i_vertical_sync(crt_vertical_sync),
+    .i_horizontal_blank(crt_horizontal_blank),
+    .i_vertical_blank(crt_vertical_blank),
     .i_forced_scandoubler(forced_scandoubler),
     .i_direct_video(direct_video),
     .iu3_effect(status[46:44]),

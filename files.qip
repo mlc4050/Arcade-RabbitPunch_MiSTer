@@ -111,8 +111,11 @@ set_global_assignment -name VHDL_FILE rtl/rabbitpunch_reset_release.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_clocked_machine.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_host.vhd
 set_global_assignment -name SDC_FILE RabbitPunch.sdc
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/video/crt_adjust/crt_adjust.sv
+set_global_assignment -name VHDL_FILE rtl/rabbitpunch_crt_adjust.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_video_options.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_video_aspect.vhd
+set_global_assignment -name VHDL_FILE rtl/rabbitpunch_status_led.vhd
 set_global_assignment -name SYSTEMVERILOG_FILE RabbitPunch.sv
 
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_debug.vhd

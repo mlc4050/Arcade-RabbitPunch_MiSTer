@@ -1,0 +1,70 @@
+{
+  "reference_commit": "42c1be53380fe4d3d7ea9ee56c9bbb943c668eb9",
+  "flip_commit": "d525db2f4639cdaa0d3e33c23df8cb6911095273",
+  "reference_rebuild_accepted": true,
+  "reference_execution_root": "D:\\git\\RabbitPunch-coverage-reference",
+  "reference_archive": "debug/fit_archive/full_shell_42c1be5_coverage_reference",
+  "reference_artifact_sha256": {
+    "BUILT_COMMIT": "15ea3fa4cee1e7bdd1b01eba6fad08c0a0cece43e9256884553e916e3b18ec75",
+    "clock_tree.tsv": "bb42da199944b88c3b044e8ba0310c0329d0dc6340bfe042d9d32fc7e5b83f5d",
+    "framework_timing_scope.json": "8bf6b1f724d5625aa51bf86634492c10796673940b72e35c285329023b857ecb",
+    "full_clock_tree.json": "d86a45baa1a4efc42f3d3ac1833e9b127432e26b57138762f919a6fdfe3f43a3",
+    "full_clock_tree.log": "dcc65358f59b4a0e12d3e492b9ace395850acf0729ff2025a6fc4749f9804707",
+    "q_staged.log": "2b6ada6051a76b113b039f1dbd8a2fa10d1f06fb96236aaa481d33f28eeae855",
+    "RabbitPunch.asm.rpt": "ff2fd9e7ffa677e73d20c1bb484c6cfdcc7dda8acdbee2eb74fdf2e48cdda46d",
+    "RabbitPunch.done": "7cfb6b5d2fbf6cb8da173dd87fb4fc993273d02ddd654ba1b9068ff861b2e8e3",
+    "RabbitPunch.fit.rpt": "892e9312e2dc9d6150723242e85083178dcb9e5e6c58d11adb7903154c024b6e",
+    "RabbitPunch.fit.smsg": "00fd517c3a675f4fd051094cac032c6a3349d6339d28e2f24b53a02093356353",
+    "RabbitPunch.fit.summary": "d9baa01870c35fb5ca3968b42f0a81e7cb44ce646a1cf5dd7cb5d60c74e6b4ea",
+    "RabbitPunch.flow.rpt": "7997f338d40aeb216bcbc79c713fe1681a255129405c8c99fda1eb3fb525a20d",
+    "RabbitPunch.jdi": "bcbb66c6cd94f4d5438a3ae258ed5172203e4fe9c36518a99a3311a41bfd60bf",
+    "RabbitPunch.map.rpt": "071aafcfc6eec053af7f6a8e75ec7ccf171b331d5418db4fc934a426b713604a",
+    "RabbitPunch.map.smsg": "f3dcb59689e867d834bb14578b81aebb306fd07e1520c106ba1903f90c752e91",
+    "RabbitPunch.map.summary": "1eb185e5bcbae2b862b33c29ca38a239278df4b53f917f77c57f66b99de6a49e",
+    "RabbitPunch.pin": "d33728eb0a1bd76d7d6e579e0c22fce92bebeeaaf0117b1f7823f2c427041d9a",
+    "RabbitPunch.rbf": "f83e70a74dcea5f4c898cdbcd7498077218be74145cec16809487533f34f06c6",
+    "RabbitPunch.sld": "c7de3cc5544a1144192d6825eb69cf5e065bf99f16fb9acb42fadd23adede991",
+    "RabbitPunch.sof": "01c479e8475a01fc19529b9956b47880ed0bbf04d7ac1ba05691ffa822138fd6",
+    "RabbitPunch.sta.rpt": "d363d2c4ef266cd58ba14bf5eb7e4e3d57463109d4155ffe172d70b0f76bf283",
+    "RabbitPunch.sta.summary": "662ce60c69140379a1f7bf3f1530582a447a4500b859ab7488fa7760ca35ec52",
+    "reference_unconstrained_paths.rpt": "a20bc994cc18d00e95d20d40dde4c1a6560cc1f376cec158333b9f87f430e231"
+  },
+  "flip_execution_root": "D:\\git\\RabbitPunch-maintenance-work",
+  "flip_ucp_sha256": "e9ed37d35178b1367c95693f7e0c434c4e13dcd374fd9a3a3bfef09aba123bed",
+  "normalization": "Anonymous ~FF_<digits> numbers normalized; trailing ~DUPLICATE suffixes removed; all source names, destinations and clock names otherwise compared exactly as multisets.",
+  "analyses": {
+    "Setup": {
+      "reference_output_paths": 110,
+      "flip_output_paths": 111,
+      "matching_other_paths": 110,
+      "sole_added_path": {
+        "source": "emu:emu|rabbitpunch_clocked_machine:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_load_frontend:load_frontend|styp_state.STATE_IDLE",
+        "destination": "LED[0]",
+        "clock": "emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk"
+      }
+    },
+    "Hold": {
+      "reference_output_paths": 110,
+      "flip_output_paths": 111,
+      "matching_other_paths": 110,
+      "sole_added_path": {
+        "source": "emu:emu|rabbitpunch_clocked_machine:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_load_frontend:load_frontend|styp_state.STATE_IDLE",
+        "destination": "LED[0]",
+        "clock": "emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk"
+      }
+    }
+  },
+  "resolution": "Register the combined external LED status in VHDL; retain every existing timing constraint and peripheral path-count limit. New full fit required; old d525db2 remains unqualified.",
+  "scope": "Complete setup/hold unconstrained output path comparison from two fitted netlists. Additional path is the load-frontend idle indicator to LED[0], not a new SDRAM/game-internal timing exemption. No physical/electrical timing proof.",
+  "registered_indicator_result": {
+    "commit": "b5b14ee7dae7ae60ab0d194f08a4aa33819f9acd",
+    "accepted": true,
+    "timing_checks": 144,
+    "minimum_setup_ns": 0.37,
+    "minimum_hold_ns": 0.078,
+    "untimed_output_paths": 82,
+    "unchanged_output_path_cap": 110,
+    "evidence": "docs/reference/full_shell_flip_release_checks.json",
+    "scope": "Full routed release shell including common flip; CRT Adjust is not connected in this snapshot; no physical hardware claim"
+  }
+}

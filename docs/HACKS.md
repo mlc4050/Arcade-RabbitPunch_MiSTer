@@ -69,10 +69,9 @@ physical board startup verification remains open.
 The framework boundary is being connected for first hardware bring-up. It exposes
 the native 288x216 raster and signed mono audio. Forced scandoubling, HQ2x and
 CRT scanline levels are connected through a tested VHDL wrapper; the new shell
-fit and physical output remain pending. CRT Adjust, HDMI rotation/flip and
+fits pass, while physical output remains pending. HDMI rotation and
 remaining crop/audio OSD options are still unconnected. HDMI aspect/integer
-metadata is connected after standalone fit/netlist checks, with its new full-shell
-validation pending;
+metadata and common screen flip pass their full-shell gates;
 this is not the final standard-feature set. The framework HDMI scaler remains
 available. DDR currently has only the load-time copier as a client; introducing a
 rotator requires an ownership mux and contention verification before use. No game
@@ -85,14 +84,15 @@ tags. It adds no composite framebuffer. This is a presentation implementation,
 not recovered C7-01 GGA circuitry; MAME's ignored global-flip bit is documented
 in MAME_KLUDGES.md. The coordinate/transaction unit test and both complete 62208-pixel rotated
 MAME comparisons pass, along with a clocked-machine fit requiring unchanged
-RAM usage. Full-shell flip timing and physical CRT/HDMI operation remain open;
+RAM usage. Full-shell flip timing and coverage also pass; physical CRT/HDMI operation remains open;
 see VIDEO_FLIP.md for the exact scope.
 
 
-The disconnected CRT Adjust evaluation corrects the donor's vertical-blank
+The connected optional CRT Adjust wrapper corrects the donor's vertical-blank
 alignment at its wrapper for our HSync-after-visible raster. It carries the
 completed bank's VBlank tag through the two read-enable stages, disables the
 donor's extra vertical RGB gate and leaves the imported file unchanged.
-The initially failing first-row test now passes all source pixels in five
-full-width geometry cases. Full-height, sync/vertical-shift, routed and monitor
-validation remain open; see CRT_ADJUST.md. Native Off bypass is direct.
+The first-row correction passes full-height RTL and synthesized-netlist checks,
+exact native sync geometry and all 62208 pixels of a real renderer/MAME scene.
+Standalone routed timing passes; the connected shell, live setting changes,
+extreme clipping, combined effects and physical monitor checks remain open; see CRT_ADJUST.md. Native Off bypass is direct.

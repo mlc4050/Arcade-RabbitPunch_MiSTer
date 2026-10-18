@@ -1,0 +1,30 @@
+{
+  "case": "gate_crt_native_raster",
+  "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+  "log": "debug\\baselines\\gate_crt_native_raster\\result.log",
+  "fit_commit": "d9dfc8ac4e5441a41d00c1790f42cd047c0bd12f",
+  "source_sha256": {
+    "debug/netlists/crt_adjust_d9dfc8a/crt_adjust_check.vo": "3b297509ff56c68293901f6e744455123c37a54bb35c43c5ac28f66160606db5",
+    "debug/crt_native_raster_tb.vhd": "cad689ed970d75eebb167cedfdb2db6dfdfe0b20bc06f27e11d3990040c55501"
+  },
+  "template_sha256": "ff1a5758f1cf7fe4b8f0d2b3669ed80a05f8b86be2593c7595c8f6208c3f7f5a",
+  "pixels": 62208,
+  "visible": [
+    288,
+    216
+  ],
+  "total": [
+    432,
+    256
+  ],
+  "horizontal_sync": [
+    352,
+    392
+  ],
+  "vertical_sync": [
+    232,
+    240
+  ],
+  "log_sha256": "df3a6ec481ca432ccf826b88208b013991dfd3ba375a03c5c64ed2502e93cd28",
+  "scope": "Synthesized CRT adapter with exact provisional native beam geometry and /7 enable; all source pixels, first/last visible rows and sync periods checked after warm-up. Clock counts are functional; routed timing is checked separately. No setting-change, extreme-size clipping, combined effects or monitor proof; disconnected from production."
+}
