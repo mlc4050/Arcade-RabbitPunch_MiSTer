@@ -11,6 +11,7 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "hdmi_presentation": (51712, ("rabbitpunch_hdmi_presentation", "rabbitpunch_hdmi_rotation", "screen_rotate_two", "rabbitpunch_rotation_transport", "rabbitpunch_frame_publication", "rabbitpunch_ddr_write_queue", "rabbitpunch_video_aspect", "video_freak", "sys_umul", "sys_udiv")),
     "rotation_transport": (51712, ("rabbitpunch_rotation_transport", "rabbitpunch_frame_publication", "rabbitpunch_ddr_write_queue")),
     "frame_publication": (0, ("rabbitpunch_frame_publication",)),
     "ddr_write_queue": (51712, ("rabbitpunch_ddr_write_queue",)),
