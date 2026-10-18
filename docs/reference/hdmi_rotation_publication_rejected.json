@@ -10,6 +10,6 @@
     "debug/baselines/rotation_publication_cw_full/run.do": "45aa9cb2a02896b7c0cb4a33dbca324539872245c646427693cda4f9222262fe",
     "debug/baselines/rotation_publication_cw_full/progress.txt": "c1987ca93b8a2c32ee7f652e38e37fe95bb201128635ef97112ec27de6a3bbb2"
   },
-  "resolution": "Use the seventeenth coordinate tag bit carried in blue bit zero as well; rerun the unchanged guard/queue/rotator integration. Compact cases already pass, because X never reaches 256.",
+  "resolution": "Resolved checker by including the seventeenth coordinate tag bit. All compact and full native CW/CCW cases now pass three complete frames under DDR stalls with the unchanged publication guard/queue/rotator. See hdmi_rotation_publication_checks.json.",
   "scope": "Rejected checker result; not yet a passing full-image publication claim and not a physical hardware failure."
 }
