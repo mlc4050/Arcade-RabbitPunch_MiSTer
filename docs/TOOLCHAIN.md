@@ -126,3 +126,12 @@ used by this fast backend: its event-based write eligibility logic includes a
 self-referential wire rejected by Verilator. The native ModelSim tests continue
 to use Intel's actual simulation model. A fast diagnostic using these logical
 RAMs must identify that boundary and cannot be called a native M10K proof.
+
+
+Full-image loader tests reuse the qualified RAM abstraction, but first require
+its exact current source/runner byte hashes. A fresh worktree with different
+checkout line endings therefore reruns run_fast_ram_tests.py rather than assuming
+an old byte-hashed report still applies. The loader worktree's exact contract is
+retained separately as reference/fast_ram_loader_contract_checks.json and in the
+full_image_loader_archive manifest; the original qualification report/archive
+remains unchanged. Generated test-source alternatives are isolated from files.qip.

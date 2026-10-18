@@ -19,6 +19,7 @@ from png_rgb import write_rgb
 from run_system_download_tests import system_sources
 
 parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--load-mode', choices=['word','byte','ddr'], default='word')
 parser.add_argument('--corrupt', action='store_true', help='Corrupt the checked ROM word; expect DEAD and red replacement stripes')
 parser.add_argument('--wall-timeout', type=int, default=1200)
 options = parser.parse_args()
@@ -26,7 +27,7 @@ if options.wall_timeout <= 0:
     parser.error('Wall timeout must be positive')
 root = core_root()
 require_no_jtag('Fast full-image main-board diagnostic')
-case = 'corrupt' if options.corrupt else 'known'
+case = ('corrupt' if options.corrupt else 'known') + ('' if options.load_mode == 'word' else '_' + options.load_mode)
 out = root / 'debug/fast_diagnostic' / case
 out.mkdir(parents=True, exist_ok=True)
 def sha(path):
@@ -51,6 +52,9 @@ input_names = list(dict.fromkeys(main_sources + [
     'sim/board/diagnostic_video_tb.vhd','rtl/rabbitpunch_clock_enables.vhd',
     'rtl/rabbitpunch_raster.vhd','rtl/rabbitpunch_scanline_scheduler.vhd',
     'rtl/rabbitpunch_video_output.vhd','rtl/rabbitpunch_scanout.vhd']))
+if options.load_mode != 'word':
+    input_names += ['sim/fast/diagnostic_load_source.vhd','rtl/rabbitpunch_load_frontend.vhd',
+                    'rtl/rabbitpunch_ddr_copy.vhd','rtl/memory/ddram/ddram_phy.sv','rtl/memory/ddram/rom_loader.sv']
 input_hashes = {name: sha(root / name) for name in input_names}
 firmware = out / 'firmware'
 subprocess.check_call([sys.executable,str(root / 'scripts/build_diagnostic_rom.py'),
@@ -224,12 +228,47 @@ end architecture;
 s=s.replace('variable styp_download_state','variable v_download_state').replace('styp_download_state','v_download_state')
 s=s.replace('program_word(vint_word, GBOOL_EXPECT_FAILURE)','program_word(vint_word)')
 s=s.replace("            if (s_ready = '1') then", "            assert (s_sound_pending = '0') report \"Fast main-board diagnostic excludes sound commands\" severity failure;\n            if (s_ready = '1') then",1)
+if options.load_mode != 'word':
+    s=s.replace('    signal s_download', '    signal s_frontend_complete : std_logic;\n    signal s_download', 1)
+    start=s.index('    -- Complete sparse original image')
+    s=s[:start]+"""    frontend_source : entity work.diagnostic_load_source
+        generic map (
+            GBOOL_DDR_MODE => """+str(options.load_mode == 'ddr').lower()+"""
+        )
+        port map (
+            i_clk => i_clk,
+            i_word_ready => s_word_ready,
+            o_download_active => s_download,
+            o_word_valid => s_word_valid,
+            ou27_word_byte_address => su27_address,
+            ou16_word_data => su16_data,
+            o_complete => s_frontend_complete
+        );
+    release_cpu : process(i_clk)
+        variable vint_delay : natural range 0 to 9334 := 0;
+    begin
+        if (rising_edge(i_clk)) then
+            if (s_frontend_complete = '1' and s_ready = '1') then
+                assert (s_image_valid = '1' and s_error = '0')
+                    report "Frontend-loaded diagnostic image failed validation" severity failure;
+                if (vint_delay = 9334) then
+                    s_run <= '1';
+                else
+                    vint_delay := vint_delay + 1;
+                end if;
+            end if;
+        end if;
+    end process;
+end architecture;
+"""
 (out/'diagnostic_fast_fixture.vhd').write_text(s)
 # Input copies from the successful main-only export remain explicitly scoped.
 sources=[p for p in main_sources if p.endswith('.vhd')]
 sources=[p.replace('rtl/rabbitpunch_ram16.vhd','sim/fast/rabbitpunch_ram16_model.vhd').replace('rtl/rabbitpunch_ram8.vhd','sim/fast/rabbitpunch_ram8_model.vhd') for p in sources]
 sources=[str((out/'rabbitpunch_tiles.vhd').relative_to(root)) if p=='rtl/rabbitpunch_tiles.vhd' else str((out/'rabbitpunch_system_main_only.vhd').relative_to(root)) if p=='rtl/rabbitpunch_system.vhd' else p for p in sources]
 sources+=['rtl/rabbitpunch_clock_enables.vhd','rtl/rabbitpunch_raster.vhd','rtl/rabbitpunch_scanline_scheduler.vhd','rtl/rabbitpunch_video_output.vhd','rtl/rabbitpunch_scanout.vhd',str((out/'diagnostic_program.vhd').relative_to(root)),str((out/'diagnostic_fast_fixture.vhd').relative_to(root))]
+if options.load_mode != 'word':
+    sources[-1:-1] = ['rtl/rabbitpunch_ddr_copy.vhd','rtl/rabbitpunch_load_frontend.vhd','sim/fast/diagnostic_load_source.vhd']
 args=[str(ghdl),'--synth','--std=08','-fsynopsys','--out=verilog','-gGBOOL_EXPECT_FAILURE='+str(options.corrupt).lower()]+[str(root/p) for p in sources]+['-e','diagnostic_fast_fixture']
 r=subprocess.run(args,cwd=out,capture_output=True,text=True,timeout=300,**NO_WINDOW)
 (out/'diagnostic_fast_fixture.v').write_text(r.stdout);(out/'export.log').write_text(r.stderr)
@@ -304,6 +343,8 @@ sdram_chip_model_wide chip (
 endmodule
 ''')
 paths=['rtl/cpu/fx68k/fx68k.sv','rtl/cpu/fx68k/fx68kAlu.sv','rtl/cpu/fx68k/uaddrPla.sv','rtl/jtframe/jtframe_draw.v','rtl/memory/sdram/sdram.sv','sim/vendor/sdram/sdram_chip_model_wide.sv']
+if options.load_mode != 'word':
+    paths += ['rtl/memory/ddram/ddram_phy.sv','rtl/memory/ddram/rom_loader.sv']
 obj=out/'obj';bridge=out/'clock_bridge.cpp'
 args=[str(suite/'bin/verilator_bin.exe'),'--cc','--exe',bridge.as_posix(),'--assert','--no-assert-case','-Wno-fatal','-Wno-ENUMVALUE','--no-timing','--timescale','1ps/1ps','--top-module','fast_diagnostic_top','--Mdir',obj.as_posix(),'-o','sim.exe','-CFLAGS','-O2 -DVL_USER_FATAL',(out/'fast_diagnostic_top.sv').as_posix(),(out/'diagnostic_fast_fixture.v').as_posix()]+[(root/p).as_posix() for p in paths]
 with (out/'verilate.log').open('w') as log:r=subprocess.run(args,cwd=out,env=env,stdout=log,stderr=subprocess.STDOUT,timeout=300,**NO_WINDOW)
@@ -376,7 +417,7 @@ assert input_hashes == {name: sha(root / name) for name in input_names}
 assert tool_hashes == {name:sha(path) for name,path in tool_paths.items()}
 for name in ('microrom.mem','nanorom.mem'):
     assert sha(out / 'rtl/cpu/fx68k' / name) == input_hashes['rtl/cpu/fx68k/' + name]
-report = dict(accepted=True,mameversion=version,corrupt_rom=options.corrupt,downloaded_bytes=len(image),
+report = dict(accepted=True,load_mode=options.load_mode,mameversion=version,corrupt_rom=options.corrupt,downloaded_bytes=len(image),
     initial_sdram_word='5A3C',poison_differs_from_every_loaded_word=True,
     bitmap_words=32768,pixels=62208,differing_pixels=0,image_sha256=sha(out / 'image_used.bin'),
     readback_sha256=sha(out / 'loaded_image.bin'),rgb_sha256=hashlib.sha256(rgb).hexdigest(),
@@ -385,6 +426,10 @@ report = dict(accepted=True,mameversion=version,corrupt_rom=options.corrupt,down
     source_sha256=input_hashes,tool_sha256=tool_hashes,ram_contract_sha256=sha(root / 'docs/reference/fast_ram_contract_checks.json'),
     generated_sha256={path.relative_to(out).as_posix():sha(path) for path in out.iterdir() if path.is_file()},
     dq_alias_normalization=json.loads((out / 'dq_alias_normalization.json').read_text()),
-    scope='Supplemental two-state main-board diagnostic with separately qualified logical on-chip RAMs, idle/excluded sound, synthetic 21428-ps system period and 5357-ps chip-clock phase. Every external SDRAM image word starts at nonzero poison distinct from its required value. All 0x210000 original firmware bytes traverse the production word-loader/SDRAM controller and unchanged chip command model; exact complete readback, real fx68k executed full bitmap fill, ROM branch, drained signature inspection and native 288x216 image pass retained VHDL and independent Python checks. Generated copies normalize combinational tile-port expressions and bidirectional aliases; production/vendor RTL is unchanged. Vendor reset-time unique-case checks are disabled separately from retained explicit VHDL assertions. No CPU/board-RAM state deposit or ROM preload; not native Intel RAM, PLL, four-state, HPS/DDR frontend, audio, game-ROM gameplay, SDF/electrical or physical hardware proof.')
+    scope='Supplemental two-state main-board diagnostic with separately qualified logical on-chip RAMs, idle/excluded sound, synthetic 21428-ps system period and 5357-ps chip-clock phase. Every external SDRAM image word starts at nonzero poison distinct from its required value. All 0x210000 original firmware bytes traverse the selected loader path and production word-loader/SDRAM controller and unchanged chip command model; exact complete readback, real fx68k executed full bitmap fill, ROM branch, drained signature inspection and native 288x216 image pass retained VHDL and independent Python checks. Generated copies normalize combinational tile-port expressions and bidirectional aliases; production/vendor RTL is unchanged. Vendor reset-time unique-case checks are disabled separately from retained explicit VHDL assertions. No CPU/board-RAM state deposit or ROM preload; not native Intel RAM, PLL, four-state, physical HPS/DDR, audio, game-ROM gameplay, SDF/electrical or physical hardware proof.')
+if options.load_mode != 'word':
+    report['frontend'] = dict(byte_download=options.load_mode == 'byte',ddr_staging=options.load_mode == 'ddr',
+        accepted_words=image_words,ddr_reads=image_words // 4 if options.load_mode == 'ddr' else 0,
+        scope='Actual HPS-signal frontend, DDR copier and unchanged DDR PHY/rom_loader with behavioral delayed DDR replies, periodic busy, spoiled invalid pins and per-word VHDL assertions. No hps_io parser, real HPS or physical DDR proof.')
 (root / f'docs/reference/fast_diagnostic_{case}_checks.json').write_text(json.dumps(report,indent=2)+'\n')
 print(f'PASS fast diagnostic {case}: full poisoned-image readback, 32768 executed bitmap words, 62208 exact RGB pixels',flush=True)

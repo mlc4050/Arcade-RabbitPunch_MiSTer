@@ -1,0 +1,22 @@
+{
+  "case": "load_frontend_full",
+  "pass_marker": "LOAD_FRONTEND_FULL_PASS",
+  "log": "debug\\baselines\\load_frontend_full\\result.log",
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_layout.vhd": "f73fef06fcb184261be74ba93fe262e144bbf7c26588fae32d8f364bd1ddaecc",
+    "rtl/memory/ddram/ddram_phy.sv": "5a0cc2eeca7d71ba83fbd19d79c38b9983f5956cb737acf4df64e20848d0578c",
+    "rtl/memory/ddram/rom_loader.sv": "01ea1c583107760fedb7457a35cc44e8a77d53e4be7593a4eae85fb4702602d5",
+    "rtl/rabbitpunch_ddr_copy.vhd": "87da9d959e0e94afac2e961e360bd7df06f4bd15d2b3f1bf389265d6d352d101",
+    "rtl/rabbitpunch_load_frontend.vhd": "3df610c1e14523fe18076f863b2571e4aadf4042cdd8defc711deda6354b61f5",
+    "sim/fast/diagnostic_pattern.vhd": "35fd1b6bc7831809ada8124e9c5ea4b8ae1e300088face4537dfa6ca99717414",
+    "sim/fast/diagnostic_load_source.vhd": "c9090239d639fd11ca28685c4a56d21008a4dbbbd5882689254187074da741ee",
+    "sim/memory/load_frontend_full_tb.vhd": "298d16cd540e13f17bb10cb5e0dce6b1a0f9b2222dd231f08bb088e4b81da7c3"
+  },
+  "runner_sha256": "bcca8288a2da814ff3372dfcc5d5c35a4f387de21720a9756efb40e2a74c49ba",
+  "log_sha256": "771b3e8b918603e031e7c0ec4f7d289c4134e09dba12a7ad97ba779bde29021b",
+  "bytes_per_mode": 2162688,
+  "words_per_mode": 1081344,
+  "ddr_reads": 270336,
+  "scope": "Native four-state ModelSim, actual HPS-signal frontend/DDR copier and unchanged DDR PHY/rom_loader, nonuniform high-address-dependent pattern across the full image, independent ordered sink, periodic and long sink stalls, DDR busy/variable response delays and invalid-pin poison. No hps_io parser, system SDRAM, executing CPU or physical DDR/HPS proof."
+}

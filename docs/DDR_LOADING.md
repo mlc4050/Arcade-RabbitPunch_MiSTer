@@ -131,3 +131,14 @@ See reference/ddr_mra_checks.json and reference/ddr_window_checks.json.
 These are unpublished development definitions, not a physical fast-load or
 throughput result. The copier still transfers game ROMs into external SDRAM;
 only optional presentation uses DDR during gameplay.
+
+
+## Full-image qualification
+
+Both complete byte-download and DDR-staged frontend paths now pass the original
+executing 68000 diagnostic, complete poisoned-SDRAM image readback and every
+native output pixel, including the deliberate corrupt-ROM branch. The independent
+four-state frontend test also checks the full image using a nonuniform pattern,
+long backpressure and variable DDR replies. Details, fixture scopes and exact
+archives are in DIAGNOSTIC_ROM.md and reference/full_image_loader_archive.json.
+Physical HPS/DDR loading speed and ARM filesystem behavior remain unverified.

@@ -22,7 +22,10 @@ The newer audio-menu release/debug revisions pass all 144/164 timing checks
 
 The fast original diagnostic now passes full poisoned-image download/readback,
 32768 executed bitmap writes and all 62208 RGB pixels in both ROM-check branches.
-Native Intel/PLL completion and full host/DDR-loader integration remain open. Full-raster CRT/HQ2x now matches all
+Complete byte and DDR-staged HPS-signal frontend integration now passes both
+branches with full poisoned-image readback and exact video; an independent
+four-state full-image frontend pattern test also passes. Native Intel/PLL
+completion and physical HPS/DDR loading remain open. Full-raster CRT/HQ2x now matches all
 248832 pixels in the qualified fast RTL backend. Audio mix defaults to
 Mono; all four settings pass synthesized-host and connected HPS regressions.
 Development DDR-load MRAs preserve each verified 0x210000-byte image and change

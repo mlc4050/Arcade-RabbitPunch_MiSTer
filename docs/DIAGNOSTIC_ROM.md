@@ -102,3 +102,40 @@ the required 0289 tag from configured MAME and checks it after writing the XML.
 The earlier empty-version diagnostic is rejected and archived separately in
 reference/diagnostic_mra_missing_version_rejected.json. Original rpdiag firmware
 uses inline-image validation rather than the MAME game-set ROM validator.
+
+
+## Full byte and DDR frontend integration
+
+The fast diagnostic runner now accepts `--load-mode word|byte|ddr` (default word).
+Both normal and corrupt-ROM branches pass through each route: complete poisoned
+SDRAM readback, all 32768 executed bitmap writes, drained completion signatures
+and all 62208 native pixels. Byte mode supplies every byte to the actual
+rabbitpunch_load_frontend, including its same-edge first-byte case. DDR mode
+supplies an index-0 transaction without byte writes, holds framework reset after
+host download ends, then allows the actual DDR copier/PHY/rom_loader to fetch
+all 270336 beats. The staging backend varies response delay, applies busy periods
+and spoils data outside valid responses. VHDL checks every accepted word/address,
+held backpressure and final counts before the CPU can run.
+
+Normal/corrupt completion cycles are 24650660/24650672 for byte mode and
+27747235/27747227 for DDR mode. The word-route regression remains
+25424808/25424796. These are fixture cycle counts, not measured loading times on
+the ARM or physical DDR. Reports are reference/fast_diagnostic_*_checks.json;
+reference/full_image_loader_archive.json identifies the immutable worktree
+archive, exact source bytes, firmware, generated models, executables, complete
+readbacks, RGB captures and logs. No production RTL was changed for these checks.
+
+The complementary native four-state ModelSim test is
+`run_load_frontend_full_tests.py`. Two VHDL sources concurrently send a
+high-address-dependent, nonuniform pattern through both complete 2162688-byte
+routes into independently checked sinks. Every word/address, final byte count,
+270336 DDR reads, periodic/long sink stalls, variable response delays and the
+post-completion quiet interval pass. The two warnings are the existing DDR
+rom_loader's reset-time unique-case warnings, one per instance; there are zero
+errors. See reference/load_frontend_full_checks.json.
+
+The integration uses behavioral DDR staging at the HPS-signal interface. It does
+not execute the hps_io parser or ARM loader, use physical DDR, include audio,
+execute a game ROM, or replace the still-running native Intel/PLL full-frame
+checks. The separate full-size frontend test includes actual vendor DDR logic
+in four-state ModelSim but has no SDRAM, main CPU or video system.
