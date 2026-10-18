@@ -172,3 +172,15 @@ bits transported. The standalone host uses 479 ALMs, 403 registers and no RAM;
 minimum setup is +7.133 ns and hold +0.167 ns at its 48 MHz evaluation clock.
 See reference/host_hdmi_menu_synth.json and reference/host_netlist_checks.json.
 This does not establish physical ARM menu behavior or a complete shell fit.
+
+A doubled-presentation regression found that integer rotation metadata measured
+the analog HQ2x geometry even though the rotator captures native pixels. In the
+32x20 native / 64x40 presented fixture at a 1900x1080 destination, the old V-integer
+output was 640x1080 instead of the native reference's 660x1080. The failing source,
+fixture and transcript are preserved under debug/fit_archive/hdmi_presented_geometry_34441d0_rejected/.
+The controller now selects native CE/VS/DE while rotated, retaining the presented
+geometry when rotation is off. Both directions and all four integer modes pass
+the independent native-aspect comparison; the complete existing mode/loader/direct
+control regression also passes. See reference/hdmi_presented_geometry_checks.json
+and hdmi_presented_geometry_rejected_checks.json. Earlier fitted-controller and
+full-shell jobs predate this metadata correction; fresh synthesis/timing is required.

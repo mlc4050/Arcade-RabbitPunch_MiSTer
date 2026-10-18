@@ -71,6 +71,7 @@ architecture rtl of rabbitpunch_hdmi_presentation is
     signal su2_requested_rotation, su2_applied_rotation : unsigned(1 downto 0) := (others => '0');
     signal s_previous_vertical_sync : std_logic := '0';
     signal s_vertical_sync, s_vertical_sync_rise, s_apply_mode : std_logic;
+    signal s_aspect_pixel_enable, s_aspect_vertical_sync, s_aspect_data_enable : std_logic;
     signal s_mode_change : std_logic := '0';
     signal s_rotated, s_capture_rotation, s_counterclockwise, s_donor_enabled : std_logic;
     signal s_raw_write, s_framebuffer_valid : std_logic;
@@ -178,12 +179,17 @@ begin
     -- ARC1/ARC2 are encoded selectors (ARY=0), so keep their encoding intact.
     su12_transposed_width <= iu12_hdmi_height when s_rotated = '1' else iu12_hdmi_width;
     su12_transposed_height <= iu12_hdmi_width when s_rotated = '1' else iu12_hdmi_height;
+    -- Rotation stores native pixels before CRT/effects. Its integer metadata
+    -- must measure that same raster, even when the analog path is doubled.
+    s_aspect_pixel_enable <= i_native_pixel_enable when s_rotated = '1' else i_presented_pixel_enable;
+    s_aspect_vertical_sync <= s_vertical_sync when s_rotated = '1' else i_presented_vertical_sync;
+    s_aspect_data_enable <= i_native_data_enable when s_rotated = '1' else i_presented_data_enable;
     aspect : entity work.rabbitpunch_video_aspect
         port map (
             i_clk => i_clk,
-            i_pixel_enable => i_presented_pixel_enable,
-            i_vertical_sync => i_presented_vertical_sync,
-            i_data_enable => i_presented_data_enable,
+            i_pixel_enable => s_aspect_pixel_enable,
+            i_vertical_sync => s_aspect_vertical_sync,
+            i_data_enable => s_aspect_data_enable,
             i_direct_video => i_direct_video,
             iu12_hdmi_width => su12_transposed_width,
             iu12_hdmi_height => su12_transposed_height,
@@ -203,3 +209,4 @@ begin
         end if;
     end process;
 end architecture;
+
