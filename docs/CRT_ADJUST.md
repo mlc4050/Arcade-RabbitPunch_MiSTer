@@ -14,8 +14,9 @@ Off is a direct RGB/sync/blanking/enable bypass, with no extra pipeline or
 memory latency. On uses the donor's two 512-pixel line banks (1024 x 24 bits),
 reading the completed row while writing the next. This optional path adds
 one buffered row plus pixel/read-rate alignment; it is separate from the
-native one-row-ahead game renderer. It adds no complete frame buffer. The
-expected 24576 RAM bits and resource/timing cost still require a fit.
+native one-row-ahead game renderer. It adds no complete frame buffer. The first fit reports 24576 RGB bits plus 129 bits of inferred VSYNC history
+(24705 total, four M10Ks). The original 24576-bit estimate was rejected by
+the RAM gate; the exact two-bank/sync geometry is now audited before refitting.
 
 Horizontal size changes the read enable, not a generated clock. The fixed
 /7 native cadence gives a period of 140 twentieths of a system clock. Each
@@ -38,16 +39,24 @@ Passing RTL checks:
 - Every-clock native bypass across 256 unequal RGB/timing patterns.
 - All 32 signed size read-enable densities and size-disable restoration.
 - Full-width 288-visible/432-total image order at /7 enable, including the
-  first/last of six visible rows in a twelve-row test raster.
+  first/last of six visible rows in a twelve-row horizontal-control fixture and the actual 256-line frame
+  geometry for vertical-shift cases.
 - Normal, left/right eight-pixel position and wider/narrower two-step sizes;
-  each checks all 1728 output pixels after warm-up.
+  each checks all 1728 output pixels after warm-up. Positive/negative one-line
+  vertical shifts also pass, with exact 3024-clock HSync and 36288-clock
+  frame periods, bounded read-pixel sync-width quantization and exact
+  one-line shifts in VSYNC phase. The production-period control uses
+  774144 system clocks per frame.
 
 Evidence: reference/crt_adjust_control_checks.json and
 reference/crt_adjust_geometry_checks.json. These synthetic geometry tests
 complement the game-renderer MAME comparisons; they are not MAME captures.
 
-Still open: routed standalone fit, functional-netlist replay, vertical-shift
-semantics and sync checks, full-height output, extreme-size clipping, setting
+A full-height RTL control now checks all 62208 pixels across 216 visible
+rows in a 256-line frame with no missing first or last row. Evidence:
+reference/crt_adjust_geometry_full_height_checks.json.
+
+Still open: functional-netlist geometry replay, extreme-size clipping, setting
 changes, main-OSD wiring and actual monitor behavior. No CRT Adjust option is
 advertised by the production menu yet. Vertical-size ring buffering is not
 included in this evaluation: it adds multiple rows and its cabinet mode expects

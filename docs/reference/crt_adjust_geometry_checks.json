@@ -7,13 +7,22 @@
       "source_sha256": {
         "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
         "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
-        "sim/video/crt_adjust_geometry_tb.vhd": "462a7856caa017faaee343f417e82e115bc60f2cf6601acfc9bb40294e12b956"
+        "sim/video/crt_adjust_geometry_tb.vhd": "76615f9ebadddbac32db3a15312f28586f769009a72b3bedf8dbfc1fc67b17c4"
       },
       "horizontal_size_index": 0,
       "horizontal_position_index": 0,
       "rows": 6,
       "pixels": 1728,
-      "log_sha256": "2a928f0c533b66b155b7ea90e1edb38c736081d1164f5684ea53bdceb4e90888"
+      "log_sha256": "bd1e7fc1b99e681a28b729090880d78a75502928740a8f8419f2aaece41990cb",
+      "vertical_shift_index": 0,
+      "frame_lines": 12,
+      "sync_metrics": {
+        "hperiod": 3024,
+        "hwidth": 280,
+        "vperiod": 36288,
+        "vwidth": 6048,
+        "vphase": 26669
+      }
     },
     {
       "case": "crt_adjust_geometry_right8",
@@ -22,13 +31,22 @@
       "source_sha256": {
         "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
         "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
-        "sim/video/crt_adjust_geometry_tb.vhd": "462a7856caa017faaee343f417e82e115bc60f2cf6601acfc9bb40294e12b956"
+        "sim/video/crt_adjust_geometry_tb.vhd": "76615f9ebadddbac32db3a15312f28586f769009a72b3bedf8dbfc1fc67b17c4"
       },
       "horizontal_size_index": 0,
       "horizontal_position_index": 8,
       "rows": 6,
       "pixels": 1728,
-      "log_sha256": "58caf0f29554bb0cfec22d7565c1407e2174284b6dfc0f876186cd3d9fa8da4e"
+      "log_sha256": "695225bcdda21f44a4552636231acd280b1efaa97e203c70f2e80fce61f07d9f",
+      "vertical_shift_index": 0,
+      "frame_lines": 12,
+      "sync_metrics": {
+        "hperiod": 3024,
+        "hwidth": 280,
+        "vperiod": 36288,
+        "vwidth": 6048,
+        "vphase": 26669
+      }
     },
     {
       "case": "crt_adjust_geometry_left8",
@@ -37,13 +55,22 @@
       "source_sha256": {
         "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
         "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
-        "sim/video/crt_adjust_geometry_tb.vhd": "462a7856caa017faaee343f417e82e115bc60f2cf6601acfc9bb40294e12b956"
+        "sim/video/crt_adjust_geometry_tb.vhd": "76615f9ebadddbac32db3a15312f28586f769009a72b3bedf8dbfc1fc67b17c4"
       },
       "horizontal_size_index": 0,
       "horizontal_position_index": 89,
       "rows": 6,
       "pixels": 1728,
-      "log_sha256": "2351d344f247815deac689ca7e96ea67b580c4e40f0097a59ff5dd568257f925"
+      "log_sha256": "a3dd63088dc1639bf337f2c1148f7d24aadf27d191702ff6f325a515598787cd",
+      "vertical_shift_index": 0,
+      "frame_lines": 12,
+      "sync_metrics": {
+        "hperiod": 3024,
+        "hwidth": 280,
+        "vperiod": 36288,
+        "vwidth": 6048,
+        "vphase": 26669
+      }
     },
     {
       "case": "crt_adjust_geometry_wider2",
@@ -52,13 +79,22 @@
       "source_sha256": {
         "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
         "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
-        "sim/video/crt_adjust_geometry_tb.vhd": "462a7856caa017faaee343f417e82e115bc60f2cf6601acfc9bb40294e12b956"
+        "sim/video/crt_adjust_geometry_tb.vhd": "76615f9ebadddbac32db3a15312f28586f769009a72b3bedf8dbfc1fc67b17c4"
       },
       "horizontal_size_index": 2,
       "horizontal_position_index": 0,
       "rows": 6,
       "pixels": 1728,
-      "log_sha256": "16bc53b309cada5cbe6197eeaba313c183e292bbaeaf95e3f7a3a75a354198bf"
+      "log_sha256": "7907be998d88c04bb31a75d05ba9101f4665f0e1e71c39d6e72295868011ed0f",
+      "vertical_shift_index": 0,
+      "frame_lines": 12,
+      "sync_metrics": {
+        "hperiod": 3024,
+        "hwidth": 285,
+        "vperiod": 36288,
+        "vwidth": 6048,
+        "vphase": 26664
+      }
     },
     {
       "case": "crt_adjust_geometry_narrower2",
@@ -67,14 +103,97 @@
       "source_sha256": {
         "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
         "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
-        "sim/video/crt_adjust_geometry_tb.vhd": "462a7856caa017faaee343f417e82e115bc60f2cf6601acfc9bb40294e12b956"
+        "sim/video/crt_adjust_geometry_tb.vhd": "76615f9ebadddbac32db3a15312f28586f769009a72b3bedf8dbfc1fc67b17c4"
       },
       "horizontal_size_index": 30,
       "horizontal_position_index": 0,
       "rows": 6,
       "pixels": 1728,
-      "log_sha256": "a7b189e9e53abaca4efe6c81162765512f7cab73ca133aabf0a4f2e7a31a5033"
+      "log_sha256": "2c2d7b4603e97b79688f10265719bb456c91cc389c31cae66a27152657087785",
+      "vertical_shift_index": 0,
+      "frame_lines": 12,
+      "sync_metrics": {
+        "hperiod": 3024,
+        "hwidth": 286,
+        "vperiod": 36288,
+        "vwidth": 6048,
+        "vphase": 26663
+      }
+    },
+    {
+      "case": "crt_adjust_geometry_production256",
+      "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+      "log": "debug\\baselines\\crt_adjust_geometry_production256\\result.log",
+      "source_sha256": {
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
+        "sim/video/crt_adjust_geometry_tb.vhd": "76615f9ebadddbac32db3a15312f28586f769009a72b3bedf8dbfc1fc67b17c4"
+      },
+      "horizontal_size_index": 0,
+      "horizontal_position_index": 0,
+      "rows": 6,
+      "pixels": 1728,
+      "log_sha256": "540446b61745ab27964a99e4b45142f4c48465e809b9d964a8266b67e54295fe",
+      "vertical_shift_index": 0,
+      "frame_lines": 256,
+      "sync_metrics": {
+        "hperiod": 3024,
+        "hwidth": 280,
+        "vperiod": 774144,
+        "vwidth": 6048,
+        "vphase": 764525
+      }
+    },
+    {
+      "case": "crt_adjust_geometry_down1",
+      "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+      "log": "debug\\baselines\\crt_adjust_geometry_down1\\result.log",
+      "source_sha256": {
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
+        "sim/video/crt_adjust_geometry_tb.vhd": "76615f9ebadddbac32db3a15312f28586f769009a72b3bedf8dbfc1fc67b17c4"
+      },
+      "horizontal_size_index": 0,
+      "horizontal_position_index": 0,
+      "rows": 6,
+      "pixels": 1728,
+      "log_sha256": "dff6477561b5edf95514f0118b755c777b0c28add908004a6668841ec9eb3fbf",
+      "vertical_shift_index": 1,
+      "frame_lines": 256,
+      "sync_metrics": {
+        "hperiod": 3024,
+        "hwidth": 280,
+        "vperiod": 774144,
+        "vwidth": 6048,
+        "vphase": 767549
+      }
+    },
+    {
+      "case": "crt_adjust_geometry_up1",
+      "pass_marker": "CRT_ADJUST_GEOMETRY_PASS",
+      "log": "debug\\baselines\\crt_adjust_geometry_up1\\result.log",
+      "source_sha256": {
+        "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+        "rtl/rabbitpunch_crt_adjust.vhd": "bcb593f36d78479f3d330a1eb20cb03e8149b7a0f7d3bbf7f882b939e13d96bc",
+        "sim/video/crt_adjust_geometry_tb.vhd": "76615f9ebadddbac32db3a15312f28586f769009a72b3bedf8dbfc1fc67b17c4"
+      },
+      "horizontal_size_index": 0,
+      "horizontal_position_index": 0,
+      "rows": 6,
+      "pixels": 1728,
+      "log_sha256": "2006d6f8d2f41830f72d62403272bc941338d76743501ef1326641c78e57a666",
+      "vertical_shift_index": 63,
+      "frame_lines": 256,
+      "sync_metrics": {
+        "hperiod": 3024,
+        "hwidth": 280,
+        "vperiod": 774144,
+        "vwidth": 6048,
+        "vphase": 761501
+      }
     }
   ],
-  "scope": "Isolated CRT Adjust with corrected VBlank row tags: 288 visible/432 total pixels at /7 enable, six visible/twelve total rows, normal and +/-8 position, +/-2 size. Every source pixel and first/last visible rows checked after warm-up. No vertical-shift, extreme-size clipping, routed fit or physical CRT proof; disconnected from production."
+  "fit_commit": null,
+  "full_height": false,
+  "scope": "Isolated unchanged CRT Adjust and VHDL adapter with corrected VBlank tags: 288 visible/432 total pixels at /7 enable. Each listed case records visible and total rows; the DUT uses its production 256-line generic. Exact source-pixel order, row boundaries, sync periods and bounded sync-width quantization are checked after warm-up. Non-full-height suite also checks position, size and exact +/-1-line vertical phase changes. No extreme-size clipping, setting-change or physical CRT proof; disconnected from production."
 }
