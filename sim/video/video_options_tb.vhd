@@ -8,10 +8,14 @@ use std.env.all;
 entity video_options_tb is
     generic (
         GINT_MODE : natural := 0;
-        GINT_VISIBLE_HEIGHT : positive := 8;
-        GINT_TOTAL_HEIGHT : positive := 16;
-        GINT_VERTICAL_SYNC_START : natural := 12;
-        GINT_VERTICAL_SYNC_END : positive := 14
+        GINT_VISIBLE_WIDTH : positive := 32;
+        GINT_TOTAL_WIDTH : positive := 48;
+        GINT_HORIZONTAL_SYNC_START : natural := 40;
+        GINT_HORIZONTAL_SYNC_END : positive := 44;
+        GINT_VISIBLE_HEIGHT : positive := 1;
+        GINT_TOTAL_HEIGHT : positive := 4;
+        GINT_VERTICAL_SYNC_START : natural := 2;
+        GINT_VERTICAL_SYNC_END : positive := 3
     );
 end entity;
 
@@ -43,7 +47,7 @@ architecture test of video_options_tb is
     signal s_clk : std_logic := '0';
     signal s_ce : std_logic := '0';
     signal sint_phase : natural range 0 to 6 := 0;
-    signal sint_x : natural range 0 to 431 := 0;
+    signal sint_x : natural range 0 to GINT_TOTAL_WIDTH - 1 := 0;
     signal sint_y : natural range 0 to GINT_TOTAL_HEIGHT - 1 := 0;
     signal sint_frames : natural := 0;
     signal s_hs, s_vs, s_hb, s_vb, s_forced, s_direct : std_logic;
@@ -55,9 +59,9 @@ architecture test of video_options_tb is
 begin
     s_clk <= not s_clk after 5 ns;
     s_ce <= '1' when sint_phase = 6 else '0';
-    s_hs <= '0' when sint_x >= 352 and sint_x < 392 else '1';
+    s_hs <= '0' when sint_x >= GINT_HORIZONTAL_SYNC_START and sint_x < GINT_HORIZONTAL_SYNC_END else '1';
     s_vs <= '0' when sint_y >= GINT_VERTICAL_SYNC_START and sint_y < GINT_VERTICAL_SYNC_END else '1';
-    s_hb <= '0' when sint_x < 288 else '1';
+    s_hb <= '0' when sint_x < GINT_VISIBLE_WIDTH else '1';
     s_vb <= '0' when sint_y < GINT_VISIBLE_HEIGHT else '1';
     -- Three distinct colour lanes catch swaps; flat fields also permit exact
     -- comparison through HQ2x without an independent smoothing algorithm.
@@ -96,11 +100,12 @@ begin
         if (rising_edge(s_clk)) then
             if (sint_phase = 6) then
                 sint_phase <= 0;
-                if (sint_x = 431) then
+                if (sint_x = GINT_TOTAL_WIDTH - 1) then
                     sint_x <= 0;
                     if (sint_y = GINT_TOTAL_HEIGHT - 1) then
                         sint_y <= 0;
                         sint_frames <= sint_frames + 1;
+                        report "VIDEO_FRAME " & integer'image(sint_frames + 1);
                     else
                         sint_y <= sint_y + 1;
                     end if;
@@ -116,8 +121,8 @@ begin
         variable vint_pixels : natural := 0;
         variable vint_lines : natural := 0;
         variable vint_line_pixels : natural := 0;
-        variable vint_expected_width : natural := 288;
-        variable vint_expected_pixels : natural := 288 * GINT_VISIBLE_HEIGHT;
+        variable vint_expected_width : natural := GINT_VISIBLE_WIDTH;
+        variable vint_expected_pixels : natural := GINT_VISIBLE_WIDTH * GINT_VISIBLE_HEIGHT;
         variable vint_expected_lines : natural := GINT_VISIBLE_HEIGHT;
         variable v_previous_de : std_logic := '0';
     begin
@@ -144,7 +149,7 @@ begin
                 vint_line_pixels := vint_line_pixels + 1;
             elsif (v_previous_de = '1') then
                 if (GINT_MODE = 2) then
-                    vint_expected_width := 576;
+                    vint_expected_width := 2 * GINT_VISIBLE_WIDTH;
                 end if;
                 assert (vint_line_pixels = vint_expected_width)
                     report "Incorrect output line width " & integer'image(vint_line_pixels) severity failure;
@@ -155,10 +160,10 @@ begin
         end if;
         if (sint_frames = 3) then
             if (GINT_MODE = 2) then
-                vint_expected_pixels := 1152 * GINT_VISIBLE_HEIGHT;
+                vint_expected_pixels := 4 * GINT_VISIBLE_WIDTH * GINT_VISIBLE_HEIGHT;
                 vint_expected_lines := 2 * GINT_VISIBLE_HEIGHT;
             elsif (GINT_MODE >= 1 and GINT_MODE <= 5) then
-                vint_expected_pixels := 576 * GINT_VISIBLE_HEIGHT;
+                vint_expected_pixels := 2 * GINT_VISIBLE_WIDTH * GINT_VISIBLE_HEIGHT;
                 vint_expected_lines := 2 * GINT_VISIBLE_HEIGHT;
             end if;
             assert (vint_pixels = vint_expected_pixels and vint_lines = vint_expected_lines)

@@ -16,9 +16,12 @@ adapter and is not advertised as supported.
 The framework line RAM capacity is two 292x24 input banks and a 584x96 output
 bank: 70080 bits total. The 256x6 HQ rule table is combinational in this fit and
 is not counted as block memory. Geometry and colour verification use a VHDL
-bench at the /7 enable ratio and full 432-pixel horizontal raster. The routine
-seven-mode regression uses 8 visible/16 total vertical lines to bound slow
-Starter Edition netlist simulation; --full-raster restores 216/256 lines. Detailed
+bench at the /7 enable ratio. The routine seven-mode regression uses 32 visible/
+48 total pixels and one visible/four total vertical lines, after two startup
+frames. --full-width restores 288/432 horizontal geometry; --full-raster restores
+216/256 vertical geometry as well. This keeps slow Starter Edition netlist
+simulation bounded; actual scene and raster proofs are separate.
+Detailed
 HQ2x edge-filter accuracy and physical video output are outside that test.
 
 Quartus 17's bundled ModelSim cannot compile the unchanged framework sources
@@ -40,3 +43,11 @@ is 70080 bits; the rule table does not contribute block-memory bits. That gate
 is corrected explicitly and a clean snapshot is refitted. The first full-height
 native netlist run hits its 180-second wall budget without an assertion failure;
 no pass is claimed for that interrupted run.
+
+The corrected standalone bf511c5 fit passes at 48 MHz with 767 ALMs, 1373
+registers, 70080 RAM bits in 14 M10Ks, zero DSPs and no PLL. All reported corner
+checks and all six timing-coverage categories pass. Minimum setup is +5.816 ns
+and minimum hold is +0.125 ns. This virtual-I/O fit is not full-shell timing.
+See reference/video_options_synth.json. Native bypass, forced doubling and HQ2x
+compact tests have passed; the remaining effect/direct modes and separate
+full-width control are running before shell integration.
