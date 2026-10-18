@@ -1,0 +1,47 @@
+{
+  "fit_commit": "d9dfc8ac4e5441a41d00c1790f42cd047c0bd12f",
+  "bench_commit": "ba87b130d8dcaf67535ae4fb5c0ea5c29042d8cf",
+  "cases": [
+    {
+      "case": "normal",
+      "rows": 6,
+      "pixels": 1728,
+      "log": "debug/baselines/gate_crt_adjust_geometry_normal/result.log",
+      "log_sha256": "0efd43743d90c816182e9887f5693bf3653f3c20ec49aa297b9350cc28ec6d56"
+    },
+    {
+      "case": "right8",
+      "rows": 6,
+      "pixels": 1728,
+      "log": "debug/baselines/gate_crt_adjust_geometry_right8/result.log",
+      "log_sha256": "d0462859e9d4d4370d119eb757e3d658231bdf5894ad016a59cec0c0afb20c80"
+    },
+    {
+      "case": "left8",
+      "rows": 6,
+      "pixels": 1728,
+      "log": "debug/baselines/gate_crt_adjust_geometry_left8/result.log",
+      "log_sha256": "a16be8bff031558617a20293ef3e72249d320bfa20af16b46ad59ee9267c526a"
+    },
+    {
+      "case": "wider2",
+      "rows": 6,
+      "pixels": 1728,
+      "log": "debug/baselines/gate_crt_adjust_geometry_wider2/result.log",
+      "log_sha256": "272a3f78a509831822182a36592b433dc3031d850c869fe782f0d328862d0713"
+    },
+    {
+      "case": "narrower2",
+      "rows": 6,
+      "pixels": 1728,
+      "log": "debug/baselines/gate_crt_adjust_geometry_narrower2/result.log",
+      "log_sha256": "f7831a46dd3ff9e31a00b2095883dac2d99fd60b880e0f052f1f5e19a3f36b0f"
+    }
+  ],
+  "netlist_sha256": "3b297509ff56c68293901f6e744455123c37a54bb35c43c5ac28f66160606db5",
+  "bench_sha256": "32d12733dbc4c7acc081acd79e3780f2af8059c2eedcf0c784607e9ecb8b6d3c",
+  "qualification_method": "Retrospective audit of completed pass markers and hashes; original suite stopped at the following long case wall timeout, no new simulation claimed.",
+  "incomplete_case": "production256",
+  "wall_limit_seconds": 300,
+  "scope": "Five compact synthesized geometry cases only; 256-line cases did not complete and no pass is claimed. Owned simulator was reaped. Original failed transcript and exact bench/netlist are archived."
+}
