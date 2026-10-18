@@ -53,3 +53,10 @@ scanline strengths, and direct-video override. The separate full-width control
 is running. The connected shell now exposes the Scandoubler Fx menu at status
 bits 46:44, hides it under direct video, and honors forced doubling when direct
 video is off. Native renderer telemetry stays before this presentation path.
+
+The expanded native HPS configuration passes its separate host fit and complete
+host functional-netlist regression. Every configuration character, forced/direct
+video flags, 128-bit status ordering, keyboard/joysticks, byte download and native
+high-score upload/request behavior pass with the new menu string. See
+reference/host_video_options_synth.json and reference/host_netlist_checks.json.
+The physical ARM/menu interaction is still part of hardware bring-up.
