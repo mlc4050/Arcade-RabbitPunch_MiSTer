@@ -49,3 +49,14 @@ behind descriptive VHDL wrappers; new control/transport/test logic is VHDL.
 Exact sound continuation remains an open design choice: the JT51 pipeline and
 JT7759 state need examination before promising it. Register replay may audibly
 reattack notes and must be identified as such if used.
+
+## Initial CPU qualification
+
+The isolated native fx68k/NMK16 helper test passes a register and 64 KiB RAM
+round trip with 400 exact ordered continuation writes and separately checked
+USP (m68k_state_checks.json). It uses an interrupt-enabled supervisor program.
+The initial fully masked SR=2700 program did not enter the park monitor even
+with the external level-7 request visible. That case is unresolved and prevents
+claiming general CPU capture support. STOP/normal pending IRQ and original
+stack preservation still require dedicated tests. The helpers/wrapper are
+quarantined outside files.qip and do not change the timed game core.

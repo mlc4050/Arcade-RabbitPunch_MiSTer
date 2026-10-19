@@ -1,0 +1,16 @@
+{
+  "repository": "https://github.com/kuzearcade/Arcade-NMK16_MiSTer.git",
+  "commit": "4c9b923a87dcefee27574a8a06361e47e8e9b963",
+  "files": [
+    {
+      "source": "rtl/savestate/ss_m68k_park.sv",
+      "target": "rtl/state/vendor/nmk16/ss_m68k_park.sv",
+      "sha256": "c6d989839e3ad187bce208293624085255cf4d354ed44f91463755b8b53d7abc"
+    },
+    {
+      "source": "rtl/savestate/ss_z80_park.sv",
+      "target": "rtl/state/vendor/nmk16/ss_z80_park.sv",
+      "sha256": "99e17cb0dc717a0c327e6d5d9b78b22b512a1fbad2b99baa13dcb4caad61d06d"
+    }
+  ]
+}
