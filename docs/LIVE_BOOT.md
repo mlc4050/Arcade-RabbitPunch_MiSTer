@@ -44,3 +44,10 @@ incomplete RTL experiments were stopped and privately archived. This is a
 rejected stimulus schedule, not a production RTL failure. The short 1200-frame
 Japanese capture also remains in a title transition; the final endpoint is
 1800 as verified in MAME. Neither stopped run is counted as an accepted test.
+
+A subsequent fixture audit caught Service Credit (SERVICE bit 0) being pulsed
+instead of Coin 1 (bit 4). The production input adapter already uses bit 4.
+Both incomplete long runs were stopped before their frame-900 injection and
+privately archived; neither is accepted. The corrected case suffix is
+_coin1, explicitly driving bit 4 and Start 1 bit 5. See
+reference/gameplay_service_credit_stimulus_rejected.json.

@@ -31,7 +31,7 @@ if options.wall_timeout <= 0:
 root = core_root()
 require_no_jtag('Bounded live game with both CPUs and continuous scanout')
 assert 2 <= options.coin_frame < options.start_frame < options.frames <= 1800
-case = options.game + '_' + str(options.frames)
+case = options.game + '_' + str(options.frames) + '_coin1'
 out = root / 'debug/gameplay_fast' / case
 out.mkdir(parents=True, exist_ok=True)
 def sha(path):

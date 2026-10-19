@@ -80,7 +80,8 @@ architecture test of gameplay_fast_fixture is
 
 begin
     -- Physical active-high board inputs, after the separately tested pad/key adapter.
-    su8_service <= x"01" when sint_frame_count >= GINT_COIN_FRAME and sint_frame_count < GINT_COIN_FRAME + 6 else
+    -- SERVICE bit 4 is Coin 1, bit 5 is Start 1; bit 0 is Service Credit.
+    su8_service <= x"10" when sint_frame_count >= GINT_COIN_FRAME and sint_frame_count < GINT_COIN_FRAME + 6 else
                    x"20" when sint_frame_count >= GINT_START_FRAME and sint_frame_count < GINT_START_FRAME + 6 else
                    x"00";
     -- Hold Shoot during play, pulse Missile, alternate vertical motion each second.
