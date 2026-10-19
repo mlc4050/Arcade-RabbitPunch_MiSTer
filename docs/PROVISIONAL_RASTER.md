@@ -30,8 +30,9 @@ For the provisional build only, interpret the oscillator label as nominal
 13 1/3 MHz and use half for pixels. A 46 2/3 MHz system clock with pixel enable
 once every seven clocks gives a steady 6 2/3 MHz dot cadence, 15.432 kHz lines
 and 60.2816 Hz frames. This differs from MAME's assumed 60 Hz. Actual oscillator
-accuracy, sync polarity and output phase remain to be verified. The PLL must be
-generated and checked by Quartus; the arithmetic is not a validated PLL setup.
+accuracy, sync polarity and output phase remain to be verified. The generated PLL is now fitted and checked by Quartus: the accepted full-shell
+reports retain the system-clock ratios and shifted SDRAM output. This establishes
+the implemented clocks, not original-board raster accuracy or physical SDRAM margin.
 
 Clock enables on the same system clock preserve the MAME CPU/audio rates:
 68000 alternating phase pulses at 12/35 of system clocks (16 MHz pulses, 8 MHz
