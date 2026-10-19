@@ -321,3 +321,5 @@ a 64x4 input / 128x8 output fixture against the independent native framework
 (reference/crt_hq_pattern_checks.json). Full native raster, extreme clipping
 and physical display behavior remain separate gates.
 
+
+Initial executing-game video now reaches 120 frames for both sets. Japan matches all 62208 raw MAME pixels; US differs by 34 pixels, with both images matching an independent render of their CPU-requested write state. This is boot evidence, not gameplay or audible audio proof. See LIVE_BOOT.md for explicit scopes and unresolved temporal alignment.
