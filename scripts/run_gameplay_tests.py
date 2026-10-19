@@ -21,6 +21,7 @@ from run_system_download_tests import system_sources
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--game', choices=['rabiolep','rpunch'], default='rabiolep')
 parser.add_argument('--frames', type=int, default=1800)
+parser.add_argument('--action-frame', type=int, default=1290)
 parser.add_argument('--coin-frame', type=int, default=900)
 parser.add_argument('--start-frame', type=int, default=990)
 parser.add_argument('--reference-root', type=Path, required=True)
@@ -30,9 +31,10 @@ if options.wall_timeout <= 0:
     parser.error('Wall timeout must be positive')
 root = core_root()
 require_no_jtag('Bounded live game with both CPUs and continuous scanout')
-assert 2 <= options.coin_frame < options.start_frame < options.frames <= 1800
-case = options.game + '_' + str(options.frames)
+assert 2 <= options.coin_frame < options.start_frame < options.action_frame < options.frames <= 1800
+case = options.game + '_' + str(options.frames) + '_pad'
 out = root / 'debug/gameplay_fast' / case
+assert not (out / 'run.log').exists(), 'Preserve earlier run artifacts before retrying'
 out.mkdir(parents=True, exist_ok=True)
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -45,7 +47,7 @@ for name, expected in contract['native_comparison']['source_sha256'].items():
 for name, expected in contract['source_sha256'].items():
     assert sha(root / name) == expected, 'Requalify the logical RAM contract first: ' + name
 all_sources = system_sources()
-main_sources = all_sources[:-1]
+main_sources = all_sources[:-1] + ['rtl/mame_keys.sv', 'rtl/rabbitpunch_keys.vhd', 'rtl/rabbitpunch_inputs.vhd']
 # All production CPU, sound and memory components are retained.
 input_names = list(dict.fromkeys(main_sources + [
     'scripts/run_gameplay_tests.py','scripts/run_fast_sound_boot_tests.py',
@@ -123,7 +125,7 @@ sources = [p for p in main_sources if p.endswith('.vhd')]
 sources = [p.replace('rtl/rabbitpunch_ram16.vhd','sim/fast/rabbitpunch_ram16_model.vhd').replace('rtl/rabbitpunch_ram8.vhd','sim/fast/rabbitpunch_ram8_model.vhd') for p in sources]
 sources = [str((out/'rabbitpunch_tiles.vhd').relative_to(root)) if p=='rtl/rabbitpunch_tiles.vhd' else str((out/'T80.vhd').relative_to(root)) if p=='rtl/cpu/t80/T80.vhd' else p for p in sources]
 sources += ['rtl/rabbitpunch_clock_enables.vhd','rtl/rabbitpunch_raster.vhd','rtl/rabbitpunch_scanline_scheduler.vhd','rtl/rabbitpunch_video_output.vhd','rtl/rabbitpunch_scanout.vhd',str((out/'game_program.vhd').relative_to(root)),'sim/fast/gameplay_fast_fixture.vhd']
-args=[str(ghdl),'--synth','--latches','--std=08','-fsynopsys','--out=verilog','-gGINT_COIN_FRAME='+str(options.coin_frame),'-gGINT_START_FRAME='+str(options.start_frame),'-gGINT_CAPTURE_FRAME='+str(options.frames),'-gGINT_DIP_DEFAULT='+str(dips)]+[str(root/p) for p in sources]+['-e','gameplay_fast_fixture']
+args=[str(ghdl),'--synth','--latches','--std=08','-fsynopsys','--out=verilog','-gGINT_ACTION_FRAME='+str(options.action_frame),'-gGINT_COIN_FRAME='+str(options.coin_frame),'-gGINT_START_FRAME='+str(options.start_frame),'-gGINT_CAPTURE_FRAME='+str(options.frames),'-gGINT_DIP_DEFAULT='+str(dips)]+[str(root/p) for p in sources]+['-e','gameplay_fast_fixture']
 r=subprocess.run(args,cwd=out,capture_output=True,text=True,timeout=300,**NO_WINDOW)
 (out/'gameplay_fast_fixture.v').write_text(r.stdout);(out/'export.log').write_text(r.stderr)
 (out/'sources.json').write_text(json.dumps(sources,indent=2)+'\n')
@@ -325,7 +327,7 @@ audio_report = dict(samples=len(audio_lines),sample_rate_hz=62500,minimum_interv
     nonzero={name:sum(value!=0 for value in values) for name,values in zip(('fm_left','fm_right','mono','adpcm'),channels)},
     adpcm_busy_samples=sum(int(row[5])!=0 for row in audio_lines),pcm_sha256=sha(out/'audio_samples.txt'),wav_sha256=sha(out/'mono.wav'),
     scope='Actual mixed mono, raw FM stereo and ADPCM PCM observed from the executing system. This prevents unused sound output pruning. Native-clock sample cadence checked; no independent waveform or physical audible comparison yet.')
-report = dict(accepted=True,audio=audio_report,coin_frame=options.coin_frame,start_frame=options.start_frame,set=options.game,frames=options.frames,maximum_row_clocks=maximum_row_clocks,
+report = dict(accepted=True,audio=audio_report,coin_frame=options.coin_frame,start_frame=options.start_frame,action_frame=options.action_frame,set=options.game,frames=options.frames,maximum_row_clocks=maximum_row_clocks,
     cycles=int(re.search(r'FAST_GAME_COMPLETE cycles=(\d+)',log)[1]),elapsed_seconds=time.monotonic()-started,
     log_sha256=sha(out/'run.log'),ram_contract_sha256=sha(root/'docs/reference/fast_ram_loader_contract_checks.json'),
     mame_main_trace_sha256=sha(main_trace),mame_sound_trace_sha256=sha(sound_trace),

@@ -26,7 +26,9 @@
     "manifest_sha256": "a445674364184d4a2de85ec841c9edd99d178362c4147badf12a4d5a3971b28d",
     "reference_rgb_sha256": "0e70d887729088b73e06ad28846aec7f83afb19463772840f52a1019eeacf6a5",
     "rendered_rgb_sha256": "0e70d887729088b73e06ad28846aec7f83afb19463772840f52a1019eeacf6a5",
-    "scope": "Independent software rendering of MAME state and visually inspected stage 1 captures. Establishes reference/input schedule only; no live RTL result or temporal alignment claim."
+    "scope": "Independent software rendering of MAME state and visually inspected stage 1 captures. Establishes reference/input schedule only; no live RTL result or temporal alignment claim.",
+    "accepted_input_schedule": false,
+    "correction": "The prior generator omitted pulse_frames declaration and ignored ERROR.txt. Images were attract-mode frames. Software rendering equality remains valid, controlled gameplay was not established."
   },
   {
     "set": "rpunch",
@@ -55,6 +57,8 @@
     "manifest_sha256": "b34c1b5df6365360eaa243c40e48e2def204afe8eb71fff430a4f13a66608fdc",
     "reference_rgb_sha256": "2dd043ae3bacf8ab7597287e8acb0c448a81bc36a621bf75b65df92f964395bd",
     "rendered_rgb_sha256": "2dd043ae3bacf8ab7597287e8acb0c448a81bc36a621bf75b65df92f964395bd",
-    "scope": "Independent software rendering of MAME state and visually inspected stage 1 captures. Establishes reference/input schedule only; no live RTL result or temporal alignment claim."
+    "scope": "Independent software rendering of MAME state and visually inspected stage 1 captures. Establishes reference/input schedule only; no live RTL result or temporal alignment claim.",
+    "accepted_input_schedule": false,
+    "correction": "The prior generator omitted pulse_frames declaration and ignored ERROR.txt. Images were attract-mode frames. Software rendering equality remains valid, controlled gameplay was not established."
   }
 ]

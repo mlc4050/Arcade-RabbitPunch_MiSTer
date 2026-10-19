@@ -1,0 +1,6 @@
+{
+  "accepted": false,
+  "archive": "D:\\git\\RabbitPunch-video-options-work\\debug\\fit_archive\\gameplay_service_credit_stimulus_rejected",
+  "reason": "Test fixture drove board service bit 0 (Service Credit) instead of bit 4 (Coin 1). Production inputs were correct and unchanged. Own incomplete runs stopped before the frame-900 injection.",
+  "manifest_sha256": "8bd4ddac056747d003328c142fc1b64ca1648a08a8c9df72ddb3c575673a706f"
+}

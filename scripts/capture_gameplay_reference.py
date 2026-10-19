@@ -12,6 +12,9 @@ from mame_capture import mame_paths, regions, spec, lua_env, mame_cmd, check_lua
 from hwlock import require_no_jtag
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--game', choices=['rabiolep','rpunch'], required=True)
+parser.add_argument('--label', default='')
+parser.add_argument('--input-error-control', action='store_true')
+parser.add_argument('--action-frame', type=int, default=1290)
 parser.add_argument('--pulse-frames', type=int, default=6)
 parser.add_argument('--frames', type=int, default=600)
 parser.add_argument('--coin-frame', type=int, default=300)
@@ -21,26 +24,34 @@ assert 2 <= a.coin_frame < a.start_frame < a.frames and 2 <= a.pulse_frames <= 6
 require_no_jtag('Scripted MAME gameplay reference')
 assert mame_version() == '0289'
 root = core_root()
-out = root/'debug/gameplay_mame'/f'{a.game}_{a.frames}_pulse{a.pulse_frames}'
+out = root/'debug/gameplay_mame'/(f'{a.game}_{a.frames}_pulse{a.pulse_frames}_checked_actions{a.action_frame}' + ('_errorcontrol' if a.input_error_control else '') + ('_'+a.label if a.label else ''))
 assert not out.exists(), 'Retain references immutably; choose a fresh frame count'
 out.mkdir(parents=True)
-source = root/'scripts/mame/capture.lua'
-text = source.read_text()
-start = text.index('    local coin = field(')
-end = text.index('\nend\ncore_subs',start)
-text = text[:start] + '\n    local coin = field("Coin 1")\n    local start = field("1 Player Start")\n    local shoot = field("P1 Button 2")\n    local missile = field("P1 Button 1")\n    local up = field("P1 Up")\n    local down = field("P1 Down")\n    local start_frame = tonumber(os.getenv("GAME_START_FRAME"))\n    emu.register_frame_done(guard("inputs", function()\n        local frame = m.screens[":screen"]:frame_number()\n        coin:set_value((frame >= coin_frame and frame < coin_frame+pulse_frames) and 1 or 0)\n        start:set_value((frame >= start_frame and frame < start_frame+pulse_frames) and 1 or 0)\n        shoot:set_value(frame >= start_frame+pulse_frames and 1 or 0)\n        missile:set_value((frame >= start_frame+30 and frame < start_frame+30+pulse_frames) and 1 or 0)\n        local moving = frame >= start_frame+pulse_frames and not (frame >= start_frame+30 and frame < start_frame+30+pulse_frames)\n        up:set_value((moving and math.floor(frame/60)%2 == 0) and 1 or 0)\n        down:set_value((moving and math.floor(frame/60)%2 == 1) and 1 or 0)\n    end))\n' + text[end:]
+source = root/'scripts/mame/gameplay_capture.lua'
 script = out/'capture_script.lua'
-script.write_text(text)
+script.write_bytes(source.read_bytes())
 r = regions()
 folder,exe = mame_paths()
 env = dict(os.environ, **lua_env(r), CORE_SCRIPT=script.as_posix(),CORE_OUT=out.as_posix(),CORE_FRAME=str(a.frames),
-    CORE_READ=spec(r['read']),CORE_WTAP=spec(r['wtap']),CORE_COIN=str(a.coin_frame),GAME_START_FRAME=str(a.start_frame),GAME_PULSE_FRAMES=str(a.pulse_frames))
+    CORE_READ=spec(r['read']),CORE_WTAP=spec(r['wtap']),CORE_COIN=str(a.coin_frame),GAME_START_FRAME=str(a.start_frame),GAME_PULSE_FRAMES=str(a.pulse_frames),GAME_ACTION_FRAME=str(a.action_frame),GAME_FORCE_INPUT_ERROR='1' if a.input_error_control else '0')
 cmd = mame_cmd(exe,a.game,'capture.lua',folder,['-seconds_to_run',str(a.frames//60+10),'-cfg_directory',str(out/'cfg'),'-nvram_directory',str(out/'nvram')])
 run = subprocess.run(cmd,cwd=folder,env=env,capture_output=True,text=True,timeout=120,**NO_WINDOW)
 (out/'run.log').write_text(run.stdout+run.stderr)
 check_lua_error(out)
+if (out/'ERROR.txt').exists():
+    raise SystemExit('MAME callback failed: '+(out/'ERROR.txt').read_text()[:1000])
+assert 'CORE_CAPTURE_ERROR' not in run.stdout + run.stderr, 'MAME callback error marker'
+applied = [list(map(int,line.split())) for line in (out/'inputs.txt').read_text().splitlines()]
+assert len(applied) > a.frames-10
+assert sum(row[1] for row in applied)==a.pulse_frames, 'Coin pulse was not applied'
+assert sum(row[2] for row in applied)==a.pulse_frames, 'Start pulse was not applied'
+assert sum(row[4] for row in applied)==a.pulse_frames, 'Missile pulse was not applied'
+assert sum(bool(row[7] & 0x10) for row in applied)==a.pulse_frames, 'Coin 1 port did not observe pulse'
+assert sum(bool(row[7] & 0x20) for row in applied)==a.pulse_frames, 'Start 1 port did not observe pulse'
+assert sum(bool(row[8] & 0x10) for row in applied)==a.pulse_frames, 'Missile port did not observe pulse'
+assert any(row[8] & 0x20 for row in applied), 'Shoot port remained inactive'
 assert run.returncode == 0 and 'CORE_CAPTURE_OK' in run.stdout, (run.stdout+run.stderr)[-3000:]
-manifest=dict(set=a.game,frames=a.frames,coin_frame=a.coin_frame,start_frame=a.start_frame,pulse_frames=a.pulse_frames,mameversion='0289',
+manifest=dict(set=a.game,frames=a.frames,coin_frame=a.coin_frame,start_frame=a.start_frame,pulse_frames=a.pulse_frames,action_frame=a.action_frame,mameversion='0289',
     generator_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
     capture_source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
     files={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in out.iterdir() if p.is_file()},

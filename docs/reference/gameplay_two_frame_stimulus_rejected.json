@@ -3,5 +3,6 @@
   "archive": "D:\\git\\RabbitPunch-video-options-work\\debug\\fit_archive\\gameplay_two_frame_stimulus_rejected",
   "reason": "Two-frame Start pulse did not start the games in independent MAME captures. Own incomplete runs stopped; no production RTL failure was observed. Six-frame MAME pulses reach stage 1.",
   "scope": "Incomplete startup/audio experiments only. No completed RGB or PCM qualification, no gameplay claim.",
-  "manifest_sha256": "06492b21981a5edd57d6e2ff9efda5eb774523b86a64cbca1e7a7584e4149267"
+  "manifest_sha256": "06492b21981a5edd57d6e2ff9efda5eb774523b86a64cbca1e7a7584e4149267",
+  "clarification": "The initial two-frame/immediate-held-Shoot schedule did not start play. The effect of pulse length was not isolated; the corrected schedule also leaves neutral input after Start."
 }
