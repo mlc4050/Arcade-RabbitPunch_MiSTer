@@ -1,0 +1,51 @@
+{
+  "set": "rpunch",
+  "frame": 120,
+  "pixels": 62208,
+  "accepted_write_replay": true,
+  "direct_mame_rgb_match": false,
+  "write_replay_differing_pixels": 0,
+  "direct_mame_differing_pixels": 34,
+  "state": {
+    "flags": "0800",
+    "scroll": [
+      0,
+      504,
+      0,
+      504
+    ],
+    "sprite_count": 54,
+    "sprite_priority": 54,
+    "layer_coverage": [
+      62208,
+      0,
+      17,
+      0
+    ]
+  },
+  "boot_report_sha256": "ec9909827ee8331bc4a1ced02bbd6d3e824df532b3955afb77a392c919b6a28c",
+  "main_trace_sha256": "1deecc8ab64c2c5b8bdcfc18960f3fc73da983014bd81b366668118dc8dd1031",
+  "live_png_sha256": "423e32c5ff0769c8f1ca01654dd66e77329a699868c2988a984618272e7bbc4a",
+  "mame_png_sha256": "a3c03cb051bfe839032b0bb513ece0fec43ca9d289e2f92f4165b9b4aa5a2476",
+  "mame_manifest_sha256": "0a82ec389b56c24e57851ee22da139fb53e80e647749d4d590d556904f0613d3",
+  "live_rgb_sha256": "89945ee52042195b8f14203d33f9de5fbdcf4d1e67cabc2f8643237daf876186",
+  "mame_rgb_sha256": "cabadf2446dee9868f24b55e805561cc2f7061904a2f407bb0435ad5c08d3d51",
+  "replay_sha256": {
+    "bitmap": "71189f7fb6aed638640078fba3a35fda6c39c8962e74dcc75935aac948da9063",
+    "spriteram": "e12287e39bb3f0dc0a137af38ee16fe66ba26df0b191782817cd609eb3114277",
+    "videoram": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+    "palette": "9c37d5226db62282fdf4549b2a1ff701195b8409fceca9fd74048824e2f4d973",
+    "workram": "45a464b49a4033a391fd164062b42583ac335b31c4974f46b8a71ebb787e6047",
+    "reg_vregs": "6c8c1cc4b33ac91e576f8b3aeb49da92660a57a48f12bad82e81e4b6de747c9f"
+  },
+  "source_sha256": {
+    "scripts/compare_live_boot_frames.py": "c7418bb078d3d3e46aa7915e5ff78febd1d02280411af98d922f4760069b6a1a",
+    "scripts/render_reference.py": "3e9d76a804b989bb0f15ff6259abecd6474fef6779a65772af1d5e6fce63c8c2",
+    "scripts/png_rgb.py": "b1cfe179b38cc467694fc704328696b06c25551539d6d337f23cdd89325cfb34",
+    "scripts/mame_capture.py": "c0de61ced96a3bba3dceef45928670f0d02ccf2b36ca93382ef348053e879822",
+    "scripts/mame/capture.lua": "5f0ae2b21f1d68e01cc90ec5694018ad2ddaf94a5ec036ac028b258a0d56f7e9",
+    "scripts/mame/run.lua": "4fafce6e4c7549c54ec4e955b1cded95b5d73417dfe254734d0e765be536952a",
+    "scripts/mame/regions.json": "d59525d28c652d82f6a4ea6d6ab0a6e96cbe621428de53ff903a8972eb8c5a46"
+  },
+  "scope": "Actual game CPU execution with continuous video; compare captured RGB against an independently MAME-validated software renderer fed by the complete requested-write trace and documented startup RAM contents. This is not a direct RAM dump and includes any final undrained request or writes after earlier captured rows. Direct raw MAME comparison is separately recorded; equal counted frames do not establish instruction, raster or vblank alignment. No physical hardware or general gameplay proof."
+}
