@@ -1,0 +1,42 @@
+{
+  "commit": "9ed67e67cdbb5268b2226b5a6967f502cf831276",
+  "revision": "RabbitPunch",
+  "seed": 3,
+  "accepted": true,
+  "hardware_verified": false,
+  "timing_checks": 144,
+  "minimum_slack_ns": {
+    "Setup": 0.383,
+    "Hold": 0.061,
+    "Recovery": 3.402,
+    "Removal": 0.333,
+    "Minimum Pulse Width": 1.122
+  },
+  "archive": "debug/fit_archive/full_shell_9ed67e6_dip_menu",
+  "artifact_sha256": {
+    "BUILT_COMMIT": "03a50e9e86f5f3a350ef3dee8a2d286ff2913f638f767683bb6b526182b5aa2a",
+    "clock_tree.tsv": "3f2efb2ffb6a8d06b4ec437acc3f0b0f3ac5122a92b7a6557e0cd88726d932bd",
+    "framework_timing_scope.json": "62ee1fbf1806ef45ea1300bbae65a60b231b0acaf68ee903ce42fb1d7af95a96",
+    "full_clock_tree.json": "255620d2e4c7458901ca85b6dca7da028a9befd0bd61d5a1286f621bd04764f1",
+    "full_clock_tree.log": "96059237966aa31ad1f520971c9eefcdfe650d6762f01cc186671b7f09acf2f7",
+    "q_staged.log": "4f68c9a1e61c3d78f3684adeacbc908de0b774cff214003e2f2b769450dd6552",
+    "RabbitPunch.asm.rpt": "af169179f1d6b859f6b92ae71ec43db6b43b8969178b081656221ecc6136a433",
+    "RabbitPunch.done": "e2bb3bf2b7246828ba28d9aab4fae9f3eb79b421471867a7afd21273bc62fb5f",
+    "RabbitPunch.fit.rpt": "04c4eec8e2b0864096d7a608428789f40a21adcc46cea211169e3272ea7ffeb3",
+    "RabbitPunch.fit.smsg": "3342538ebc9b330d0bd31af7d5dffd4511b8a1ef9b1a62f0334972e1d6f874d6",
+    "RabbitPunch.fit.summary": "3d39625f575677a10d8ee73857be3f210bfc0eb1fe7e25c9cdeab2f0d279830e",
+    "RabbitPunch.flow.rpt": "d9b3130be38be3b92bfd414d761273ef1a9e32920d00de4bde0734a266c341b5",
+    "RabbitPunch.jdi": "82c5b63d33649bb63c4f2eccdfc7fc985ad4877b829cc4f75e1b03ec94da0f2a",
+    "RabbitPunch.map.rpt": "31db31822b338bec1739e4ff09fa50bc3075fc6ef4260053a47653ac8074a958",
+    "RabbitPunch.map.smsg": "c27baf3761409675ae9a6a1f2716d7840ec3d8fd8ba62aa05fd2c6deec061c31",
+    "RabbitPunch.map.summary": "98cf6f2568e28f54a44a3dcb1817c848cfacc000921267ff4601aadf3612d92c",
+    "RabbitPunch.pin": "d33728eb0a1bd76d7d6e579e0c22fce92bebeeaaf0117b1f7823f2c427041d9a",
+    "RabbitPunch.rbf": "9f4dc32948c3f4e7b9c2e41660e98ae61f98b0f320a9635765a1d150f919b0e9",
+    "RabbitPunch.sld": "c7de3cc5544a1144192d6825eb69cf5e065bf99f16fb9acb42fadd23adede991",
+    "RabbitPunch.sof": "78837b88188bf543058453b0ae51477ccf87ec03c226aa52428ba9ad1263f2f6",
+    "RabbitPunch.sta.rpt": "a0ee3c51d1d385bd1e27a295c7524ef91ae4fe1db46127d87470c97bb52ee95e",
+    "RabbitPunch.sta.summary": "907da1ece10573363cfcc12204875b94afa101f38a825c3ec06836c3f23e8736",
+    "source.tar": "f5ea2b6f4bce3c4e0eda6303c38290032cc966b2cabfeb48896b1679359aeeb6"
+  },
+  "scope": "DIP menu token added, full build and scoped timing gates pass. This intermediate bitstream predates corrected fallback button labels and pause mute; final combined rebuild follows."
+}
