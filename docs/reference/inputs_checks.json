@@ -5,11 +5,11 @@
   "source_sha256": {
     "rtl/mame_keys.sv": "c2d3d7fa4cefeebeaeba0e74b66f90fd0ee98b5ae33e4113e9eb1f3c66559edc",
     "rtl/rabbitpunch_keys.vhd": "75905e497a9d6facd72a68b25491aa08367f9aa85c7b784821102a9e04e891ff",
-    "rtl/rabbitpunch_inputs.vhd": "12390a74888d13c1f0c38d5e8d1f8ea5eff3673d225b5440e03a2b20b43e3630",
+    "rtl/rabbitpunch_inputs.vhd": "6e32b5b707fc6e241ae89022b672f2fd28749717ce3e82804db6c5e037000465",
     "sim/board/inputs_tb.vhd": "b2cd77ed60ecf84fa8b1f6ccd007d11f8007cbbc0bb5c0c284d8f3f7a2269b85"
   },
   "vectors_sha256": "a55b65fd3a8063d06b4a01be7957f13ecfd30f56e2ded32fdf48413ffbfb1b04",
   "reference_sha256": "62507510bf4658db578356795e7d97f15265fc02cacd8285d757d78862ee8bec",
-  "log_sha256": "dc69fdb2ae8810a608a03dbaa9c7914b118403fabe9ae2db423174120eb60c35",
+  "log_sha256": "f9ef5601f25b512763302b5c943a8f52b260a154cddc63c5fe75e8434761910d",
   "scope": "Pad and inherited MAME-default key decoder mapped to actual live MAME active-high P1/P2/SERVICE vectors for both sets; exact MRA button slots, service/test distinction, reserved controls, event toggles and held-pad/key union; 512 raw DIP byte values, per-set MRA defaults, index/address/strobe filtering; no physical pad, pause latch, native HPS-to-system or game-play proof"
 }

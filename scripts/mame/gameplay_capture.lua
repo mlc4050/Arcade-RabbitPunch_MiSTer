@@ -111,8 +111,8 @@ if coin_frame > 0 then
 
     local coin = field("Coin 1")
     local start = field("1 Player Start")
-    local shoot = field("P1 Button 2")
-    local missile = field("P1 Button 1")
+    local shoot = field("P1 Button 1")
+    local missile = field("P1 Button 2")
     local up = field("P1 Up")
     local down = field("P1 Down")
     local start_frame = assert(tonumber(os.getenv("GAME_START_FRAME")))

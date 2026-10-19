@@ -113,10 +113,9 @@ begin
         if (sint_frame_count >= GINT_START_FRAME and sint_frame_count < GINT_START_FRAME + 6) then
             vu32_actions(CINT_JOY_START) := '1';
         end if;
-        -- Leave a neutral interval after Start: immediate held Shoot prevents
-        -- the software from leaving its title/start-release handling in MAME.
+        -- Keep the chosen post-Start neutral interval before gameplay actions.
         if (sint_frame_count >= GINT_ACTION_FRAME) then
-            vu32_actions(CINT_JOY_SHOOT) := '1';
+            vu32_actions(CINT_JOY_FIRE_PUNCH) := '1';
             if (sint_frame_count >= GINT_ACTION_FRAME + 30 and sint_frame_count < GINT_ACTION_FRAME + 36) then
                 vu32_actions(CINT_JOY_MISSILE) := '1';
             elsif ((sint_frame_count / 60) mod 2 = 0) then

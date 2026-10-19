@@ -19,8 +19,8 @@ package rabbitpunch_layout is
     constant CINT_ROM_IMAGE_SIZE : natural := 16#210000#;
 
     -- MiSTer joystick slot numbers; directions occupy bits 0..3.
-    constant CINT_JOY_MISSILE : natural := 4;
-    constant CINT_JOY_SHOOT : natural := 5;
+    constant CINT_JOY_FIRE_PUNCH : natural := 4;
+    constant CINT_JOY_MISSILE : natural := 5;
     constant CINT_JOY_START : natural := 10;
     constant CINT_JOY_COIN : natural := 11;
     constant CINT_JOY_PAUSE : natural := 12;

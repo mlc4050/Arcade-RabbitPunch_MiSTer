@@ -48,8 +48,8 @@ assert [row[0] for row in applied if row[2]]==list(range(a.start_frame,a.start_f
 assert sum(row[4] for row in applied)==a.pulse_frames, 'Missile pulse was not applied'
 assert sum(bool(row[7] & 0x10) for row in applied)==a.pulse_frames, 'Coin 1 port did not observe pulse'
 assert sum(bool(row[7] & 0x20) for row in applied)==a.pulse_frames, 'Start 1 port did not observe pulse'
-assert sum(bool(row[8] & 0x10) for row in applied)==a.pulse_frames, 'Missile port did not observe pulse'
-assert any(row[8] & 0x20 for row in applied), 'Shoot port remained inactive'
+assert sum(bool(row[8] & 0x20) for row in applied)==a.pulse_frames, 'Missile port did not observe pulse'
+assert any(row[8] & 0x10 for row in applied), 'Shoot port remained inactive'
 assert run.returncode == 0 and 'CORE_CAPTURE_OK' in run.stdout, (run.stdout+run.stderr)[-3000:]
 manifest=dict(set=a.game,frames=a.frames,coin_frame=a.coin_frame,start_frame=a.start_frame,pulse_frames=a.pulse_frames,action_frame=a.action_frame,mameversion='0289',
     actual_requested_coin_frames=[row[0] for row in applied if row[1]],actual_requested_start_frames=[row[0] for row in applied if row[2]],
