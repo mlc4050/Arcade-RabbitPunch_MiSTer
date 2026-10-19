@@ -367,3 +367,11 @@ Do not expose nonworking actions. Study local NMK16 fx68k/T80 park helpers and
 KonamiGX bus-based register capture, then write a per-core feasibility/format
 plan from STATE.md before implementation. Existing RAM reachability is partial;
 CPU registers, sound state and restore/raster coordination still need work.
+
+## Completed long-run gates
+
+Both 1800-frame fast cases and both native preloaded diagnostic branches have
+completed. See LIVE_BOOT.md and the exact archive reports. CPU coin/start credit
+accounting passes; audible music-track matching is still open. Japan action is
+visible; the US final image is course selection, so full US action is not yet
+proved by this script. All previous captures remain immutable.

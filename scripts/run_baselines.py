@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 
@@ -53,7 +54,7 @@ def run_case(name, sources, top, duration, marker, sim_args=(), wall_timeout=90,
     command("vsim", "-c", "-do", "do run.do")
     if marker not in logs[-1]:
         raise SystemExit(f"{name}: missing pass marker; see {run_dir / 'result.log'}")
-    if "FAIL" in logs[-1] or "TIMEOUT" in logs[-1]:
+    if re.search(r"\b(?:FAIL|FAILED|TIMEOUT)\b|\*\*\s+(?:Failure|Fatal|Error)\b", logs[-1]):
         raise SystemExit(f"{name}: failure in transcript; see {run_dir / 'result.log'}")
     label = "MEASURED" if name == "tg68k_pace" else "PASS"
     print(f"{label} {name}: {marker}", flush=True)

@@ -82,3 +82,33 @@ credit bytes are zero, and each independently rendered snapshot matches all
 62208 pixels. These checks validate the reference schedule and static state;
 the separate live RTL runs remain pending. MAME-only Start timing controls are
 recorded in reference/start_timing_observations.json.
+
+## Completed extended runs
+
+Both qualified fast runs reached frame 1800 in 1394111382 system clocks, with
+no row deadline or underflow assertion. Maximum row times were 2081 clocks for
+Japan and 2329 for US against the 3024-clock budget. Both real CPU traces show
+credits 0 -> 1 -> 0 for the scripted Coin/Start. Startup prefixes remain checked
+against the pinned MAME traces, with the audited sound reset-byte exceptions.
+
+Each run captured 1867091 PCM samples at 746/747-clock cadence. Japan produced
+389050 nonzero mixed/FM samples and no nonzero ADPCM samples in this schedule;
+US produced 413836 nonzero mixed samples, including 10313 nonzero ADPCM samples.
+These are output-activity/cadence checks, not track-by-track MAME music equality.
+The final Japan image shows Stage 1 action; the US image remains on course
+selection. A claim of both sets reaching action gameplay is not accepted.
+
+Exact sources/models, binaries, traces and images are retained in the video
+worktree archive debug/fit_archive/gameplay_1800_pad_6c34c39, recorded in
+reference/gameplay_1800_pad_archive.json. Per-set gameplay_fast reports retain
+the tested source hashes. Those runs used old action-role names: held slot 5
+and pulsed slot 4. Hardware feedback now identifies these as Missile and
+Fire/Punch respectively; new fixtures and labels reflect that correction.
+No direct temporally aligned MAME-image or music-track proof is added.
+
+Both native Intel RAM/vendor PLL diagnostic branches completed 32768 bitmap
+writes and all 62208 expected pixels, maximum rows 1207/1206 clocks. The wrapper
+originally rejected its own EXPECT_FAILURE generic argument because of a broad
+FAIL substring search. The saved transcript and complete images were rechecked
+with token/error-marker matching, and exact inputs were archived without a new
+simulation. See reference/native_diagnostic_complete_checks.json.
