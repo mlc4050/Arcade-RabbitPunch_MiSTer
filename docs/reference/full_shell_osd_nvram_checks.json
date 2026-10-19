@@ -1,0 +1,42 @@
+{
+  "commit": "bac5286404eea7aaad8fa3ddfa6d30ab4a89b33c",
+  "revision": "RabbitPunch",
+  "seed": 3,
+  "accepted": true,
+  "hardware_verified": false,
+  "timing_checks": 144,
+  "minimum_slack_ns": {
+    "Setup": 0.424,
+    "Hold": 0.071,
+    "Recovery": 3.119,
+    "Removal": 0.352,
+    "Minimum Pulse Width": 1.122
+  },
+  "archive": "debug/fit_archive/full_shell_bac5286_osd_nvram",
+  "artifact_sha256": {
+    "BUILT_COMMIT": "0ff09d876bd5a86e2d2f62050e0eec44d574435a9caa21656b94beec73bdf051",
+    "clock_tree.tsv": "60d078c5db25306542c9b86f58f1e1bbfb1c9ce9226f6ea25089e135f161fc86",
+    "framework_timing_scope.json": "62ee1fbf1806ef45ea1300bbae65a60b231b0acaf68ee903ce42fb1d7af95a96",
+    "full_clock_tree.json": "4ff7497a83527c167e04925b36e5faa7134d97b406779ccb3819e7d9d23edc41",
+    "full_clock_tree.log": "96191e5192644bd7e9d1bcb7aa7902d86fb0f79f6a126f7e38489e518fd1452b",
+    "q_staged.log": "469e9122347530e24cd7636300862e2dcf2eeadaef83db76eae1dee0df6ad907",
+    "RabbitPunch.asm.rpt": "9e0a2cbddb128c9e3f45ca6b9cc01d9a8cf4536ac8e467f01761945931d81af9",
+    "RabbitPunch.done": "a498a24e3adbafefdde113a272925ceed8d78607a783351bb3010a7f0d5f5e04",
+    "RabbitPunch.fit.rpt": "6f593428a28250870678394eacfbb07ce7d1c127619bd154b53d7e8f7c157cbb",
+    "RabbitPunch.fit.smsg": "00fd517c3a675f4fd051094cac032c6a3349d6339d28e2f24b53a02093356353",
+    "RabbitPunch.fit.summary": "7e7660dbcde733c8c4b0a1c8593f1fdbce39d52b019dbe611d1bfa6fe3371cbb",
+    "RabbitPunch.flow.rpt": "eab6103a5a8b5b32cece8980ffe843f1093cc793e21cce0def0ab8b76ad1a19f",
+    "RabbitPunch.jdi": "82c5b63d33649bb63c4f2eccdfc7fc985ad4877b829cc4f75e1b03ec94da0f2a",
+    "RabbitPunch.map.rpt": "76db48cff65ca58082fe28015b55646db0328c1b9da15cc464e9615484d337df",
+    "RabbitPunch.map.smsg": "c27baf3761409675ae9a6a1f2716d7840ec3d8fd8ba62aa05fd2c6deec061c31",
+    "RabbitPunch.map.summary": "5ea442076d11aae14292a0dee2f3cd4757f88faab315c0265d7428f3387d7124",
+    "RabbitPunch.pin": "d33728eb0a1bd76d7d6e579e0c22fce92bebeeaaf0117b1f7823f2c427041d9a",
+    "RabbitPunch.rbf": "6fc278be8f9879dcee82566ac7d46e6219219dbdf1f9cbc0cc636e88841c4391",
+    "RabbitPunch.sld": "c7de3cc5544a1144192d6825eb69cf5e065bf99f16fb9acb42fadd23adede991",
+    "RabbitPunch.sof": "2ac439af129a5f0d323d30edd5dd819f3d3d77326b93940f26a0250e75f4e0fa",
+    "RabbitPunch.sta.rpt": "4c60355243bfad1c78129595a4840e52dc5fcf197fef2952bb554b41ab35eebf",
+    "RabbitPunch.sta.summary": "b39a08d56bd5532e2020a7553ec6f078b9dae3d9c8f0bec468e95eb0742285b9",
+    "source.tar": "7dfb6b19304b81265da7aa5d659c296bf557764296d9fdd49513032c937243b2"
+  },
+  "scope": "Video submenu, Rotation label, DIP menu, corrected Fire/Punch/Missile labels, explicit pause PCM mute, manual NVRAM save and removed OSD Pause toggle. Full build and scoped timing gates pass; physical menu/manual save/mute testing remains. Full savestates not implemented."
+}

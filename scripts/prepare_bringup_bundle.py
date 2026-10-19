@@ -24,12 +24,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--archive-root', type=Path, help='Worktree retaining the accepted Quartus artifact archive')
     parser.add_argument('--output-dir', type=Path)
+    parser.add_argument('--report', type=Path, help='Explicit qualified fit report; source and artifact guards still apply')
     parser.add_argument('--revision', choices=('RabbitPunch', 'RabbitPunch_stp'), default='RabbitPunch')
     options = parser.parse_args()
     root = core_root()
     debug = options.revision == 'RabbitPunch_stp'
     report_name = 'full_shell_hdmi_audio_debug_seed2_checks.json' if debug else 'full_shell_hdmi_audio_release_checks.json'
-    report_path = root / 'docs/reference' / report_name
+    report_path = options.report or root / 'docs/reference' / report_name
+    if not report_path.is_absolute():
+        report_path = root / report_path
     report = json.loads(report_path.read_text())
     assert report['accepted'] and report['revision'] == options.revision
     assert report['timing_checks'] == (164 if debug else 144) and all(value >= 0 for value in report['minimum_slack_ns'].values())
