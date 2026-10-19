@@ -1,10 +1,10 @@
 {
-  "packager_sha256": "77f18c6d87ed0ea6821b878a930d16f516e3b8deb39840b911f874f614f2a187",
+  "packager_sha256": "3082c0a25239ded84243e39920c5db9f809e7323bf404ff76359f6642a2fcca4",
   "prepared": true,
   "hardware_verified": false,
   "deployed": false,
   "published": false,
-  "packaging_commit": "2016fb13b216a2ecbb26b2cdaea1d3efa0843b28",
+  "packaging_commit": "b6f1d0cc1c4b0f978104c8c1febd2edadf54c8a0",
   "rbf_commit": "86c437a7705e39b7c621cb955772f0419d4ace0a",
   "revision": "RabbitPunch",
   "seed": 3,
@@ -19,42 +19,53 @@
   "fit_report_sha256": "db00c5c853785cbd34f2070e347c74e1437bedf5910bc9625ef03566318ae8d1",
   "archive_worktree": "D:\\git\\RabbitPunch-video-options-work",
   "artifact_archive": "debug/fit_archive/full_shell_86c437a_hdmi_audio_release",
-  "output": "D:\\git\\RabbitPunch-maintenance-work\\debug\\bringup\\20261018_86c437a_both_coinage",
+  "output": "D:\\git\\RabbitPunch-maintenance-work\\debug\\bringup\\20261018_86c437a_profile_checked",
   "production_sources_match_timed_commit": true,
+  "debug_probes": false,
   "mras": [
     {
       "source": "releases/_dev/Rabbit Punch (US).mra",
       "destination": "_Arcade/Rabbit Punch (US).mra",
       "set": "rpunch",
-      "sha256": "cce0d7bd4114bb2b4baa9eabed0057fd19c9c4ee8d8ed906a97e3af2a005604f"
+      "source_sha256": "cce0d7bd4114bb2b4baa9eabed0057fd19c9c4ee8d8ed906a97e3af2a005604f",
+      "sha256": "cce0d7bd4114bb2b4baa9eabed0057fd19c9c4ee8d8ed906a97e3af2a005604f",
+      "metadata_changes": []
     },
     {
       "source": "releases/_dev/Rabio Lepus (Japan).mra",
       "destination": "_Arcade/Rabio Lepus (Japan).mra",
       "set": "rabiolep",
-      "sha256": "85aa8e249f5978b2437a311931b4074cce169bf3da407787a14891729defd5ff"
+      "source_sha256": "85aa8e249f5978b2437a311931b4074cce169bf3da407787a14891729defd5ff",
+      "sha256": "85aa8e249f5978b2437a311931b4074cce169bf3da407787a14891729defd5ff",
+      "metadata_changes": []
     },
     {
       "source": "releases/_dev/_ddr/Rabbit Punch (US) - DDR load.mra",
       "destination": "_Arcade/_Alternatives/DDR load/Rabbit Punch (US) - DDR load.mra",
       "set": "rpunch",
-      "sha256": "9472f3f12b28a1850e2e665acf6a0f6aa67cb883daa1b01a6c7b603b8b5320fd"
+      "source_sha256": "9472f3f12b28a1850e2e665acf6a0f6aa67cb883daa1b01a6c7b603b8b5320fd",
+      "sha256": "9472f3f12b28a1850e2e665acf6a0f6aa67cb883daa1b01a6c7b603b8b5320fd",
+      "metadata_changes": []
     },
     {
       "source": "releases/_dev/_ddr/Rabio Lepus (Japan) - DDR load.mra",
       "destination": "_Arcade/_Alternatives/DDR load/Rabio Lepus (Japan) - DDR load.mra",
       "set": "rabiolep",
-      "sha256": "7fa1f425b8ce43753f64a6e798cbb9b3c0b6c91b5b74364421dd09e2788c27e1"
+      "source_sha256": "7fa1f425b8ce43753f64a6e798cbb9b3c0b6c91b5b74364421dd09e2788c27e1",
+      "sha256": "7fa1f425b8ce43753f64a6e798cbb9b3c0b6c91b5b74364421dd09e2788c27e1",
+      "metadata_changes": []
     },
     {
       "source": "releases/_dev/_diagnostic/RabbitPunch_Diagnostic.mra",
       "destination": "_Arcade/_Diagnostic/RabbitPunch_Diagnostic.mra",
       "set": "rpdiag",
-      "sha256": "dd7f2abedab29d74d2d0f2d237e6692c85840fd41ad4afb7f2eeea60484d3441"
+      "source_sha256": "dd7f2abedab29d74d2d0f2d237e6692c85840fd41ad4afb7f2eeea60484d3441",
+      "sha256": "dd7f2abedab29d74d2d0f2d237e6692c85840fd41ad4afb7f2eeea60484d3441",
+      "metadata_changes": []
     }
   ],
   "files": {
-    "README.txt": "bbb31bba4079f9deb6209870582a25377ee918aee57b3dc288b63fe915b5ff16",
+    "README.txt": "afd27b47c23c564e24dce87714cb7d82fa127e66a2c84498d027e3de77ea03f1",
     "_Arcade/Rabbit Punch (US).mra": "cce0d7bd4114bb2b4baa9eabed0057fd19c9c4ee8d8ed906a97e3af2a005604f",
     "_Arcade/Rabio Lepus (Japan).mra": "85aa8e249f5978b2437a311931b4074cce169bf3da407787a14891729defd5ff",
     "_Arcade/cores/Arcade-RabbitPunch_20261018.rbf": "0629a3d2f8f5c674160b0a85793024d0a2b012dfed3cd6189fcfb2cf358a511e",

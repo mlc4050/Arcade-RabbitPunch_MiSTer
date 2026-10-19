@@ -4,7 +4,8 @@ The instrumented RabbitPunch_stp revision includes rabbitpunch_debug; the releas
 revision omits its instance. This is VHDL instrumentation with one system-clock
 process and no signals that control the game. Its counter/packet bench passes;
 the Tcl field decoder and one-line Python reader pass valid and deliberately malformed input tests without
-opening JTAG. Fitted probe presence and actual hardware reads remain unverified.
+opening JTAG. The accepted instrumented full fit retains rabbitpunch_debug/altsource_probe
+hierarchy. Actual JTAG discovery and hardware reads remain unverified.
 
 Use scripts/read_issp.py RPUN through scripts/d_drive.ps1 when all compilation and
 simulation jobs have ended. The helper takes the shared JTAG lock. Do not invoke
@@ -52,3 +53,8 @@ archived under debug/fit_archive/full_shell_1693628_probe_width_rejected/.
 The unused top bit was removed. Layout version occupies bits 480..510; all
 other field positions remain unchanged. VHDL and decoder tests are rerun for
 the exact hardware width, and malformed-width packets remain rejected.
+
+The accepted instrumented RBF is also prepared as a private _Debug menu bundle;
+see BRINGUP_BUNDLE.md and reference/bringup_bundle_debug_checks.json. The existing
+fitted SLD and all RBF/metadata hashes are retained. This does not establish a
+successful physical JTAG read.
