@@ -344,3 +344,12 @@ their sources frozen. Do not edit their inputs until completion. The final
 MAME reference schedule and actual port traces are separately qualified in
 reference/gameplay_mame_explicit_schedule_checks.json; this is a reference
 qualification, not a completed live FPGA test.
+
+## First user hardware observation and DIP menu correction
+
+The user reports the first prototype runs and looks good on MiSTer. This is
+a user-reported visual boot, not a completed controls/audio/persistence checklist.
+The OSD DIP page was missing: the MRAs and index-254 DIP latch existed, but the
+host configuration omitted the mandatory DIP token. Add that menu entry and
+rebuild the complete release candidate through implementation and timing.
+The original hardware-tested artifact remains preserved unchanged.

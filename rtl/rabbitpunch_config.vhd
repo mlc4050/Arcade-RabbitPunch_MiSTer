@@ -13,6 +13,7 @@ package rabbitpunch_config is
     constant CINT_STATUS_HISCORE_AUTOSAVE_BIT : natural := 3;
     constant CSTR_DEFAULT_CONFIG_STRING : string :=
         "RabbitPunch;;" &
+        "DIP;" &
         "R0,Reset;" &
         "O1,Pause,Off,On;" &
         "O2,Pause when OSD is open,Off,On;" &
