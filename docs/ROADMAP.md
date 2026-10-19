@@ -385,3 +385,16 @@ Manual NVRAM uses T4 rather than R4 so activation keeps the OSD open and returns
 through Main_MiSTer's arcade upload polling path. The previous R4 closed the
 menu; that host behavior is a plausible cause of the user-reported missing save.
 Validate actual .nvm file creation/restoration on the replacement RBF.
+
+## Current requested order of work
+
+Finish the OSD/NVRAM build and supply its timed RBF first, then investigate
+music against MAME, then resume full savestates. The user confirms manual
+Save NVRAM closes the existing OSD and the file is saved on the next OSD
+open. This corroborates the queued-upload/menu-poll explanation. The new
+T4 action keeps the menu open; immediate on-disk persistence still needs
+confirmation with the replacement RBF.
+The final-menu candidate is source 3dfbd332d078da18f1d762df7fcb34be8cb05a51,
+RabbitPunch seed 3. The superseded 252ca88 fit was intentionally canceled
+and its log/source preserved as a canceled run, not accepted timing evidence.
+Savestate UI remains withheld while full capture/restore is unfinished.
