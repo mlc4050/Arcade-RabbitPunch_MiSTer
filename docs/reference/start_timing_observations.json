@@ -1,0 +1,101 @@
+{
+  "cases": [
+    {
+      "game": "rabiolep",
+      "variant": "early_neutral",
+      "start_frame": 990,
+      "start_hold": 6,
+      "start_player": 1,
+      "frames": 1800,
+      "final_credit_byte": 0,
+      "source_sha256": "44b4fb01ff6d1c77241692a81a6805b16e174399cfff1df8f38181414acee94b",
+      "snapshot_sha256": "47f3a1c556b82ed012064cc46f4827a1e7c1cc37a09c599413dba75e5e32bc32",
+      "input_trace_sha256": "37600335604c47649629ff4108f10d6538e72f3fd19c38b1962b326abe57ec8a"
+    },
+    {
+      "game": "rabiolep",
+      "variant": "early_hold",
+      "start_frame": 990,
+      "start_hold": 60,
+      "start_player": 1,
+      "frames": 1800,
+      "final_credit_byte": 0,
+      "source_sha256": "77ca17e3e2e9bdf0334f59f3539bcaab767a4d1c346762c5ba8a0f4976bdea60",
+      "snapshot_sha256": "bdb2b84d464e85b0ea4dd7be6cb7b027cbebe59ee32236b919872688d4adb889",
+      "input_trace_sha256": "a93c6904896aa7b60c53c62258e9bc3e608e4c96cca06e75db6b57e8d81e52db"
+    },
+    {
+      "game": "rabiolep",
+      "variant": "late_neutral",
+      "start_frame": 1500,
+      "start_hold": 6,
+      "start_player": 1,
+      "frames": 2200,
+      "final_credit_byte": 0,
+      "source_sha256": "44b4fb01ff6d1c77241692a81a6805b16e174399cfff1df8f38181414acee94b",
+      "snapshot_sha256": "7b697ba79c4302f56994f7ac494086b139947fa48ddc51d47dff95cdf23184b3",
+      "input_trace_sha256": "580a596c96554ce31312d4a181a07c6313ec21ecc82cd3b8cad73875d88d4115"
+    },
+    {
+      "game": "rabiolep",
+      "variant": "late_player2",
+      "start_frame": 1500,
+      "start_hold": 6,
+      "start_player": 2,
+      "frames": 2200,
+      "final_credit_byte": 1,
+      "source_sha256": "8ffd3fe30a756f936a8b666bff12f625e35f590b8a12d708a0930c61f4455915",
+      "snapshot_sha256": "3d92d77e8578e16f002f36f216d29a48d5a2a7cd2389524e9fa155a0db1a0210",
+      "input_trace_sha256": "aeb099b6e8ca7d52a4a99e2dd3ae85262268e84bbd11eb9d52d675d662f7fc58"
+    },
+    {
+      "game": "rpunch",
+      "variant": "early_neutral",
+      "start_frame": 990,
+      "start_hold": 6,
+      "start_player": 1,
+      "frames": 1800,
+      "final_credit_byte": 0,
+      "source_sha256": "44b4fb01ff6d1c77241692a81a6805b16e174399cfff1df8f38181414acee94b",
+      "snapshot_sha256": "d5860bc893c97aeb6d11fc40b8ed4cc282e62437702ac402854e5a1e2350cd9d",
+      "input_trace_sha256": "37600335604c47649629ff4108f10d6538e72f3fd19c38b1962b326abe57ec8a"
+    },
+    {
+      "game": "rpunch",
+      "variant": "early_hold",
+      "start_frame": 990,
+      "start_hold": 60,
+      "start_player": 1,
+      "frames": 1800,
+      "final_credit_byte": 0,
+      "source_sha256": "77ca17e3e2e9bdf0334f59f3539bcaab767a4d1c346762c5ba8a0f4976bdea60",
+      "snapshot_sha256": "d128b8e0bb3667e46679a62a996f456a69eb289030244babd567875298b3ba7e",
+      "input_trace_sha256": "a93c6904896aa7b60c53c62258e9bc3e608e4c96cca06e75db6b57e8d81e52db"
+    },
+    {
+      "game": "rpunch",
+      "variant": "late_neutral",
+      "start_frame": 1500,
+      "start_hold": 6,
+      "start_player": 1,
+      "frames": 2200,
+      "final_credit_byte": 0,
+      "source_sha256": "44b4fb01ff6d1c77241692a81a6805b16e174399cfff1df8f38181414acee94b",
+      "snapshot_sha256": "fe1f6f929c894f46c0705fdcb4eb3fed3530a67e8ebc59247f681be99ffef940",
+      "input_trace_sha256": "580a596c96554ce31312d4a181a07c6313ec21ecc82cd3b8cad73875d88d4115"
+    },
+    {
+      "game": "rpunch",
+      "variant": "late_player2",
+      "start_frame": 1500,
+      "start_hold": 6,
+      "start_player": 2,
+      "frames": 2200,
+      "final_credit_byte": 1,
+      "source_sha256": "8ffd3fe30a756f936a8b666bff12f625e35f590b8a12d708a0930c61f4455915",
+      "snapshot_sha256": "9c1775a4359f5d90b4c4fb21fd1d528747aeb7e9cd99b7a523f99ee997964bbe",
+      "input_trace_sha256": "aeb099b6e8ca7d52a4a99e2dd3ae85262268e84bbd11eb9d52d675d662f7fc58"
+    }
+  ],
+  "scope": "Controlled MAME-only Start timing/field experiments with one real coin, no gameplay actions, actual port pulses and final observed credit byte. No live FPGA or physical control result."
+}

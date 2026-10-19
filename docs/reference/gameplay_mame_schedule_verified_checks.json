@@ -1,7 +1,7 @@
 [
   {
     "set": "rabiolep",
-    "accepted_reference": true,
+    "accepted_reference": false,
     "frames": 1800,
     "coin_frame": 900,
     "start_frame": 990,
@@ -36,11 +36,12 @@
     "input_trace_sha256": "256e1f3031780ba9189b4203e2533fb6333fc65b743040e76950175928f97694",
     "generator_sha256": "b8428e1d509d05fc9fcd1b5fa370a8c6e55d046b0f407e795d0ed5f88f1fd6d5",
     "lua_sha256": "44b4fb01ff6d1c77241692a81a6805b16e174399cfff1df8f38181414acee94b",
-    "scope": "Final versioned runner, zero callback errors, actual Coin/Start/Missile/Shoot port values checked, both captures advance past title with neutral interval after Start; independent MAME-state software rendering matches every pixel. No live RTL result or temporal alignment claim."
+    "scope": "Final versioned runner, zero callback errors, actual Coin/Start/Missile/Shoot port values checked, both captures advance past title with neutral interval after Start; independent MAME-state software rendering matches every pixel. No live RTL result or temporal alignment claim.",
+    "correction": "Port counts and renderer comparison were valid, but the final labelled capture used stale Python defaults coin=300/start=310 while the record incorrectly hardcoded 900/990. Superseded by a capture with explicit matching arguments and requested-event frame-list assertions."
   },
   {
     "set": "rpunch",
-    "accepted_reference": true,
+    "accepted_reference": false,
     "frames": 1800,
     "coin_frame": 900,
     "start_frame": 990,
@@ -75,6 +76,7 @@
     "input_trace_sha256": "256e1f3031780ba9189b4203e2533fb6333fc65b743040e76950175928f97694",
     "generator_sha256": "b8428e1d509d05fc9fcd1b5fa370a8c6e55d046b0f407e795d0ed5f88f1fd6d5",
     "lua_sha256": "44b4fb01ff6d1c77241692a81a6805b16e174399cfff1df8f38181414acee94b",
-    "scope": "Final versioned runner, zero callback errors, actual Coin/Start/Missile/Shoot port values checked, both captures advance past title with neutral interval after Start; independent MAME-state software rendering matches every pixel. No live RTL result or temporal alignment claim."
+    "scope": "Final versioned runner, zero callback errors, actual Coin/Start/Missile/Shoot port values checked, both captures advance past title with neutral interval after Start; independent MAME-state software rendering matches every pixel. No live RTL result or temporal alignment claim.",
+    "correction": "Port counts and renderer comparison were valid, but the final labelled capture used stale Python defaults coin=300/start=310 while the record incorrectly hardcoded 900/990. Superseded by a capture with explicit matching arguments and requested-event frame-list assertions."
   }
 ]

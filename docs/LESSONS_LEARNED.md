@@ -1221,7 +1221,7 @@ ack address that is also an input port must acknowledge on writes only.
   Record actual input-port reads, not only requested field values. An injected
   callback-error control must fail even when the capture-complete marker appears.
   Evidence: reference/gameplay_reference_error_guard_checks.json and the corrected
-  reference/gameplay_mame_schedule_verified_checks.json.
+  reference/gameplay_mame_explicit_schedule_checks.json.
 
 - **[RabbitPunch] Prove the coin-input/DIP association before judging a coinage
   setting.** The pinned US ROM associates MAME Coin 1 with Coin B/high nibble
@@ -1514,3 +1514,12 @@ on the CCW request, after all four CW integer checks had passed. Allowing four
 receiving clocks retains all expected metadata and both directions then pass.
 The rejected fixture is preserved as hdmi_presented_geometry_fitted_latch_fixture_rejected.json;
 production RTL was unchanged.
+
+- **[RabbitPunch] Qualify actual input event frames against artifact metadata.**
+  An earlier reference used stale defaults 300/310 while its summary recorded
+  intended Coin/Start frames 900/990. Correct pulse counts did not prove matching
+  schedules. Compare exact requested frame lists and actual port-read frame lists
+  with the capture manifest and the live fixture generics. Preserve any known
+  callback-to-port latency explicitly. Superseded captures remain rejected for
+  temporal claims even when their independent static pixel comparison passes.
+  Evidence: reference/gameplay_mame_explicit_schedule_checks.json.

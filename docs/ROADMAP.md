@@ -342,5 +342,5 @@ still running in the main checkout. The independent fast gameplay/PCM cases
 rabiolep_1800_pad and rpunch_1800_pad run in the video-options worktree with
 their sources frozen. Do not edit their inputs until completion. The final
 MAME reference schedule and actual port traces are separately qualified in
-reference/gameplay_mame_schedule_verified_checks.json; this is a reference
+reference/gameplay_mame_explicit_schedule_checks.json; this is a reference
 qualification, not a completed live FPGA test.

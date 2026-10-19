@@ -1,0 +1,130 @@
+[
+  {
+    "set": "rabiolep",
+    "accepted_input_schedule": true,
+    "frames": 1800,
+    "coin_frame": 900,
+    "start_frame": 990,
+    "action_frame": 1290,
+    "requested_coin_frames": [
+      900,
+      901,
+      902,
+      903,
+      904,
+      905
+    ],
+    "requested_start_frames": [
+      990,
+      991,
+      992,
+      993,
+      994,
+      995
+    ],
+    "actual_port_coin_frames": [
+      901,
+      902,
+      903,
+      904,
+      905,
+      906
+    ],
+    "actual_port_start_frames": [
+      991,
+      992,
+      993,
+      994,
+      995,
+      996
+    ],
+    "final_credit_byte": 0,
+    "differing_pixels": 0,
+    "state": {
+      "flags": "0c00",
+      "scroll": [
+        0,
+        504,
+        0,
+        504
+      ],
+      "sprite_count": 54,
+      "sprite_priority": 0,
+      "layer_coverage": [
+        62208,
+        0,
+        0,
+        204
+      ]
+    },
+    "fixture_sha256": "f65a23d946b5f67510d7808efafe0bc86f919c2348eba9e60fc64bf782304be0",
+    "reference_manifest_sha256": "65000042feff3fdc318375e82b7f5175db6643fc8a3d93f2ef87714150dfb8e9",
+    "source_sha256": "0c1fea0e795832d95ded6621bb1a960879f089e4f1cde1122df69a3c504ec118",
+    "lua_sha256": "b0545cb968a9ef5b40c62378c4adda1f2ba651965b6721e5c98fb4e447213c59",
+    "scope": "Exact requested Coin/Start frame lists and actual delayed MAME port-read frame lists are checked against reference metadata and the frozen live fixture default generics. Software-renderer differences and final credit state are recorded separately. No live RTL result or cycle alignment claim."
+  },
+  {
+    "set": "rpunch",
+    "accepted_input_schedule": true,
+    "frames": 1800,
+    "coin_frame": 900,
+    "start_frame": 990,
+    "action_frame": 1290,
+    "requested_coin_frames": [
+      900,
+      901,
+      902,
+      903,
+      904,
+      905
+    ],
+    "requested_start_frames": [
+      990,
+      991,
+      992,
+      993,
+      994,
+      995
+    ],
+    "actual_port_coin_frames": [
+      901,
+      902,
+      903,
+      904,
+      905,
+      906
+    ],
+    "actual_port_start_frames": [
+      991,
+      992,
+      993,
+      994,
+      995,
+      996
+    ],
+    "final_credit_byte": 0,
+    "differing_pixels": 0,
+    "state": {
+      "flags": "0000",
+      "scroll": [
+        0,
+        504,
+        0,
+        504
+      ],
+      "sprite_count": 54,
+      "sprite_priority": 0,
+      "layer_coverage": [
+        62208,
+        62208,
+        99,
+        458
+      ]
+    },
+    "fixture_sha256": "f65a23d946b5f67510d7808efafe0bc86f919c2348eba9e60fc64bf782304be0",
+    "reference_manifest_sha256": "b6435ba4d3b440b22f54d4264a91c8bc27617557ab5eb984d6aaa4b5f0938143",
+    "source_sha256": "0c1fea0e795832d95ded6621bb1a960879f089e4f1cde1122df69a3c504ec118",
+    "lua_sha256": "b0545cb968a9ef5b40c62378c4adda1f2ba651965b6721e5c98fb4e447213c59",
+    "scope": "Exact requested Coin/Start frame lists and actual delayed MAME port-read frame lists are checked against reference metadata and the frozen live fixture default generics. Software-renderer differences and final credit state are recorded separately. No live RTL result or cycle alignment claim."
+  }
+]

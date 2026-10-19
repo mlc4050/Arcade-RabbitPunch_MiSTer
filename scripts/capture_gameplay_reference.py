@@ -17,8 +17,8 @@ parser.add_argument('--input-error-control', action='store_true')
 parser.add_argument('--action-frame', type=int, default=1290)
 parser.add_argument('--pulse-frames', type=int, default=6)
 parser.add_argument('--frames', type=int, default=600)
-parser.add_argument('--coin-frame', type=int, default=300)
-parser.add_argument('--start-frame', type=int, default=310)
+parser.add_argument('--coin-frame', type=int, default=900)
+parser.add_argument('--start-frame', type=int, default=990)
 a = parser.parse_args()
 assert 2 <= a.coin_frame < a.start_frame < a.frames and 2 <= a.pulse_frames <= 60
 require_no_jtag('Scripted MAME gameplay reference')
@@ -43,8 +43,8 @@ if (out/'ERROR.txt').exists():
 assert 'CORE_CAPTURE_ERROR' not in run.stdout + run.stderr, 'MAME callback error marker'
 applied = [list(map(int,line.split())) for line in (out/'inputs.txt').read_text().splitlines()]
 assert len(applied) > a.frames-10
-assert sum(row[1] for row in applied)==a.pulse_frames, 'Coin pulse was not applied'
-assert sum(row[2] for row in applied)==a.pulse_frames, 'Start pulse was not applied'
+assert [row[0] for row in applied if row[1]]==list(range(a.coin_frame,a.coin_frame+a.pulse_frames)), 'Coin pulse frames differ from request'
+assert [row[0] for row in applied if row[2]]==list(range(a.start_frame,a.start_frame+a.pulse_frames)), 'Start pulse frames differ from request'
 assert sum(row[4] for row in applied)==a.pulse_frames, 'Missile pulse was not applied'
 assert sum(bool(row[7] & 0x10) for row in applied)==a.pulse_frames, 'Coin 1 port did not observe pulse'
 assert sum(bool(row[7] & 0x20) for row in applied)==a.pulse_frames, 'Start 1 port did not observe pulse'
@@ -52,6 +52,7 @@ assert sum(bool(row[8] & 0x10) for row in applied)==a.pulse_frames, 'Missile por
 assert any(row[8] & 0x20 for row in applied), 'Shoot port remained inactive'
 assert run.returncode == 0 and 'CORE_CAPTURE_OK' in run.stdout, (run.stdout+run.stderr)[-3000:]
 manifest=dict(set=a.game,frames=a.frames,coin_frame=a.coin_frame,start_frame=a.start_frame,pulse_frames=a.pulse_frames,action_frame=a.action_frame,mameversion='0289',
+    actual_requested_coin_frames=[row[0] for row in applied if row[1]],actual_requested_start_frames=[row[0] for row in applied if row[2]],
     generator_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
     capture_source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
     files={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in out.iterdir() if p.is_file()},

@@ -51,13 +51,14 @@ negative control even when capture completion was also printed. Both final
 the reference inputs and renderer comparison; it does not prove live RTL
 gameplay or instruction/raster alignment.
 
-Reports are reference/gameplay_mame_schedule_verified_checks.json and
+Reports are reference/gameplay_mame_explicit_schedule_checks.json and
 reference/gameplay_reference_error_guard_checks.json. Earlier reports remain
 explicitly rejected for their input-schedule claims:
 
-- The first two-frame/immediate-held-Shoot schedule did not reach play. The
-  effect of pulse duration was not isolated; a neutral interval after Start
-  also matters. Own incomplete runs were preserved and stopped.
+- The first two-frame/immediate-held-Shoot schedule did not establish play.
+  Pulse duration, held controls and the reference event schedule were not
+  isolated. No causal claim about those controls is accepted. Own incomplete
+  runs were preserved and stopped.
 - A raw-board fixture initially selected Service Credit instead of Coin 1.
   Production controls were already correct. Both incomplete runs stopped before
   injection; the current fixture uses the real pad adapter.
@@ -66,3 +67,18 @@ explicitly rejected for their input-schedule claims:
   comparisons remain valid; their controlled-gameplay claims were withdrawn.
 
 No rejected or incomplete run is included in an accepted live gameplay result.
+
+A further reference audit caught stale Python defaults in the labelled verified
+capture: actual coin/Start were 300/310, while the qualification record hardcoded
+900/990. The requested port counts and pixel comparisons were valid, but schedule
+matching was not. That report is explicitly rejected and superseded by explicit
+900/990 captures with requested-event frame-list assertions. The running RTL
+fixture already uses 900/990 and is unchanged. Direct no-action Start controls
+at 990 consume the credit in MAME; no production Start mapping failure is inferred.
+
+The accepted explicit reference records requested Coin frames 900..905 and
+Start frames 990..995, with actual MAME port reads one frame later. Both final
+credit bytes are zero, and each independently rendered snapshot matches all
+62208 pixels. These checks validate the reference schedule and static state;
+the separate live RTL runs remain pending. MAME-only Start timing controls are
+recorded in reference/start_timing_observations.json.
