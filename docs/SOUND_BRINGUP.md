@@ -405,3 +405,14 @@ game music, resampling quality or physical audio. The separate long gameplay
 runs remain pending. Reports: reference/fm_waveform_cross_tool_checks.json and
 reference/fm_waveform_archive.json; private immutable exact-source/generated/
 binary/native-PCM archive is in debug/fit_archive/fm_waveform_cross_tool.
+
+## User pause output mute
+
+The first hardware user reports a sustained note during pause. The sound CPU
+stops issuing changes, while the YM2151 and ADPCM enable streams continue.
+The system now forces the presented mono PCM output to signed zero for the
+explicit pause request. Internal chip clocks, registers and raw diagnostic
+PCM taps remain unchanged; unpause restores the current mixer output without
+resetting the sound system. This also covers OSD pause when enabled. Brief
+internal maintenance ownership alone does not assert this user-output mute.
+Physical silence and transition quality require checking the rebuilt RBF.

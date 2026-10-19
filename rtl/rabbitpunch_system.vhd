@@ -138,12 +138,14 @@ architecture rtl of rabbitpunch_system is
     signal su9_sample_pcm : unsigned(8 downto 0);
     signal s_fm_primed, s_fm_valid : std_logic := '0';
     signal su16_left_mix, su16_right_mix : unsigned(15 downto 0);
+    signal su16_mono_pcm : unsigned(15 downto 0);
     signal s_audio_request, s_audio_ready, s_audio_valid, s_sample_request, s_sample_valid : std_logic;
     signal su16_audio_address : unsigned(15 downto 0);
     signal su18_sample_address : unsigned(17 downto 0);
     signal su8_audio_data, su8_sample_data : unsigned(7 downto 0);
     signal s_board_idle, s_maintenance_pause : std_logic;
 begin
+    ou16_mono_pcm <= (others => '0') when (i_pause = '1') else su16_mono_pcm;
     ou16_left_pcm <= su16_fm_left;
     ou16_right_pcm <= su16_fm_right;
     ou9_adpcm_pcm <= su9_sample_pcm;
@@ -267,7 +269,7 @@ begin
             iu16_left_pcm => su16_left_mix,
             iu16_right_pcm => su16_right_mix,
             iu9_adpcm_pcm => su9_sample_pcm,
-            ou16_mono_pcm => ou16_mono_pcm
+            ou16_mono_pcm => su16_mono_pcm
         );
     audio : entity work.rabbitpunch_audio
         port map (
