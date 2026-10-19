@@ -1,0 +1,120 @@
+{
+  "accepted": true,
+  "mameversion": "0289",
+  "game": "rabiolep",
+  "observations": [
+    {
+      "dip_slot": "A",
+      "mame_coin_input": 2,
+      "nibble": 12,
+      "credits_after_each_coin": [
+        0,
+        1,
+        1,
+        2,
+        2,
+        3
+      ]
+    },
+    {
+      "dip_slot": "B",
+      "mame_coin_input": 1,
+      "nibble": 12,
+      "credits_after_each_coin": [
+        0,
+        1,
+        1,
+        2,
+        2,
+        3
+      ]
+    },
+    {
+      "dip_slot": "A",
+      "mame_coin_input": 2,
+      "nibble": 0,
+      "credits_after_each_coin": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "dip_slot": "A",
+      "mame_coin_input": 2,
+      "nibble": 1,
+      "credits_after_each_coin": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "dip_slot": "A",
+      "mame_coin_input": 2,
+      "nibble": 14,
+      "credits_after_each_coin": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "dip_slot": "B",
+      "mame_coin_input": 1,
+      "nibble": 0,
+      "credits_after_each_coin": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "dip_slot": "B",
+      "mame_coin_input": 1,
+      "nibble": 1,
+      "credits_after_each_coin": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "dip_slot": "B",
+      "mame_coin_input": 1,
+      "nibble": 14,
+      "credits_after_each_coin": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "observed_credit_ram_byte": "0x0FC19F",
+  "matching_display_byte": "0x0FD973",
+  "source_sha256": {
+    "scripts/check_manual_coinage.py": "7c2c8d869cabed4715a062cde33ac1d11d4abd42a625a753b9c12e3d2d2c942e",
+    "scripts/mame/manual_coinage.lua": "c2edf9088f3bc90f750d3819b514b67af91813445af601a6216c0f663cc261b4"
+  },
+  "archive": "D:\\git\\RabbitPunch-maintenance-work\\debug\\fit_archive\\rabiolep_coinage_mame",
+  "manifest_sha256": "1ba45dd96c3996c537f47f039b18f2d3638b8a7c48378f0c895376acaa35f54a",
+  "scope": "Japanese ROM independently confirms the omitted coinage schedules and known 2C/1C control for both slots, using power-on raw DIPs and actual port reads. Software evidence for Japanese MRA choices; US manual does not establish other Japanese board settings. No live FPGA or physical coin-accounting claim."
+}

@@ -1,0 +1,17 @@
+{
+  "accepted": true,
+  "changed_mras": [
+    "releases/_dev/_ddr/Rabio Lepus (Japan) - DDR load.mra",
+    "releases/_dev/Rabio Lepus (Japan).mra"
+  ],
+  "only_changed_coin_values": [
+    1,
+    14
+  ],
+  "defaults_and_bit_positions_unchanged": true,
+  "all_other_metadata_unchanged": true,
+  "us_mras_unchanged": true,
+  "rom_streams_match_source_and_mame": true,
+  "japanese_rom_evidence_sha256": "fa9fb7a272d53ecf1e6f7ae951c5864c1561b27b24dbea512ca90b2c4bc5eca0",
+  "scope": "Only the two independently ROM-confirmed Japanese coinage menu entries change in each direct/DDR MRA. Other Japanese switches/defaults, controls, ROM layout and all production HDL are unchanged."
+}

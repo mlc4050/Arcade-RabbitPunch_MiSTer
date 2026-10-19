@@ -11,7 +11,7 @@ MAME 0.289 omits two encodings documented for both coin slots. The US developmen
 | 1 | ON / OFF / OFF / OFF | 1C/1C+2C/3C | First coin gives one credit; two accumulated coins give three credits. |
 | E | OFF / ON / ON / ON | 4C/1C | Four coins give one credit. |
 
-Existing MAME labels 6C/4C, 5C/6C and 4C/5C describe the end of cumulative bonus schedules in the manual. They retain their established labels. Nibbles 7 and F are unspecified and remain unavailable. No manual overrides are applied to Rabio Lepus: this is the US manual.
+Existing MAME labels 6C/4C, 5C/6C and 4C/5C describe the end of cumulative bonus schedules in the manual. They retain their established labels. Nibbles 7 and F are unspecified and remain unavailable. The US manual is not evidence for other Japanese settings. The same coinage additions are independently confirmed in the Japanese ROM, as described below.
 
 ## Bank 2 and defaults
 
@@ -48,3 +48,17 @@ CFGs, actual input traces, six RAM snapshots per case, final screenshots, source
 hashes and both the exploratory pairing and confirmed cross-slot controls.
 The new settings are therefore supported by the actual ROM as well as the
 manual. MiSTer hardware accounting remains unverified.
+
+## Japanese ROM confirmation
+
+Rabio Lepus independently produces the same four credit histories above on both
+slots, including the known C control, with raw DIPs applied at power-on and
+actual input-port coin pulses checked. Its observed credit byte is also
+0x0FC19F; matching display state uses 0x0FD973. See
+reference/rabiolep_manual_coinage_checks.json and its exact private archive.
+
+Both Japanese development MRAs now offer the two verified omitted encodings.
+Japanese lives, laser, extended-play/demo-sound definitions and default 00,00
+remain its own MAME settings. This extension follows actual Japanese ROM
+behavior and does not infer other Japanese board settings from the US manual.
+ROM images, DIP positions, controls and production RTL remain unchanged.

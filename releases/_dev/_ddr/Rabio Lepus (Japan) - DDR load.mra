@@ -51,8 +51,8 @@
     </rom>
     <nvram index="4" size="119" />
     <switches default="00,00" base="0">
-        <dip name="Coin A" bits="0,3" ids="1C/1C,-,4C/5C,5C/6C,1C/6C,6C/4C,2C/3C,-,1C/2C,1C/3C,1C/4C,1C/5C,2C/1C,3C/1C,-,-" />
-        <dip name="Coin B" bits="4,7" ids="1C/1C,-,4C/5C,5C/6C,1C/6C,6C/4C,2C/3C,-,1C/2C,1C/3C,1C/4C,1C/5C,2C/1C,3C/1C,-,-" />
+        <dip name="Coin A" bits="0,3" ids="1C/1C,1C/1C+2C/3C,4C/5C,5C/6C,1C/6C,6C/4C,2C/3C,-,1C/2C,1C/3C,1C/4C,1C/5C,2C/1C,3C/1C,4C/1C,-" />
+        <dip name="Coin B" bits="4,7" ids="1C/1C,1C/1C+2C/3C,4C/5C,5C/6C,1C/6C,6C/4C,2C/3C,-,1C/2C,1C/3C,1C/4C,1C/5C,2C/1C,3C/1C,4C/1C,-" />
         <dip name="Difficulty" bits="8,9" ids="Normal,Hard,Easy,Hardest" />
         <dip name="Continues" bits="14" ids="On,Off" />
         <dip name="Flip Screen" bits="15" ids="Off,On" />

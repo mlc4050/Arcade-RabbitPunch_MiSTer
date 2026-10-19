@@ -159,9 +159,9 @@ def switches(parent, name, driver):
     for label, mask, _, settings in dips:
         if settings is None:
             continue
-        # US manual DIP bank 1 documents two encodings absent from MAME 0.289.
-        # Keep the Japanese set and MAME's defaults unchanged; see MANUAL_DIPS.md.
-        if name == "rpunch" and label in ("Coin A", "Coin B"):
+        # US manual plus actual US/Japan ROM accounting establish two omitted values.
+        # Preserve each set's MAME defaults and other switches; see MANUAL_DIPS.md.
+        if name in ("rpunch", "rabiolep") and label in ("Coin A", "Coin B"):
             shift = 0 if label == "Coin A" else 4
             if mask != (0xF << shift):
                 raise ValueError("Manual coinage override no longer matches the driver mask")
@@ -175,7 +175,7 @@ def switches(parent, name, driver):
         ids = []
         for packed in range(1 << len(bits)):
             raw = sum(((packed >> j) & 1) << bit for j, bit in enumerate(bits))
-            # Unspecified encodings remain unavailable; US manual additions are above.
+            # Unspecified encodings remain unavailable; verified additions are above.
             ids.append(extract_dips._short(settings.get(raw, "-")))
         if any("," in value for value in ids) or 2 + len(label) + max(map(len, ids)) > 28:
             raise ValueError(f"DIP too wide/invalid for OSD: {label}")
