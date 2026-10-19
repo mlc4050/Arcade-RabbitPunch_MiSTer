@@ -376,14 +376,12 @@ accounting passes; audible music-track matching is still open. Japan action is
 visible; the US final image is course selection, so full US action is not yet
 proved by this script. All previous captures remain immutable.
 
-Requested root order: Video settings first, blank separator, DIP switches,
-blank separator, Pause when OSD is open, persistence controls, Audio mix, blank
+Requested root order: Video settings, blank separator, Audio mix, blank
+separator, DIP switches, blank separator, Pause when OSD is open, Autosave
+NVRAM, Save NVRAM, blank separator, the four savestate controls, blank
 separator, Reset last. Savestate rows remain pending functional state capture.
+This supersedes the earlier order and spacing requests.
 Manual NVRAM uses T4 rather than R4 so activation keeps the OSD open and returns
 through Main_MiSTer's arcade upload polling path. The previous R4 closed the
 menu; that host behavior is a plausible cause of the user-reported missing save.
 Validate actual .nvm file creation/restoration on the replacement RBF.
-
-The user's confirmed target adds a blank row after Pause when OSD is open,
-before the four savestate controls, with another separator before NVRAM.
-Keep that grouping when those currently pending state actions become functional.
