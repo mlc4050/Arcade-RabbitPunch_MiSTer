@@ -1,0 +1,61 @@
+{
+  "accepted": true,
+  "samples": 256,
+  "channels": 4,
+  "nonzero_left": 256,
+  "native": {
+    "case": "fm_waveform_native",
+    "pass_marker": "FM_WAVEFORM_PASS",
+    "log": "debug\\baselines\\fm_waveform_native\\result.log"
+  },
+  "native_log_sha256": "b75609425799955089bb71ea5c1e1d3c6101a0ffa819c3f6b592f41dd79aaf76",
+  "native_pcm_sha256": "f9addd7da2bbe99f0f9aba6b169cbd58f18f37b8b788456d60887b83ce250f91",
+  "fast_pcm_sha256": "f9addd7da2bbe99f0f9aba6b169cbd58f18f37b8b788456d60887b83ce250f91",
+  "source_sha256": {
+    "rtl/sound/jt51/hdl/jt51_acc.v": "633319a0e89a78d390cba54a24aabf6f1019b705b378b636e246dcf44c8829f8",
+    "rtl/sound/jt51/hdl/jt51_eg.v": "6e7c5f315edc82b70918ea61d6d5c992204d4e8b272e33fb3ce539a9843cac5e",
+    "rtl/sound/jt51/hdl/jt51_exp2lin.v": "cecc44acf6d7c8a81e80638e4a6eeb46f17d6c8d809e7a928338553bb23fb400",
+    "rtl/sound/jt51/hdl/jt51_exprom.v": "c9f33ede4c1c0af6f54ae45620d986a2c5a2f0ef16b453dc7d2eeeac85f8cbb5",
+    "rtl/sound/jt51/hdl/jt51_kon.v": "e1bb08fe65a53d2dc871459cc91e4beeec9efb9e839b3a39a941fa27ac19ba0f",
+    "rtl/sound/jt51/hdl/jt51_lfo.v": "2bb0e19b51982f761fd50eb992c90f6dbadf467528ac09fa033b48020cd8d193",
+    "rtl/sound/jt51/hdl/jt51_lin2exp.v": "c4351ea7711364ab394ab510326111dc5047f4e57830bddef15163cbc4dcb98e",
+    "rtl/sound/jt51/hdl/jt51_mmr.v": "db3a6506091e6ea99a17ad2f5b8b11ecf36d97f74dbf0c1098cf6db601d6fdd6",
+    "rtl/sound/jt51/hdl/jt51_mod.v": "1a04fe51a56756a98b577547bbd95cf984283288f2da2e4946d75063a69d357c",
+    "rtl/sound/jt51/hdl/jt51_noise_lfsr.v": "6b58949a51dbfe8c96f19eac3aa84aaace7fcc5cc4e1902c084a93d3d1c4da91",
+    "rtl/sound/jt51/hdl/jt51_noise.v": "87b70082becc58ece4c223ea5ed01b0c0bc0b05ae95ace9b498768429232f360",
+    "rtl/sound/jt51/hdl/jt51_op.v": "5dbb743c49af67e6dff7e6c65691a66371aaf5a126834525f9501a8af1420bbf",
+    "rtl/sound/jt51/hdl/jt51_pg.v": "d52c369e535196ee260243b2342c6a526a1d95425440512037f3f3b5185f0a8a",
+    "rtl/sound/jt51/hdl/jt51_phinc_rom.v": "41fefe0b9bc9a3b71a036d12d723666e4b588c57625228eee278f9704a6f53b1",
+    "rtl/sound/jt51/hdl/jt51_phrom.v": "b3fb0623737dd22befa0bfa9a130d7b1437e81ff3e1842538251d5cd29a75c89",
+    "rtl/sound/jt51/hdl/jt51_pm.v": "9625bda77a523371fc4704ac66cfec95a9d1aff343c2e770ea5aba11eb50c8f3",
+    "rtl/sound/jt51/hdl/jt51_reg_ch.v": "2303d898fa49bf67fa8aace6c1a1e00e48d2951f9a221e75058233953f670aad",
+    "rtl/sound/jt51/hdl/jt51_csr_op.v": "b129bf97cc155bc0e4312287af79b2c7985852ef65c1768f23ffa31badd5b648",
+    "rtl/sound/jt51/hdl/jt51_reg.v": "a9913cb08f562046c2f9375fd6f7a4a5a0eb4d46266df303875059761f304de7",
+    "rtl/sound/jt51/hdl/jt51_sh.v": "71246f6b6989f922220cdd370cee52ecd56c7244e11073ddc618028a4136f0aa",
+    "rtl/sound/jt51/hdl/jt51_timers.v": "e885ffd11d62c2bf42aafb90eb30e681c3d98ae9c4fe6714b13d72f491347e70",
+    "rtl/sound/jt51/hdl/jt51.v": "4c5f80dae49f435686d3f917897df867ba7725a44bd52c5d652658ba178689b0",
+    "sim/vendor/jt51/sep32.v": "e1f1733d87094bc51a31d39a34c27c71d408541939bfd4c7db00a248a02b85a1",
+    "sim/vendor/jt51/sep32_cnt.v": "cc15f156e3bbf72f19956c6fca34c4d17986a576209d1ae890450519692edce7",
+    "rtl/rabbitpunch_clock_enables.vhd": "3c2356fb1fd0d45bd58e710b9fd0262cd6aa40f7081da6c6ae4bd9f22fe11a10",
+    "rtl/rabbitpunch_ym2151.vhd": "286a83e81a7caaaf91c4758db87fa1977c78e2b6dea7acf9b3f2eb62d5dbefff",
+    "sim/sound/fm_waveform_fixture.vhd": "9b1f9e068e6c27d3fa332b039211d8f82c313e37a22108ed2bb80ac374a9b0d1",
+    "sim/sound/fm_waveform_tb.vhd": "d496dd7e106503358baf90949126a38fef751643c69a2c03b63b93b88b52dc3e",
+    "scripts/run_fm_waveform_tests.py": "f8d11d0bc181ef99c594b9f18e2539c62fabfcaa6195cea772da4b014dfa4402",
+    "scripts/run_baselines.py": "684d041a0bbcef543a19a0f13dd87400b6d65a012f40f3ddbf4075d3500bbfb2"
+  },
+  "tool_sha256": {
+    "ghdl": "dc983e37f4a606d9803557f728902b8e2bcb96cd9fb3f117307fb4de129e6a91",
+    "verilator": "f750ce230db972ca885d795f2d3be03711c2c7cddb2fc898819df46e6573132c",
+    "cxx": "671ca52a98e6f0c44411f72ad1be386f03c193f83970f7dbd235f4b974e728d2"
+  },
+  "generated_sha256": {
+    "build.log": "2d8459120808ecccfa9963c4ca1fb55fd57239fe8e986add234050e65341d20a",
+    "clock_transport.cpp": "23340b870183e976d56377100c50a6675e905c220181dfd6910dead6abc66e66",
+    "export.log": "f61c4a93786480f94b99081a30ef4628f312428be72694149dc2b3950189b94c",
+    "fm_waveform_fixture.v": "a968c95a503ccc1c0ec3c9f777654f75bc02e49a5f3f138800ad94fb27827d0f",
+    "pcm.txt": "f9addd7da2bbe99f0f9aba6b169cbd58f18f37b8b788456d60887b83ce250f91",
+    "run.log": "8ed5f5a62cb4a3be9969ff1d5a67c3344099274c966c38b998a0d1df945006ed",
+    "verilate.log": "435eb86c97ed0294c87a1718c4f8f2c58fbf2f7ab36c146653098807923af7fe"
+  },
+  "scope": "Explicitly initialized and keyed channel-zero four-carrier JT51 tone under production fractional enables; unchanged vendor logic and descriptive VHDL wrapper. Native four-state ModelSim versus GHDL/Verilator: all 256 samples in raw stereo and full-resolution stereo must match exactly, be known, symmetric and nonzero. No MAME waveform, game audio, analog gain, resampling or physical audible claim."
+}

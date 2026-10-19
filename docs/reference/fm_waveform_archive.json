@@ -1,0 +1,7 @@
+{
+  "accepted": true,
+  "archive": "D:\\git\\RabbitPunch-maintenance-work\\debug\\fit_archive\\fm_waveform_cross_tool",
+  "manifest_sha256": "30c61adfae6335da8de5e69fe736e513f17ab8287ae7741880266eeb7380fe8a",
+  "artifacts": 45,
+  "scope": "Explicitly initialized and keyed channel-zero four-carrier JT51 tone under production fractional enables; unchanged vendor logic and descriptive VHDL wrapper. Native four-state ModelSim versus GHDL/Verilator: all 256 samples in raw stereo and full-resolution stereo must match exactly, be known, symmetric and nonzero. No MAME waveform, game audio, analog gain, resampling or physical audible claim."
+}

@@ -388,3 +388,20 @@ TOOLCHAIN.md and reference/fast_sound_boot_archive.json for the conversion bound
 rejected initial reset-assertion model and exact source/binary/trace archives.
 This enables further bounded system simulation; it does not establish audible
 output, commands, sample decoding or long game execution in the fast model.
+
+## Keyed FM waveform cross-tool qualification
+
+The native ModelSim and GHDL/Verilator paths now produce exactly the same 256
+samples on all four JT51 PCM outputs (raw stereo and full-resolution stereo)
+for an explicitly initialized, keyed four-carrier channel-zero tone. VHDL owns
+register sequencing, production fractional enables, settling, sample strobes
+and assertions. The native run checks known-valued, symmetric and nonzero PCM
+and completes with zero errors/warnings. The fast C++ bridge only supplies the
+clock and writes sample files. No chip RTL or production adapter was changed.
+
+This qualifies nonzero waveform transport between the two simulation paths.
+It does not establish MAME waveform equality, original-board analog gain, live
+game music, resampling quality or physical audio. The separate long gameplay
+runs remain pending. Reports: reference/fm_waveform_cross_tool_checks.json and
+reference/fm_waveform_archive.json; private immutable exact-source/generated/
+binary/native-PCM archive is in debug/fit_archive/fm_waveform_cross_tool.
