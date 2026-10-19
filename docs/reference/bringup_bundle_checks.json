@@ -4,7 +4,7 @@
   "hardware_verified": false,
   "deployed": false,
   "published": false,
-  "packaging_commit": "6256e0187f318c4a6245e89ae5daadd6b4e65c4b",
+  "packaging_commit": "f7fd652be7612b9c634445527a2c873c108d7fdf",
   "rbf_commit": "86c437a7705e39b7c621cb955772f0419d4ace0a",
   "revision": "RabbitPunch",
   "seed": 3,
@@ -19,14 +19,14 @@
   "fit_report_sha256": "db00c5c853785cbd34f2070e347c74e1437bedf5910bc9625ef03566318ae8d1",
   "archive_worktree": "D:\\git\\RabbitPunch-video-options-work",
   "artifact_archive": "debug/fit_archive/full_shell_86c437a_hdmi_audio_release",
-  "output": "D:\\git\\RabbitPunch-maintenance-work\\debug\\bringup\\20261018_86c437a_qualified",
+  "output": "D:\\git\\RabbitPunch-maintenance-work\\debug\\bringup\\20261018_86c437a_manual_dips",
   "production_sources_match_timed_commit": true,
   "mras": [
     {
       "source": "releases/_dev/Rabbit Punch (US).mra",
       "destination": "_Arcade/Rabbit Punch (US).mra",
       "set": "rpunch",
-      "sha256": "cc4e350448ba6b8268f7baad4da9dea96a585d9a18104c6e173f05e13b3bec84"
+      "sha256": "cce0d7bd4114bb2b4baa9eabed0057fd19c9c4ee8d8ed906a97e3af2a005604f"
     },
     {
       "source": "releases/_dev/Rabio Lepus (Japan).mra",
@@ -38,13 +38,13 @@
       "source": "releases/_dev/_ddr/Rabbit Punch (US) - DDR load.mra",
       "destination": "_Arcade/_Alternatives/DDR load/Rabbit Punch (US) - DDR load.mra",
       "set": "rpunch",
-      "sha256": "8bc78d46a1008e80673e06acc5a19c94534c408d1a8f61aef5ea3068c555739e"
+      "sha256": "9472f3f12b28a1850e2e665acf6a0f6aa67cb883daa1b01a6c7b603b8b5320fd"
     },
     {
       "source": "releases/_dev/_ddr/Rabio Lepus (Japan) - DDR load.mra",
       "destination": "_Arcade/_Alternatives/DDR load/Rabio Lepus (Japan) - DDR load.mra",
       "set": "rabiolep",
-      "sha256": "f084fd1ce89258e0e24f94a73044abe8d921e75a0debf9a5a792e6a2d7704033"
+      "sha256": "d1f50c48c3f13f6900f07e5175df6b6e7ffa0582bb108db8ebb048d55430024d"
     },
     {
       "source": "releases/_dev/_diagnostic/RabbitPunch_Diagnostic.mra",
@@ -55,12 +55,12 @@
   ],
   "files": {
     "README.txt": "bbb31bba4079f9deb6209870582a25377ee918aee57b3dc288b63fe915b5ff16",
-    "_Arcade/Rabbit Punch (US).mra": "cc4e350448ba6b8268f7baad4da9dea96a585d9a18104c6e173f05e13b3bec84",
+    "_Arcade/Rabbit Punch (US).mra": "cce0d7bd4114bb2b4baa9eabed0057fd19c9c4ee8d8ed906a97e3af2a005604f",
     "_Arcade/Rabio Lepus (Japan).mra": "207e83b4588cd0c6e366c45bf101f2e16e4c3e2e0cf37b56b47be2c740b22afa",
     "_Arcade/cores/Arcade-RabbitPunch_20261018.rbf": "0629a3d2f8f5c674160b0a85793024d0a2b012dfed3cd6189fcfb2cf358a511e",
     "_Arcade/_Diagnostic/RabbitPunch_Diagnostic.mra": "dd7f2abedab29d74d2d0f2d237e6692c85840fd41ad4afb7f2eeea60484d3441",
-    "_Arcade/_Alternatives/DDR load/Rabbit Punch (US) - DDR load.mra": "8bc78d46a1008e80673e06acc5a19c94534c408d1a8f61aef5ea3068c555739e",
-    "_Arcade/_Alternatives/DDR load/Rabio Lepus (Japan) - DDR load.mra": "f084fd1ce89258e0e24f94a73044abe8d921e75a0debf9a5a792e6a2d7704033"
+    "_Arcade/_Alternatives/DDR load/Rabbit Punch (US) - DDR load.mra": "9472f3f12b28a1850e2e665acf6a0f6aa67cb883daa1b01a6c7b603b8b5320fd",
+    "_Arcade/_Alternatives/DDR load/Rabio Lepus (Japan) - DDR load.mra": "d1f50c48c3f13f6900f07e5175df6b6e7ffa0582bb108db8ebb048d55430024d"
   },
   "scope": "Private source-matched timed RBF plus byte-identical development MRAs; no ROM ZIPs, publication, deployment, JTAG or hardware execution. Required reported timing passes under the previously documented provisional SDRAM and inherited peripheral coverage scope."
 }
