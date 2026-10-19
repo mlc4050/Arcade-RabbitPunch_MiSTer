@@ -1,0 +1,16 @@
+{
+  "host_repository": "https://github.com/MiSTer-devel/Main_MiSTer",
+  "host_reference_commit": "88d2d107630d05d52a2defb42fb7a449a8098827",
+  "source_sha256": {
+    "menu.cpp": "ca9835d62e0629ac54666cf5ca55eff3221afb32815a8eea4d51dc2f2f5cfa20",
+    "user_io.cpp": "8f2e5b1bf77f722aab2fc3304299d7668a0d71b68d7790e7ca590bf71c3ca50d",
+    "support/arcade/mra_loader.cpp": "20662b3d98ddc0b73e0f3d4700aa67954a598bf1c07c9255d6ac7253bc927d38"
+  },
+  "observations": [
+    "R actions close OSD after pulsing status; T actions return to generic main menu",
+    "Generic menu entry passes through MENU_SAVE_CHECK and polls UIO_CHK_UPLOAD",
+    "Arcade save uses MRA nvram index/size and config/nvram/<MRA filename>.nvm"
+  ],
+  "change": "Manual Save NVRAM uses T4 to keep menu open and revisit the upload check after its status pulse.",
+  "scope": "Host source audit and suspected menu-flow defect; actual user firmware version and on-disk behavior remain unverified."
+}

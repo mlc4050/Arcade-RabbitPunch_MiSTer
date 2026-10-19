@@ -6,6 +6,7 @@ use std.env.all;
 use std.textio.all;
 
 entity m68k_state_tb is
+    generic (GINT_INITIAL_STATUS : natural := 8192);
 end entity;
 
 architecture test of m68k_state_tb is
@@ -17,12 +18,12 @@ architecture test of m68k_state_tb is
     end record;
     type t_traces is array(0 to 399) of t_trace;
     constant CU16_PROGRAM : t_words := (
-        x"46FC", x"2000", x"2C7C", x"1234", x"5678", x"4E66", x"7000", x"7201",
+        x"46FC", to_unsigned(GINT_INITIAL_STATUS, 16), x"2C7C", x"1234", x"5678", x"4E66", x"4CF9", x"7FFF", x"0000", x"1800", x"7000", x"7201",
         x"243C", x"0BAD", x"F00D", x"2E3C", x"AAAA", x"5555",
         x"2A7C", x"DEAD", x"BEEF", x"227C", x"0000", x"2000",
-        x"5280", x"E399", x"D482", x"32C0", x"33C0", x"0000", x"3000",
+        x"5280", x"E399", x"D482", x"48F9", x"7FFF", x"0000", x"3100", x"32C0", x"33C0", x"0000", x"3000",
         x"23C1", x"0000", x"3004", x"23C2", x"0000", x"3008",
-        x"B2FC", x"2100", x"66E0", x"227C", x"0000", x"2000", x"60D8"
+        x"B2FC", x"2100", x"66D8", x"227C", x"0000", x"2000", x"60D0"
     );
     signal s_clk : std_logic := '0';
     signal s_reset : std_logic := '1';
@@ -40,7 +41,7 @@ architecture test of m68k_state_tb is
     signal sint_game_writes, sint_recorded, sint_compared : natural := 0;
 begin
     s_clk <= not s_clk after 5 ns;
-    su2_divider <= su2_divider + 1 when rising_edge(s_clk);
+    su2_divider <= su2_divider + 1 when falling_edge(s_clk);
     s_phase1 <= '1' when (su2_divider = 0) else '0';
     s_phase2 <= '1' when (su2_divider = 2) else '0';
     su24_address <= su23_word_address & '0';
@@ -117,6 +118,9 @@ begin
                 v_ram(3) := x"1000";
                 for vint_word in CU16_PROGRAM'range loop
                     v_ram(16#800# + vint_word) := CU16_PROGRAM(vint_word);
+                end loop;
+                for vint_word in 0 to 29 loop
+                    v_ram(16#C00# + vint_word) := to_unsigned(16#1000# + vint_word * 37, 16);
                 end loop;
                 v_initialized := true;
             end if;

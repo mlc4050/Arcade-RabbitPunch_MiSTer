@@ -16,6 +16,7 @@ architecture test of hiscore_tb is
     signal s_profile, s_us, s_osd, s_autosave : std_logic := '0';
     signal s_download, s_dump_write, s_upload : std_logic := '0';
     signal s_manual_save : std_logic := '0';
+    signal s_manual_expected : std_logic := '0';
     signal su27_dump_address : unsigned(26 downto 0) := (others => '0');
     signal su8_dump_in, su8_dump_out : unsigned(7 downto 0) := (others => '0');
     signal s_wait, s_request, s_initialized, s_saved, s_dirty : std_logic;
@@ -166,7 +167,7 @@ begin
                 vint_pause_delay := vint_pause_delay + 1;
             end if;
             if (s_request = '1') then
-                assert (s_saved = '1' and s_wait = '0' and (s_dirty = '1' or s_manual_save = '1'))
+                assert (s_saved = '1' and s_wait = '0' and (s_dirty = '1' or s_manual_expected = '1'))
                     report "Upload requested without a complete changed or explicitly saved image" severity failure;
                 sint_upload_requests <= sint_upload_requests + 1;
             end if;
@@ -491,6 +492,7 @@ begin
             assert (s_saved = '1') report "First run without a file never became saveable" severity failure;
             check_upload(2);
             -- Manual save must capture fresh RAM even with autosave/OSD off.
+            s_manual_expected <= '1';
             s_autosave <= '0';
             s_osd <= '0';
             set_table(1);
@@ -507,10 +509,13 @@ begin
             s_manual_save <= '0';
             cycles(3);
             s_manual_save <= '1';
+            cycles(1);
+            s_manual_save <= '0';
             cycles(50000);
             assert (sint_upload_requests = vint_notices + 2)
                 report "Manual save did not save an unchanged snapshot" severity failure;
             check_upload(1);
+            s_manual_expected <= '0';
             s_manual_save <= '0';
             cycles(3);
         end loop;

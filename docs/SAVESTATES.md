@@ -60,3 +60,11 @@ with the external level-7 request visible. That case is unresolved and prevents
 claiming general CPU capture support. STOP/normal pending IRQ and original
 stack preservation still require dedicated tests. The helpers/wrapper are
 quarantined outside files.qip and do not change the timed game core.
+
+The strengthened 68000 loop now initializes and emits all D0-D7/A0-A6 values
+through MOVEM, then compares 400 ordered writes after restoration. Z80 also
+passes 400 exact writes with both register banks and repeated mode-1 ISR
+activity; IRQ trigger phase is part of the bench snapshot, and actual ISR
+writes are asserted. Exact sources/logs and the unresolved masked-case
+waveform are preserved in reference/cpu_state_archive.json. Neither result
+proves STOP/HALT preservation or an integrated game savestate.

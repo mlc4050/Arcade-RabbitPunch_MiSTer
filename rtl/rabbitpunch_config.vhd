@@ -14,11 +14,6 @@ package rabbitpunch_config is
     constant CINT_STATUS_NVRAM_SAVE_BIT : natural := 4;
     constant CSTR_DEFAULT_CONFIG_STRING : string :=
         "RabbitPunch;;" &
-        "DIP;" &
-        "R0,Reset;" &
-        "O2,Pause when OSD is open,Off,On;" &
-        "H3O3,Autosave NVRAM,Off,On;" &
-        "H3R4,Save NVRAM;" &
         "P1,Video settings;" &
         "H5P1O[122:121],Aspect ratio,Original,Full Screen,[ARC1],[ARC2];" &
         "H5P1O[114:113],Rotation,None,CW,CCW;" &
@@ -29,7 +24,15 @@ package rabbitpunch_config is
         "H5P1O[68:66],Scale,Normal,V-Integer,Narrower HV-Integer,Wider HV-Integer,HV-Integer;" &
         "P1O[65],Flip Screen,Off,On;" &
         "H5P1O[46:44],Scandoubler Fx,None,HQ2x,CRT 25%,CRT 50%,CRT 75%;" &
+        "-;" &
+        "DIP;" &
+        "-;" &
+        "O2,Pause when OSD is open,Off,On;" &
+        "H3O3,Autosave NVRAM,Off,On;" &
+        "H3T4,Save NVRAM;" &
         "O[124:123],Audio mix,Mono,None,25%,50%;" &
+        "-;" &
+        "R0,Reset;" &
         "J1,Fire/Punch,Missile,-,-,-,-,Start,Coin,Pause,Service,Test;" &
         "V,v0.1-dev;";
 end package;

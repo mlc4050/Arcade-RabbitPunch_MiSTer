@@ -9,9 +9,9 @@
     "rtl/rabbitpunch_hiscore.vhd": "d6bf4cfb9a6da0459d0fdbe07e7ca94ea05903c96277bef32a35cfce526ea202",
     "rtl/rabbitpunch_hiscore_config.vhd": "fcb70ea11a4ea24040d0b1d09c7ceb1512e4527cfad06c316f3aea79ac614d6d",
     "rtl/rabbitpunch_hiscore_service.vhd": "2201b593dd261b036192a6eeca8826ad5d7bc08762caeed77a5a0803c2d9ba16",
-    "sim/board/hiscore_tb.vhd": "9bc73363152465417942a01b1229b5d8649b3c831c9c8a8a4fe5a3a64fa8cf44"
+    "sim/board/hiscore_tb.vhd": "188623a4ae901a4afd7af42f70e275ae2d69a4722821522b5663b9f22af7e972"
   },
   "vectors_sha256": "56c5bb10b5801c7e067a3a6770e4369431bac096d0f90be7ed958c3974b4af01",
-  "log_sha256": "b71e9240f8c3377a06e12424c3fd6024b7767a96a5afdea82fe195aa06b21a68",
-  "scope": "Atomic saved-score banks with native dual-port RAM and production maintenance byte adapter, both captured MAME geometries. Backend pause confirmation and varying acknowledgment latency, initialization guards, changed saved guard bytes, exact restoration and neighbors, first run without a file, unchanged/changed captures, autosave request edges, malformed file rejection and reset debt. No production platform composition or disk persistence claim. Manual save with autosave and OSD off captures fresh RAM; unchanged explicit saves and held-action no-repeat checked."
+  "log_sha256": "29f9c9fb11647816bf120dc08d31909364f6fde846ac0dbfea5e40ab6520d6a4",
+  "scope": "Atomic saved-score banks with native dual-port RAM and production maintenance byte adapter, both captured MAME geometries. Backend pause confirmation and varying acknowledgment latency, initialization guards, changed saved guard bytes, exact restoration and neighbors, first run without a file, unchanged/changed captures, autosave request edges, malformed file rejection and reset debt. No production platform composition or disk persistence claim."
 }

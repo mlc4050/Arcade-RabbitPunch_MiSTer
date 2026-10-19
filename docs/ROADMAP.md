@@ -375,3 +375,11 @@ completed. See LIVE_BOOT.md and the exact archive reports. CPU coin/start credit
 accounting passes; audible music-track matching is still open. Japan action is
 visible; the US final image is course selection, so full US action is not yet
 proved by this script. All previous captures remain immutable.
+
+Requested root order: Video settings first, blank separator, DIP switches,
+blank separator, Pause when OSD is open, persistence controls, Audio mix, blank
+separator, Reset last. Savestate rows remain pending functional state capture.
+Manual NVRAM uses T4 rather than R4 so activation keeps the OSD open and returns
+through Main_MiSTer's arcade upload polling path. The previous R4 closed the
+menu; that host behavior is a plausible cause of the user-reported missing save.
+Validate actual .nvm file creation/restoration on the replacement RBF.

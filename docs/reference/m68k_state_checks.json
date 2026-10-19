@@ -2,6 +2,7 @@
   "case": "m68k_state",
   "pass_marker": "M68K_STATE_PASS",
   "log": "debug\\baselines\\m68k_state\\result.log",
+  "cpu": "m68k",
   "source_sha256": {
     "rtl/cpu/fx68k/fx68k.sv": "846602cd0fc25a9eee04f641ba5e6fcfa05a80a1db417898040c78b1f7449a33",
     "rtl/cpu/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
@@ -9,8 +10,8 @@
     "rtl/rabbitpunch_fx68k.vhd": "f58d91e270636a92f629854f63e923aa6a8a7175b5f9d409a0f2e401e0a53ea1",
     "rtl/state/vendor/nmk16/ss_m68k_park.sv": "c6d989839e3ad187bce208293624085255cf4d354ed44f91463755b8b53d7abc",
     "rtl/state/rabbitpunch_m68k_state.vhd": "b4fa8ac3b95e825e8c9197be2c6fd411671241b0a52aa6c53a347679c20fcb0c",
-    "sim/state/m68k_state_tb.vhd": "223de429544997effb2f78cae459dd34aad8870c0453df336018693c0794983b"
+    "sim/state/m68k_state_tb.vhd": "3dd2a54cf4510506e3e5a1f87466d6a2a3534573f6acaa98419c86b2b154bd90"
   },
-  "log_sha256": "6dca82ab5f2548205cc7fc56f4484f8e1fec74874e9b3740982b1b620230869a",
+  "log_sha256": "10be0e8db3cfb9e3cbbf11420c5e65f70bd788f283d3266d8619887b08f0877c",
   "scope": "Native fx68k, unchanged NMK16 monitor helper, descriptive VHDL wrapper and VHDL memory/stimulus/scoreboard. Architectural register/64KiB RAM round trip with 400 ordered resumed game writes; USP separately checked. Synthetic continuously running supervisor program with SR interrupt mask zero only; fully masked case did not park and remains unresolved; STOP, pending normal interrupt, real game bus, Z80, sound, DDR/file slots and physical hardware are separate gates. Testbench snapshots are not a production state engine."
 }
