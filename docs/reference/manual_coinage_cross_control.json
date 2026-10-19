@@ -1,0 +1,96 @@
+{
+  "mameversion": "0289",
+  "cases": [
+    {
+      "slot": "A",
+      "nibble": 12,
+      "cross_slot": true,
+      "expected_credit_history": [
+        0,
+        1,
+        1,
+        2,
+        2,
+        3
+      ],
+      "matching_ram_byte_candidates": [
+        "0xfc19f",
+        "0xfd987"
+      ],
+      "actual_port_coin_frames": 36,
+      "poweron_raw_dip_verified": true,
+      "files": {
+        "bitmap.bin": "57be26d52dfac7e55ac24cef1d5574170bf914fdc7e40976370d8cb645e5f5a1",
+        "coin_1.bin": "eaa8c8b19f4de0a9f40adea43adfb0e661b3b915553cbe80e93ba585813c43c3",
+        "coin_2.bin": "7495e0f3de897052b7a8160f8de7cd0916b3a70cbfb796370da87f1ff062fdc7",
+        "coin_3.bin": "304b31450f59f7109d0924ebceee74dc18ddb11606112174037fbe1930db3dce",
+        "coin_4.bin": "2d11062098e21eb6cdf29245a58ac3e45ea7bb8d0a5e8a2decfca5a986a54cf4",
+        "coin_5.bin": "8aa01533fe3a05c9396fdd80eaaae760c1056cfcfdb2fe6d1efc100ab7c7b56c",
+        "coin_6.bin": "d90e39bf3a76332881606ee45ce763a6f77a31d912b3c47f44076bd748f7bc59",
+        "dipinfo.txt": "dbc7fb3d5075b0c621f9f3062fe3eb3d4922d5f0c4366f83e3547401b0d022b7",
+        "inputs.txt": "84ec053cc87a2f8b9f51387b0fbc013408b2b467fd81b10536c5127eeabb8916",
+        "manifest.txt": "d6e52bb47a4cd1a1a8fe0553f1862a374276b7c314ee8b8c00183f2ef63ad6bc",
+        "palette.bin": "0eb9ab55248c0666e6ee254ae67fb46846e6f11a024ba02ee9a7205ae92a1c32",
+        "poweron.cfg": "317747d40c86384ffcc74561e35549814ff01d8af5ded9104ecbe7af4ccd5e3e",
+        "reference.png": "76569011c722ee4fa28de5729f2379e9f4073977e967fafefdeb306f7f08b5da",
+        "reg_bitmap.bin": "57be26d52dfac7e55ac24cef1d5574170bf914fdc7e40976370d8cb645e5f5a1",
+        "reg_palette.bin": "0eb9ab55248c0666e6ee254ae67fb46846e6f11a024ba02ee9a7205ae92a1c32",
+        "reg_spriteram.bin": "443431a9e3c639306e0e7fcccb5c051f53d34f5ae0abb64c8c31ee425502f6f6",
+        "reg_videoram.bin": "a319dc3a42ec7c001db6ae5e374fbf0d2628b70eaaeb8fd43651a3bfb79d1414",
+        "reg_vregs.bin": "f346e8dc588264af45d1af39ee9030840d3e760c51f91645e7d5601e2608c0fb",
+        "run.log": "9c3faf3198c0d35818710c53fc89aa903db56863ea5ba216ceef7ca582ebfbd4",
+        "spriteram.bin": "443431a9e3c639306e0e7fcccb5c051f53d34f5ae0abb64c8c31ee425502f6f6",
+        "videoram.bin": "a319dc3a42ec7c001db6ae5e374fbf0d2628b70eaaeb8fd43651a3bfb79d1414",
+        "workram.bin": "adcc5620e690a5b7768866a5e6d5de3d83cfab8ec8692785b018592f55b28ea1"
+      }
+    },
+    {
+      "slot": "B",
+      "nibble": 12,
+      "cross_slot": true,
+      "expected_credit_history": [
+        0,
+        1,
+        1,
+        2,
+        2,
+        3
+      ],
+      "matching_ram_byte_candidates": [
+        "0xfc19f",
+        "0xfd987"
+      ],
+      "actual_port_coin_frames": 36,
+      "poweron_raw_dip_verified": true,
+      "files": {
+        "bitmap.bin": "57be26d52dfac7e55ac24cef1d5574170bf914fdc7e40976370d8cb645e5f5a1",
+        "coin_1.bin": "f12c5baf63417c5726c8960a218f2f8da343f5dfcb0c811b87cef73c871dd8e2",
+        "coin_2.bin": "51fd3bc08a15427dc832432a9ceb06fcc113aa2dfb7ab33637db4b305b1bafff",
+        "coin_3.bin": "e11b0ed3686e8635f8e9c1766bfa2435581c84bac52925d09eddf55a4b17bb39",
+        "coin_4.bin": "76496b688d39a0177d08343f5f65573667b755e0a591abffae3d3118df92a3b3",
+        "coin_5.bin": "d13f29139e69e61ce1fd2205c8694e0d62d9857c6080f7194b6b11f015c2c5b8",
+        "coin_6.bin": "7df0a639b9e0493bf18d3ad1a28e2523fe32b64c79000f5a362cddc5a1b6f0aa",
+        "dipinfo.txt": "793f745457a120681dcfbaa044850148e9bc17d27c2a94c9e6c4cf72e52ae39d",
+        "inputs.txt": "d5ad138a8e3b6d36a782ff5a1633ec4f3af596addd0bfcf00b464bea34363074",
+        "manifest.txt": "d6e52bb47a4cd1a1a8fe0553f1862a374276b7c314ee8b8c00183f2ef63ad6bc",
+        "palette.bin": "0eb9ab55248c0666e6ee254ae67fb46846e6f11a024ba02ee9a7205ae92a1c32",
+        "poweron.cfg": "37eb32b068bbdca959395820070a2a2dc6fde22cdb3d0f0f478e284f609e6ac5",
+        "reference.png": "76569011c722ee4fa28de5729f2379e9f4073977e967fafefdeb306f7f08b5da",
+        "reg_bitmap.bin": "57be26d52dfac7e55ac24cef1d5574170bf914fdc7e40976370d8cb645e5f5a1",
+        "reg_palette.bin": "0eb9ab55248c0666e6ee254ae67fb46846e6f11a024ba02ee9a7205ae92a1c32",
+        "reg_spriteram.bin": "443431a9e3c639306e0e7fcccb5c051f53d34f5ae0abb64c8c31ee425502f6f6",
+        "reg_videoram.bin": "a319dc3a42ec7c001db6ae5e374fbf0d2628b70eaaeb8fd43651a3bfb79d1414",
+        "reg_vregs.bin": "f346e8dc588264af45d1af39ee9030840d3e760c51f91645e7d5601e2608c0fb",
+        "run.log": "78c39a91304b8428871657ec27f2e71acc4e170265a4759fc603bf4f625209c2",
+        "spriteram.bin": "443431a9e3c639306e0e7fcccb5c051f53d34f5ae0abb64c8c31ee425502f6f6",
+        "videoram.bin": "a319dc3a42ec7c001db6ae5e374fbf0d2628b70eaaeb8fd43651a3bfb79d1414",
+        "workram.bin": "535dd7c57d97c652aaeabaa0035c6d75c95b785104596a04b193a1abca6b8895"
+      }
+    }
+  ],
+  "source_sha256": {
+    "scripts/check_manual_coinage.py": "56292edfd184580df5b271fa22b722692579a2a8b4328f53fa9f5ae69d05f01c",
+    "scripts/mame/manual_coinage.lua": "c2edf9088f3bc90f750d3819b514b67af91813445af601a6216c0f663cc261b4"
+  },
+  "scope": "Six real input-port coin pulses per slot/encoding; raw DIP checked from power-on configuration and every recorded frame. Candidate RAM bytes matching manual credit schedules are observations, pending cross-case and screen validation. No live FPGA coin accounting or physical hardware claim."
+}

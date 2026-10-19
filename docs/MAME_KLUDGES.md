@@ -58,3 +58,9 @@ OSD flip are XORed, so two requests restore normal orientation.
 ## US manual coinage omissions
 
 MAME 0.289 omits coin nibbles 1 (cumulative 1C/1C, 2C/3C) and E (4C/1C), both documented in the US manual. The US MRA adds these two labels for both slots; no RTL or Japanese settings change. See [MANUAL_DIPS.md](MANUAL_DIPS.md) for source hashes, switch order and the factory/demo-sound default discrepancy.
+
+The actual US ROM also confirms both manual-only encodings. In the pinned MAME
+input naming, Coin 1 uses the Coin B/high nibble and Coin 2 uses Coin A/low;
+a known 2C/1C control and six-coin credit histories establish that association.
+See MANUAL_DIPS.md and reference/manual_coinage_checks.json. Core pin mapping
+and MAME field labels are preserved; no physical wiring claim is made.

@@ -1,0 +1,124 @@
+{
+  "accepted": true,
+  "mameversion": "0289",
+  "game": "rpunch",
+  "coin_pulses_per_case": 6,
+  "frames_per_pulse": 6,
+  "observed_credit_ram_byte": "0x0FC19F",
+  "matching_credit_display_byte": "0x0FD987",
+  "raw_dips_applied_from_power_on": true,
+  "actual_input_ports_verified": true,
+  "observations": [
+    {
+      "dip_slot": "A",
+      "mame_coin_input": 2,
+      "nibble": 12,
+      "credits_after_each_coin": [
+        0,
+        1,
+        1,
+        2,
+        2,
+        3
+      ]
+    },
+    {
+      "dip_slot": "B",
+      "mame_coin_input": 1,
+      "nibble": 12,
+      "credits_after_each_coin": [
+        0,
+        1,
+        1,
+        2,
+        2,
+        3
+      ]
+    },
+    {
+      "dip_slot": "A",
+      "mame_coin_input": 2,
+      "nibble": 0,
+      "credits_after_each_coin": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "dip_slot": "A",
+      "mame_coin_input": 2,
+      "nibble": 1,
+      "credits_after_each_coin": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "dip_slot": "A",
+      "mame_coin_input": 2,
+      "nibble": 14,
+      "credits_after_each_coin": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "dip_slot": "B",
+      "mame_coin_input": 1,
+      "nibble": 0,
+      "credits_after_each_coin": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "dip_slot": "B",
+      "mame_coin_input": 1,
+      "nibble": 1,
+      "credits_after_each_coin": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "dip_slot": "B",
+      "mame_coin_input": 1,
+      "nibble": 14,
+      "credits_after_each_coin": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "source_sha256": {
+    "scripts/check_manual_coinage.py": "56292edfd184580df5b271fa22b722692579a2a8b4328f53fa9f5ae69d05f01c",
+    "scripts/mame/manual_coinage.lua": "c2edf9088f3bc90f750d3819b514b67af91813445af601a6216c0f663cc261b4"
+  },
+  "archive": "D:\\git\\RabbitPunch-maintenance-work\\debug\\fit_archive\\manual_coinage_mame",
+  "manifest_sha256": "63f14f09bb2ee0220e8acfb94cebd66a2801de5abeebb2af74512d21b95a1fdb",
+  "scope": "Real US game ROM in pinned MAME, raw DIP configuration verified each frame, six actual input-port coin pulses per setting and both slots, credit histories checked against the manual and a known 2C/1C control. MAME input Coin 1 uses Coin B nibble and Coin 2 uses Coin A. No physical wiring or live FPGA accounting claim."
+}
