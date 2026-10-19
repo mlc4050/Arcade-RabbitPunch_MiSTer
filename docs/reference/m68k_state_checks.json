@@ -3,15 +3,16 @@
   "pass_marker": "M68K_STATE_PASS",
   "log": "debug\\baselines\\m68k_state\\result.log",
   "cpu": "m68k",
+  "initial_status": 8192,
   "source_sha256": {
     "rtl/cpu/fx68k/fx68k.sv": "846602cd0fc25a9eee04f641ba5e6fcfa05a80a1db417898040c78b1f7449a33",
     "rtl/cpu/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
     "rtl/cpu/fx68k/uaddrPla.sv": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a",
     "rtl/rabbitpunch_fx68k.vhd": "f58d91e270636a92f629854f63e923aa6a8a7175b5f9d409a0f2e401e0a53ea1",
     "rtl/state/vendor/nmk16/ss_m68k_park.sv": "c6d989839e3ad187bce208293624085255cf4d354ed44f91463755b8b53d7abc",
-    "rtl/state/rabbitpunch_m68k_state.vhd": "b4fa8ac3b95e825e8c9197be2c6fd411671241b0a52aa6c53a347679c20fcb0c",
+    "rtl/state/rabbitpunch_m68k_state.vhd": "f346003269f55640599e2c277f86137f0c8cb3c33db647331548e755d41ae26e",
     "sim/state/m68k_state_tb.vhd": "3dd2a54cf4510506e3e5a1f87466d6a2a3534573f6acaa98419c86b2b154bd90"
   },
-  "log_sha256": "10be0e8db3cfb9e3cbbf11420c5e65f70bd788f283d3266d8619887b08f0877c",
-  "scope": "Native fx68k, unchanged NMK16 monitor helper, descriptive VHDL wrapper and VHDL memory/stimulus/scoreboard. Architectural register/64KiB RAM round trip with 400 ordered resumed game writes; USP separately checked. Synthetic continuously running supervisor program with SR interrupt mask zero only; fully masked case did not park and remains unresolved; STOP, pending normal interrupt, real game bus, Z80, sound, DDR/file slots and physical hardware are separate gates. Testbench snapshots are not a production state engine."
+  "log_sha256": "c99902fe76cb92b6948ef831f6b32377f09b9266a7aef2475d0731b6447b73d9",
+  "scope": "Native fx68k, unchanged NMK16 monitor helper, descriptive VHDL wrapper and VHDL memory/stimulus/scoreboard. Architectural register/64KiB RAM round trip with 400 ordered resumed game writes; USP separately checked. Synthetic continuously running supervisor program; initial SR is recorded separately; masked and unmasked cases now enter through a resettable VHDL interrupt-request path; STOP, pending normal interrupt, real game bus, Z80, sound, DDR/file slots and physical hardware are separate gates. Testbench snapshots are not a production state engine."
 }
