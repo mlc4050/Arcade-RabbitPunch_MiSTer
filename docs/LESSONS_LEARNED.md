@@ -1212,6 +1212,27 @@ ack address that is also an input port must acknowledge on writes only.
 
 ## Driving MAME as a reference generator (Lua)
 
+
+- **[RabbitPunch] Callback errors can coexist with a capture-complete marker.**
+  The first extended reference runner checked run.lua's lua_error.txt but missed
+  capture.lua's ERROR.txt. A missing Lua variable prevented the input callback,
+  while the separate frame callback still wrote a snapshot and CORE_CAPTURE_OK.
+  Reject both error files and callback-error markers before accepting completion.
+  Record actual input-port reads, not only requested field values. An injected
+  callback-error control must fail even when the capture-complete marker appears.
+  Evidence: reference/gameplay_reference_error_guard_checks.json and the corrected
+  reference/gameplay_mame_schedule_verified_checks.json.
+
+- **[RabbitPunch] Prove the coin-input/DIP association before judging a coinage
+  setting.** The pinned US ROM associates MAME Coin 1 with Coin B/high nibble
+  and Coin 2 with Coin A/low nibble. Pairing A/1 and B/2 made even a known 2C/1C
+  control appear ignored despite correct raw DSW reads. Crossed inputs reproduce
+  both known control and manual-only bonus/4C1 schedules. Validate power-on
+  raw DIPs, actual coin-port pulses and credit history; preserve upstream names
+  until hardware evidence resolves physical labels. See MANUAL_DIPS.md and
+  reference/manual_coinage_checks.json.
+
+
 - **[BallySente] A sound reference captured without starting the game is the SOUND BOARD's boot
   routine, not the game's.** Four Bally/Sente cartridges were captured for 10 s each and replayed
   against the model, and all four produced identical numbers to four significant figures. That
