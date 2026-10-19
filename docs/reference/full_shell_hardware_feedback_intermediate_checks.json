@@ -1,0 +1,42 @@
+{
+  "commit": "439265b862e70c46b373d2152c409b1e68c75164",
+  "revision": "RabbitPunch",
+  "seed": 3,
+  "accepted": true,
+  "hardware_verified": false,
+  "timing_checks": 144,
+  "minimum_slack_ns": {
+    "Setup": 0.501,
+    "Hold": 0.082,
+    "Recovery": 3.829,
+    "Removal": 0.218,
+    "Minimum Pulse Width": 1.122
+  },
+  "archive": "debug/fit_archive/full_shell_439265b_hardware_feedback",
+  "artifact_sha256": {
+    "BUILT_COMMIT": "b34c5f3ab2a2ea8f141881314b8500c12a68698e7e977e8d0d060d157704ac15",
+    "clock_tree.tsv": "84e7ad00c36d2825afffa04585aeb5716290600bc22f269ae0ba50b4ef459c06",
+    "framework_timing_scope.json": "62ee1fbf1806ef45ea1300bbae65a60b231b0acaf68ee903ce42fb1d7af95a96",
+    "full_clock_tree.json": "d2f0e7af498ed5364b60ff639bc4d513810c1b057ebca2e9ee53edb69510452b",
+    "full_clock_tree.log": "d969368bd2ff61f90157513b134e5cb0ee07b136c82d65ad6b0ac15ea6543660",
+    "q_staged.log": "6f9ffa1115e1179248b845710f795b0c076883853e9f3f412c476571104288b2",
+    "RabbitPunch.asm.rpt": "e59f1242bb55ce6eac3ae446490f5e46f821d05501d9390ed74a1ed978feb1ff",
+    "RabbitPunch.done": "1bca382e4101dbb0403a6b316549da9ea09d701b81757a0e2fdde9fb5c762d82",
+    "RabbitPunch.fit.rpt": "a283ea509b25b9d4d922f4a169160fa808568b56ab1338b4bf92ee3024d735ad",
+    "RabbitPunch.fit.smsg": "00fd517c3a675f4fd051094cac032c6a3349d6339d28e2f24b53a02093356353",
+    "RabbitPunch.fit.summary": "0567bea9447015d983a9cccc43e09dc1dbf66c1251287c32536db99557202c81",
+    "RabbitPunch.flow.rpt": "4241d046ca28ee4f3d624f6c6e8bbd7088e3f80fcaec29178b389ea089128d2c",
+    "RabbitPunch.jdi": "82c5b63d33649bb63c4f2eccdfc7fc985ad4877b829cc4f75e1b03ec94da0f2a",
+    "RabbitPunch.map.rpt": "01517b70cd33c16c9b0e351f62afd9fd3e66408ec046cfaf5d15a4d9993bf00d",
+    "RabbitPunch.map.smsg": "c27baf3761409675ae9a6a1f2716d7840ec3d8fd8ba62aa05fd2c6deec061c31",
+    "RabbitPunch.map.summary": "18314e836d55fc87d6ea639c7daa6bc8a6251043563f4124aeff6a23909ae152",
+    "RabbitPunch.pin": "d33728eb0a1bd76d7d6e579e0c22fce92bebeeaaf0117b1f7823f2c427041d9a",
+    "RabbitPunch.rbf": "113559d62e2a56af3b06c16d73634225fbfc3bda2b4019030eb0b86b9743f4b4",
+    "RabbitPunch.sld": "c7de3cc5544a1144192d6825eb69cf5e065bf99f16fb9acb42fadd23adede991",
+    "RabbitPunch.sof": "8ef1b2f33bafa92243db09a53b3e35ad566753f806f43c62d0e61b9560abfdf0",
+    "RabbitPunch.sta.rpt": "ef8a8cce7d6d736a8929125d15c8d5d0870d83f08e4fbdb165f7ce29dc9694e3",
+    "RabbitPunch.sta.summary": "3685031b1da3157e51e26793d42f8baaafd1a50ca5aa2764bc9b0c4631ebe3bf",
+    "source.tar": "ebfd675a93b78bcced99f9bf9de65c1791dd945794605701061de2daf4a40425"
+  },
+  "scope": "DIP menu, corrected action labels and presented pause mute; full build and scoped timing gates pass. Predates the requested video submenu/manual NVRAM controls and full savestates."
+}
