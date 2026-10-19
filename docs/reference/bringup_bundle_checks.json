@@ -1,25 +1,25 @@
 {
-  "packager_sha256": "8fd6af7e753fb4295536b3940328d03f9d28892d96ab76ce338fd0b35cba3b6f",
+  "packager_sha256": "9558db427453564caf90084bc3208cee803b21de9016b26f6f1d2839401ca01d",
   "prepared": true,
   "hardware_verified": false,
   "deployed": false,
   "published": false,
-  "packaging_commit": "f173c1e24d47efbeea862c56eb95932cd316263f",
-  "rbf_commit": "bac5286404eea7aaad8fa3ddfa6d30ab4a89b33c",
+  "packaging_commit": "c1af3a56092720139819a03ee1e3f26d83c7f418",
+  "rbf_commit": "3dfbd332d078da18f1d762df7fcb34be8cb05a51",
   "revision": "RabbitPunch",
   "seed": 3,
   "timing_checks": 144,
   "minimum_slack_ns": {
-    "Setup": 0.424,
-    "Hold": 0.071,
-    "Recovery": 3.119,
-    "Removal": 0.352,
+    "Setup": 0.419,
+    "Hold": 0.079,
+    "Recovery": 3.629,
+    "Removal": 0.376,
     "Minimum Pulse Width": 1.122
   },
-  "fit_report_sha256": "ebef50811ff8128950f1ed34575c106c7e1a08ec1c99769557ddfcb22219cb63",
-  "archive_worktree": "D:\\git\\RabbitPunch-maintenance-work",
-  "artifact_archive": "debug/fit_archive/full_shell_bac5286_osd_nvram",
-  "output": "D:\\git\\Arcade-RabbitPunch_MiSTer\\debug\\bringup\\20261018_bac5286_osd_nvram",
+  "fit_report_sha256": "bce6e94672ea0c79e03134f89bc4393b3ddac4908d18bf2902c21d28af04c54c",
+  "archive_worktree": "D:\\git\\Arcade-RabbitPunch_MiSTer",
+  "artifact_archive": "debug/fit_archive/full_shell_3dfbd33_final_osd_nvram",
+  "output": "D:\\git\\Arcade-RabbitPunch_MiSTer\\debug\\bringup\\20261018_3dfbd33_final_osd_nvram",
   "production_sources_match_timed_commit": true,
   "debug_probes": false,
   "mras": [
@@ -27,51 +27,51 @@
       "source": "releases/_dev/Rabbit Punch (US).mra",
       "destination": "_Arcade/Rabbit Punch (US).mra",
       "set": "rpunch",
-      "source_sha256": "747bb6f6d2a61d0e0cde0082da13cf2b7307b3889bf8096516a7ca50057e4bbd",
-      "sha256": "747bb6f6d2a61d0e0cde0082da13cf2b7307b3889bf8096516a7ca50057e4bbd",
+      "source_sha256": "7c9d04943b261fbcda7c1db29093eb8981946e14f25d029ce2012391b4b5b540",
+      "sha256": "7c9d04943b261fbcda7c1db29093eb8981946e14f25d029ce2012391b4b5b540",
       "metadata_changes": []
     },
     {
       "source": "releases/_dev/Rabio Lepus (Japan).mra",
       "destination": "_Arcade/Rabio Lepus (Japan).mra",
       "set": "rabiolep",
-      "source_sha256": "6b50caf32d63601a2968bea303ce4603f29bc7952a6bd3754a93803dd7aedce9",
-      "sha256": "6b50caf32d63601a2968bea303ce4603f29bc7952a6bd3754a93803dd7aedce9",
+      "source_sha256": "88fc818bcb22ed24cd34832b7ebb443f8acfeed59e8b95895b928d348a585c82",
+      "sha256": "88fc818bcb22ed24cd34832b7ebb443f8acfeed59e8b95895b928d348a585c82",
       "metadata_changes": []
     },
     {
       "source": "releases/_dev/_ddr/Rabbit Punch (US) - DDR load.mra",
       "destination": "_Arcade/_Alternatives/DDR load/Rabbit Punch (US) - DDR load.mra",
       "set": "rpunch",
-      "source_sha256": "ef964ae4ef232f49cd278b44d709eb9a4e1c123b41593f27f898e751521f23b7",
-      "sha256": "ef964ae4ef232f49cd278b44d709eb9a4e1c123b41593f27f898e751521f23b7",
+      "source_sha256": "0076a75e3f29029bb5c51b92ed549ec3dc0e234b8b7e269bbcfac268ab9e0288",
+      "sha256": "0076a75e3f29029bb5c51b92ed549ec3dc0e234b8b7e269bbcfac268ab9e0288",
       "metadata_changes": []
     },
     {
       "source": "releases/_dev/_ddr/Rabio Lepus (Japan) - DDR load.mra",
       "destination": "_Arcade/_Alternatives/DDR load/Rabio Lepus (Japan) - DDR load.mra",
       "set": "rabiolep",
-      "source_sha256": "9a6586f3ea69f056be9c1c8d480d3ade7ae32f19f397c0c046b6739bf1386597",
-      "sha256": "9a6586f3ea69f056be9c1c8d480d3ade7ae32f19f397c0c046b6739bf1386597",
+      "source_sha256": "49b11d45b87745adab8eb0ba3f837775edf2e5ba53712a1d44f404dd3543dc3c",
+      "sha256": "49b11d45b87745adab8eb0ba3f837775edf2e5ba53712a1d44f404dd3543dc3c",
       "metadata_changes": []
     },
     {
       "source": "releases/_dev/_diagnostic/RabbitPunch_Diagnostic.mra",
       "destination": "_Arcade/_Diagnostic/RabbitPunch_Diagnostic.mra",
       "set": "rpdiag",
-      "source_sha256": "dd7f2abedab29d74d2d0f2d237e6692c85840fd41ad4afb7f2eeea60484d3441",
-      "sha256": "dd7f2abedab29d74d2d0f2d237e6692c85840fd41ad4afb7f2eeea60484d3441",
+      "source_sha256": "adeaf8c6b508375d2e4c997ca04e0781d89cfc5f1e94b7d73a40d52fd010db00",
+      "sha256": "adeaf8c6b508375d2e4c997ca04e0781d89cfc5f1e94b7d73a40d52fd010db00",
       "metadata_changes": []
     }
   ],
   "files": {
-    "README.txt": "8be8e99748e014395e8bd19ac1a946253a62ebfc663de9a81699c31d4f2ca82c",
-    "_Arcade/Rabbit Punch (US).mra": "747bb6f6d2a61d0e0cde0082da13cf2b7307b3889bf8096516a7ca50057e4bbd",
-    "_Arcade/Rabio Lepus (Japan).mra": "6b50caf32d63601a2968bea303ce4603f29bc7952a6bd3754a93803dd7aedce9",
-    "_Arcade/cores/Arcade-RabbitPunch_20261018.rbf": "6fc278be8f9879dcee82566ac7d46e6219219dbdf1f9cbc0cc636e88841c4391",
-    "_Arcade/_Diagnostic/RabbitPunch_Diagnostic.mra": "dd7f2abedab29d74d2d0f2d237e6692c85840fd41ad4afb7f2eeea60484d3441",
-    "_Arcade/_Alternatives/DDR load/Rabbit Punch (US) - DDR load.mra": "ef964ae4ef232f49cd278b44d709eb9a4e1c123b41593f27f898e751521f23b7",
-    "_Arcade/_Alternatives/DDR load/Rabio Lepus (Japan) - DDR load.mra": "9a6586f3ea69f056be9c1c8d480d3ade7ae32f19f397c0c046b6739bf1386597"
+    "README.txt": "e96ec8a01b38786eb16dd22336b1b6071c1dd048eefcd6786b4133b7e40a7c6d",
+    "_Arcade/Rabbit Punch (US).mra": "7c9d04943b261fbcda7c1db29093eb8981946e14f25d029ce2012391b4b5b540",
+    "_Arcade/Rabio Lepus (Japan).mra": "88fc818bcb22ed24cd34832b7ebb443f8acfeed59e8b95895b928d348a585c82",
+    "_Arcade/cores/Arcade-RabbitPunch_20261018.rbf": "2848c5750c1fbe4d8201a34c987d9dfd4761dba44c4c4367ec5ed5dd6c32a92b",
+    "_Arcade/_Diagnostic/RabbitPunch_Diagnostic.mra": "adeaf8c6b508375d2e4c997ca04e0781d89cfc5f1e94b7d73a40d52fd010db00",
+    "_Arcade/_Alternatives/DDR load/Rabbit Punch (US) - DDR load.mra": "0076a75e3f29029bb5c51b92ed549ec3dc0e234b8b7e269bbcfac268ab9e0288",
+    "_Arcade/_Alternatives/DDR load/Rabio Lepus (Japan) - DDR load.mra": "49b11d45b87745adab8eb0ba3f837775edf2e5ba53712a1d44f404dd3543dc3c"
   },
   "scope": "Private source-matched timed RBF plus byte-identical development MRAs; no ROM ZIPs, publication, deployment, JTAG or hardware execution. Required reported timing passes under the previously documented provisional SDRAM and inherited peripheral coverage scope."
 }
