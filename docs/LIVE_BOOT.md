@@ -23,57 +23,46 @@ The exact tested prototype runner retains inherited diagnostic naming and suppor
 
 Reports are `reference/fast_game_{rabiolep,rpunch}_120_checks.json`, `reference/live_boot_{rabiolep,rpunch}_120_image_checks.json` and `reference/live_boot_120_archive.json`. The latter records immutable private archive `debug/fit_archive/live_boot_120_19a6d19dd5/` in the video-options worktree, with exact tested sources, generated models, binaries, ROM-derived inputs, CPU traces, raw images and MAME captures. ROM-derived files stay private and ignored.
 
-## Extended gameplay/PCM test prepared
+## Pending extended pad/PCM run
 
-The versioned VHDL fixture in sim/fast/gameplay_fast_fixture.vhd and runner
-scripts/run_gameplay_tests.py extend the test to 1800 frames. Coin is asserted
-at frame 900 and Start at 990, each for six frames. Shoot is held after Start,
-Missile pulses once and vertical movement alternates. PCM is observed from raw
-FM left/right, ADPCM and the actual mixed mono output; the VHDL sample strobe is
-delayed four clocks after a rising YM sample marker to allow mixer settling.
-The runner checks the 746/747 system-clock sample cadence and rejects a
-completed all-zero mono capture. No independent waveform equality is claimed.
+The versioned VHDL fixture sim/fast/gameplay_fast_fixture.vhd drives the same
+production pad adapter as the complete MiSTer shell. It uses named layout slots
+for Coin, Start, Shoot and Missile, with alternating vertical movement. Current
+cases are rabiolep_1800_pad and rpunch_1800_pad: Coin at frame 900, Start at 990,
+six-frame pulses, neutral controls until frame 1290, then Shoot/motion and a
+Missile pulse at 1320. Both long runs remain pending. Applied stimulus alone
+does not prove that a game has entered playable action.
 
-This test is prepared and running, not qualified by the 120-frame results.
-The independent MAME 1800-frame references visibly reach stage 1 for both sets,
-and their complete 62208-pixel images match independent rendering of the
-captured MAME state. See reference/gameplay_mame_schedule_checks.json.
+Actual raw FM stereo, ADPCM and mixed mono PCM are observed, preventing unused
+sound-output pruning. VHDL delays its capture strobe four clocks after the YM
+sample-marker edge for mixer settling. The runner checks the 746/747 system-
+clock sample cadence, rejects a completed all-zero mono capture and produces
+a private 62500 Hz WAV. There is no independent game-waveform or physical
+audible comparison yet. The separate keyed-FM cross-tool proof is recorded
+in SOUND_BRINGUP.md.
 
-An initial two-frame Start pulse failed to start either game in MAME; the own
-incomplete RTL experiments were stopped and privately archived. This is a
-rejected stimulus schedule, not a production RTL failure. The short 1200-frame
-Japanese capture also remains in a title transition; the final endpoint is
-1800 as verified in MAME. Neither stopped run is counted as an accepted test.
+## Reference controls and rejected fixtures
 
-A subsequent fixture audit caught Service Credit (SERVICE bit 0) being pulsed
-instead of Coin 1 (bit 4). The production input adapter already uses bit 4.
-Both incomplete long runs were stopped before their frame-900 injection and
-privately archived; neither is accepted. The corrected case suffix is
-_coin1, explicitly driving bit 4 and Start 1 bit 5. See
-reference/gameplay_service_credit_stimulus_rejected.json.
+The final MAME reference runner uses versioned gameplay_capture.lua. It checks
+actual SERVICE Coin 1/Start 1 and player Missile/Shoot port values, rejects both
+Lua error files and callback error markers, and passes an actual injected-error
+negative control even when capture completion was also printed. Both final
+1800-frame images match independent rendering of their MAME state. This proves
+the reference inputs and renderer comparison; it does not prove live RTL
+gameplay or instruction/raster alignment.
 
-Correction to the initial extended reference claim: the first pulse-length
-generator omitted a Lua pulse_frames declaration and checked lua_error.txt but
-missed ERROR.txt from capture callbacks. Those stage-1 images were attract mode,
-not validated controlled gameplay. Their static software-renderer equality
-still holds. The initial schedule report is explicitly rejected for input
-validation. The corrected runner uses versioned gameplay_capture.lua, rejects
-both error files and callback error markers, and verifies recorded Coin/Start/
-Missile pulse counts from inputs.txt. Corrected output names end in _checked.
+Reports are reference/gameplay_mame_schedule_verified_checks.json and
+reference/gameplay_reference_error_guard_checks.json. Earlier reports remain
+explicitly rejected for their input-schedule claims:
 
-The final corrected schedule uses Coin at 900, Start at 990, and neutral
-controls until frame 1290 before Shoot/motion and a Missile pulse at 1320.
-With immediate held Shoot the games stayed in title/start-release handling;
-the neutral interval permits progress. The earlier effect of pulse duration
-was not isolated and is not claimed as a game requirement. The final MAME
-runner checks actual SERVICE Coin 1/Start 1 and player Missile/Shoot bits,
-rejects callback errors even when CORE_CAPTURE_OK was also printed, and passes
-an actual injected-callback-error negative control. Both final 1800-frame
-reference images match independent rendering of their MAME state. Reports:
-reference/gameplay_mame_schedule_verified_checks.json and
-reference/gameplay_reference_error_guard_checks.json. Earlier schedule reports
-remain explicitly rejected.
+- The first two-frame/immediate-held-Shoot schedule did not reach play. The
+  effect of pulse duration was not isolated; a neutral interval after Start
+  also matters. Own incomplete runs were preserved and stopped.
+- A raw-board fixture initially selected Service Credit instead of Coin 1.
+  Production controls were already correct. Both incomplete runs stopped before
+  injection; the current fixture uses the real pad adapter.
+- The first MAME pulse-length generator omitted a Lua variable and failed to
+  check ERROR.txt. Its stage-1 images were attract mode. Their static rendering
+  comparisons remain valid; their controlled-gameplay claims were withdrawn.
 
-The final live VHDL fixture drives the unchanged production pad adapter using
-the layout's named button slots, rather than duplicating its board-bit map.
-Current live output cases end in _pad. No long-run result is accepted yet.
+No rejected or incomplete run is included in an accepted live gameplay result.

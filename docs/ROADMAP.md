@@ -1,7 +1,8 @@
 # Rabbit Punch / Rabio Lepus MiSTer roadmap
 
 Approved by the user in the originating chat. The core is in simulation and
-implementation bring-up; no complete game or playable RBF exists yet. The
+implementation bring-up. A compiled, timed prototype RBF is prepared in the private
+bring-up bundle; no hardware-verified playable release exists yet. The
 MiSTer framework boundary points to the VHDL machine. Prior non-debug full
 implementation passes, including corrected HDMI rotation in both revisions.
 The newer audio-menu release/debug revisions pass all 144/164 timing checks
@@ -31,8 +32,12 @@ Mono; all four settings pass synthesized-host and connected HPS regressions.
 Supplemental fast sound startup now matches all 4096 ordered writes and all
 215 peripheral values for each game against native ModelSim/MAME, with only the
 existing audited bootstrap bytes exposed. The unsupported block-I/O flag path
-has an executing fatal-guard control. A bounded live both-CPU/game/video run is
-in progress; no visible-gameplay or audible-output result is claimed yet.
+has an executing fatal-guard control. Initial 120-frame executing-game runs have completed: Japan matches all raw
+MAME pixels, while US differs by 34 pixels; both match independent rendering of
+their requested-write state. Longer 1800-frame pad-adapter/PCM runs are pending;
+no live gameplay or audible-output result is claimed yet. Keyed FM additionally
+matches all 256 samples across four outputs between native and fast simulators.
+The US manual-only coinage options match six-coin ROM histories for both slots.
 Development DDR-load MRAs preserve each verified 0x210000-byte image and change
 only the staging address/display description; the default direct MRAs remain.
 
@@ -323,3 +328,19 @@ and physical display behavior remain separate gates.
 
 
 Initial executing-game video now reaches 120 frames for both sets. Japan matches all 62208 raw MAME pixels; US differs by 34 pixels, with both images matching an independent render of their CPU-requested write state. This is boot evidence, not gameplay or audible audio proof. See LIVE_BOOT.md for explicit scopes and unresolved temporal alignment.
+
+## Current private artifact and running gates
+
+The first compiled RBF is complete: source 86c437a, release seed 3,
+3116972 bytes, all 144 required timing checks positive. The current private
+bundle includes the manual-corrected development MRAs; see BRINGUP_BUNDLE.md
+and reference/bringup_bundle_checks.json. Compilation is complete; physical
+boot/play, analog/HDMI display, sound and persistence remain unverified.
+
+The native Intel RAM/vendor PLL diagnostic normal and corrupt branches are
+still running in the main checkout. The independent fast gameplay/PCM cases
+rabiolep_1800_pad and rpunch_1800_pad run in the video-options worktree with
+their sources frozen. Do not edit their inputs until completion. The final
+MAME reference schedule and actual port traces are separately qualified in
+reference/gameplay_mame_schedule_verified_checks.json; this is a reference
+qualification, not a completed live FPGA test.
