@@ -353,3 +353,17 @@ The OSD DIP page was missing: the MRAs and index-254 DIP latch existed, but the
 host configuration omitted the mandatory DIP token. Add that menu entry and
 rebuild the complete release candidate through implementation and timing.
 The original hardware-tested artifact remains preserved unchanged.
+
+## Requested OSD and savestate follow-up
+
+Group Aspect ratio, Rotation, CRT Adjust and Scale under Video settings, retaining
+Flip Screen and Scandoubler effects there too. DIP switches and Pause when OSD
+is open remain on the main menu. Remove the OSD Pause toggle and ignore its old
+saved status bit; controller Pause remains. Rename high-score autosave to
+Autosave NVRAM and add an acknowledged fresh-snapshot Save NVRAM action.
+
+Full savestates are explicitly requested: slot, autoincrement, save and restore.
+Do not expose nonworking actions. Study local NMK16 fx68k/T80 park helpers and
+KonamiGX bus-based register capture, then write a per-core feasibility/format
+plan from STATE.md before implementation. Existing RAM reachability is partial;
+CPU registers, sound state and restore/raster coordination still need work.

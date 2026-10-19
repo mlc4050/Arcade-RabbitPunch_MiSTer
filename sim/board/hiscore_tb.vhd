@@ -15,6 +15,7 @@ architecture test of hiscore_tb is
     signal s_initialize, s_reset : std_logic := '1';
     signal s_profile, s_us, s_osd, s_autosave : std_logic := '0';
     signal s_download, s_dump_write, s_upload : std_logic := '0';
+    signal s_manual_save : std_logic := '0';
     signal su27_dump_address : unsigned(26 downto 0) := (others => '0');
     signal su8_dump_in, su8_dump_out : unsigned(7 downto 0) := (others => '0');
     signal s_wait, s_request, s_initialized, s_saved, s_dirty : std_logic;
@@ -50,6 +51,7 @@ begin
                 iu16_check_wait => to_unsigned(19, 16),
                 i_osd_open => s_osd,
                 i_autosave => s_autosave,
+                i_manual_save => s_manual_save,
                 i_dump_download => s_download,
                 i_dump_write => s_dump_write,
                 i_dump_upload => s_upload,
@@ -79,6 +81,7 @@ begin
                 i_game_reset => s_reset,
                 i_osd_open => s_osd,
                 i_autosave => s_autosave,
+                i_manual_save => s_manual_save,
                 i_download => s_download,
                 i_upload => s_upload,
                 iu16_file_index => su16_file_index,
@@ -163,8 +166,8 @@ begin
                 vint_pause_delay := vint_pause_delay + 1;
             end if;
             if (s_request = '1') then
-                assert (s_saved = '1' and s_dirty = '1')
-                    report "Upload requested before a complete dirty score image" severity failure;
+                assert (s_saved = '1' and s_wait = '0' and (s_dirty = '1' or s_manual_save = '1'))
+                    report "Upload requested without a complete changed or explicitly saved image" severity failure;
                 sint_upload_requests <= sint_upload_requests + 1;
             end if;
             if (s_bus_request = '1') then
@@ -487,8 +490,31 @@ begin
             wait_initialized;
             assert (s_saved = '1') report "First run without a file never became saveable" severity failure;
             check_upload(2);
+            -- Manual save must capture fresh RAM even with autosave/OSD off.
+            s_autosave <= '0';
+            s_osd <= '0';
+            set_table(1);
+            cycles(3);
+            vint_notices := sint_upload_requests;
+            s_manual_save <= '1';
+            cycles(50000);
+            assert (sint_upload_requests = vint_notices + 1)
+                report "Manual NVRAM save did not request one fresh upload" severity failure;
+            check_upload(1);
+            cycles(300);
+            assert (sint_upload_requests = vint_notices + 1)
+                report "Held manual NVRAM action repeated its request" severity failure;
+            s_manual_save <= '0';
+            cycles(3);
+            s_manual_save <= '1';
+            cycles(50000);
+            assert (sint_upload_requests = vint_notices + 2)
+                report "Manual save did not save an unchanged snapshot" severity failure;
+            check_upload(1);
+            s_manual_save <= '0';
+            cycles(3);
         end loop;
-        report "HISCORE_PASS sets=2 captured_geometry=checked sentinel_gate=checked changed_guard_bytes=checked native_ram_lanes_neighbors=checked delayed_ack=checked atomic_bank_commit=checked incomplete_reordered_oversize_downloads=checked reset_debt=checked first_run_without_file=checked concurrent_upload_bank_stability=checked busy_download_announcement=checked load_while_game_reset=checked";
+        report "HISCORE_PASS manual_save_fresh_and_unchanged=checked held_manual_no_repeat=checked sets=2 captured_geometry=checked sentinel_gate=checked changed_guard_bytes=checked native_ram_lanes_neighbors=checked delayed_ack=checked atomic_bank_commit=checked incomplete_reordered_oversize_downloads=checked reset_debt=checked first_run_without_file=checked concurrent_upload_bank_stability=checked busy_download_announcement=checked load_while_game_reset=checked";
         finish;
         wait;
     end process;

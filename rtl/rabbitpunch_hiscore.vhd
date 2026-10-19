@@ -19,6 +19,7 @@ entity rabbitpunch_hiscore is
         iu16_check_wait : in unsigned(15 downto 0);
         i_osd_open : in std_logic;
         i_autosave : in std_logic;
+        i_manual_save : in std_logic := '0';
         i_dump_download : in std_logic;
         i_dump_write : in std_logic;
         i_dump_upload : in std_logic;
@@ -51,6 +52,7 @@ architecture rtl of rabbitpunch_hiscore is
     signal s_dirty, s_notified, s_changed, s_capture_pending : std_logic := '0';
     signal s_old_download, s_old_upload, s_old_osd, s_old_profile : std_logic := '0';
     signal s_download_bad : std_logic := '0';
+    signal s_old_manual_save, s_manual_pending, s_manual_capture : std_logic := '0';
     signal su8_download_count : unsigned(7 downto 0) := (others => '0');
     signal su7_index : unsigned(6 downto 0) := (others => '0');
     signal su7_length : unsigned(6 downto 0);
@@ -111,6 +113,7 @@ begin
             s_old_download <= i_dump_download;
             s_old_upload <= i_dump_upload;
             s_old_osd <= i_osd_open;
+            s_old_manual_save <= i_manual_save;
             s_old_profile <= i_profile_valid;
             if (i_initialize = '1') then
                 styp_state <= STATE_IDLE;
@@ -120,6 +123,8 @@ begin
                 s_dirty <= '0';
                 s_notified <= '0';
                 s_capture_pending <= '0';
+                s_manual_pending <= '0';
+                s_manual_capture <= '0';
                 s_download_bad <= '0';
                 su8_download_count <= (others => '0');
                 su32_wait <= iu32_start_wait;
@@ -130,6 +135,8 @@ begin
                 s_dirty <= '0';
                 s_notified <= '0';
                 s_capture_pending <= '0';
+                s_manual_pending <= '0';
+                s_manual_capture <= '0';
                 su32_wait <= iu32_start_wait;
             else
                 -- Host snapshot loading is independent of the gameplay reset.
@@ -164,16 +171,25 @@ begin
                     styp_state <= STATE_IDLE;
                     s_initialized <= '0';
                     s_capture_pending <= '0';
+                    s_manual_pending <= '0';
+                    s_manual_capture <= '0';
                     su32_wait <= iu32_start_wait;
                 else
+                    if (i_manual_save = '1' and s_old_manual_save = '0' and i_profile_valid = '1') then
+                        s_manual_pending <= '1';
+                        s_manual_capture <= '1';
+                        s_capture_pending <= '1';
+                    end if;
                     if (i_osd_open = '1' and s_old_osd = '0' and s_initialized = '1') then
                         s_capture_pending <= '1';
                     end if;
                     if (styp_state = STATE_IDLE and i_dump_download = '0' and i_dump_upload = '0' and
-                        s_dirty = '1' and s_saved_valid = '1' and s_notified = '0' and s_old_download = '0' and
-                        i_autosave = '1' and i_osd_open = '1' and s_capture_pending = '0') then
+                        s_saved_valid = '1' and s_old_download = '0' and s_capture_pending = '0' and
+                        ((s_dirty = '1' and s_notified = '0' and i_autosave = '1' and i_osd_open = '1') or
+                         (s_manual_pending = '1' and s_manual_capture = '0'))) then
                         o_upload_request <= '1';
                         s_notified <= '1';
+                        s_manual_pending <= '0';
                     end if;
                     -- Native HPS may announce a transfer while wait is asserted.
                     -- Finish accepted RAM work before admitting its first data byte.
@@ -267,6 +283,7 @@ begin
                                     s_saved_bank <= not s_saved_bank;
                                     s_saved_valid <= '1';
                                     s_initialized <= '1';
+                                    s_manual_capture <= '0';
                                     if (s_changed = '1') then
                                         s_dirty <= '1';
                                         s_notified <= '0';

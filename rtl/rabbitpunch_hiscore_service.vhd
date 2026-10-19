@@ -15,6 +15,7 @@ entity rabbitpunch_hiscore_service is
         i_game_reset : in std_logic;
         i_osd_open : in std_logic;
         i_autosave : in std_logic;
+        i_manual_save : in std_logic := '0';
         i_download : in std_logic;
         i_upload : in std_logic;
         iu16_file_index : in unsigned(15 downto 0);
@@ -79,6 +80,7 @@ begin
             iu16_check_wait => su16_check_wait,
             i_osd_open => i_osd_open,
             i_autosave => i_autosave,
+            i_manual_save => i_manual_save,
             i_dump_download => s_dump_download,
             i_dump_write => i_write,
             i_dump_upload => s_dump_upload,

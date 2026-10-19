@@ -3,15 +3,15 @@
   "pass_marker": "HISCORE_PASS",
   "log": "debug\\baselines\\hiscore_service\\result.log",
   "source_sha256": {
-    "rtl/rabbitpunch_ram8.vhd": "fe34437890ca1cc79c920831062d7e43f2f0d2c01dd40fc7323e9614920ffee1",
-    "rtl/rabbitpunch_ram16.vhd": "944818901a265eb00e376732c43da881745b6e020303bb907283f3a2aeb46beb",
+    "rtl/rabbitpunch_ram8.vhd": "baff6e5a11280435e74ad8581f4be5cb68fb24ad8849c7ccd86ef38760397f4a",
+    "rtl/rabbitpunch_ram16.vhd": "74d32c1783ba829da369ad5520c9f24d5197c43052770fd2a22de07b50516acc",
     "rtl/rabbitpunch_maintenance.vhd": "19d90ccaf6c967a05b7c6964dceb46e34ba7945bf3ae3a9e30d7cade5c6c1268",
-    "rtl/rabbitpunch_hiscore.vhd": "ae503d52f8bf71d1ea5fcce76bae4a5e6936fd18a1babde342f80b8be5188b24",
+    "rtl/rabbitpunch_hiscore.vhd": "d6bf4cfb9a6da0459d0fdbe07e7ca94ea05903c96277bef32a35cfce526ea202",
     "rtl/rabbitpunch_hiscore_config.vhd": "fcb70ea11a4ea24040d0b1d09c7ceb1512e4527cfad06c316f3aea79ac614d6d",
-    "rtl/rabbitpunch_hiscore_service.vhd": "4428ab8031e87adcc6ec81e781fd055d7bc93461cef11a6a6defa07e45bd5d2b",
-    "sim/board/hiscore_tb.vhd": "aea06023c12ec8d573983bf6cd940b101129722d3346e030f8e08300412f4eb2"
+    "rtl/rabbitpunch_hiscore_service.vhd": "2201b593dd261b036192a6eeca8826ad5d7bc08762caeed77a5a0803c2d9ba16",
+    "sim/board/hiscore_tb.vhd": "9bc73363152465417942a01b1229b5d8649b3c831c9c8a8a4fe5a3a64fa8cf44"
   },
   "vectors_sha256": "56c5bb10b5801c7e067a3a6770e4369431bac096d0f90be7ed958c3974b4af01",
-  "log_sha256": "f1de4d27eaecb9cd61966061e8cb9c26bad21da38062d77580d38c46a28c2725",
-  "scope": "Standard index-3 metadata plus index-4 file service composition. Atomic saved-score banks with native dual-port RAM and production maintenance byte adapter, both captured MAME geometries. Backend pause confirmation and varying acknowledgment latency, initialization guards, changed saved guard bytes, exact restoration and neighbors, first run without a file, unchanged/changed captures, autosave request edges, malformed file rejection and reset debt. No production platform composition or disk persistence claim."
+  "log_sha256": "218aa9aecea59fcc6efcb38587a858d394aa925980576afc3c265a9032106743",
+  "scope": "Standard index-3 metadata plus index-4 file service composition. Atomic saved-score banks with native dual-port RAM and production maintenance byte adapter, both captured MAME geometries. Backend pause confirmation and varying acknowledgment latency, initialization guards, changed saved guard bytes, exact restoration and neighbors, first run without a file, unchanged/changed captures, autosave request edges, malformed file rejection and reset debt. No production platform composition or disk persistence claim. Manual save with autosave and OSD off captures fresh RAM; unchanged explicit saves and held-action no-repeat checked."
 }

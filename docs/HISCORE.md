@@ -172,3 +172,14 @@ through config3/dump4 before checking the CPU's restored word. The preceding
 controller fails the new unit test at the expected reset-held-load assertion
 (private debug/baselines/hiscore_reset_unfixed/negative_control.json). All final
 positive report source/log hashes were checked before this commit.
+
+## Explicit Save NVRAM action
+
+The root menu now calls this persistence Autosave NVRAM and Save NVRAM. The
+manual action uses status bit 4, edge-detected by the score store. It requests
+a fresh acknowledged RAM snapshot, waits for atomic commit, and asks HPS to
+upload index 4 even when autosave is off or the image is unchanged. A held
+action produces one request; a new press can request another. Game/new-ROM
+reset cancels pending manual work. Native RAM tests cover both table lengths,
+fresh upload bytes, unchanged saves, held-action suppression and service
+composition. Physical file creation remains a hardware check.
