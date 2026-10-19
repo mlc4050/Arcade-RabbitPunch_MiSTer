@@ -1,0 +1,80 @@
+[
+  {
+    "set": "rabiolep",
+    "accepted_reference": true,
+    "frames": 1800,
+    "coin_frame": 900,
+    "start_frame": 990,
+    "action_frame": 1290,
+    "pulse_frames": 6,
+    "actual_port_counts": {
+      "coin1": 6,
+      "start1": 6,
+      "missile": 6,
+      "shoot": 510
+    },
+    "pixels": 62208,
+    "differing_pixels": 0,
+    "state": {
+      "flags": "0800",
+      "scroll": [
+        0,
+        504,
+        0,
+        504
+      ],
+      "sprite_count": 54,
+      "sprite_priority": 54,
+      "layer_coverage": [
+        62208,
+        8365,
+        0,
+        1586
+      ]
+    },
+    "reference_manifest_sha256": "16a7c312a2152895a44b2c89b045bc40cb383a0b3566a3621f3b1b6a8b222054",
+    "input_trace_sha256": "256e1f3031780ba9189b4203e2533fb6333fc65b743040e76950175928f97694",
+    "generator_sha256": "b8428e1d509d05fc9fcd1b5fa370a8c6e55d046b0f407e795d0ed5f88f1fd6d5",
+    "lua_sha256": "44b4fb01ff6d1c77241692a81a6805b16e174399cfff1df8f38181414acee94b",
+    "scope": "Final versioned runner, zero callback errors, actual Coin/Start/Missile/Shoot port values checked, both captures advance past title with neutral interval after Start; independent MAME-state software rendering matches every pixel. No live RTL result or temporal alignment claim."
+  },
+  {
+    "set": "rpunch",
+    "accepted_reference": true,
+    "frames": 1800,
+    "coin_frame": 900,
+    "start_frame": 990,
+    "action_frame": 1290,
+    "pulse_frames": 6,
+    "actual_port_counts": {
+      "coin1": 6,
+      "start1": 6,
+      "missile": 6,
+      "shoot": 510
+    },
+    "pixels": 62208,
+    "differing_pixels": 0,
+    "state": {
+      "flags": "0800",
+      "scroll": [
+        0,
+        504,
+        0,
+        504
+      ],
+      "sprite_count": 54,
+      "sprite_priority": 54,
+      "layer_coverage": [
+        62208,
+        11371,
+        0,
+        3063
+      ]
+    },
+    "reference_manifest_sha256": "572b0a3cbe85315f1caefd9566b392e20f567418d205176ae5516c1ae6700ec4",
+    "input_trace_sha256": "256e1f3031780ba9189b4203e2533fb6333fc65b743040e76950175928f97694",
+    "generator_sha256": "b8428e1d509d05fc9fcd1b5fa370a8c6e55d046b0f407e795d0ed5f88f1fd6d5",
+    "lua_sha256": "44b4fb01ff6d1c77241692a81a6805b16e174399cfff1df8f38181414acee94b",
+    "scope": "Final versioned runner, zero callback errors, actual Coin/Start/Missile/Shoot port values checked, both captures advance past title with neutral interval after Start; independent MAME-state software rendering matches every pixel. No live RTL result or temporal alignment claim."
+  }
+]

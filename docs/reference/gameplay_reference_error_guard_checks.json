@@ -1,0 +1,9 @@
+{
+  "accepted": true,
+  "expected_runner_exit": 1,
+  "capture_completion_also_printed": true,
+  "error_marker": "INPUT_ERROR_NEGATIVE_CONTROL",
+  "error_sha256": "d63f8e7933b5007757f540c06826a07fc7815bc599c472732d0f50e47e8c990d",
+  "log_sha256": "bb97a3d6a0beb9a3a8e992b45a8da581eb059dbeb683fbb6b9b9431a43da7136",
+  "scope": "Actual MAME callback raises; guarded capture still prints completion; Python runner correctly rejects ERROR.txt before accepting completion. Expected negative-control rejection, not a production core failure."
+}

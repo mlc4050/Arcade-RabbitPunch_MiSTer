@@ -51,3 +51,29 @@ Both incomplete long runs were stopped before their frame-900 injection and
 privately archived; neither is accepted. The corrected case suffix is
 _coin1, explicitly driving bit 4 and Start 1 bit 5. See
 reference/gameplay_service_credit_stimulus_rejected.json.
+
+Correction to the initial extended reference claim: the first pulse-length
+generator omitted a Lua pulse_frames declaration and checked lua_error.txt but
+missed ERROR.txt from capture callbacks. Those stage-1 images were attract mode,
+not validated controlled gameplay. Their static software-renderer equality
+still holds. The initial schedule report is explicitly rejected for input
+validation. The corrected runner uses versioned gameplay_capture.lua, rejects
+both error files and callback error markers, and verifies recorded Coin/Start/
+Missile pulse counts from inputs.txt. Corrected output names end in _checked.
+
+The final corrected schedule uses Coin at 900, Start at 990, and neutral
+controls until frame 1290 before Shoot/motion and a Missile pulse at 1320.
+With immediate held Shoot the games stayed in title/start-release handling;
+the neutral interval permits progress. The earlier effect of pulse duration
+was not isolated and is not claimed as a game requirement. The final MAME
+runner checks actual SERVICE Coin 1/Start 1 and player Missile/Shoot bits,
+rejects callback errors even when CORE_CAPTURE_OK was also printed, and passes
+an actual injected-callback-error negative control. Both final 1800-frame
+reference images match independent rendering of their MAME state. Reports:
+reference/gameplay_mame_schedule_verified_checks.json and
+reference/gameplay_reference_error_guard_checks.json. Earlier schedule reports
+remain explicitly rejected.
+
+The final live VHDL fixture drives the unchanged production pad adapter using
+the layout's named button slots, rather than duplicating its board-bit map.
+Current live output cases end in _pad. No long-run result is accepted yet.

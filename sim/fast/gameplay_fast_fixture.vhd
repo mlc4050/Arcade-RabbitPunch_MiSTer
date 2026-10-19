@@ -12,6 +12,7 @@ entity gameplay_fast_fixture is
         GINT_CAPTURE_FRAME : positive := 1800;
         GINT_COIN_FRAME : positive := 900;
         GINT_START_FRAME : positive := 990;
+        GINT_ACTION_FRAME : positive := 1290;
         GINT_DIP_DEFAULT : natural := 0
     );
     port (
@@ -64,7 +65,9 @@ architecture test of gameplay_fast_fixture is
     signal s_previous_sample : std_logic := '0';
     signal sint_sample_delay : natural range 0 to 4 := 0;
     signal sint_frame_count : natural := 0;
-    signal su8_player1, su8_service : unsigned(7 downto 0) := (others => '0');
+    signal su8_player1, su8_service : unsigned(7 downto 0);
+    signal su32_joystick : unsigned(31 downto 0) := (others => '0');
+    signal su16_dips : unsigned(15 downto 0);
     signal su16_left_pcm, su16_right_pcm, su16_mono_pcm : unsigned(15 downto 0);
     signal su9_adpcm_pcm : unsigned(8 downto 0);
     signal su16_audio_address : unsigned(15 downto 0);
@@ -79,16 +82,51 @@ architecture test of gameplay_fast_fixture is
     signal su8_output_y, su8_output_red, su8_output_green, su8_output_blue : unsigned(7 downto 0) := (others => '0');
 
 begin
-    -- Physical active-high board inputs, after the separately tested pad/key adapter.
-    -- SERVICE bit 4 is Coin 1, bit 5 is Start 1; bit 0 is Service Credit.
-    su8_service <= x"10" when sint_frame_count >= GINT_COIN_FRAME and sint_frame_count < GINT_COIN_FRAME + 6 else
-                   x"20" when sint_frame_count >= GINT_START_FRAME and sint_frame_count < GINT_START_FRAME + 6 else
-                   x"00";
-    -- Hold Shoot during play, pulse Missile, alternate vertical motion each second.
-    su8_player1 <= x"30" when sint_frame_count >= GINT_START_FRAME + 30 and sint_frame_count < GINT_START_FRAME + 36 else
-                   x"21" when sint_frame_count >= GINT_START_FRAME + 6 and (sint_frame_count / 60) mod 2 = 0 else
-                   x"22" when sint_frame_count >= GINT_START_FRAME + 6 else
-                   x"00";
+    -- Exercise the same pad-to-board adapter used by the complete MiSTer shell.
+    inputs : entity work.rabbitpunch_inputs
+        generic map (
+            GU16_DIP_DEFAULT => to_unsigned(GINT_DIP_DEFAULT, 16)
+        )
+        port map (
+            i_clk => i_clk,
+            i_initialize => '0',
+            iu32_joystick0 => su32_joystick,
+            iu32_joystick1 => (others => '0'),
+            iu11_key_event => (others => '0'),
+            i_file_write => '0',
+            iu16_file_index => (others => '0'),
+            iu27_file_byte_address => (others => '0'),
+            iu8_file_data => (others => '0'),
+            ou8_player1 => su8_player1,
+            ou8_player2 => open,
+            ou8_service => su8_service,
+            ou16_dips => su16_dips,
+            o_pause_pressed => open
+        );
+    pad_stimulus : process(all)
+        variable vu32_actions : unsigned(31 downto 0);
+    begin
+        vu32_actions := (others => '0');
+        if (sint_frame_count >= GINT_COIN_FRAME and sint_frame_count < GINT_COIN_FRAME + 6) then
+            vu32_actions(CINT_JOY_COIN) := '1';
+        end if;
+        if (sint_frame_count >= GINT_START_FRAME and sint_frame_count < GINT_START_FRAME + 6) then
+            vu32_actions(CINT_JOY_START) := '1';
+        end if;
+        -- Leave a neutral interval after Start: immediate held Shoot prevents
+        -- the software from leaving its title/start-release handling in MAME.
+        if (sint_frame_count >= GINT_ACTION_FRAME) then
+            vu32_actions(CINT_JOY_SHOOT) := '1';
+            if (sint_frame_count >= GINT_ACTION_FRAME + 30 and sint_frame_count < GINT_ACTION_FRAME + 36) then
+                vu32_actions(CINT_JOY_MISSILE) := '1';
+            elsif ((sint_frame_count / 60) mod 2 = 0) then
+                vu32_actions(3) := '1';
+            else
+                vu32_actions(2) := '1';
+            end if;
+        end if;
+        su32_joystick <= vu32_actions;
+    end process;
     ou16_left_pcm <= su16_left_pcm;
     ou16_right_pcm <= su16_right_pcm;
     ou16_mono_pcm <= su16_mono_pcm;
@@ -213,7 +251,7 @@ begin
             iu8_player1 => su8_player1,
             iu8_player2 => (others => '0'),
             iu8_service => su8_service,
-            iu16_dips => to_unsigned(GINT_DIP_DEFAULT, 16),
+            iu16_dips => su16_dips,
             i_sound_cpu_enable => s_fractional_sound and s_run,
             i_ym_enable => s_fractional_ym,
             i_ym_half_enable => s_fractional_half,
