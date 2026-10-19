@@ -383,3 +383,7 @@ Manual NVRAM uses T4 rather than R4 so activation keeps the OSD open and returns
 through Main_MiSTer's arcade upload polling path. The previous R4 closed the
 menu; that host behavior is a plausible cause of the user-reported missing save.
 Validate actual .nvm file creation/restoration on the replacement RBF.
+
+The user's confirmed target adds a blank row after Pause when OSD is open,
+before the four savestate controls, with another separator before NVRAM.
+Keep that grouping when those currently pending state actions become functional.

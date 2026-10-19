@@ -28,6 +28,7 @@ package rabbitpunch_config is
         "DIP;" &
         "-;" &
         "O2,Pause when OSD is open,Off,On;" &
+        "-;" &
         "H3O3,Autosave NVRAM,Off,On;" &
         "H3T4,Save NVRAM;" &
         "O[124:123],Audio mix,Mono,None,25%,50%;" &
