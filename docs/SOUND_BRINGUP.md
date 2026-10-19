@@ -375,3 +375,16 @@ see reference/full_shell_hdmi_audio_release_checks.json. The instrumented 896da7
 with setup/hold +0.306/+0.078 ns; its exact archive is recorded in
 reference/full_shell_hdmi_audio_debug_seed2_checks.json. No physical audio
 playback is claimed.
+
+
+## Supplemental fast startup qualification
+
+Both sets now pass the fast T80/sound bus/JT51 startup against the existing native
+ModelSim and MAME traces: 4096 ordered writes, all 215 peripheral values, and only
+the already audited bootstrap stack positions permitted to differ. An executing
+INI negative control proves the unsupported fast block-I/O flag path is fatal.
+No vendor source was changed; no CPU state or sound-RAM deposit is used. See
+TOOLCHAIN.md and reference/fast_sound_boot_archive.json for the conversion boundary,
+rejected initial reset-assertion model and exact source/binary/trace archives.
+This enables further bounded system simulation; it does not establish audible
+output, commands, sample decoding or long game execution in the fast model.

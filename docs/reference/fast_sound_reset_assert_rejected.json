@@ -1,0 +1,17 @@
+{
+  "accepted": false,
+  "scope": "Exported clocked assertion helper defaults false in the two-state model before its asynchronous reset edge, causing time-zero fatal before CPU execution. Preserve rejection; replace tool-only unsupported-path assertion with a concurrent reset-gated assertion. This is not a production CPU or sound failure.",
+  "archive_worktree": "D:\\git\\RabbitPunch-maintenance-work",
+  "archive": "debug/fit_archive/fast_sound_reset_assert_rejected",
+  "artifacts": {
+    "classification.json": "d6d7f8df65055ec7df2abbad7fe2073f288862f09d2b51b490b9c6e468b2f0b0",
+    "clock_bridge.cpp": "f1696b5315df9f38686d001329c1f548805a51b42d25f44fb021e130cc578b27",
+    "export.log": "a94f5a1216f03be93daf61c64c1faba55458a865024b34c5fff75d420f8b47ac",
+    "fixture.v": "d0684115db423d7838b4c9d3925338a0a4eb75c3af1de8e56d44306f64190f98",
+    "run.log": "23421ca1dc59d10f9e71597e3f6a51251f839aea7bb33848a309d68ffc78c405",
+    "runner.py": "417f13e7e5574391f99721f2f75449ca058dbf1504d31cac88b5870dfe9dd82b",
+    "sim.exe": "d5c0a1ce12981cd8c493654bcf8cd9908af53dd4e4886195e6d39a55ebe938a0",
+    "T80.vhd": "c473dd1f709b4749b5bc19848ec13aee60261b5dca5e7eac751cd09f18c61d33",
+    "verilate.log": "385fccff5719af9f034a2cdd00e5d3cd4c06b3292c9e35f4f841983ff475ca96"
+  }
+}

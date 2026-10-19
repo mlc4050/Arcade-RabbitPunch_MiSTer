@@ -105,3 +105,16 @@ Native, forced-doubled and direct combined cases also pass. Patterned combined
 HQ2x now matches all 1024 pixels against an independent native-framework fixture.
 Live vertical-shift changes, extreme clipping and physical monitor
 checks remain open; see CRT_ADJUST.md. Native Off bypass is direct.
+
+
+## Supplemental fast T80 model
+
+Production T80 sources remain unchanged. The GHDL-only exported copy replaces an
+unequal-width legacy block-I/O mask to permit compilation, and explicitly traps
+the entire affected flag path; it provides no silent replacement behavior for
+those instructions. Native ModelSim/MAME startup comparisons and an executing
+INI rejection qualify only the documented workload. Logical RAM and two-state
+initialization retain their separately documented limits. See TOOLCHAIN.md and
+reference/fast_sound_boot_archive.json. General instruction equivalence would
+require independent opcode qualification or a faithfully supported toolchain;
+these startup tests do not supply it.

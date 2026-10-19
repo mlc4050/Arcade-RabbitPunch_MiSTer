@@ -135,3 +135,38 @@ an old byte-hashed report still applies. The loader worktree's exact contract is
 retained separately as reference/fast_ram_loader_contract_checks.json and in the
 full_image_loader_archive manifest; the original qualification report/archive
 remains unchanged. Generated test-source alternatives are isolated from files.qip.
+
+
+## Fast sound startup boundary
+
+run_fast_sound_boot_tests.py and sim/fast/sound_fast_fixture.vhd qualify the
+T80/sound bus/JT51 startup against both pinned native ModelSim and MAME traces.
+Both games pass all 4096 ordered addresses/masks and 215 peripheral values in
+958385 synthetic system cycles. Against the native trace, the only differing
+value is the previously audited uninitialized B stack save (native XX, two-state
+00). Against MAME, three values differ within the same four audited bootstrap
+positions. Every other compared RAM value is exact. Neither CPU state nor RAM
+is deposited. The original complete sound/physical checks remain authoritative.
+
+GHDL rejects a legacy T80 expression with a nine-bit operand and four-bit mask.
+The generated copy uses an explicit nine-bit mask to permit export, and makes
+the entire affected block-I/O flag path fatal. This does not claim that the
+instruction is implemented correctly by the fast copy. --negative-block-io runs
+an original INI program which reaches that fatal assertion after reset (13.209 us),
+proving the guard is active. Production/vendor source bytes remain unchanged.
+--latches preserves the existing vendor latch behavior during export; explicit
+HDL assertions remain enabled, independent of vendor reset unique-case checks.
+
+The first clocked guard exported an artificial assertion register which started
+false before the first asynchronous reset edge in two-state evaluation. Its
+time-zero rejection is retained in reference/fast_sound_reset_assert_rejected.json.
+The qualified copy instead uses a concurrent reset/enable-gated guard, then passes
+both startup comparisons and the executing negative control. The rejected model
+is not a production sound failure or a passing CPU test.
+
+Exact binaries, source bytes, generated models, private ROM fixtures, independent
+traces and logs are pinned by reference/fast_sound_boot_archive.json. The separate
+worktree RAM contract is reference/fast_ram_sound_contract_checks.json. These are
+supplemental startup proofs, excluding game commands, uPD samples, shared SDRAM,
+audible output, general CPU equivalence and hardware. --reference-root selects
+private ROM/MAME fixtures; --native-reference-root selects existing native traces.

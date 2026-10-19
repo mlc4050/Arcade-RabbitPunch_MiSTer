@@ -1,0 +1,149 @@
+{
+  "accepted": true,
+  "native_comparison": {
+    "case": "fast_ram_native_compare",
+    "pass_marker": "FAST_RAM_NATIVE_COMPARE_PASS",
+    "log": "debug\\baselines\\fast_ram_native_compare\\result.log",
+    "source_sha256": {
+      "rtl/rabbitpunch_ram16.vhd": "74d32c1783ba829da369ad5520c9f24d5197c43052770fd2a22de07b50516acc",
+      "rtl/rabbitpunch_ram8.vhd": "baff6e5a11280435e74ad8581f4be5cb68fb24ad8849c7ccd86ef38760397f4a",
+      "debug\\fast_ram_compare\\ram16_model.vhd": "9eba4ce31e209f446046fa973f22356e92b92de63bb6f7fd213cf6ad904e30f1",
+      "debug\\fast_ram_compare\\ram8_model.vhd": "87892b5665973b534a30aefd171b4cf9a0590491a5bae234a833de155a08d9b6",
+      "debug\\fast_ram_compare\\fast_ram_compare_tb.vhd": "032f9478fef7ac62f61e228c0371150dc1ef20ff2650978c027f77ccb2588a84"
+    },
+    "scope": "Simultaneous logical-model/native-Intel RAM comparison under the existing exhaustive 256-address primitive startup and independent-byte-lane workload, both read ports and output-enable hold. Native read-during-write/collision/unknown behavior is excluded and the logical models reject active same-word mixed-port writes. Not physical M10K or a complete system proof.",
+    "log_sha256": "2b4ed4dec1cea613aa4a061838899a107105453cdaaf69312355db6d6699a3f5",
+    "model_source_sha256": {
+      "sim/fast/rabbitpunch_ram16_model.vhd": "2c736e990784a43b0be6efecb79b937fb9e56fb37f9212270ce692112eec3630",
+      "sim/fast/rabbitpunch_ram8_model.vhd": "f62607533326005bea02cd44014270dd8884c46ca76cbc114878d9cd121598d1"
+    }
+  },
+  "logical_checks": [
+    {
+      "args": [
+        "-a",
+        "--std=08",
+        "D:\\git\\RabbitPunch-maintenance-work\\sim\\fast\\rabbitpunch_ram16_model.vhd"
+      ],
+      "returncode": 0,
+      "seconds": 0.0708405000041239,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "-a",
+        "--std=08",
+        "D:\\git\\RabbitPunch-maintenance-work\\sim\\fast\\rabbitpunch_ram8_model.vhd"
+      ],
+      "returncode": 0,
+      "seconds": 0.06757550002657808,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "-a",
+        "--std=08",
+        "D:\\git\\RabbitPunch-maintenance-work\\rtl\\rabbitpunch_layout.vhd"
+      ],
+      "returncode": 0,
+      "seconds": 0.08910800001467578,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "-a",
+        "--std=08",
+        "D:\\git\\RabbitPunch-maintenance-work\\rtl\\rabbitpunch_decode.vhd"
+      ],
+      "returncode": 0,
+      "seconds": 0.08932189998449758,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "-a",
+        "--std=08",
+        "D:\\git\\RabbitPunch-maintenance-work\\rtl\\rabbitpunch_board_memory.vhd"
+      ],
+      "returncode": 0,
+      "seconds": 0.06548580000526272,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "-a",
+        "--std=08",
+        "D:\\git\\RabbitPunch-maintenance-work\\rtl\\rabbitpunch_memory.vhd"
+      ],
+      "returncode": 0,
+      "seconds": 0.07463620000635274,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "-a",
+        "--std=08",
+        "D:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\ram_powerup_tb.vhd"
+      ],
+      "returncode": 0,
+      "seconds": 0.06280130002414808,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "-a",
+        "--std=08",
+        "D:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd"
+      ],
+      "returncode": 0,
+      "seconds": 0.06983739999122918,
+      "stdout": "",
+      "stderr": "D:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:127:58:warning: declaration of \"vu16_expected\" hides variable \"vu16_expected\" [-Whide]\n            vu2_lanes : unsigned(1 downto 0); vu16_data, vu16_expected : unsigned(15 downto 0)) is\n                                                         ^\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:158:61:warning: declaration of \"vu16_expected\" hides variable \"vu16_expected\" [-Whide]\n        procedure view_word(vint_bank, vint_word : natural; vu16_expected : unsigned(15 downto 0)) is\n                                                            ^\n"
+    },
+    {
+      "args": [
+        "-r",
+        "--std=08",
+        "ram_powerup_tb",
+        "--assert-level=error",
+        "--stop-time=10ms"
+      ],
+      "returncode": 0,
+      "seconds": 0.18233919999329373,
+      "stdout": "D:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\ram_powerup_tb.vhd:139:9:@12890ns:(report note): RAM_POWERUP_PASS words_per_bank=256 logical_patterns=0000_FFFF_A55A byte_ram_zero=checked dual_ports=checked independent_byte_lanes=checked clock_enable_hold=checked no_simulator_deposits=checked\nsimulation finished @12890ns\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "-r",
+        "--std=08",
+        "memory_powerup_tb",
+        "--assert-level=error",
+        "--stop-time=10ms"
+      ],
+      "returncode": 0,
+      "seconds": 5.798371999990195,
+      "stdout": "D:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:178:9:@0ms:(report note): MEMORY_POWERUP_START: checking configuration contents\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:191:21:@286720ns:(report note): MEMORY_POWERUP_PROGRESS bank=0 words=4096\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:191:21:@573440ns:(report note): MEMORY_POWERUP_PROGRESS bank=0 words=8192\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:191:21:@860160ns:(report note): MEMORY_POWERUP_PROGRESS bank=0 words=12288\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:191:21:@1146880ns:(report note): MEMORY_POWERUP_PROGRESS bank=0 words=16384\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:191:21:@1433600ns:(report note): MEMORY_POWERUP_PROGRESS bank=0 words=20480\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:191:21:@1720320ns:(report note): MEMORY_POWERUP_PROGRESS bank=0 words=24576\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:191:21:@2007040ns:(report note): MEMORY_POWERUP_PROGRESS bank=0 words=28672\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:191:21:@2293760ns:(report note): MEMORY_POWERUP_PROGRESS bank=0 words=32768\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:191:21:@2437120ns:(report note): MEMORY_POWERUP_PROGRESS bank=1 words=2048\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:191:21:@2723840ns:(report note): MEMORY_POWERUP_PROGRESS bank=2 words=4096\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:191:21:@3010560ns:(report note): MEMORY_POWERUP_PROGRESS bank=2 words=8192\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:191:21:@3082240ns:(report note): MEMORY_POWERUP_PROGRESS bank=3 words=1024\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:191:21:@3368960ns:(report note): MEMORY_POWERUP_PROGRESS bank=4 words=4096\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:191:21:@3655680ns:(report note): MEMORY_POWERUP_PROGRESS bank=4 words=8192\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:223:13:@3659430ns:(report note): MEMORY_POWERUP_PASS: all 52224 words through CPU and view before writes; checks=104553\nsimulation finished @3659430ns\n",
+      "stderr": "D:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:101:9:warning: instance \"dut\" of component \"memory_check\" is not bound [-Wbinding]\n        dut : memory_check\n        ^\nD:\\git\\RabbitPunch-maintenance-work\\sim\\memory\\memory_powerup_tb.vhd:15:14:warning: (in default configuration of memory_powerup_tb(test))\n"
+    }
+  ],
+  "source_sha256": {
+    "sim/fast/rabbitpunch_ram16_model.vhd": "2c736e990784a43b0be6efecb79b937fb9e56fb37f9212270ce692112eec3630",
+    "sim/fast/rabbitpunch_ram8_model.vhd": "f62607533326005bea02cd44014270dd8884c46ca76cbc114878d9cd121598d1",
+    "rtl/rabbitpunch_layout.vhd": "e375b766fa01bf4ae808ccc315f7629488a2dfa4db9e7c8a98f7da993adae14d",
+    "rtl/rabbitpunch_decode.vhd": "83bde9875e72c5588153e802f0c075627193cfd5202bd58d987549a461f82b5a",
+    "rtl/rabbitpunch_board_memory.vhd": "abfc16353dc426497519091854798359cdc6d0829c30df1ac13cdb5f52eaaba6",
+    "rtl/rabbitpunch_memory.vhd": "848a5cebb1558b68de8d681e3a6b2a14a64890a22e9efe9c9d75203c2390e059",
+    "sim/memory/ram_powerup_tb.vhd": "676993a08504e96a56fe4d7de196a2626258045b8633cb4820ad9f38f04d2928",
+    "sim/memory/memory_powerup_tb.vhd": "ed1bb523421c944576842a8ad7a25014e67dc99036288a678eff9d9e5820e5d2"
+  },
+  "runner_sha256": "c0bc6e3e80ba6155e1cbddfffd8e74b80e56e0840d8dafe66adb82e192bcb461",
+  "scope": "Simulation-only RAM abstractions match the native Intel primitive for the exact dual-instance 256-address workload, and pass existing all-bank startup/byte-lane contracts. Read timing, enabled output hold and configured logical contents only. Collision writes are rejected; X/uninitialized, physical M10K and electrical behavior are not modeled. Production source lists keep the real Intel wrappers."
+}

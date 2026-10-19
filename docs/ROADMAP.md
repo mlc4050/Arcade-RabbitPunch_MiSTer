@@ -28,6 +28,11 @@ four-state full-image frontend pattern test also passes. Native Intel/PLL
 completion and physical HPS/DDR loading remain open. Full-raster CRT/HQ2x now matches all
 248832 pixels in the qualified fast RTL backend. Audio mix defaults to
 Mono; all four settings pass synthesized-host and connected HPS regressions.
+Supplemental fast sound startup now matches all 4096 ordered writes and all
+215 peripheral values for each game against native ModelSim/MAME, with only the
+existing audited bootstrap bytes exposed. The unsupported block-I/O flag path
+has an executing fatal-guard control. A bounded live both-CPU/game/video run is
+in progress; no visible-gameplay or audible-output result is claimed yet.
 Development DDR-load MRAs preserve each verified 0x210000-byte image and change
 only the staging address/display description; the default direct MRAs remain.
 
