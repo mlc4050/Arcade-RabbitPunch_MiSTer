@@ -32,10 +32,10 @@ reference/video_aspect_synth.json and reference/video_aspect_netlist_checks.json
 The adapter now connects VIDEO_ARX/ARY at the shell, measuring post-effect
 CE_PIXEL/VGA_DE/VGA_VS and receiving the framework HDMI dimensions. H5 OSD
 selectors use aspect bits 122:121 and scale bits 68:66; they are hidden under
-direct video. Original 4:3 remains the default. The newly connected full-shell
-fit and expanded native-host regression are next; physical HDMI behavior is
-not established by this standalone result. Crop and rotation are
-separate work, and are not advertised by this evaluation.
+direct video. Original 4:3 remains the default. The original standalone evaluation did not establish physical HDMI behavior.
+Subsequent connected full-shell and host regressions are recorded below.
+Rotation is now integrated and qualified separately in HDMI_ROTATION.md;
+HDMI-only crop remains open.
 
 The expanded native HPS menu now passes its own fitted host and complete protocol
 netlist regression, including every new aspect/scale configuration character,
@@ -46,3 +46,23 @@ checks, scoped pin coverage and fitted clock topology. Minimum setup is
 +0.525 ns, hold +0.078 ns, recovery +3.154 ns, removal +0.437 ns and pulse
 width +1.122 ns. See reference/full_shell_aspect_release_checks.json.
 This snapshot predates common flip. Physical HDMI behavior remains unverified.
+
+## HDMI-only crop interface constraint
+
+Source inspection of the unchanged framework confirms why shared DE cannot
+provide an HDMI-only crop: sys/sys_top.v feeds VGA_scanlines with
+din(de_emu ? {r_out, g_out, b_out} : 24'd0). The same resulting RGB reaches
+the native analog OSD/output chain. Narrowing core VGA_DE would therefore
+black those rows on analog output as well, even though vga_out itself
+only delays its DE signal.
+
+Oversized absolute VIDEO_ARX/ARY metadata is also insufficient: sys_top state 6
+clamps videow/videoh to the HDMI dimensions before calculating centered output
+limits. It does not select a smaller source rectangle.
+
+This is a source/interface constraint, not a failed crop simulation. The current
+adapter keeps CROP_SIZE/CROP_OFF zero. Preserve the one-row native analog path,
+unchanged framework and default latency while resolving an independent HDMI
+source-crop path. No new presentation framebuffer or sys modification has
+been introduced for crop. The already-qualified optional rotation framebuffer
+remains a separate feature.
