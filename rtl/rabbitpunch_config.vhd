@@ -25,13 +25,13 @@ package rabbitpunch_config is
         "P1O[65],Flip Screen,Off,On;" &
         "H5P1O[46:44],Scandoubler Fx,None,HQ2x,CRT 25%,CRT 50%,CRT 75%;" &
         "-;" &
+        "O[124:123],Audio mix,Mono,None,25%,50%;" &
+        "-;" &
         "DIP;" &
         "-;" &
         "O2,Pause when OSD is open,Off,On;" &
-        "-;" &
         "H3O3,Autosave NVRAM,Off,On;" &
         "H3T4,Save NVRAM;" &
-        "O[124:123],Audio mix,Mono,None,25%,50%;" &
         "-;" &
         "R0,Reset;" &
         "J1,Fire/Punch,Missile,-,-,-,-,Start,Coin,Pause,Service,Test;" &
