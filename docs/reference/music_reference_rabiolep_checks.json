@@ -1,0 +1,61 @@
+{
+  "set": "rabiolep",
+  "mame_version": "0289",
+  "frames": 1800,
+  "coin_frame": 900,
+  "start_frame": 990,
+  "action_frame": 1290,
+  "raw_action_profile": "old qualified fixture: hold P1 bit5/button2; pulse bit4/button1",
+  "mame_peripheral_writes": 500833,
+  "rtl_peripheral_writes": 471184,
+  "common_ordered_write_prefix": 664,
+  "shorter_stream_is_exact_prefix": false,
+  "first_difference": {
+    "index": 664,
+    "mame": [
+      61441,
+      10
+    ],
+    "rtl": [
+      61441,
+      42
+    ],
+    "mame_time": [
+      0.040459,
+      2
+    ]
+  },
+  "wav": {
+    "channels": 1,
+    "width": 2,
+    "rate": 48000,
+    "frames": 1440001
+  },
+  "files": {
+    "bitmap.bin": "0a9f1536b56af94d3bf3a0f4ccea198e8f66781472069e9f588ebe47080519f1",
+    "capture_script.lua": "e849928338372a2df33826afe6a1d395a0e65f5dc85cfa136f3f803e34ed1103",
+    "inputs.txt": "d23056a4f3cc3b58b997c40cf8f241b9d31d89c923a2fb8dc723b67703c38b2b",
+    "mame.wav": "3867faabcd76c648ee87770f2da47d74d456208e0e59e3c85e4a5d62363c527a",
+    "manifest.txt": "991515e61cffd635a8444b33a519617645b760152e7025edd6dbc1934c98f70a",
+    "music_writes.txt": "6b870defe9393b1a7c13e15ce40af87b504392ddc70fe9419f53b79266b4b7f3",
+    "palette.bin": "645b14ef6e1c43f57cd0b36665559fdb3dbd4a89ffba213445f8add561b7fcdf",
+    "reference.png": "949bd8e51d0665b8f1a10a199c6f4dcc1a3b8dc39d828685d5076d36ef9284ab",
+    "reg_bitmap.bin": "0a9f1536b56af94d3bf3a0f4ccea198e8f66781472069e9f588ebe47080519f1",
+    "reg_palette.bin": "645b14ef6e1c43f57cd0b36665559fdb3dbd4a89ffba213445f8add561b7fcdf",
+    "reg_spriteram.bin": "eed78086824dd5b86eaedca32c6e989b941acd1d19e0dc57d7284dbb5d220e53",
+    "reg_videoram.bin": "9cff1c5342c57b9bcb36b7cd503ef2830ffbe785c125bcea2f033eeb4e0ae941",
+    "reg_vregs.bin": "0756f6d0d15c9dd4f9d69caa1b386a026be3280aaff115d215b2e3991de016ed",
+    "run.log": "233a47792233970930cdcb0f17f750be71601b86d4ce3a13b52d7ea9cfb55615",
+    "spriteram.bin": "eed78086824dd5b86eaedca32c6e989b941acd1d19e0dc57d7284dbb5d220e53",
+    "videoram.bin": "9cff1c5342c57b9bcb36b7cd503ef2830ffbe785c125bcea2f033eeb4e0ae941",
+    "workram.bin": "a76f2fb1cb7ec0e2ac69e8456e81b3a065ff1243a8f6c9a09a77314d23b43e70",
+    "cfg/default.cfg": "ce6f92d4260cfa730a9cda509e6b19e58813b279f1d85a3408cccb2abb49f236",
+    "cfg/rabiolep.cfg": "6fe1e56fbac97c166abc69967343d1791543d1124ff700ec15f6430ddfce5b02"
+  },
+  "source_sha256": {
+    "qualified_capture": "b0545cb968a9ef5b40c62378c4adda1f2ba651965b6721e5c98fb4e447213c59",
+    "music_trace.lua": "8f2a142d6793798338cfef0ff01cfd821842320e2e54c41b6eb2fad842ae4f0e",
+    "runner": "eab59f55c7abf4151425451ffb3e2f1b9da60500ad2f2737700da9da320dab86"
+  },
+  "scope": "Pinned MAME full bounded-schedule peripheral-write ordering and output WAV captured against the already completed live FPGA simulation. Machine-time tap timestamps have scheduler granularity. Matching prefixes are register/command sequence evidence only; no sample-exact waveform, tempo or physical listening equality claim yet."
+}
