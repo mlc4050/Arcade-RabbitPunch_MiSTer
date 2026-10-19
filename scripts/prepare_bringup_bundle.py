@@ -117,7 +117,7 @@ This bundle has not been copied to or launched on a MiSTer.
 When doing the authorized hardware bring-up, copy the _Arcade contents into the
 MiSTer's _Arcade directory. The RBF belongs in _Arcade/cores. Keep the ROM ZIP
 in the configured MiSTer arcade ROM location. The MRA files retain their tested
-ROM layout, DIP defaults, Shoot/Missile controls and hiscore transfers.
+ROM layout, DIP defaults, Fire/Punch and Missile controls and hiscore transfers.
 
 Start {diagnostic_path} first. After the CPU finishes filling
 bitmap RAM, expect repeating one-pixel red, green, blue and white stripes. The
@@ -126,7 +126,7 @@ the original program, not a forced test RGB output.\n{probe_note}
 
 Then test the two game MRAs in {'_Debug' if debug else 'the bundle root'}. Begin with default output options. The DDR
 load variants are under {'_Debug/' if debug else ''}_Alternatives/DDR load; they use the same game image.
-Check both-player movement, Shoot, Missile, coin/start and pause. Physical game
+Check both-player movement, Fire/Punch, Missile, coin/start and pause. Physical game
 boot/play, audio, analog CRT/HDMI output and .dip/.nvm filesystem round trips remain
 unverified until results are recorded from the actual device.
 

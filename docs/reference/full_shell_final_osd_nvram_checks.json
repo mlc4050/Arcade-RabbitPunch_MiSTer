@@ -1,0 +1,42 @@
+{
+  "commit": "3dfbd332d078da18f1d762df7fcb34be8cb05a51",
+  "revision": "RabbitPunch",
+  "seed": 3,
+  "accepted": true,
+  "hardware_verified": false,
+  "timing_checks": 144,
+  "minimum_slack_ns": {
+    "Setup": 0.419,
+    "Hold": 0.079,
+    "Recovery": 3.629,
+    "Removal": 0.376,
+    "Minimum Pulse Width": 1.122
+  },
+  "archive": "debug/fit_archive/full_shell_3dfbd33_final_osd_nvram",
+  "artifact_sha256": {
+    "BUILT_COMMIT": "7bb4d98ea0e1eb1866533f3fa86d7add0afc9917861b3e549f659d2968027690",
+    "clock_tree.tsv": "f8f98e77bb999f08e7ccc7ac3e603f39e910b60ab853cf0fecf8728084c40a69",
+    "framework_timing_scope.json": "62ee1fbf1806ef45ea1300bbae65a60b231b0acaf68ee903ce42fb1d7af95a96",
+    "full_clock_tree.json": "0f5779c23b3eb7a876f4f711f6269af560e62622c3a88937d1b06ec1992151e3",
+    "full_clock_tree.log": "965ca137d625c0a2b06e8d2906b9bca641fd4b061d68de7de674ee6136102b6b",
+    "q_staged.log": "8bb32db605032370b5b85e488a88d355b7e8ff6e66972d957313b21ec0960c19",
+    "RabbitPunch.asm.rpt": "384254ad94dd51ebc8fe199982599ef05a621a501a360a3635c682564c3c8d88",
+    "RabbitPunch.done": "1804676f523ebfb8c4a236c2260e1b31d3b30f7977641f99e3a3199c158188d2",
+    "RabbitPunch.fit.rpt": "1d5463da0ddc4718051e070757cda467baefb8e599e34d5f4f779b954a79a904",
+    "RabbitPunch.fit.smsg": "00fd517c3a675f4fd051094cac032c6a3349d6339d28e2f24b53a02093356353",
+    "RabbitPunch.fit.summary": "9553889b1f0550270ae59a13565172a492ed73137dde45ec44133de52d5be1f1",
+    "RabbitPunch.flow.rpt": "61798bd2623660595863c2603d0be2de72c1ce9431a646a6aa2247612a5502f0",
+    "RabbitPunch.jdi": "82c5b63d33649bb63c4f2eccdfc7fc985ad4877b829cc4f75e1b03ec94da0f2a",
+    "RabbitPunch.map.rpt": "2eb237a22cdea4daa0358a06650d30142c36a04e056fe98d0743477369148d0c",
+    "RabbitPunch.map.smsg": "c27baf3761409675ae9a6a1f2716d7840ec3d8fd8ba62aa05fd2c6deec061c31",
+    "RabbitPunch.map.summary": "1a3559ae1a9a9b6bfd4de4ab0e71fa77a5ba4630293c599cc135cd5a05a22a37",
+    "RabbitPunch.pin": "d33728eb0a1bd76d7d6e579e0c22fce92bebeeaaf0117b1f7823f2c427041d9a",
+    "RabbitPunch.rbf": "2848c5750c1fbe4d8201a34c987d9dfd4761dba44c4c4367ec5ed5dd6c32a92b",
+    "RabbitPunch.sld": "c7de3cc5544a1144192d6825eb69cf5e065bf99f16fb9acb42fadd23adede991",
+    "RabbitPunch.sof": "28208b77e391b6b2069c68a6815eb826a994b0e47144d2b2e899ea4fbc067e90",
+    "RabbitPunch.sta.rpt": "6bdc6172d68474e57470852fe9512497cf6d4f9738a3a49b774e2ee031356ac6",
+    "RabbitPunch.sta.summary": "fbd03ffde65d12bd63a4facbfeecf38fc6503b37be1e4ac970f4870e83b9af3f",
+    "source.tar": "82e3c98f9ef559a6c022979fc63eb6ddb2d4e8845679eab9fb8cfbe99cbddb7e"
+  },
+  "scope": "Final user-requested OSD grouping; T4 Save NVRAM retains OSD for host upload polling. Earlier DIP/action-label/pause-mute changes retained. Full fitted timing and source guards pass. Immediate NVRAM file creation needs physical confirmation; savestate controls are withheld while incomplete. No new audio behavior is claimed."
+}
