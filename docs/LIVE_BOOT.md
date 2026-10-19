@@ -22,3 +22,25 @@ The exact tested prototype runner retains inherited diagnostic naming and suppor
 ## Evidence
 
 Reports are `reference/fast_game_{rabiolep,rpunch}_120_checks.json`, `reference/live_boot_{rabiolep,rpunch}_120_image_checks.json` and `reference/live_boot_120_archive.json`. The latter records immutable private archive `debug/fit_archive/live_boot_120_19a6d19dd5/` in the video-options worktree, with exact tested sources, generated models, binaries, ROM-derived inputs, CPU traces, raw images and MAME captures. ROM-derived files stay private and ignored.
+
+## Extended gameplay/PCM test prepared
+
+The versioned VHDL fixture in sim/fast/gameplay_fast_fixture.vhd and runner
+scripts/run_gameplay_tests.py extend the test to 1800 frames. Coin is asserted
+at frame 900 and Start at 990, each for six frames. Shoot is held after Start,
+Missile pulses once and vertical movement alternates. PCM is observed from raw
+FM left/right, ADPCM and the actual mixed mono output; the VHDL sample strobe is
+delayed four clocks after a rising YM sample marker to allow mixer settling.
+The runner checks the 746/747 system-clock sample cadence and rejects a
+completed all-zero mono capture. No independent waveform equality is claimed.
+
+This test is prepared and running, not qualified by the 120-frame results.
+The independent MAME 1800-frame references visibly reach stage 1 for both sets,
+and their complete 62208-pixel images match independent rendering of the
+captured MAME state. See reference/gameplay_mame_schedule_checks.json.
+
+An initial two-frame Start pulse failed to start either game in MAME; the own
+incomplete RTL experiments were stopped and privately archived. This is a
+rejected stimulus schedule, not a production RTL failure. The short 1200-frame
+Japanese capture also remains in a title transition; the final endpoint is
+1800 as verified in MAME. Neither stopped run is counted as an accepted test.
