@@ -75,7 +75,7 @@ def main():
         run_dir.mkdir(parents=True, exist_ok=True)
         (run_dir / "program.hex").write_text(
             "\n".join(rom[i:i+2].hex() for i in range(0, len(rom), 2)) + "\n", encoding="ascii")
-        mra_path = next(path for path in (root / "releases/_dev").glob("*.mra")
+        mra_path = next(path for path in (root / "releases").glob("*.mra")
                         if ET.parse(path).findtext("setname") == game)
         dip_bytes = ET.parse(mra_path).find("switches").get("default").split(",")
         dip_default = int(dip_bytes[0], 16) | (int(dip_bytes[1], 16) << 8)

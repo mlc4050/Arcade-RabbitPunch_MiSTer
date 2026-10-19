@@ -52,7 +52,7 @@ def main():
             output.write("// format=mti addressradix=h dataradix=h version=1.0 wordsperline=1\n")
             for index, (word,) in enumerate(struct.iter_unpack("<H", image)):
                 output.write(f"{index:x}: {word:04x}\n")
-        mra = next(ET.parse(path) for path in (root / "releases/_dev").glob("*.mra") if ET.parse(path).findtext("setname") == game)
+        mra = next(ET.parse(path) for path in (root / "releases").glob("*.mra") if ET.parse(path).findtext("setname") == game)
         dip_bytes = mra.find("switches").get("default").split(",")
         dips = int(dip_bytes[0], 16) | (int(dip_bytes[1], 16) << 8)
         ram_seed_commands = ["run 1 ns"] + [

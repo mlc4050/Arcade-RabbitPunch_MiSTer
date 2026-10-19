@@ -31,7 +31,7 @@ for game in ('rabiolep','rpunch'):
     for line in (out/'input_vectors.txt').read_text().splitlines():
         name,joy0,joy1,key,pause,p1,p2,service=line.split()
         cases.append(dict(name=name,joy0=int(joy0,16),joy1=int(joy1,16),key=int(key,16),pause=int(pause),player1=int(p1,16),player2=int(p2,16),service=int(service,16)))
-    mra=next(ET.parse(path) for path in (root/'releases/_dev').glob('*.mra') if ET.parse(path).findtext('setname')==game)
+    mra=next(ET.parse(path) for path in (root/'releases').glob('*.mra') if ET.parse(path).findtext('setname')==game)
     defaults=mra.find('switches').get('default').split(',')
     expected_default=int(defaults[0],16)|(int(defaults[1],16)<<8)
     assert len(cases)==int(match[1]) and int(match[2])==expected_default

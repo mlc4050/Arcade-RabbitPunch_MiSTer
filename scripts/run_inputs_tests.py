@@ -10,7 +10,7 @@ root=core_root()
 references=json.loads((root/'docs/reference/input_vectors.json').read_text())
 assert {row['set']:row['dips_default'] for row in references}=={'rabiolep':0,'rpunch':0x2000}
 assert references[0]['cases']==references[1]['cases']
-for path in (root/'releases/_dev').glob('*.mra'):
+for path in (root/'releases').glob('*.mra'):
     tree=ET.parse(path)
     assert tree.find('buttons').get('names').split(',')==['Fire/Punch','Missile','-','-','-','-','Start','Coin','Pause','Service','Test']
 out=root/'debug/baselines/inputs'

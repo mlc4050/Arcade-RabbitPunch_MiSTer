@@ -199,7 +199,7 @@ def main():
     archives = [path / "rabiolep.zip" for path in rompaths if (path / "rabiolep.zip").exists()]
     if not archives:
         raise SystemExit("Merged rabiolep.zip not found in MAME_ROMPATH")
-    out = root / "releases/_dev"
+    out = root / "releases"
     out.mkdir(parents=True, exist_ok=True)
     reports = []
     for name, title in NAMES.items():

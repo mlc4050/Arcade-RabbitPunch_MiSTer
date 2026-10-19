@@ -26,7 +26,7 @@ archives = [Path(path) / 'rabiolep.zip' for path in setting('MAME_ROMPATH', '').
 archives = [path for path in archives if path.exists()]
 if not archives:
     raise SystemExit('Verified local merged rabiolep.zip is required')
-out = root / 'releases/_dev/_ddr'
+out = root / 'releases/_alternatives/_ddr'
 out.mkdir(parents=True, exist_ok=True)
 results = []
 for row in reference:

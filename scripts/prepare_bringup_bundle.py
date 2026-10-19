@@ -63,9 +63,9 @@ def main():
         metadata.mkdir()
         shutil.copy2(archive / 'RabbitPunch_stp.sld', metadata / 'RabbitPunch_stp.sld')
     menu_root = arcade / '_Debug' if debug else arcade
-    mras = list((root / 'releases/_dev').glob('*.mra'))
-    mras += list((root / 'releases/_dev/_ddr').glob('*.mra'))
-    mras += list((root / 'releases/_dev/_diagnostic').glob('*.mra'))
+    mras = list((root / 'releases').glob('*.mra'))
+    mras += list((root / 'releases/_alternatives/_ddr').glob('*.mra'))
+    mras += list((root / 'releases/_alternatives/_diagnostic').glob('*.mra'))
     assert len(mras) == 5
     records = []
     for source in mras:

@@ -64,7 +64,7 @@ def main():
             for index,(word,) in enumerate(struct.iter_unpack('<H',image)):
                 file.write(f'{index:x}: {word:04x}\n')
         (out/'main_header.hex').write_text(''.join(f'{word:04x}\n' for (word,) in struct.iter_unpack('<H',image[:32])))
-        mra=next(ET.parse(path) for path in (root/'releases/_dev').glob('*.mra') if ET.parse(path).findtext('setname')==game)
+        mra=next(ET.parse(path) for path in (root/'releases').glob('*.mra') if ET.parse(path).findtext('setname')==game)
         dip_bytes=mra.find('switches').get('default').split(',')
         dips=int(dip_bytes[0],16)|(int(dip_bytes[1],16)<<8)
         state_file=root/'debug/sound_boot'/game/'reset_state.txt'

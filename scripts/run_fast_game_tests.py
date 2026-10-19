@@ -72,7 +72,7 @@ image = b''.join(parts)
 (out / 'image_used.bin').write_bytes(image)
 physical = [word for word, in struct.iter_unpack('<H', image)]
 image_words = 16
-mra = next(ET.parse(path) for path in (root / 'releases/_dev').glob('*.mra') if ET.parse(path).findtext('setname') == options.game)
+mra = next(ET.parse(path) for path in (root / 'releases').glob('*.mra') if ET.parse(path).findtext('setname') == options.game)
 dip_bytes = mra.find('switches').get('default').split(',')
 dips = int(dip_bytes[0],16) | (int(dip_bytes[1],16) << 8)
 package = """-- SPDX-License-Identifier: GPL-3.0-or-later

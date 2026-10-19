@@ -25,7 +25,7 @@ for row in reference:
     saved=bytes(value^((index*17+0x5a)&255) for index,value in enumerate(initial))
     parts.extend([initial,saved])
     title='Rabio Lepus (Japan)' if row['set']=='rabiolep' else 'Rabbit Punch (US)'
-    mra=ET.parse(root/'releases/_dev'/f'{title}.mra').getroot()
+    mra=ET.parse(root/'releases'/f'{title}.mra').getroot()
     config=bytes.fromhex(mra.find("rom[@index='3']/part").text)
     assert len(config)==24 and int(mra.find("nvram[@index='4']").get('size'))==row['length']
     assert int.from_bytes(config[16:20],'big')==row['address']
