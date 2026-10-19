@@ -1,0 +1,16 @@
+{
+  "source": "https://www.crazykong.com/manuals/RabbitPunch.man.pdf",
+  "manual_sha256": "0edf3b05bfadab5bf5dede2f9af75d17e29bd5d597673f1d016d2d0dfecc0b07",
+  "images": {
+    "bank1": "10cec1b28bb1ffacfdd81130191962fe7a23ba3341308cb383527f190e9bb851",
+    "bank2": "f383cfd4607689e3bb4e958d28e56bbd10839e263529c7cedc8640ad1f7b720f"
+  },
+  "set": "rpunch",
+  "coin_nibbles": {
+    "1": "1C/1C+2C/3C",
+    "14": "4C/1C"
+  },
+  "switch_on_bit": 1,
+  "default_policy": "Retain MAME 0.289 defaults 00,20; physical manual factory all OFF would be 00,00.",
+  "japanese_manual_overrides": false
+}

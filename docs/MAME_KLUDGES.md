@@ -54,3 +54,7 @@ read boundary for both HDMI and analog. This deliberately fills a presentation
 feature absent from MAME's renderer; it does not claim the GGA's original
 internal flip addressing or raster timing is known. The game's flag and the
 OSD flip are XORed, so two requests restore normal orientation.
+
+## US manual coinage omissions
+
+MAME 0.289 omits coin nibbles 1 (cumulative 1C/1C, 2C/3C) and E (4C/1C), both documented in the US manual. The US MRA adds these two labels for both slots; no RTL or Japanese settings change. See [MANUAL_DIPS.md](MANUAL_DIPS.md) for source hashes, switch order and the factory/demo-sound default discrepancy.

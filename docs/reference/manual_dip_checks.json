@@ -1,0 +1,17 @@
+{
+  "accepted": true,
+  "us_mras": [
+    "releases/_dev/_ddr/Rabbit Punch (US) - DDR load.mra",
+    "releases/_dev/Rabbit Punch (US).mra"
+  ],
+  "only_changed_coin_values": [
+    1,
+    14
+  ],
+  "both_coin_slots": true,
+  "japanese_mras_unchanged": true,
+  "defaults_and_bit_positions_unchanged": true,
+  "rom_streams_match_mame": true,
+  "all_osd_lines_fit": true,
+  "source_reference_sha256": "e286f5fb609bfa51b17eeae45b28d5bafbd6424f06c649cd576d210d794783a7"
+}
