@@ -9,14 +9,20 @@ including native integer geometry, CRT adjustment and common flip. The newer
 audio-menu release/debug revisions also pass full implementation; no hardware-verified
 playable RBF or release exists.
 
+A first compiled RBF is prepared in the private [bring-up bundle](docs/BRINGUP_BUNDLE.md),
+alongside both game MRAs and an original ROM-free diagnostic. The release candidate
+passes all 144 timing checks at source 86c437a, seed 3 (setup +0.139 ns, hold
++0.084 ns). Physical MiSTer boot/play, display, sound and persistence are pending.
+
 Verification includes:
 
 - Both games match 10,000 main and 4,096 sound startup writes in the documented
   logical tests. With the production PLL/fractional enables and shifted SDRAM
   chip-clock model, both pass 2,000 main and 256 sound ordered startup writes.
 - Six static graphics scenes match MAME through shared SDRAM and concurrent
-  synthetic CPU traffic. Continuous PLL-driven scanout currently passes Rabbit
-  Punch attract and Rabio Lepus gameplay, with all 62,208 pixels matching each
+  synthetic CPU traffic. Continuous PLL-driven scanout of saved MAME video-state
+  fixtures passes Rabbit Punch attract and Rabio Lepus gameplay scenes, with all
+  62,208 pixels matching each
   and no underflow. At the production 5.357 ns phase, Rabbit Punch attract and
   Rabio Lepus gameplay at frame 1000 both match exactly.
 - The accepted CRT/common-flip MiSTer snapshot passes all reported corners at a fitted
@@ -27,6 +33,13 @@ Verification includes:
 - Native RAM startup contents, DDR/direct ROM loading, replacement/reset/pause,
   controls/DIPs and high-score host-file transfers pass subsystem tests. All
   38 real ADPCM sample sequences pass 237,330 decoded-value checks.
+- Executing-game 120-frame boot captures match independent rendering of their
+  requested-write state. Japan matches all raw MAME pixels; US differs by 34.
+  Longer pad-adapter/PCM runs are pending. See [live boot](docs/LIVE_BOOT.md).
+- A keyed JT51 tone matches 256 samples on all four PCM outputs between native
+  ModelSim and the fast simulator. This extends the timer/mute baseline.
+- The US manual's bonus-coin and 4C/1C settings are available in development MRAs
+  and match actual ROM credit histories for both slots. See [manual DIPs](docs/MANUAL_DIPS.md).
 
 The original ROM-free development diagnostic also passes full poisoned-SDRAM
 image readback and a complete 62208-pixel executed frame in the qualified fast
