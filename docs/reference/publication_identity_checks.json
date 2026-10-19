@@ -1,0 +1,15 @@
+{
+  "original_build_commit": "3dfbd332d078da18f1d762df7fcb34be8cb05a51",
+  "corresponding_rewritten_commit": "5704d95f32c325ac919f90afaeb55952bccaa878",
+  "identical_tree": "1c4da3f0fb6dbc284d0cdc17070b590423e335f0",
+  "source_files_unchanged": true,
+  "revision": "RabbitPunch",
+  "seed": 3,
+  "rbf_sha256": "2848c5750c1fbe4d8201a34c987d9dfd4761dba44c4c4367ec5ed5dd6c32a92b",
+  "timing_checks": 144,
+  "minimum_setup_ns": 0.419,
+  "minimum_hold_ns": 0.079,
+  "author": "mlc4050",
+  "email": "63271527+mlc4050@users.noreply.github.com",
+  "scope": "Author/committer metadata rewritten before publication; identical complete source file tree. Reports retain original build IDs. This does not claim a bit-identical rebuild after build-ID metadata changes, full audio equivalence, complete savestates or physical NVRAM verification."
+}

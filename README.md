@@ -1,121 +1,98 @@
 # Rabbit Punch / Rabio Lepus for MiSTer
 
-Early development for Video System's 1987 arcade hardware, using MAME's rpunch.cpp
-as the behavioral reference. Target sets: rabiolep (Japan), rpunch (US).
+Work-in-progress core for Video System's 1987 arcade hardware. Supports the
+Rabbit Punch (US) and Rabio Lepus (Japan) ROM sets, using MAME 0.289's
+`rpunch.cpp` as the behavioral reference.
 
-Status: the VHDL CPU, memory, video, audio, ROM-loading, controls and high-score
-services are connected to the MiSTer boundary. Corrected HDMI rotation passes complete release/debug prototype timing gates,
-including native integer geometry, CRT adjustment and common flip. The newer
-audio-menu release/debug revisions also pass full implementation; no hardware-verified
-playable RBF or release exists.
+## Status
 
-A first compiled RBF is prepared in the private [bring-up bundle](docs/BRINGUP_BUNDLE.md),
-alongside both game MRAs and an original ROM-free diagnostic. The release candidate
-passes all 144 timing checks at source 86c437a, seed 3 (setup +0.139 ns, hold
-+0.084 ns). Physical MiSTer boot/play, display, sound and persistence are pending.
+The user has reported successful boot and play on a DE10-Nano with one 128 MB
+SDRAM module. Video looks good in that testing and sound effects are working.
+Music still needs comparison against MAME. This is a prototype, not a completed
+hardware-validation or accuracy claim.
 
-Verification includes:
+The latest OSD/NVRAM candidate has the requested Video settings submenu,
+Audio mix, DIP switches, Pause when OSD is open, Autosave NVRAM and Save NVRAM,
+with Reset at the bottom. Save NVRAM now keeps the menu open so MiSTer's host
+can process the upload without reopening the OSD. Immediate on-disk saving
+still needs confirmation on this candidate.
 
-- Both games match 10,000 main and 4,096 sound startup writes in the documented
-  logical tests. With the production PLL/fractional enables and shifted SDRAM
-  chip-clock model, both pass 2,000 main and 256 sound ordered startup writes.
-- Six static graphics scenes match MAME through shared SDRAM and concurrent
-  synthetic CPU traffic. Continuous PLL-driven scanout of saved MAME video-state
-  fixtures passes Rabbit Punch attract and Rabio Lepus gameplay scenes, with all
-  62,208 pixels matching each
-  and no underflow. At the production 5.357 ns phase, Rabbit Punch attract and
-  Rabio Lepus gameplay at frame 1000 both match exactly.
-- The accepted CRT/common-flip MiSTer snapshot passes all reported corners at a fitted
-  46.667 MHz game clock and 5.357 ns SDRAM phase, with minimum setup/hold
-  margins +0.435/+0.042 ns in the accepted CRT/common-flip snapshot. The instrumented CRT snapshot e48d817 at seed 2 also passes all 164 checks (setup +0.288 ns, hold +0.080 ns). The prototype SDRAM budgets and
-  inherited peripheral/debug pin coverage scope are explicit in
-  [SDRAM pin timing](docs/SDRAM_PIN_TIMING.md); physical margins remain unverified.
-- Native RAM startup contents, DDR/direct ROM loading, replacement/reset/pause,
-  controls/DIPs and high-score host-file transfers pass subsystem tests. All
-  38 real ADPCM sample sequences pass 237,330 decoded-value checks.
-- Executing-game 120-frame boot captures match independent rendering of their
-  requested-write state. Japan matches all raw MAME pixels; US differs by 34.
-  Longer pad-adapter/PCM runs are pending. See [live boot](docs/LIVE_BOOT.md).
-- A keyed JT51 tone matches 256 samples on all four PCM outputs between native
-  ModelSim and the fast simulator. This extends the timer/mute baseline.
-- The US manual's bonus-coin and 4C/1C settings are available in development MRAs
-  and match actual ROM credit histories for both slots. See [manual DIPs](docs/MANUAL_DIPS.md).
+Full savestates are being implemented. They are not functional or exposed in
+the OSD yet. NVRAM saving preserves high scores; it is separate from savestates.
 
-The original ROM-free development diagnostic also passes full poisoned-SDRAM
-image readback and a complete 62208-pixel executed frame in the qualified fast
-main-board model, for both normal/corrupt ROM branches. Its logical-RAM/idle-audio
-scope and local test MRA are explicit in [diagnostic firmware](docs/DIAGNOSTIC_ROM.md).
+## Hardware and controls
 
-The native game renderer prepares one row ahead into two line banks. Optional
-HDMI rotation captures a separate DDR3 framebuffer before CRT/output effects;
-it defaults to None and uses safe triple buffering, with end-to-end latency
-still unmeasured. Analog output keeps the native line pipeline. Provisional geometry and clock assumptions are documented in
-[video timing](docs/PROVISIONAL_RASTER.md). Sound listening, physical outputs,
-interactive game execution and the remaining standard video features still
-require bring-up. Optional forced doubling, HQ2x and scanline modes now pass
-functional tests and full fits in both revisions. The instrumented seed-2 retry
-passes all 164 reported timing checks. Common CRT/HDMI flip passes both complete rotated-frame comparisons; its
-full build passes all 144 timing checks and the unchanged coverage limits. Combined CRT/HQ2x matches independent native-framework references at all 1152 flat-field and 1024 patterned output pixels; see [analog output and flip](docs/VIDEO_FLIP.md). See [machine integration](docs/MACHINE_INTEGRATION.md),
-[sound bring-up](docs/SOUND_BRINGUP.md), [prototype limitations](docs/HACKS.md)
-and [read-only debug probes](docs/DEBUG.md) for exact scope.
+- DE10-Nano, one SDRAM module; hardware feedback so far uses 128 MB.
+- fx68k 68000, T80 Z80, JT51 YM2151 and JT7759 ADPCM, with existing MiSTer
+  framework and JTFRAME components reused behind descriptive adapters.
+- New board logic and testbenches use VHDL and `numeric_std` unsigned types.
+- Native video renders one scanline ahead using line buffers. Optional HDMI
+  rotation uses a separate DDR3 presentation framebuffer.
+- Controls are labeled Fire/Punch and Missile. Controller Pause, coin/start,
+  service and test are also wired; see [controls](docs/CONTROLS.md).
+- Each game's ROM image occupies 0x210000 bytes. Development MRAs include direct
+  and DDR-staged loading alternatives.
 
-HDMI None/CW/CCW mode changes, loader ownership, queue flushing, complete-image
-publication and direct-video bypass pass controller regressions. Both native
-288x216 directions pass three complete production-raster frames in RTL around
-qualified donor netlists. A reproduced interaction with doubled analog geometry
-is fixed: rotated integer scaling now measures the native framebuffer raster.
-The corrected complete controller passes standalone timing and functional control
-checks. Its complete release/debug shells pass all 144/164 timing checks, with
-minimum setup/hold margins +0.217/+0.075 ns and +0.384/+0.075 ns respectively.
-The complete controller netlist also passes both 62,208-pixel directions at a
-separately documented compressed cadence, plus doubled-presentation integer
-metadata checks. The original production-raster complete-netlist image run
-remains incomplete after its wall timeout. See
-[rotation qualification](docs/HDMI_ROTATION.md) for exact source revisions,
-separate netlist/time-limit results and remaining physical tests.
+## Builds and ROMs
 
-The Audio mix menu defaults to Mono and passes synthesized-host and connected
-HPS protocol tests for all four settings. Optional development MRAs select DDR
-ROM staging while preserving the verified direct-load ROM bytes; physical
-loading speed remains unmeasured.
+Use Quartus Prime Lite 17.0.2 with Cyclone V device support. ModelSim and Python
+3 are used by the native test scripts; the supplemental fast simulation setup
+is documented in [toolchain](docs/TOOLCHAIN.md).
 
-New board logic will use VHDL, with fx68k (SystemVerilog), T80 (VHDL), directly reused JTFRAME
-modules, and approved mixed-language sound/framework dependencies. Target: DE10-nano, Quartus Prime Lite 17.0.2, one
-SDRAM module of at least 32 MB. Each set declares 0x210000 ROM bytes (2.0625 MiB).
+Configure local tool/ROM paths in gitignored `mister.env`. MAME executable and
+source must both be version 0.289. ROMs are not included or distributed here.
+Development MRAs are under `releases/_dev/` and must be used with the matching
+prototype core.
 
-See [ROADMAP](docs/ROADMAP.md), [hardware notes](docs/HARDWARE_NOTES.md), and
-[WORKFLOW](docs/WORKFLOW.md) for scope, evidence, and build coordination.
-Installed versions and baseline results are recorded in [TOOLCHAIN](docs/TOOLCHAIN.md).
-ROM/control definitions and board-interface tests are in [BOARD_INTERFACE](docs/BOARD_INTERFACE.md).
-Video reference and bitmap RTL evidence are in [VIDEO_REFERENCE](docs/VIDEO_REFERENCE.md).
+On the Windows development setup, build through the staged workflow:
 
-## Reference setup
+```powershell
+.\scripts\d_drive.ps1 scripts/build_staged.py --rev RabbitPunch --seed 3
+```
 
-Configure MAME_SRC, MAME_DIR, MAME_EXE and MAME_ROMPATH in gitignored mister.env.
-Use a matching release source/executable before collecting trusted MAME captures.
-ROMs are not distributed or committed here.
+The latest compiled OSD/NVRAM prototype passes all 144 scoped timing checks:
+minimum setup +0.419 ns and hold +0.079 ns. The game clock is 46.667 MHz.
+Inherited framework electrical timing exclusions and provisional board timing
+are documented in [SDRAM timing](docs/SDRAM_PIN_TIMING.md) and
+[video timing](docs/PROVISIONAL_RASTER.md). A successful fit is not a substitute
+for physical testing.
 
-    python scripts/coretools.py
-    python scripts/extract_dips.py --selftest
-    python scripts/reference_manifest.py
+Before first publication, local author/committer identity was changed for
+privacy. Source file trees were verified unchanged. Older verification reports
+retain their original build commit IDs; the corresponding rewritten source is
+recorded in [build identity mapping](docs/reference/publication_identity_checks.json).
+Private backups and development outputs are excluded from publication.
 
-The ROM manifest is source research, not an executable MRA. It preserves load
-interleave, explicit fills, and region flags. Physical video timing is unresolved.
+## Verification and remaining work
 
-## Provenance and AI assistance
+- Startup tests cover both games' main and sound CPUs, including production
+  PLL/enables and a shifted SDRAM chip model.
+- Six static video scenes match MAME; qualified native scanout scenes each
+  match all 62,208 pixels. Earlier executing-game captures also record a
+  34-pixel US temporal difference rather than claiming universal equality.
+- Completed 1,800-frame live pad/PCM runs cover both sets; their input schedule,
+  archive and scope are recorded in `docs/reference/`.
+- All 38 ADPCM sample sequences pass 237,330 decoded-value checks. Keyed FM
+  samples match between native and supplemental fast simulation. Complete
+  music-track equivalence against MAME is still open.
+- Basic masked/unmasked 68000 and Z80 state-continuation tests pass. STOP/HALT,
+  integrated RAM/chip capture, storage slots and full-game restore remain work.
 
-Framework: MiSTer-devel/Template_MiSTer 9c8eadb40067c8ce3aef90899844f62d688ac73a.
-The sys directory is unchanged apart from Windows checkout line endings.
-Bootstrap tooling and workflows came from the local MiSTer-CoreSkill checkout.
-CPU and initial JTFRAME evaluation sources are pinned with passing baseline checks;
-an unchanged YM2151 evaluation copy and VHDL wrapper now pass isolated timer/IRQ,
-sample-cadence and explicit-mute tests. JT7759 is a separately baselined evaluation
-copy; all selected vendor sources remain unchanged. See [BASELINES](docs/BASELINES.md)
-and [sound bring-up](docs/SOUND_BRINGUP.md).
+See [roadmap](docs/ROADMAP.md), [hardware notes](docs/HARDWARE_NOTES.md),
+[prototype limitations](docs/HACKS.md), [sound bring-up](docs/SOUND_BRINGUP.md),
+[savestates](docs/SAVESTATES.md) and [state inventory](docs/STATE.md) for details.
+Older subsystem documents describe their own test revisions and scopes.
 
-Codex assisted with research, documentation, board RTL, adapters, testbenches and
-reference tooling. Simulation and implementation checks are recorded; board
-verification is still required before release. No hardware
-results or release artifacts exist yet. Distribution: GPL-3.0-or-later, preserving
-third-party notices and recording provenance for each added dependency.
+## Credits, license and AI assistance
 
+MAME is the behavioral reference. The MiSTer framework, fx68k, T80, JTFRAME,
+JT51, JT7759 and other reused components retain their original authorship and
+license notices; provenance is recorded alongside the imported files and in
+[third-party documentation](THIRD-PARTY.md).
+
+Codex substantially assisted with research, VHDL implementation, adapters,
+testbenches, reference tooling and documentation. Simulation, implementation
+results and remaining limitations are documented rather than presented as
+unverified hardware results.
+
+Distribution is GPL-3.0-or-later, preserving third-party notices.
