@@ -1,0 +1,15 @@
+{
+  "accepted": true,
+  "source": "5e02229106b4ada3d34cb1e9a059352640254840",
+  "seed": 2,
+  "timing_checks": 144,
+  "matching_bundle_sha256": "ea4d32062fcb0571a4f94745e5c03e842705bba501e3e4ced0afdd30a2163a62",
+  "release_files": {
+    "releases/Rabbit Punch (US).mra": "febfd70eb444dfc75375295315bcf8fe65b3826811609f2f3602f470b90d57c7",
+    "releases/Rabio Lepus (Japan).mra": "ba6b2101de37615058bad8f929bdca39da7288c6ec87f5c0108da494370e03a2",
+    "releases/Arcade-RabbitPunch_20261021.rbf": "5f2df78addd9f83713f00e8a6fbab084a6b6128fcac9673f3dfc5733dd9c32dd",
+    "releases/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra": "b7c3c94fea62b22a81044cc5360d4a558e056c4994a26f942ca9028f1ec983e6",
+    "releases/_alternatives/_ddr/Rabio Lepus (Japan) - DDR load.mra": "543b882df83366972fd56a287915c64c5d1126abf576fad6eb614433e4ba73d4"
+  },
+  "scope": "Exact promotion of the qualified RBF and matching four MRAs; production RTL unchanged."
+}

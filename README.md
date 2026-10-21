@@ -22,6 +22,10 @@ A MiSTer FPGA core for Video System's 1987 arcade hardware, supporting **Rabbit 
 
 ## History
 
+### Arcade-RabbitPunch_20261021
+
+Hold **SS + Left/Right** to select savestate slot 1-4, with an on-screen slot indicator. **SS + Down** saves; **SS + Up** restores and shows the slot being loaded.
+
 ### Arcade-RabbitPunch_20261020 — savestates
 
 - Four savestate slots, optional slot autoincrement, Save state and Restore state in the OSD.
@@ -61,7 +65,7 @@ Both games use the same RBF. Select the appropriate MRA for the game you want to
 - Four-slot savestates with optional autoincrement.
 - Direct ROM loading, with optional DDR-staged loading MRAs.
 
-Development cheat candidates add a **Cheats >** submenu with independent P1/P2 missile, life and energy/shield switches. See [CHEATS.md](docs/CHEATS.md) for matching MRAs and verification status.
+The **Cheats >** submenu provides independent P1/P2 missile, life and energy/shield switches. See [CHEATS.md](docs/CHEATS.md) for matching MRAs and verification status.
 
 The Video settings submenu holds the display options. DIP switches, audio mix, pause behavior, NVRAM and savestate controls are available from the main OSD page.
 
@@ -107,11 +111,10 @@ The main OSD places these controls together after **Save NVRAM**:
 | Restore state | Resume the selected snapshot |
 
 Assign **Savestate (SS)** through MiSTer's **Define joystick buttons** menu.
-Hold SS and press **Left/Right to select a slot**, **Down to save** or **Up to
-restore**. Slot selection wraps between 1 and 4 and stays synchronized with the
-OSD, with a brief **Savestate slot 1-4** popup on each accepted SS + Left/Right change. SS + Up also shows **Loading state 1-4** when restore starts. Save uses the selected slot and autoincrement setting. SS has no default assignment; existing button
-positions are unchanged. That controller's game inputs are suppressed while
-SS is held.
+Hold **SS + Left/Right** to select slot 1-4, **SS + Down** to save, or
+**SS + Up** to restore. Slot selection wraps and shows a popup; restoring
+shows the slot being loaded. The selected slot is shared with the OSD.
+SS has no default assignment, and existing button positions are unchanged.
 
 Savestates and high-score NVRAM are separate features. See
 [savestate implementation and validation](docs/SAVESTATES.md) for test coverage
