@@ -1,0 +1,15 @@
+{
+  "accepted": false,
+  "source_sha256": {
+    "rtl/rabbitpunch_config.vhd": "9946ae38c785e698dad4d6fb6466246b4653ef571bc5aca42837455c09d1436f",
+    "rtl/state/rabbitpunch_state_config.vhd": "810ddd62adcce07d427f709bc8bf114eec2d2c9dfeef0d10c6a5824360e49661",
+    "rtl/state/rabbitpunch_state_controls.vhd": "464352a37319cceca0f0485d8cd1aafd09352f6ecdcd3ac8bc6ba0c0c6243534",
+    "sim/state/state_controls_partial_tb.vhd": "002e902e38c5d90a892f0372db23381c6ae5f6733021ca39ee88e4be0b8999a1"
+  },
+  "runner_sha256": "f206318af64c0a69002eb7ebc29db9a1e035567db55f4e3abad3daf8a0af862d",
+  "reason": "Old host controls admitted SAVE during a restore-only incomplete-machine hold, consuming an unserviceable pending ticket",
+  "log_sha256": "7542bc31b9713854f567e3c8bfb5f245f58992902bc25c0c6a017bb3ae9017e2",
+  "original_emu_commit": "b11a538",
+  "original_emu_normalized_sha256": "831ad5257de96f2c30024ce0dafb16b6d10ccd7b3717437b951ed6ccabc747e6",
+  "scope": "Rejected native control-interface case with synthetic service/host endpoints. The original controller had no incomplete-state input and the original emu left that output open. No full-machine failure injection, actual hps_io, OSD rendering or hardware result."
+}

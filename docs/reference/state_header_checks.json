@@ -1,0 +1,12 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_crc.vhd": "4de0b46eae23558ed02db73df8ce628e8a02cb8a6318405c4b8846dbed81e568",
+    "rtl/state/rabbitpunch_state_preflight.vhd": "39602b76e4bfcba1b6f94a0e6089518bfe5bb6faebcda54eef4321e21c4e34e6",
+    "rtl/state/rabbitpunch_state_header.vhd": "f516fa8d35f1b8b1ab73fa83e203a9ed89203d514ed4eb280982e10ef774e1ba",
+    "sim/state/state_header_tb.vhd": "9e7edc64f663bba2b31786264c15be2254a935ea8b26f8820edee519b52e57a9"
+  },
+  "runner_sha256": "f342803d203ea312857fc8cb67860c06dacde9e9a7e0fe92e3ee2a2dfdac1293",
+  "log_sha256": "79d48492a4e2542ee3e74a35c8854f567975f0e3a465e2f4ac41b58c4cb81a56",
+  "scope": "Isolated board header construction: independent struct/zlib golden header, three stalled header/body roundtrips through the real preflight validator, all56 CRC-edge cancellations, unknown ROM, overflowing/misaligned/wrong-total sections and valid retry. No DDR publication, CPU/RAM application, full game restore or FPGA timing qualification."
+}

@@ -49,7 +49,7 @@ def main():
         if name.startswith('rtl/'):
             assert sha(root / name) == digest
     sources = system_sources()
-    sources = sources[sources.index('rtl/cpu/t80/T80_Pack.vhd'):sources.index('rtl/rabbitpunch_upd7759.vhd')]
+    sources = sources[sources.index('rtl/cpu/t80/T80_Pack.vhd'):sources.index('rtl/rabbitpunch_upd7759_control.vhd')]
     # Exclude the disconnected sample engine while retaining the real sound board and JT51.
     sources = [name for name in sources if not name.startswith('rtl/sound/jt7759/')]
     source_names = sources + ['sim/fast/rabbitpunch_ram8_model.vhd', 'sim/fast/sound_fast_fixture.vhd',

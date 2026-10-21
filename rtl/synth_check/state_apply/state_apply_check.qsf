@@ -1,0 +1,40 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 RabbitPunch contributors
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY state_apply_check
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_state_layout.vhd
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_state_apply.vhd
+set_global_assignment -name VHDL_FILE state_apply_check.vhd
+set_global_assignment -name SDC_FILE state_apply_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_initialize
+set_instance_assignment -name VIRTUAL_PIN ON -to i_game_reset_completed
+set_instance_assignment -name VIRTUAL_PIN ON -to i_start
+set_instance_assignment -name VIRTUAL_PIN ON -to i_cancel
+set_instance_assignment -name VIRTUAL_PIN ON -to i_image_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to i_machine_held
+set_instance_assignment -name VIRTUAL_PIN ON -to o_machine_hold_request
+set_instance_assignment -name VIRTUAL_PIN ON -to o_image_read
+set_instance_assignment -name VIRTUAL_PIN ON -to ou18_image_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_image_response
+set_instance_assignment -name VIRTUAL_PIN ON -to i_image_error
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_image_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_body_request
+set_instance_assignment -name VIRTUAL_PIN ON -to i_body_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to ou18_body_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_body_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_body_response
+set_instance_assignment -name VIRTUAL_PIN ON -to i_body_error
+set_instance_assignment -name VIRTUAL_PIN ON -to o_body_commit
+set_instance_assignment -name VIRTUAL_PIN ON -to i_body_committed
+set_instance_assignment -name VIRTUAL_PIN ON -to i_body_commit_error
+set_instance_assignment -name VIRTUAL_PIN ON -to o_active
+set_instance_assignment -name VIRTUAL_PIN ON -to o_finished
+set_instance_assignment -name VIRTUAL_PIN ON -to o_success
+set_instance_assignment -name VIRTUAL_PIN ON -to o_incomplete
+set_instance_assignment -name VIRTUAL_PIN ON -to ou4_error[*]

@@ -1,0 +1,24 @@
+{
+  "case": "upd7759_selection_corrected_default_v1",
+  "pass_marker": "UPD7759_SELECTION_PASS",
+  "log": "debug\\baselines\\upd7759_selection_corrected_default_v1\\result.log",
+  "source_sha256": {
+    "rtl/sound/jt7759/hdl/jt7759_div.v": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862",
+    "rtl/sound/jt7759/hdl/jt7759_data.v": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d",
+    "rtl/sound/jt7759/hdl/jt7759_adpcm.v": "41d795e33e2085d3d07ee0acab23e85f495f3766e61bd91f177c46e84072380d",
+    "rtl/rabbitpunch_upd7759_control.vhd": "b3fabe48db6731c86fda4a54e7d8b7ce212a71fccb83a0b258facf8af1ede454",
+    "rtl/rabbitpunch_upd7759_playback.vhd": "cd7482bf4fdcba424a99d851c45c21024e20e4bdfdd6857e338a69a57ac02279",
+    "rtl/state/generated/jt7759_state_netlist.vhd": "6fdc86fa46e21bd97109e1cafa221d0e31c04deb2c1af48d2e15be388be5c3a9",
+    "rtl/rabbitpunch_upd7759.vhd": "6ba0d183f8bb3201d5d80292470c03fb50a95f9dcef16b0f1cd9867daaa35c85",
+    "sim/state/upd7759_selection_tb.vhd": "a90840c1a376d0a20cac1f351abc84f7395f6a23d9a78feac526a73297084a31"
+  },
+  "integration_branch": "codex/savestates",
+  "production_source_branch": "develop",
+  "production_source_commit": "ea4c83e",
+  "state_model_commit": "f1a552d",
+  "state_model_sha256": "6fdc86fa46e21bd97109e1cafa221d0e31c04deb2c1af48d2e15be388be5c3a9",
+  "native_playback_transform": "Entity rename and provenance comment only; LF/CRLF normalized for source comparison.",
+  "runner_sha256": "530158c6a5f33cf132002645f385d90d0c9ddc094149e029fe662415d9f96965",
+  "log_sha256": "80fd2b3e2b01fd826d4e1b52a5ad3517dad2cca6d065ef0cb2ff043a3e90e9a5",
+  "scope": "Production ADPCM wrapper generic=false and true compared every clock with the explicit FPGA-zero native power-up contract. Busy/ROM request/address/PCM match through a2048-enable corrected silence packet and subsequent nonzero synthetic sample with throttled ROM; inactive state read is zero. No active restore, real sound corpus, whole-machine or FPGA/hardware qualification."
+}

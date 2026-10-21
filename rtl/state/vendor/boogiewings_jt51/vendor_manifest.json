@@ -1,0 +1,95 @@
+{
+  "repository": "https://github.com/rmonic79/Arcade-BoogieWings_MiSTer",
+  "files": [
+    {
+      "sha256": "633319a0e89a78d390cba54a24aabf6f1019b705b378b636e246dcf44c8829f8",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_acc.v"
+    },
+    {
+      "sha256": "72bef3f2fbf4c2fad86bcf86acd443af81c99723e48c1f9b8db390e703941d28",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_csr_op.v"
+    },
+    {
+      "sha256": "0c68826a3c4cc3cfa5e40e8de4dbdee97b5e700fc8edb16e649577b2d19b457e",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_eg.v"
+    },
+    {
+      "sha256": "cecc44acf6d7c8a81e80638e4a6eeb46f17d6c8d809e7a928338553bb23fb400",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_exp2lin.v"
+    },
+    {
+      "sha256": "c9f33ede4c1c0af6f54ae45620d986a2c5a2f0ef16b453dc7d2eeeac85f8cbb5",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_exprom.v"
+    },
+    {
+      "sha256": "d3d95adf74cc181003f6f9ef7faef231c6d432a1e50a628f5202ad10e0d07ef1",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_kon.v"
+    },
+    {
+      "sha256": "0c3ecae56b27e5f8cf21456774423103bbdde7e62877e8514831e6293b38e7be",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_lfo.v"
+    },
+    {
+      "sha256": "c4351ea7711364ab394ab510326111dc5047f4e57830bddef15163cbc4dcb98e",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_lin2exp.v"
+    },
+    {
+      "sha256": "8cf405d324f9d13a2e8ec9fa8745fe57528dbbe88504ceed2f1849cb0cfe90c5",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_mmr.v"
+    },
+    {
+      "sha256": "1a04fe51a56756a98b577547bbd95cf984283288f2da2e4946d75063a69d357c",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_mod.v"
+    },
+    {
+      "sha256": "cc9f713fa62350038aa7eb49621aedbd39440369c61a462f1f1d9fd6a6fb92f8",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_noise.v"
+    },
+    {
+      "sha256": "5dbb743c49af67e6dff7e6c65691a66371aaf5a126834525f9501a8af1420bbf",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_op.v"
+    },
+    {
+      "sha256": "26bd83a437748a4add38aab1b35972a69a53ec5e8f31131cab6d4a6a0ee8fbc8",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_pg.v"
+    },
+    {
+      "sha256": "41fefe0b9bc9a3b71a036d12d723666e4b588c57625228eee278f9704a6f53b1",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_phinc_rom.v"
+    },
+    {
+      "sha256": "b3fb0623737dd22befa0bfa9a130d7b1437e81ff3e1842538251d5cd29a75c89",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_phrom.v"
+    },
+    {
+      "sha256": "9625bda77a523371fc4704ac66cfec95a9d1aff343c2e770ea5aba11eb50c8f3",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_pm.v"
+    },
+    {
+      "sha256": "7794f859f4efd1676c95fe89169a9ce6591d7bb5f697b09aa5a0cfe7900d758e",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_reg_ch.v"
+    },
+    {
+      "sha256": "33ec2aa020f938b857525c620207819fb7e257e434537899a3b4e36d07ebb039",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_reg.v"
+    },
+    {
+      "sha256": "4a5bfdb4f6be9874c9fdda973a24e66c22cd486ff902744acf60f236054e39d6",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_sh.v"
+    },
+    {
+      "sha256": "3089004599a439ebc7d2885caa181bb9efed26314e4964f826134d3f19eb587f",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51_timers.v"
+    },
+    {
+      "sha256": "760bbb1e14b08999398521a523d9cc325b904218f105c1240492d946c0f5e43d",
+      "target": "rtl/state/vendor/boogiewings_jt51/jt51.v"
+    },
+    {
+      "sha256": "589ed823e9a84c56feb95ac58e7cf384626b9cbf4fda2a907bc36e103de1bad2",
+      "target": "rtl/state/vendor/boogiewings_jt51/LICENSE",
+      "source": "rtl/sound/jt51/LICENSE (existing JT51 GPLv3 text)"
+    }
+  ],
+  "commit": "84085e3d19be7c0a9b3238579ce99962b0b462e5"
+}

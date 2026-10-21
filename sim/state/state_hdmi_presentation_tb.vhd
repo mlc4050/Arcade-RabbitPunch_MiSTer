@@ -1,0 +1,342 @@
+-- SPDX-License-Identifier: GPL-3.0-or-later
+-- Copyright (C) 2026 RabbitPunch contributors
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use std.env.all;
+
+entity state_hdmi_presentation_tb is
+    generic (
+        GINT_FRAME_PIXELS : positive := 640;
+        GBOOL_SMOKE_ONLY : boolean := false
+    );
+end entity;
+
+architecture test of state_hdmi_presentation_tb is
+
+    signal s_clk : std_logic := '0';
+    signal sint_phase : natural range 0 to 6 := 0;
+    signal sint_x : natural range 0 to 47 := 0;
+    signal sint_y : natural range 0 to 27 := 0;
+    signal sint_frames : natural := 0;
+    signal s_enable, s_vertical_sync, s_horizontal_sync, s_data_enable : std_logic;
+    signal s_direct : std_logic := '0';
+    signal su2_aspect : unsigned(1 downto 0) := (others => '0');
+    signal su3_scale : unsigned(2 downto 0) := to_unsigned(4, 3);
+    signal su12_hdmi_width : unsigned(11 downto 0) := to_unsigned(1920, 12);
+    signal su12_hdmi_height : unsigned(11 downto 0) := to_unsigned(1050, 12);
+    signal su13_aspect_x, su13_aspect_y : unsigned(12 downto 0);
+    signal s_initialize : std_logic := '1';
+    signal s_loader : std_logic := '0';
+    signal s_framebuffer_enable, s_force_blank, s_rotated, s_queue_empty, s_overflow, s_ddr_write : std_logic;
+    signal su2_rotation_request : unsigned(1 downto 0) := (others => '0');
+    signal su2_applied : unsigned(1 downto 0);
+    signal su13_reference_x, su13_reference_y : unsigned(12 downto 0);
+    signal s_state_flush, s_state_active, s_state_read, s_state_write : std_logic := '0';
+    signal s_state_busy, s_state_valid, s_loader_valid, s_ddr_read : std_logic;
+    signal s_ddr_read_valid : std_logic := '0';
+    signal s_ddr_busy : std_logic := '0';
+    signal su64_state_data : unsigned(63 downto 0);
+    signal su29_ddr_address : unsigned(28 downto 0);
+    signal su64_ddr_data : unsigned(63 downto 0);
+    signal su8_ddr_bytes, su8_ddr_burst : unsigned(7 downto 0);
+    constant CU29_STATE_ADDRESS : unsigned(28 downto 0) := to_unsigned(16#07C00000#, 29);
+    constant CU64_STATE_DATA : unsigned(63 downto 0) := x"0123456789ABCDEF";
+begin
+    s_initialize <= '0' after 30 ns;
+    assert (s_overflow /= '1') report "Presentation control fixture overflowed" severity failure;
+    s_clk <= not s_clk after 5 ns;
+    s_enable <= '1' when sint_phase = 6 else '0';
+    s_vertical_sync <= '1' when sint_y >= 24 and sint_y < 26 else '0';
+    s_horizontal_sync <= '1' when sint_x >= 40 and sint_x < 44 else '0';
+    s_data_enable <= '1' when sint_x < 32 and sint_y < 20 else '0';
+    dut : entity work.rabbitpunch_state_hdmi_presentation
+        generic map (
+            GINT_FRAME_PIXELS => GINT_FRAME_PIXELS
+        )
+        port map (
+            i_clk => s_clk,
+            i_initialize => s_initialize,
+            i_game_ready => '1',
+            i_loader_active => s_loader,
+            i_direct_video => s_direct,
+            iu2_rotation => su2_rotation_request,
+            i_native_pixel_enable => s_enable,
+            iu8_native_red => to_unsigned(sint_x, 8),
+            iu8_native_green => to_unsigned(sint_y, 8),
+            iu8_native_blue => x"A5",
+            i_native_horizontal_sync_n => not s_horizontal_sync,
+            i_native_vertical_sync_n => not s_vertical_sync,
+            i_native_data_enable => s_data_enable,
+            i_presented_pixel_enable => s_enable,
+            i_presented_vertical_sync => s_vertical_sync,
+            i_presented_data_enable => s_data_enable,
+            iu12_hdmi_width => su12_hdmi_width,
+            iu12_hdmi_height => su12_hdmi_height,
+            iu2_aspect => su2_aspect,
+            iu3_scale => su3_scale,
+            ou13_aspect_x => su13_aspect_x,
+            ou13_aspect_y => su13_aspect_y,
+            i_framebuffer_vertical_blank => s_vertical_sync,
+            o_framebuffer_enable => s_framebuffer_enable,
+            o_framebuffer_force_blank => s_force_blank,
+            ou5_framebuffer_format => open,
+            ou12_framebuffer_width => open,
+            ou12_framebuffer_height => open,
+            ou32_framebuffer_base => open,
+            ou14_framebuffer_stride => open,
+            o_rotation_active => s_rotated,
+            ou2_applied_rotation => su2_applied,
+            o_discard_frame => open,
+            o_queue_overflow => s_overflow,
+            o_queue_empty => s_queue_empty,
+            iu8_loader_burst_count => to_unsigned(1, 8),
+            iu29_loader_word_address => to_unsigned(0, 29),
+            iu64_loader_write_data => to_unsigned(0, 64),
+            iu8_loader_byte_enables => to_unsigned(0, 8),
+            i_loader_read => '0',
+            i_loader_write => '0',
+            o_loader_busy => open,
+            o_loader_read_valid => s_loader_valid,
+            ou64_loader_read_data => open,
+            i_state_flush => s_state_flush,
+            i_state_active => s_state_active,
+            i_state_read => s_state_read,
+            i_state_write => s_state_write,
+            iu29_state_word_address => CU29_STATE_ADDRESS,
+            iu64_state_write_data => CU64_STATE_DATA,
+            iu8_state_byte_enables => x"3C",
+            o_state_busy => s_state_busy,
+            o_state_read_valid => s_state_valid,
+            ou64_state_read_data => su64_state_data,
+            i_ddr_busy => s_ddr_busy,
+            i_ddr_read_valid => s_ddr_read_valid,
+            iu64_ddr_read_data => CU64_STATE_DATA,
+            ou8_ddr_burst_count => su8_ddr_burst,
+            ou29_ddr_word_address => su29_ddr_address,
+            ou64_ddr_write_data => su64_ddr_data,
+            ou8_ddr_byte_enables => su8_ddr_bytes,
+            o_ddr_read => s_ddr_read,
+            o_ddr_write => s_ddr_write
+        );
+    integer_reference : entity work.rabbitpunch_video_aspect
+        port map (
+            i_clk => s_clk,
+            i_pixel_enable => s_enable,
+            i_vertical_sync => s_vertical_sync,
+            i_data_enable => s_data_enable,
+            i_direct_video => '0',
+            iu12_hdmi_width => su12_hdmi_height,
+            iu12_hdmi_height => su12_hdmi_width,
+            iu2_aspect => su2_aspect,
+            iu3_scale => su3_scale,
+            ou13_aspect_x => su13_reference_x,
+            ou13_aspect_y => su13_reference_y
+        );
+    raster : process(s_clk)
+    begin
+        if (rising_edge(s_clk)) then
+            if (sint_phase = 6) then
+                sint_phase <= 0;
+                if (sint_x = 47) then
+                    sint_x <= 0;
+                    if (sint_y = 27) then
+                        sint_y <= 0;
+                        sint_frames <= sint_frames + 1;
+                    else
+                        sint_y <= sint_y + 1;
+                    end if;
+                else
+                    sint_x <= sint_x + 1;
+                end if;
+            else
+                sint_phase <= sint_phase + 1;
+            end if;
+        end if;
+    end process;
+    stimulus : process
+        procedure cycles(vint_count : positive) is
+        begin
+            for vint_cycle in 1 to vint_count loop
+                wait until falling_edge(s_clk);
+            end loop;
+        end procedure;
+        procedure expect_size(vint_width, vint_height : natural) is
+        begin
+            assert (su13_aspect_x = vint_width and su13_aspect_y = vint_height)
+                report "Aspect metadata mismatch: " & integer'image(to_integer(su13_aspect_x)) &
+                    "," & integer'image(to_integer(su13_aspect_y)) severity failure;
+        end procedure;
+    begin
+        if (GBOOL_SMOKE_ONLY) then
+            cycles(32);
+            expect_size(4, 3);
+            report "STATE_HDMI_PRESENTATION_SMOKE_PASS";
+            finish;
+        end if;
+        wait until sint_frames = 3;
+        su3_scale <= (others => '0');
+        cycles(32);
+        expect_size(4, 3);
+        for vint_selection in 1 to 3 loop
+            su2_aspect <= to_unsigned(vint_selection, 2);
+            cycles(32);
+            expect_size(vint_selection - 1, 0);
+        end loop;
+        su2_aspect <= (others => '0');
+        -- 32x20 deliberately has non-square display pixels. At 1920x1050,
+        -- vertical integer height is 1040 and ideal 4:3 width is 1386.
+        -- The adjacent horizontal integer widths are 1376 and 1408.
+        for vint_mode in 1 to 4 loop
+            su3_scale <= to_unsigned(vint_mode, 3);
+            cycles(3000);
+            case vint_mode is
+                when 1 =>
+                    expect_size(4096 + 1386, 4096 + 1040);
+                when 3 =>
+                    expect_size(4096 + 1408, 4096 + 1040);
+                when others =>
+                    expect_size(4096 + 1376, 4096 + 1040);
+            end case;
+        end loop;
+        su12_hdmi_width <= to_unsigned(1280, 12);
+        su12_hdmi_height <= to_unsigned(720, 12);
+        cycles(3000);
+        expect_size(4096 + 960, 4096 + 720);
+        su2_aspect <= to_unsigned(3, 2);
+        s_direct <= '1';
+        cycles(32);
+        expect_size(4, 3);
+        s_direct <= '0';
+        su2_aspect <= (others => '0');
+        su3_scale <= to_unsigned(7, 3);
+        cycles(32);
+        expect_size(4, 3);
+        -- Mode requests made at the start of active video wait for VS.
+        su12_hdmi_width <= to_unsigned(1920, 12);
+        su12_hdmi_height <= to_unsigned(1050, 12);
+        su2_aspect <= (others => '0');
+        su3_scale <= (others => '0');
+        wait until sint_y = 0 and sint_x = 0;
+        su2_rotation_request <= to_unsigned(1, 2);
+        cycles(32);
+        assert (su2_applied = 0) report "Rotation mode changed during active video" severity failure;
+        wait until s_vertical_sync = '1';
+        cycles(4);
+        assert (su2_applied = 1 and s_rotated = '1' and s_force_blank = '1')
+            report "CW mode did not latch/blank at VS" severity failure;
+        expect_size(3, 4);
+        for vint_selection in 1 to 3 loop
+            su2_aspect <= to_unsigned(vint_selection, 2);
+            cycles(32);
+            expect_size(vint_selection - 1, 0);
+        end loop;
+        su2_aspect <= (others => '0');
+        for vint_mode in 1 to 4 loop
+            su3_scale <= to_unsigned(vint_mode, 3);
+            cycles(3000);
+            assert (su13_aspect_x = su13_reference_y and su13_aspect_y = su13_reference_x and
+                su13_aspect_x(12) = '1' and su13_aspect_y(12) = '1' and
+                su13_aspect_x(11 downto 0) <= su12_hdmi_width and
+                su13_aspect_y(11 downto 0) <= su12_hdmi_height)
+                report "Rotated integer metadata does not fit transposed HDMI rectangle" severity failure;
+        end loop;
+        su3_scale <= (others => '0');
+        wait until sint_y = 0 and sint_x = 0;
+        su2_rotation_request <= to_unsigned(2, 2);
+        cycles(32);
+        assert (su2_applied = 1) report "Direction changed during active video" severity failure;
+        wait until s_vertical_sync = '1';
+        cycles(4);
+        assert (su2_applied = 2 and s_framebuffer_enable = '1' and s_force_blank = '1') report "CCW change retained an old valid image" severity failure;
+        s_loader <= '1';
+        su2_rotation_request <= (others => '0');
+        for vint_frame in 0 to 1 loop
+            wait until s_vertical_sync = '1';
+            cycles(4);
+            assert (su2_applied = 2 and s_force_blank = '1' and s_queue_empty = '1' and s_ddr_write = '0')
+                report "Loader did not hold presentation mode/blank/queue ownership" severity failure;
+        end loop;
+        s_loader <= '0';
+        wait until s_vertical_sync = '1';
+        cycles(4);
+        assert (su2_applied = 0 and s_rotated = '0' and s_framebuffer_enable = '0' and s_force_blank = '0')
+            report "None mode did not release the native path" severity failure;
+        expect_size(4, 3);
+        su2_rotation_request <= to_unsigned(1, 2);
+        wait until s_vertical_sync = '1';
+        cycles(4);
+        s_direct <= '1';
+        su2_aspect <= to_unsigned(3, 2);
+        cycles(4);
+        assert (s_rotated = '0' and s_framebuffer_enable = '0' and s_force_blank = '0' and s_ddr_write = '0')
+            report "Direct video retained HDMI framebuffer state" severity failure;
+        expect_size(4, 3);
+        s_direct <= '0';
+        su2_rotation_request <= to_unsigned(3, 2);
+        wait until s_vertical_sync = '1';
+        cycles(4);
+        assert (su2_applied = 0 and s_rotated = '0') report "Reserved rotation encoding was enabled" severity failure;
+        -- A complete frame from the real donor must be published before
+        -- testing invalidation; an already blank framebuffer is insufficient.
+        for vint_direction in 1 to 2 loop
+            su2_rotation_request <= to_unsigned(vint_direction, 2);
+            wait until s_vertical_sync = '0';
+            wait until s_vertical_sync = '1';
+            cycles(4);
+            assert (su2_applied = vint_direction) severity failure;
+            wait until s_force_blank = '0' for 1 ms;
+            assert (s_framebuffer_enable = '1' and s_force_blank = '0')
+                report "Real rotator did not publish a complete frame" severity failure;
+            wait until sint_y = 8 and sint_x = 8;
+            s_state_active <= '1';
+            s_state_read <= '1';
+            -- The current rotation packet can win. Wait for the actual
+            -- accepted external read, then retain that credit during flush.
+            wait until rising_edge(s_clk) and s_ddr_read = '1';
+            assert (s_state_busy = '0' and su29_ddr_address = CU29_STATE_ADDRESS and su8_ddr_burst = 1)
+                report "State read command was corrupted" severity failure;
+            wait until falling_edge(s_clk);
+            s_state_read <= '0';
+            s_state_flush <= '1';
+            s_state_active <= '0';
+            su2_rotation_request <= to_unsigned(3 - vint_direction, 2);
+            cycles(4);
+            assert (s_force_blank = '1' and s_queue_empty = '1' and s_ddr_write = '0')
+                report "State flush retained presentation data" severity failure;
+            wait until s_vertical_sync = '0';
+            wait until s_vertical_sync = '1';
+            cycles(4);
+            assert (su2_applied = vint_direction and s_force_blank = '1')
+                report "Rotation mode changed while state flush held presentation" severity failure;
+            s_ddr_read_valid <= '1';
+            wait for 1 ns;
+            assert (s_state_valid = '1' and s_loader_valid = '0' and su64_state_data = CU64_STATE_DATA)
+                report "Presentation flush lost or rerouted an accepted state read" severity failure;
+            cycles(1);
+            s_ddr_read_valid <= '0';
+            cycles(2);
+            assert (s_state_valid = '0') report "Late state read was duplicated" severity failure;
+            s_state_active <= '1';
+            s_state_write <= '1';
+            wait for 1 ns;
+            assert (s_state_busy = '0' and s_ddr_write = '1' and su29_ddr_address = CU29_STATE_ADDRESS and
+                su64_ddr_data = CU64_STATE_DATA and su8_ddr_bytes = x"3C")
+                report "Held presentation blocked an ordinary state write" severity failure;
+            cycles(1);
+            s_state_write <= '0';
+            s_state_active <= '0';
+            -- Restored pixels must fill a fresh frame; no old frame becomes
+            -- visible simply because the flush input is released.
+            su2_rotation_request <= to_unsigned(vint_direction, 2);
+            s_state_flush <= '0';
+            cycles(4);
+            assert (s_force_blank = '1') report "Old rotated frame reappeared after state flush" severity failure;
+            wait until s_force_blank = '0' for 1 ms;
+            assert (s_force_blank = '0' and s_framebuffer_enable = '1' and s_overflow = '0')
+                report "Presentation did not republish after state flush" severity failure;
+        end loop;
+        report "STATE_HDMI_PRESENTATION_PASS cw_ccw=checked actual_rotator=checked complete_frame=checked midframe_flush=checked held_mode=checked late_state_read=checked held_state_write=checked clean_republish=checked";
+        finish;
+    end process;
+end architecture;

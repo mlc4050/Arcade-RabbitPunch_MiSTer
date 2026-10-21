@@ -8,7 +8,7 @@
     <manufacturer>V-System Co.</manufacturer>
     <rotation>horizontal</rotation>
     <players>2</players>
-    <about>Development DDR-staged load alternative. Physical HPS/DDR loading and speed are unverified. Game ROMs execute from external SDRAM.</about>
+    <about>DDR-staged ROM loading; game ROMs execute from external SDRAM. Savestate controller mapping included.</about>
     <joystick ways="8" />
     <rom index="0" zip="rabiolep.zip" md5="None" address="0x30000000">
         <interleave output="16">
@@ -61,5 +61,5 @@
         <dip name="Extended Play" bits="12" ids="500000 points,300000 points" />
         <dip name="Demo Sounds" bits="13" ids="On,Off" />
     </switches>
-    <buttons names="Fire/Punch,Missile,-,-,-,-,Start,Coin,Pause,Service,Test" count="2" />
+    <buttons names="Fire/Punch,Missile,-,-,-,-,Start,Coin,Pause,Service,Test,Savestate (SS)" count="2" />
 </misterromdescription>

@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 RabbitPunch contributors
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY jt51_state_check
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name VHDL_FILE ../../state/generated/jt51_state_netlist.vhd
+set_global_assignment -name VHDL_FILE jt51_state_check.vhd
+set_global_assignment -name SDC_FILE jt51_state_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_reset
+set_instance_assignment -name VIRTUAL_PIN ON -to i_chip_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to i_half_chip_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to i_chip_select_n
+set_instance_assignment -name VIRTUAL_PIN ON -to i_write_n
+set_instance_assignment -name VIRTUAL_PIN ON -to i_data_register
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_write_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_status[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_control1
+set_instance_assignment -name VIRTUAL_PIN ON -to o_control2
+set_instance_assignment -name VIRTUAL_PIN ON -to o_interrupt_n
+set_instance_assignment -name VIRTUAL_PIN ON -to o_sample
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_left_pcm[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_right_pcm[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_full_left_pcm[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_full_right_pcm[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_hold
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_write
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_state_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu32_state_write_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou32_state_read_data[*]

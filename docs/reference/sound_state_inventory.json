@@ -1,0 +1,190 @@
+{
+  "chips": {
+    "jt51": {
+      "word": {
+        "state_bits": 4032,
+        "groups": {
+          "u_acc": 199,
+          "u_eg": 548,
+          "u_lfo": 97,
+          "u_mmr": 1731,
+          "u_noise": 36,
+          "u_op": 616,
+          "u_pg": 779,
+          "u_timers": 26
+        },
+        "cell_types": {
+          "$add": 60,
+          "$adff": 114,
+          "$and": 37,
+          "$dff": 256,
+          "$eq": 432,
+          "$ge": 15,
+          "$gt": 4,
+          "$le": 1,
+          "$logic_and": 32,
+          "$logic_not": 66,
+          "$logic_or": 9,
+          "$lt": 4,
+          "$mul": 1,
+          "$mux": 2038,
+          "$ne": 3,
+          "$not": 25,
+          "$or": 18,
+          "$pmux": 43,
+          "$reduce_and": 3,
+          "$reduce_bool": 3,
+          "$reduce_or": 32,
+          "$scopeinfo": 42,
+          "$shiftx": 2,
+          "$shr": 1,
+          "$sub": 9,
+          "$xor": 6
+        },
+        "netlist_sha256": "2bd91bf6368534a240fd6a66d99ce16eba1d33f039848750d3dd01821a4f3964",
+        "log_sha256": "4f73b9c97a99dd204500c3024c45ef03cfb5fccc20d26cd4d40f506e48898d38",
+        "yosys": "Yosys 0.70+157 (git sha1 af9f71e51, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 15.2.1)",
+        "source_sha256": {
+          "rtl/sound/jt51/hdl/jt51_acc.v": "633319a0e89a78d390cba54a24aabf6f1019b705b378b636e246dcf44c8829f8",
+          "rtl/sound/jt51/hdl/jt51_eg.v": "6e7c5f315edc82b70918ea61d6d5c992204d4e8b272e33fb3ce539a9843cac5e",
+          "rtl/sound/jt51/hdl/jt51_exp2lin.v": "cecc44acf6d7c8a81e80638e4a6eeb46f17d6c8d809e7a928338553bb23fb400",
+          "rtl/sound/jt51/hdl/jt51_exprom.v": "c9f33ede4c1c0af6f54ae45620d986a2c5a2f0ef16b453dc7d2eeeac85f8cbb5",
+          "rtl/sound/jt51/hdl/jt51_kon.v": "e1bb08fe65a53d2dc871459cc91e4beeec9efb9e839b3a39a941fa27ac19ba0f",
+          "rtl/sound/jt51/hdl/jt51_lfo.v": "2bb0e19b51982f761fd50eb992c90f6dbadf467528ac09fa033b48020cd8d193",
+          "rtl/sound/jt51/hdl/jt51_lin2exp.v": "c4351ea7711364ab394ab510326111dc5047f4e57830bddef15163cbc4dcb98e",
+          "rtl/sound/jt51/hdl/jt51_mmr.v": "db3a6506091e6ea99a17ad2f5b8b11ecf36d97f74dbf0c1098cf6db601d6fdd6",
+          "rtl/sound/jt51/hdl/jt51_mod.v": "1a04fe51a56756a98b577547bbd95cf984283288f2da2e4946d75063a69d357c",
+          "rtl/sound/jt51/hdl/jt51_noise_lfsr.v": "6b58949a51dbfe8c96f19eac3aa84aaace7fcc5cc4e1902c084a93d3d1c4da91",
+          "rtl/sound/jt51/hdl/jt51_noise.v": "87b70082becc58ece4c223ea5ed01b0c0bc0b05ae95ace9b498768429232f360",
+          "rtl/sound/jt51/hdl/jt51_op.v": "5dbb743c49af67e6dff7e6c65691a66371aaf5a126834525f9501a8af1420bbf",
+          "rtl/sound/jt51/hdl/jt51_pg.v": "d52c369e535196ee260243b2342c6a526a1d95425440512037f3f3b5185f0a8a",
+          "rtl/sound/jt51/hdl/jt51_phinc_rom.v": "41fefe0b9bc9a3b71a036d12d723666e4b588c57625228eee278f9704a6f53b1",
+          "rtl/sound/jt51/hdl/jt51_phrom.v": "b3fb0623737dd22befa0bfa9a130d7b1437e81ff3e1842538251d5cd29a75c89",
+          "rtl/sound/jt51/hdl/jt51_pm.v": "9625bda77a523371fc4704ac66cfec95a9d1aff343c2e770ea5aba11eb50c8f3",
+          "rtl/sound/jt51/hdl/jt51_reg_ch.v": "2303d898fa49bf67fa8aace6c1a1e00e48d2951f9a221e75058233953f670aad",
+          "rtl/sound/jt51/hdl/jt51_csr_op.v": "b129bf97cc155bc0e4312287af79b2c7985852ef65c1768f23ffa31badd5b648",
+          "rtl/sound/jt51/hdl/jt51_reg.v": "a9913cb08f562046c2f9375fd6f7a4a5a0eb4d46266df303875059761f304de7",
+          "rtl/sound/jt51/hdl/jt51_sh.v": "71246f6b6989f922220cdd370cee52ecd56c7244e11073ddc618028a4136f0aa",
+          "rtl/sound/jt51/hdl/jt51_timers.v": "e885ffd11d62c2bf42aafb90eb30e681c3d98ae9c4fe6714b13d72f491347e70",
+          "rtl/sound/jt51/hdl/jt51.v": "4c5f80dae49f435686d3f917897df867ba7725a44bd52c5d652658ba178689b0"
+        }
+      },
+      "gates": {
+        "state_bits": 4016,
+        "groups": {
+          "unclassified": 4016
+        },
+        "cell_types": {
+          "$_AND_": 5594,
+          "$_DFF_PP0_": 453,
+          "$_DFF_PP1_": 24,
+          "$_DFF_P_": 3539,
+          "$_MUX_": 22717,
+          "$_NOT_": 1495,
+          "$_OR_": 5287,
+          "$_XOR_": 4267,
+          "$scopeinfo": 42
+        },
+        "netlist_sha256": "00f6f56b9684d6dd1f1bf360dc066daf5007b709cc671783feeb0ff9149ddb53",
+        "log_sha256": "218fe0144879d0a394828ab42add216e35a648ca799585a8e8de4597f7594b10",
+        "yosys": "Yosys 0.70+157 (git sha1 af9f71e51, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 15.2.1)",
+        "source_sha256": {
+          "rtl/sound/jt51/hdl/jt51_acc.v": "633319a0e89a78d390cba54a24aabf6f1019b705b378b636e246dcf44c8829f8",
+          "rtl/sound/jt51/hdl/jt51_eg.v": "6e7c5f315edc82b70918ea61d6d5c992204d4e8b272e33fb3ce539a9843cac5e",
+          "rtl/sound/jt51/hdl/jt51_exp2lin.v": "cecc44acf6d7c8a81e80638e4a6eeb46f17d6c8d809e7a928338553bb23fb400",
+          "rtl/sound/jt51/hdl/jt51_exprom.v": "c9f33ede4c1c0af6f54ae45620d986a2c5a2f0ef16b453dc7d2eeeac85f8cbb5",
+          "rtl/sound/jt51/hdl/jt51_kon.v": "e1bb08fe65a53d2dc871459cc91e4beeec9efb9e839b3a39a941fa27ac19ba0f",
+          "rtl/sound/jt51/hdl/jt51_lfo.v": "2bb0e19b51982f761fd50eb992c90f6dbadf467528ac09fa033b48020cd8d193",
+          "rtl/sound/jt51/hdl/jt51_lin2exp.v": "c4351ea7711364ab394ab510326111dc5047f4e57830bddef15163cbc4dcb98e",
+          "rtl/sound/jt51/hdl/jt51_mmr.v": "db3a6506091e6ea99a17ad2f5b8b11ecf36d97f74dbf0c1098cf6db601d6fdd6",
+          "rtl/sound/jt51/hdl/jt51_mod.v": "1a04fe51a56756a98b577547bbd95cf984283288f2da2e4946d75063a69d357c",
+          "rtl/sound/jt51/hdl/jt51_noise_lfsr.v": "6b58949a51dbfe8c96f19eac3aa84aaace7fcc5cc4e1902c084a93d3d1c4da91",
+          "rtl/sound/jt51/hdl/jt51_noise.v": "87b70082becc58ece4c223ea5ed01b0c0bc0b05ae95ace9b498768429232f360",
+          "rtl/sound/jt51/hdl/jt51_op.v": "5dbb743c49af67e6dff7e6c65691a66371aaf5a126834525f9501a8af1420bbf",
+          "rtl/sound/jt51/hdl/jt51_pg.v": "d52c369e535196ee260243b2342c6a526a1d95425440512037f3f3b5185f0a8a",
+          "rtl/sound/jt51/hdl/jt51_phinc_rom.v": "41fefe0b9bc9a3b71a036d12d723666e4b588c57625228eee278f9704a6f53b1",
+          "rtl/sound/jt51/hdl/jt51_phrom.v": "b3fb0623737dd22befa0bfa9a130d7b1437e81ff3e1842538251d5cd29a75c89",
+          "rtl/sound/jt51/hdl/jt51_pm.v": "9625bda77a523371fc4704ac66cfec95a9d1aff343c2e770ea5aba11eb50c8f3",
+          "rtl/sound/jt51/hdl/jt51_reg_ch.v": "2303d898fa49bf67fa8aace6c1a1e00e48d2951f9a221e75058233953f670aad",
+          "rtl/sound/jt51/hdl/jt51_csr_op.v": "b129bf97cc155bc0e4312287af79b2c7985852ef65c1768f23ffa31badd5b648",
+          "rtl/sound/jt51/hdl/jt51_reg.v": "a9913cb08f562046c2f9375fd6f7a4a5a0eb4d46266df303875059761f304de7",
+          "rtl/sound/jt51/hdl/jt51_sh.v": "71246f6b6989f922220cdd370cee52ecd56c7244e11073ddc618028a4136f0aa",
+          "rtl/sound/jt51/hdl/jt51_timers.v": "e885ffd11d62c2bf42aafb90eb30e681c3d98ae9c4fe6714b13d72f491347e70",
+          "rtl/sound/jt51/hdl/jt51.v": "4c5f80dae49f435686d3f917897df867ba7725a44bd52c5d652658ba178689b0"
+        }
+      }
+    },
+    "jt7759": {
+      "word": {
+        "state_bits": 192,
+        "groups": {
+          "u_adpcm": 13,
+          "u_ctrl": 86,
+          "u_data": 77,
+          "u_div": 16
+        },
+        "cell_types": {
+          "$add": 9,
+          "$adff": 27,
+          "$and": 6,
+          "$dff": 11,
+          "$eq": 87,
+          "$logic_and": 16,
+          "$logic_not": 19,
+          "$logic_or": 5,
+          "$lt": 1,
+          "$mux": 479,
+          "$ne": 2,
+          "$neg": 4,
+          "$not": 7,
+          "$or": 2,
+          "$pmux": 15,
+          "$reduce_and": 2,
+          "$reduce_bool": 3,
+          "$scopeinfo": 4,
+          "$shift": 4,
+          "$shiftx": 1,
+          "$sub": 5
+        },
+        "netlist_sha256": "02af2df6e2ae16af602632bc907f310222bd7baacb7107e77ebe23a0c413d416",
+        "log_sha256": "d3a7c1506f5fed0399f5ebd8cf5c307b3c950ac08bd679d559d77c679bcda60b",
+        "yosys": "Yosys 0.70+157 (git sha1 af9f71e51, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 15.2.1)",
+        "source_sha256": {
+          "rtl/sound/jt7759/hdl/jt7759.v": "a4defeee8f5b5fec795af00d6185aa941f4135ab72ae5f7fece31908c3c48c1a",
+          "rtl/sound/jt7759/hdl/jt7759_adpcm.v": "41d795e33e2085d3d07ee0acab23e85f495f3766e61bd91f177c46e84072380d",
+          "rtl/sound/jt7759/hdl/jt7759_ctrl.v": "19ad3a6572dec4e61d0046b222b6af53660cb558123b985f43db86dd5ed98aa9",
+          "rtl/sound/jt7759/hdl/jt7759_data.v": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d",
+          "rtl/sound/jt7759/hdl/jt7759_div.v": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862"
+        }
+      },
+      "gates": {
+        "state_bits": 192,
+        "groups": {
+          "unclassified": 192
+        },
+        "cell_types": {
+          "$_AND_": 964,
+          "$_DFF_PP0_": 127,
+          "$_DFF_PP1_": 5,
+          "$_DFF_P_": 60,
+          "$_MUX_": 3853,
+          "$_NOT_": 270,
+          "$_OR_": 1516,
+          "$_XOR_": 1248,
+          "$scopeinfo": 4
+        },
+        "netlist_sha256": "085a399c5a59f196d81234c12aa96f12a80f74b0849f8baad220768bc0218bd5",
+        "log_sha256": "3d2d3af6f6a0527831e3e40ab9b8824aa431eac4fe6e8ebaa89a6bf092c7bdba",
+        "yosys": "Yosys 0.70+157 (git sha1 af9f71e51, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 15.2.1)",
+        "source_sha256": {
+          "rtl/sound/jt7759/hdl/jt7759.v": "a4defeee8f5b5fec795af00d6185aa941f4135ab72ae5f7fece31908c3c48c1a",
+          "rtl/sound/jt7759/hdl/jt7759_adpcm.v": "41d795e33e2085d3d07ee0acab23e85f495f3766e61bd91f177c46e84072380d",
+          "rtl/sound/jt7759/hdl/jt7759_ctrl.v": "19ad3a6572dec4e61d0046b222b6af53660cb558123b985f43db86dd5ed98aa9",
+          "rtl/sound/jt7759/hdl/jt7759_data.v": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d",
+          "rtl/sound/jt7759/hdl/jt7759_div.v": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862"
+        }
+      }
+    }
+  },
+  "scope": "Pristine production configuration. Reachable sequential-state inventory only; no functional, freeze/load, Quartus timing or full-game qualification implied."
+}

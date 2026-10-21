@@ -1,0 +1,11 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_bus_owner.vhd": "5ee01e482a2e0075e03cb8da95013dff57df183b26fa701daeaad9ef540745f6",
+    "rtl/state/rabbitpunch_state_main_bus.vhd": "7ba81db74df3543776ea4a5d3474adcffb9ed3f2d9045cec9bbd1da3e96c79f8",
+    "sim/state/state_main_bus_tb.vhd": "ba79209c94af263d4c583dfe3d36cad76612aa22d186bc2487e30caeb3bfeeea"
+  },
+  "runner_sha256": "3d2bc5f94f1af38f545356ff0314f30844ef58e6324861972d3c8ac5deefe352",
+  "log_sha256": "e2bdb81bd4b676448a664546dd9d3a1c73cbd9188ac6d949a3e72b074826cd60",
+  "scope": "Nine accepted CPU/NVRAM/state packets through the actual shared bus owner: preserved direct CPU edge and CPU priority, delayed replies, latched state address/data/byte/write fields, canceled live access, accepted state request on reset edge, retained reset until debt/session retirement, fresh legacy/CPU replies after state, exact no-replay packet and reply counts. Synthetic backend; no physical RAM, complete board or game-state restoration."
+}

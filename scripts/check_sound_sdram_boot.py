@@ -26,7 +26,7 @@ def main():
                'rtl/memory/sdram/sdram.sv', 'rtl/rabbitpunch_sdram.vhd', 'sim/vendor/sdram/sdram_chip_model_wide.sv']
     sources += [f'rtl/cpu/t80/{name}.vhd' for name in ('T80_Pack', 'T80_Reg', 'T80_MCode', 'T80_ALU', 'T80', 'T80se')]
     sources += [row['target'] for row in manifest['files'] if row['target'].startswith(('rtl/sound/jt51/', 'sim/vendor/jt51/', 'rtl/sound/jt7759/')) and row['target'].endswith('.v')]
-    sources += [f'rtl/{name}.vhd' for name in ('rabbitpunch_z80', 'rabbitpunch_soundcpu', 'rabbitpunch_ym2151', 'rabbitpunch_ram8', 'rabbitpunch_sound_bus', 'rabbitpunch_sound_board', 'rabbitpunch_upd7759', 'rabbitpunch_adpcm', 'rabbitpunch_audio', 'rabbitpunch_rom_cache', 'rabbitpunch_read_arbiter', 'rabbitpunch_audio_roms', 'rabbitpunch_audio_rom_transport')]
+    sources += [f'rtl/{name}.vhd' for name in ('rabbitpunch_z80', 'rabbitpunch_soundcpu', 'rabbitpunch_ym2151', 'rabbitpunch_ram8', 'rabbitpunch_sound_bus', 'rabbitpunch_sound_board', 'rabbitpunch_upd7759_control', 'rabbitpunch_upd7759_playback', 'rabbitpunch_upd7759', 'rabbitpunch_adpcm', 'rabbitpunch_audio', 'rabbitpunch_rom_cache', 'rabbitpunch_read_arbiter', 'rabbitpunch_audio_roms', 'rabbitpunch_audio_rom_transport')]
     sources += ['sim/sound/sound_sdram_boot_tb.vhd']
     for row in manifest['files']:
         if row['target'] in sources:

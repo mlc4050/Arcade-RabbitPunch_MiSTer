@@ -1,0 +1,21 @@
+{
+  "accepted": true,
+  "checker_sha256": "92e1e8bdb3eba3304f58b825c41d22730817fcbad0128f1a1b12ecb6d968952e",
+  "recorder_sha256": "16829d83d0d0bf34a61b0400ad6c2182de8259dceaa1c0ea1c6b227cf4c4eb8b",
+  "fixture_coverage_sha256": "0d976888bf75280d4c96ec5a39bb8e2db5ea4299be53b52a1c3cb4865532c744",
+  "cases": [
+    {
+      "name": "same_checkpoint",
+      "returncode": 0,
+      "expected_returncode": 0,
+      "log_sha256": "f2dc157980b92ad5213ab83e592927b114a656edd2f306bb3c365ed483617347"
+    },
+    {
+      "name": "different_checkpoint",
+      "returncode": 1,
+      "expected_returncode": 1,
+      "log_sha256": "fdc16855a87562306457b7633dcc4a79c548b0bd65d02d96dcfa2ad30d28b304"
+    }
+  ],
+  "scope": "Checker regression only, with explicitly synthetic cold-run metadata and read-only real-game traces. Same checkpoint passes; three mutually equal continuations from the wrong checkpoint are rejected against the original SAVE. No cold machine or new game simulation was executed."
+}

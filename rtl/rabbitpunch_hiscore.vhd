@@ -38,7 +38,11 @@ entity rabbitpunch_hiscore is
         ou8_memory_data : out unsigned(7 downto 0);
         i_memory_ready : in std_logic;
         i_memory_response : in std_logic;
-        iu8_memory_data : in unsigned(7 downto 0)
+        iu8_memory_data : in unsigned(7 downto 0);
+        i_state_quiesce : in std_logic := '0';
+        o_state_quiesced : out std_logic := '0';
+        i_state_reconcile : in std_logic := '0';
+        i_state_scores_ready : in std_logic := '0'
     );
 end entity;
 
@@ -62,13 +66,15 @@ architecture rtl of rabbitpunch_hiscore is
     signal su8_store_address, su8_store_data, su8_store_read : unsigned(7 downto 0);
     signal su8_view_address, su8_view_data : unsigned(7 downto 0);
     signal s_valid_download_byte : std_logic;
+    signal s_state_quiesced, s_rescan_only : std_logic := '0';
 begin
     su7_length <= to_unsigned(115, 7) when i_us_set = '1' else to_unsigned(119, 7);
     su8_last_guard <= x"17" when i_us_set = '1' else x"80";
     o_initialized <= s_initialized;
     o_saved_valid <= s_saved_valid;
     o_dirty <= s_dirty;
-    o_dump_wait <= '1' when styp_state /= STATE_IDLE else '0';
+    o_dump_wait <= '1' when styp_state /= STATE_IDLE or s_state_quiesced = '1' else '0';
+    o_state_quiesced <= s_state_quiesced;
     o_memory_access <= '1' when styp_state /= STATE_IDLE else '0';
     o_memory_valid <= '1' when i_initialize = '0' and i_game_reset = '0' and
         (styp_state = STATE_FIRST_ISSUE or styp_state = STATE_LAST_ISSUE or
@@ -81,7 +87,7 @@ begin
     su8_view_address <= s_saved_bank & iu27_dump_address(6 downto 0) when i_dump_upload = '1'
         else s_saved_bank & su7_index;
     s_valid_download_byte <= '1' when i_dump_download = '1' and i_dump_write = '1' and
-        i_profile_valid = '1' and styp_state = STATE_IDLE and s_download_bad = '0' and
+        i_profile_valid = '1' and styp_state = STATE_IDLE and s_state_quiesced = '0' and s_download_bad = '0' and
         iu27_dump_address = resize(su8_download_count, 27) and
         su8_download_count < resize(su7_length, 8) else '0';
     s_store_enable <= '1' when s_valid_download_byte = '1' or styp_state = STATE_RESTORE_READ or
@@ -106,6 +112,22 @@ begin
             iux_view_address => su8_view_address,
             ou8_view_data => su8_view_data
         );
+    -- Stop new complete operations, then grant the state owner only after the
+    -- current RAM operation and any announced host transfer finish. An active
+    -- score restore/capture must not be interrupted between bytes.
+    state_lease : process(i_clk)
+    begin
+        if (rising_edge(i_clk)) then
+            if (i_initialize = '1' or i_game_reset = '1' or i_state_quiesce = '0') then
+                s_state_quiesced <= '0';
+            elsif (styp_state = STATE_IDLE and i_dump_download = '0' and i_dump_upload = '0' and
+                s_old_download = '0' and s_old_upload = '0') then
+                s_state_quiesced <= '1';
+            end if;
+            assert (i_state_reconcile = '0' or s_state_quiesced = '1')
+                report "NVRAM state reconciliation requires the quiesced state lease" severity failure;
+        end if;
+    end process;
     process(i_clk)
     begin
         if (rising_edge(i_clk)) then
@@ -125,6 +147,7 @@ begin
                 s_capture_pending <= '0';
                 s_manual_pending <= '0';
                 s_manual_capture <= '0';
+                s_rescan_only <= '0';
                 s_download_bad <= '0';
                 su8_download_count <= (others => '0');
                 su32_wait <= iu32_start_wait;
@@ -137,7 +160,39 @@ begin
                 s_capture_pending <= '0';
                 s_manual_pending <= '0';
                 s_manual_capture <= '0';
+                s_rescan_only <= '0';
                 su32_wait <= iu32_start_wait;
+            elsif (s_state_quiesced = '1') then
+                -- HPS can announce a download while wait is high. Remember
+                -- that edge so its first admitted byte still starts at zero.
+                if (i_dump_download = '1' and s_old_download = '0') then
+                    su8_download_count <= (others => '0');
+                    s_download_bad <= '0';
+                end if;
+                if (i_game_reset = '1') then
+                    styp_state <= STATE_IDLE;
+                    s_initialized <= '0';
+                    s_capture_pending <= '0';
+                    s_manual_pending <= '0';
+                    s_manual_capture <= '0';
+                    s_rescan_only <= '0';
+                    su32_wait <= iu32_start_wait;
+                elsif (i_state_reconcile = '1') then
+                    -- Normalize both save continuation and restore. Initial
+                    -- guards may legitimately change after score entry, so a
+                    -- previously ready image carries its readiness explicitly.
+                    s_rescan_only <= '1';
+                    s_initialized <= i_state_scores_ready;
+                    s_capture_pending <= i_state_scores_ready;
+                    su32_wait <= (others => '0');
+                end if;
+                if (i_manual_save = '1' and s_old_manual_save = '0' and i_profile_valid = '1') then
+                    s_manual_pending <= '1';
+                    s_manual_capture <= '1';
+                end if;
+                if (i_osd_open = '1' and s_old_osd = '0' and s_initialized = '1') then
+                    s_capture_pending <= '1';
+                end if;
             else
                 -- Host snapshot loading is independent of the gameplay reset.
                 -- Reset still cancels RAM work through the maintenance helper.
@@ -173,6 +228,7 @@ begin
                     s_capture_pending <= '0';
                     s_manual_pending <= '0';
                     s_manual_capture <= '0';
+                    s_rescan_only <= '0';
                     su32_wait <= iu32_start_wait;
                 else
                     if (i_manual_save = '1' and s_old_manual_save = '0' and i_profile_valid = '1') then
@@ -184,6 +240,7 @@ begin
                         s_capture_pending <= '1';
                     end if;
                     if (styp_state = STATE_IDLE and i_dump_download = '0' and i_dump_upload = '0' and
+                        i_state_quiesce = '0' and s_rescan_only = '0' and
                         s_saved_valid = '1' and s_old_download = '0' and s_capture_pending = '0' and
                         ((s_dirty = '1' and s_notified = '0' and i_autosave = '1' and i_osd_open = '1') or
                          (s_manual_pending = '1' and s_manual_capture = '0'))) then
@@ -196,7 +253,7 @@ begin
                     if (styp_state /= STATE_IDLE or (i_dump_download = '0' and s_old_download = '0')) then
                         case styp_state is
                             when STATE_IDLE =>
-                                if (i_profile_valid = '1' and i_dump_upload = '0') then
+                                if (i_profile_valid = '1' and i_dump_upload = '0' and i_state_quiesce = '0') then
                                     if (s_initialized = '0') then
                                         if (su32_wait /= 0) then
                                             su32_wait <= su32_wait - 1;
@@ -233,10 +290,10 @@ begin
                                 if (i_memory_response = '1') then
                                     if (iu8_memory_data = su8_last_guard) then
                                         su7_index <= (others => '0');
-                                        if (s_saved_valid = '1') then
+                                        if (s_saved_valid = '1' and s_rescan_only = '0') then
                                             styp_state <= STATE_RESTORE_READ;
                                         else
-                                            s_changed <= '1';
+                                            s_changed <= not s_saved_valid;
                                             styp_state <= STATE_CAPTURE_ISSUE;
                                         end if;
                                     else
@@ -284,6 +341,7 @@ begin
                                     s_saved_valid <= '1';
                                     s_initialized <= '1';
                                     s_manual_capture <= '0';
+                                    s_rescan_only <= '0';
                                     if (s_changed = '1') then
                                         s_dirty <= '1';
                                         s_notified <= '0';

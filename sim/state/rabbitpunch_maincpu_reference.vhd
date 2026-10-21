@@ -1,0 +1,139 @@
+-- SPDX-License-Identifier: GPL-3.0-or-later
+-- Copyright (C) 2026 RabbitPunch contributors
+-- Original maincpu phase/bus control, instantiated against the same unchanged
+-- GX instruction core as the candidate. Only entity/boundary names change;
+-- the extra passive STOP output is ignored. Original LF-normalized source SHA256:
+-- 31ab1732aa5e8465cc71bc88ef068b50cb364daeb172f45c4dafa1f669dba5ce
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+-- Legacy 48 MHz evaluation uses alternating phases every three clocks.
+-- Production may select a fractional phase pulse from the system enable generator.
+-- Memory latency becomes real 68000 wait states; phases are never accelerated.
+entity rabbitpunch_maincpu_reference is
+    generic (
+        GINT_PHASE_DIVIDER : positive := 3;
+        GBOOL_EXTERNAL_PHASE_ENABLE : boolean := false
+    );
+    port (
+        i_clk : in std_logic;
+        i_phase_enable : in std_logic := '0';
+        i_reset : in std_logic;
+        i_pause : in std_logic;
+        i_interrupt_level1 : in std_logic := '0';
+        o_interrupt_acknowledge : out std_logic;
+        o_request : out std_logic;
+        o_request_write : out std_logic;
+        ou24_request_address : out unsigned(23 downto 0);
+        ou16_request_data : out unsigned(15 downto 0);
+        ou2_request_bytes : out unsigned(1 downto 0);
+        i_response_valid : in std_logic;
+        iu16_response_data : in unsigned(15 downto 0);
+        o_paused : out std_logic
+    );
+end entity;
+
+architecture rtl of rabbitpunch_maincpu_reference is
+    signal sint_phase_count : natural range 0 to GINT_PHASE_DIVIDER-1 := 0;
+    signal s_phase : std_logic := '0';
+    signal s_enable_phase1, s_enable_phase2, s_phase_advance, s_frozen : std_logic;
+    signal s_address_strobe_n, s_upper_byte_strobe_n, s_lower_byte_strobe_n, s_read, s_transfer_acknowledge_n : std_logic;
+    signal su23_word_address : unsigned(23 downto 1);
+    signal su16_read_data, su16_write_data : unsigned(15 downto 0);
+    signal su3_function_code, su3_interrupt_level_n : unsigned(2 downto 0);
+    signal s_interrupt_cycle, s_interrupt_cycle_previous : std_logic := '0';
+    signal s_memory_address_strobe_n : std_logic;
+begin
+    su3_interrupt_level_n <= "110" when i_interrupt_level1 = '1' else "111";
+    s_interrupt_cycle <= '1' when s_address_strobe_n = '0' and su3_function_code = "111" else '0';
+    s_memory_address_strobe_n <= s_address_strobe_n or s_interrupt_cycle;
+    process(i_clk)
+    begin
+        if (rising_edge(i_clk)) then
+            o_interrupt_acknowledge <= '0';
+            if (i_reset = '1') then
+                s_interrupt_cycle_previous <= '0';
+            else
+                s_interrupt_cycle_previous <= s_interrupt_cycle;
+                if (s_interrupt_cycle = '1' and s_interrupt_cycle_previous = '0') then
+                    o_interrupt_acknowledge <= '1';
+                end if;
+            end if;
+        end if;
+    end process;
+    -- Finish the current bus cycle before stopping. Backend replies keep running.
+    s_frozen <= '1' when i_pause = '1' and s_address_strobe_n = '1' and i_reset = '0' else '0';
+    o_paused <= s_frozen;
+    s_phase_advance <= i_phase_enable when GBOOL_EXTERNAL_PHASE_ENABLE else
+        '1' when sint_phase_count = GINT_PHASE_DIVIDER - 1 else '0';
+    s_enable_phase1 <= '1' when s_phase_advance = '1' and s_phase = '0' and s_frozen = '0' else '0';
+    s_enable_phase2 <= '1' when s_phase_advance = '1' and s_phase = '1' and s_frozen = '0' else '0';
+    process(i_clk)
+    begin
+        if (rising_edge(i_clk) and s_frozen = '0') then
+            if (GBOOL_EXTERNAL_PHASE_ENABLE) then
+                if (i_phase_enable = '1') then
+                    s_phase <= not s_phase;
+                end if;
+            else
+                if (sint_phase_count = GINT_PHASE_DIVIDER-1) then
+                    sint_phase_count <= 0;
+                    s_phase <= not s_phase;
+                else
+                    sint_phase_count <= sint_phase_count + 1;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    cpu : entity work.rabbitpunch_state_fx68k
+        port map (
+            i_clk => i_clk,
+            i_external_reset => i_reset,
+            i_powerup_reset => i_reset,
+            i_enable_phase1 => s_enable_phase1,
+            i_enable_phase2 => s_enable_phase2,
+            i_run => '1',
+            o_read => s_read,
+            o_address_strobe_n => s_address_strobe_n,
+            o_upper_byte_strobe_n => s_upper_byte_strobe_n,
+            o_lower_byte_strobe_n => s_lower_byte_strobe_n,
+            ou23_word_address => su23_word_address,
+            ou16_write_data => su16_write_data,
+            iu16_read_data => su16_read_data,
+            i_transfer_acknowledge_n => s_transfer_acknowledge_n,
+            i_peripheral_transfer_n => not s_interrupt_cycle, -- Autovector on interrupt acknowledge.
+            i_bus_error_n => '1',
+            i_bus_request_n => '1', -- No external bus master.
+            i_bus_grant_acknowledge_n => '1',
+            iu3_interrupt_level_n => su3_interrupt_level_n,
+            ou3_function_code => su3_function_code,
+            o_peripheral_clock => open,
+            o_peripheral_address_valid_n => open,
+            o_bus_grant_n => open,
+            o_external_reset_out_n => open,
+            o_halted_out_n => open,
+            o_stopped => open
+        );
+    bus_adapter : entity work.rabbitpunch_bus
+        port map (
+            i_clk => i_clk,
+            i_reset => i_reset,
+            i_cpu_address_strobe_n => s_memory_address_strobe_n,
+            i_cpu_read => s_read,
+            i_cpu_upper_byte_strobe_n => s_upper_byte_strobe_n,
+            i_cpu_lower_byte_strobe_n => s_lower_byte_strobe_n,
+            iu23_cpu_word_address => su23_word_address,
+            iu16_cpu_write_data => su16_write_data,
+            ou16_cpu_read_data => su16_read_data,
+            o_cpu_transfer_acknowledge_n => s_transfer_acknowledge_n,
+            o_request => o_request,
+            o_request_write => o_request_write,
+            ou24_request_address => ou24_request_address,
+            ou16_request_data => ou16_request_data,
+            ou2_request_bytes => ou2_request_bytes,
+            i_response_valid => i_response_valid,
+            iu16_response_data => iu16_response_data
+        );
+end architecture;

@@ -12,7 +12,7 @@ def main():
     for row in files:
         assert hashlib.sha256((root/row['target']).read_bytes()).hexdigest() == row['sha256']
     sources = [row['target'] for row in files if row['target'].startswith('rtl/') and row['target'].endswith('.v')]
-    sources += ['rtl/rabbitpunch_upd7759.vhd', 'sim/sound/jt7759_baseline_tb.vhd']
+    sources += ['rtl/rabbitpunch_upd7759_control.vhd', 'rtl/rabbitpunch_upd7759_playback.vhd', 'rtl/rabbitpunch_upd7759.vhd', 'sim/sound/jt7759_baseline_tb.vhd']
     results = []
     for wrapped in (False, True):
         result = run_case('jt7759_wrapper' if wrapped else 'jt7759_baseline', sources, 'jt7759_baseline_tb', '7 ms', 'JT7759_BASELINE_PASS', wall_timeout=120, sim_args=(f"-gGBOOL_USE_WRAPPER={str(wrapped).lower()}",))

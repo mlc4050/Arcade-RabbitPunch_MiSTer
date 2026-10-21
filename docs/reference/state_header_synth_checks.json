@@ -1,0 +1,122 @@
+{
+  "commit": "c108e8fd794ca3dacf31a017ddc5ce5c4178959e",
+  "device": "5CSEBA6U23I7",
+  "project": "state_header_check",
+  "constraint_mhz": 48,
+  "seed": 3,
+  "memory_bits": 0,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 7.33
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.333
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.722
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 7.375
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.315
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.572
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 10.611
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.181
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.828
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 10.801
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.156
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.829
+    }
+  ],
+  "timing_coverage": {
+    "Illegal Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Port Paths": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Port Paths": {
+      "setup": 0,
+      "hold": 0
+    }
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Mon Oct 19 04:54:47 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : state_header_check",
+    "Top-level Entity Name : state_header_check",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 733 / 41,910 ( 2 % )",
+    "Total registers : 1146",
+    "Total pins : 1 / 314 ( < 1 % )",
+    "Total virtual pins : 839",
+    "Total block memory bits : 0 / 5,662,720 ( 0 % )",
+    "Total RAM Blocks : 0 / 553 ( 0 % )",
+    "Total DSP Blocks : 0 / 112 ( 0 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 0 / 6 ( 0 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "log_sha256": "46abde3b7fef4ca816f0b6a31270ef9d70407b89f44c8f2e20d4a31522b4980e",
+  "scope": "Isolated registered virtual-I/O state block at48MHz seed3. Exact committed source/boundary bytes retained; expected RAM and required hierarchy gates passed. All reported timing nonnegative and unconstrained gate passed. Not a complete core, post-fit functional proof, physical DDR or hardware/game-state restore qualification.",
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_header.vhd": "f516fa8d35f1b8b1ab73fa83e203a9ed89203d514ed4eb280982e10ef774e1ba",
+    "rtl/state/rabbitpunch_state_crc.vhd": "4de0b46eae23558ed02db73df8ce628e8a02cb8a6318405c4b8846dbed81e568",
+    "rtl/synth_check/state_header/state_header_check.qsf": "41318cacd01acc412c9de4822f16af05e841f6fe3e9f2419413ea2aee5b946a8",
+    "rtl/synth_check/state_header/state_header_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "rtl/synth_check/state_header/state_header_check.vhd": "e5f511d5e04acbb0413c37ccc9d848b13cd525d58ed607a8d1ee18905327010a"
+  },
+  "artifacts_sha256": {
+    "build/rtl/synth_check/state_header/state_header_check.qsf": "41318cacd01acc412c9de4822f16af05e841f6fe3e9f2419413ea2aee5b946a8",
+    "build/rtl/synth_check/state_header/state_header_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "build/rtl/synth_check/state_header/state_header_check.vhd": "e5f511d5e04acbb0413c37ccc9d848b13cd525d58ed607a8d1ee18905327010a",
+    "build/rtl/synth_check/state_header/output_files/state_header_check.fit.rpt": "f4d4e17a0ae99db4fb6d7ae397f53e06fe9d4783f68f92166eb65e5bae55c742"
+  },
+  "recorder_sha256": "e0cc5f69ec759695a32d46cfa18903b84004f17c36d968c80e016b890b89063a"
+}

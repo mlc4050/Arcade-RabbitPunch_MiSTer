@@ -1,0 +1,46 @@
+{
+  "repository": "local Arcade-KonamiGX_MiSTer; upstream ijor/fx68k",
+  "commit": "89124d4f29e1d3f95557e5e5265efcbe9d0d7cb4",
+  "files": [
+    {
+      "source": "rtl/cpu/gx_ss_m68k.sv",
+      "target": "rtl/state/vendor/konamigx/gx_ss_m68k.sv",
+      "sha256": "397e40f9dfcca76acb3039853db44d239a246f31671fd641e0cb81003d5daec4"
+    },
+    {
+      "source": "rtl/cpu/fx68k/fx68k.sv",
+      "target": "rtl/state/vendor/konamigx/fx68k/fx68k.sv",
+      "sha256": "9f327366a840badd2e3b192f77b76a4e2d5f568add7df3df5e31010e2ba21ab4"
+    },
+    {
+      "source": "rtl/cpu/fx68k/fx68kAlu.sv",
+      "target": "rtl/state/vendor/konamigx/fx68k/fx68kAlu.sv",
+      "sha256": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775"
+    },
+    {
+      "source": "rtl/cpu/fx68k/uaddrPla.sv",
+      "target": "rtl/state/vendor/konamigx/fx68k/uaddrPla.sv",
+      "sha256": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a"
+    },
+    {
+      "source": "rtl/cpu/fx68k/microrom.mem",
+      "target": "rtl/state/vendor/konamigx/fx68k/microrom.mem",
+      "sha256": "06b3325e369b5bbf9ed2ec76737fe19aea12573775858a4ca62b8e5bcc173d0a"
+    },
+    {
+      "source": "rtl/cpu/fx68k/nanorom.mem",
+      "target": "rtl/state/vendor/konamigx/fx68k/nanorom.mem",
+      "sha256": "46ef9dea89372021949a78674aa67cf46a485d9524e3df9655dabc5126170457"
+    },
+    {
+      "source": "rtl/cpu/fx68k/LICENSE",
+      "target": "rtl/state/vendor/konamigx/fx68k/LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "source": "rtl/cpu/fx68k/PROVENANCE.md",
+      "target": "rtl/state/vendor/konamigx/fx68k/PROVENANCE.md",
+      "sha256": "e3c2eab35189aa0ddadeb7298ae57832bf1ef76478a53780ca28bb6f868d392c"
+    }
+  ]
+}

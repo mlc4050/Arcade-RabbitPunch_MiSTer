@@ -1,0 +1,150 @@
+{
+  "commit": "9e8d02620a28d7acf09630171f6f198e64677994",
+  "device": "5CSEBA6U23I7",
+  "project": "jt7759_state_check",
+  "constraint_mhz": 48,
+  "seed": 3,
+  "memory_bits": 0,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 11.515
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.419
+    },
+    {
+      "type": "Slow 1100mV 100C Model Recovery 'clk_sys'",
+      "slack_ns": 16.443
+    },
+    {
+      "type": "Slow 1100mV 100C Model Removal 'clk_sys'",
+      "slack_ns": 1.835
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.718
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 11.748
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.39
+    },
+    {
+      "type": "Slow 1100mV -40C Model Recovery 'clk_sys'",
+      "slack_ns": 16.568
+    },
+    {
+      "type": "Slow 1100mV -40C Model Removal 'clk_sys'",
+      "slack_ns": 1.763
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.574
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 10.516
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.179
+    },
+    {
+      "type": "Fast 1100mV 100C Model Recovery 'clk_sys'",
+      "slack_ns": 18.243
+    },
+    {
+      "type": "Fast 1100mV 100C Model Removal 'clk_sys'",
+      "slack_ns": 0.858
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.83
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 10.734
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.165
+    },
+    {
+      "type": "Fast 1100mV -40C Model Recovery 'clk_sys'",
+      "slack_ns": 18.689
+    },
+    {
+      "type": "Fast 1100mV -40C Model Removal 'clk_sys'",
+      "slack_ns": 0.741
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.83
+    }
+  ],
+  "timing_coverage": {
+    "Illegal Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Port Paths": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Port Paths": {
+      "setup": 0,
+      "hold": 0
+    }
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Mon Oct 19 09:48:09 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : jt7759_state_check",
+    "Top-level Entity Name : jt7759_state_check",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 439 / 41,910 ( 1 % )",
+    "Total registers : 387",
+    "Total pins : 1 / 314 ( < 1 % )",
+    "Total virtual pins : 134",
+    "Total block memory bits : 0 / 5,662,720 ( 0 % )",
+    "Total RAM Blocks : 0 / 553 ( 0 % )",
+    "Total DSP Blocks : 0 / 112 ( 0 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 0 / 6 ( 0 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "log_sha256": "da5e39589e67669eebf31aaa53bfd9b38615b0d35165a7ad3e35d244873327c9",
+  "scope": "Standalone registered virtual-I/O sound-state block at48MHz seed3 on5CSEBA6U23I7. All reported setup/hold/recovery/removal/pulse checks nonnegative and unconstrained-path gate passed. Exact canonical model bytes match staged source. No complete core, game restore, hardware or deployment qualification.",
+  "verification_only": false,
+  "checker_sha256": "870f819f640f48a6fa2075332c761d5cb5a8dbd5f336c6196b64e17aff94f4cb",
+  "canonical_model_sha256": "6fdc86fa46e21bd97109e1cafa221d0e31c04deb2c1af48d2e15be388be5c3a9",
+  "mapped_state_bits": 189,
+  "core_registers": 246,
+  "fitter_report_sha256": "5e24a37582cc70b35283277c3cf5b8fa38cdafa79af26185e57d8b039e1637ae",
+  "qsf_sha256": "21e747444f6d8f37060b781cfd0d522752df1a66cbea5915abe66e2e4a1b58f6",
+  "sdc_sha256": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+  "recorder_sha256": "ed273e9113e54dc82596e82c0451437da50dc4fc9249da789c42847b405af1f5",
+  "preservation_scope": "Required chip hierarchy, zero RAM and fitted core register count not less than complete mapped state size. Dynamic scan read/write ports remain observable through registered boundary I/O. This is a preservation sanity gate, not post-fit functional equivalence."
+}

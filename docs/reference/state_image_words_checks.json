@@ -1,0 +1,11 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_layout.vhd": "dd5f77217553196f29570fb29d51b62993b29439fda34812c4fc19b7eec6c7ab",
+    "rtl/state/rabbitpunch_state_image_words.vhd": "818f00770ca62e64179d9610fff736915f6361d8752cb3f66f87508fcb20bb46",
+    "sim/state/state_image_words_tb.vhd": "2eebddea750f6cd4bc177d36cd4feb0d63b000c70a01b35d416638dd52fabca2"
+  },
+  "runner_sha256": "af412c7ab2290f903464ba48ef5e9fc77788032be660ba29ca2e0e274a6463eb",
+  "log_sha256": "315b6b366b373cfd37360d93ec3c08280cab9fca71311cf1679ee51a32abcd4e",
+  "scope": "Seven image-word stream cases: every107280 byte independently checked in13410 little-endian words, extended backpressure and stable output, delayed read cancellation/reset debt, validation-permission loss, injected read error and complete retry. Synthetic acknowledged byte source; not DDR publication or full-game restoration."
+}

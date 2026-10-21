@@ -1,0 +1,10 @@
+{
+  "accepted": false,
+  "reason": "ISet alone admitted capture at PC 0106 between DD prefix and opcode; accepted-M1 prefix tracking is required.",
+  "archived_sha256": {
+    "debug/fit_archive/t80_prefix_admission_rejected/mode1.log": "81db919b6aab0e058bd6171c840762452358b4a753aa48095fca04e072e33605",
+    "debug/fit_archive/t80_prefix_admission_rejected/rabbitpunch_t80_capture.vhd": "1087cf6d6fe899d9717e9c653cd0cb6b240913884172b43180a2fa91a0d7c5fe",
+    "debug/fit_archive/t80_prefix_admission_rejected/run_t80_capture_tests.py": "45f12b8c12d742798e08fdde73cc68c2f71bba521b8e81d739d2c850b2eed544",
+    "debug/fit_archive/t80_prefix_admission_rejected/t80_capture_tb.vhd": "6449cd2c5ef2ac8c60bd7ae25be016212e3b60ec4f5ecabbc3c0c80fec92e45e"
+  }
+}

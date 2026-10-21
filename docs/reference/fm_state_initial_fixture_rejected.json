@@ -1,0 +1,9 @@
+{
+  "accepted": false,
+  "reason": "Fixture did not initialize stopped timer count registers through load edges; corrected before final audit.",
+  "archive": "debug/fit_archive/fm_state_uninitialized_timer_rejected",
+  "files": {
+    "fm_state_audit_tb.vhd": "954f447ef4e91f379ce52161621ca6e0376565fce9df9190826c4a31e8eadb4b",
+    "result.log": "3aa360c1da1c8357074fc6eee869a1907d82cc99124f656b8cec8f170edbb212"
+  }
+}

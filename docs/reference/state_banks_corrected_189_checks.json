@@ -1,0 +1,13 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_layout.vhd": "9f862ba8f7bb4d68f85c1040b0e787fddd51253e4b88e17ebe86745e7409bc68",
+    "rtl/state/rabbitpunch_state_memory.vhd": "e8a6a32e9d56a0ffe9553384e5badd6400c4cf146ed45ec045151592fe48b787",
+    "rtl/state/rabbitpunch_state_body.vhd": "dfd56ad6039a32cc5cdf724bf95d4da3996bd41de48e90eec2a7310e1a780a50",
+    "rtl/state/rabbitpunch_state_banks.vhd": "c8c79f09c0ffb5938dbe52fc0acdb5f62a3776c7ecc128e614c5b646f823406d",
+    "sim/state/state_banks_tb.vhd": "2fcce6df1478400cddae776a9403c7f0b4ed5e6c08b7877242ac95ff3929db47"
+  },
+  "runner_sha256": "394e0b00c8867e5afa77176a97be0ac297ba79a21af6c99ed334875334894bb2",
+  "log_sha256": "4e31686c680b24835edaf8e404b07fd520e4debac23587eb5948c680de14bd05",
+  "scope": "Real dense-RAM adapter plus held-body parent with synthetic physical RAM/register endpoints: every107216-byte read before and after a complete ordered write; two independent patterns, canonical zero donor/FM padding with unknown imported unused bits,20 CPU words,126 FM words,6 ADPCM words, deferred atomic T80/board load, denied partial/out-of-order commits, physical main/sound addresses and big-endian byte lanes, delayed RAM and session-loss/reset debt. Tests packing/protocol only; does not prove CPU/chip or complete-game restoration."
+}

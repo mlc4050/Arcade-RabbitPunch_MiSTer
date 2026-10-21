@@ -1,0 +1,33 @@
+{
+  "source_repository": "D:/git/meatsauce",
+  "commit": "dccc50bb72ded70b67dd9aebec22964f1e4e23b6",
+  "license": "BSD-style three-clause, retained in original headers",
+  "scope": "Unchanged230-bit T80 state-port evaluation only; not a production CPU replacement",
+  "files": [
+    {
+      "source": "cores/s32multi/rtl/audio/T80/T80.vhd",
+      "target": "rtl/state/vendor/meatsauce_t80/T80.vhd",
+      "sha256": "e6f6a31dcbc34f0193ff8aa4bc124e4967e527d10731d0acc6f3908d3384e0ef"
+    },
+    {
+      "source": "cores/s32multi/rtl/audio/T80/T80_ALU.vhd",
+      "target": "rtl/state/vendor/meatsauce_t80/T80_ALU.vhd",
+      "sha256": "8e1dfd1c47fc0ce4a902f3d789f657a93f2b9faa6a72df70e1f12f27649291b8"
+    },
+    {
+      "source": "cores/s32multi/rtl/audio/T80/T80_MCode.vhd",
+      "target": "rtl/state/vendor/meatsauce_t80/T80_MCode.vhd",
+      "sha256": "a73c512d7f03bc34759de560efe78c1813785c5ae3f52714df149455b876e5a5"
+    },
+    {
+      "source": "cores/s32multi/rtl/audio/T80/T80_Reg.vhd",
+      "target": "rtl/state/vendor/meatsauce_t80/T80_Reg.vhd",
+      "sha256": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783"
+    },
+    {
+      "source": "cores/s32multi/rtl/audio/T80/T80s.vhd",
+      "target": "rtl/state/vendor/meatsauce_t80/T80s.vhd",
+      "sha256": "16fbbccf05abda145ceca25f703f2f2057818e1cf2e703aac54375cb258df1ec"
+    }
+  ]
+}

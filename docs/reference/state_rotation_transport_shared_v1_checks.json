@@ -1,0 +1,16 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_ddr_write_queue.vhd": "d8a66938e884f6a26f18e3e7c2de7c5f4732ae7c507e745ce91101ce06d592e5",
+    "rtl/rabbitpunch_frame_publication.vhd": "2ab81ea58f2ddbc240095067d4ff6c267675d9213af684a37045e04b16552cb3",
+    "rtl/state/rabbitpunch_state_ddr_arbiter.vhd": "f7ac7ebe67c4e46c4d8f9d550efde19e989ed7a3a1b575efe974cf6cf9dcc77d",
+    "rtl/state/rabbitpunch_state_rotation_transport.vhd": "14ac95c7b7283e862a83bda904657e565850a31500b931059fe64df307b18a72",
+    "rtl/rabbitpunch_hdmi_rotation.vhd": "769a309dcdc4422f0801e1149d0f3a621d15c3313c1f5f600d01f36bc88eb17c",
+    "rtl/rabbitpunch_video_aspect.vhd": "15f15840b7ced43d06487c1e9c1b7251bc1b210dfa911c9273cf9c904c05759b",
+    "rtl/state/rabbitpunch_state_hdmi_presentation.vhd": "2aa92755c4c2ad6a7bed80e13f6231404266e39070c1d6d0c1b6fe83f3f83808",
+    "sim/state/state_rotation_transport_tb.vhd": "d710b7258584e047ac5bdc0f46b1efa813a32186435ad3c06369b96b0c02be38"
+  },
+  "runner_sha256": "0367b6a3d81da726e577b40343155632c263f4a3c9de11fdc4fca69e39c35d69",
+  "log_sha256": "4e836eb18e0058701e99954a739d6e0ec0e2f8b06f2b1278a7ee6630a90ffad4",
+  "scope": "Actual presentation queue/frame-publication/three-client DDR arbiter with synthetic four-pixel packets and delayed DDR responses. Loader priority/fields, discard and clean frame restart, state read debt across cancellation and presentation invalidation, continued state retry read/write while video held, and loader takeover only after canceled state response. Higher HDMI wrapper analyzed, not elaborated. No actual rotator/scaler, file loader, MiSTer DDR controller, whole-game restoration, FPGA or hardware qualification."
+}

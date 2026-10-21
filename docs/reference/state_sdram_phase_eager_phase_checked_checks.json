@@ -1,0 +1,17 @@
+{
+  "case": "state_sdram_phase_eager_phase_checked",
+  "pass_marker": "STATE_SDRAM_PHASE_PASS",
+  "log": "debug\\baselines\\state_sdram_phase_eager_phase_checked\\result.log",
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_sdram_types.vhd": "35c1406e611389f2ee18dd3da7b0805e389ac4b8bd763c8a603a691b5de66367",
+    "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+    "rtl/rabbitpunch_sdram.vhd": "c2bb1bd24c3b7ef22653e3ce8d7d888acb868b5b28ad6345bbc26e0d5694815a",
+    "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
+    "rtl/state/rabbitpunch_state_sdram_phase.vhd": "60a17d0e8995fb3c5195ec0a994aabbf415f77d2173057d32706845d1ff4ae7b",
+    "sim/state/state_sdram_phase_tb.vhd": "1806975fbf22e8235f9d168f5b8c23f022103128a027bc5c3ae6850da710fb10"
+  },
+  "runner_sha256": "b42968c006fc7106c47dc22f726c2cd1fce33f5b6084062530510d506792eeae",
+  "log_sha256": "a669754d2a6954e6a9b33e5cb6025e4606b2e9f08a8eb7e4ceeff701cd1f2c67",
+  "scope": "Native unchanged SDRAM controller/adapter/chip,5357ps shifted clock and capture adjustment1.163 initial delay cases; four normal writes and1304 exact normal burst readbacks after read-only phase streaming. Compare ready/valid and command timing for256 clocks after release; 16 cancellation edges around accepted-read completion retain ownership and suppress private replies, then return exactly one normal reply. Refresh chip-select parity excluded. No game integration, FPGA timing or whole-game continuation qualification."
+}

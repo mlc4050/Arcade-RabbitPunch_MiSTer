@@ -1,0 +1,23 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/vendor/meatsauce_t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+    "rtl/state/vendor/meatsauce_t80/T80_MCode.vhd": "a73c512d7f03bc34759de560efe78c1813785c5ae3f52714df149455b876e5a5",
+    "rtl/state/vendor/meatsauce_t80/T80_ALU.vhd": "8e1dfd1c47fc0ce4a902f3d789f657a93f2b9faa6a72df70e1f12f27649291b8",
+    "rtl/state/vendor/meatsauce_t80/T80.vhd": "e6f6a31dcbc34f0193ff8aa4bc124e4967e527d10731d0acc6f3908d3384e0ef",
+    "rtl/state/rabbitpunch_t80_capture.vhd": "55aec7bb27e91dc6d04e3f2e3f1a5535c866cda4c290389a8b5d887844dc8462",
+    "rtl/rabbitpunch_z80.vhd": "60b5528ed86932a3c1881951a389e77d640d850188f1182457a0ff75ffbdcf9c",
+    "rtl/rabbitpunch_soundcpu.vhd": "e2baa84d8bbbc8da959938f9ca338f27dec8f2265bb622a9c09b574218cfc682",
+    "rtl/rabbitpunch_ram8.vhd": "3125a846fd3c208c8512f604952bd4766ac4d2d7ee959c0b8e53b989e31fc7fa",
+    "rtl/rabbitpunch_sound_bus.vhd": "9801559d2b41a745280140813bc1da182a07cc52ee6b950d2145a0d3737a0c9d",
+    "rtl/state/generated/jt51_state_netlist.vhd": "af6ad0f89208e06a192a139906735d958f46fa91b840ea0ffa2237c6b0d559a0",
+    "rtl/rabbitpunch_ym2151.vhd": "482a5d7b9d501c861aba630c2dbfd61e29688a4613cab57a3734cfa5422af0ba",
+    "rtl/rabbitpunch_sound_board.vhd": "99420aff42033a58d60f18b4ea4f71735e94bf148995c5427a8fb731b1994bad",
+    "sim/state/delayed_state_sound_bus.vhd": "0877341db4a9d54de41ff8250ff4b4ee0b46d97173b03cb88c5068e4ada41fc0",
+    "sim/state/sound_state_owner_tb.vhd": "7d9bf973e70f59fb34ba8d6b18cc426575e0cc7b1c3d2f7b0cc70ca524ec7dc4"
+  },
+  "vendor_component_package_sha256": "c74954b2bc34152c667f88c9f414b84011c8e8b228399346047664ad27a2eb4d",
+  "runner_sha256": "b80a0bd89aa77ca12ec416a2cb97659b54e9c6bfc6d2f213575448debe322b76",
+  "log_sha256": "7a91967225dae593a03613281a051b7a16c8eeb81aedaad2ca2afc85ff081d12",
+  "scope": "Actual state-enabled sound board/Z80/generated FM with test-only delayed VHDL backend architecture: late RAM read/write reply retains state ownership after mode cancel, held cancellation, short gameplay reset during accepted debt, no new CPU requests until debt retired, clean rebootstrap and retained user pause on resume. Hierarchy confirms delayed_state_test. This is a protocol injection test, not original sound RAM, real-ROM audio, ADPCM or whole-game restore."
+}

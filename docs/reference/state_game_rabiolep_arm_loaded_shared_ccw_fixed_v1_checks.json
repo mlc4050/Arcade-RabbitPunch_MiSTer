@@ -1,0 +1,321 @@
+{
+  "accepted": false,
+  "cold_continuation_checks_passed": true,
+  "failures": [],
+  "seed_sha256": "504f75cecef8acd5aa1e82c0f5611ae2c228d7ffa61be52326be7de8c3585479",
+  "seed_admission_sha256": "fb12270b8ef3d05ecde08e8f3ca462fcbf72713cb5bc114fea7bdcfc82701212",
+  "bundle_manifest_sha256": "5130f5e144693d0a15aa4a06323ee59f025a4efff2d5f808cd33d43f7ab47c22",
+  "original_coverage_sha256": "0d976888bf75280d4c96ec5a39bb8e2db5ea4299be53b52a1c3cb4865532c744",
+  "cold_coverage_sha256": "b84e87b76855a83a882c252c16f6131f732e86f016a7dd2b99a69865ef1f12dd",
+  "expected_trace_sha256": [
+    "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46",
+    "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46",
+    "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46"
+  ],
+  "actual_trace_sha256": [
+    "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46",
+    "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46",
+    "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46"
+  ],
+  "checker_sha256": "92e1e8bdb3eba3304f58b825c41d22730817fcbad0128f1a1b12ecb6d968952e",
+  "scope": "Fresh machine/ROM load, ARM file-sized zero-filled external slot with rewritten FFFFFFFF counter, ordinary restore, and three exact two-frame continuations compared with the original SAVE. Includes a new SAVE and two further RESTOREs checked by the ordinary continuation checker. No internal model deposits; this does not qualify hardware or the complete MiSTer presentation/DDR path.",
+  "game": "rabiolep",
+  "frozen_commit": "adfb4916013427fb731a3c3bb6116e894b08dd39",
+  "artifact_directory": "debug/state_full_machine_cold_shared_jp_ccw_selector_fixed_v1/rabiolep",
+  "scenario": {
+    "checkpoint_frames": 120,
+    "dips": 0,
+    "save_count": 2,
+    "hiscore_profile": null,
+    "boot_restore": true,
+    "boot_pad": 0,
+    "image_identity": {
+      "abi": "52500101",
+      "config": 0,
+      "production": false
+    },
+    "shared_presentation": true,
+    "rotation": 2,
+    "gameplay": false,
+    "coin_frame": 900,
+    "start_frame": 990,
+    "action_frame": 1290,
+    "phase_cycle_limit": 240000000
+  },
+  "seed_admission": {
+    "accepted": true,
+    "admission_kind": "persisted_external_DDR_seed",
+    "bundle_manifest_sha256": "5130f5e144693d0a15aa4a06323ee59f025a4efff2d5f808cd33d43f7ab47c22",
+    "game": "rabiolep",
+    "loaded_counter": 4294967295,
+    "expected_counters": [
+      4294967295,
+      0
+    ],
+    "original_published_slot_sha256": "471d606296a43cb1258d2347309ef0b8684b9cbb464d6191a0ad2898496767aa",
+    "persisted_file_sha256": "dda0322afb6fa9611a081619c7bc852c6e0ebc52d5b555360efe9699298a744b",
+    "source_policy_admission": {
+      "file": "rtl/state/rabbitpunch_state_slot_reader.vhd",
+      "contract_sha256": "5e14850e27e8559e46cf7190c8d31248faf938149f839f52370befb05d994a55",
+      "presentation": {
+        "added_sources": [
+          "rtl/rabbitpunch_ddr_write_queue.vhd",
+          "rtl/rabbitpunch_frame_publication.vhd",
+          "rtl/rabbitpunch_hdmi_rotation.vhd",
+          "rtl/rabbitpunch_video_aspect.vhd",
+          "rtl/state/rabbitpunch_state_ddr_arbiter.vhd",
+          "rtl/state/rabbitpunch_state_hdmi_presentation.vhd",
+          "rtl/state/rabbitpunch_state_rotation_transport.vhd",
+          "rtl/video/rotation/screen_rotate_two.sv",
+          "sys/math.sv",
+          "sys/video_freak.sv"
+        ],
+        "proof_sha256": "87f02b5c5373e6387d28c844640c93fd7c6bd5315578534e347043116d353b68"
+      },
+      "original_normalized_sha256": "84d5d13871be5ad1b6895758f582dbc675e1cbc5fa0b85675b1f08dc11f16ec4",
+      "corrected_normalized_sha256": "c2cb1787f6372bf33b0e6f7473e52319d8bab25ce8f1340d5c5955a25db970dc"
+    },
+    "seed_sha256": "504f75cecef8acd5aa1e82c0f5611ae2c228d7ffa61be52326be7de8c3585479",
+    "origin_manifest_sha256": "d167e90ab4105b8608d54f0d4d4270df297e4cc4f0e50706b3a487de4535921f",
+    "origin_coverage_sha256": "0d976888bf75280d4c96ec5a39bb8e2db5ea4299be53b52a1c3cb4865532c744",
+    "origin_case": "D:\\git\\RabbitPunch-savestates\\debug\\state_full_machine_transport_repeat_v1\\rabiolep",
+    "expected_trace_sha256": [
+      "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46",
+      "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46",
+      "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46"
+    ],
+    "expected_release_observations": [
+      [
+        "1",
+        "0",
+        "0",
+        "c",
+        "325",
+        "74"
+      ],
+      [
+        "2",
+        "0",
+        "0",
+        "c",
+        "325",
+        "74"
+      ],
+      [
+        "3",
+        "0",
+        "0",
+        "c",
+        "325",
+        "74"
+      ]
+    ],
+    "frozen_pad": 0,
+    "recorder_sha256": "8a047453e31a1b2ec72a048dbc9b026b6fed27524eb1ef0e9fd9c27219b25a26",
+    "scope": "Only the external DDR slot is initialized from an independently CRC-checked published SAVE, using ARM file length, zero fill and FFFFFFFF change-counter rewrite. No internal model state is written. Original continuation passed with matching guest RTL, ROMs, DIPs and score descriptor; only the separately native-proved outer reader sentinel correction may differ. Optional presentation source additions must match their qualified native composition; actual shared-bus continuation is still a separate test. Cold continuation must still pass separately; this admission is not that test."
+  },
+  "coverage": [
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 6688,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 6688,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 6688,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83967,
+      "nonblack_pixels": 6751,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "49579bfa12b08817f119b0dac83ab8217372019c5e30def0717fcd16ba3bb69b"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83967,
+      "nonblack_pixels": 6751,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "49579bfa12b08817f119b0dac83ab8217372019c5e30def0717fcd16ba3bb69b"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83967,
+      "nonblack_pixels": 6751,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "49579bfa12b08817f119b0dac83ab8217372019c5e30def0717fcd16ba3bb69b"
+    }
+  ],
+  "published_images": [
+    {
+      "counter": 4294967295,
+      "sha256": "504f75cecef8acd5aa1e82c0f5611ae2c228d7ffa61be52326be7de8c3585479"
+    },
+    {
+      "counter": 0,
+      "sha256": "55f07d91962635fd3fd6c7cc68b74d25334a6c665bb46b52693fe469835771f0"
+    }
+  ],
+  "release_observations": [
+    [
+      "1",
+      "0",
+      "0",
+      "c",
+      "325",
+      "74"
+    ],
+    [
+      "2",
+      "0",
+      "0",
+      "c",
+      "325",
+      "74"
+    ],
+    [
+      "3",
+      "0",
+      "0",
+      "c",
+      "325",
+      "74"
+    ],
+    [
+      "4",
+      "0",
+      "0",
+      "c",
+      "159",
+      "75"
+    ],
+    [
+      "5",
+      "0",
+      "0",
+      "c",
+      "159",
+      "75"
+    ],
+    [
+      "6",
+      "0",
+      "0",
+      "c",
+      "159",
+      "75"
+    ]
+  ],
+  "active_audio_checkpoints_required": [],
+  "run": {
+    "command": [
+      "D:\\git\\RabbitPunch-savestates\\debug\\state_full_machine_cold_shared_jp_ccw_selector_fixed_v1\\obj\\sim.exe",
+      "D:\\git\\RabbitPunch-savestates\\.local\\deferred-state-evaluation\\full_machine_cold_shared_jp_ccw_selector_fixed_v1\\roms\\rabiolep.bin"
+    ],
+    "returncode": 0,
+    "seconds": 334.02059599998756
+  },
+  "file_sha256": {
+    "debug/state_full_machine_cold_shared_jp_ccw_selector_fixed_v1/plan.json": "70e41869d48f99acac6ec13b6bac981cbc2c226a10e8c754b33e46c1bbec5ae0",
+    "debug/state_full_machine_cold_shared_jp_ccw_selector_fixed_v1/fixture_dq.v": "28337f6f4d9221bbfd2844152789d48e9d81428ab23c080bc73735c510908bd9",
+    "debug/state_full_machine_cold_shared_jp_ccw_selector_fixed_v1/obj/sim.exe": "3ee7229d58771c84231364fbdac7c7513f8c07417947595232266471fe41be7e",
+    "debug/state_full_machine_cold_shared_jp_ccw_selector_fixed_v1/native_state_ram_admission.json": "f611d22b15d9e455b120c20482f6ffd54f115d987560b1a782320870f5d81556",
+    "debug/state_full_machine_cold_shared_jp_ccw_selector_fixed_v1/dq_native_readback_admission.json": "5c36a382610a2ed1629037ee72976ec26fcae01218dd854aaf2d4e92ccfb1a14",
+    "debug/state_full_machine_cold_shared_jp_ccw_selector_fixed_v1/event_monitor_admission.json": "b5b9e0e80fe13750af76b098ef236cc8f3acce29a9180aada49059c28e6922c9",
+    "debug/state_full_machine_cold_shared_jp_ccw_selector_fixed_v1/rabiolep/run.json": "2fe2105ce628900e2ce177fbe732fd87c09eae26668001466d592b94e13b9807",
+    "debug/state_full_machine_cold_shared_jp_ccw_selector_fixed_v1/rabiolep/endpoints.txt": "acf1dedc8991127f47f8769d0fa32db2beab3426ee0ff45712d1c2bff2d0cf38",
+    "debug/state_full_machine_cold_shared_jp_ccw_selector_fixed_v1/rabiolep/slot0_save1.bin": "504f75cecef8acd5aa1e82c0f5611ae2c228d7ffa61be52326be7de8c3585479",
+    "debug/state_full_machine_cold_shared_jp_ccw_selector_fixed_v1/rabiolep/slot0_save2.bin": "55f07d91962635fd3fd6c7cc68b74d25334a6c665bb46b52693fe469835771f0",
+    "debug/state_full_machine_cold_shared_jp_ccw_selector_fixed_v1/rabiolep/slot0.bin": "55f07d91962635fd3fd6c7cc68b74d25334a6c665bb46b52693fe469835771f0",
+    "debug/state_full_machine_cold_shared_jp_ccw_selector_fixed_v1/rabiolep/cold_continuation_comparison.json": "69082ed8f88375064ac71996c4b22858c948ce543b098dc2ed27eb838c94d8fe"
+  },
+  "native_game_event_miter": false,
+  "shared_presentation_observations": {
+    "rotation_writes": 527574,
+    "unblanked": true
+  }
+}

@@ -5,6 +5,9 @@ use ieee.numeric_std.all;
 -- The bus runs on i_clk while the Z80 advances only at enabled, completed
 -- transaction boundaries. A request is a one-clock pulse with one reply owed.
 entity rabbitpunch_soundcpu is
+    generic (
+        GBOOL_STATE_CAPABLE : boolean := false
+    );
     port (
         i_clk : in std_logic;
         i_reset : in std_logic;
@@ -18,7 +21,15 @@ entity rabbitpunch_soundcpu is
         i_response_valid : in std_logic;
         iu8_response_data : in unsigned(7 downto 0);
         o_paused : out std_logic;
-        o_halted : out std_logic
+        o_halted : out std_logic;
+        i_capture_request : in std_logic := '0';
+        i_capture_cancel : in std_logic := '0';
+        o_capture_pending : out std_logic := '0';
+        o_state_held : out std_logic := '0';
+        i_state_resume : in std_logic := '0';
+        i_state_write : in std_logic := '0';
+        iu256_state_data : in unsigned(255 downto 0) := (others => '0');
+        ou256_state_data : out unsigned(255 downto 0) := (others => '0')
     );
 end entity;
 
@@ -26,17 +37,25 @@ architecture rtl of rabbitpunch_soundcpu is
     type t_state is (STATE_IDLE, STATE_WAITING, STATE_COMPLETE, STATE_DRAINING);
     signal styp_state : t_state := STATE_IDLE;
     signal s_memory, s_read, s_write, s_cycle, s_enable, s_reset : std_logic;
+    signal s_capture_pending, s_capture_held, s_capture_run, s_bus_drained : std_logic;
     signal su16_address : unsigned(15 downto 0);
     signal su8_write_data : unsigned(7 downto 0);
     signal su8_read_data : unsigned(7 downto 0) := x"FF";
 begin
+    o_capture_pending <= s_capture_pending;
+    o_state_held <= s_capture_held;
+    s_capture_run <= i_capture_request or s_capture_pending;
+    s_bus_drained <= '1' when styp_state = STATE_IDLE and o_request = '0' else '0';
     s_cycle <= s_memory and (s_read or s_write);
     s_reset <= '1' when i_reset = '1' or styp_state = STATE_DRAINING else '0';
-    s_enable <= i_enable when i_pause = '0' and s_reset = '0' and
+    s_enable <= i_enable when (i_pause = '0' or s_capture_run = '1') and s_reset = '0' and
         (s_cycle = '0' or styp_state = STATE_COMPLETE) else '0';
-    o_paused <= '1' when i_pause = '1' and
-        (styp_state = STATE_IDLE or styp_state = STATE_COMPLETE) else '0';
+    o_paused <= '1' when s_capture_held = '1' or (i_pause = '1' and
+        (styp_state = STATE_IDLE or styp_state = STATE_COMPLETE)) else '0';
     cpu : entity work.rabbitpunch_z80
+        generic map (
+            GBOOL_STATE_CAPABLE => GBOOL_STATE_CAPABLE
+        )
         port map (
             i_clk => i_clk,
             i_reset => s_reset,
@@ -55,7 +74,16 @@ begin
             o_write => s_write,
             o_refresh => open,
             o_halted => o_halted,
-            o_bus_grant => open
+            o_bus_grant => open,
+            i_capture_request => i_capture_request,
+            i_capture_cancel => i_capture_cancel,
+            i_bus_drained => s_bus_drained,
+            o_capture_pending => s_capture_pending,
+            o_state_held => s_capture_held,
+            i_state_resume => i_state_resume,
+            i_state_write => i_state_write,
+            iu256_state_data => iu256_state_data,
+            ou256_state_data => ou256_state_data
         );
     process(i_clk)
     begin
@@ -71,7 +99,7 @@ begin
             else
                 case styp_state is
                     when STATE_IDLE =>
-                        if (s_cycle = '1' and i_pause = '0') then
+                        if (s_cycle = '1' and (i_pause = '0' or s_capture_run = '1')) then
                             ou16_request_address <= su16_address;
                             ou8_request_data <= su8_write_data;
                             o_request_write <= s_write;

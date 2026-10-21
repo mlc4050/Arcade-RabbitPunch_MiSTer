@@ -273,10 +273,14 @@ begin
             SDRAM_nCAS => s_column_n
         );
 
-    pcm_defined : process(s_clk)
+    pcm_defined : process
     begin
-        if (rising_edge(s_clk) and now > 1 us) then
-            assert (su16_mono_pcm = 0) report "Disabled audio clocks must keep mixed PCM silent" severity failure;
+        wait until rising_edge(s_clk);
+        -- The first PLL edge initializes the registered mixer. Observe its
+        -- output after the clock and hierarchy port delta cycles settle.
+        wait for 1 ns;
+        if (now > 1 us) then
+            assert (su16_mono_pcm = 0) report "Synthetic diagnostic must keep mixed PCM silent" severity failure;
             for vint_bit in su16_mono_pcm'range loop
                 assert (su16_mono_pcm(vint_bit) = '0' or su16_mono_pcm(vint_bit) = '1')
                     report "Mixed PCM is undefined during startup/reset/playback" severity failure;

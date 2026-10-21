@@ -1,4 +1,5 @@
 -- SPDX-License-Identifier: GPL-3.0-or-later
+-- Copyright (C) 2026 RabbitPunch contributors
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -146,8 +147,8 @@ begin
                         v_trace(sint_recorded) := (vu24_last_address, vu16_last_data, vu2_last_bytes);
                         sint_recorded <= sint_recorded + 1;
                     end if;
-                    if (s_compare = '1' and sint_compared < 400) then
-                        assert (v_trace(sint_compared) = t_trace'(vu24_last_address, vu16_last_data, vu2_last_bytes))
+                    if (s_compare = '1' and sint_compared < 1200) then
+                        assert (v_trace(sint_compared mod 400) = t_trace'(vu24_last_address, vu16_last_data, vu2_last_bytes))
                             report "68000 continuation differs at write " & integer'image(sint_compared) severity failure;
                         sint_compared <= sint_compared + 1;
                     end if;
@@ -219,23 +220,26 @@ begin
         resume;
         wait until sint_recorded = 400;
         s_record <= '0';
-        vint_prior_writes := sint_game_writes;
-        wait until sint_game_writes >= vint_prior_writes + 1000;
-        park;
-        s_restore <= '1';
-        cycles(1);
-        s_restore <= '0';
-        for vint_word in 0 to 3 loop
-            su2_state_word <= to_unsigned(vint_word, 2);
-            su16_state_in <= v_registers(vint_word);
-            s_state_write <= '1';
+        for vint_round in 1 to 3 loop
+            vint_prior_writes := sint_game_writes;
+            wait until sint_game_writes >= vint_prior_writes + 1000;
+            park;
+            s_restore <= '1';
             cycles(1);
+            s_restore <= '0';
+            for vint_word in 0 to 3 loop
+                su2_state_word <= to_unsigned(vint_word, 2);
+                su16_state_in <= v_registers(vint_word);
+                s_state_write <= '1';
+                cycles(1);
+            end loop;
+            s_state_write <= '0';
+            s_compare <= '1';
+            resume;
+            wait until sint_compared = 400 * vint_round;
+            s_compare <= '0';
         end loop;
-        s_state_write <= '0';
-        s_compare <= '1';
-        resume;
-        wait until sint_compared = 400;
-        report "M68K_STATE_PASS ordered_continuation_writes=400 usp=checked ram_and_register_restore=checked";
+        report "M68K_STATE_PASS ordered_continuation_writes=1200 repeated_restores=3 usp=checked ram_and_register_restore=checked";
         finish;
         wait;
     end process;

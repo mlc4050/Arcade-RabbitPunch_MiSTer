@@ -1,0 +1,11 @@
+{
+  "case": "timing_state",
+  "pass_marker": "TIMING_STATE_PASS",
+  "log": "debug\\baselines\\timing_state\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_clock_enables.vhd": "43f72dc52568f284236f9066f1f48d74d280c55bbb5fc7677d39a29093fbfcfa",
+    "rtl/rabbitpunch_raster.vhd": "57e3eac7e7560f4527251289fce1bd1d172ac245dc1bc59a101d656e1839769a",
+    "sim/state/timing_state_tb.vhd": "b729e63658083856dfb26248c2b228c02577f636f228e9ec5582867a1c283b4b"
+  },
+  "log_sha256": "e20b3f21a21d8e295b0df18c196ab85baaa83d6756d200ae6a3bc88105902350"
+}

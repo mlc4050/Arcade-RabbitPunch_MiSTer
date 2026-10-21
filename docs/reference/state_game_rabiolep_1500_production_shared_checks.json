@@ -1,0 +1,317 @@
+{
+  "accepted": false,
+  "diagnostic_checks_passed": true,
+  "exact_continuations_equal": true,
+  "failures": [],
+  "first_difference": null,
+  "coverage": [
+    {
+      "clocks": 1548288,
+      "main_writes": 409,
+      "sound_writes": 5607,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 77724,
+      "nonzero_pcm_clocks": 1548288,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 2074,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1279,
+      "sha256": "364be4f0e7ea8067c4ae602ddf3925166f6961a6e88607b6d0122667d8cb5e47"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 409,
+      "sound_writes": 5607,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 77724,
+      "nonzero_pcm_clocks": 1548288,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 2074,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1279,
+      "sha256": "364be4f0e7ea8067c4ae602ddf3925166f6961a6e88607b6d0122667d8cb5e47"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 409,
+      "sound_writes": 5607,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 77724,
+      "nonzero_pcm_clocks": 1548288,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 2074,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1279,
+      "sha256": "364be4f0e7ea8067c4ae602ddf3925166f6961a6e88607b6d0122667d8cb5e47"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 392,
+      "sound_writes": 5583,
+      "pixels": 221184,
+      "active_pixels": 83988,
+      "nonblack_pixels": 77894,
+      "nonzero_pcm_clocks": 1548288,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 2074,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1122,
+      "sha256": "e99d0fb0593d1860d538a2d4b81209cadbeac3638a5ba27171c842486c85d180"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 392,
+      "sound_writes": 5583,
+      "pixels": 221184,
+      "active_pixels": 83988,
+      "nonblack_pixels": 77894,
+      "nonzero_pcm_clocks": 1548288,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 2074,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1122,
+      "sha256": "e99d0fb0593d1860d538a2d4b81209cadbeac3638a5ba27171c842486c85d180"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 392,
+      "sound_writes": 5583,
+      "pixels": 221184,
+      "active_pixels": 83988,
+      "nonblack_pixels": 77894,
+      "nonzero_pcm_clocks": 1548288,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 2074,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1122,
+      "sha256": "e99d0fb0593d1860d538a2d4b81209cadbeac3638a5ba27171c842486c85d180"
+    }
+  ],
+  "checkpoint_differences": [
+    null,
+    null
+  ],
+  "published_images": [
+    {
+      "counter": 1,
+      "sha256": "c66a66d0a84806919a7b48119e61ba62d3470ea091bc0c5b2b7680ab36a2b0ab",
+      "hiscore": {
+        "ready": true,
+        "address": 1048065,
+        "length": 119,
+        "table_sha256": "524e9f2452d57ab3ca410a4bce68b032b990da755511f758e38da2c272ea493d",
+        "initial_guards_match": true
+      }
+    },
+    {
+      "counter": 2,
+      "sha256": "1f2d81786bd67351aa5192570611d1ebbd8f452f2e15ee3ca79fef017022982d",
+      "hiscore": {
+        "ready": true,
+        "address": 1048065,
+        "length": 119,
+        "table_sha256": "524e9f2452d57ab3ca410a4bce68b032b990da755511f758e38da2c272ea493d",
+        "initial_guards_match": true
+      }
+    }
+  ],
+  "hiscore_profile": {
+    "game": "rabiolep",
+    "config_hex": "02dc6c00ffff00020002000100000000000ffe0100770080",
+    "config_sha256": "8d3d680a1ec2b361b5aec91237f02520f92807a934e4e8e3bafd234bf5404b48",
+    "mra": "releases/Rabio Lepus (Japan).mra",
+    "mra_commit": "adfb4916013427fb731a3c3bb6116e894b08dd39",
+    "mra_sha256": "88fc818bcb22ed24cd34832b7ebb443f8acfeed59e8b95895b928d348a585c82",
+    "polling_waits_unchanged": true,
+    "require_ready": true
+  },
+  "hiscore_release_observations": [
+    [
+      "1",
+      "1",
+      "1"
+    ],
+    [
+      "2",
+      "1",
+      "1"
+    ],
+    [
+      "3",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1"
+    ],
+    [
+      "5",
+      "1",
+      "1"
+    ],
+    [
+      "6",
+      "1",
+      "1"
+    ]
+  ],
+  "image_identity": {
+    "abi": "3a1b6dde",
+    "config": 65536,
+    "production": true,
+    "abi_definition_sha256": "51191fdf72110d69e360e9cc269e1f3315aab804e0cf119149457e3725b263f6"
+  },
+  "shared_presentation_observations": {
+    "rotation_writes": 93731982,
+    "unblanked": true
+  },
+  "active_audio_required": true,
+  "active_audio_checkpoints_required": [
+    1,
+    2
+  ],
+  "rom_identity": "46c87159",
+  "release_observations": [
+    [
+      "1",
+      "0",
+      "0",
+      "c",
+      "335",
+      "74"
+    ],
+    [
+      "2",
+      "0",
+      "0",
+      "c",
+      "335",
+      "74"
+    ],
+    [
+      "3",
+      "0",
+      "0",
+      "c",
+      "335",
+      "74"
+    ],
+    [
+      "4",
+      "0",
+      "0",
+      "c",
+      "181",
+      "75"
+    ],
+    [
+      "5",
+      "0",
+      "0",
+      "c",
+      "181",
+      "75"
+    ],
+    [
+      "6",
+      "0",
+      "0",
+      "c",
+      "181",
+      "75"
+    ]
+  ],
+  "independently_checked_header_and_body_crc": true,
+  "slot_sha256": "1f2d81786bd67351aa5192570611d1ebbd8f452f2e15ee3ca79fef017022982d",
+  "checker_sha256": "8df7c281e9ee6d81b00e42525348bc35745f2b529f4bf7a8e459514d32196c18",
+  "scope": "Real Japanese ROM, normal score profile and production ABI/config identity; 1500-frame scripted Coin/Start/Fire/Missile/movement scenario, two SAVEs and four RESTOREs. Each checkpoint reproduces all 1548288 observed clocks, CPU writes, enabled pixels, sampled PCM/cadence and interrupt observations; both checkpoints have varying nonzero sampled PCM. Independent image layout/CRC/counter checks and initialized score flags pass. The shared ROM/state/rotation DDR composition publishes a complete frame. A passive extracted frame shows the game scene and 1UP HUD. No STOP/HALT observed here; focused native tests cover those cases separately. RAM/DQ and passive recorder admissions are present; no native whole-game event miter, actual ARM execution, complete HPS/scaler/physical DDR runtime, CRT or hardware qualification is claimed.",
+  "frozen_commit": "adfb4916013427fb731a3c3bb6116e894b08dd39",
+  "scenario": {
+    "checkpoint_frames": 1500,
+    "dips": 0,
+    "save_count": 2,
+    "hiscore_profile": {
+      "game": "rabiolep",
+      "config_hex": "02dc6c00ffff00020002000100000000000ffe0100770080",
+      "config_sha256": "8d3d680a1ec2b361b5aec91237f02520f92807a934e4e8e3bafd234bf5404b48",
+      "mra": "releases/Rabio Lepus (Japan).mra",
+      "mra_commit": "adfb4916013427fb731a3c3bb6116e894b08dd39",
+      "mra_sha256": "88fc818bcb22ed24cd34832b7ebb443f8acfeed59e8b95895b928d348a585c82",
+      "polling_waits_unchanged": true,
+      "require_ready": true
+    },
+    "boot_restore": false,
+    "boot_pad": 0,
+    "image_identity": {
+      "abi": "3a1b6dde",
+      "config": 65536,
+      "production": true,
+      "abi_definition_sha256": "51191fdf72110d69e360e9cc269e1f3315aab804e0cf119149457e3725b263f6"
+    },
+    "shared_presentation": true,
+    "rotation": 1,
+    "gameplay": true,
+    "coin_frame": 900,
+    "start_frame": 990,
+    "action_frame": 1290,
+    "phase_cycle_limit": 2000000000
+  },
+  "game": "rabiolep",
+  "artifact_directory": "debug/state_full_machine_rabiolep_profile_shared_production_v2/rabiolep",
+  "manifest_sha256": "909353f00c389c9806ab0e9ac27f490aaa0d2ba2cf52a9348f149cf4b9dcff20",
+  "admissions": {
+    "native_state_ram_admission.json": "30574a615530046f46ba01b61d6799b4ed6c77704d60dbd9d377aa38d7ca4fcd",
+    "dq_native_readback_admission.json": "0bd98c2a47e70ddb28a0ab940d009c7007843053a2c18152b3745e2a52175587",
+    "event_monitor_admission.json": "675cff5b8fbe3ec700edaf3d7fe3502e3cc5b7f25a7b80c20c0b78ee6521adc5"
+  },
+  "coverage_receipt_sha256": "d3da4cc4d7c87b094c9edeeda458d20232fb5af2291f6621ed88badad06a4f4e",
+  "file_sha256": {
+    "debug/state_full_machine_rabiolep_profile_shared_production_v2/plan.json": "de4134ffec8771bbc60cb89699f24c31f1140de004f4081d5cc0e6c40844b05d",
+    "debug/state_full_machine_rabiolep_profile_shared_production_v2/fixture_dq.v": "719064b6f5046b493c51acb298a482e4bdd38e27c3be442fa18070f3386087bd",
+    "debug/state_full_machine_rabiolep_profile_shared_production_v2/obj/sim.exe": "a4e2f4917457be41a70c38c7e2c76a9959bec49604797e7d3be85ded3813f088",
+    "debug/state_full_machine_rabiolep_profile_shared_production_v2/rabiolep/run.json": "ceb2237d776b8fecfcee7dec420479cdf4846052bc9888ea1c3ea4e739910f47",
+    "debug/state_full_machine_rabiolep_profile_shared_production_v2/rabiolep/comparison.json": "88d24f7e65d6254abd19e02bac16d901db7f3a0b51c7d5d3a0de9c454e3e9254",
+    "debug/state_full_machine_rabiolep_profile_shared_production_v2/rabiolep/endpoints.txt": "a3c961b2f72cf884c9466c149661f696adc19e40662aeacd2c00f9169f48d02e",
+    "debug/state_full_machine_rabiolep_profile_shared_production_v2/rabiolep/slot0_save1.bin": "c66a66d0a84806919a7b48119e61ba62d3470ea091bc0c5b2b7680ab36a2b0ab",
+    "debug/state_full_machine_rabiolep_profile_shared_production_v2/rabiolep/slot0_save2.bin": "1f2d81786bd67351aa5192570611d1ebbd8f452f2e15ee3ca79fef017022982d",
+    "debug/state_full_machine_rabiolep_profile_shared_production_v2/rabiolep/slot0.bin": "1f2d81786bd67351aa5192570611d1ebbd8f452f2e15ee3ca79fef017022982d",
+    "debug/state_full_machine_rabiolep_profile_shared_production_v2/rabiolep/native_frame1.png": "e0e8e9accfc474dc5a2ae8a157001e35d81cdb0cdce0fe78983e547c04070a2f",
+    "debug/state_full_machine_rabiolep_profile_shared_production_v2/rabiolep/native_frame1.json": "a31a6dedf22560b1535441ef5eca128ec9be6db846ae700431081952ba7ea227"
+  },
+  "native_game_event_miter": false
+}

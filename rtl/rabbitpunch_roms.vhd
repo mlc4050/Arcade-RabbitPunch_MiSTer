@@ -52,7 +52,12 @@ entity rabbitpunch_roms is
         o_sdram_write_n : out std_logic;
         o_sdram_row_n : out std_logic;
         o_sdram_column_n : out std_logic;
-        o_sdram_clock_enable : out std_logic
+        o_sdram_clock_enable : out std_logic;
+        i_state_flush : in std_logic := '0';
+        i_state_sdram_prepare : in std_logic := '0';
+        i_state_sdram_anchor : in std_logic := '0';
+        iu7_state_sdram_phase : in unsigned(6 downto 0) := (others => '0');
+        o_state_sdram_aligned : out std_logic := '0'
     );
 end entity;
 
@@ -75,17 +80,25 @@ architecture rtl of rabbitpunch_roms is
     signal su16_memory_data : t_sdram_write_data;
     signal su2_memory_bytes : t_sdram_byte_enables;
     signal su64_memory_data : t_sdram_read_data;
+    signal su3_port_requests, su3_port_writes, su3_port_ready, su3_port_valid : unsigned(2 downto 0);
+    signal su27_port_addresses : t_sdram_addresses;
+    signal su16_port_data : t_sdram_write_data;
+    signal su2_port_bytes : t_sdram_byte_enables;
+    signal su64_port_data : t_sdram_read_data;
+    signal s_phase_idle, s_refresh, s_sdram_we, s_sdram_ras, s_sdram_cas : std_logic;
 begin
     -- An offered request is accepted on this same edge. Pending-state flags
     -- alone would report idle one edge too early to the download controller.
     s_idle <= '1' when s_front_idle = '1' and s_cache_idle = '1' and s_shared_idle = '1' and
-        s_loader_pending = '0' and su3_memory_ready = "111" and
+        s_loader_pending = '0' and su3_port_ready = "111" and s_phase_idle = '1' and
         i_sprite_request = '0' and i_tile_request = '0' and i_cpu_request = '0' and
         i_audio_request = '0' and i_sample_request = '0' else '0';
     o_idle <= s_idle;
     o_ready <= s_initialized and not i_loading;
     o_loader_ready <= s_initialized and i_loading and su3_memory_ready(2) and not s_loader_pending;
-    s_invalidate <= i_loading and not s_previous_loading;
+    -- State normalization invalidates only derived ROM copies. The physical
+    -- SDRAM controller, refresh state and loaded image remain running.
+    s_invalidate <= (i_loading and not s_previous_loading) or i_state_flush;
     o_audio_ready <= s_audio_program_ready and s_initialized and not i_loading;
     o_audio_response_valid <= s_audio_program_valid and not i_loading;
     o_sample_valid <= s_sample_valid and s_initialized and not i_loading;
@@ -104,6 +117,50 @@ begin
     su3_memory_writes <= "100" when i_loading = '1' else "000";
     su16_memory_data <= (2 => iu16_loader_data, others => (others => '0'));
     su2_memory_bytes <= (2 => iu2_loader_bytes, others => "00");
+    su3_port_requests(1 downto 0) <= su3_memory_requests(1 downto 0);
+    su3_port_writes(1 downto 0) <= su3_memory_writes(1 downto 0);
+    su3_memory_ready(1 downto 0) <= su3_port_ready(1 downto 0);
+    su3_memory_valid(1 downto 0) <= su3_port_valid(1 downto 0);
+    su27_port_addresses(0) <= su27_memory_addresses(0);
+    su27_port_addresses(1) <= su27_memory_addresses(1);
+    su16_port_data(0) <= su16_memory_data(0);
+    su16_port_data(1) <= su16_memory_data(1);
+    su2_port_bytes(0) <= su2_memory_bytes(0);
+    su2_port_bytes(1) <= su2_memory_bytes(1);
+    su64_memory_data(0) <= su64_port_data(0);
+    su64_memory_data(1) <= su64_port_data(1);
+    o_sdram_write_n <= s_sdram_we;
+    o_sdram_row_n <= s_sdram_ras;
+    o_sdram_column_n <= s_sdram_cas;
+    s_refresh <= not s_sdram_ras and not s_sdram_cas and s_sdram_we;
+    phase_control : entity work.rabbitpunch_state_sdram_phase
+        port map (
+            i_clk => i_clk,
+            i_initialize => i_initialize,
+            i_prepare => i_state_sdram_prepare and not i_loading,
+            i_anchor => i_state_sdram_anchor,
+            i_phase_known => '1',
+            iu7_phase => iu7_state_sdram_phase,
+            i_refresh => s_refresh,
+            o_aligned => o_state_sdram_aligned,
+            o_idle => s_phase_idle,
+            i_client_request => su3_memory_requests(2),
+            i_client_write => su3_memory_writes(2),
+            iu27_client_address => su27_memory_addresses(2),
+            iu16_client_data => su16_memory_data(2),
+            iu2_client_bytes => su2_memory_bytes(2),
+            o_client_ready => su3_memory_ready(2),
+            o_client_valid => su3_memory_valid(2),
+            ou64_client_data => su64_memory_data(2),
+            o_backend_request => su3_port_requests(2),
+            o_backend_write => su3_port_writes(2),
+            ou27_backend_address => su27_port_addresses(2),
+            ou16_backend_data => su16_port_data(2),
+            ou2_backend_bytes => su2_port_bytes(2),
+            i_backend_ready => su3_port_ready(2),
+            i_backend_valid => su3_port_valid(2),
+            iu64_backend_data => su64_port_data(2)
+        );
 
     requests : entity work.rabbitpunch_rom_requests
         port map (
@@ -147,6 +204,7 @@ begin
     shared_readers : entity work.rabbitpunch_audio_rom_transport
         port map (
             i_clk => i_clk,
+            i_state_normalize => i_state_flush,
             i_invalidate => s_invalidate,
             o_idle => s_shared_idle,
             i_program_request => i_audio_request and s_initialized and not i_loading,
@@ -177,31 +235,33 @@ begin
             i_clk => i_clk,
             i_initialize => i_initialize,
             o_initialized => s_initialized,
-            iu3_requests => su3_memory_requests,
-            ou3_ready => su3_memory_ready,
-            iu3_writes => su3_memory_writes,
-            iu27_byte_addresses => su27_memory_addresses,
-            iu16_write_data => su16_memory_data,
-            iu2_byte_enables => su2_memory_bytes,
-            ou3_response_valid => su3_memory_valid,
-            ou64_read_data => su64_memory_data,
+            iu3_requests => su3_port_requests,
+            ou3_ready => su3_port_ready,
+            iu3_writes => su3_port_writes,
+            iu27_byte_addresses => su27_port_addresses,
+            iu16_write_data => su16_port_data,
+            iu2_byte_enables => su2_port_bytes,
+            ou3_response_valid => su3_port_valid,
+            ou64_read_data => su64_port_data,
             iou16_sdram_data => iou16_sdram_data,
             ou13_sdram_address => ou13_sdram_address,
             ou2_sdram_bank => ou2_sdram_bank,
             ou2_sdram_byte_mask => ou2_sdram_byte_mask,
             o_sdram_chip_select => o_sdram_chip_select,
-            o_sdram_write_n => o_sdram_write_n,
-            o_sdram_row_n => o_sdram_row_n,
-            o_sdram_column_n => o_sdram_column_n,
+            o_sdram_write_n => s_sdram_we,
+            o_sdram_row_n => s_sdram_ras,
+            o_sdram_column_n => s_sdram_cas,
             o_sdram_clock_enable => o_sdram_clock_enable
         );
     process(i_clk)
     begin
         if (rising_edge(i_clk)) then
             o_loader_response_valid <= '0';
+            assert (i_state_flush = '0' or (s_idle = '1' and i_loading = '0'))
+                report "State ROM cache flush requires drained clients and transport" severity failure;
             if (i_loading /= s_previous_loading) then
                 assert ((s_front_idle = '1' and s_cache_idle = '1' and s_shared_idle = '1' and s_loader_pending = '0') and
-                    (su3_memory_ready = "111" or s_initialized = '0'))
+                    ((su3_port_ready = "111" and s_phase_idle = '1') or s_initialized = '0'))
                     report "ROM loading mode changed before transport drained" severity failure;
             end if;
             s_previous_loading <= i_loading;

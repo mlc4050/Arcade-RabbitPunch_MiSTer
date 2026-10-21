@@ -1,0 +1,12 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_config.vhd": "9946ae38c785e698dad4d6fb6466246b4653ef571bc5aca42837455c09d1436f",
+    "rtl/state/rabbitpunch_state_config.vhd": "810ddd62adcce07d427f709bc8bf114eec2d2c9dfeef0d10c6a5824360e49661",
+    "rtl/state/rabbitpunch_state_controls.vhd": "464352a37319cceca0f0485d8cd1aafd09352f6ecdcd3ac8bc6ba0c0c6243534",
+    "sim/state/state_controls_tb.vhd": "f5e52a00a397f18bcb04a0bf8c92c10f0c4bae8c6bbfb4ba1affae53f795d2fb"
+  },
+  "runner_sha256": "37d4f0f4eea29b5bcda79c9b3c5adc864c2580462ffd84b61d0b12beb50eea94",
+  "log_sha256": "620e40e75a7d29d1aed316f667e2d82af95815f456fa4909664dead27d11dc44",
+  "scope": "State control module with synthetic service and host endpoints. All four slots/wrap, final-successful-save-only increment, failures, restore, no-auto, host slot/auto edits during transfer, held buttons, unavailable edge discard, simultaneous priority, reset/stray completion, default-disabled outputs, exact disabled configuration and enabled configuration header/order/separators/unique controls. No actual hps_io, OSD visibility, DDR publication, whole-game restore, FPGA or hardware qualification."
+}

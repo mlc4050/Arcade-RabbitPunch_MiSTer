@@ -43,7 +43,9 @@ def button_names():
     names = ["-"] * (max(slots.values()) - 3)
     for key, slot in slots.items():
         names[slot - 4] = labels[key]
-    return ",".join(names)
+    if max(slots.values()) != 14:
+        raise ValueError("Savestate modifier requires the next free joystick bit15")
+    return ",".join(names + ["Savestate (SS)"])
 
 
 def hiscore_metadata(name):
@@ -220,7 +222,7 @@ def main():
                            ("mameversion", version), ("year", info.findtext("year")),
                            ("manufacturer", info.findtext("manufacturer")),
                            ("rotation", "horizontal"), ("players", "2"),
-                           ("about", "Development ROM/control definition; no playable core release yet.")):
+                           ("about", "Rabbit Punch / Rabio Lepus for MiSTer. Savestate controller mapping included.")):
             ET.SubElement(doc, tag).text = value
         ET.SubElement(doc, "joystick", ways="8")
         rom = ET.SubElement(doc, "rom", index="0", zip="rabiolep.zip" if name == "rabiolep" else "rpunch.zip|rabiolep.zip", md5="None")

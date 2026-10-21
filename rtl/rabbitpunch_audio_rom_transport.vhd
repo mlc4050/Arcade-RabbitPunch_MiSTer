@@ -28,7 +28,8 @@ entity rabbitpunch_audio_rom_transport is
         ou27_backend_byte_address : out unsigned(26 downto 0);
         i_backend_ready : in std_logic;
         i_backend_response_valid : in std_logic;
-        iu64_backend_read_data : in unsigned(63 downto 0)
+        iu64_backend_read_data : in unsigned(63 downto 0);
+        i_state_normalize : in std_logic := '0'
     );
 end entity;
 
@@ -90,6 +91,7 @@ begin
             ou27_backend_byte_address => ou27_backend_byte_address,
             i_backend_ready => i_backend_ready,
             i_backend_response_valid => i_backend_response_valid,
-            iu64_backend_read_data => iu64_backend_read_data
+            iu64_backend_read_data => iu64_backend_read_data,
+            i_state_normalize => i_state_normalize
         );
 end architecture;

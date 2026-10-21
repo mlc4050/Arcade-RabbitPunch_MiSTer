@@ -1,0 +1,28 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_layout.vhd": "9f862ba8f7bb4d68f85c1040b0e787fddd51253e4b88e17ebe86745e7409bc68",
+    "rtl/state/rabbitpunch_state_crc.vhd": "4de0b46eae23558ed02db73df8ce628e8a02cb8a6318405c4b8846dbed81e568",
+    "rtl/state/rabbitpunch_state_header.vhd": "f516fa8d35f1b8b1ab73fa83e203a9ed89203d514ed4eb280982e10ef774e1ba",
+    "rtl/state/rabbitpunch_state_preflight.vhd": "39602b76e4bfcba1b6f94a0e6089518bfe5bb6faebcda54eef4321e21c4e34e6",
+    "rtl/state/rabbitpunch_state_semantics.vhd": "405ca6d7572e72471225cab76c7b8aea10d9783e258653f3ecdc787422eef62b",
+    "rtl/state/rabbitpunch_state_image_buffer.vhd": "90ccae6b5ac6f22d6a06fb018393b34897e77bd238afebce452fbea9a692ac72",
+    "rtl/state/rabbitpunch_state_snapshot.vhd": "20f724580c0fa984a3f5ac52a79cd1dc4a406c165db7f3070cbe5e41e75520d5",
+    "rtl/state/rabbitpunch_state_slot_reader.vhd": "84d5d13871be5ad1b6895758f582dbc675e1cbc5fa0b85675b1f08dc11f16ec4",
+    "rtl/state/rabbitpunch_state_image_validator.vhd": "61b18f6c314ee24e76237c1b4e4d96d6b4a3994e6b8c39f84fc0905eee1f8111",
+    "rtl/state/rabbitpunch_state_apply.vhd": "21011211d63c862d0b0e91e36aa8f1187606921ec86397a5a39b46c3c2a4b53d",
+    "rtl/state/rabbitpunch_state_image_words.vhd": "818f00770ca62e64179d9610fff736915f6361d8752cb3f66f87508fcb20bb46",
+    "rtl/state/rabbitpunch_state_slot_writer.vhd": "372560c8120898213efee206a38d08273b3b7baae0748076392cca43f3809a9e",
+    "rtl/state/rabbitpunch_state_publish.vhd": "5b49157b082400cd1dd2799a1875db70d7c38cf09aa91eaefa0f10305fe62f78",
+    "rtl/state/rabbitpunch_state_service.vhd": "7d162325c5e165d6af45661b6a77396955ae418f39607356c264a46fea5c08e1",
+    "debug/ghdl/state_service_group3_v1/state_service_reference.vhd": "6b13ba420d256436875e08f2239abf3f2eaa9e148dc1d3b5dd06d9b820e983b1",
+    "sim/state/state_service_tb.vhd": "91c03f1c86979e01678a08d060221198c5b8fb5e5aa327c7fba5338bafa70ede"
+  },
+  "case_group": 3,
+  "exercised": "Cancellation after accepted DDR read with no machine acquisition/write.",
+  "expected_body_crc32": "c1b72a37",
+  "independent_body_sha256": "7c116dc51cd990240c97749348872385ec49357c1db709eafa649cbcf53952a7",
+  "runner_sha256": "b9ace653db71579e707346f36e9036e70be2a59dd90bd470be7d76ae15bfc963",
+  "log_sha256": "6c56cf68790f33fa0f63772e4fa6e803d5923fd2fa51915604765b08b7bde4a3",
+  "scope": "Actual private image RAM/snapshot/header/CRC/semantics/validator/apply/publish/slot-reader/writer composition with delayed synthetic machine/body/DDR endpoints. Groups0..3 first construct a complete 107280-byte image and check independent Python-zlib body CRC. The exercised field identifies the additional assertions in this bounded group. Protocol qualification only; no actual CPUs/chips/video, real game restoration, FPGA or hardware proof."
+}

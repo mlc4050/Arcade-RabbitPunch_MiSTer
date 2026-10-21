@@ -63,6 +63,7 @@ set_global_assignment -name VHDL_FILE ../../rabbitpunch_rom_cache.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_read_arbiter.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_audio_roms.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_audio_rom_transport.vhd
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_state_sdram_phase.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_roms.vhd
 set_instance_assignment -name VIRTUAL_PIN ON -to i_initialize
 set_instance_assignment -name VIRTUAL_PIN ON -to o_ready

@@ -1,0 +1,25 @@
+{
+  "case": "state_ram_native_clean_completion_v2",
+  "pass_marker": "STATE_RAM_NATIVE_COMPARE_PASS operations=532480",
+  "log": "debug\\baselines\\state_ram_native_clean_completion_v2\\result.log",
+  "accepted": true,
+  "transactions": 532480,
+  "source_sha256": {
+    "rtl/rabbitpunch_layout.vhd": "31af791e125292f3d1eabaee3bab7fd7f08ae4bdbec95c8f2202e0b9429545e5",
+    "rtl/rabbitpunch_decode.vhd": "94f9077729e3f6cb75d06244c68648b0adeb70841b09b44ed6ea2f819f092f73",
+    "rtl/rabbitpunch_ram16.vhd": "4f5a99d51fac4367cdd9fe82a45e5cbbcec0cf0ac5a0fe4e80d2b44ef8922aec",
+    "rtl/rabbitpunch_ram8.vhd": "3125a846fd3c208c8512f604952bd4766ac4d2d7ee959c0b8e53b989e31fc7fa",
+    "rtl/rabbitpunch_board_memory.vhd": "3176be16826eac890ba716a15ba9ae4d6cb578ff81af6e0e15d65c180dc1c97d",
+    "rtl/rabbitpunch_sound_bus.vhd": "9801559d2b41a745280140813bc1da182a07cc52ee6b950d2145a0d3737a0c9d",
+    "rtl/state/rabbitpunch_state_memory.vhd": "2403b9cdaba2de8acb1cda455639bad78184e030f2f7ee75b031a4a73929afe2",
+    "debug/baselines/state_ram_native_clean_completion_v2/ram16_model.vhd": "0569a21326a072df878b3063debfc122fcfcf84c73f0b855a55d80b52e4968eb",
+    "debug/baselines/state_ram_native_clean_completion_v2/ram8_model.vhd": "1ffa6127a4b63b7ffe79bb54ec58e67cb6dd9ac5dc5a36bf190b9735db9453cd",
+    "debug/baselines/state_ram_native_clean_completion_v2/rabbitpunch_board_memory_model.vhd": "f2197df6a9bf1696add2d27c97ed02f3abf7f87c868119d1863e7f526fab47c0",
+    "debug/baselines/state_ram_native_clean_completion_v2/rabbitpunch_sound_bus_model.vhd": "b1b464b5e75c211a4f06e5e3a9899f01fe1623f1da9385e6ab97940c476c9cee",
+    "sim/state/state_ram_native_compare_tb.vhd": "6690e823f77565275d36bc9aca1b13a0a35a6afa8de56daaf86b17282e06dcfa"
+  },
+  "runner_sha256": "02312c7bcdb06ca6c6d25beca4967e0e2be2637f3d9b75338a2d4ba6d772474b",
+  "trace_sha256": "198bff6c86551b768410bb433cce26adfe35921945ec8244158ab0a41963f99b",
+  "log_sha256": "99a0ace3b7b16ff30c492c42553c9b3007ae2bb77bd32fc07108069d38798706",
+  "scope": "Actual state_memory feeding paired production board_memory/sound_bus with native Intel versus renamed logical RAM. All106496 dense bytes, configured initial contents and two complete writes/reads, both main byte lanes and delayed1..5-cycle credits; independent Python checks every transaction/read value. Idle sound address defined only without a request. Renderer/view disabled, collisions and unknown data excluded. No CPU/chip/full-game/FPGA qualification."
+}

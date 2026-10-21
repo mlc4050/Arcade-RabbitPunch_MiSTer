@@ -1,0 +1,46 @@
+{
+  "results": [
+    {
+      "case": "state_memory",
+      "pass_marker": "STATE_MEMORY_PASS",
+      "log": "debug\\baselines\\state_memory\\result.log",
+      "source_sha256": {
+        "rtl/rabbitpunch_layout.vhd": "31af791e125292f3d1eabaee3bab7fd7f08ae4bdbec95c8f2202e0b9429545e5",
+        "rtl/rabbitpunch_decode.vhd": "94f9077729e3f6cb75d06244c68648b0adeb70841b09b44ed6ea2f819f092f73",
+        "rtl/rabbitpunch_ram16.vhd": "4f5a99d51fac4367cdd9fe82a45e5cbbcec0cf0ac5a0fe4e80d2b44ef8922aec",
+        "rtl/rabbitpunch_ram8.vhd": "3125a846fd3c208c8512f604952bd4766ac4d2d7ee959c0b8e53b989e31fc7fa",
+        "rtl/rabbitpunch_board_memory.vhd": "3176be16826eac890ba716a15ba9ae4d6cb578ff81af6e0e15d65c180dc1c97d",
+        "rtl/rabbitpunch_memory.vhd": "848a5cebb1558b68de8d681e3a6b2a14a64890a22e9efe9c9d75203c2390e059",
+        "rtl/rabbitpunch_sound_bus.vhd": "f20bcb586a20fffb1890e3bb5eeaf7c699b5f76027ebc984bef4d831f0ee1e07",
+        "rtl/state/rabbitpunch_state_memory.vhd": "e8a6a32e9d56a0ffe9553384e5badd6400c4cf146ed45ec045151592fe48b787",
+        "sim/state/state_memory_tb.vhd": "37eeabab74b72bafb6933ef52a9495aa984ffcf8e444923a22eb76ed20bada19"
+      },
+      "log_sha256": "49e8d93ed52bf0e91ace67dcfc42a9dd73b0f29ff63a2a2c88deef82fa05b7d3"
+    },
+    {
+      "case": "board_register_state",
+      "pass_marker": "BOARD_REGISTER_STATE_PASS",
+      "log": "debug\\baselines\\board_register_state\\result.log",
+      "source_sha256": {
+        "rtl/rabbitpunch_layout.vhd": "31af791e125292f3d1eabaee3bab7fd7f08ae4bdbec95c8f2202e0b9429545e5",
+        "rtl/rabbitpunch_decode.vhd": "94f9077729e3f6cb75d06244c68648b0adeb70841b09b44ed6ea2f819f092f73",
+        "rtl/rabbitpunch_io.vhd": "4e2f26f3831df45b3d33223995572a7ecad5fed70c7d09f75e7d62697d77d652",
+        "rtl/rabbitpunch_irq.vhd": "ed1456938cc21512c8a54f0adaa5e0b1d8c3be8e7abe07545e613d9bd9474570",
+        "sim/state/board_register_state_tb.vhd": "635b4bea6284de766ad3f4b17cfcd3fe0bb30964ab08939e63cc941201760d00"
+      },
+      "log_sha256": "15143cb4d023b4f163afa67f32b0a5bf5f3613064ee63a852a58dfdd032c702b"
+    },
+    {
+      "case": "timing_state",
+      "pass_marker": "TIMING_STATE_PASS",
+      "log": "debug\\baselines\\timing_state\\result.log",
+      "source_sha256": {
+        "rtl/rabbitpunch_clock_enables.vhd": "43f72dc52568f284236f9066f1f48d74d280c55bbb5fc7677d39a29093fbfcfa",
+        "rtl/rabbitpunch_raster.vhd": "57e3eac7e7560f4527251289fce1bd1d172ac245dc1bc59a101d656e1839769a",
+        "sim/state/timing_state_tb.vhd": "b729e63658083856dfb26248c2b228c02577f636f228e9ec5582867a1c283b4b"
+      },
+      "log_sha256": "e20b3f21a21d8e295b0df18c196ab85baaa83d6756d200ae6a3bc88105902350"
+    }
+  ],
+  "scope": "Isolated native board I/O, IRQ and timing state ports and all 106496 bytes of native main/sound RAM through the standalone state-memory adapter. Eight register round trips, full RAM capture/perturb/restore, canceled debt draining, invalid addresses, and exact clock/beam continuation. Production defaults retain normal behavior; ports are not connected to a complete game state engine. No CPU, sound-chip, DDR, OSD or hardware qualification."
+}

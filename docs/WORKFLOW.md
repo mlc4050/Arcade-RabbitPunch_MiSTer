@@ -19,6 +19,11 @@ the Quartus flow there. The main tree stays editable for the whole compile, Quar
 out of the repo root, and the build is exactly HEAD — a dirty tree is refused by default. The built
 commit and seed are recorded in `build/BUILT_COMMIT` beside the log.
 
+To preserve an existing build worktree and all its artifacts, pass a fresh
+in-repository path, for example `--stage .local/builds/state_integration_v1`.
+This mode requires D: and refuses any existing destination. Its logs, reports
+and `BUILT_COMMIT` live under the selected path rather than `build/`.
+
 For the standalone board RAM check, run
 `./scripts/d_drive.ps1 scripts/build_staged.py --synth-check memory`.
 It fits `rabbitpunch_memory` behind the evaluation-only `memory_check` launch/capture registers with virtual I/O at a 48 MHz evaluation
@@ -66,9 +71,13 @@ the menu page compile out. No `#ifdef` in the middle of the logic — the guard 
 instances in the top-level `.sv` and around one `localparam` that drives `status_menumask`.
 
 ```
-python scripts/build_staged.py                  # <Name>_stp, the default
-python scripts/build_staged.py --rev <Name>     # the release build
+python scripts/build_staged.py --rev RabbitPunch_stp  # instrumented
+python scripts/build_staged.py --rev RabbitPunch      # release
 ```
+
+Without `--rev`, `CORE_REV` takes precedence; otherwise the final revision in
+the primary `RabbitPunch.qpf` is selected. Separate offline evaluation projects
+do not change that default.
 
 Outputs are named after the revision (`build/output_files/<Name>_stp.rbf`), so the two never
 overwrite each other.

@@ -4,9 +4,10 @@ Use `Arcade-RabbitPunch_20261018.rbf` with the primary MRAs in this folder.
 Optional DDR-loading and synthetic diagnostic MRAs are under `_alternatives/`.
 ROMs are not included. The diagnostic MRA requires the separately generated diagnostic ROM.
 
-This candidate updates the OSD and keeps Save NVRAM open for host upload polling.
-Immediate on-disk NVRAM saving still requires hardware confirmation. Full savestates
-are not available, and music comparison against MAME remains in progress.
+This build updates the OSD and keeps Save NVRAM open for host upload polling.
+NVRAM saving, controller mappings and HDMI rotation have been tested on hardware.
+CRT output remains untested. Full savestates are not available, and music
+comparison against MAME remains in progress.
 
 Build: original source `3dfbd332d078da18f1d762df7fcb34be8cb05a51`, fitter seed 3;
 corresponding privacy-rewritten source `5704d95f32c325ac919f90afaeb55952bccaa878`.

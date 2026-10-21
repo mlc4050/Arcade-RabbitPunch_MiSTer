@@ -1,0 +1,31 @@
+{
+  "accepted": true,
+  "contract_only": true,
+  "loaded_counter": "ffffffff",
+  "slot_base": "3e000000",
+  "slot_bytes": 262144,
+  "slots": 4,
+  "payload_words": 26820,
+  "persisted_file_bytes": 107288,
+  "sources": {
+    "user_io.cpp": {
+      "url": "https://raw.githubusercontent.com/MiSTer-devel/Main_MiSTer/master/user_io.cpp",
+      "sha256": "8adb1c97155349672834379b2bd55cf32230d5e9c6ee11c214d48b87596e1233"
+    },
+    "menu.cpp": {
+      "url": "https://raw.githubusercontent.com/MiSTer-devel/Main_MiSTer/master/menu.cpp",
+      "sha256": "3827132877d29e29ed8246d5f6226fa9f98b4e1000ee5d19b4c06bdf4d7d6f88"
+    }
+  },
+  "original_reader_normalized_sha256": "84d5d13871be5ad1b6895758f582dbc675e1cbc5fa0b85675b1f08dc11f16ec4",
+  "corrected_reader_normalized_sha256": "c2cb1787f6372bf33b0e6f7473e52319d8bab25ce8f1340d5c5955a25db970dc",
+  "reproduced_rejection": {
+    "case": "state_slot_reader_arm_sentinel_before_fix_v1",
+    "accepted": false,
+    "log_sha256": "1a6f6ca07873c59c57ea9ac55e2000d0703ea02ada58293a774eba2d7ccf398e",
+    "source_sha256": "84d5d13871be5ad1b6895758f582dbc675e1cbc5fa0b85675b1f08dc11f16ec4"
+  },
+  "fixed_native_receipt_sha256": "bc173b3bea6b0f591d984c9683bc40a2398e90af517d4b2ceec12691f2347881",
+  "scope": "Official ARM source contract and native reader regression only. ARM maps four contiguous slots, clears each slot before file read, then rewrites only the outer change counter to FFFFFFFF. File persistence includes the two control words plus advertised payload. The old reader rejects this valid loaded counter; corrected reader passes11 cases including empty/changed/corrupt loaded images. No ARM binary execution, filesystem durability or cold full-game continuation claim.",
+  "fixed_native_receipt_normalized_sha256": "147805874c59a8a2c4fd43a6502a727e93bc44ba6c18b17d120dda4bac674c08"
+}

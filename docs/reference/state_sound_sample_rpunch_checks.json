@@ -1,0 +1,124 @@
+{
+  "accepted": true,
+  "game": "rpunch",
+  "seconds": 3,
+  "command": 228,
+  "sample": 36,
+  "source_commit": "fd3434b7dcfacb2b4e1f2d70106b4e6846d3ef85",
+  "candidate_regression": {
+    "original_result_sha256": "b45e7fcc6b46c3d107bd80b42ead1e51505b34c76e02e3ed5db9753a55769c5b",
+    "native_report_sha256": "b2370536615a7f18d1f3cbb7b1e489213150d91735255339822b0bf7006b4d40",
+    "exact_original_pcm_and_timed_trace": true,
+    "native_startup_prefix_checked": false,
+    "sound_bundle_sha256": "e046110ab18277c071b1cd485a2747a9b8cfeca3da81a1d5031e43e86bf5635a",
+    "sound_source_commit": "fd3434b7dcfacb2b4e1f2d70106b4e6846d3ef85",
+    "export_cleanup": {
+      "identity": "one-bit unknown-condition ternary with an X arm is X",
+      "replacements": 404,
+      "original_export_sha256": "bfbca22862bc4bf9f859bfaa22825568db6610655ade5960b2a8fa56cb62b626",
+      "four_state_semantics_preserved": true,
+      "generated_vhdl_unchanged": true,
+      "simplified_export_sha256": "4e56d4e7b074c9ec1e0470935801c077a80b6f742e4d02418fb39e711501e2a6"
+    }
+  },
+  "candidate_result_sha256": "7907fcff3fd7cbb081bed3473532e90474a63d14c3d743ff3f7173e4c72aeeb0",
+  "original_result_sha256": "b45e7fcc6b46c3d107bd80b42ead1e51505b34c76e02e3ed5db9753a55769c5b",
+  "original_mame_analysis_sha256": "9e4f705915cdbf2f2b608945b218b7d30bd909b47731afffe8d5d9ac72540a28",
+  "source_sha256": {
+    "rtl/state/generated/jt51_state_netlist.vhd": "af6ad0f89208e06a192a139906735d958f46fa91b840ea0ffa2237c6b0d559a0",
+    "rtl/state/generated/jt7759_state_netlist.vhd": "2d1600ca4d84f163dead5441b0334e4d1c95ab5b2104b598e00d77fef749f595",
+    "sim/vendor/jt51/sep32.v": "e1f1733d87094bc51a31d39a34c27c71d408541939bfd4c7db00a248a02b85a1",
+    "sim/vendor/jt51/sep32_cnt.v": "cc15f156e3bbf72f19956c6fca34c4d17986a576209d1ae890450519692edce7",
+    "D:\\git\\Arcade-RabbitPunch_MiSTer\\debug\\baselines\\state_t80_sound_active_high\\sources\\candidate\\rtl\\state\\rabbitpunch_t80_capture.vhd": "55aec7bb27e91dc6d04e3f2e3f1a5535c866cda4c290389a8b5d887844dc8462",
+    "rtl/rabbitpunch_z80.vhd": "60b5528ed86932a3c1881951a389e77d640d850188f1182457a0ff75ffbdcf9c",
+    "rtl/rabbitpunch_soundcpu.vhd": "e2baa84d8bbbc8da959938f9ca338f27dec8f2265bb622a9c09b574218cfc682",
+    "rtl/rabbitpunch_ym2151.vhd": "482a5d7b9d501c861aba630c2dbfd61e29688a4613cab57a3734cfa5422af0ba",
+    "rtl/rabbitpunch_ram8.vhd": "3125a846fd3c208c8512f604952bd4766ac4d2d7ee959c0b8e53b989e31fc7fa",
+    "rtl/rabbitpunch_sound_bus.vhd": "9801559d2b41a745280140813bc1da182a07cc52ee6b950d2145a0d3737a0c9d",
+    "rtl/rabbitpunch_sound_board.vhd": "99420aff42033a58d60f18b4ea4f71735e94bf148995c5427a8fb731b1994bad",
+    "rtl/rabbitpunch_upd7759.vhd": "3458c82a6b5d4298e3d56dcf152f1b0f8e36a0bf861dffe9aceafaa8576b7350",
+    "rtl/rabbitpunch_adpcm.vhd": "6cf0d6504dffd312e2822a07caead8ec2ef8ab074dc22e52835f0a3010cf9aed",
+    "rtl/rabbitpunch_audio.vhd": "79c1ee1a76c8bab77cb9a9c34c2503d9081bac4e865f14143ff34bca1c2d0324",
+    "rtl/rabbitpunch_audio_mixer.vhd": "da1cd0fb2874740ec5447790d331a36396f90310d8aace84ac88fab29204284f",
+    "rtl/rabbitpunch_clock_enables.vhd": "3c2356fb1fd0d45bd58e710b9fd0262cd6aa40f7081da6c6ae4bd9f22fe11a10",
+    "sim/sound/music_commands_fixture.vhd": "0c9a414dcfff51bec3e93011012323e35664b7632c583b428320b4516c36d344",
+    "D:\\git\\Arcade-RabbitPunch_MiSTer\\debug\\baselines\\state_t80_sound_active_high\\sources\\candidate\\rtl\\state\\vendor\\meatsauce_t80\\T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+    "D:\\git\\Arcade-RabbitPunch_MiSTer\\debug\\baselines\\state_t80_sound_active_high\\sources\\candidate\\rtl\\state\\vendor\\meatsauce_t80\\T80_MCode.vhd": "a73c512d7f03bc34759de560efe78c1813785c5ae3f52714df149455b876e5a5",
+    "D:\\git\\Arcade-RabbitPunch_MiSTer\\debug\\baselines\\state_t80_sound_active_high\\sources\\candidate\\rtl\\state\\vendor\\meatsauce_t80\\T80_ALU.vhd": "8e1dfd1c47fc0ce4a902f3d789f657a93f2b9faa6a72df70e1f12f27649291b8",
+    "D:\\git\\Arcade-RabbitPunch_MiSTer\\debug\\baselines\\state_t80_sound_active_high\\sources\\candidate\\rtl\\state\\vendor\\meatsauce_t80\\T80.vhd": "e6f6a31dcbc34f0193ff8aa4bc124e4967e527d10731d0acc6f3908d3384e0ef"
+  },
+  "files": {
+    "audio_rom.hex": "799de3e1da9e961504bc676331b1e0ede8afc02910f96961fe4f5ae61c008b04",
+    "build.log": "fb5fd26eb7cc8768211c4e4158f5a4ae17dad0e5ad5943c64a76137924d79b7b",
+    "clock_transport.cpp": "922db2ef8da55f25143267b54c9ccbfb3fae9fe4a1a31c8e0bba0abf147ca238",
+    "export.log": "01d3f38496eed6be1b594c631bac71215a2c18c86c2f7d7eea29029cc2835e2f",
+    "export_mux_cleanup.json": "2dea1fe0dff784ba69c36318bc79f7bca681dabc2da2566ff362b2406f3f48ef",
+    "fixture.v": "4e56d4e7b074c9ec1e0470935801c077a80b6f742e4d02418fb39e711501e2a6",
+    "fixture_ghdl.v": "bfbca22862bc4bf9f859bfaa22825568db6610655ade5960b2a8fa56cb62b626",
+    "fixture_source.vhd": "0c9a414dcfff51bec3e93011012323e35664b7632c583b428320b4516c36d344",
+    "mono.wav": "a71a7debe75ebd18cbe572d27fc526ad958836eb8c61a480c71634262f418375",
+    "pcm.raw": "4a19a263f0cf5c7b6f10a4d22c8a64804687231497e8b01f2ab1aa09a258f9d0",
+    "rtl_sound_writes.txt": "849f57ae82dc942a878060ddfa8fd83c713b3ea7df2143c71a97619dff5645ec",
+    "run.log": "4c24bc9b5945b9da8508cebab9b89fd40f74656c36ea893361035ee786ea5626",
+    "runner_source.py": "0b6a1cfc063939697ab446681f8a755001e2124ef73ff19ebcbd60c836a4bdad",
+    "sample_rom.hex": "a53c18e310e489b4fbcdedb8c6b586c1f7e4b96fae0e050448d0704c3553b9ed",
+    "state_t80_analyze_0.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "state_t80_analyze_1.log": "476c989c08be3eae7fd12a4103c111d42657902f1ec44ee1ff9a0a365eb13ddd",
+    "state_t80_analyze_2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "state_t80_analyze_3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "T80.vhd": "b38f8adb22307c5339ece58cebf4dde9d48a05aca605f8ee9fad6070cfd67163",
+    "verilate.log": "894c81712df8fcba691a6362ecb5a0ceaa7675e52aa27a647fdb2fabc984b475"
+  },
+  "sample_start_offset_ms": 0.04727899999990015,
+  "known_pcm_onset_advance_ms": 17.210166666666638,
+  "timing_diagnosis_sha256": "220c86797d089dccea3a0c5cc713d3462203f9ca761aea0e39d4c75558a5bc94",
+  "adpcm_commands": {
+    "mame_count": 1,
+    "rtl_count": 1,
+    "matching_prefix": 1,
+    "shorter_is_exact_prefix": true,
+    "first_difference": null
+  },
+  "adpcm_controls": {
+    "mame_count": 4,
+    "rtl_count": 4,
+    "matching_prefix": 4,
+    "shorter_is_exact_prefix": true,
+    "first_difference": null
+  },
+  "waveform": {
+    "onsets_seconds": {
+      "mame": 1.1075416666666666,
+      "rtl": 1.090528
+    },
+    "duration_seconds": 1.84,
+    "rms_ratio": 1.0020286806607535,
+    "gain_difference_db": 0.01760304688085468,
+    "envelope_correlation": 0.999270814686081,
+    "mean_spectral_cosine": 0.9962807298592351,
+    "spectral_active_windows": 9,
+    "spectral_both_silent_windows": 81,
+    "scope": "Independently threshold-aligned PCM, linear resampling to 48kHz, no gain fitting/time stretch; descriptive metrics, no percent-accuracy interpretation."
+  },
+  "activity": {
+    "mame": {
+      "nonzero_samples": 8029,
+      "minimum": -6591.0,
+      "maximum": 8806.0,
+      "rail_samples": 0,
+      "first_nonzero_seconds": 1.1073541666666666,
+      "last_nonzero_seconds": 1.2760208333333334
+    },
+    "rtl": {
+      "nonzero_samples": 10316,
+      "minimum": -6528.0,
+      "maximum": 8768.0,
+      "rail_samples": 0,
+      "first_nonzero_seconds": 1.090144,
+      "last_nonzero_seconds": 1.258256
+    }
+  },
+  "exact_original_pcm_wav_and_timed_trace": true,
+  "receipt_builder_sha256": "bfbb9752a41e20026f124174c65a8d8c32115caef7d0dc3025b615495ff67dc4",
+  "scope": "Active sample24 via real command E4: committed newer CPU/sound ownership/reset interfaces, generated FM/ADPCM chips and registered mixer with all state controls inactive. Complete three-second original RTL PCM/WAV/timestamped stream equality. This equality retains the known approximately17.21ms early legacy PCM onset versus MAME; MAME analysis derives from identical original capture; no exact MAME waveform, all-sample, capture/restore or physical analog claim."
+}

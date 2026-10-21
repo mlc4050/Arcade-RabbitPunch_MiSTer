@@ -1,0 +1,137 @@
+{
+  "commit": "2e16e024da480820a4eceab81167263784087f0a",
+  "device": "5CSEBA6U23I7",
+  "project": "state_image_validator_check",
+  "constraint_mhz": 48,
+  "seed": 3,
+  "memory_bits": 0,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 5.209
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.371
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.723
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 4.713
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.35
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.577
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 10.219
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.177
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.826
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 10.493
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.162
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.826
+    }
+  ],
+  "timing_coverage": {
+    "Illegal Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Port Paths": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Port Paths": {
+      "setup": 0,
+      "hold": 0
+    }
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Mon Oct 19 06:54:12 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : state_image_validator_check",
+    "Top-level Entity Name : state_image_validator_check",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 1,397 / 41,910 ( 3 % )",
+    "Total registers : 1344",
+    "Total pins : 1 / 314 ( < 1 % )",
+    "Total virtual pins : 139",
+    "Total block memory bits : 0 / 5,662,720 ( 0 % )",
+    "Total RAM Blocks : 0 / 553 ( 0 % )",
+    "Total DSP Blocks : 0 / 112 ( 0 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 0 / 6 ( 0 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "log_sha256": "063fafa01e5eea07c33bbdc0879ed0d2789dcc0c87daa306c69f866fe26841f0",
+  "scope": "Isolated registered virtual-I/O parent at48MHz seed3. Exact committed dependencies and boundary inputs retained; expected memory, hierarchy, unconstrained-path and nonnegative timing gates passed. Register counts are preservation checks, not post-fit functional proof. Not a whole-core fit or game-state/hardware restore qualification.",
+  "verification_only": false,
+  "checker_sha256": "f3c9ee5c3e7e0441a39f2dda5c191ac2308c8edd79dd439bec810b1860261524",
+  "source_sha256": {
+    "rtl/synth_check/state_image_validator/state_image_validator_check.qsf": "ec1019079c77e6aff8c23dd3e04e5f2630898d87ce791000bac3a957c4b84f3a",
+    "rtl/synth_check/state_image_validator/state_image_validator_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "rtl/state/rabbitpunch_state_layout.vhd": "dd5f77217553196f29570fb29d51b62993b29439fda34812c4fc19b7eec6c7ab",
+    "rtl/state/rabbitpunch_state_crc.vhd": "4de0b46eae23558ed02db73df8ce628e8a02cb8a6318405c4b8846dbed81e568",
+    "rtl/state/rabbitpunch_state_preflight.vhd": "39602b76e4bfcba1b6f94a0e6089518bfe5bb6faebcda54eef4321e21c4e34e6",
+    "rtl/state/rabbitpunch_state_semantics.vhd": "76430005e2ec3e19d8ef00731caee860469e878f1984d684b835e0d994dceaaf",
+    "rtl/state/rabbitpunch_state_image_validator.vhd": "61b18f6c314ee24e76237c1b4e4d96d6b4a3994e6b8c39f84fc0905eee1f8111",
+    "rtl/synth_check/state_image_validator/state_image_validator_check.vhd": "4c14f2f48ced60f9076cebdcb926c04952af929d95280164ebe54814e53b5c4d"
+  },
+  "committed_blob_sha256": {
+    "rtl/synth_check/state_image_validator/state_image_validator_check.qsf": "ec1019079c77e6aff8c23dd3e04e5f2630898d87ce791000bac3a957c4b84f3a",
+    "rtl/synth_check/state_image_validator/state_image_validator_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "rtl/state/rabbitpunch_state_layout.vhd": "dd5f77217553196f29570fb29d51b62993b29439fda34812c4fc19b7eec6c7ab",
+    "rtl/state/rabbitpunch_state_crc.vhd": "4de0b46eae23558ed02db73df8ce628e8a02cb8a6318405c4b8846dbed81e568",
+    "rtl/state/rabbitpunch_state_preflight.vhd": "39602b76e4bfcba1b6f94a0e6089518bfe5bb6faebcda54eef4321e21c4e34e6",
+    "rtl/state/rabbitpunch_state_semantics.vhd": "76430005e2ec3e19d8ef00731caee860469e878f1984d684b835e0d994dceaaf",
+    "rtl/state/rabbitpunch_state_image_validator.vhd": "61b18f6c314ee24e76237c1b4e4d96d6b4a3994e6b8c39f84fc0905eee1f8111",
+    "rtl/synth_check/state_image_validator/state_image_validator_check.vhd": "4c14f2f48ced60f9076cebdcb926c04952af929d95280164ebe54814e53b5c4d"
+  },
+  "artifacts_sha256": {
+    "build/rtl/synth_check/state_image_validator/state_image_validator_check.qsf": "ec1019079c77e6aff8c23dd3e04e5f2630898d87ce791000bac3a957c4b84f3a",
+    "build/rtl/synth_check/state_image_validator/state_image_validator_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "build/rtl/synth_check/state_image_validator/state_image_validator_check.vhd": "4c14f2f48ced60f9076cebdcb926c04952af929d95280164ebe54814e53b5c4d",
+    "build/rtl/synth_check/state_image_validator/output_files/state_image_validator_check.fit.rpt": "67dffe8753498083e9a7365e7f4784dbe67256b02d4ffdfd5172e7818a48703c"
+  },
+  "recorder_sha256": "965422943b04ce02d932f2317bd1c59c4962fe876d26461bd87794caf1603a19"
+}

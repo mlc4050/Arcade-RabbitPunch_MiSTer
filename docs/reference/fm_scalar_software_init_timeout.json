@@ -1,0 +1,10 @@
+{
+  "accepted": false,
+  "outcome": "unscored wall-clock timeout",
+  "wall_timeout_seconds": 1200,
+  "generated_sha256": "9ed3a9d64ccec6ddb508e0ce0cbe44a9dd50819f4e2a3f78df0c948579d83054",
+  "generator_sha256": "6f396d4ca833e088e902ced9cda70387bbc557aa5f04539bee04d5c67654b61b",
+  "bench_sha256": "cf6aba2961c4e7eef75b1847939454bd065987ce54edca7cea311d2e088f8e28",
+  "log_sha256": "058cdf1a0345502551d8bb7aa0e64fd3c5d31b8062031273caf222860db0f3b7",
+  "scope": "Scalar individual-process JT51 VHDL versus pristine native chip without global initialization overrides. Full real-bus register initialization was requested. No success or assertion-failure marker was reached before timeout; simulation progress was not instrumented. This is neither a native equivalence pass nor a functional counterexample. Exact model, manifest, bench and partial log retained on D:."
+}

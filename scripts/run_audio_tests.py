@@ -12,7 +12,7 @@ def main():
     sources += [row['target'] for row in manifest['files'] if row['target'].startswith(('rtl/sound/jt51/', 'sim/vendor/jt51/')) and row['target'].endswith('.v')]
     sources += [f'rtl/{name}.vhd' for name in ('rabbitpunch_z80', 'rabbitpunch_soundcpu', 'rabbitpunch_ym2151', 'rabbitpunch_ram8', 'rabbitpunch_sound_bus', 'rabbitpunch_sound_board')]
     sources += [row['target'] for row in manifest['files'] if row['donor'] == 'upd7759' and row['target'].startswith('rtl/') and row['target'].endswith('.v')]
-    sources += ['rtl/rabbitpunch_upd7759.vhd', 'rtl/rabbitpunch_adpcm.vhd', 'rtl/rabbitpunch_audio.vhd', 'sim/sound/audio_tb.vhd']
+    sources += ['rtl/rabbitpunch_upd7759_control.vhd', 'rtl/rabbitpunch_upd7759_playback.vhd', 'rtl/rabbitpunch_upd7759.vhd', 'rtl/rabbitpunch_adpcm.vhd', 'rtl/rabbitpunch_audio.vhd', 'sim/sound/audio_tb.vhd']
     result = run_case('audio', sources, 'audio_tb', '8 ms', 'AUDIO_PASS', wall_timeout=240)
     result.update(source_sha256={name: hashlib.sha256((root/name).read_bytes()).hexdigest() for name in sources},
         log_sha256=hashlib.sha256((root/result['log']).read_bytes()).hexdigest(),

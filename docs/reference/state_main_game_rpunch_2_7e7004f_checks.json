@@ -1,0 +1,59 @@
+{
+  "accepted": true,
+  "set": "rpunch",
+  "frames": 2,
+  "comparisons": {
+    "rtl_main_writes.txt": {
+      "equal": true,
+      "original_rows": 14688,
+      "candidate_rows": 14688,
+      "first_difference": null
+    },
+    "rtl_sound_writes.txt": {
+      "equal": true,
+      "original_rows": 9302,
+      "candidate_rows": 9302,
+      "first_difference": null
+    },
+    "rtl_timed_writes.txt": {
+      "equal": true,
+      "original_rows": 23990,
+      "candidate_rows": 23990,
+      "first_difference": null
+    },
+    "pixels.hex": {
+      "equal": true
+    },
+    "loaded_image.bin": {
+      "equal": true
+    }
+  },
+  "files": {
+    "rtl_main_writes.txt": {
+      "original": "7a74ffc001c00790f515bf17ceb4b56c58cdfe988e9511635c5a1974e704b592",
+      "candidate": "7a74ffc001c00790f515bf17ceb4b56c58cdfe988e9511635c5a1974e704b592"
+    },
+    "rtl_sound_writes.txt": {
+      "original": "08cf7766e94c208545d3929b9018db954339f3de59c96d20071070feaa79d49a",
+      "candidate": "08cf7766e94c208545d3929b9018db954339f3de59c96d20071070feaa79d49a"
+    },
+    "rtl_timed_writes.txt": {
+      "original": "60c4dafcfb76e62e010838f01af2ccbc7a51fac03d4e4799103cd965de509941",
+      "candidate": "60c4dafcfb76e62e010838f01af2ccbc7a51fac03d4e4799103cd965de509941"
+    },
+    "pixels.hex": {
+      "original": "5f30c7929d7168614a1db8f9ba7d44b56d883fc33037c8d5638c2fcfb6672302",
+      "candidate": "5f30c7929d7168614a1db8f9ba7d44b56d883fc33037c8d5638c2fcfb6672302"
+    },
+    "loaded_image.bin": {
+      "original": "cf849688f863acfc771cfeca8e9812cbfee62d025966b997bdbf2f9efc5e3117",
+      "candidate": "cf849688f863acfc771cfeca8e9812cbfee62d025966b997bdbf2f9efc5e3117"
+    }
+  },
+  "input_reports": {
+    "fast_game_rpunch_2_state_control_checks.json": "e4651348b0539b6ef7b4e533de0e9b7785419bf8f822f77ab59a56be4a662d1c",
+    "fast_game_rpunch_2_state_7e7004f_checks.json": "4e435719edc66e1f2c52def30b07ed99a3ca6e66fe901e90fe387dc61d4c20b1"
+  },
+  "source_commit": "7e7004fd1b9c9c8cdf64759fde38763e761cf639",
+  "scope": "Full-game candidate CPU substitution with capture inactive, same real ROMs and frame boundary. Requires exact full main/sound writes, every recorded system-cycle write timestamp, pixels and SDRAM image. No offset fitting or trimmed-prefix substitution. Not active capture/restore, physical timing, CRT or audio-waveform proof."
+}

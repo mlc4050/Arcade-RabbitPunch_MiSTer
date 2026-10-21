@@ -1,0 +1,52 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 RabbitPunch contributors
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY state_maincpu_check
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name SEARCH_PATH ../../..
+set_global_assignment -name SYSTEMVERILOG_FILE ../../state/vendor/konamigx/fx68k/fx68k.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../state/vendor/konamigx/fx68k/fx68kAlu.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../state/vendor/konamigx/fx68k/uaddrPla.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../state/vendor/konamigx/gx_ss_m68k.sv
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_state_fx68k.vhd
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_m68k_capture.vhd
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_capture_stack_undo.vhd
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_capture_phase.vhd
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_state_maincpu.vhd
+set_global_assignment -name VHDL_FILE state_maincpu_check.vhd
+set_global_assignment -name SDC_FILE state_maincpu_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_phase_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to i_reset
+set_instance_assignment -name VIRTUAL_PIN ON -to i_pause
+set_instance_assignment -name VIRTUAL_PIN ON -to i_interrupt_level1
+set_instance_assignment -name VIRTUAL_PIN ON -to o_interrupt_acknowledge
+set_instance_assignment -name VIRTUAL_PIN ON -to o_request
+set_instance_assignment -name VIRTUAL_PIN ON -to o_request_write
+set_instance_assignment -name VIRTUAL_PIN ON -to ou24_request_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_request_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou2_request_bytes[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_response_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_paused
+set_instance_assignment -name VIRTUAL_PIN ON -to i_capture_request
+set_instance_assignment -name VIRTUAL_PIN ON -to i_capture_cancel
+set_instance_assignment -name VIRTUAL_PIN ON -to o_capture_pending
+set_instance_assignment -name VIRTUAL_PIN ON -to o_capture_held
+set_instance_assignment -name VIRTUAL_PIN ON -to o_capture_error
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_resume
+set_instance_assignment -name VIRTUAL_PIN ON -to o_return_held
+set_instance_assignment -name VIRTUAL_PIN ON -to i_return_release
+set_instance_assignment -name VIRTUAL_PIN ON -to o_resume_completed
+set_instance_assignment -name VIRTUAL_PIN ON -to o_resume_canceled
+set_instance_assignment -name VIRTUAL_PIN ON -to iu5_state_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_write
+set_instance_assignment -name VIRTUAL_PIN ON -to iu32_state_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou32_state_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou24_journal_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_stopped
+set_instance_assignment -name VIRTUAL_PIN ON -to ou52_debug_bus[*]

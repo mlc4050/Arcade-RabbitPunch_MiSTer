@@ -1,0 +1,121 @@
+{
+  "commit": "c108e8fd794ca3dacf31a017ddc5ce5c4178959e",
+  "device": "5CSEBA6U23I7",
+  "project": "state_slot_reader_check",
+  "constraint_mhz": 48,
+  "seed": 3,
+  "memory_bits": 0,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 11.687
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.282
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.729
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 11.922
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.264
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.579
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 10.661
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.153
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.829
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 10.851
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.136
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.831
+    }
+  ],
+  "timing_coverage": {
+    "Illegal Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Port Paths": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Port Paths": {
+      "setup": 0,
+      "hold": 0
+    }
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Mon Oct 19 04:55:54 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : state_slot_reader_check",
+    "Top-level Entity Name : state_slot_reader_check",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 159 / 41,910 ( < 1 % )",
+    "Total registers : 268",
+    "Total pins : 1 / 314 ( < 1 % )",
+    "Total virtual pins : 117",
+    "Total block memory bits : 0 / 5,662,720 ( 0 % )",
+    "Total RAM Blocks : 0 / 553 ( 0 % )",
+    "Total DSP Blocks : 0 / 112 ( 0 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 0 / 6 ( 0 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "log_sha256": "fcd1cc836019f6b44858d9507dede32be177ebed0a1e5bfa920b75d0600aad92",
+  "scope": "Isolated registered virtual-I/O state block at48MHz seed3. Exact committed source/boundary bytes retained; expected RAM and required hierarchy gates passed. All reported timing nonnegative and unconstrained gate passed. Not a complete core, post-fit functional proof, physical DDR or hardware/game-state restore qualification.",
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_slot_reader.vhd": "84d5d13871be5ad1b6895758f582dbc675e1cbc5fa0b85675b1f08dc11f16ec4",
+    "rtl/synth_check/state_slot_reader/state_slot_reader_check.qsf": "6fab445fe246d0f72c3d9563e881ecae1787a0b3dbce393f1c737f3893a7a4e0",
+    "rtl/synth_check/state_slot_reader/state_slot_reader_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "rtl/synth_check/state_slot_reader/state_slot_reader_check.vhd": "b63cd539705c84aff39d6dd43b14051335a1b7625a697c9b79a027947ae799fc"
+  },
+  "artifacts_sha256": {
+    "build/rtl/synth_check/state_slot_reader/state_slot_reader_check.qsf": "b698c7c1df26651e7cde0b13073559a4bb215bf7a525d5fa79bd1f022ff00b3f",
+    "build/rtl/synth_check/state_slot_reader/state_slot_reader_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "build/rtl/synth_check/state_slot_reader/state_slot_reader_check.vhd": "b63cd539705c84aff39d6dd43b14051335a1b7625a697c9b79a027947ae799fc",
+    "build/rtl/synth_check/state_slot_reader/output_files/state_slot_reader_check.fit.rpt": "ef9ffa5194954c3c3129de4b3e0736206f57854240bfc58ecca43102b8de7aa8"
+  },
+  "recorder_sha256": "e0cc5f69ec759695a32d46cfa18903b84004f17c36d968c80e016b890b89063a"
+}

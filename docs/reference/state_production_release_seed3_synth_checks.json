@@ -1,0 +1,1205 @@
+{
+  "accepted": true,
+  "commit": "6ac4a1bb138d8aaaa1ee021442a7691ea4eeb3f3",
+  "seed": 3,
+  "revision": "RabbitPunch",
+  "device": "5CSEBA6U23I7",
+  "alms": 22889,
+  "registers": 29824,
+  "block_memory_bits": 2303968,
+  "ram_blocks": 292,
+  "dsp_blocks": 34,
+  "plls": 3,
+  "debug_enabled": false,
+  "build_id": "6AC4A1BB",
+  "arm_loaded_reader_fixed": true,
+  "production_state_sources": true,
+  "minimum_setup_ns": 0.225,
+  "minimum_hold_ns": 0.112,
+  "timing_checks": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.236
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'sdram_pin'",
+      "slack_ns": 0.783
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 1.019
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 2.436
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'spi_sck'",
+      "slack_ns": 5.269
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'FPGA_CLK1_50'",
+      "slack_ns": 8.881
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'FPGA_CLK2_50'",
+      "slack_ns": 13.047
+    },
+    {
+      "type": "Slow 1100mV 100C Model Setup 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 15.469
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.226
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.242
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'FPGA_CLK2_50'",
+      "slack_ns": 0.266
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'FPGA_CLK1_50'",
+      "slack_ns": 0.282
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.285
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 0.332
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'spi_sck'",
+      "slack_ns": 0.355
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'sdram_pin'",
+      "slack_ns": 11.469
+    },
+    {
+      "type": "Slow 1100mV 100C Model Recovery 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 3.269
+    },
+    {
+      "type": "Slow 1100mV 100C Model Recovery 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 7.513
+    },
+    {
+      "type": "Slow 1100mV 100C Model Recovery 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 10.989
+    },
+    {
+      "type": "Slow 1100mV 100C Model Recovery 'FPGA_CLK1_50'",
+      "slack_ns": 15.676
+    },
+    {
+      "type": "Slow 1100mV 100C Model Removal 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 1.345
+    },
+    {
+      "type": "Slow 1100mV 100C Model Removal 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 1.406
+    },
+    {
+      "type": "Slow 1100mV 100C Model Removal 'FPGA_CLK1_50'",
+      "slack_ns": 1.528
+    },
+    {
+      "type": "Slow 1100mV 100C Model Removal 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 1.61
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|fpll_0|fpll|vcoph[0]'",
+      "slack_ns": 1.122
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.19
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.196
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 1.937
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 3.589
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'spi_sck'",
+      "slack_ns": 4.259
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'FPGA_CLK1_50'",
+      "slack_ns": 9.21
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'FPGA_CLK2_50'",
+      "slack_ns": 9.215
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 9.277
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'FPGA_CLK3_50'",
+      "slack_ns": 9.73
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 10.51
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 18.902
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.225
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'sdram_pin'",
+      "slack_ns": 0.87
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 1.442
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 2.492
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'spi_sck'",
+      "slack_ns": 5.492
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'FPGA_CLK1_50'",
+      "slack_ns": 8.581
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'FPGA_CLK2_50'",
+      "slack_ns": 12.824
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 14.548
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.112
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.207
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'FPGA_CLK2_50'",
+      "slack_ns": 0.256
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.271
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'FPGA_CLK1_50'",
+      "slack_ns": 0.272
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 0.289
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'spi_sck'",
+      "slack_ns": 0.337
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'sdram_pin'",
+      "slack_ns": 11.613
+    },
+    {
+      "type": "Slow 1100mV -40C Model Recovery 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 3.418
+    },
+    {
+      "type": "Slow 1100mV -40C Model Recovery 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 7.691
+    },
+    {
+      "type": "Slow 1100mV -40C Model Recovery 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 11.363
+    },
+    {
+      "type": "Slow 1100mV -40C Model Recovery 'FPGA_CLK1_50'",
+      "slack_ns": 15.914
+    },
+    {
+      "type": "Slow 1100mV -40C Model Removal 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 1.266
+    },
+    {
+      "type": "Slow 1100mV -40C Model Removal 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 1.349
+    },
+    {
+      "type": "Slow 1100mV -40C Model Removal 'FPGA_CLK1_50'",
+      "slack_ns": 1.411
+    },
+    {
+      "type": "Slow 1100mV -40C Model Removal 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 1.528
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|fpll_0|fpll|vcoph[0]'",
+      "slack_ns": 1.122
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.19
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.196
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 1.911
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 3.562
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'spi_sck'",
+      "slack_ns": 4.206
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 9.253
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'FPGA_CLK2_50'",
+      "slack_ns": 9.317
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'FPGA_CLK1_50'",
+      "slack_ns": 9.328
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'FPGA_CLK3_50'",
+      "slack_ns": 9.754
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 10.461
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 18.875
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'sdram_pin'",
+      "slack_ns": 1.714
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 3.278
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 4.23
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 5.774
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'spi_sck'",
+      "slack_ns": 7.434
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'FPGA_CLK1_50'",
+      "slack_ns": 14.197
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'FPGA_CLK2_50'",
+      "slack_ns": 16.35
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 28.107
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.13
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.139
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'FPGA_CLK2_50'",
+      "slack_ns": 0.14
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.147
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'FPGA_CLK1_50'",
+      "slack_ns": 0.154
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 0.178
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'spi_sck'",
+      "slack_ns": 0.188
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'sdram_pin'",
+      "slack_ns": 12.873
+    },
+    {
+      "type": "Fast 1100mV 100C Model Recovery 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 4.636
+    },
+    {
+      "type": "Fast 1100mV 100C Model Recovery 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 8.544
+    },
+    {
+      "type": "Fast 1100mV 100C Model Recovery 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 15.556
+    },
+    {
+      "type": "Fast 1100mV 100C Model Recovery 'FPGA_CLK1_50'",
+      "slack_ns": 17.604
+    },
+    {
+      "type": "Fast 1100mV 100C Model Removal 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.668
+    },
+    {
+      "type": "Fast 1100mV 100C Model Removal 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.678
+    },
+    {
+      "type": "Fast 1100mV 100C Model Removal 'FPGA_CLK1_50'",
+      "slack_ns": 0.75
+    },
+    {
+      "type": "Fast 1100mV 100C Model Removal 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 0.851
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|fpll_0|fpll|vcoph[0]'",
+      "slack_ns": 1.122
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.19
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.196
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 2.247
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 3.897
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'spi_sck'",
+      "slack_ns": 4.594
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'FPGA_CLK2_50'",
+      "slack_ns": 9.138
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'FPGA_CLK1_50'",
+      "slack_ns": 9.139
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'FPGA_CLK3_50'",
+      "slack_ns": 9.347
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 9.589
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 10.623
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 19.222
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'sdram_pin'",
+      "slack_ns": 1.775
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 3.57
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 4.634
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 6.353
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'spi_sck'",
+      "slack_ns": 7.867
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'FPGA_CLK1_50'",
+      "slack_ns": 14.88
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'FPGA_CLK2_50'",
+      "slack_ns": 16.936
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 29.643
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.114
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.118
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'FPGA_CLK2_50'",
+      "slack_ns": 0.124
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.13
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'FPGA_CLK1_50'",
+      "slack_ns": 0.136
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'spi_sck'",
+      "slack_ns": 0.16
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 0.165
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'sdram_pin'",
+      "slack_ns": 12.927
+    },
+    {
+      "type": "Fast 1100mV -40C Model Recovery 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 5.001
+    },
+    {
+      "type": "Fast 1100mV -40C Model Recovery 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 8.819
+    },
+    {
+      "type": "Fast 1100mV -40C Model Recovery 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 16.467
+    },
+    {
+      "type": "Fast 1100mV -40C Model Recovery 'FPGA_CLK1_50'",
+      "slack_ns": 17.991
+    },
+    {
+      "type": "Fast 1100mV -40C Model Removal 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 0.578
+    },
+    {
+      "type": "Fast 1100mV -40C Model Removal 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.584
+    },
+    {
+      "type": "Fast 1100mV -40C Model Removal 'FPGA_CLK1_50'",
+      "slack_ns": 0.631
+    },
+    {
+      "type": "Fast 1100mV -40C Model Removal 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 0.719
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|fpll_0|fpll|vcoph[0]'",
+      "slack_ns": 1.122
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.19
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.196
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk'",
+      "slack_ns": 2.254
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk'",
+      "slack_ns": 3.9
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'spi_sck'",
+      "slack_ns": 4.581
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'FPGA_CLK2_50'",
+      "slack_ns": 9.078
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'FPGA_CLK1_50'",
+      "slack_ns": 9.079
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'FPGA_CLK3_50'",
+      "slack_ns": 9.274
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 9.598
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'emu|machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 10.61
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 19.228
+    }
+  ],
+  "state_resources": {
+    "state_machine_block_bits": 1784608,
+    "capture_mlab_bits": 1216,
+    "state_memory": [
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_hiscore_service:high_scores|rabbitpunch_hiscore:scores|rabbitpunch_ram8:buffers|altsyncram:physical_ram|altsyncram_2l34:auto_generated|ALTSYNCRAM",
+        "kind": "M10K block",
+        "requested_depth": 256,
+        "requested_width": 8,
+        "depth": 256,
+        "width": 8,
+        "bits": 2048
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_audio:\\state_audio:audio|rabbitpunch_sound_board:sound_board|rabbitpunch_sound_bus:sound_bus|rabbitpunch_ram8:sound_ram|altsyncram:physical_ram|altsyncram_oq34:auto_generated|ALTSYNCRAM",
+        "kind": "M10K block",
+        "requested_depth": 2048,
+        "requested_width": 8,
+        "depth": 2048,
+        "width": 8,
+        "bits": 16384
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_board_video:board_video|rabbitpunch_board_memory:memory|rabbitpunch_ram16:bitmap|altsyncram:physical_ram|altsyncram_0054:auto_generated|ALTSYNCRAM",
+        "kind": "M10K block",
+        "requested_depth": 32768,
+        "requested_width": 16,
+        "depth": 32768,
+        "width": 16,
+        "bits": 524288
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_board_video:board_video|rabbitpunch_board_memory:memory|rabbitpunch_ram16:palette|altsyncram:physical_ram|altsyncram_gr44:auto_generated|ALTSYNCRAM",
+        "kind": "M10K block",
+        "requested_depth": 1024,
+        "requested_width": 16,
+        "depth": 1024,
+        "width": 16,
+        "bits": 16384
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_board_video:board_video|rabbitpunch_board_memory:memory|rabbitpunch_ram16:sprites|altsyncram:physical_ram|altsyncram_0s44:auto_generated|ALTSYNCRAM",
+        "kind": "M10K block",
+        "requested_depth": 2048,
+        "requested_width": 16,
+        "depth": 2048,
+        "width": 16,
+        "bits": 32768
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_board_video:board_video|rabbitpunch_board_memory:memory|rabbitpunch_ram16:tiles|altsyncram:physical_ram|altsyncram_gs44:auto_generated|ALTSYNCRAM",
+        "kind": "M10K block",
+        "requested_depth": 8192,
+        "requested_width": 16,
+        "depth": 8192,
+        "width": 16,
+        "bits": 131072
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_board_video:board_video|rabbitpunch_board_memory:memory|rabbitpunch_ram16:work_ram|altsyncram:physical_ram|altsyncram_gs44:auto_generated|ALTSYNCRAM",
+        "kind": "M10K block",
+        "requested_depth": 8192,
+        "requested_width": 16,
+        "depth": 8192,
+        "width": 16,
+        "bits": 131072
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_board_video:board_video|rabbitpunch_rgb_video:video|rabbitpunch_video:video|rabbitpunch_sprites:sprites|rabbitpunch_sprite_line:storage|rabbitpunch_ram16:\\banks:0:line_ram|altsyncram:physical_ram|altsyncram_2m44:auto_generated|ALTSYNCRAM",
+        "kind": "M10K block",
+        "requested_depth": 512,
+        "requested_width": 16,
+        "depth": 512,
+        "width": 16,
+        "bits": 8192
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_board_video:board_video|rabbitpunch_rgb_video:video|rabbitpunch_video:video|rabbitpunch_sprites:sprites|rabbitpunch_sprite_line:storage|rabbitpunch_ram16:\\banks:1:line_ram|altsyncram:physical_ram|altsyncram_2m44:auto_generated|ALTSYNCRAM",
+        "kind": "M10K block",
+        "requested_depth": 512,
+        "requested_width": 16,
+        "depth": 512,
+        "width": 16,
+        "bits": 8192
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_board_video:board_video|rabbitpunch_rgb_video:video|rabbitpunch_video:video|rabbitpunch_tiles:tiles|rabbitpunch_ram16:\\banks:0:line_ram|altsyncram:physical_ram|altsyncram_2m44:auto_generated|ALTSYNCRAM",
+        "kind": "M10K block",
+        "requested_depth": 512,
+        "requested_width": 16,
+        "depth": 512,
+        "width": 16,
+        "bits": 8192
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_board_video:board_video|rabbitpunch_rgb_video:video|rabbitpunch_video:video|rabbitpunch_tiles:tiles|rabbitpunch_ram16:\\banks:1:line_ram|altsyncram:physical_ram|altsyncram_2m44:auto_generated|ALTSYNCRAM",
+        "kind": "M10K block",
+        "requested_depth": 512,
+        "requested_width": 16,
+        "depth": 512,
+        "width": 16,
+        "bits": 8192
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_state_maincpu:\\state_cpu:cpu|rabbitpunch_m68k_capture:monitor|gx_ss_m68k:capture|altdpram:ea_h_rtl_0|dpram_n8o1:auto_generated|ALTDPRAM_INSTANCE",
+        "kind": "MLAB",
+        "requested_depth": 19,
+        "requested_width": 16,
+        "depth": 19,
+        "width": 16,
+        "bits": 304
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_state_maincpu:\\state_cpu:cpu|rabbitpunch_m68k_capture:monitor|gx_ss_m68k:capture|altdpram:ea_l_rtl_0|dpram_n8o1:auto_generated|ALTDPRAM_INSTANCE",
+        "kind": "MLAB",
+        "requested_depth": 19,
+        "requested_width": 16,
+        "depth": 19,
+        "width": 16,
+        "bits": 304
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_state_maincpu:\\state_cpu:cpu|rabbitpunch_m68k_capture:monitor|gx_ss_m68k:capture|altdpram:eb_h_rtl_0|dpram_eno1:auto_generated|ALTDPRAM_INSTANCE",
+        "kind": "MLAB",
+        "requested_depth": 19,
+        "requested_width": 16,
+        "depth": 19,
+        "width": 16,
+        "bits": 304
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_state_maincpu:\\state_cpu:cpu|rabbitpunch_m68k_capture:monitor|gx_ss_m68k:capture|altdpram:eb_l_rtl_0|dpram_eno1:auto_generated|ALTDPRAM_INSTANCE",
+        "kind": "MLAB",
+        "requested_depth": 19,
+        "requested_width": 16,
+        "depth": 19,
+        "width": 16,
+        "bits": 304
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_state_maincpu:\\state_cpu:cpu|rabbitpunch_state_fx68k:cpu|fx68k:cpu|nanoRom:nanoRom|altsyncram:nRam_rtl_0|altsyncram_jkd1:auto_generated|ALTSYNCRAM",
+        "kind": "AUTO",
+        "requested_depth": 336,
+        "requested_width": 68,
+        "depth": 336,
+        "width": 66,
+        "bits": 22176
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_machine_backend:machine|rabbitpunch_machine:machine|rabbitpunch_platform:platform|rabbitpunch_system:system|rabbitpunch_board:board|rabbitpunch_state_maincpu:\\state_cpu:cpu|rabbitpunch_state_fx68k:cpu|fx68k:cpu|uRom:uRom|altsyncram:uRam_rtl_0|altsyncram_58d1:auto_generated|ALTSYNCRAM",
+        "kind": "AUTO",
+        "requested_depth": 1024,
+        "requested_width": 17,
+        "depth": 1024,
+        "width": 17,
+        "bits": 17408
+      },
+      {
+        "instance": "emu:emu|rabbitpunch_state_emu:machine|rabbitpunch_state_machine:machine|rabbitpunch_state_service:image_service|rabbitpunch_state_image_buffer:image_store|altsyncram:su8_memory_rtl_0|altsyncram_0dq1:auto_generated|ALTSYNCRAM",
+        "kind": "AUTO",
+        "requested_depth": 107280,
+        "requested_width": 8,
+        "depth": 107280,
+        "width": 8,
+        "bits": 858240
+      }
+    ],
+    "fitted_sound_registers": {
+      "rabbitpunch_jt51_state_netlist": 4683,
+      "rabbitpunch_jt7759_state_netlist": 259
+    },
+    "commit": "6ac4a1bb138d8aaaa1ee021442a7691ea4eeb3f3",
+    "revision": "RabbitPunch",
+    "validator_sha256": "bedb36d8db090b17d32aba02a98ebdeafb0c991df9e9b2f62303634a47916d55",
+    "scope": "Full-shell fitted RAM and chip-state preservation only; game continuation, physical DDR behavior and hardware remain independent gates."
+  },
+  "game_clock": {
+    "commit": "6ac4a1bb138d8aaaa1ee021442a7691ea4eeb3f3",
+    "revision": "RabbitPunch",
+    "nominal_game_frequency_hz": 46666666.666666664,
+    "sdram_phase_ns": 5.357,
+    "clocks": [
+      {
+        "name": "FPGA_CLK1_50",
+        "period_ns": 20.0,
+        "rise_ns": 0.0,
+        "fall_ns": 10.0,
+        "positive_timing_endpoints": 708,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 1
+      },
+      {
+        "name": "FPGA_CLK2_50",
+        "period_ns": 20.0,
+        "rise_ns": 0.0,
+        "fall_ns": 10.0,
+        "positive_timing_endpoints": 218,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 1
+      },
+      {
+        "name": "FPGA_CLK3_50",
+        "period_ns": 20.0,
+        "rise_ns": 0.0,
+        "fall_ns": 10.0,
+        "positive_timing_endpoints": 1,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 1
+      },
+      {
+        "name": "sysmem|fpga_interfaces|clocks_resets|h2f_user0_clk",
+        "period_ns": 10.0,
+        "rise_ns": 0.0,
+        "fall_ns": 5.0,
+        "positive_timing_endpoints": 1369,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 1
+      },
+      {
+        "name": "spi_sck",
+        "period_ns": 10.0,
+        "rise_ns": 0.0,
+        "fall_ns": 5.0,
+        "positive_timing_endpoints": 130,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 1
+      },
+      {
+        "name": "hdmi_sck",
+        "period_ns": 100.0,
+        "rise_ns": 0.0,
+        "fall_ns": 50.0,
+        "positive_timing_endpoints": 0,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 1
+      },
+      {
+        "name": "pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk",
+        "period_ns": 6.732,
+        "rise_ns": 0.0,
+        "fall_ns": 3.366,
+        "positive_timing_endpoints": 6554,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 3
+      },
+      {
+        "name": "pll_hdmi|pll_hdmi_inst|altera_pll_i|cyclonev_pll|fpll_0|fpll|vcoph[0]",
+        "period_ns": 2.244,
+        "rise_ns": 0.0,
+        "fall_ns": 1.122,
+        "positive_timing_endpoints": 1,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 4563,
+        "divide_by": 512
+      },
+      {
+        "name": "emu|machine|pll|clock_generator|general[0].gpll~FRACTIONAL_PLL|vcoph[0]",
+        "period_ns": 2.38,
+        "rise_ns": 0.0,
+        "fall_ns": 1.19,
+        "positive_timing_endpoints": 2,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 42,
+        "divide_by": 5
+      },
+      {
+        "name": "emu|machine|pll|clock_generator|general[0].gpll~PLL_OUTPUT_COUNTER|divclk",
+        "period_ns": 21.428,
+        "rise_ns": 0.0,
+        "fall_ns": 10.714,
+        "positive_timing_endpoints": 36707,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 9
+      },
+      {
+        "name": "emu|machine|pll|clock_generator|general[1].gpll~PLL_OUTPUT_COUNTER|divclk",
+        "period_ns": 21.428,
+        "rise_ns": 5.357,
+        "fall_ns": 16.071,
+        "positive_timing_endpoints": 1,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 9
+      },
+      {
+        "name": "pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]",
+        "period_ns": 2.393,
+        "rise_ns": 0.0,
+        "fall_ns": 1.196,
+        "positive_timing_endpoints": 1,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 4279,
+        "divide_by": 512
+      },
+      {
+        "name": "pll_audio|pll_audio_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk",
+        "period_ns": 40.682,
+        "rise_ns": 0.0,
+        "fall_ns": 20.341,
+        "positive_timing_endpoints": 2014,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 17
+      },
+      {
+        "name": "sdram_pin",
+        "period_ns": 21.428,
+        "rise_ns": 5.357,
+        "fall_ns": 16.071,
+        "positive_timing_endpoints": 0,
+        "negative_timing_endpoints": 0,
+        "multiply_by": 1,
+        "divide_by": 1
+      }
+    ],
+    "inspector_sha256": "60c030103ec5a2d0b93802310c0de99595d619f35838498f054f8dc158b4d1ce",
+    "validator_sha256": "bedb36d8db090b17d32aba02a98ebdeafb0c991df9e9b2f62303634a47916d55",
+    "scope": "Fitted game PLL ratios, system domain, forwarded quarter-period SDRAM clock and absence of functional users on its shifted output; framework/JTAG clocks remain separate; not an electrical or hardware execution proof"
+  },
+  "framework_timing_scope": {
+    "scope": "Inherited Template MiSTer peripheral pin paths left untimed by upstream sys_top.sdc; explicit source-locked scope, not a claim of HDMI/audio/SD/I2C electrical timing. No SDRAM or game-internal clock/path is excluded.",
+    "input_ports": [
+      "HDMI_I2C_SDA",
+      "HDMI_TX_INT",
+      "IO_SDA",
+      "SDCD_SPDIF"
+    ],
+    "output_ports": [
+      "HDMI_I2C_SCL",
+      "HDMI_I2C_SDA",
+      "HDMI_I2S",
+      "HDMI_LRCLK",
+      "HDMI_MCLK",
+      "HDMI_SCLK",
+      "HDMI_TX_CLK",
+      "HDMI_TX_DE",
+      "HDMI_TX_D[0]",
+      "HDMI_TX_D[10]",
+      "HDMI_TX_D[11]",
+      "HDMI_TX_D[12]",
+      "HDMI_TX_D[13]",
+      "HDMI_TX_D[14]",
+      "HDMI_TX_D[15]",
+      "HDMI_TX_D[16]",
+      "HDMI_TX_D[17]",
+      "HDMI_TX_D[18]",
+      "HDMI_TX_D[19]",
+      "HDMI_TX_D[1]",
+      "HDMI_TX_D[20]",
+      "HDMI_TX_D[21]",
+      "HDMI_TX_D[22]",
+      "HDMI_TX_D[23]",
+      "HDMI_TX_D[2]",
+      "HDMI_TX_D[3]",
+      "HDMI_TX_D[4]",
+      "HDMI_TX_D[5]",
+      "HDMI_TX_D[6]",
+      "HDMI_TX_D[7]",
+      "HDMI_TX_D[8]",
+      "HDMI_TX_D[9]",
+      "HDMI_TX_HS",
+      "HDMI_TX_VS",
+      "IO_SCL",
+      "IO_SDA",
+      "LED[0]",
+      "LED[2]",
+      "LED[6]",
+      "SDCD_SPDIF",
+      "SDIO_CLK",
+      "SDIO_CMD",
+      "SDIO_DAT[0]",
+      "SDIO_DAT[1]",
+      "SDIO_DAT[2]",
+      "SDIO_DAT[3]",
+      "SD_SPI_CS",
+      "USER_IO[2]",
+      "USER_IO[4]",
+      "USER_IO[5]"
+    ],
+    "raw_coverage": {
+      "Illegal Clocks": [
+        0,
+        0
+      ],
+      "Unconstrained Clocks": [
+        0,
+        0
+      ],
+      "Unconstrained Input Ports": [
+        4,
+        4
+      ],
+      "Unconstrained Input Port Paths": [
+        14,
+        14
+      ],
+      "Unconstrained Output Ports": [
+        50,
+        50
+      ],
+      "Unconstrained Output Port Paths": [
+        82,
+        82
+      ]
+    },
+    "instrumented_jtag_scope": null
+  },
+  "staged_source_sha256": {
+    "rtl/state/vendor/konamigx/fx68k/fx68k.sv": "9f327366a840badd2e3b192f77b76a4e2d5f568add7df3df5e31010e2ba21ab4",
+    "rtl/state/vendor/konamigx/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
+    "rtl/state/vendor/konamigx/fx68k/uaddrPla.sv": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a",
+    "rtl/state/vendor/konamigx/gx_ss_m68k.sv": "397e40f9dfcca76acb3039853db44d239a246f31671fd641e0cb81003d5daec4",
+    "rtl/state/rabbitpunch_state_fx68k.vhd": "5ec7ccd432103faf6cc817d7aff7b7aa9259fe05750062a08702455749c59dec",
+    "rtl/state/rabbitpunch_m68k_capture.vhd": "a825b7b56a2db4b9d6c9c99bf20e6e746181b6a49cc8a98e5b8f5e9889e15c13",
+    "rtl/state/rabbitpunch_capture_stack_undo.vhd": "2aa4223c523bd336ddc6c3ffeeb693c365aaf7d4fde784824cebe6b3bc0298f9",
+    "rtl/state/rabbitpunch_capture_phase.vhd": "2e91ee4ada46c28f1bb37df5919ed85666582f04b747569133c0790c91461d87",
+    "rtl/state/rabbitpunch_state_maincpu.vhd": "82d2d374497fb31a04bc16dc18bf888bca37437410b8041f6f34540941174043",
+    "rtl/state/rabbitpunch_state_layout.vhd": "9f862ba8f7bb4d68f85c1040b0e787fddd51253e4b88e17ebe86745e7409bc68",
+    "rtl/state/rabbitpunch_t80_capture.vhd": "39a8c43ab6603958c36ba57e1cfa9ce0a0708c355bd76faf817e0b9219e51f16",
+    "rtl/state/generated/jt51_state_netlist.vhd": "af6ad0f89208e06a192a139906735d958f46fa91b840ea0ffa2237c6b0d559a0",
+    "rtl/state/generated/jt7759_state_netlist.vhd": "6fdc86fa46e21bd97109e1cafa221d0e31c04deb2c1af48d2e15be388be5c3a9",
+    "rtl/state/rabbitpunch_state_crc.vhd": "4de0b46eae23558ed02db73df8ce628e8a02cb8a6318405c4b8846dbed81e568",
+    "rtl/state/rabbitpunch_rom_identity.vhd": "c5f3a878615d75ce3d4bc9c6506a99bafaef4dc4e27d0d9164fbadd7e0760311",
+    "rtl/rabbitpunch_layout.vhd": "31af791e125292f3d1eabaee3bab7fd7f08ae4bdbec95c8f2202e0b9429545e5",
+    "rtl/rabbitpunch_decode.vhd": "94f9077729e3f6cb75d06244c68648b0adeb70841b09b44ed6ea2f819f092f73",
+    "rtl/rabbitpunch_ram16.vhd": "4f5a99d51fac4367cdd9fe82a45e5cbbcec0cf0ac5a0fe4e80d2b44ef8922aec",
+    "rtl/rabbitpunch_board_memory.vhd": "3176be16826eac890ba716a15ba9ae4d6cb578ff81af6e0e15d65c180dc1c97d",
+    "rtl/rabbitpunch_memory.vhd": "848a5cebb1558b68de8d681e3a6b2a14a64890a22e9efe9c9d75203c2390e059",
+    "rtl/rabbitpunch_bus.vhd": "2ff140db32be1209154ffce745039cd569d3ba0fbb0531c560fd173fa080f5c5",
+    "rtl/rabbitpunch_fx68k.vhd": "f58d91e270636a92f629854f63e923aa6a8a7175b5f9d409a0f2e401e0a53ea1",
+    "rtl/rabbitpunch_maincpu.vhd": "31ab1732aa5e8465cc71bc88ef068b50cb364daeb172f45c4dafa1f669dba5ce",
+    "rtl/rabbitpunch_io.vhd": "4e2f26f3831df45b3d33223995572a7ecad5fed70c7d09f75e7d62697d77d652",
+    "rtl/rabbitpunch_irq.vhd": "ed1456938cc21512c8a54f0adaa5e0b1d8c3be8e7abe07545e613d9bd9474570",
+    "rtl/rabbitpunch_sdram_types.vhd": "35c1406e611389f2ee18dd3da7b0805e389ac4b8bd763c8a603a691b5de66367",
+    "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+    "rtl/rabbitpunch_sdram.vhd": "c2bb1bd24c3b7ef22653e3ce8d7d888acb868b5b28ad6345bbc26e0d5694815a",
+    "rtl/rabbitpunch_rom_requests.vhd": "53c61ff61c68aeef1b4508d8ae8ebef18378e9b778fc1f264a57fdccf8554db7",
+    "rtl/rabbitpunch_rom_cache.vhd": "828c24531a06f6a39ea0d93bdf127ea213152c9bb90598b6b94cf5095e52ce90",
+    "rtl/rabbitpunch_read_arbiter.vhd": "737f3161e737d020fd51227e8dd2b64b4e51af330b08a3663b4f987a446191bf",
+    "rtl/rabbitpunch_audio_roms.vhd": "7b718c0695820cb5c5113059ebedbd57a1c43f4df3897677ed6cf892628b13dd",
+    "rtl/rabbitpunch_audio_rom_transport.vhd": "00f4ec9277c643f4a0234164803bc217802c94dc536172ecf31ab5eb5a8590ad",
+    "rtl/state/rabbitpunch_state_sdram_phase.vhd": "60a17d0e8995fb3c5195ec0a994aabbf415f77d2173057d32706845d1ff4ae7b",
+    "rtl/rabbitpunch_roms.vhd": "66baa14a569cff743c1cfb8ab6ef236a232f80d6b6bf46d8b0dca1cad00a08bb",
+    "rtl/jtframe/jtframe_draw.v": "2c52e8735ddf3eb0925c42d8f893035fb4180ed69f61cd5eaa7120b519be8edc",
+    "rtl/rabbitpunch_sprite_priority.vhd": "fd49c0085d8a9250f74c5872f6619ff327ded4d0c157bdd106c9f95efd61ae49",
+    "rtl/rabbitpunch_pixel_mixer.vhd": "013f07b6de458482508a2591cbaf54c4084d5e4a9cbc5995b6db4ae86b9cf1ed",
+    "rtl/rabbitpunch_tile_row.vhd": "27794969cf7705508bf06e49557de6ae7941c55be7304b6aafb98cd7739aad9c",
+    "rtl/rabbitpunch_tile_lookup.vhd": "c49719b79ea86d0cce8d9de87c8ff9f5718f6e9580ea76c4785fd0aeb977ab3b",
+    "rtl/rabbitpunch_tile_layer.vhd": "32cfa2bd9465f96e3d439f59eec7046462930678b63164a143b7ee5d66be1bf7",
+    "rtl/rabbitpunch_tiles.vhd": "85a5cf8b9099858d801d5bd80fd1fdaa18c19ccfced82f038d6aac54f9102603",
+    "rtl/rabbitpunch_sprite_scan.vhd": "5a8005860e33d987e7691f5b696b523ed022cb4b9e976da0d199c9692539bba9",
+    "rtl/rabbitpunch_sprite_row.vhd": "716949c5ab9525240f6a2bfbdb4a97eaafe4027910efbee16b9008cbb53fa6a9",
+    "rtl/rabbitpunch_sprite_line.vhd": "ca7cda21c6103143560dc113c2b1f664106d65ae929a7296277963d15b8a3484",
+    "rtl/rabbitpunch_sprites.vhd": "90f9a9119c401f446e8b2ce22156cd72bb01daa3f4b6c30e98224f79191b67a6",
+    "rtl/rabbitpunch_bitmap_pixel.vhd": "13827f06b763926657a50dbbfc0dd32f1ba3b37b47bd5463af5a96e47bbdcd93",
+    "rtl/rabbitpunch_video.vhd": "62ababf496d06727b600c2fdac3549c13692a5b3e357e993cc650961b4b3538d",
+    "rtl/rabbitpunch_palette_pixel.vhd": "9dda5fe21b2e6076308b0ec485d849d97136f4a76b05490fa5fc78d46db144bd",
+    "rtl/rabbitpunch_rgb_video.vhd": "e5fa59dbb896814e27eb03e217be7079a79e3fbc62c660a05a447ef23e5dc637",
+    "rtl/rabbitpunch_board_video.vhd": "18c5d8143d927063946082dcfdebac39fd45f8fbb04888ecf47929280c04751b",
+    "rtl/rabbitpunch_maintenance.vhd": "19d90ccaf6c967a05b7c6964dceb46e34ba7945bf3ae3a9e30d7cade5c6c1268",
+    "rtl/rabbitpunch_bus_owner.vhd": "5ee01e482a2e0075e03cb8da95013dff57df183b26fa701daeaad9ef540745f6",
+    "rtl/state/rabbitpunch_state_main_bus.vhd": "7ba81db74df3543776ea4a5d3474adcffb9ed3f2d9045cec9bbd1da3e96c79f8",
+    "rtl/rabbitpunch_board.vhd": "a752d0706d4d4d0d30838e71aa0772e308bff96a3c85c5f0daedd3b80694d46d",
+    "rtl/rabbitpunch_download.vhd": "0c691d3055282fafbfd691b07e645de20ef5d05ba0c210dc81eccb589c54f57c",
+    "rtl/cpu/t80/T80_Pack.vhd": "f0e6aff273f25d904fd55e53372e44b52d07a82b8c6cb58fe73ea7fde06ec22d",
+    "rtl/cpu/t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+    "rtl/cpu/t80/T80_MCode.vhd": "d4f03ddd9693e341ace2a685153838aec39085826fd2f6128ece1a9f8852f02e",
+    "rtl/cpu/t80/T80_ALU.vhd": "823a062b8be873505ac16e627351a5105101243a11483bf8f2446214893b739e",
+    "rtl/cpu/t80/T80.vhd": "ba63aaa402eadfc0d47e59e9747c516a22b7454ad0b27430e99d968efcae6ec0",
+    "rtl/cpu/t80/T80se.vhd": "d528be5e4a75a8e45d1965740bcd6c77180bd54e1862b8e177bea8a432e58588",
+    "rtl/sound/jt51/hdl/jt51_acc.v": "633319a0e89a78d390cba54a24aabf6f1019b705b378b636e246dcf44c8829f8",
+    "rtl/sound/jt51/hdl/jt51_eg.v": "6e7c5f315edc82b70918ea61d6d5c992204d4e8b272e33fb3ce539a9843cac5e",
+    "rtl/sound/jt51/hdl/jt51_exp2lin.v": "cecc44acf6d7c8a81e80638e4a6eeb46f17d6c8d809e7a928338553bb23fb400",
+    "rtl/sound/jt51/hdl/jt51_exprom.v": "c9f33ede4c1c0af6f54ae45620d986a2c5a2f0ef16b453dc7d2eeeac85f8cbb5",
+    "rtl/sound/jt51/hdl/jt51_kon.v": "e1bb08fe65a53d2dc871459cc91e4beeec9efb9e839b3a39a941fa27ac19ba0f",
+    "rtl/sound/jt51/hdl/jt51_lfo.v": "2bb0e19b51982f761fd50eb992c90f6dbadf467528ac09fa033b48020cd8d193",
+    "rtl/sound/jt51/hdl/jt51_lin2exp.v": "c4351ea7711364ab394ab510326111dc5047f4e57830bddef15163cbc4dcb98e",
+    "rtl/sound/jt51/hdl/jt51_mmr.v": "db3a6506091e6ea99a17ad2f5b8b11ecf36d97f74dbf0c1098cf6db601d6fdd6",
+    "rtl/sound/jt51/hdl/jt51_mod.v": "1a04fe51a56756a98b577547bbd95cf984283288f2da2e4946d75063a69d357c",
+    "rtl/sound/jt51/hdl/jt51_noise_lfsr.v": "6b58949a51dbfe8c96f19eac3aa84aaace7fcc5cc4e1902c084a93d3d1c4da91",
+    "rtl/sound/jt51/hdl/jt51_noise.v": "87b70082becc58ece4c223ea5ed01b0c0bc0b05ae95ace9b498768429232f360",
+    "rtl/sound/jt51/hdl/jt51_op.v": "5dbb743c49af67e6dff7e6c65691a66371aaf5a126834525f9501a8af1420bbf",
+    "rtl/sound/jt51/hdl/jt51_pg.v": "d52c369e535196ee260243b2342c6a526a1d95425440512037f3f3b5185f0a8a",
+    "rtl/sound/jt51/hdl/jt51_phinc_rom.v": "41fefe0b9bc9a3b71a036d12d723666e4b588c57625228eee278f9704a6f53b1",
+    "rtl/sound/jt51/hdl/jt51_phrom.v": "b3fb0623737dd22befa0bfa9a130d7b1437e81ff3e1842538251d5cd29a75c89",
+    "rtl/sound/jt51/hdl/jt51_pm.v": "9625bda77a523371fc4704ac66cfec95a9d1aff343c2e770ea5aba11eb50c8f3",
+    "rtl/sound/jt51/hdl/jt51_reg_ch.v": "2303d898fa49bf67fa8aace6c1a1e00e48d2951f9a221e75058233953f670aad",
+    "rtl/sound/jt51/hdl/jt51_csr_op.v": "b129bf97cc155bc0e4312287af79b2c7985852ef65c1768f23ffa31badd5b648",
+    "rtl/sound/jt51/hdl/jt51_reg.v": "a9913cb08f562046c2f9375fd6f7a4a5a0eb4d46266df303875059761f304de7",
+    "rtl/sound/jt51/hdl/jt51_sh.v": "71246f6b6989f922220cdd370cee52ecd56c7244e11073ddc618028a4136f0aa",
+    "rtl/sound/jt51/hdl/jt51_timers.v": "e885ffd11d62c2bf42aafb90eb30e681c3d98ae9c4fe6714b13d72f491347e70",
+    "rtl/sound/jt51/hdl/jt51.v": "4c5f80dae49f435686d3f917897df867ba7725a44bd52c5d652658ba178689b0",
+    "rtl/sound/jt7759/hdl/jt7759.v": "a4defeee8f5b5fec795af00d6185aa941f4135ab72ae5f7fece31908c3c48c1a",
+    "rtl/sound/jt7759/hdl/jt7759_adpcm.v": "41d795e33e2085d3d07ee0acab23e85f495f3766e61bd91f177c46e84072380d",
+    "rtl/sound/jt7759/hdl/jt7759_ctrl.v": "19ad3a6572dec4e61d0046b222b6af53660cb558123b985f43db86dd5ed98aa9",
+    "rtl/sound/jt7759/hdl/jt7759_data.v": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d",
+    "rtl/sound/jt7759/hdl/jt7759_div.v": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862",
+    "rtl/rabbitpunch_z80.vhd": "4aae6436bc0957027f6f30b7caab38ec0d0d0efd330a5fa3a24f734979d4321d",
+    "rtl/rabbitpunch_soundcpu.vhd": "e2baa84d8bbbc8da959938f9ca338f27dec8f2265bb622a9c09b574218cfc682",
+    "rtl/rabbitpunch_ym2151.vhd": "6676c99a104e4665cff087cb0464506d96dcc1aa8f3f3dc0ed33a4be15b8f328",
+    "rtl/rabbitpunch_ram8.vhd": "3125a846fd3c208c8512f604952bd4766ac4d2d7ee959c0b8e53b989e31fc7fa",
+    "rtl/rabbitpunch_sound_bus.vhd": "9801559d2b41a745280140813bc1da182a07cc52ee6b950d2145a0d3737a0c9d",
+    "rtl/rabbitpunch_sound_board.vhd": "0a523151ed32a08af40dcb503635b5395968e27d04dee58b9a82af0ddf7b2496",
+    "rtl/rabbitpunch_upd7759_control.vhd": "b3fabe48db6731c86fda4a54e7d8b7ce212a71fccb83a0b258facf8af1ede454",
+    "rtl/rabbitpunch_upd7759_playback.vhd": "ba2f11fb337e48ca03fd539abf167b262f6ca64002986ed0bdbe5f73afda65ca",
+    "rtl/rabbitpunch_upd7759.vhd": "3434be19e205f9b061aaf7158881901da02835cbc33f0a56b275eb5854a9354e",
+    "rtl/rabbitpunch_adpcm.vhd": "6cf0d6504dffd312e2822a07caead8ec2ef8ab074dc22e52835f0a3010cf9aed",
+    "rtl/rabbitpunch_audio.vhd": "9116a3184e6019c87d5250db9dede968b986413ae9521942be62cc5a0927de4a",
+    "rtl/rabbitpunch_audio_mixer.vhd": "da1cd0fb2874740ec5447790d331a36396f90310d8aace84ac88fab29204284f",
+    "rtl/rabbitpunch_system.vhd": "8ce975faa00e9916ed3ef4a14e7518dd8661509e09cfa91119ae0d4550277275",
+    "rtl/memory/ddram/ddram_phy.sv": "5a0cc2eeca7d71ba83fbd19d79c38b9983f5956cb737acf4df64e20848d0578c",
+    "rtl/memory/ddram/rom_loader.sv": "01ea1c583107760fedb7457a35cc44e8a77d53e4be7593a4eae85fb4702602d5",
+    "rtl/rabbitpunch_ddr_copy.vhd": "87da9d959e0e94afac2e961e360bd7df06f4bd15d2b3f1bf389265d6d352d101",
+    "rtl/rabbitpunch_load_frontend.vhd": "3df610c1e14523fe18076f863b2571e4aadf4042cdd8defc711deda6354b61f5",
+    "rtl/mame_keys.sv": "c2d3d7fa4cefeebeaeba0e74b66f90fd0ee98b5ae33e4113e9eb1f3c66559edc",
+    "rtl/rabbitpunch_keys.vhd": "75905e497a9d6facd72a68b25491aa08367f9aa85c7b784821102a9e04e891ff",
+    "rtl/rabbitpunch_inputs.vhd": "9b6e552c490ba4f725b5838c5cefbe206abfbced5ac24d8000d9b80f59be0b40",
+    "rtl/rabbitpunch_pause.vhd": "8bbbcd71a56ff3e30c898f61eed9ffa64909d3674767ee31de9ed017475d386c",
+    "rtl/rabbitpunch_controls.vhd": "dac347f8dc62c03ff619e3a256b651eecc7d07549c8ff2cd60d8299baf01267d",
+    "rtl/rabbitpunch_config.vhd": "9946ae38c785e698dad4d6fb6466246b4653ef571bc5aca42837455c09d1436f",
+    "rtl/rabbitpunch_hiscore.vhd": "cfb2f3830e496e4fe1d05e091b4b32d7769dd9dc835204f730076100e7453b98",
+    "rtl/rabbitpunch_hiscore_config.vhd": "bf4e9297d998527e35bf016e6ce60ac4c0181e1b5e3d84febd7a3e2237d39d9c",
+    "rtl/rabbitpunch_hiscore_service.vhd": "35287e7109b39c3e1515ecdb989a042a96d17d8c27087de7fe123abc237fa118",
+    "rtl/rabbitpunch_maintenance_clients.vhd": "3a75eb18aff0f36cf74c3d454db3640f97ae51bc013414b3283243b428fd25f3",
+    "rtl/rabbitpunch_platform.vhd": "09c46ad9acdae72a043f7fcc9b56c1cf3948cdeaff9486defa8035fff3a20d91",
+    "rtl/rabbitpunch_clock_enables.vhd": "43f72dc52568f284236f9066f1f48d74d280c55bbb5fc7677d39a29093fbfcfa",
+    "rtl/rabbitpunch_raster.vhd": "57e3eac7e7560f4527251289fce1bd1d172ac245dc1bc59a101d656e1839769a",
+    "rtl/rabbitpunch_scanline_scheduler.vhd": "38761b9a7f583d5ae02edb614cb0a043b43e206fd437f51a225e2c031dbe0b05",
+    "rtl/rabbitpunch_video_output.vhd": "50aa7b951abddfb3cb61e8f3687535ddfe33d09fa561abf49590cf6b08028b97",
+    "rtl/state/rabbitpunch_state_game_timing.vhd": "27b0ce3facbc23919f9d24d26d3c4a119196fd9247d25357066a16fdee1af091",
+    "rtl/rabbitpunch_scanout.vhd": "e9dfcc04c9d3b7bba7b959d11c665e2640f3596768794dbc0a623f35964df3b0",
+    "rtl/rabbitpunch_view_flip.vhd": "5616ddad8f44bb83885b6478b8fc71421c0ec0dceba3a0215613c5cc8271d121",
+    "rtl/rabbitpunch_machine.vhd": "1e3ae012f0ddcaa062e84349a868188ad28b1f8e98120f9254b3131dde6344b2",
+    "rtl/state/rabbitpunch_state_memory.vhd": "2403b9cdaba2de8acb1cda455639bad78184e030f2f7ee75b031a4a73929afe2",
+    "rtl/state/rabbitpunch_state_body.vhd": "dfd56ad6039a32cc5cdf724bf95d4da3996bd41de48e90eec2a7310e1a780a50",
+    "rtl/state/rabbitpunch_state_banks.vhd": "c8c79f09c0ffb5938dbe52fc0acdb5f62a3776c7ecc128e614c5b646f823406d",
+    "rtl/state/rabbitpunch_state_machine_access.vhd": "ae8d28076ca040e45b6db012891eefee16afb90209364843fbacdfd427011496",
+    "rtl/state/rabbitpunch_state_machine_backend.vhd": "26f0750c0806f1c05c235cd04ed6632852e9fc3b3489b5eb6c7a5a5454cbaea1",
+    "rtl/state/rabbitpunch_state_header.vhd": "f516fa8d35f1b8b1ab73fa83e203a9ed89203d514ed4eb280982e10ef774e1ba",
+    "rtl/state/rabbitpunch_state_preflight.vhd": "39602b76e4bfcba1b6f94a0e6089518bfe5bb6faebcda54eef4321e21c4e34e6",
+    "rtl/state/rabbitpunch_state_semantics.vhd": "405ca6d7572e72471225cab76c7b8aea10d9783e258653f3ecdc787422eef62b",
+    "rtl/state/rabbitpunch_state_image_buffer.vhd": "90ccae6b5ac6f22d6a06fb018393b34897e77bd238afebce452fbea9a692ac72",
+    "rtl/state/rabbitpunch_state_snapshot.vhd": "20f724580c0fa984a3f5ac52a79cd1dc4a406c165db7f3070cbe5e41e75520d5",
+    "rtl/state/rabbitpunch_state_slot_reader.vhd": "c2cb1787f6372bf33b0e6f7473e52319d8bab25ce8f1340d5c5955a25db970dc",
+    "rtl/state/rabbitpunch_state_image_validator.vhd": "61b18f6c314ee24e76237c1b4e4d96d6b4a3994e6b8c39f84fc0905eee1f8111",
+    "rtl/state/rabbitpunch_state_apply.vhd": "21011211d63c862d0b0e91e36aa8f1187606921ec86397a5a39b46c3c2a4b53d",
+    "rtl/state/rabbitpunch_state_image_words.vhd": "818f00770ca62e64179d9610fff736915f6361d8752cb3f66f87508fcb20bb46",
+    "rtl/state/rabbitpunch_state_slot_writer.vhd": "372560c8120898213efee206a38d08273b3b7baae0748076392cca43f3809a9e",
+    "rtl/state/rabbitpunch_state_publish.vhd": "5b49157b082400cd1dd2799a1875db70d7c38cf09aa91eaefa0f10305fe62f78",
+    "rtl/state/rabbitpunch_state_service.vhd": "c94c852ae0cabb2d466a1397e623a1f166919967f90f6f067139b7a92c44666b",
+    "rtl/state/rabbitpunch_state_machine.vhd": "8f636abd159145f1afdf4711515467cb57c484b7cf8700386bced8609dcd17bd",
+    "rtl/rabbitpunch_pll.vhd": "f8db5d9bceac3fb71b94a158e7019eab1b5027602e51db4d9ad9dbf5c68aa86f",
+    "rtl/rabbitpunch_reset_release.vhd": "abb9b8de051c767107269c917e46442b11c8cffc1b4795c470493e095d5ac0cf",
+    "rtl/rabbitpunch_host.vhd": "80a082a7852dd3b4ebed8873686d2610d4997ba4732b7389fc773ffde50c7759",
+    "rtl/rabbitpunch_crt_adjust.vhd": "aad8878d3ebe44a18a038c86fb7131a09699feae7898256ddc9c193310bb5c7e",
+    "rtl/rabbitpunch_video_options.vhd": "e418ce32749d0474ffa5e5586a3403928b0c91cb504c7cc7e5136e4340be2bf2",
+    "rtl/rabbitpunch_video_aspect.vhd": "15f15840b7ced43d06487c1e9c1b7251bc1b210dfa911c9273cf9c904c05759b",
+    "rtl/rabbitpunch_status_led.vhd": "6e82522df66de23e6067c7948fa68d8e9074c87b50b0f85a49179b552eb110e3",
+    "rtl/rabbitpunch_hdmi_rotation.vhd": "769a309dcdc4422f0801e1149d0f3a621d15c3313c1f5f600d01f36bc88eb17c",
+    "rtl/rabbitpunch_ddr_write_queue.vhd": "d8a66938e884f6a26f18e3e7c2de7c5f4732ae7c507e745ce91101ce06d592e5",
+    "rtl/rabbitpunch_frame_publication.vhd": "2ab81ea58f2ddbc240095067d4ff6c267675d9213af684a37045e04b16552cb3",
+    "rtl/state/rabbitpunch_state_ddr_arbiter.vhd": "f7ac7ebe67c4e46c4d8f9d550efde19e989ed7a3a1b575efe974cf6cf9dcc77d",
+    "rtl/state/rabbitpunch_state_rotation_transport.vhd": "63f3823dc889eaabce602f530e289a34f5794b0937d8af54881aab1c4f441826",
+    "rtl/state/rabbitpunch_state_hdmi_presentation.vhd": "1c79bea8d8a962f5b164a634e9cf8b88a596c8eb15441ced287db69269c2295a",
+    "rtl/state/rabbitpunch_state_abi.vhd": "7396136150450091a66361610d848cc28c872d2df197064706e77a613baeef15",
+    "rtl/state/rabbitpunch_state_config.vhd": "9eb1ba638c888b2f607be9ee619015d5b83426a0e8f65eeda926045f550a7442",
+    "rtl/state/rabbitpunch_state_controls.vhd": "33129775230c604370bccdbf2325f4f5fdbde93b07ec810299bfa3c3ef979348",
+    "rtl/rabbitpunch_debug.vhd": "6a85b120b16792baa22b389a8576fd46f73b4b81c0ce65306ab5fd3063e14938",
+    "rtl/state/rabbitpunch_state_build.vhd": "692b30488079ee11ea2262acc183e746a3fe7ffef93631be5b5168f8b6cf5001",
+    "rtl/state/rabbitpunch_state_emu.vhd": "b1b521330271fb3b3fa47728143dcc37ffc24ccb5e11bc7403cf91797e03883b",
+    "rtl/video/crt_adjust/crt_adjust.sv": "43c666a045db4ec1559fe316e566aa3ff2fcfcd46b5ea0fa46bfbb8328e31c90",
+    "rtl/video/rotation/screen_rotate_two.sv": "a704b114cc7d7c1684eb273ab98b436350a3ffb957b350fad975bb322ba11f9e",
+    "rtl/state/vendor/meatsauce_t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+    "rtl/state/vendor/meatsauce_t80/T80_MCode.vhd": "a73c512d7f03bc34759de560efe78c1813785c5ae3f52714df149455b876e5a5",
+    "rtl/state/vendor/meatsauce_t80/T80_ALU.vhd": "8e1dfd1c47fc0ce4a902f3d789f657a93f2b9faa6a72df70e1f12f27649291b8",
+    "rtl/state/vendor/meatsauce_t80/T80.vhd": "e6f6a31dcbc34f0193ff8aa4bc124e4967e527d10731d0acc6f3908d3384e0ef",
+    "rtl/state/rabbitpunch_state_emu_boundary.vhd": "e31792f4fd34a636c9c881fb28a03921822088c80dffe91ad543bf44e2a20a04",
+    "files.qip": "f998ffaed6379d684dc606fb32fa66a2de297d98a11780c61d0c3e5b36e2409e",
+    "RabbitPunch.qsf": "2f3b94c282d5220c4e037b7e725a5c839fa80df9e60af54607670067b9edc5e9",
+    "RabbitPunch.qpf": "a552a22ecade6e422a692a6f5bcae251aa1bf068e8efdde91f1ce46401972bfa",
+    "RabbitPunch.sdc": "9fc30157a6725de440d256959690d6a063d0171a95afcd38f1bb0925ac64317d"
+  },
+  "framework_git_tree": "5d7a1a15658d89cb7a20d593753acb5e6b95403d",
+  "artifact_sha256": {
+    "RabbitPunch.map.rpt": "64c8b64846c6750700ea0133bc18d5f140be9d9a149c01b1485912f3476fb4b3",
+    "RabbitPunch.fit.rpt": "456de98ebe3075696d1e189f8ee36b27ca1c9ee424d02ed95945c322bb36d41a",
+    "RabbitPunch.fit.summary": "27c759bbcb940bc3c84270eca0efd58b9453653e434ac8fbc71a998a61ffe8ed",
+    "RabbitPunch.sta.rpt": "7ab150771bf8fa4950ddb217c09a6cbdd908ebcc9c333cde488005214d04434d",
+    "RabbitPunch.sta.summary": "22c4adb1c0672ce9f092023986631991390432642eb1600e409b70b36862a4e6",
+    "RabbitPunch.rbf": "f7cc5bcd9f89ac3b9a4b976b7b7782bb6980dd88d7722e5df3b0b573f11f83e3",
+    "RabbitPunch.sof": "6c82201669d88547799364d0f9e7e0766fca50363823d35d06538e68174c2de6",
+    "RabbitPunch.flow.rpt": "3f77d1b5413cd1ec6f8d04e89984c8cc688ae874907eae2c1494c7efba1c02c1",
+    "full_clock_tree.json": "91703a6f5559112adb290fbd8cd5e7e5145bcf7a52c82a52a2a8a0538eb40e61",
+    "clock_tree.tsv": "62f419e08b7cf06d4fec134f968dc8aa3d8b21d6e812b5dc77dc4c2a8a13f378",
+    "state_eval_resources.json": "6d0f0a1787d65068dd047e156e0eccfb714e7a05e6bf67da8ee5a4b7c93f02f8",
+    "framework_timing_scope.json": "62ee1fbf1806ef45ea1300bbae65a60b231b0acaf68ee903ce42fb1d7af95a96"
+  },
+  "build_log_sha256": "0600fe2143af81a7e5b4e4fc32e927c4e60058bfd05d806d5706efcdc96eb8e2",
+  "recorder_sha256": "3320402e79dce0c36117349f320483102b85c8335ad622ab54cbbc4ab5f9728b",
+  "scope": "Full MiSTer fit only, with state controls enabled in the production boundary. Complete state RAM/CPU ROM/chip-register and hierarchy/macro gates, all reported scoped timing, fitted PLL and forwarded SDRAM phase are checked. Instrumentation/build identity and ARM-reader policy are stated separately. Firmware execution, physical DDR, runtime continuation, CRT and hardware remain separate gates. No deployment or JTAG operation."
+}

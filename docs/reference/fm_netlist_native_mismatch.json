@@ -1,0 +1,12 @@
+{
+  "accepted": false,
+  "case": "fm_netlist_native_mismatch",
+  "failure_time_ns": 122960,
+  "archive": "debug/fit_archive/fm_state_netlist_native_mismatch",
+  "source_sha256": {
+    "rtl/state/generated/jt51_state_netlist.vhd": "360ebd093729924028c392280fe7c7e056aa1d6a15380f80d0c237131dfa88d8",
+    "sim/state/fm_netlist_state_tb.vhd": "c84a25eb7206ae93a9efbf48696f84c0b21971f55b867e88d5e66a6ef1da43d5"
+  },
+  "log_sha256": "ed53ef39eafecfb8181ff420a4ec7a0aa6b10bd0ea3833823d680c3da47e6514",
+  "scope": "Native four-state comparison failed before capture despite two-state normal-mode correspondence proof. Initialization/four-state/frontend boundary requires diagnosis. No FM restore qualification."
+}

@@ -1,0 +1,11 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_maintenance_clients.vhd": "3a75eb18aff0f36cf74c3d454db3640f97ae51bc013414b3283243b428fd25f3",
+    "sim/state/state_maintenance_clients_tb.vhd": "91486a193b80afdc88c366fd0a71539223a86fe78690c62db5cac4cb47bd145b"
+  },
+  "runner_sha256": "62c461fd4af3df7da895cbea750fe1f3f66a83030f38f77457bf19070451710d",
+  "log": "debug/ghdl/state_maintenance_clients/result.log",
+  "log_sha256": "99731b3964cab4f67c3faa809ff76d211b7751dee01c78dfa4124d90a14ebc7c",
+  "scope": "Production legacy maintenance byte/session owner with synthetic acknowledged backend. Original external priority, packet ownership, cancellation and late-reply cases plus state quiesce: block new external sessions, drain already accepted whole score operations even before byte-owner admission, retain active external credits and queued payloads, then retire all owners. No RAM, actual NVRAM engine, game-state coordinator or hardware qualification."
+}

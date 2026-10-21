@@ -9,7 +9,8 @@ use work.rabbitpunch_layout.all;
 entity rabbitpunch_board is
     generic (
         GINT_PHASE_DIVIDER : positive := 3;
-        GBOOL_EXTERNAL_PHASE_ENABLE : boolean := false
+        GBOOL_EXTERNAL_PHASE_ENABLE : boolean := false;
+        GBOOL_STATE_CAPABLE : boolean := false
     );
     port (
         i_clk : in std_logic;
@@ -92,7 +93,40 @@ entity rabbitpunch_board is
         o_cpu_request_write : out std_logic;
         ou24_cpu_request_address : out unsigned(23 downto 0);
         ou16_cpu_request_data : out unsigned(15 downto 0);
-        ou2_cpu_request_bytes : out unsigned(1 downto 0)
+        ou2_cpu_request_bytes : out unsigned(1 downto 0);
+        i_state_capture : in std_logic := '0';
+        i_state_cancel : in std_logic := '0';
+        o_state_pending : out std_logic := '0';
+        o_state_held : out std_logic := '0';
+        o_state_error : out std_logic := '0';
+        i_state_resume : in std_logic := '0';
+        o_state_return_held : out std_logic := '0';
+        i_state_release : in std_logic := '0';
+        o_state_resumed : out std_logic := '0';
+        o_state_canceled : out std_logic := '0';
+        iu5_state_cpu_address : in unsigned(4 downto 0) := (others => '0');
+        i_state_cpu_write : in std_logic := '0';
+        iu32_state_cpu_data : in unsigned(31 downto 0) := (others => '0');
+        ou32_state_cpu_data : out unsigned(31 downto 0) := (others => '0');
+        o_state_cpu_stopped : out std_logic := '0';
+        ou52_state_cpu_bus : out unsigned(51 downto 0) := (others => '0');
+        i_state_hold : in std_logic := '0';
+        i_state_load : in std_logic := '0';
+        iu224_state_io : in unsigned(223 downto 0) := (others => '0');
+        ou224_state_io : out unsigned(223 downto 0) := (others => '0');
+        iu4_state_irq : in unsigned(3 downto 0) := (others => '0');
+        ou4_state_irq : out unsigned(3 downto 0) := (others => '0');
+        i_state_memory_access : in std_logic := '0';
+        i_state_memory_request : in std_logic := '0';
+        i_state_memory_write : in std_logic := '0';
+        iu24_state_memory_address : in unsigned(23 downto 0) := (others => '0');
+        iu16_state_memory_data : in unsigned(15 downto 0) := (others => '0');
+        iu2_state_memory_bytes : in unsigned(1 downto 0) := (others => '0');
+        o_state_memory_response : out std_logic := '0';
+        ou16_state_memory_data : out unsigned(15 downto 0) := (others => '0');
+        o_state_memory_busy : out std_logic := '0';
+        o_maintenance_idle : out std_logic := '0';
+        i_state_video_flush : in std_logic := '0'
     );
 end entity;
 
@@ -112,7 +146,12 @@ architecture rtl of rabbitpunch_board is
     signal su24_maintenance_address, su24_backend_address : unsigned(23 downto 0);
     signal su16_maintenance_data, su16_backend_data, su16_cpu_response_data, su16_maintenance_response_data : unsigned(15 downto 0);
     signal su2_maintenance_bytes, su2_backend_bytes : unsigned(1 downto 0);
+    signal s_state_hold, s_state_load, s_video_flush : std_logic;
+    signal s_maintenance_block : std_logic;
 begin
+    s_state_hold <= i_state_hold when GBOOL_STATE_CAPABLE else '0';
+    s_state_load <= i_state_load when GBOOL_STATE_CAPABLE else '0';
+    s_video_flush <= i_state_video_flush when GBOOL_STATE_CAPABLE else '0';
     su16_response_data <= su16_memory_data when s_memory_valid = '1' else su16_io_data;
     o_cpu_request <= s_request;
     o_cpu_request_write <= s_request_write;
@@ -134,7 +173,7 @@ begin
             i_initialize => i_initialize or i_reset or i_maintenance_initialize,
             i_access_requested => i_maintenance_access,
             o_pause => s_maintenance_pause,
-            i_cpu_paused => s_cpu_paused and i_maintenance_permitted,
+            i_cpu_paused => s_cpu_paused and i_maintenance_permitted and not s_maintenance_block,
             i_bus_idle => s_owner_cpu_idle,
             i_byte_valid => i_maintenance_valid,
             o_byte_ready => o_maintenance_ready,
@@ -143,7 +182,7 @@ begin
             iu8_byte_data => iu8_maintenance_data,
             o_byte_response_valid => o_maintenance_response_valid,
             ou8_byte_response_data => ou8_maintenance_response_data,
-            o_idle => open,
+            o_idle => o_maintenance_idle,
             o_bus_request => s_maintenance_request,
             o_bus_write => s_maintenance_write,
             ou24_bus_address => su24_maintenance_address,
@@ -152,59 +191,236 @@ begin
             i_bus_response_valid => s_maintenance_response_valid,
             iu16_bus_response_data => su16_maintenance_response_data
         );
-    bus_owner : entity work.rabbitpunch_bus_owner
-        port map (
-            i_clk => i_clk,
-            i_cpu_request => s_request,
-            i_cpu_write => s_request_write,
-            iu24_cpu_address => su24_request_address,
-            iu16_cpu_data => su16_request_data,
-            iu2_cpu_bytes => su2_request_bytes,
-            o_cpu_idle => s_owner_cpu_idle,
-            o_idle => o_transport_idle,
-            o_cpu_response_valid => s_cpu_response_valid,
-            ou16_cpu_response_data => su16_cpu_response_data,
-            i_maintenance_allowed => s_cpu_paused or i_reset,
-            i_maintenance_request => s_maintenance_request,
-            i_maintenance_write => s_maintenance_write,
-            iu24_maintenance_address => su24_maintenance_address,
-            iu16_maintenance_data => su16_maintenance_data,
-            iu2_maintenance_bytes => su2_maintenance_bytes,
-            o_maintenance_response_valid => s_maintenance_response_valid,
-            ou16_maintenance_response_data => su16_maintenance_response_data,
-            o_backend_request => s_backend_request,
-            o_backend_write => s_backend_write,
-            ou24_backend_address => su24_backend_address,
-            ou16_backend_data => su16_backend_data,
-            ou2_backend_bytes => su2_backend_bytes,
-            i_backend_response_valid => s_memory_valid or s_io_valid,
-            iu16_backend_response_data => su16_response_data
-        );
-    cpu : entity work.rabbitpunch_maincpu
-        generic map (
-            GINT_PHASE_DIVIDER => GINT_PHASE_DIVIDER,
-            GBOOL_EXTERNAL_PHASE_ENABLE => GBOOL_EXTERNAL_PHASE_ENABLE
-        )
-        port map (
-            i_clk => i_clk,
-            i_phase_enable => i_main_phase_enable,
-            i_reset => i_reset,
-            i_pause => i_pause or s_maintenance_pause,
-            i_interrupt_level1 => s_irq_pending,
-            o_interrupt_acknowledge => s_irq_acknowledge,
-            o_request => s_request,
-            o_request_write => s_request_write,
-            ou24_request_address => su24_request_address,
-            ou16_request_data => su16_request_data,
-            ou2_request_bytes => su2_request_bytes,
-            i_response_valid => s_cpu_response_valid,
-            iu16_response_data => su16_cpu_response_data,
-            o_paused => s_cpu_paused
-        );
+    original_cpu : if (not GBOOL_STATE_CAPABLE) generate
+        s_maintenance_block <= '0';
+        o_state_pending <= '0';
+        o_state_held <= '0';
+        o_state_error <= '0';
+        o_state_return_held <= '0';
+        o_state_resumed <= '0';
+        o_state_canceled <= '0';
+        ou32_state_cpu_data <= (others => '0');
+        o_state_cpu_stopped <= '0';
+        ou52_state_cpu_bus <= (others => '0');
+        o_state_memory_response <= '0';
+        ou16_state_memory_data <= (others => '0');
+        o_state_memory_busy <= '0';
+        bus_owner : entity work.rabbitpunch_bus_owner
+            port map (
+                i_clk => i_clk,
+                i_cpu_request => s_request,
+                i_cpu_write => s_request_write,
+                iu24_cpu_address => su24_request_address,
+                iu16_cpu_data => su16_request_data,
+                iu2_cpu_bytes => su2_request_bytes,
+                o_cpu_idle => s_owner_cpu_idle,
+                o_idle => o_transport_idle,
+                o_cpu_response_valid => s_cpu_response_valid,
+                ou16_cpu_response_data => su16_cpu_response_data,
+                i_maintenance_allowed => s_cpu_paused or i_reset,
+                i_maintenance_request => s_maintenance_request,
+                i_maintenance_write => s_maintenance_write,
+                iu24_maintenance_address => su24_maintenance_address,
+                iu16_maintenance_data => su16_maintenance_data,
+                iu2_maintenance_bytes => su2_maintenance_bytes,
+                o_maintenance_response_valid => s_maintenance_response_valid,
+                ou16_maintenance_response_data => su16_maintenance_response_data,
+                o_backend_request => s_backend_request,
+                o_backend_write => s_backend_write,
+                ou24_backend_address => su24_backend_address,
+                ou16_backend_data => su16_backend_data,
+                ou2_backend_bytes => su2_backend_bytes,
+                i_backend_response_valid => s_memory_valid or s_io_valid,
+                iu16_backend_response_data => su16_response_data
+            );
+        cpu : entity work.rabbitpunch_maincpu
+            generic map (
+                GINT_PHASE_DIVIDER => GINT_PHASE_DIVIDER,
+                GBOOL_EXTERNAL_PHASE_ENABLE => GBOOL_EXTERNAL_PHASE_ENABLE
+            )
+            port map (
+                i_clk => i_clk,
+                i_phase_enable => i_main_phase_enable,
+                i_reset => i_reset,
+                i_pause => i_pause or s_maintenance_pause,
+                i_interrupt_level1 => s_irq_pending,
+                o_interrupt_acknowledge => s_irq_acknowledge,
+                o_request => s_request,
+                o_request_write => s_request_write,
+                ou24_request_address => su24_request_address,
+                ou16_request_data => su16_request_data,
+                ou2_request_bytes => su2_request_bytes,
+                i_response_valid => s_cpu_response_valid,
+                iu16_response_data => su16_cpu_response_data,
+                o_paused => s_cpu_paused
+            );
+    end generate;
+    state_cpu : if (GBOOL_STATE_CAPABLE) generate
+        component rabbitpunch_state_maincpu is
+            generic (
+                GINT_PHASE_DIVIDER : positive := 3;
+                GBOOL_EXTERNAL_PHASE_ENABLE : boolean := false
+            );
+            port (
+                i_clk : in std_logic;
+                i_phase_enable : in std_logic;
+                i_reset : in std_logic;
+                i_pause : in std_logic;
+                i_interrupt_level1 : in std_logic;
+                o_interrupt_acknowledge : out std_logic;
+                o_request : out std_logic;
+                o_request_write : out std_logic;
+                ou24_request_address : out unsigned(23 downto 0);
+                ou16_request_data : out unsigned(15 downto 0);
+                ou2_request_bytes : out unsigned(1 downto 0);
+                i_response_valid : in std_logic;
+                iu16_response_data : in unsigned(15 downto 0);
+                o_paused : out std_logic;
+                i_capture_request : in std_logic;
+                i_capture_cancel : in std_logic;
+                o_capture_pending : out std_logic;
+                o_capture_held : out std_logic;
+                o_capture_error : out std_logic;
+                i_state_resume : in std_logic;
+                o_return_held : out std_logic;
+                i_return_release : in std_logic;
+                o_resume_completed : out std_logic;
+                o_resume_canceled : out std_logic;
+                iu5_state_address : in unsigned(4 downto 0);
+                i_state_write : in std_logic;
+                iu32_state_data : in unsigned(31 downto 0);
+                ou32_state_data : out unsigned(31 downto 0);
+                ou24_journal_address : out unsigned(23 downto 0);
+                o_stopped : out std_logic;
+                ou52_debug_bus : out unsigned(51 downto 0)
+            );
+        end component;
+        component rabbitpunch_state_main_bus is
+            port (
+                i_clk : in std_logic;
+                i_reset : in std_logic;
+                o_cpu_reset : out std_logic;
+                i_cpu_request : in std_logic;
+                i_cpu_write : in std_logic;
+                iu24_cpu_address : in unsigned(23 downto 0);
+                iu16_cpu_data : in unsigned(15 downto 0);
+                iu2_cpu_bytes : in unsigned(1 downto 0);
+                o_cpu_idle : out std_logic;
+                o_idle : out std_logic;
+                o_cpu_response : out std_logic;
+                ou16_cpu_data : out unsigned(15 downto 0);
+                i_maintenance_allowed : in std_logic;
+                i_maintenance_request : in std_logic;
+                i_maintenance_write : in std_logic;
+                iu24_maintenance_address : in unsigned(23 downto 0);
+                iu16_maintenance_data : in unsigned(15 downto 0);
+                iu2_maintenance_bytes : in unsigned(1 downto 0);
+                o_maintenance_response : out std_logic;
+                ou16_maintenance_data : out unsigned(15 downto 0);
+                o_maintenance_block : out std_logic;
+                i_state_access : in std_logic;
+                i_state_request : in std_logic;
+                i_state_write : in std_logic;
+                iu24_state_address : in unsigned(23 downto 0);
+                iu16_state_data : in unsigned(15 downto 0);
+                iu2_state_bytes : in unsigned(1 downto 0);
+                o_state_response : out std_logic;
+                ou16_state_data : out unsigned(15 downto 0);
+                o_state_busy : out std_logic;
+                o_backend_request : out std_logic;
+                o_backend_write : out std_logic;
+                ou24_backend_address : out unsigned(23 downto 0);
+                ou16_backend_data : out unsigned(15 downto 0);
+                ou2_backend_bytes : out unsigned(1 downto 0);
+                i_backend_response : in std_logic;
+                iu16_backend_data : in unsigned(15 downto 0)
+            );
+        end component;
+        signal s_cpu_reset : std_logic;
+    begin
+        ownership : rabbitpunch_state_main_bus
+            port map (
+                i_clk => i_clk,
+                i_reset => i_reset,
+                o_cpu_reset => s_cpu_reset,
+                i_cpu_request => s_request,
+                i_cpu_write => s_request_write,
+                iu24_cpu_address => su24_request_address,
+                iu16_cpu_data => su16_request_data,
+                iu2_cpu_bytes => su2_request_bytes,
+                o_cpu_idle => s_owner_cpu_idle,
+                o_idle => o_transport_idle,
+                o_cpu_response => s_cpu_response_valid,
+                ou16_cpu_data => su16_cpu_response_data,
+                i_maintenance_allowed => s_cpu_paused or i_reset,
+                i_maintenance_request => s_maintenance_request,
+                i_maintenance_write => s_maintenance_write,
+                iu24_maintenance_address => su24_maintenance_address,
+                iu16_maintenance_data => su16_maintenance_data,
+                iu2_maintenance_bytes => su2_maintenance_bytes,
+                o_maintenance_response => s_maintenance_response_valid,
+                ou16_maintenance_data => su16_maintenance_response_data,
+                o_maintenance_block => s_maintenance_block,
+                i_state_access => i_state_memory_access,
+                i_state_request => i_state_memory_request,
+                i_state_write => i_state_memory_write,
+                iu24_state_address => iu24_state_memory_address,
+                iu16_state_data => iu16_state_memory_data,
+                iu2_state_bytes => iu2_state_memory_bytes,
+                o_state_response => o_state_memory_response,
+                ou16_state_data => ou16_state_memory_data,
+                o_state_busy => o_state_memory_busy,
+                o_backend_request => s_backend_request,
+                o_backend_write => s_backend_write,
+                ou24_backend_address => su24_backend_address,
+                ou16_backend_data => su16_backend_data,
+                ou2_backend_bytes => su2_backend_bytes,
+                i_backend_response => s_memory_valid or s_io_valid,
+                iu16_backend_data => su16_response_data
+            );
+        cpu : rabbitpunch_state_maincpu
+            generic map (
+                GINT_PHASE_DIVIDER => GINT_PHASE_DIVIDER,
+                GBOOL_EXTERNAL_PHASE_ENABLE => GBOOL_EXTERNAL_PHASE_ENABLE
+            )
+            port map (
+                i_clk => i_clk,
+                i_phase_enable => i_main_phase_enable,
+                i_reset => s_cpu_reset,
+                i_pause => i_pause or s_maintenance_pause,
+                i_interrupt_level1 => s_irq_pending,
+                o_interrupt_acknowledge => s_irq_acknowledge,
+                o_request => s_request,
+                o_request_write => s_request_write,
+                ou24_request_address => su24_request_address,
+                ou16_request_data => su16_request_data,
+                ou2_request_bytes => su2_request_bytes,
+                i_response_valid => s_cpu_response_valid,
+                iu16_response_data => su16_cpu_response_data,
+                o_paused => s_cpu_paused,
+                i_capture_request => i_state_capture,
+                i_capture_cancel => i_state_cancel,
+                o_capture_pending => o_state_pending,
+                o_capture_held => o_state_held,
+                o_capture_error => o_state_error,
+                i_state_resume => i_state_resume,
+                o_return_held => o_state_return_held,
+                i_return_release => i_state_release,
+                o_resume_completed => o_state_resumed,
+                o_resume_canceled => o_state_canceled,
+                iu5_state_address => iu5_state_cpu_address,
+                i_state_write => i_state_cpu_write,
+                iu32_state_data => iu32_state_cpu_data,
+                ou32_state_data => ou32_state_cpu_data,
+                ou24_journal_address => open,
+                o_stopped => o_state_cpu_stopped,
+                ou52_debug_bus => ou52_state_cpu_bus
+            );
+    end generate;
     board_video : entity work.rabbitpunch_board_video
         port map (
             i_clk => i_clk,
-            i_reset => i_reset,
+            i_reset => i_reset or s_video_flush,
             i_line_valid => i_line_valid,
             o_line_ready => o_line_ready,
             i_render_bank => i_render_bank,
@@ -290,7 +506,11 @@ begin
             ou4_gga_write_address => ou4_gga_write_address,
             ou8_gga_write_data => ou8_gga_write_data,
             o_irq_configure => s_irq_configure,
-            o_irq_twice_per_frame => s_irq_twice_per_frame
+            o_irq_twice_per_frame => s_irq_twice_per_frame,
+            i_state_hold => s_state_hold,
+            i_state_load => s_state_load,
+            iu224_state => iu224_state_io,
+            ou224_state => ou224_state_io
         );
     interrupts : entity work.rabbitpunch_irq
         port map (
@@ -301,6 +521,10 @@ begin
             i_vblank_start => i_vblank_start,
             i_half_frame => i_half_frame,
             i_acknowledge => s_irq_acknowledge,
-            o_level1_pending => s_irq_pending
+            o_level1_pending => s_irq_pending,
+            i_state_hold => s_state_hold,
+            i_state_load => s_state_load,
+            iu4_state => iu4_state_irq,
+            ou4_state => ou4_state_irq
         );
 end architecture;

@@ -1,4 +1,5 @@
 -- SPDX-License-Identifier: GPL-3.0-or-later
+-- Copyright (C) 2026 RabbitPunch contributors
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -129,8 +130,8 @@ begin
                             v_trace(sint_recorded) := (vu16_last_address, vu8_last_data);
                             sint_recorded <= sint_recorded + 1;
                         end if;
-                        if (s_compare = '1' and sint_compared < 400) then
-                            assert (v_trace(sint_compared) = t_trace'(vu16_last_address, vu8_last_data))
+                        if (s_compare = '1' and sint_compared < 1200) then
+                            assert (v_trace(sint_compared mod 400) = t_trace'(vu16_last_address, vu8_last_data))
                                 report "Z80 continuation differs at write " & integer'image(sint_compared) severity failure;
                             sint_compared <= sint_compared + 1;
                         end if;
@@ -207,25 +208,28 @@ begin
         resume;
         wait until sint_recorded = 400;
         s_record <= '0';
-        vint_prior_writes := sint_writes;
-        wait until sint_writes >= vint_prior_writes + 1000;
-        park;
-        s_restore <= '1';
-        cycles(1);
-        s_restore <= '0';
-        s_state_word <= '0';
-        su16_state_in <= v_registers(0);
-        s_state_write <= '1';
-        cycles(1);
-        s_state_word <= '1';
-        su16_state_in <= v_registers(1);
-        cycles(1);
-        s_state_write <= '0';
-        s_compare <= '1';
-        resume;
-        wait until sint_compared = 400;
+        for vint_round in 1 to 3 loop
+            vint_prior_writes := sint_writes;
+            wait until sint_writes >= vint_prior_writes + 1000;
+            park;
+            s_restore <= '1';
+            cycles(1);
+            s_restore <= '0';
+            s_state_word <= '0';
+            su16_state_in <= v_registers(0);
+            s_state_write <= '1';
+            cycles(1);
+            s_state_word <= '1';
+            su16_state_in <= v_registers(1);
+            cycles(1);
+            s_state_write <= '0';
+            s_compare <= '1';
+            resume;
+            wait until sint_compared = 400 * vint_round;
+            s_compare <= '0';
+        end loop;
         assert (sint_irq_writes >= 3) report "Z80 continuation did not exercise its IRQ handler" severity failure;
-        report "Z80_STATE_PASS ordered_continuation_writes=400 mode1_irq=checked ram_and_register_restore=checked";
+        report "Z80_STATE_PASS ordered_continuation_writes=1200 repeated_restores=3 mode1_irq=checked ram_and_register_restore=checked";
         finish;
         wait;
     end process;

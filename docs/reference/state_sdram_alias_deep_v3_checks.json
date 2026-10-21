@@ -1,0 +1,29 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_sdram_types.vhd": "35c1406e611389f2ee18dd3da7b0805e389ac4b8bd763c8a603a691b5de66367",
+    "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+    "rtl/rabbitpunch_sdram.vhd": "c2bb1bd24c3b7ef22653e3ce8d7d888acb868b5b28ad6345bbc26e0d5694815a",
+    "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
+    "sim/state/state_sdram_alias_stage.vhd": "35f8e5e2f7c6e87a1da7a857dbfd03381e7c1fe4251262c9800e4353d9fc1ee2",
+    "sim/state/state_sdram_alias_eval.vhd": "f24816d925fe1f0c059fc5cdfb1506e9aa09baad8e1712fbd8419bbb9fca1ebf",
+    "sim/state/state_sdram_alias_tb.vhd": "e4f824fb6ff1aa558e99790c0af907bb15c6b519f8d544d77c8bece53370f2ca",
+    "sim/fast/state_sdram_alias_transport.cpp": "c8240ca26e4abb2d0be2f9da565395c4d671a145c47dca0d107985a854dfa2e5"
+  },
+  "native": {
+    "case": "state_sdram_alias_deep_v3",
+    "pass_marker": "STATE_SDRAM_ALIAS_PASS",
+    "log": "debug\\baselines\\state_sdram_alias_deep_v3\\result.log"
+  },
+  "runner_sha256": "ae0acd2e90973a5f50fa8bea5c6b1f3bbf950a35b5f22dfd2a0386f8417fb2c5",
+  "native_trace_sha256": "7cfb816f8cad2d4d5b2d58fb568f1e672847fa21faf5842782dfc2aaf2a3ee69",
+  "native_log_sha256": "c889f5f5dcfbe856bf0fe1298b970a9805d467c6b19b561d53b442b185685b12",
+  "exported_trace_sha256": "f082be2bcd73981c78ef6ceebef934ce314355915bc53579a25f5cbc391ad064",
+  "raw_sha256": "bbe282d048130bd4434abc15b443fdcba9854e43a534b9f50dee373b4c00f2a4",
+  "newline_normalized_trace_sha256": "f082be2bcd73981c78ef6ceebef934ce314355915bc53579a25f5cbc391ad064",
+  "normalized_sha256": "fa926e27ba432a67073541464e637441b45c5d311bf6926191ad9b68c61a0d38",
+  "trace_clocks": 6186,
+  "writes": 256,
+  "burst_reads": 192,
+  "scope": "Native and exported VHDL sequencer, six transparent inout stages and the unchanged real adapter/controller/chip. Ordinary writes initialize512 bytes in four distinct64-bit patterns;192 burst reads use all three ports simultaneously. Every initialized clock compares requests, ready, valid, physical commands and all valid read data byte exactly after CRLF/LF normalization. Seven DQ associations and their shared top wire are restored by a restricted structural audit. No game state deposits, RAM abstraction, CPU/event monitor, whole-game, fitted timing or hardware qualification. Address/bank are excluded only for NOP, refresh and burst termination; DQM, select and command timing remain visible on every clock."
+}

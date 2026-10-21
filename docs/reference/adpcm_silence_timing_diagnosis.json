@@ -1,0 +1,1714 @@
+{
+  "accepted_static_diagnosis": true,
+  "mame_tag": "mame0289",
+  "mame_commit": "d0b7160e54874fa58f553614db373d73100d5ecb",
+  "mame_device_sha256": "d3b1989df8a94a0ab5b5b48bfdefd495f6599415f0a1b78f98151f0d5ef6f99e",
+  "sample_rom_sha256": "b43ae35e8565711c2ec38f01ae6e7d517d153f1451ef98e7516424154c739068",
+  "master_clock_hz": 640000,
+  "legacy_control_sha256": "19ad3a6572dec4e61d0046b222b6af53660cb558123b985f43db86dd5ed98aa9",
+  "legacy_divider_sha256": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862",
+  "mame_silence_formula": "1024*(header_low6+1) master clocks",
+  "legacy_silence_formula": "128*header_low6+1 master clocks, cen_ctl=cen",
+  "observed_sample24": {
+    "rabiolep": {
+      "reference_analysis_sha256": "05e693841223174e1b1f68b999f75a72b3544cfb45e568267e1e1f15fb3ea233",
+      "trigger_offset_ms": 0.03953600000006219,
+      "mame_minus_rtl_first_nonzero_ms": 17.210166666666638
+    },
+    "rpunch": {
+      "reference_analysis_sha256": "9e4f705915cdbf2f2b608945b218b7d30bd909b47731afffe8d5d9ac72540a28",
+      "trigger_offset_ms": 0.04727899999990015,
+      "mame_minus_rtl_first_nonzero_ms": 17.210166666666638
+    }
+  },
+  "samples": [
+    {
+      "sample": 0,
+      "first_header_address": 97,
+      "first_header": 11,
+      "decoded_nibbles": 5148,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 97,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 987,
+          "header": 54,
+          "mame_master_clocks": 56320,
+          "legacy_loaded_counter": 6912,
+          "legacy_wait_master_clocks": 6913
+        },
+        {
+          "address": 2696,
+          "header": 1,
+          "mame_master_clocks": 2048,
+          "legacy_loaded_counter": 128,
+          "legacy_wait_master_clocks": 129
+        }
+      ]
+    },
+    {
+      "sample": 1,
+      "first_header_address": 2699,
+      "first_header": 8,
+      "decoded_nibbles": 7424,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 2699,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        },
+        {
+          "address": 5053,
+          "header": 33,
+          "mame_master_clocks": 34816,
+          "legacy_loaded_counter": 4224,
+          "legacy_wait_master_clocks": 4225
+        },
+        {
+          "address": 6446,
+          "header": 16,
+          "mame_master_clocks": 17408,
+          "legacy_loaded_counter": 2048,
+          "legacy_wait_master_clocks": 2049
+        }
+      ]
+    },
+    {
+      "sample": 2,
+      "first_header_address": 6449,
+      "first_header": 27,
+      "decoded_nibbles": 11033,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 6449,
+          "header": 27,
+          "mame_master_clocks": 28672,
+          "legacy_loaded_counter": 3456,
+          "legacy_wait_master_clocks": 3457
+        },
+        {
+          "address": 6463,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        },
+        {
+          "address": 7009,
+          "header": 32,
+          "mame_master_clocks": 33792,
+          "legacy_loaded_counter": 4096,
+          "legacy_wait_master_clocks": 4097
+        },
+        {
+          "address": 7344,
+          "header": 23,
+          "mame_master_clocks": 24576,
+          "legacy_loaded_counter": 2944,
+          "legacy_wait_master_clocks": 2945
+        },
+        {
+          "address": 10035,
+          "header": 21,
+          "mame_master_clocks": 22528,
+          "legacy_loaded_counter": 2688,
+          "legacy_wait_master_clocks": 2689
+        },
+        {
+          "address": 12022,
+          "header": 21,
+          "mame_master_clocks": 22528,
+          "legacy_loaded_counter": 2688,
+          "legacy_wait_master_clocks": 2689
+        }
+      ]
+    },
+    {
+      "sample": 3,
+      "first_header_address": 12025,
+      "first_header": 11,
+      "decoded_nibbles": 12865,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 12025,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 12085,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        },
+        {
+          "address": 13348,
+          "header": 12,
+          "mame_master_clocks": 13312,
+          "legacy_loaded_counter": 1536,
+          "legacy_wait_master_clocks": 1537
+        },
+        {
+          "address": 13458,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 15026,
+          "header": 21,
+          "mame_master_clocks": 22528,
+          "legacy_loaded_counter": 2688,
+          "legacy_wait_master_clocks": 2689
+        },
+        {
+          "address": 15038,
+          "header": 14,
+          "mame_master_clocks": 15360,
+          "legacy_loaded_counter": 1792,
+          "legacy_wait_master_clocks": 1793
+        },
+        {
+          "address": 15087,
+          "header": 9,
+          "mame_master_clocks": 10240,
+          "legacy_loaded_counter": 1152,
+          "legacy_wait_master_clocks": 1153
+        },
+        {
+          "address": 16732,
+          "header": 21,
+          "mame_master_clocks": 22528,
+          "legacy_loaded_counter": 2688,
+          "legacy_wait_master_clocks": 2689
+        },
+        {
+          "address": 18517,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        },
+        {
+          "address": 18531,
+          "header": 24,
+          "mame_master_clocks": 25600,
+          "legacy_loaded_counter": 3072,
+          "legacy_wait_master_clocks": 3073
+        }
+      ]
+    },
+    {
+      "sample": 4,
+      "first_header_address": 18535,
+      "first_header": 24,
+      "decoded_nibbles": 2075,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 18535,
+          "header": 24,
+          "mame_master_clocks": 25600,
+          "legacy_loaded_counter": 3072,
+          "legacy_wait_master_clocks": 3073
+        },
+        {
+          "address": 19584,
+          "header": 19,
+          "mame_master_clocks": 20480,
+          "legacy_loaded_counter": 2432,
+          "legacy_wait_master_clocks": 2433
+        }
+      ]
+    },
+    {
+      "sample": 5,
+      "first_header_address": 19587,
+      "first_header": 12,
+      "decoded_nibbles": 2181,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 19587,
+          "header": 12,
+          "mame_master_clocks": 13312,
+          "legacy_loaded_counter": 1536,
+          "legacy_wait_master_clocks": 1537
+        },
+        {
+          "address": 20689,
+          "header": 23,
+          "mame_master_clocks": 24576,
+          "legacy_loaded_counter": 2944,
+          "legacy_wait_master_clocks": 2945
+        }
+      ]
+    },
+    {
+      "sample": 6,
+      "first_header_address": 20693,
+      "first_header": 41,
+      "decoded_nibbles": 2641,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 20693,
+          "header": 41,
+          "mame_master_clocks": 43008,
+          "legacy_loaded_counter": 5248,
+          "legacy_wait_master_clocks": 5249
+        },
+        {
+          "address": 22027,
+          "header": 21,
+          "mame_master_clocks": 22528,
+          "legacy_loaded_counter": 2688,
+          "legacy_wait_master_clocks": 2689
+        }
+      ]
+    },
+    {
+      "sample": 7,
+      "first_header_address": 22031,
+      "first_header": 13,
+      "decoded_nibbles": 2328,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 22031,
+          "header": 13,
+          "mame_master_clocks": 14336,
+          "legacy_loaded_counter": 1664,
+          "legacy_wait_master_clocks": 1665
+        },
+        {
+          "address": 23207,
+          "header": 17,
+          "mame_master_clocks": 18432,
+          "legacy_loaded_counter": 2176,
+          "legacy_wait_master_clocks": 2177
+        }
+      ]
+    },
+    {
+      "sample": 8,
+      "first_header_address": 23211,
+      "first_header": 11,
+      "decoded_nibbles": 3527,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 23211,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 24658,
+          "header": 12,
+          "mame_master_clocks": 13312,
+          "legacy_loaded_counter": 1536,
+          "legacy_wait_master_clocks": 1537
+        },
+        {
+          "address": 24994,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        }
+      ]
+    },
+    {
+      "sample": 9,
+      "first_header_address": 24997,
+      "first_header": 83,
+      "decoded_nibbles": 2554,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 25563,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 25564,
+          "header": 15,
+          "mame_master_clocks": 16384,
+          "legacy_loaded_counter": 1920,
+          "legacy_wait_master_clocks": 1921
+        },
+        {
+          "address": 25940,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        },
+        {
+          "address": 26292,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        }
+      ]
+    },
+    {
+      "sample": 10,
+      "first_header_address": 26295,
+      "first_header": 83,
+      "decoded_nibbles": 2983,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 27296,
+          "header": 13,
+          "mame_master_clocks": 14336,
+          "legacy_loaded_counter": 1664,
+          "legacy_wait_master_clocks": 1665
+        },
+        {
+          "address": 27802,
+          "header": 28,
+          "mame_master_clocks": 29696,
+          "legacy_loaded_counter": 3584,
+          "legacy_wait_master_clocks": 3585
+        }
+      ]
+    },
+    {
+      "sample": 11,
+      "first_header_address": 27805,
+      "first_header": 11,
+      "decoded_nibbles": 1588,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 27805,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 28429,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 28430,
+          "header": 24,
+          "mame_master_clocks": 25600,
+          "legacy_loaded_counter": 3072,
+          "legacy_wait_master_clocks": 3073
+        },
+        {
+          "address": 28611,
+          "header": 21,
+          "mame_master_clocks": 22528,
+          "legacy_loaded_counter": 2688,
+          "legacy_wait_master_clocks": 2689
+        }
+      ]
+    },
+    {
+      "sample": 12,
+      "first_header_address": 28615,
+      "first_header": 26,
+      "decoded_nibbles": 3331,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 28615,
+          "header": 26,
+          "mame_master_clocks": 27648,
+          "legacy_loaded_counter": 3328,
+          "legacy_wait_master_clocks": 3329
+        },
+        {
+          "address": 28635,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 30299,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 30300,
+          "header": 1,
+          "mame_master_clocks": 2048,
+          "legacy_loaded_counter": 128,
+          "legacy_wait_master_clocks": 129
+        }
+      ]
+    },
+    {
+      "sample": 13,
+      "first_header_address": 30303,
+      "first_header": 12,
+      "decoded_nibbles": 2325,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 30303,
+          "header": 12,
+          "mame_master_clocks": 13312,
+          "legacy_loaded_counter": 1536,
+          "legacy_wait_master_clocks": 1537
+        },
+        {
+          "address": 31478,
+          "header": 24,
+          "mame_master_clocks": 25600,
+          "legacy_loaded_counter": 3072,
+          "legacy_wait_master_clocks": 3073
+        }
+      ]
+    },
+    {
+      "sample": 14,
+      "first_header_address": 31481,
+      "first_header": 8,
+      "decoded_nibbles": 3906,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 31481,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        },
+        {
+          "address": 32601,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        },
+        {
+          "address": 33455,
+          "header": 22,
+          "mame_master_clocks": 23552,
+          "legacy_loaded_counter": 2816,
+          "legacy_wait_master_clocks": 2817
+        }
+      ]
+    },
+    {
+      "sample": 15,
+      "first_header_address": 33459,
+      "first_header": 12,
+      "decoded_nibbles": 4187,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 33459,
+          "header": 12,
+          "mame_master_clocks": 13312,
+          "legacy_loaded_counter": 1536,
+          "legacy_wait_master_clocks": 1537
+        },
+        {
+          "address": 33642,
+          "header": 27,
+          "mame_master_clocks": 28672,
+          "legacy_loaded_counter": 3456,
+          "legacy_wait_master_clocks": 3457
+        },
+        {
+          "address": 35276,
+          "header": 31,
+          "mame_master_clocks": 32768,
+          "legacy_loaded_counter": 3968,
+          "legacy_wait_master_clocks": 3969
+        },
+        {
+          "address": 35578,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        }
+      ]
+    },
+    {
+      "sample": 16,
+      "first_header_address": 35581,
+      "first_header": 14,
+      "decoded_nibbles": 3255,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 35581,
+          "header": 14,
+          "mame_master_clocks": 15360,
+          "legacy_loaded_counter": 1792,
+          "legacy_wait_master_clocks": 1793
+        },
+        {
+          "address": 36202,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 36203,
+          "header": 22,
+          "mame_master_clocks": 23552,
+          "legacy_loaded_counter": 2816,
+          "legacy_wait_master_clocks": 2817
+        },
+        {
+          "address": 37227,
+          "header": 33,
+          "mame_master_clocks": 34816,
+          "legacy_loaded_counter": 4224,
+          "legacy_wait_master_clocks": 4225
+        }
+      ]
+    },
+    {
+      "sample": 17,
+      "first_header_address": 37231,
+      "first_header": 9,
+      "decoded_nibbles": 3374,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 37231,
+          "header": 9,
+          "mame_master_clocks": 10240,
+          "legacy_loaded_counter": 1152,
+          "legacy_wait_master_clocks": 1153
+        },
+        {
+          "address": 37852,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 37853,
+          "header": 19,
+          "mame_master_clocks": 20480,
+          "legacy_loaded_counter": 2432,
+          "legacy_wait_master_clocks": 2433
+        },
+        {
+          "address": 38937,
+          "header": 19,
+          "mame_master_clocks": 20480,
+          "legacy_loaded_counter": 2432,
+          "legacy_wait_master_clocks": 2433
+        }
+      ]
+    },
+    {
+      "sample": 18,
+      "first_header_address": 38941,
+      "first_header": 83,
+      "decoded_nibbles": 2939,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 39378,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 39379,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 39380,
+          "header": 5,
+          "mame_master_clocks": 6144,
+          "legacy_loaded_counter": 640,
+          "legacy_wait_master_clocks": 641
+        },
+        {
+          "address": 40429,
+          "header": 26,
+          "mame_master_clocks": 27648,
+          "legacy_loaded_counter": 3328,
+          "legacy_wait_master_clocks": 3329
+        }
+      ]
+    },
+    {
+      "sample": 19,
+      "first_header_address": 40433,
+      "first_header": 7,
+      "decoded_nibbles": 2985,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 40433,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        },
+        {
+          "address": 40890,
+          "header": 33,
+          "mame_master_clocks": 34816,
+          "legacy_loaded_counter": 4224,
+          "legacy_wait_master_clocks": 4225
+        },
+        {
+          "address": 41074,
+          "header": 14,
+          "mame_master_clocks": 15360,
+          "legacy_loaded_counter": 1792,
+          "legacy_wait_master_clocks": 1793
+        },
+        {
+          "address": 41091,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        },
+        {
+          "address": 41113,
+          "header": 54,
+          "mame_master_clocks": 56320,
+          "legacy_loaded_counter": 6912,
+          "legacy_wait_master_clocks": 6913
+        },
+        {
+          "address": 41951,
+          "header": 38,
+          "mame_master_clocks": 39936,
+          "legacy_loaded_counter": 4864,
+          "legacy_wait_master_clocks": 4865
+        }
+      ]
+    },
+    {
+      "sample": 20,
+      "first_header_address": 41955,
+      "first_header": 8,
+      "decoded_nibbles": 3508,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 41955,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        },
+        {
+          "address": 42221,
+          "header": 44,
+          "mame_master_clocks": 46080,
+          "legacy_loaded_counter": 5632,
+          "legacy_wait_master_clocks": 5633
+        },
+        {
+          "address": 43204,
+          "header": 31,
+          "mame_master_clocks": 32768,
+          "legacy_loaded_counter": 3968,
+          "legacy_wait_master_clocks": 3969
+        },
+        {
+          "address": 43216,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        },
+        {
+          "address": 43230,
+          "header": 54,
+          "mame_master_clocks": 56320,
+          "legacy_loaded_counter": 6912,
+          "legacy_wait_master_clocks": 6913
+        },
+        {
+          "address": 43737,
+          "header": 18,
+          "mame_master_clocks": 19456,
+          "legacy_loaded_counter": 2304,
+          "legacy_wait_master_clocks": 2305
+        }
+      ]
+    },
+    {
+      "sample": 21,
+      "first_header_address": 43741,
+      "first_header": 12,
+      "decoded_nibbles": 10166,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 43741,
+          "header": 12,
+          "mame_master_clocks": 13312,
+          "legacy_loaded_counter": 1536,
+          "legacy_wait_master_clocks": 1537
+        },
+        {
+          "address": 44424,
+          "header": 32,
+          "mame_master_clocks": 33792,
+          "legacy_loaded_counter": 4096,
+          "legacy_wait_master_clocks": 4097
+        },
+        {
+          "address": 45606,
+          "header": 16,
+          "mame_master_clocks": 17408,
+          "legacy_loaded_counter": 2048,
+          "legacy_wait_master_clocks": 2049
+        },
+        {
+          "address": 46359,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        },
+        {
+          "address": 48074,
+          "header": 27,
+          "mame_master_clocks": 28672,
+          "legacy_loaded_counter": 3456,
+          "legacy_wait_master_clocks": 3457
+        },
+        {
+          "address": 48878,
+          "header": 4,
+          "mame_master_clocks": 5120,
+          "legacy_loaded_counter": 512,
+          "legacy_wait_master_clocks": 513
+        }
+      ]
+    },
+    {
+      "sample": 22,
+      "first_header_address": 48881,
+      "first_header": 18,
+      "decoded_nibbles": 9799,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 48881,
+          "header": 18,
+          "mame_master_clocks": 19456,
+          "legacy_loaded_counter": 2304,
+          "legacy_wait_master_clocks": 2305
+        },
+        {
+          "address": 49589,
+          "header": 17,
+          "mame_master_clocks": 18432,
+          "legacy_loaded_counter": 2176,
+          "legacy_wait_master_clocks": 2177
+        },
+        {
+          "address": 51667,
+          "header": 31,
+          "mame_master_clocks": 32768,
+          "legacy_loaded_counter": 3968,
+          "legacy_wait_master_clocks": 3969
+        },
+        {
+          "address": 52517,
+          "header": 17,
+          "mame_master_clocks": 18432,
+          "legacy_loaded_counter": 2176,
+          "legacy_wait_master_clocks": 2177
+        },
+        {
+          "address": 53143,
+          "header": 47,
+          "mame_master_clocks": 49152,
+          "legacy_loaded_counter": 6016,
+          "legacy_wait_master_clocks": 6017
+        },
+        {
+          "address": 53833,
+          "header": 28,
+          "mame_master_clocks": 29696,
+          "legacy_loaded_counter": 3584,
+          "legacy_wait_master_clocks": 3585
+        }
+      ]
+    },
+    {
+      "sample": 23,
+      "first_header_address": 53837,
+      "first_header": 12,
+      "decoded_nibbles": 12551,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 53837,
+          "header": 12,
+          "mame_master_clocks": 13312,
+          "legacy_loaded_counter": 1536,
+          "legacy_wait_master_clocks": 1537
+        },
+        {
+          "address": 57543,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 57909,
+          "header": 38,
+          "mame_master_clocks": 39936,
+          "legacy_loaded_counter": 4864,
+          "legacy_wait_master_clocks": 4865
+        },
+        {
+          "address": 58996,
+          "header": 46,
+          "mame_master_clocks": 48128,
+          "legacy_loaded_counter": 5888,
+          "legacy_wait_master_clocks": 5889
+        },
+        {
+          "address": 59531,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 59532,
+          "header": 1,
+          "mame_master_clocks": 2048,
+          "legacy_loaded_counter": 128,
+          "legacy_wait_master_clocks": 129
+        },
+        {
+          "address": 60176,
+          "header": 22,
+          "mame_master_clocks": 23552,
+          "legacy_loaded_counter": 2816,
+          "legacy_wait_master_clocks": 2817
+        }
+      ]
+    },
+    {
+      "sample": 24,
+      "first_header_address": 60179,
+      "first_header": 83,
+      "decoded_nibbles": 4634,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 60906,
+          "header": 46,
+          "mame_master_clocks": 48128,
+          "legacy_loaded_counter": 5888,
+          "legacy_wait_master_clocks": 5889
+        },
+        {
+          "address": 61039,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 61040,
+          "header": 22,
+          "mame_master_clocks": 23552,
+          "legacy_loaded_counter": 2816,
+          "legacy_wait_master_clocks": 2817
+        },
+        {
+          "address": 61653,
+          "header": 34,
+          "mame_master_clocks": 35840,
+          "legacy_loaded_counter": 4352,
+          "legacy_wait_master_clocks": 4353
+        },
+        {
+          "address": 61766,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        },
+        {
+          "address": 62529,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        }
+      ]
+    },
+    {
+      "sample": 25,
+      "first_header_address": 62533,
+      "first_header": 9,
+      "decoded_nibbles": 5252,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 62533,
+          "header": 9,
+          "mame_master_clocks": 10240,
+          "legacy_loaded_counter": 1152,
+          "legacy_wait_master_clocks": 1153
+        },
+        {
+          "address": 63130,
+          "header": 22,
+          "mame_master_clocks": 23552,
+          "legacy_loaded_counter": 2816,
+          "legacy_wait_master_clocks": 2817
+        },
+        {
+          "address": 63942,
+          "header": 41,
+          "mame_master_clocks": 43008,
+          "legacy_loaded_counter": 5248,
+          "legacy_wait_master_clocks": 5249
+        },
+        {
+          "address": 64865,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 64866,
+          "header": 14,
+          "mame_master_clocks": 15360,
+          "legacy_loaded_counter": 1792,
+          "legacy_wait_master_clocks": 1793
+        },
+        {
+          "address": 65192,
+          "header": 2,
+          "mame_master_clocks": 3072,
+          "legacy_loaded_counter": 256,
+          "legacy_wait_master_clocks": 257
+        }
+      ]
+    },
+    {
+      "sample": 26,
+      "first_header_address": 65195,
+      "first_header": 83,
+      "decoded_nibbles": 5821,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 67220,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 67221,
+          "header": 16,
+          "mame_master_clocks": 17408,
+          "legacy_loaded_counter": 2048,
+          "legacy_wait_master_clocks": 2049
+        },
+        {
+          "address": 67784,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 67785,
+          "header": 54,
+          "mame_master_clocks": 56320,
+          "legacy_loaded_counter": 6912,
+          "legacy_wait_master_clocks": 6913
+        },
+        {
+          "address": 67796,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        },
+        {
+          "address": 68140,
+          "header": 16,
+          "mame_master_clocks": 17408,
+          "legacy_loaded_counter": 2048,
+          "legacy_wait_master_clocks": 2049
+        }
+      ]
+    },
+    {
+      "sample": 27,
+      "first_header_address": 68143,
+      "first_header": 17,
+      "decoded_nibbles": 9633,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 68143,
+          "header": 17,
+          "mame_master_clocks": 18432,
+          "legacy_loaded_counter": 2176,
+          "legacy_wait_master_clocks": 2177
+        },
+        {
+          "address": 68963,
+          "header": 37,
+          "mame_master_clocks": 38912,
+          "legacy_loaded_counter": 4736,
+          "legacy_wait_master_clocks": 4737
+        },
+        {
+          "address": 69927,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 69928,
+          "header": 56,
+          "mame_master_clocks": 58368,
+          "legacy_loaded_counter": 7168,
+          "legacy_wait_master_clocks": 7169
+        },
+        {
+          "address": 70490,
+          "header": 43,
+          "mame_master_clocks": 45056,
+          "legacy_loaded_counter": 5504,
+          "legacy_wait_master_clocks": 5505
+        },
+        {
+          "address": 72762,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 72763,
+          "header": 17,
+          "mame_master_clocks": 18432,
+          "legacy_loaded_counter": 2176,
+          "legacy_wait_master_clocks": 2177
+        },
+        {
+          "address": 73013,
+          "header": 24,
+          "mame_master_clocks": 25600,
+          "legacy_loaded_counter": 3072,
+          "legacy_wait_master_clocks": 3073
+        }
+      ]
+    },
+    {
+      "sample": 28,
+      "first_header_address": 73017,
+      "first_header": 23,
+      "decoded_nibbles": 10934,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 73017,
+          "header": 23,
+          "mame_master_clocks": 24576,
+          "legacy_loaded_counter": 2944,
+          "legacy_wait_master_clocks": 2945
+        },
+        {
+          "address": 73806,
+          "header": 42,
+          "mame_master_clocks": 44032,
+          "legacy_loaded_counter": 5376,
+          "legacy_wait_master_clocks": 5377
+        },
+        {
+          "address": 74464,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 74465,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 74466,
+          "header": 52,
+          "mame_master_clocks": 54272,
+          "legacy_loaded_counter": 6656,
+          "legacy_wait_master_clocks": 6657
+        },
+        {
+          "address": 74477,
+          "header": 24,
+          "mame_master_clocks": 25600,
+          "legacy_loaded_counter": 3072,
+          "legacy_wait_master_clocks": 3073
+        },
+        {
+          "address": 76735,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        },
+        {
+          "address": 76759,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        },
+        {
+          "address": 78329,
+          "header": 24,
+          "mame_master_clocks": 25600,
+          "legacy_loaded_counter": 3072,
+          "legacy_wait_master_clocks": 3073
+        },
+        {
+          "address": 78539,
+          "header": 17,
+          "mame_master_clocks": 18432,
+          "legacy_loaded_counter": 2176,
+          "legacy_wait_master_clocks": 2177
+        },
+        {
+          "address": 78553,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        }
+      ]
+    },
+    {
+      "sample": 29,
+      "first_header_address": 78557,
+      "first_header": 12,
+      "decoded_nibbles": 6437,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 78557,
+          "header": 12,
+          "mame_master_clocks": 13312,
+          "legacy_loaded_counter": 1536,
+          "legacy_wait_master_clocks": 1537
+        },
+        {
+          "address": 81804,
+          "header": 9,
+          "mame_master_clocks": 10240,
+          "legacy_loaded_counter": 1152,
+          "legacy_wait_master_clocks": 1153
+        }
+      ]
+    },
+    {
+      "sample": 30,
+      "first_header_address": 81807,
+      "first_header": 17,
+      "decoded_nibbles": 15019,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 81807,
+          "header": 17,
+          "mame_master_clocks": 18432,
+          "legacy_loaded_counter": 2176,
+          "legacy_wait_master_clocks": 2177
+        },
+        {
+          "address": 81821,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        },
+        {
+          "address": 89381,
+          "header": 21,
+          "mame_master_clocks": 22528,
+          "legacy_loaded_counter": 2688,
+          "legacy_wait_master_clocks": 2689
+        }
+      ]
+    },
+    {
+      "sample": 31,
+      "first_header_address": 89385,
+      "first_header": 11,
+      "decoded_nibbles": 8536,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 89385,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 93339,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        },
+        {
+          "address": 93369,
+          "header": 9,
+          "mame_master_clocks": 10240,
+          "legacy_loaded_counter": 1152,
+          "legacy_wait_master_clocks": 1153
+        },
+        {
+          "address": 93571,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 93591,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 93611,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 93631,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        },
+        {
+          "address": 93671,
+          "header": 22,
+          "mame_master_clocks": 23552,
+          "legacy_loaded_counter": 2816,
+          "legacy_wait_master_clocks": 2817
+        },
+        {
+          "address": 93709,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        }
+      ]
+    },
+    {
+      "sample": 32,
+      "first_header_address": 93713,
+      "first_header": 18,
+      "decoded_nibbles": 15525,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 93713,
+          "header": 18,
+          "mame_master_clocks": 19456,
+          "legacy_loaded_counter": 2304,
+          "legacy_wait_master_clocks": 2305
+        },
+        {
+          "address": 100855,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        },
+        {
+          "address": 101266,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        },
+        {
+          "address": 101386,
+          "header": 9,
+          "mame_master_clocks": 10240,
+          "legacy_loaded_counter": 1152,
+          "legacy_wait_master_clocks": 1153
+        },
+        {
+          "address": 101475,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 101495,
+          "header": 21,
+          "mame_master_clocks": 22528,
+          "legacy_loaded_counter": 2688,
+          "legacy_wait_master_clocks": 2689
+        },
+        {
+          "address": 101523,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        },
+        {
+          "address": 101539,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 101559,
+          "header": 29,
+          "mame_master_clocks": 30720,
+          "legacy_loaded_counter": 3712,
+          "legacy_wait_master_clocks": 3713
+        }
+      ]
+    },
+    {
+      "sample": 33,
+      "first_header_address": 101563,
+      "first_header": 7,
+      "decoded_nibbles": 6456,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 101563,
+          "header": 7,
+          "mame_master_clocks": 8192,
+          "legacy_loaded_counter": 896,
+          "legacy_wait_master_clocks": 897
+        },
+        {
+          "address": 102536,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 102537,
+          "header": 14,
+          "mame_master_clocks": 15360,
+          "legacy_loaded_counter": 1792,
+          "legacy_wait_master_clocks": 1793
+        },
+        {
+          "address": 104822,
+          "header": 23,
+          "mame_master_clocks": 24576,
+          "legacy_loaded_counter": 2944,
+          "legacy_wait_master_clocks": 2945
+        }
+      ]
+    },
+    {
+      "sample": 34,
+      "first_header_address": 104825,
+      "first_header": 11,
+      "decoded_nibbles": 5419,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 104825,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 105425,
+          "header": 22,
+          "mame_master_clocks": 23552,
+          "legacy_loaded_counter": 2816,
+          "legacy_wait_master_clocks": 2817
+        },
+        {
+          "address": 105753,
+          "header": 53,
+          "mame_master_clocks": 55296,
+          "legacy_loaded_counter": 6784,
+          "legacy_wait_master_clocks": 6785
+        },
+        {
+          "address": 106154,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 106155,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 106156,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 106157,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 106158,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        },
+        {
+          "address": 106371,
+          "header": 13,
+          "mame_master_clocks": 14336,
+          "legacy_loaded_counter": 1664,
+          "legacy_wait_master_clocks": 1665
+        },
+        {
+          "address": 107055,
+          "header": 27,
+          "mame_master_clocks": 28672,
+          "legacy_loaded_counter": 3456,
+          "legacy_wait_master_clocks": 3457
+        },
+        {
+          "address": 107577,
+          "header": 13,
+          "mame_master_clocks": 14336,
+          "legacy_loaded_counter": 1664,
+          "legacy_wait_master_clocks": 1665
+        }
+      ]
+    },
+    {
+      "sample": 35,
+      "first_header_address": 107581,
+      "first_header": 11,
+      "decoded_nibbles": 14990,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 107581,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 108189,
+          "header": 53,
+          "mame_master_clocks": 55296,
+          "legacy_loaded_counter": 6784,
+          "legacy_wait_master_clocks": 6785
+        },
+        {
+          "address": 108203,
+          "header": 17,
+          "mame_master_clocks": 18432,
+          "legacy_loaded_counter": 2176,
+          "legacy_wait_master_clocks": 2177
+        },
+        {
+          "address": 109305,
+          "header": 8,
+          "mame_master_clocks": 9216,
+          "legacy_loaded_counter": 1024,
+          "legacy_wait_master_clocks": 1025
+        },
+        {
+          "address": 109321,
+          "header": 12,
+          "mame_master_clocks": 13312,
+          "legacy_loaded_counter": 1536,
+          "legacy_wait_master_clocks": 1537
+        },
+        {
+          "address": 111213,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 111214,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 111215,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 111216,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 111217,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 111218,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 111219,
+          "header": 63,
+          "mame_master_clocks": 65536,
+          "legacy_loaded_counter": 8064,
+          "legacy_wait_master_clocks": 8065
+        },
+        {
+          "address": 111220,
+          "header": 15,
+          "mame_master_clocks": 16384,
+          "legacy_loaded_counter": 1920,
+          "legacy_wait_master_clocks": 1921
+        },
+        {
+          "address": 111446,
+          "header": 38,
+          "mame_master_clocks": 39936,
+          "legacy_loaded_counter": 4864,
+          "legacy_wait_master_clocks": 4865
+        },
+        {
+          "address": 115161,
+          "header": 6,
+          "mame_master_clocks": 7168,
+          "legacy_loaded_counter": 768,
+          "legacy_wait_master_clocks": 769
+        }
+      ]
+    },
+    {
+      "sample": 36,
+      "first_header_address": 115165,
+      "first_header": 11,
+      "decoded_nibbles": 1346,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 115165,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        },
+        {
+          "address": 115846,
+          "header": 21,
+          "mame_master_clocks": 22528,
+          "legacy_loaded_counter": 2688,
+          "legacy_wait_master_clocks": 2689
+        }
+      ]
+    },
+    {
+      "sample": 37,
+      "first_header_address": 115849,
+      "first_header": 83,
+      "decoded_nibbles": 8655,
+      "repeat_headers": 0,
+      "silence_packets": [
+        {
+          "address": 120212,
+          "header": 11,
+          "mame_master_clocks": 12288,
+          "legacy_loaded_counter": 1408,
+          "legacy_wait_master_clocks": 1409
+        }
+      ]
+    }
+  ],
+  "upstream_inspected_commit": "c23dc9fd3605cb183991ad3806a258a9e941041f",
+  "scope": "Static packet/source timing diagnosis plus existing measured original sample24 onset. All38 packet parses retain the earlier237330 decoded nibble counts; that earlier test qualified only the nibble decoder, not whole-chip packet timing. Nominal leading-silence counter difference explains17ms of the observed~17.21ms earlier RTL onset. Not a measured original-board claim or a qualified correction. No production/imported/generated chip changes."
+}

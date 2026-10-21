@@ -1,0 +1,24 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_upd7759.vhd": "65a37f224951b1a3ae56bc8fa079e569b6a40d504c4cbee8cca3b49feb4095d3",
+    "rtl/rabbitpunch_upd7759_control.vhd": "438055e81965378999d67ae07a55f1de60b457f176b1654ac333ca71bfcf8888"
+  },
+  "evidence_sha256": {
+    "docs/reference/upd7759_legacy_reset_all38_checks.json": "f5be8fa9c36534ca668291326d27f40bb222fc8d50a1385cb616b9ed3385b7ea",
+    "docs/reference/upd7759_reusable_e4_checks.json": "d03cccb995a48c3ba3d28bf71147b2a3913e7e01f346a99f45fd6fc64d648f07"
+  },
+  "scope": "Exact-source admission for production sound integration testing after native all38 legacy and both-set corrected E4 absolute-time sample checks. The all38 corrected sweep is a further mandatory packaging gate. Does not itself prove full-board PCM, synthesis or physical timing.",
+  "controller_equivalence": {
+    "prototype_sha256": "20b0a305df24099e62e7b6c7e691168e26862b325915f9c8a05be88b1ad3bdf2",
+    "production_sha256": "438055e81965378999d67ae07a55f1de60b457f176b1654ac333ca71bfcf8888",
+    "allowed_changes": [
+      "file header comment",
+      "architecture identifier prototype->rtl",
+      "diagnostic message prefix"
+    ],
+    "exact_remainder_equal": true,
+    "matrix_model_json_sha256": "04942da13fd9d27411975b2e356244c442502face64191e4f3e901e103ab46bd"
+  },
+  "wrapper_changes": "Standalone engine mapping from qualified prototype, MAME mode true, debug counter open, public interface retains original port names/order and PCM interpretation."
+}

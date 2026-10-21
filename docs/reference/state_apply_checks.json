@@ -1,0 +1,11 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_layout.vhd": "dd5f77217553196f29570fb29d51b62993b29439fda34812c4fc19b7eec6c7ab",
+    "rtl/state/rabbitpunch_state_apply.vhd": "21011211d63c862d0b0e91e36aa8f1187606921ec86397a5a39b46c3c2a4b53d",
+    "sim/state/state_apply_tb.vhd": "43aae29f962b4a5a2e3ffd04822eccd4a64dec3dba1e6dc7e5a79f2482403409"
+  },
+  "runner_sha256": "9274317b0dbf2602601e6fe8d3c2ad4ee3104ae752598f277bb4d008335a0ce7",
+  "log_sha256": "4963d07a67ef3f835132d2d11084c5b70b736c5e6811bb6429c2e3a881d24816",
+  "scope": "Fifteen protocol cases with independently checked107216-byte ordered writes, source/target stalls, denied admission, delayed image/body/commit replies, cancellation, reset, permission/hold loss, source/target errors including final commit failure, incomplete-machine hold, complete retry and full-game-reset acknowledgement. Synthetic body backend; no CPU/chip or full-game restoration."
+}

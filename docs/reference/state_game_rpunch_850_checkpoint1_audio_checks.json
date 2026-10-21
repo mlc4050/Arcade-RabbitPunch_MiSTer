@@ -1,0 +1,276 @@
+{
+  "accepted": false,
+  "diagnostic_checks_passed": true,
+  "exact_continuations_equal": true,
+  "failures": [],
+  "first_difference": null,
+  "coverage": [
+    {
+      "clocks": 1548288,
+      "main_writes": 2097,
+      "sound_writes": 5470,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 65207,
+      "nonzero_pcm_clocks": 1547667,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 2073,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 901,
+      "sha256": "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 2097,
+      "sound_writes": 5470,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 65207,
+      "nonzero_pcm_clocks": 1547667,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 2073,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 901,
+      "sha256": "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 2097,
+      "sound_writes": 5470,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 65207,
+      "nonzero_pcm_clocks": 1547667,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 2073,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 901,
+      "sha256": "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 2402,
+      "sound_writes": 5465,
+      "pixels": 221184,
+      "active_pixels": 83989,
+      "nonblack_pixels": 65320,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "4d26860368de5574b438fd42cef407b619261a2c901b246a7c18b824c327c07e"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 2402,
+      "sound_writes": 5465,
+      "pixels": 221184,
+      "active_pixels": 83989,
+      "nonblack_pixels": 65320,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "4d26860368de5574b438fd42cef407b619261a2c901b246a7c18b824c327c07e"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 2402,
+      "sound_writes": 5465,
+      "pixels": 221184,
+      "active_pixels": 83989,
+      "nonblack_pixels": 65320,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "4d26860368de5574b438fd42cef407b619261a2c901b246a7c18b824c327c07e"
+    }
+  ],
+  "checkpoint_differences": [
+    null,
+    null
+  ],
+  "published_images": [
+    {
+      "counter": 1,
+      "sha256": "378f268f9e4b96eb95b227b6e46b336ad4154a224ff3059aab4d5826a834b923",
+      "hiscore": {
+        "ready": true,
+        "address": 1048065,
+        "length": 115,
+        "table_sha256": "fbe1d8db9aea48f7812155e85d26e5142caa8176fb50b4de8c71f57f05cd0d70",
+        "initial_guards_match": true
+      }
+    },
+    {
+      "counter": 2,
+      "sha256": "02c6e3b6f6716fea6c3fe4a69e2f4d68a2f95064431b1470ba9ab644b284df80",
+      "hiscore": {
+        "ready": true,
+        "address": 1048065,
+        "length": 115,
+        "table_sha256": "fbe1d8db9aea48f7812155e85d26e5142caa8176fb50b4de8c71f57f05cd0d70",
+        "initial_guards_match": true
+      }
+    }
+  ],
+  "hiscore_profile": {
+    "game": "rpunch",
+    "config_hex": "02dc6c00ffff00020002000100000000000ffe0100730017",
+    "config_sha256": "c3407b043c1d2ec2092c241d78366949f1a969dac977f2692ffe3153e94bb774",
+    "mra": "releases/Rabbit Punch (US).mra",
+    "mra_commit": "7bc7e571f30d06c34d8295b143aacbc0c8a1c25a",
+    "mra_sha256": "7c9d04943b261fbcda7c1db29093eb8981946e14f25d029ce2012391b4b5b540",
+    "polling_waits_unchanged": true,
+    "require_ready": true
+  },
+  "hiscore_release_observations": [
+    [
+      "1",
+      "1",
+      "1"
+    ],
+    [
+      "2",
+      "1",
+      "1"
+    ],
+    [
+      "3",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1"
+    ],
+    [
+      "5",
+      "1",
+      "1"
+    ],
+    [
+      "6",
+      "1",
+      "1"
+    ]
+  ],
+  "image_identity": {
+    "abi": "52500101",
+    "config": 0,
+    "production": false
+  },
+  "shared_presentation_observations": null,
+  "active_audio_required": false,
+  "active_audio_checkpoints_required": [
+    1
+  ],
+  "rom_identity": "beebf645",
+  "release_observations": [
+    [
+      "1",
+      "0",
+      "0",
+      "c",
+      "340",
+      "74"
+    ],
+    [
+      "2",
+      "0",
+      "0",
+      "c",
+      "340",
+      "74"
+    ],
+    [
+      "3",
+      "0",
+      "0",
+      "c",
+      "340",
+      "74"
+    ],
+    [
+      "4",
+      "0",
+      "0",
+      "c",
+      "182",
+      "75"
+    ],
+    [
+      "5",
+      "0",
+      "0",
+      "c",
+      "182",
+      "75"
+    ],
+    [
+      "6",
+      "0",
+      "0",
+      "c",
+      "182",
+      "75"
+    ]
+  ],
+  "independently_checked_header_and_body_crc": true,
+  "slot_sha256": "02c6e3b6f6716fea6c3fe4a69e2f4d68a2f95064431b1470ba9ab644b284df80",
+  "checker_sha256": "8df7c281e9ee6d81b00e42525348bc35745f2b529f4bf7a8e459514d32196c18",
+  "scope": "Completed real US game run with two SAVEs and four RESTOREs. Each checkpoint group reproduces all1548288 clocks, CPU writes, PCM/cadence/IRQ and visible pixels exactly; both published images and the final image pass independent layout/CRC/counter checks. Initialized score flags persist and both115-byte tables equal the MAME reference. Checkpoint1 is active with901 sampled PCM values/2073 nonzero samples; checkpoint2 is silent, with PCM already zero at the end of checkpoint1. Explicit checkpoint1-audio reanalysis passes; the original all-checkpoints-active rejection is retained. No model execution was repeated by reanalysis. Passive recorder admission is source/API only, not a native whole-game timing miter. No hardware/full-shell runtime or unobserved STOP/HALT claim.",
+  "bundle_manifest_sha256": "461c6d62f448c89c5f360a8f91315233a5e92588d95fc20a39e09e954c9208a6",
+  "original_model_run_sha256": "d3e043c83c8f86db3cc55dfc50390893657cd747199472eb21e9b4c92a20bd05",
+  "model_execution_repeated": false,
+  "original_strict_rejection_sha256": "afc779d09b611870632ea23538179edffa892d5f4f21be70d72203232a7b35b2",
+  "analysis_provenance_sha256": "ff5dc05dca7d19505cf0d687fdaa1f257aebc67afeb9982fe7ba86f29cf3b83f",
+  "source_admission_sha256": "d7ea8fdbc6df75e3125168fdadb56bfac44c9a734b3adf39d7a84b7dec084a83",
+  "admissions": {
+    "native_state_ram_admission.json": "ce49f81375711d0777d299a4f4718fed18f2905fb75b6cc5af875cd4b911b56f",
+    "dq_native_readback_admission.json": "e8dcf37237cfd139263d017167fd5a1e7a914224c3d786d5ad424fd615888e26",
+    "event_monitor_admission.json": "46a8c688dcf4ba9c81790f7977f6ec352572e3b88df6d76005bb9c8b688fff55"
+  },
+  "executable_sha256": "32bff99260733b42dbc6cc62680714ba78d64f0782b308bd874d2a01abc16033",
+  "mame_score_reference": {
+    "path": "debug/state_mame_us_noinput850_v1/score_reference_checks.json",
+    "sha256": "be16cc80be22cc541ce3524ad553832720890b4a16f3acd879314c44d16fb300",
+    "table_sha256": "fbe1d8db9aea48f7812155e85d26e5142caa8176fb50b4de8c71f57f05cd0d70",
+    "all115bytes_match": true
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/vendor/meatsauce_t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+    "rtl/state/vendor/meatsauce_t80/T80_MCode.vhd": "a73c512d7f03bc34759de560efe78c1813785c5ae3f52714df149455b876e5a5",
+    "rtl/state/vendor/meatsauce_t80/T80_ALU.vhd": "8e1dfd1c47fc0ce4a902f3d789f657a93f2b9faa6a72df70e1f12f27649291b8",
+    "rtl/state/vendor/meatsauce_t80/T80.vhd": "e6f6a31dcbc34f0193ff8aa4bc124e4967e527d10731d0acc6f3908d3384e0ef",
+    "rtl/cpu/t80/T80_Pack.vhd": "f0e6aff273f25d904fd55e53372e44b52d07a82b8c6cb58fe73ea7fde06ec22d",
+    "rtl/cpu/t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+    "rtl/cpu/t80/T80_MCode.vhd": "d4f03ddd9693e341ace2a685153838aec39085826fd2f6128ece1a9f8852f02e",
+    "rtl/cpu/t80/T80_ALU.vhd": "823a062b8be873505ac16e627351a5105101243a11483bf8f2446214893b739e",
+    "rtl/cpu/t80/T80.vhd": "ba63aaa402eadfc0d47e59e9747c516a22b7454ad0b27430e99d968efcae6ec0",
+    "rtl/cpu/t80/T80se.vhd": "d528be5e4a75a8e45d1965740bcd6c77180bd54e1862b8e177bea8a432e58588",
+    "rtl/state/rabbitpunch_t80_capture.vhd": "55aec7bb27e91dc6d04e3f2e3f1a5535c866cda4c290389a8b5d887844dc8462",
+    "rtl/rabbitpunch_z80.vhd": "60b5528ed86932a3c1881951a389e77d640d850188f1182457a0ff75ffbdcf9c",
+    "rtl/rabbitpunch_soundcpu.vhd": "e2baa84d8bbbc8da959938f9ca338f27dec8f2265bb622a9c09b574218cfc682",
+    "sim/state/soundcpu_state_paths_tb.vhd": "8d104506ef73c5bc3b92f5c90358bfeeed2c65ab912d5cc05d8237c5d58b9351"
+  },
+  "cases": [
+    {
+      "mode": false,
+      "log": "debug/ghdl/soundcpu_state_paths/modeFalse.log",
+      "log_sha256": "4d512d38c76e0a0a92ecc86351df1c4cb5d88d8a73b2c1df779409957798230e"
+    },
+    {
+      "mode": true,
+      "log": "debug/ghdl/soundcpu_state_paths/modeTrue.log",
+      "log_sha256": "7bf6cceea8ff951778d94bd917741020b5816179b15b6fbc0c6fe8ebe680bb34"
+    }
+  ],
+  "runner_sha256": "f16594916116efaceec994eae16605a207117e33cb37bf2b539fc9b99304a995",
+  "scope": "Both production sound CPU selections:65-clock delayed replies, RAM/peripheral writes, reset/pause debt draining; state-capable path additionally captures HALT while user pause asserted, reloads256-bit image and resumes three times without replaying writes or overriding retained user pause. No full sound-board or game-state restore qualification."
+}

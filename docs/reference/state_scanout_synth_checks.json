@@ -1,0 +1,139 @@
+{
+  "commit": "2e16e024da480820a4eceab81167263784087f0a",
+  "device": "5CSEBA6U23I7",
+  "project": "state_scanout_check",
+  "constraint_mhz": 48,
+  "seed": 3,
+  "memory_bits": 0,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 12.288
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.291
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.717
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 12.525
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.252
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.571
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 11.028
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.165
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.83
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 11.134
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.136
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.83
+    }
+  ],
+  "timing_coverage": {
+    "Illegal Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Port Paths": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Port Paths": {
+      "setup": 0,
+      "hold": 0
+    }
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Mon Oct 19 07:01:48 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : state_scanout_check",
+    "Top-level Entity Name : state_scanout_check",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 314 / 41,910 ( < 1 % )",
+    "Total registers : 539",
+    "Total pins : 1 / 314 ( < 1 % )",
+    "Total virtual pins : 256",
+    "Total block memory bits : 0 / 5,662,720 ( 0 % )",
+    "Total RAM Blocks : 0 / 553 ( 0 % )",
+    "Total DSP Blocks : 0 / 112 ( 0 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 0 / 6 ( 0 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "log_sha256": "4727514842b4851d1f18f0e73f11b8b13fa162375e5292a67f2b498d76f96db6",
+  "scope": "Isolated registered virtual-I/O parent at48MHz seed3. Exact committed dependencies and boundary inputs retained; expected memory, hierarchy, unconstrained-path and nonnegative timing gates passed. Register counts are preservation checks, not post-fit functional proof. Not a whole-core fit or game-state/hardware restore qualification.",
+  "verification_only": false,
+  "checker_sha256": "f3c9ee5c3e7e0441a39f2dda5c191ac2308c8edd79dd439bec810b1860261524",
+  "source_sha256": {
+    "rtl/synth_check/state_scanout/state_scanout_check.qsf": "6478fe2ab3aecc2922659522352b38c3ebfe4ae564694b6dc76d3cc24590d9c6",
+    "rtl/synth_check/state_scanout/state_scanout_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "rtl/rabbitpunch_clock_enables.vhd": "43f72dc52568f284236f9066f1f48d74d280c55bbb5fc7677d39a29093fbfcfa",
+    "rtl/rabbitpunch_raster.vhd": "57e3eac7e7560f4527251289fce1bd1d172ac245dc1bc59a101d656e1839769a",
+    "rtl/state/rabbitpunch_state_game_timing.vhd": "bac3a7c02df25bf4a174d70f44b6068e32215135540c67633b04422e25174b97",
+    "rtl/rabbitpunch_scanline_scheduler.vhd": "38761b9a7f583d5ae02edb614cb0a043b43e206fd437f51a225e2c031dbe0b05",
+    "rtl/rabbitpunch_video_output.vhd": "50aa7b951abddfb3cb61e8f3687535ddfe33d09fa561abf49590cf6b08028b97",
+    "rtl/rabbitpunch_scanout.vhd": "1e8f9023a0b6c954458e5621e252163bac92fae291c828ef92546d662ffa2c4a",
+    "rtl/synth_check/state_scanout/state_scanout_check.vhd": "174233abf60b3ac2d12ea08842af3d8881d618a965002cae3e0df0507855c2e8"
+  },
+  "committed_blob_sha256": {
+    "rtl/synth_check/state_scanout/state_scanout_check.qsf": "4b4149cc5587c793b5e4af94740efa5cfd2ceaacd989753750c86691f6334037",
+    "rtl/synth_check/state_scanout/state_scanout_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "rtl/rabbitpunch_clock_enables.vhd": "43f72dc52568f284236f9066f1f48d74d280c55bbb5fc7677d39a29093fbfcfa",
+    "rtl/rabbitpunch_raster.vhd": "57e3eac7e7560f4527251289fce1bd1d172ac245dc1bc59a101d656e1839769a",
+    "rtl/state/rabbitpunch_state_game_timing.vhd": "bac3a7c02df25bf4a174d70f44b6068e32215135540c67633b04422e25174b97",
+    "rtl/rabbitpunch_scanline_scheduler.vhd": "38761b9a7f583d5ae02edb614cb0a043b43e206fd437f51a225e2c031dbe0b05",
+    "rtl/rabbitpunch_video_output.vhd": "50aa7b951abddfb3cb61e8f3687535ddfe33d09fa561abf49590cf6b08028b97",
+    "rtl/rabbitpunch_scanout.vhd": "1e8f9023a0b6c954458e5621e252163bac92fae291c828ef92546d662ffa2c4a",
+    "rtl/synth_check/state_scanout/state_scanout_check.vhd": "174233abf60b3ac2d12ea08842af3d8881d618a965002cae3e0df0507855c2e8"
+  },
+  "artifacts_sha256": {
+    "build/rtl/synth_check/state_scanout/state_scanout_check.qsf": "6478fe2ab3aecc2922659522352b38c3ebfe4ae564694b6dc76d3cc24590d9c6",
+    "build/rtl/synth_check/state_scanout/state_scanout_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "build/rtl/synth_check/state_scanout/state_scanout_check.vhd": "174233abf60b3ac2d12ea08842af3d8881d618a965002cae3e0df0507855c2e8",
+    "build/rtl/synth_check/state_scanout/output_files/state_scanout_check.fit.rpt": "5e698d73ee98ee3614588235a027052999fd2364ec8aabd3150b00daa516d31c"
+  },
+  "recorder_sha256": "965422943b04ce02d932f2317bd1c59c4962fe876d26461bd87794caf1603a19"
+}

@@ -1,0 +1,269 @@
+{
+  "cases": [
+    {
+      "set": "rabiolep",
+      "raw_ym": {
+        "mame_count": 250412,
+        "rtl_count": 235588,
+        "matching_prefix": 331,
+        "shorter_is_exact_prefix": false,
+        "first_difference": {
+          "index": 331,
+          "mame": [
+            20,
+            10
+          ],
+          "rtl": [
+            20,
+            42
+          ]
+        }
+      },
+      "excluding_timer_control": {
+        "mame_count": 1888,
+        "rtl_count": 1886,
+        "matching_prefix": 1886,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "voice_registers": {
+        "mame_count": 1191,
+        "rtl_count": 1191,
+        "matching_prefix": 1191,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "global_register_clear_events": {
+        "mame": [
+          {
+            "event_index": 1,
+            "seconds": 0.010965
+          },
+          {
+            "event_index": 138098,
+            "seconds": 16.560244
+          }
+        ],
+        "rtl": [
+          {
+            "event_index": 1,
+            "seconds": null
+          },
+          {
+            "event_index": 130105,
+            "seconds": null
+          }
+        ]
+      },
+      "gameplay_after_last_global_clear": {
+        "mame_count": 1622,
+        "rtl_count": 1620,
+        "matching_prefix": 1620,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "adpcm_commands": {
+        "mame_count": 1,
+        "rtl_count": 1,
+        "matching_prefix": 1,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "adpcm_controls": {
+        "mame_count": 7,
+        "rtl_count": 7,
+        "matching_prefix": 7,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "waveform": {
+        "mame": {
+          "rate_hz": 48000,
+          "duration_seconds": 30.000020833333334,
+          "music_onset_seconds": 23.737625,
+          "peak": 6774.0,
+          "clipped_samples": 0
+        },
+        "rtl": {
+          "rate_hz": 62500,
+          "duration_seconds": 29.873456,
+          "music_onset_seconds": 23.646768,
+          "peak": 6640.0,
+          "clipped_samples": 0
+        },
+        "compared_seconds": 5.9,
+        "common_rate_hz": 48000,
+        "interpolation": "linear, no gain correction or time stretch",
+        "rms_mame": 1226.4131198901277,
+        "rms_rtl": 1248.330130092178,
+        "rms_ratio": 1.017870821704854,
+        "gain_difference_db": 0.15385330106514916,
+        "envelope_window_ms": 5,
+        "envelope_correlation": 0.8867239382599095,
+        "spectral_window_samples": 2048,
+        "spectral_hop_samples": 480,
+        "mean_spectral_cosine": 0.9306615756834746,
+        "median_spectral_cosine": 0.9388941381837002,
+        "scope": "Descriptive onset-aligned first gameplay-music excerpt, not a full-track or sample-exact acceptance test."
+      },
+      "input_sha256": {
+        "debug\\audio_reference\\mame\\rabiolep\\music_writes.txt": "6b870defe9393b1a7c13e15ce40af87b504392ddc70fe9419f53b79266b4b7f3",
+        "debug\\audio_reference\\mame\\rabiolep\\mame.wav": "3867faabcd76c648ee87770f2da47d74d456208e0e59e3c85e4a5d62363c527a",
+        "debug\\audio_reference\\rtl\\rabiolep\\rtl_sound_writes.txt": "792accc131502a8a91e9a79cb8614e672a218c2c173eb3f996a12ecc41623147",
+        "debug\\audio_reference\\rtl\\rabiolep\\mono.wav": "53903cebde7253406ee7eb2fb91ac61377dd0d8858f7e7eb29a7cc1105a13c0d"
+      }
+    },
+    {
+      "set": "rpunch",
+      "raw_ym": {
+        "mame_count": 249894,
+        "rtl_count": 233139,
+        "matching_prefix": 331,
+        "shorter_is_exact_prefix": false,
+        "first_difference": {
+          "index": 331,
+          "mame": [
+            20,
+            10
+          ],
+          "rtl": [
+            20,
+            42
+          ]
+        }
+      },
+      "excluding_timer_control": {
+        "mame_count": 2833,
+        "rtl_count": 2781,
+        "matching_prefix": 569,
+        "shorter_is_exact_prefix": false,
+        "first_difference": {
+          "index": 569,
+          "mame": [
+            8,
+            1
+          ],
+          "rtl": [
+            8,
+            0
+          ]
+        }
+      },
+      "voice_registers": {
+        "mame_count": 1966,
+        "rtl_count": 1932,
+        "matching_prefix": 514,
+        "shorter_is_exact_prefix": false,
+        "first_difference": {
+          "index": 514,
+          "mame": [
+            67,
+            50
+          ],
+          "rtl": [
+            255,
+            0
+          ]
+        }
+      },
+      "global_register_clear_events": {
+        "mame": [
+          {
+            "event_index": 1,
+            "seconds": 0.010965
+          },
+          {
+            "event_index": 126699,
+            "seconds": 15.1992085
+          },
+          {
+            "event_index": 137659,
+            "seconds": 16.576938
+          }
+        ],
+        "rtl": [
+          {
+            "event_index": 1,
+            "seconds": null
+          },
+          {
+            "event_index": 117999,
+            "seconds": null
+          },
+          {
+            "event_index": 128130,
+            "seconds": null
+          }
+        ]
+      },
+      "gameplay_after_last_global_clear": {
+        "mame_count": 1883,
+        "rtl_count": 1869,
+        "matching_prefix": 1869,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "adpcm_commands": {
+        "mame_count": 2,
+        "rtl_count": 2,
+        "matching_prefix": 2,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "adpcm_controls": {
+        "mame_count": 10,
+        "rtl_count": 10,
+        "matching_prefix": 10,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "waveform": {
+        "mame": {
+          "rate_hz": 48000,
+          "duration_seconds": 30.000020833333334,
+          "music_onset_seconds": 23.812125,
+          "peak": 8792.0,
+          "clipped_samples": 0
+        },
+        "rtl": {
+          "rate_hz": 62500,
+          "duration_seconds": 29.873456,
+          "music_onset_seconds": 23.73616,
+          "peak": 8768.0,
+          "clipped_samples": 0
+        },
+        "compared_seconds": 5.9,
+        "common_rate_hz": 48000,
+        "interpolation": "linear, no gain correction or time stretch",
+        "rms_mame": 1225.4853420722513,
+        "rms_rtl": 1247.6174941770823,
+        "rms_ratio": 1.0180599076504713,
+        "gain_difference_db": 0.15546669550611147,
+        "envelope_window_ms": 5,
+        "envelope_correlation": 0.8805463945718742,
+        "spectral_window_samples": 2048,
+        "spectral_hop_samples": 480,
+        "mean_spectral_cosine": 0.9308925990672964,
+        "median_spectral_cosine": 0.9339764347492754,
+        "scope": "Descriptive onset-aligned first gameplay-music excerpt, not a full-track or sample-exact acceptance test."
+      },
+      "input_sha256": {
+        "debug\\audio_reference\\mame\\rpunch\\music_writes.txt": "c10ac9750e95afd5aaa1994f5529b4f84dd43d45787043fe81f3bb11436f9a06",
+        "debug\\audio_reference\\mame\\rpunch\\mame.wav": "94b991d3a0519b95f6b35879144877f911b27571496d111f26e89ae481ba4282",
+        "debug\\audio_reference\\rtl\\rpunch\\rtl_sound_writes.txt": "923406cfaa2129d50563a26a578f935bf201019f0a08eb363ef35dd78461946d",
+        "debug\\audio_reference\\rtl\\rpunch\\mono.wav": "eeb573cf68b56d2266172470f0b3cf7b059394f9520f1605c5c63e7cd3711474"
+      }
+    }
+  ],
+  "runner_sha256": "2dbefc44418f1db2543a17a5cd278152fe3e8169782ceb9b2b60a5aff21c6336",
+  "numpy_version": "2.5.4",
+  "scope": "Retrospective audit of immutable 1800-frame executing-game captures. Original raw inputs and their separate MAME/RTL qualification hashes are checked. No fresh game simulation, full-track match, exact waveform equality, or physical audio gain claim.",
+  "timer_difference": "First raw divergence is YM register 0x14: 0x0A versus 0x2A. Bit 5 clears timer B status; it is not an instrument/note bit. Raw differences remain reported and timer timing is not waived.",
+  "limitations": [
+    "RTL peripheral trace has no event timestamps.",
+    "MAME runs 60 Hz while RTL raster is approximately 60.282 Hz; compare music starts separately.",
+    "US attract sequence diverges before a game-reset command; ordered gameplay music matches the shorter capture.",
+    "Music excerpt is 5.9 seconds, not a complete track.",
+    "Spectral cosine is a similarity metric, not percent hardware accuracy."
+  ]
+}

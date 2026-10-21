@@ -3,6 +3,7 @@
   "pass_marker": "Z80_STATE_PASS",
   "log": "debug\\baselines\\z80_state\\result.log",
   "cpu": "z80",
+  "initial_status": null,
   "source_sha256": {
     "rtl/cpu/t80/T80_Pack.vhd": "f0e6aff273f25d904fd55e53372e44b52d07a82b8c6cb58fe73ea7fde06ec22d",
     "rtl/cpu/t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
@@ -12,9 +13,9 @@
     "rtl/cpu/t80/T80se.vhd": "d528be5e4a75a8e45d1965740bcd6c77180bd54e1862b8e177bea8a432e58588",
     "rtl/rabbitpunch_t80.vhd": "510cf2228d0b42ec347d4549603789af01ce882185c8b9e0dede6c3efa4f61ae",
     "rtl/state/vendor/nmk16/ss_z80_park.sv": "99e17cb0dc717a0c327e6d5d9b78b22b512a1fbad2b99baa13dcb4caad61d06d",
-    "rtl/state/rabbitpunch_z80_state.vhd": "25d1a2f229a0f1cf6efc88cc97f1d67c645b3051c050608b47baca5cee83713f",
-    "sim/state/z80_state_tb.vhd": "741ee6ab3b12f953462f8e2fe981f933686233b9801396aaebcc102da064c095"
+    "rtl/state/rabbitpunch_z80_state.vhd": "d5649ae8b46ac36e4d2b1bd17ec37d4709b2f5a38b67cdfd0b23c93a1ad230f8",
+    "sim/state/z80_state_tb.vhd": "37695cb0fd3ab0d8c14fe9d7cd81dc2f57b575dcf22b4fb408cbd780dc1b60e8"
   },
-  "log_sha256": "cb9320d2abea6c410491e41087e115e87676bb6e156017ebd7ed200ad2378f52",
-  "scope": "Native production T80se, unchanged NMK16 NMI monitor and descriptive VHDL wrapper. 64KiB RAM and SP/IM restore, both register banks exercised, 400 ordered continuation writes including periodic mode-1 IRQ handler activity with external IRQ phase restored. No production sound-bus integration, chip state, HALT/pending-NMI/general interrupt-mode or physical hardware proof."
+  "log_sha256": "8abcd1b6558469fd930e0cf24a1bcfb45ebd45a97e5cf395cdbb5f1a3b19dece",
+  "scope": "Native production T80se, unchanged NMK16 NMI monitor and descriptive VHDL wrapper. Three restores of one 64KiB-RAM/SP/IM image, both register banks exercised, 1200 ordered continuation writes including periodic mode-1 IRQ handler activity with external IRQ phase restored. No production sound-bus integration, original-stack preservation, chip state, HALT/pending-NMI/general interrupt-mode or physical hardware proof."
 }

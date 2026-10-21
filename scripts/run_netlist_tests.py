@@ -18,6 +18,7 @@ from run_baselines import run_case
 
 
 BLOCKS = {
+    "state_host": ("state_host_tb", "STATE_HOST_PASS", "sim/state/state_host_tb.vhd"),
     "hdmi_presentation": ("hdmi_presentation_control_tb", "HDMI_PRESENTATION_CONTROL_PASS", "sim/video/hdmi_presentation_control_tb.vhd"),
     "rotation_transport": ("rotation_transport_tb", "ROTATION_TRANSPORT_PASS", "sim/video/rotation_transport_tb.vhd"),
     "frame_publication": ("frame_publication_tb", "FRAME_PUBLICATION_PASS", "sim/video/frame_publication_tb.vhd"),
@@ -83,7 +84,7 @@ def main():
             vectors[filename] = hashlib.sha256(source.read_bytes()).hexdigest()
     support = "rtl/rabbitpunch_sdram_types.vhd" if args.block in ("sdram", "rom_requests", "rom_cache", "roms") else "sim/video/tile_test_support.vhd"
     sources = [str(netlist.relative_to(root)).replace("\\", "/")]
-    if args.block not in ("hdmi_presentation", "rotation_transport", "frame_publication", "sound_board", "adpcm", "audio", "host", "memory", "video_aspect", "crt_adjust", "hdmi_rotation", "ddr_write_queue"):
+    if args.block not in ("state_host", "hdmi_presentation", "rotation_transport", "frame_publication", "sound_board", "adpcm", "audio", "host", "memory", "video_aspect", "crt_adjust", "hdmi_rotation", "ddr_write_queue"):
         sources.append(support)
     if args.block in ("sdram", "roms"):
         sources.append("sim/vendor/sdram/sdram_chip_model_wide.sv")
@@ -92,8 +93,10 @@ def main():
                     "sim/vendor/sdram/sdram_chip_model_wide.sv"]
     if args.block == "memory":
         sources.append("rtl/rabbitpunch_layout.vhd")
-    if args.block == "host":
+    if args.block in ("host", "state_host"):
         sources.append("rtl/rabbitpunch_config.vhd")
+    if args.block == "state_host":
+        sources.append("rtl/state/rabbitpunch_state_config.vhd")
     if args.block in ("rotation_transport", "frame_publication"):
         # The fitted entity has its production 62208-pixel constant, not a
         # run-time generic. Keep the behavioral scenario, scale its stimulus.
@@ -131,6 +134,8 @@ def main():
     if args.block == "memory":
         check.update(memory_initialization_addresses=408, memory_initialization_reads=816, exhaustive=False,
                      scope=check["scope"] + "; all five banks: first/last word of every 256-word region through both CPU and inspection, plus masked writes; full-address coverage is RTL only")
+    if args.block == "state_host":
+        check.update(scope=check["scope"] + "; actual unchanged hps_io and VHDL state controls, complete enabled configuration bytes,128-bit status request/ack, four slot increments/wrap after final SAVE only, failed SAVE and failed/successful RESTORE without increment, held-trigger acknowledgment and unavailable mask. Service endpoints synthetic; no whole-game, ARM firmware/UI rendering or hardware qualification")
     (root / f"docs/reference/{args.block}_netlist_checks.json").write_text(json.dumps(check, indent=2) + "\n", encoding="utf-8")
 
 

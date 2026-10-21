@@ -1,0 +1,1552 @@
+{
+  "chip": "jt7759",
+  "entity": "rabbitpunch_jt7759_state_netlist",
+  "state_bits": 189,
+  "net_style": "scalar",
+  "state_process_style": "grouped_by_scan_word",
+  "state_words": 6,
+  "yosys": "Yosys 0.70+157 (git sha1 af9f71e51, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 15.2.1)",
+  "source_sha256": {
+    "rtl/rabbitpunch_upd7759_control.vhd": "b3fabe48db6731c86fda4a54e7d8b7ce212a71fccb83a0b258facf8af1ede454",
+    "rtl/sound/jt7759/hdl/jt7759_div.v": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862",
+    "rtl/sound/jt7759/hdl/jt7759_data.v": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d",
+    "rtl/sound/jt7759/hdl/jt7759_adpcm.v": "41d795e33e2085d3d07ee0acab23e85f495f3766e61bd91f177c46e84072380d",
+    "rtl/sound/jt7759/hdl/jt7759.v": "a4defeee8f5b5fec795af00d6185aa941f4135ab72ae5f7fece31908c3c48c1a"
+  },
+  "lowered_netlist_sha256": "e53f3759c62e2b243a94fa74c922f30a9812436de91d48ccaa3226e7b14ab4ab",
+  "generator_sha256": "33c927c1bbfa296181e48f72ddfa08b285928e6dd9033098cc30159f8ab0cfea",
+  "generated_sha256": "6fdc86fa46e21bd97109e1cafa221d0e31c04deb2c1af48d2e15be388be5c3a9",
+  "ports": {
+    "rst": "i_reset",
+    "clk": "i_clk",
+    "cen": "i_chip_enable",
+    "stn": "i_start_n",
+    "cs": "i_chip_select",
+    "mdn": "i_standalone_mode",
+    "busyn": "o_busy_n",
+    "wrn": "i_write_n",
+    "din": "iu8_write_data",
+    "drqn": "o_data_request_n",
+    "rom_cs": "o_rom_request",
+    "rom_addr": "ou17_rom_address",
+    "rom_data": "iu8_rom_data",
+    "rom_ok": "i_rom_valid",
+    "sound": "ou9_pcm"
+  },
+  "state": [
+    {
+      "bit": 0,
+      "cell": "$auto$ff.cc:337:slice$10533",
+      "q": 56,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:997.3-1001.20"
+    },
+    {
+      "bit": 1,
+      "cell": "$auto$ff.cc:337:slice$10534",
+      "q": 58,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:997.3-1001.20"
+    },
+    {
+      "bit": 2,
+      "cell": "$auto$ff.cc:337:slice$10535",
+      "q": 60,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:997.3-1001.20"
+    },
+    {
+      "bit": 3,
+      "cell": "$auto$ff.cc:337:slice$10536",
+      "q": 62,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:997.3-1001.20"
+    },
+    {
+      "bit": 4,
+      "cell": "$auto$ff.cc:337:slice$10537",
+      "q": 64,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:997.3-1001.20"
+    },
+    {
+      "bit": 5,
+      "cell": "$auto$ff.cc:337:slice$10538",
+      "q": 66,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:997.3-1001.20"
+    },
+    {
+      "bit": 6,
+      "cell": "$auto$ff.cc:337:slice$10539",
+      "q": 68,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:997.3-1001.20"
+    },
+    {
+      "bit": 7,
+      "cell": "$auto$ff.cc:337:slice$10540",
+      "q": 70,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:997.3-1001.20"
+    },
+    {
+      "bit": 8,
+      "cell": "$auto$ff.cc:337:slice$10541",
+      "q": 72,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:997.3-1001.20"
+    },
+    {
+      "bit": 9,
+      "cell": "$auto$ff.cc:337:slice$10569",
+      "q": 74,
+      "type": "$_DFF_PP1_",
+      "reset": 2,
+      "source": "controller.v:954.3-958.20"
+    },
+    {
+      "bit": 10,
+      "cell": "$auto$ff.cc:337:slice$10601",
+      "q": 76,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 11,
+      "cell": "$auto$ff.cc:337:slice$10602",
+      "q": 78,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 12,
+      "cell": "$auto$ff.cc:337:slice$10603",
+      "q": 80,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 13,
+      "cell": "$auto$ff.cc:337:slice$10604",
+      "q": 82,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 14,
+      "cell": "$auto$ff.cc:337:slice$10605",
+      "q": 84,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 15,
+      "cell": "$auto$ff.cc:337:slice$10606",
+      "q": 86,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 16,
+      "cell": "$auto$ff.cc:337:slice$10607",
+      "q": 88,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 17,
+      "cell": "$auto$ff.cc:337:slice$10608",
+      "q": 90,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 18,
+      "cell": "$auto$ff.cc:337:slice$10609",
+      "q": 92,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 19,
+      "cell": "$auto$ff.cc:337:slice$10610",
+      "q": 94,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 20,
+      "cell": "$auto$ff.cc:337:slice$10611",
+      "q": 96,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 21,
+      "cell": "$auto$ff.cc:337:slice$10612",
+      "q": 98,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 22,
+      "cell": "$auto$ff.cc:337:slice$10613",
+      "q": 100,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 23,
+      "cell": "$auto$ff.cc:337:slice$10614",
+      "q": 102,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 24,
+      "cell": "$auto$ff.cc:337:slice$10615",
+      "q": 104,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 25,
+      "cell": "$auto$ff.cc:337:slice$10616",
+      "q": 106,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 26,
+      "cell": "$auto$ff.cc:337:slice$10617",
+      "q": 108,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:985.3-989.20"
+    },
+    {
+      "bit": 27,
+      "cell": "$auto$ff.cc:337:slice$10684",
+      "q": 110,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:948.3-952.20"
+    },
+    {
+      "bit": 28,
+      "cell": "$auto$ff.cc:337:slice$10685",
+      "q": 112,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:948.3-952.20"
+    },
+    {
+      "bit": 29,
+      "cell": "$auto$ff.cc:337:slice$10686",
+      "q": 114,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:948.3-952.20"
+    },
+    {
+      "bit": 30,
+      "cell": "$auto$ff.cc:337:slice$10687",
+      "q": 116,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:948.3-952.20"
+    },
+    {
+      "bit": 31,
+      "cell": "$auto$ff.cc:337:slice$10688",
+      "q": 118,
+      "type": "$_DFF_PP1_",
+      "reset": 2,
+      "source": "controller.v:948.3-952.20"
+    },
+    {
+      "bit": 32,
+      "cell": "$auto$ff.cc:337:slice$10689",
+      "q": 120,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:948.3-952.20"
+    },
+    {
+      "bit": 33,
+      "cell": "$auto$ff.cc:337:slice$11116",
+      "q": 122,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 34,
+      "cell": "$auto$ff.cc:337:slice$11117",
+      "q": 124,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 35,
+      "cell": "$auto$ff.cc:337:slice$11118",
+      "q": 126,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 36,
+      "cell": "$auto$ff.cc:337:slice$11119",
+      "q": 128,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 37,
+      "cell": "$auto$ff.cc:337:slice$11120",
+      "q": 130,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 38,
+      "cell": "$auto$ff.cc:337:slice$11121",
+      "q": 132,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 39,
+      "cell": "$auto$ff.cc:337:slice$11122",
+      "q": 134,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 40,
+      "cell": "$auto$ff.cc:337:slice$11123",
+      "q": 136,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 41,
+      "cell": "$auto$ff.cc:337:slice$11132",
+      "q": 138,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 42,
+      "cell": "$auto$ff.cc:337:slice$11133",
+      "q": 140,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 43,
+      "cell": "$auto$ff.cc:337:slice$11134",
+      "q": 142,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 44,
+      "cell": "$auto$ff.cc:337:slice$11135",
+      "q": 144,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 45,
+      "cell": "$auto$ff.cc:337:slice$11136",
+      "q": 146,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 46,
+      "cell": "$auto$ff.cc:337:slice$11137",
+      "q": 148,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 47,
+      "cell": "$auto$ff.cc:337:slice$11138",
+      "q": 150,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 48,
+      "cell": "$auto$ff.cc:337:slice$11139",
+      "q": 152,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 49,
+      "cell": "$auto$ff.cc:337:slice$11148",
+      "q": 154,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 50,
+      "cell": "$auto$ff.cc:337:slice$11149",
+      "q": 156,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 51,
+      "cell": "$auto$ff.cc:337:slice$11150",
+      "q": 158,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 52,
+      "cell": "$auto$ff.cc:337:slice$11151",
+      "q": 160,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 53,
+      "cell": "$auto$ff.cc:337:slice$11152",
+      "q": 162,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 54,
+      "cell": "$auto$ff.cc:337:slice$11153",
+      "q": 164,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 55,
+      "cell": "$auto$ff.cc:337:slice$11154",
+      "q": 166,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 56,
+      "cell": "$auto$ff.cc:337:slice$11155",
+      "q": 168,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 57,
+      "cell": "$auto$ff.cc:337:slice$11156",
+      "q": 170,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 58,
+      "cell": "$auto$ff.cc:337:slice$11157",
+      "q": 18,
+      "type": "$_DFF_PP1_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 59,
+      "cell": "$auto$ff.cc:337:slice$11158",
+      "q": 173,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 60,
+      "cell": "$auto$ff.cc:337:slice$11167",
+      "q": 175,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 61,
+      "cell": "$auto$ff.cc:337:slice$11168",
+      "q": 177,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 62,
+      "cell": "$auto$ff.cc:337:slice$11169",
+      "q": 20,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 63,
+      "cell": "$auto$ff.cc:337:slice$11170",
+      "q": 21,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 64,
+      "cell": "$auto$ff.cc:337:slice$11171",
+      "q": 22,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 65,
+      "cell": "$auto$ff.cc:337:slice$11172",
+      "q": 23,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 66,
+      "cell": "$auto$ff.cc:337:slice$11173",
+      "q": 24,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 67,
+      "cell": "$auto$ff.cc:337:slice$11174",
+      "q": 25,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 68,
+      "cell": "$auto$ff.cc:337:slice$11175",
+      "q": 26,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 69,
+      "cell": "$auto$ff.cc:337:slice$11176",
+      "q": 27,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 70,
+      "cell": "$auto$ff.cc:337:slice$11177",
+      "q": 28,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 71,
+      "cell": "$auto$ff.cc:337:slice$11178",
+      "q": 29,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 72,
+      "cell": "$auto$ff.cc:337:slice$11179",
+      "q": 30,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 73,
+      "cell": "$auto$ff.cc:337:slice$11180",
+      "q": 31,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 74,
+      "cell": "$auto$ff.cc:337:slice$11181",
+      "q": 32,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 75,
+      "cell": "$auto$ff.cc:337:slice$11182",
+      "q": 33,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 76,
+      "cell": "$auto$ff.cc:337:slice$11183",
+      "q": 34,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 77,
+      "cell": "$auto$ff.cc:337:slice$11184",
+      "q": 35,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 78,
+      "cell": "$auto$ff.cc:337:slice$11185",
+      "q": 36,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 79,
+      "cell": "$auto$ff.cc:337:slice$11186",
+      "q": 196,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 80,
+      "cell": "$auto$ff.cc:337:slice$11187",
+      "q": 198,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 81,
+      "cell": "$auto$ff.cc:337:slice$11188",
+      "q": 200,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 82,
+      "cell": "$auto$ff.cc:337:slice$11189",
+      "q": 201,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:67.1-92.4"
+    },
+    {
+      "bit": 83,
+      "cell": "$auto$ff.cc:337:slice$11190",
+      "q": 202,
+      "type": "$_DFF_PP1_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 84,
+      "cell": "$auto$ff.cc:337:slice$11191",
+      "q": 204,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 85,
+      "cell": "$auto$ff.cc:337:slice$11192",
+      "q": 206,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 86,
+      "cell": "$auto$ff.cc:337:slice$11193",
+      "q": 208,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 87,
+      "cell": "$auto$ff.cc:337:slice$11194",
+      "q": 210,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 88,
+      "cell": "$auto$ff.cc:337:slice$11195",
+      "q": 212,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 89,
+      "cell": "$auto$ff.cc:337:slice$11196",
+      "q": 214,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 90,
+      "cell": "$auto$ff.cc:337:slice$11197",
+      "q": 216,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 91,
+      "cell": "$auto$ff.cc:337:slice$11198",
+      "q": 218,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 92,
+      "cell": "$auto$ff.cc:337:slice$11199",
+      "q": 220,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 93,
+      "cell": "$auto$ff.cc:337:slice$11200",
+      "q": 222,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 94,
+      "cell": "$auto$ff.cc:337:slice$11201",
+      "q": 224,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 95,
+      "cell": "$auto$ff.cc:337:slice$11202",
+      "q": 226,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 96,
+      "cell": "$auto$ff.cc:337:slice$11203",
+      "q": 228,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 97,
+      "cell": "$auto$ff.cc:337:slice$11212",
+      "q": 230,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 98,
+      "cell": "$auto$ff.cc:337:slice$11213",
+      "q": 232,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 99,
+      "cell": "$auto$ff.cc:337:slice$11214",
+      "q": 234,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 100,
+      "cell": "$auto$ff.cc:337:slice$11215",
+      "q": 236,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 101,
+      "cell": "$auto$ff.cc:337:slice$11216",
+      "q": 238,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 102,
+      "cell": "$auto$ff.cc:337:slice$11217",
+      "q": 240,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 103,
+      "cell": "$auto$ff.cc:337:slice$11218",
+      "q": 242,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 104,
+      "cell": "$auto$ff.cc:337:slice$11219",
+      "q": 244,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:94.1-145.4"
+    },
+    {
+      "bit": 105,
+      "cell": "$auto$ff.cc:337:slice$11228",
+      "q": 246,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:56.1-65.4"
+    },
+    {
+      "bit": 106,
+      "cell": "$auto$ff.cc:337:slice$11229",
+      "q": 248,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:56.1-65.4"
+    },
+    {
+      "bit": 107,
+      "cell": "$auto$ff.cc:337:slice$11230",
+      "q": 250,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:56.1-65.4"
+    },
+    {
+      "bit": 108,
+      "cell": "$auto$ff.cc:337:slice$11231",
+      "q": 252,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:56.1-65.4"
+    },
+    {
+      "bit": 109,
+      "cell": "$auto$ff.cc:337:slice$11232",
+      "q": 254,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_data.v:56.1-65.4"
+    },
+    {
+      "bit": 110,
+      "cell": "$auto$ff.cc:337:slice$11610",
+      "q": 46,
+      "type": "$_DFF_PP0_",
+      "reset": 74,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_adpcm.v:58.1-68.4"
+    },
+    {
+      "bit": 111,
+      "cell": "$auto$ff.cc:337:slice$11611",
+      "q": 47,
+      "type": "$_DFF_PP0_",
+      "reset": 74,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_adpcm.v:58.1-68.4"
+    },
+    {
+      "bit": 112,
+      "cell": "$auto$ff.cc:337:slice$11612",
+      "q": 48,
+      "type": "$_DFF_PP0_",
+      "reset": 74,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_adpcm.v:58.1-68.4"
+    },
+    {
+      "bit": 113,
+      "cell": "$auto$ff.cc:337:slice$11613",
+      "q": 49,
+      "type": "$_DFF_PP0_",
+      "reset": 74,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_adpcm.v:58.1-68.4"
+    },
+    {
+      "bit": 114,
+      "cell": "$auto$ff.cc:337:slice$11614",
+      "q": 50,
+      "type": "$_DFF_PP0_",
+      "reset": 74,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_adpcm.v:58.1-68.4"
+    },
+    {
+      "bit": 115,
+      "cell": "$auto$ff.cc:337:slice$11615",
+      "q": 51,
+      "type": "$_DFF_PP0_",
+      "reset": 74,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_adpcm.v:58.1-68.4"
+    },
+    {
+      "bit": 116,
+      "cell": "$auto$ff.cc:337:slice$11616",
+      "q": 52,
+      "type": "$_DFF_PP0_",
+      "reset": 74,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_adpcm.v:58.1-68.4"
+    },
+    {
+      "bit": 117,
+      "cell": "$auto$ff.cc:337:slice$11617",
+      "q": 53,
+      "type": "$_DFF_PP0_",
+      "reset": 74,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_adpcm.v:58.1-68.4"
+    },
+    {
+      "bit": 118,
+      "cell": "$auto$ff.cc:337:slice$11618",
+      "q": 54,
+      "type": "$_DFF_PP0_",
+      "reset": 74,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_adpcm.v:58.1-68.4"
+    },
+    {
+      "bit": 119,
+      "cell": "$auto$ff.cc:337:slice$11619",
+      "q": 265,
+      "type": "$_DFF_PP0_",
+      "reset": 74,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_adpcm.v:58.1-68.4"
+    },
+    {
+      "bit": 120,
+      "cell": "$auto$ff.cc:337:slice$11620",
+      "q": 267,
+      "type": "$_DFF_PP0_",
+      "reset": 74,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_adpcm.v:58.1-68.4"
+    },
+    {
+      "bit": 121,
+      "cell": "$auto$ff.cc:337:slice$11621",
+      "q": 269,
+      "type": "$_DFF_PP0_",
+      "reset": 74,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_adpcm.v:58.1-68.4"
+    },
+    {
+      "bit": 122,
+      "cell": "$auto$ff.cc:337:slice$11622",
+      "q": 271,
+      "type": "$_DFF_PP0_",
+      "reset": 74,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_adpcm.v:58.1-68.4"
+    },
+    {
+      "bit": 123,
+      "cell": "$auto$ff.cc:337:slice$2495",
+      "q": 273,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:44.1-51.4"
+    },
+    {
+      "bit": 124,
+      "cell": "$auto$ff.cc:337:slice$2496",
+      "q": 275,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:44.1-51.4"
+    },
+    {
+      "bit": 125,
+      "cell": "$auto$ff.cc:337:slice$2497",
+      "q": 277,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:44.1-51.4"
+    },
+    {
+      "bit": 126,
+      "cell": "$auto$ff.cc:337:slice$2498",
+      "q": 279,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:44.1-51.4"
+    },
+    {
+      "bit": 127,
+      "cell": "$auto$ff.cc:337:slice$2499",
+      "q": 281,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:44.1-51.4"
+    },
+    {
+      "bit": 128,
+      "cell": "$auto$ff.cc:337:slice$2500",
+      "q": 283,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:44.1-51.4"
+    },
+    {
+      "bit": 129,
+      "cell": "$auto$ff.cc:337:slice$2501",
+      "q": 285,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:44.1-51.4"
+    },
+    {
+      "bit": 130,
+      "cell": "$auto$ff.cc:337:slice$2502",
+      "q": 287,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:44.1-51.4"
+    },
+    {
+      "bit": 131,
+      "cell": "$auto$ff.cc:337:slice$2503",
+      "q": 289,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:44.1-51.4"
+    },
+    {
+      "bit": 132,
+      "cell": "$auto$ff.cc:337:slice$2504",
+      "q": 291,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:44.1-51.4"
+    },
+    {
+      "bit": 133,
+      "cell": "$auto$ff.cc:337:slice$2505",
+      "q": 293,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:44.1-51.4"
+    },
+    {
+      "bit": 134,
+      "cell": "$auto$ff.cc:337:slice$2506",
+      "q": 295,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:44.1-51.4"
+    },
+    {
+      "bit": 135,
+      "cell": "$auto$ff.cc:337:slice$2507",
+      "q": 297,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:44.1-51.4"
+    },
+    {
+      "bit": 136,
+      "cell": "$auto$ff.cc:337:slice$2508",
+      "q": 299,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:44.1-51.4"
+    },
+    {
+      "bit": 137,
+      "cell": "$auto$ff.cc:337:slice$2509",
+      "q": 301,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:53.1-56.4"
+    },
+    {
+      "bit": 138,
+      "cell": "$auto$ff.cc:337:slice$2510",
+      "q": 302,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "D:/git/RabbitPunch-savestates/rtl/sound/jt7759/hdl/jt7759_div.v:53.1-56.4"
+    },
+    {
+      "bit": 139,
+      "cell": "$auto$ff.cc:337:slice$3153",
+      "q": 304,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 140,
+      "cell": "$auto$ff.cc:337:slice$3154",
+      "q": 306,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 141,
+      "cell": "$auto$ff.cc:337:slice$3155",
+      "q": 308,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 142,
+      "cell": "$auto$ff.cc:337:slice$3156",
+      "q": 310,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 143,
+      "cell": "$auto$ff.cc:337:slice$3157",
+      "q": 312,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 144,
+      "cell": "$auto$ff.cc:337:slice$3158",
+      "q": 314,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 145,
+      "cell": "$auto$ff.cc:337:slice$3159",
+      "q": 316,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 146,
+      "cell": "$auto$ff.cc:337:slice$3160",
+      "q": 318,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 147,
+      "cell": "$auto$ff.cc:337:slice$3161",
+      "q": 320,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 148,
+      "cell": "$auto$ff.cc:337:slice$3162",
+      "q": 322,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 149,
+      "cell": "$auto$ff.cc:337:slice$3163",
+      "q": 324,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 150,
+      "cell": "$auto$ff.cc:337:slice$3164",
+      "q": 326,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 151,
+      "cell": "$auto$ff.cc:337:slice$3165",
+      "q": 328,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 152,
+      "cell": "$auto$ff.cc:337:slice$3166",
+      "q": 330,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 153,
+      "cell": "$auto$ff.cc:337:slice$3167",
+      "q": 332,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 154,
+      "cell": "$auto$ff.cc:337:slice$3168",
+      "q": 334,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1003.3-1007.20"
+    },
+    {
+      "bit": 155,
+      "cell": "$auto$ff.cc:337:slice$3169",
+      "q": 336,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:972.3-976.20"
+    },
+    {
+      "bit": 156,
+      "cell": "$auto$ff.cc:337:slice$3170",
+      "q": 338,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:972.3-976.20"
+    },
+    {
+      "bit": 157,
+      "cell": "$auto$ff.cc:337:slice$3171",
+      "q": 340,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:972.3-976.20"
+    },
+    {
+      "bit": 158,
+      "cell": "$auto$ff.cc:337:slice$3172",
+      "q": 342,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:972.3-976.20"
+    },
+    {
+      "bit": 159,
+      "cell": "$auto$ff.cc:337:slice$3173",
+      "q": 344,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1009.3-1013.23"
+    },
+    {
+      "bit": 160,
+      "cell": "$auto$ff.cc:337:slice$3174",
+      "q": 346,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 161,
+      "cell": "$auto$ff.cc:337:slice$3175",
+      "q": 348,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 162,
+      "cell": "$auto$ff.cc:337:slice$3176",
+      "q": 350,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 163,
+      "cell": "$auto$ff.cc:337:slice$3177",
+      "q": 352,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 164,
+      "cell": "$auto$ff.cc:337:slice$3178",
+      "q": 354,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 165,
+      "cell": "$auto$ff.cc:337:slice$3179",
+      "q": 356,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 166,
+      "cell": "$auto$ff.cc:337:slice$3180",
+      "q": 358,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 167,
+      "cell": "$auto$ff.cc:337:slice$3181",
+      "q": 360,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 168,
+      "cell": "$auto$ff.cc:337:slice$3182",
+      "q": 362,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 169,
+      "cell": "$auto$ff.cc:337:slice$3183",
+      "q": 364,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 170,
+      "cell": "$auto$ff.cc:337:slice$3184",
+      "q": 366,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 171,
+      "cell": "$auto$ff.cc:337:slice$3185",
+      "q": 368,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 172,
+      "cell": "$auto$ff.cc:337:slice$3186",
+      "q": 370,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 173,
+      "cell": "$auto$ff.cc:337:slice$3187",
+      "q": 372,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 174,
+      "cell": "$auto$ff.cc:337:slice$3188",
+      "q": 374,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 175,
+      "cell": "$auto$ff.cc:337:slice$3189",
+      "q": 376,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 176,
+      "cell": "$auto$ff.cc:337:slice$3190",
+      "q": 378,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:991.3-995.20"
+    },
+    {
+      "bit": 177,
+      "cell": "$auto$ff.cc:337:slice$3191",
+      "q": 380,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1015.3-1019.20"
+    },
+    {
+      "bit": 178,
+      "cell": "$auto$ff.cc:337:slice$3192",
+      "q": 382,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:966.3-970.20"
+    },
+    {
+      "bit": 179,
+      "cell": "$auto$ff.cc:337:slice$3193",
+      "q": 384,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1021.3-1025.20"
+    },
+    {
+      "bit": 180,
+      "cell": "$auto$ff.cc:337:slice$3194",
+      "q": 386,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "controller.v:982.3-983.18"
+    },
+    {
+      "bit": 181,
+      "cell": "$auto$ff.cc:337:slice$3195",
+      "q": 388,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "controller.v:982.3-983.18"
+    },
+    {
+      "bit": 182,
+      "cell": "$auto$ff.cc:337:slice$3196",
+      "q": 390,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "controller.v:982.3-983.18"
+    },
+    {
+      "bit": 183,
+      "cell": "$auto$ff.cc:337:slice$3197",
+      "q": 392,
+      "type": "$_DFF_P_",
+      "reset": null,
+      "source": "controller.v:982.3-983.18"
+    },
+    {
+      "bit": 184,
+      "cell": "$auto$ff.cc:337:slice$3198",
+      "q": 394,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:1027.3-1031.20"
+    },
+    {
+      "bit": 185,
+      "cell": "$auto$ff.cc:337:slice$3199",
+      "q": 396,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:960.3-964.20"
+    },
+    {
+      "bit": 186,
+      "cell": "$auto$ff.cc:337:slice$3200",
+      "q": 398,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:960.3-964.20"
+    },
+    {
+      "bit": 187,
+      "cell": "$auto$ff.cc:337:slice$3201",
+      "q": 400,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:960.3-964.20"
+    },
+    {
+      "bit": 188,
+      "cell": "$auto$ff.cc:337:slice$3202",
+      "q": 402,
+      "type": "$_DFF_PP0_",
+      "reset": 2,
+      "source": "controller.v:960.3-964.20"
+    }
+  ],
+  "accepted": false,
+  "scope": "Generated evaluation only. All reachable mapped flops exported, frozen and scan writable, including asynchronous reset gating while frozen. Unknown power-up bits initialize to FPGA zero. No normal-mode equivalence, continuation or synthesis qualification yet."
+}

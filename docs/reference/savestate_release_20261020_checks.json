@@ -1,0 +1,85 @@
+{
+  "accepted": true,
+  "source_build_commit": "6ac4a1bb138d8aaaa1ee021442a7691ea4eeb3f3",
+  "fitter_seed": 3,
+  "rbf": "releases/Arcade-RabbitPunch_20261020.rbf",
+  "rbf_sha256": "f7cc5bcd9f89ac3b9a4b976b7b7782bb6980dd88d7722e5df3b0b573f11f83e3",
+  "release_fit_receipt_sha256": "0d7b735c1082300df76dfc553df8e1ca8dca64a39505df930f94551b9cd5e6fd",
+  "hardware_savestate_save_restore_working": true,
+  "hardware_evidence_kind": "manual hardware check",
+  "mras": [
+    {
+      "path": "releases/Rabbit Punch (US).mra",
+      "sha256": "bf274d48c3aea2eed914aab20a2ac6f53af9dc6c34aaf7a3f3710b81605050f5",
+      "savestate_button_bit": 15,
+      "rom_dip_profile_and_button_layout_unchanged": true
+    },
+    {
+      "path": "releases/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra",
+      "sha256": "e84b6fbffa23694839772b00f92c558a8c1563f793ab88cd4b9346f9f717377e",
+      "savestate_button_bit": 15,
+      "rom_dip_profile_and_button_layout_unchanged": true
+    },
+    {
+      "path": "releases/Rabio Lepus (Japan).mra",
+      "sha256": "fe2c21689d359a13572ad7749c080819bd6d5f06a6e0af5ffa0054cf35d8ed85",
+      "savestate_button_bit": 15,
+      "rom_dip_profile_and_button_layout_unchanged": true
+    },
+    {
+      "path": "releases/_alternatives/_ddr/Rabio Lepus (Japan) - DDR load.mra",
+      "sha256": "b75b39e557a4fa470761fd19cfcd635dc66b0f22c4fbaf99a09ba92514471948",
+      "savestate_button_bit": 15,
+      "rom_dip_profile_and_button_layout_unchanged": true
+    }
+  ],
+  "vendor_manifests": [
+    {
+      "path": "docs/reference/vendor_manifest.json",
+      "sha256": "07af91c9d12e751e75982559ec1594b5e57d913bc29cf457d9a21516ba0eb831",
+      "files": 76,
+      "working_file_sha256": "07af91c9d12e751e75982559ec1594b5e57d913bc29cf457d9a21516ba0eb831",
+      "hash_scope": "published Git blob"
+    },
+    {
+      "path": "rtl/state/vendor/boogiewings_jt51/vendor_manifest.json",
+      "sha256": "023caa19b267d283ddc6797a655d7c3129828ede79a4d0d820d51a027347ae16",
+      "files": 22,
+      "working_file_sha256": "023caa19b267d283ddc6797a655d7c3129828ede79a4d0d820d51a027347ae16",
+      "hash_scope": "published Git blob"
+    },
+    {
+      "path": "rtl/state/vendor/konamigx/vendor_manifest.json",
+      "sha256": "8bb687a05fe92d7151e24e4b31cd303adb5eaff007553fc26c774a0e004dfb0e",
+      "files": 8,
+      "working_file_sha256": "8bb687a05fe92d7151e24e4b31cd303adb5eaff007553fc26c774a0e004dfb0e",
+      "hash_scope": "published Git blob"
+    },
+    {
+      "path": "rtl/state/vendor/meatsauce_t80/vendor_manifest.json",
+      "sha256": "6dece1e7ac3905ffc0039e5c7addeff88cc9f4e0d974424fa54c5203a3f965bc",
+      "files": 5,
+      "working_file_sha256": "6dece1e7ac3905ffc0039e5c7addeff88cc9f4e0d974424fa54c5203a3f965bc",
+      "hash_scope": "published Git blob"
+    },
+    {
+      "path": "rtl/state/vendor/nmk16/vendor_manifest.json",
+      "sha256": "8ed0c458d75ad06ba661b43cc78e8d2e7592c883c62a1cff3b4b5bf180fbb48e",
+      "files": 2,
+      "working_file_sha256": "8ed0c458d75ad06ba661b43cc78e8d2e7592c883c62a1cff3b4b5bf180fbb48e",
+      "hash_scope": "published Git blob"
+    }
+  ],
+  "vendor_files_checked": 113,
+  "unchanged_framework_tree": "5d7a1a15658d89cb7a20d593753acb5e6b95403d",
+  "floorplan_sha256": {
+    "RabbitPunch_20261020.png": "a227787edb7cf36f7d070cc3d5e0051e9532fe1a8738639ec6020e1d8e73a48f",
+    "RabbitPunch_20261020_groups.md": "3a9fd19170234b4968c2a42d4a22c680f95d0487d44b77de8e096445f56c3095",
+    "RabbitPunch_stp_20261020.png": "d5186d2857f23493fef26b2195b1286755eb0689509e88d980117edbcbf2c33a",
+    "RabbitPunch_stp_20261020_groups.md": "a802add446a98146a7ee47cccc8620d2a2b5e415b24c0d22df0cd796fc8fa1b7"
+  },
+  "auditor_sha256": "c8e47011dd1b871fc189dd6f90868acce913955cc4c36e62c32788565c829906",
+  "scope": "Dated RBF exactly matches the timing-qualified release artifact. Game RTL, source list and timing constraints are unchanged from the fitted source. Both direct and DDR MRAs retain their ROM/DIP/profile/button layout and agree with the generator Savestate bit15 mapping. Imported vendor files match their byte manifests; framework tree is unchanged. Save/restore works in a manual MiSTer hardware check. This does not expand the recorded pixel/PCM simulations into exhaustive hardware or CRT coverage.",
+  "text_file_line_endings": "LF for release MRAs and floorplan Markdown",
+  "text_finalizer_sha256": "4877a23cc9d1de5a9fbb1dcc277699913dd1d7abcd2da0c902d0f1c3ce836dd3"
+}

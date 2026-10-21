@@ -19,7 +19,8 @@ entity rabbitpunch_read_arbiter is
         ou27_backend_byte_address : out unsigned(26 downto 0);
         i_backend_ready : in std_logic;
         i_backend_response_valid : in std_logic;
-        iu64_backend_read_data : in unsigned(63 downto 0)
+        iu64_backend_read_data : in unsigned(63 downto 0);
+        i_state_normalize : in std_logic := '0'
     );
 end entity;
 
@@ -59,6 +60,15 @@ begin
     begin
         if (rising_edge(i_clk)) then
             ou3_response_valid <= "000";
+            if (i_state_normalize = '1') then
+                assert (su3_pending = "000" and styp_state = STATE_IDLE and
+                    iu3_requests = "000" and i_backend_response_valid = '0')
+                    report "Read arbiter normalization requires drained requests" severity failure;
+                if (su3_pending = "000" and styp_state = STATE_IDLE and
+                    iu3_requests = "000" and i_backend_response_valid = '0') then
+                    sint_next <= 0;
+                end if;
+            end if;
             for vint_client in 0 to 2 loop
                 if (iu3_requests(vint_client) = '1') then
                     assert (su3_pending(vint_client) = '0' and i_enable = '1')

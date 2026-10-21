@@ -1,0 +1,11 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_layout.vhd": "9f862ba8f7bb4d68f85c1040b0e787fddd51253e4b88e17ebe86745e7409bc68",
+    "rtl/state/rabbitpunch_state_semantics.vhd": "405ca6d7572e72471225cab76c7b8aea10d9783e258653f3ecdc787422eef62b",
+    "sim/state/state_semantics_tb.vhd": "ffa10c62d2465644c9fb635ad0c2af0e1e23a413ce01a071a084e76dde17a701"
+  },
+  "runner_sha256": "6bd9b39fc6defaef4c6c7efb17b88ae002954b83feede47941e3f39f3e7d839f",
+  "log_sha256": "99433e6e8817e73153976cc6443daafa1b7a2412bf7561a80f7d0d278c413a74",
+  "scope": "Read-only complete-body legality stream:34 cases cover M68K SR/PC/SSP and padding, Z80 IM/reserved bits, IO/IRQ/cadence/beam/ADPCM wrapper bounds, FM tail padding, FM startup consistency, captured score readiness,189-bit ADPCM tail padding, valid boundary values, stalls, truncated/excess length, abort with ignored late bytes and valid retry. No state-write port or full-game integration/FPGA timing qualification."
+}

@@ -1,0 +1,61 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 RabbitPunch contributors
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY state_banks_check
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_state_layout.vhd
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_state_memory.vhd
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_state_body.vhd
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_state_banks.vhd
+set_global_assignment -name VHDL_FILE state_banks_check.vhd
+set_global_assignment -name SDC_FILE state_banks_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_initialize
+set_instance_assignment -name VIRTUAL_PIN ON -to i_session
+set_instance_assignment -name VIRTUAL_PIN ON -to i_machine_held
+set_instance_assignment -name VIRTUAL_PIN ON -to i_apply_begin
+set_instance_assignment -name VIRTUAL_PIN ON -to i_byte_request
+set_instance_assignment -name VIRTUAL_PIN ON -to o_byte_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to i_byte_write
+set_instance_assignment -name VIRTUAL_PIN ON -to iu18_byte_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_byte_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_byte_response
+set_instance_assignment -name VIRTUAL_PIN ON -to o_byte_error
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_byte_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_commit
+set_instance_assignment -name VIRTUAL_PIN ON -to o_committed
+set_instance_assignment -name VIRTUAL_PIN ON -to o_commit_error
+set_instance_assignment -name VIRTUAL_PIN ON -to o_idle
+set_instance_assignment -name VIRTUAL_PIN ON -to ou5_m68k_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu32_m68k_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_m68k_write
+set_instance_assignment -name VIRTUAL_PIN ON -to ou32_m68k_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu256_t80_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou256_t80_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_t80_load
+set_instance_assignment -name VIRTUAL_PIN ON -to iu512_board_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou512_board_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_board_load
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_chip_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu32_fm_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu32_adpcm_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou32_chip_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_fm_write
+set_instance_assignment -name VIRTUAL_PIN ON -to o_adpcm_write
+set_instance_assignment -name VIRTUAL_PIN ON -to o_main_request
+set_instance_assignment -name VIRTUAL_PIN ON -to o_main_write
+set_instance_assignment -name VIRTUAL_PIN ON -to ou24_main_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_main_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou2_main_bytes[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_main_response
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_main_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_sound_request
+set_instance_assignment -name VIRTUAL_PIN ON -to o_sound_write
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_sound_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_sound_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_sound_response
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_sound_data[*]

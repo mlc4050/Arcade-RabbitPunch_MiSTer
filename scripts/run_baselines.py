@@ -10,7 +10,8 @@ from coretools import core_root, modelsim_bin, NO_WINDOW
 from hwlock import require_no_jtag
 
 
-def run_case(name, sources, top, duration, marker, sim_args=(), wall_timeout=90, setup_commands=()):
+def run_case(name, sources, top, duration, marker, sim_args=(), wall_timeout=90, setup_commands=(),
+             verilog_defines=('SIMULATION',), vlog_options=()):
     require_no_jtag(f"Rabbit Punch baseline: {name}")
     root, tools = core_root(), modelsim_bin()
     run_dir = root / "debug/baselines" / name
@@ -44,7 +45,8 @@ def run_case(name, sources, top, duration, marker, sim_args=(), wall_timeout=90,
         if path.endswith(".vhd"):
             command("vcom", "-2008", "-work", "work", root / path)
         else:
-            command("vlog", "-sv", "+define+SIMULATION", "-suppress", "7061", "-work", "work", root / path)
+            defines = ['+define+'+value for value in verilog_defines]
+            command("vlog", "-sv", *defines, *vlog_options, "-suppress", "7061", "-work", "work", root / path)
     (run_dir / "run.do").write_text(
         "onerror {quit -code 1 -f}\nonbreak {quit -code 1 -f}\n"
         "set BreakOnAssertion 2\n"

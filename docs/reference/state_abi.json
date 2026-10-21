@@ -1,0 +1,54 @@
+{
+  "provisional": true,
+  "signature_hex": "3A1B6DDE",
+  "definition_sha256": "3a1b6dde1261661559356bdf51a975484bac07f7789071d56f7870da7bde5306",
+  "definition": {
+    "format": "RPS1/00400001",
+    "abi_revision": 1,
+    "section_bytes": [
+      106496,
+      96,
+      32,
+      64,
+      504,
+      24
+    ],
+    "models": {
+      "jt51": {
+        "bits": 4016,
+        "model_sha256": "af6ad0f89208e06a192a139906735d958f46fa91b840ea0ffa2237c6b0d559a0"
+      },
+      "jt7759": {
+        "bits": 189,
+        "model_sha256": "6fdc86fa46e21bd97109e1cafa221d0e31c04deb2c1af48d2e15be388be5c3a9"
+      }
+    },
+    "mapping_sha256": {
+      "rtl/rabbitpunch_audio.vhd": "9116a3184e6019c87d5250db9dede968b986413ae9521942be62cc5a0927de4a",
+      "rtl/rabbitpunch_audio_rom_transport.vhd": "00f4ec9277c643f4a0234164803bc217802c94dc536172ecf31ab5eb5a8590ad",
+      "rtl/rabbitpunch_io.vhd": "4e2f26f3831df45b3d33223995572a7ecad5fed70c7d09f75e7d62697d77d652",
+      "rtl/rabbitpunch_irq.vhd": "ed1456938cc21512c8a54f0adaa5e0b1d8c3be8e7abe07545e613d9bd9474570",
+      "rtl/rabbitpunch_read_arbiter.vhd": "737f3161e737d020fd51227e8dd2b64b4e51af330b08a3663b4f987a446191bf",
+      "rtl/rabbitpunch_sound_board.vhd": "0a523151ed32a08af40dcb503635b5395968e27d04dee58b9a82af0ddf7b2496",
+      "rtl/rabbitpunch_upd7759.vhd": "3434be19e205f9b061aaf7158881901da02835cbc33f0a56b275eb5854a9354e",
+      "rtl/rabbitpunch_ym2151.vhd": "6676c99a104e4665cff087cb0464506d96dcc1aa8f3f3dc0ed33a4be15b8f328",
+      "rtl/state/rabbitpunch_m68k_capture.vhd": "a825b7b56a2db4b9d6c9c99bf20e6e746181b6a49cc8a98e5b8f5e9889e15c13",
+      "rtl/state/rabbitpunch_state_banks.vhd": "c8c79f09c0ffb5938dbe52fc0acdb5f62a3776c7ecc128e614c5b646f823406d",
+      "rtl/state/rabbitpunch_state_body.vhd": "dfd56ad6039a32cc5cdf724bf95d4da3996bd41de48e90eec2a7310e1a780a50",
+      "rtl/state/rabbitpunch_state_fx68k.vhd": "5ec7ccd432103faf6cc817d7aff7b7aa9259fe05750062a08702455749c59dec",
+      "rtl/state/rabbitpunch_state_game_timing.vhd": "27b0ce3facbc23919f9d24d26d3c4a119196fd9247d25357066a16fdee1af091",
+      "rtl/state/rabbitpunch_state_layout.vhd": "9f862ba8f7bb4d68f85c1040b0e787fddd51253e4b88e17ebe86745e7409bc68",
+      "rtl/state/rabbitpunch_state_machine_access.vhd": "ae8d28076ca040e45b6db012891eefee16afb90209364843fbacdfd427011496",
+      "rtl/state/rabbitpunch_state_machine_backend.vhd": "26f0750c0806f1c05c235cd04ed6632852e9fc3b3489b5eb6c7a5a5454cbaea1",
+      "rtl/state/rabbitpunch_state_memory.vhd": "2403b9cdaba2de8acb1cda455639bad78184e030f2f7ee75b031a4a73929afe2",
+      "rtl/state/rabbitpunch_state_sdram_phase.vhd": "60a17d0e8995fb3c5195ec0a994aabbf415f77d2173057d32706845d1ff4ae7b",
+      "rtl/state/rabbitpunch_t80_capture.vhd": "39a8c43ab6603958c36ba57e1cfa9ce0a0708c355bd76faf817e0b9219e51f16",
+      "rtl/state/vendor/konamigx/gx_ss_m68k.sv": "397e40f9dfcca76acb3039853db44d239a246f31671fd641e0cb81003d5daec4",
+      "rtl/state/vendor/meatsauce_t80/T80.vhd": "e6f6a31dcbc34f0193ff8aa4bc124e4967e527d10731d0acc6f3908d3384e0ef",
+      "rtl/state/vendor/meatsauce_t80/T80_ALU.vhd": "8e1dfd1c47fc0ce4a902f3d789f657a93f2b9faa6a72df70e1f12f27649291b8",
+      "rtl/state/vendor/meatsauce_t80/T80_MCode.vhd": "a73c512d7f03bc34759de560efe78c1813785c5ae3f52714df149455b876e5a5",
+      "rtl/state/vendor/meatsauce_t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783"
+    }
+  },
+  "scope": "Conservative image compatibility identifier. Source correspondence and section sizes only; no whole-game continuation or FPGA claim."
+}

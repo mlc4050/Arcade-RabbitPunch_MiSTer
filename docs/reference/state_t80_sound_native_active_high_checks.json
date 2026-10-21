@@ -1,0 +1,264 @@
+{
+  "accepted": true,
+  "game": "rabiolep",
+  "emulated_milliseconds": 60,
+  "peripheral_writes": 983,
+  "pcm_samples": 3743,
+  "exact_cycle_address_data_and_pcm": true,
+  "original_cpu_absent": true,
+  "hierarchy": [
+    "# Loading work.state_t80_sound_tb(test)",
+    "# Loading work.rabbitpunch_t80_capture(rtl)",
+    "# Loading state_t80.t80(rtl)",
+    "# Loading state_t80.t80_mcode(rtl)",
+    "# Loading state_t80.t80_alu(rtl)",
+    "# Loading state_t80.t80_reg(rtl)"
+  ],
+  "baseline_report_sha256": "dd19ab6c02d306bf716bc5c1c35e8f0318a9019750c2a89adb957202b28fb861",
+  "fixture_snapshot_sha256": "7deb401c79c93bb705b856a4e5bf4336b8ad99f310969b516011803c8f68ec7f",
+  "sources": {
+    "candidate/rtl/state/vendor/meatsauce_t80/T80_Reg.vhd": {
+      "sha256": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+      "source": "D:\\git\\RabbitPunch-savestates\\rtl\\state\\vendor\\meatsauce_t80\\T80_Reg.vhd",
+      "snapshot": "sources/candidate/rtl/state/vendor/meatsauce_t80/T80_Reg.vhd"
+    },
+    "candidate/rtl/state/vendor/meatsauce_t80/T80_MCode.vhd": {
+      "sha256": "a73c512d7f03bc34759de560efe78c1813785c5ae3f52714df149455b876e5a5",
+      "source": "D:\\git\\RabbitPunch-savestates\\rtl\\state\\vendor\\meatsauce_t80\\T80_MCode.vhd",
+      "snapshot": "sources/candidate/rtl/state/vendor/meatsauce_t80/T80_MCode.vhd"
+    },
+    "candidate/rtl/state/vendor/meatsauce_t80/T80_ALU.vhd": {
+      "sha256": "8e1dfd1c47fc0ce4a902f3d789f657a93f2b9faa6a72df70e1f12f27649291b8",
+      "source": "D:\\git\\RabbitPunch-savestates\\rtl\\state\\vendor\\meatsauce_t80\\T80_ALU.vhd",
+      "snapshot": "sources/candidate/rtl/state/vendor/meatsauce_t80/T80_ALU.vhd"
+    },
+    "candidate/rtl/state/vendor/meatsauce_t80/T80.vhd": {
+      "sha256": "e6f6a31dcbc34f0193ff8aa4bc124e4967e527d10731d0acc6f3908d3384e0ef",
+      "source": "D:\\git\\RabbitPunch-savestates\\rtl\\state\\vendor\\meatsauce_t80\\T80.vhd",
+      "snapshot": "sources/candidate/rtl/state/vendor/meatsauce_t80/T80.vhd"
+    },
+    "candidate/rtl/state/rabbitpunch_t80_capture.vhd": {
+      "sha256": "55aec7bb27e91dc6d04e3f2e3f1a5535c866cda4c290389a8b5d887844dc8462",
+      "source": "D:\\git\\RabbitPunch-savestates\\rtl\\state\\rabbitpunch_t80_capture.vhd",
+      "snapshot": "sources/candidate/rtl/state/rabbitpunch_t80_capture.vhd"
+    },
+    "sim/sound/state_t80_z80_adapter.vhd": {
+      "sha256": "e2cc301aa89d779bdc18f11f066e2953f9255fd677d6d1f186809c12b9e43bec",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\sim\\sound\\state_t80_z80_adapter.vhd",
+      "snapshot": "sources/sim/sound/state_t80_z80_adapter.vhd"
+    },
+    "rtl/sound/jt51/hdl/jt51_acc.v": {
+      "sha256": "633319a0e89a78d390cba54a24aabf6f1019b705b378b636e246dcf44c8829f8",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_acc.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_acc.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_eg.v": {
+      "sha256": "6e7c5f315edc82b70918ea61d6d5c992204d4e8b272e33fb3ce539a9843cac5e",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_eg.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_eg.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_exp2lin.v": {
+      "sha256": "cecc44acf6d7c8a81e80638e4a6eeb46f17d6c8d809e7a928338553bb23fb400",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_exp2lin.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_exp2lin.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_exprom.v": {
+      "sha256": "c9f33ede4c1c0af6f54ae45620d986a2c5a2f0ef16b453dc7d2eeeac85f8cbb5",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_exprom.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_exprom.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_kon.v": {
+      "sha256": "e1bb08fe65a53d2dc871459cc91e4beeec9efb9e839b3a39a941fa27ac19ba0f",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_kon.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_kon.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_lfo.v": {
+      "sha256": "2bb0e19b51982f761fd50eb992c90f6dbadf467528ac09fa033b48020cd8d193",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_lfo.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_lfo.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_lin2exp.v": {
+      "sha256": "c4351ea7711364ab394ab510326111dc5047f4e57830bddef15163cbc4dcb98e",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_lin2exp.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_lin2exp.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_mmr.v": {
+      "sha256": "db3a6506091e6ea99a17ad2f5b8b11ecf36d97f74dbf0c1098cf6db601d6fdd6",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_mmr.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_mmr.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_mod.v": {
+      "sha256": "1a04fe51a56756a98b577547bbd95cf984283288f2da2e4946d75063a69d357c",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_mod.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_mod.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_noise_lfsr.v": {
+      "sha256": "6b58949a51dbfe8c96f19eac3aa84aaace7fcc5cc4e1902c084a93d3d1c4da91",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_noise_lfsr.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_noise_lfsr.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_noise.v": {
+      "sha256": "87b70082becc58ece4c223ea5ed01b0c0bc0b05ae95ace9b498768429232f360",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_noise.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_noise.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_op.v": {
+      "sha256": "5dbb743c49af67e6dff7e6c65691a66371aaf5a126834525f9501a8af1420bbf",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_op.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_op.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_pg.v": {
+      "sha256": "d52c369e535196ee260243b2342c6a526a1d95425440512037f3f3b5185f0a8a",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_pg.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_pg.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_phinc_rom.v": {
+      "sha256": "41fefe0b9bc9a3b71a036d12d723666e4b588c57625228eee278f9704a6f53b1",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_phinc_rom.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_phinc_rom.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_phrom.v": {
+      "sha256": "b3fb0623737dd22befa0bfa9a130d7b1437e81ff3e1842538251d5cd29a75c89",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_phrom.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_phrom.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_pm.v": {
+      "sha256": "9625bda77a523371fc4704ac66cfec95a9d1aff343c2e770ea5aba11eb50c8f3",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_pm.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_pm.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_reg_ch.v": {
+      "sha256": "2303d898fa49bf67fa8aace6c1a1e00e48d2951f9a221e75058233953f670aad",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_reg_ch.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_reg_ch.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_csr_op.v": {
+      "sha256": "b129bf97cc155bc0e4312287af79b2c7985852ef65c1768f23ffa31badd5b648",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_csr_op.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_csr_op.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_reg.v": {
+      "sha256": "a9913cb08f562046c2f9375fd6f7a4a5a0eb4d46266df303875059761f304de7",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_reg.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_reg.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_sh.v": {
+      "sha256": "71246f6b6989f922220cdd370cee52ecd56c7244e11073ddc618028a4136f0aa",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_sh.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_sh.v"
+    },
+    "rtl/sound/jt51/hdl/jt51_timers.v": {
+      "sha256": "e885ffd11d62c2bf42aafb90eb30e681c3d98ae9c4fe6714b13d72f491347e70",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51_timers.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51_timers.v"
+    },
+    "rtl/sound/jt51/hdl/jt51.v": {
+      "sha256": "4c5f80dae49f435686d3f917897df867ba7725a44bd52c5d652658ba178689b0",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt51\\hdl\\jt51.v",
+      "snapshot": "sources/rtl/sound/jt51/hdl/jt51.v"
+    },
+    "sim/vendor/jt51/sep32.v": {
+      "sha256": "e1f1733d87094bc51a31d39a34c27c71d408541939bfd4c7db00a248a02b85a1",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\sim\\vendor\\jt51\\sep32.v",
+      "snapshot": "sources/sim/vendor/jt51/sep32.v"
+    },
+    "sim/vendor/jt51/sep32_cnt.v": {
+      "sha256": "cc15f156e3bbf72f19956c6fca34c4d17986a576209d1ae890450519692edce7",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\sim\\vendor\\jt51\\sep32_cnt.v",
+      "snapshot": "sources/sim/vendor/jt51/sep32_cnt.v"
+    },
+    "rtl/sound/jt7759/hdl/jt7759.v": {
+      "sha256": "a4defeee8f5b5fec795af00d6185aa941f4135ab72ae5f7fece31908c3c48c1a",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt7759\\hdl\\jt7759.v",
+      "snapshot": "sources/rtl/sound/jt7759/hdl/jt7759.v"
+    },
+    "rtl/sound/jt7759/hdl/jt7759_adpcm.v": {
+      "sha256": "41d795e33e2085d3d07ee0acab23e85f495f3766e61bd91f177c46e84072380d",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt7759\\hdl\\jt7759_adpcm.v",
+      "snapshot": "sources/rtl/sound/jt7759/hdl/jt7759_adpcm.v"
+    },
+    "rtl/sound/jt7759/hdl/jt7759_ctrl.v": {
+      "sha256": "19ad3a6572dec4e61d0046b222b6af53660cb558123b985f43db86dd5ed98aa9",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt7759\\hdl\\jt7759_ctrl.v",
+      "snapshot": "sources/rtl/sound/jt7759/hdl/jt7759_ctrl.v"
+    },
+    "rtl/sound/jt7759/hdl/jt7759_data.v": {
+      "sha256": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt7759\\hdl\\jt7759_data.v",
+      "snapshot": "sources/rtl/sound/jt7759/hdl/jt7759_data.v"
+    },
+    "rtl/sound/jt7759/hdl/jt7759_div.v": {
+      "sha256": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\sound\\jt7759\\hdl\\jt7759_div.v",
+      "snapshot": "sources/rtl/sound/jt7759/hdl/jt7759_div.v"
+    },
+    "rtl/rabbitpunch_soundcpu.vhd": {
+      "sha256": "a203a2192e38f8e8dabd23a89f93ee3da936a90aef2637ef154175887e107fa9",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\rabbitpunch_soundcpu.vhd",
+      "snapshot": "sources/rtl/rabbitpunch_soundcpu.vhd"
+    },
+    "rtl/rabbitpunch_ym2151.vhd": {
+      "sha256": "ffb3d550d38586328f1b5a25d1c5c0ff6d96f0c439ae659386dd350a6fdb5ce5",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\rabbitpunch_ym2151.vhd",
+      "snapshot": "sources/rtl/rabbitpunch_ym2151.vhd"
+    },
+    "rtl/rabbitpunch_ram8.vhd": {
+      "sha256": "3125a846fd3c208c8512f604952bd4766ac4d2d7ee959c0b8e53b989e31fc7fa",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\rabbitpunch_ram8.vhd",
+      "snapshot": "sources/rtl/rabbitpunch_ram8.vhd"
+    },
+    "rtl/rabbitpunch_sound_bus.vhd": {
+      "sha256": "faf7694bb4396268d89179b47f1ca6c5e23281be6c5bbe5caee8310f9d655710",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\rabbitpunch_sound_bus.vhd",
+      "snapshot": "sources/rtl/rabbitpunch_sound_bus.vhd"
+    },
+    "rtl/rabbitpunch_sound_board.vhd": {
+      "sha256": "bb41d8b894978d4312c5081ae87d050426584a51c7823037eff5adf07ddf88c1",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\rabbitpunch_sound_board.vhd",
+      "snapshot": "sources/rtl/rabbitpunch_sound_board.vhd"
+    },
+    "rtl/rabbitpunch_upd7759.vhd": {
+      "sha256": "38d8e7f106759009323027ae17ad3905d58a69034eb57c0f2daa76f5fdaf3d1a",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\rabbitpunch_upd7759.vhd",
+      "snapshot": "sources/rtl/rabbitpunch_upd7759.vhd"
+    },
+    "rtl/rabbitpunch_adpcm.vhd": {
+      "sha256": "72b28e62f4a5e38e942fd0b4068a10e9200d69ef68652624f91875af664d66dd",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\rabbitpunch_adpcm.vhd",
+      "snapshot": "sources/rtl/rabbitpunch_adpcm.vhd"
+    },
+    "rtl/rabbitpunch_audio.vhd": {
+      "sha256": "001143defe3df5968a1d660ceb70ff9edda62756d575606e2558d65ae2a71a46",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\rabbitpunch_audio.vhd",
+      "snapshot": "sources/rtl/rabbitpunch_audio.vhd"
+    },
+    "rtl/rabbitpunch_audio_mixer.vhd": {
+      "sha256": "3e8e3684f188f2d751fc7f6f01dad1ff4869869576701aae7b48641049c0601b",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\rabbitpunch_audio_mixer.vhd",
+      "snapshot": "sources/rtl/rabbitpunch_audio_mixer.vhd"
+    },
+    "rtl/rabbitpunch_clock_enables.vhd": {
+      "sha256": "3c2356fb1fd0d45bd58e710b9fd0262cd6aa40f7081da6c6ae4bd9f22fe11a10",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\rtl\\rabbitpunch_clock_enables.vhd",
+      "snapshot": "sources/rtl/rabbitpunch_clock_enables.vhd"
+    },
+    "sim/sound/music_commands_fixture.vhd": {
+      "sha256": "7deb401c79c93bb705b856a4e5bf4336b8ad99f310969b516011803c8f68ec7f",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\debug\\music_commands\\rabiolep_9s_rtl_enabled_reset_checked\\fixture_source.vhd",
+      "snapshot": "sources/sim/sound/music_commands_fixture.vhd"
+    },
+    "sim/sound/state_t80_sound_tb.vhd": {
+      "sha256": "c623d6198c5dc89a884304148d98ca3e4fb6cc448a8b1a69a5cae9f29705cb27",
+      "source": "D:\\git\\Arcade-RabbitPunch_MiSTer\\sim\\sound\\state_t80_sound_tb.vhd",
+      "snapshot": "sources/sim/sound/state_t80_sound_tb.vhd"
+    }
+  },
+  "runner_sha256": "2e0f9f6f176090dd5021725cc8c85c1eb0f3badcd85826716d403391e6550e20",
+  "files": {
+    "native_peripheral.txt": "32c5aa9c3ebcc5a9fe0ebd48e5acbbffa6038680a1056c9d860999fe911a7b3c",
+    "native_pcm.txt": "792d5cb5284ff8c46a4dd4b90036c7ebc2aaa84dcec055bcbd3165dec32b16c2",
+    "result.log": "17899ba56d48c3e4498e0bba0f70328493e2b835e427b9696dbcd25abaf0d96b",
+    "elaboration.log": "b1e3baafd6f617a7aa87430cf570eb6952f33bc1ebb0354355b96137062120f9"
+  },
+  "scope": "Isolated candidate CPU substitution only, exact preserved enabled-reset VHDL fixture and original real sound ROM/RAM/chips. First60ms startup/transport versus original native capture; not a full-track or integrated savestate qualification. No production files changed."
+}

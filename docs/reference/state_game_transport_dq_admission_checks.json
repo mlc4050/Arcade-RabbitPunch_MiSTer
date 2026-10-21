@@ -1,0 +1,20 @@
+{
+  "accepted": true,
+  "bundle_manifest_sha256": "d167e90ab4105b8608d54f0d4d4270df297e4cc4f0e50706b3a487de4535921f",
+  "normalized_export_sha256": "a4369f9a9b072a53d02f1ba904957d7d45564f52791906729531d94e30b2aedf",
+  "native_export_receipt_sha256": "6f621a235df287209267cdc52c2ed534307cc34a27b141864075ab0fb26072ed",
+  "native_full_image_receipt_sha256": "77480ce5cd2121e55d5e56862567bd26d59207a792128f9e545d42767e8606ec",
+  "normalized_leaf_trace_sha256": "f082be2bcd73981c78ef6ceebef934ce314355915bc53579a25f5cbc391ad064",
+  "native_full_image_bytes": 2162688,
+  "common_source_sha256": {
+    "rtl/rabbitpunch_sdram_types.vhd": "35c1406e611389f2ee18dd3da7b0805e389ac4b8bd763c8a603a691b5de66367",
+    "rtl/rabbitpunch_sdram.vhd": "c2bb1bd24c3b7ef22653e3ce8d7d888acb868b5b28ad6345bbc26e0d5694815a",
+    "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+    "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c"
+  },
+  "dq_alias_audit_sha256": "d0e8acca74a40835dc1e82f239cd4bb69562b74bf01c0f4d9632bb7241789ab1",
+  "audit_replay_sha256": "d0e8acca74a40835dc1e82f239cd4bb69562b74bf01c0f4d9632bb7241789ab1",
+  "association_auditor_sha256": "9cf735d92132d50656303cefd77e5ad2212010eb6bb7c5a25cb2559f9b75bf0e",
+  "recorder_sha256": "86e199709be25639075bb1e344e332e19b12d8f71635951b3518b1a2427e7dad",
+  "scope": "SDRAM DQ abstraction admission by bounded native/export conformance and exact transparent association replay. The same unchanged controller/adapter/chip and parameters pass6186 initialized command clocks,256 normal writes and192 three-port readbacks through seven inout stages; only CRLF/LF and protocol-unused address/bank operands differ in the observer. Native all-address readback covers the full Japanese image; the US image shares that address geometry, without a separate native full-image run. The game export changes only the seven direct native associations and shared top wire, with no functional VHDL DQ readers. This does not admit game event monitors, CPU/state logic, whole-game continuation, fitted timing, full MiSTer or hardware behavior."
+}

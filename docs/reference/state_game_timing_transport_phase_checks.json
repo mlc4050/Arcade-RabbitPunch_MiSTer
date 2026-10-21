@@ -1,0 +1,17 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_clock_enables.vhd": "43f72dc52568f284236f9066f1f48d74d280c55bbb5fc7677d39a29093fbfcfa",
+    "rtl/rabbitpunch_raster.vhd": "57e3eac7e7560f4527251289fce1bd1d172ac245dc1bc59a101d656e1839769a",
+    "rtl/state/rabbitpunch_state_game_timing.vhd": "27b0ce3facbc23919f9d24d26d3c4a119196fd9247d25357066a16fdee1af091",
+    "rtl/rabbitpunch_scanline_scheduler.vhd": "38761b9a7f583d5ae02edb614cb0a043b43e206fd437f51a225e2c031dbe0b05",
+    "rtl/rabbitpunch_video_output.vhd": "50aa7b951abddfb3cb61e8f3687535ddfe33d09fa561abf49590cf6b08028b97",
+    "rtl/rabbitpunch_scanout.vhd": "e9dfcc04c9d3b7bba7b959d11c665e2640f3596768794dbc0a623f35964df3b0",
+    "sim/state/state_game_timing_tb.vhd": "1f9635992cbcd41661bbc1dbc216b29fa1009b1704768b78e8efeef8f6c0c06a"
+  },
+  "runner_sha256": "39fc07f77ee5bec107f94da35f49e912dd47034be041663d6f9fa2d594f4f981",
+  "log_sha256": "e5bd8a1b16df759c82d24101ceeb4bd68bfa9a1425fa7e2eff2d208ce34fd0e6",
+  "prior_timeout": "debug/fit_archive/game_timing_full_phase_timeout: full-size seven-phase sweep exceeded90s; not accepted; original source retained",
+  "scope": "Independent integer recurrence checks all guest clock enables, half-phase and IRQ events plus continuous physical raster/pixel/HSync/VSync. Compact72x16 geometry covers seven pixel phases,21 repeated restored field loads and seven aligned releases; default432x256 covers one full-frame alignment,three restored loads and one release. Each release has12000 exact continuation clocks. Actual native scanout with default and state timing selected has identical physical metadata every clock through holds/loads; presentation muted. No RGB renderer/CRT hardware or whole-game restore qualification.",
+  "modulo128_phase_checked": true
+}

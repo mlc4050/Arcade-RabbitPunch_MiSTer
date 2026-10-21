@@ -1,0 +1,10 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_ddr_arbiter.vhd": "f7ac7ebe67c4e46c4d8f9d550efde19e989ed7a3a1b575efe974cf6cf9dcc77d",
+    "sim/state/state_ddr_arbiter_tb.vhd": "715a9a0d63e030922194762bfb40a945bffae3c53ea264dd4681999fdf802a73"
+  },
+  "runner_sha256": "bffc7d375079ac27515c9b4e543e551a9c5fb9324b1301af151b013fea5216e5",
+  "log_sha256": "f496c6c14a16d924744940416cb8179cde0fd12e16b07c88895d0038cf188a1e",
+  "scope": "Standalone single-clock DDR arbiter: loader exclusive ownership, rotation write priority, snapshot single-beat read/write payload/masks, physical BUSY stalls, accepted snapshot read drained across cancellation and initialization before loader takeover, canceled loader3/255-beat bursts routed only to loader, no premature read-idle, single-beat loader write priority, no new commands during initialization. No production rotation queue, loader, DDR controller, game states or FPGA timing qualification."
+}

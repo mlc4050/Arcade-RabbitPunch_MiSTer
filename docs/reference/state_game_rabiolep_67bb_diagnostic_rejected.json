@@ -1,0 +1,120 @@
+{
+  "accepted": false,
+  "diagnostic_checks_passed": false,
+  "exact_continuations_equal": false,
+  "failures": [
+    "Exact per-clock continuation differs"
+  ],
+  "first_difference": {
+    "line": 1048,
+    "records": [
+      "S 915 fffd 00",
+      "C 916 0000 0000 0000 000 0 0 1 1 0 0 0 0 c",
+      "C 916 0000 0000 0000 000 0 0 1 1 0 0 0 0 c"
+    ]
+  },
+  "coverage": [
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 6688,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 6688,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "a7058f65a8c8732c95cacc7ee8705387ec36bf113049f29c8055c641b890b3b0"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 6688,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "a7058f65a8c8732c95cacc7ee8705387ec36bf113049f29c8055c641b890b3b0"
+    }
+  ],
+  "active_audio_required": false,
+  "rom_identity": "46c87159",
+  "release_observations": [
+    [
+      "1",
+      "0",
+      "0",
+      "c",
+      "325",
+      "74"
+    ],
+    [
+      "2",
+      "0",
+      "0",
+      "c",
+      "325",
+      "74"
+    ],
+    [
+      "3",
+      "0",
+      "0",
+      "c",
+      "325",
+      "74"
+    ]
+  ],
+  "independently_checked_header_and_body_crc": true,
+  "slot_sha256": "471d606296a43cb1258d2347309ef0b8684b9cbb464d6191a0ad2898496767aa",
+  "checker_sha256": "e67f151c67ced2c1e224621b44f493be72a633c12fdaf7d2c702411f76658ee9",
+  "scope": "Diagnostic evidence only. Native/export admission and full MiSTer integration remain independent gates. STOP/HALT/IRQ counts describe observed coverage, not proof of every interrupt or stopped-state case.",
+  "source_commit": "67bb84c5cc120e7ff80cf18dd13adb7a2b48682b",
+  "run": {
+    "command": [
+      "D:\\git\\RabbitPunch-savestates\\debug\\state_full_machine_67bb84c_v1\\obj\\sim.exe",
+      "D:\\git\\RabbitPunch-savestates\\.local\\deferred-state-evaluation\\full_machine_67bb84c_v1\\roms\\rabiolep.bin"
+    ],
+    "returncode": 0,
+    "seconds": 1077.0839023000008
+  },
+  "frozen_manifest_sha256": "73207827800d71a49ddeb6ad88965480641591dc5560c3ee0e92c594937ab672",
+  "normalized_export_sha256": "510b51b5928e0f14fda9a67e1777ebac434e7ab1773ad70e072c0e81c1d41ceb",
+  "diagnosis": "Delayed Z80 retirement fixed; all windows5541 sound writes. Matching first sound write at915 versus939 shows remaining timing mismatch. Transport normalization and corrected continuation remain unqualified.",
+  "artifacts": "debug/state_full_machine_67bb84c_v1/rabiolep"
+}

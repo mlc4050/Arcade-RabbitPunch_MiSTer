@@ -1,0 +1,16 @@
+{
+  "accepted": false,
+  "republication_bytes_equal": true,
+  "game": "rabiolep",
+  "original_counter": 2,
+  "cold_counter": 0,
+  "compared_bytes": 262140,
+  "excluded_bytes": "Only the outer 32-bit publication counter",
+  "original_image_sha256": "998bfb3041054d31d64bf446c6f355586bb0b1ddc99f332b18accff1296c4ad4",
+  "cold_image_sha256": "55f07d91962635fd3fd6c7cc68b74d25334a6c665bb46b52693fe469835771f0",
+  "common_header_body_sha256": "1a5c12af6e82c8f3035bc10b2d01a773e84bbfe3bc8685dcfc9e69b3d76bded9",
+  "original_coverage_sha256": "0d976888bf75280d4c96ec5a39bb8e2db5ea4299be53b52a1c3cb4865532c744",
+  "cold_coverage_sha256": "b84e87b76855a83a882c252c16f6131f732e86f016a7dd2b99a69865ef1f12dd",
+  "cold_report_sha256": "44c2880ad68f11d0aec7fcaf3a2ccd8b44b7995a12360808dd166be78706af57",
+  "scope": "Independent byte comparison of the new SAVE after cold restoration against the original run second SAVE. All length, header, body and unused slot bytes match; only the expected outer publication counter differs. This does not add hardware or full MiSTer qualification."
+}

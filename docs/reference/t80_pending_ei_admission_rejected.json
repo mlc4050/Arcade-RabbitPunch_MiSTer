@@ -1,0 +1,10 @@
+{
+  "accepted": false,
+  "reason": "Capture immediately after EI at PC 0301 lost its deferred interrupt effect; admission must wait through the protected instruction and interrupt decision.",
+  "archived_sha256": {
+    "debug/fit_archive/t80_pending_ei_admission_rejected/mode1.log": "1c3dba81b15d059c09ecf2f3b66b9cdc54a15516c2b3a6c226a21376b8c198ac",
+    "debug/fit_archive/t80_pending_ei_admission_rejected/rabbitpunch_t80_capture.vhd": "dcbd12b04a06e10a239bd62f495d219b870db4dce6ac18802ffa01f245389497",
+    "debug/fit_archive/t80_pending_ei_admission_rejected/run_t80_capture_tests.py": "45f12b8c12d742798e08fdde73cc68c2f71bba521b8e81d739d2c850b2eed544",
+    "debug/fit_archive/t80_pending_ei_admission_rejected/t80_capture_tb.vhd": "0fc3938d36777a61bf2e2ba4ca398c89dbc3d0ad976a4bae5c1c00809a850344"
+  }
+}

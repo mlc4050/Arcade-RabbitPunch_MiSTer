@@ -1,0 +1,37 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/vendor/meatsauce_t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+    "rtl/state/vendor/meatsauce_t80/T80_MCode.vhd": "a73c512d7f03bc34759de560efe78c1813785c5ae3f52714df149455b876e5a5",
+    "rtl/state/vendor/meatsauce_t80/T80_ALU.vhd": "8e1dfd1c47fc0ce4a902f3d789f657a93f2b9faa6a72df70e1f12f27649291b8",
+    "rtl/state/vendor/meatsauce_t80/T80.vhd": "e6f6a31dcbc34f0193ff8aa4bc124e4967e527d10731d0acc6f3908d3384e0ef",
+    "rtl/cpu/t80/T80_Pack.vhd": "f0e6aff273f25d904fd55e53372e44b52d07a82b8c6cb58fe73ea7fde06ec22d",
+    "rtl/cpu/t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+    "rtl/cpu/t80/T80_MCode.vhd": "d4f03ddd9693e341ace2a685153838aec39085826fd2f6128ece1a9f8852f02e",
+    "rtl/cpu/t80/T80_ALU.vhd": "823a062b8be873505ac16e627351a5105101243a11483bf8f2446214893b739e",
+    "rtl/cpu/t80/T80.vhd": "ba63aaa402eadfc0d47e59e9747c516a22b7454ad0b27430e99d968efcae6ec0",
+    "rtl/cpu/t80/T80se.vhd": "d528be5e4a75a8e45d1965740bcd6c77180bd54e1862b8e177bea8a432e58588",
+    "rtl/rabbitpunch_t80.vhd": "510cf2228d0b42ec347d4549603789af01ce882185c8b9e0dede6c3efa4f61ae",
+    "rtl/state/rabbitpunch_t80_capture.vhd": "39a8c43ab6603958c36ba57e1cfa9ce0a0708c355bd76faf817e0b9219e51f16",
+    "sim/state/t80_capture_tb.vhd": "0aa26bb721a0d1a84e330601c5561bc087ef49df5c5471a92dc134440395e17e"
+  },
+  "cases": [
+    {
+      "mode": 0,
+      "log": "debug/ghdl/t80_capture_retired/mode0.log",
+      "log_sha256": "53d709a2315eeeb8384298ab42b0c57fbaac468c8a9d30ac6408a5f5d9d7cb04"
+    },
+    {
+      "mode": 1,
+      "log": "debug/ghdl/t80_capture_retired/mode1.log",
+      "log_sha256": "c4e9a0e26b51d712bcc88096656fc13865e2d9824e322457e9e5c82570af1a45"
+    },
+    {
+      "mode": 2,
+      "log": "debug/ghdl/t80_capture_retired/mode2.log",
+      "log_sha256": "f215892cfd85825f3a28195d386020f4b8026d432639ccca2d12c7fee648503d"
+    }
+  ],
+  "runner_sha256": "5d7a4192b833dd7170170449f48c1b3f41bd2ba3593bf4823dfcef2e079b4292",
+  "scope": "Unchanged230-bit T80 donor with new VHDL clean-fetch capture/bus wrapper. Synthetic native VHDL program compares normal bus timing/address/writes against original production T80se, then tests three400-write continuations with both register banks, live R/I reads, R bit7/wrap and periodic IRQ. Prefix/EI admission guards, acquisition cancellation, alternate bank reload, complementary writes to all238used bits, full256-bit image and RAM restore, three512-clock HALT continuations/IRQ wakes and pendingEI+IRQ request deferred to safe acknowledged IRQ entry and its continuation are checked for each selected IM. Board NMI/BUSRQ are tied inactive; this is not an all-microstate/general NMI/ISA proof, real soundROM comparison, production sound bus, Quartus fit or full game restore."
+}

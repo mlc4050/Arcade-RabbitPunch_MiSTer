@@ -1,0 +1,18 @@
+{
+  "case": "state_sdram_image_rabiolep_full",
+  "pass_marker": "STATE_SDRAM_IMAGE_PASS bytes=2162688",
+  "log": "debug\\baselines\\state_sdram_image_rabiolep_full\\result.log",
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_sdram_types.vhd": "35c1406e611389f2ee18dd3da7b0805e389ac4b8bd763c8a603a691b5de66367",
+    "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+    "rtl/rabbitpunch_sdram.vhd": "c2bb1bd24c3b7ef22653e3ce8d7d888acb868b5b28ad6345bbc26e0d5694815a",
+    "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
+    "sim/state/state_sdram_image_tb.vhd": "bef617f99a23fb42a08d853333a841092c5409663129a983903a82fe2f458430"
+  },
+  "checked_bytes": 2162688,
+  "image_sha256": "f99fedd7cee90bf4dcc0fd4c6aeb27bcaedbf9f0e07061b12f441017b80c7386",
+  "runner_sha256": "6eabd9b8da8609051d059d1df613ea14424bfa04350f6b1dc78c11e09c4266f8",
+  "log_sha256": "4aec9a1520fe90a37171ec128306bf58889d803aef0299aa70b10794cdab142d",
+  "scope": "Native production SDRAM adapter/controller and unchanged chip model. Real image bytes written only through normal16-bit client2 writes and all checked64-bit readbacks rotate across clients0/1/2 at 5357ps shifted clock/capture adjustment1. No memory deposits. Not actual DDR/HPS loader, full-machine DQ hierarchy, export normalization, whole-game continuation, physical timing or hardware proof."
+}

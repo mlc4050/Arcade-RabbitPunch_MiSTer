@@ -1,0 +1,17 @@
+{
+  "accepted": false,
+  "stage": "GHDL synthesis frontend",
+  "source_sha256": {
+    "rtl/cpu/t80/T80_Pack.vhd": "f0e6aff273f25d904fd55e53372e44b52d07a82b8c6cb58fe73ea7fde06ec22d",
+    "rtl/cpu/t80/T80_ALU.vhd": "823a062b8be873505ac16e627351a5105101243a11483bf8f2446214893b739e",
+    "rtl/cpu/t80/T80_MCode.vhd": "d4f03ddd9693e341ace2a685153838aec39085826fd2f6128ece1a9f8852f02e",
+    "rtl/cpu/t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+    "rtl/cpu/t80/T80.vhd": "ba63aaa402eadfc0d47e59e9747c516a22b7454ad0b27430e99d968efcae6ec0",
+    "rtl/cpu/t80/T80se.vhd": "d528be5e4a75a8e45d1965740bcd6c77180bd54e1862b8e177bea8a432e58588",
+    "rtl/rabbitpunch_t80.vhd": "510cf2228d0b42ec347d4549603789af01ce882185c8b9e0dede6c3efa4f61ae"
+  },
+  "runner_sha256": "8d2652059864807c1ba3a84e734bb3166b0f986e0607a6d97844a1d2040c6a46",
+  "log_sha256": "6be0475df22596faa02701d9dd56759aa04659fb511975367b4df01162c004b6",
+  "diagnostics": "D:\\git\\RabbitPunch-savestates\\rtl\\cpu\\t80\\T80_MCode.vhd:162:17:warning: declaration of \"F\" hides port \"F\" [-Whide]\n                F : std_logic_vector(7 downto 0);\n                ^\nD:\\git\\RabbitPunch-savestates\\rtl\\cpu\\t80\\T80.vhd:685:61:error: operands don't have the same length\n                                                ioq := (ioq and x\"7\") xor ('0'&BusA);\n                                                            ^\nD:\\git\\RabbitPunch-savestates\\rtl\\cpu\\t80\\T80.vhd:116:17:error: latch infered for net \"do\" (use --latches)\n                DO         : out std_logic_vector(7 downto 0);\n                ^\nD:\\git\\RabbitPunch-savestates\\rtl\\cpu\\t80\\T80.vhd:152:16:error: latch infered for net \"alternate\" (use --latches)\n        signal Alternate            : std_logic;\n               ^\n",
+  "scope": "Pristine production T80se inventory rejected before JSON lowering. The original operand-width expression and inferred latches are retained. No source patch, CPU inventory count, state implementation, equivalence or replacement qualification is claimed. Existing fast fixtures use an explicitly trapped tool-only unsupported block-I/O path; that restricted substitution is not used for this complete-state inventory."
+}

@@ -36,7 +36,9 @@ entity rabbitpunch_maintenance_clients is
         ou8_memory_data : out unsigned(7 downto 0);
         i_memory_ready : in std_logic;
         i_memory_response : in std_logic;
-        iu8_memory_data : in unsigned(7 downto 0)
+        iu8_memory_data : in unsigned(7 downto 0);
+        i_external_quiesce : in std_logic := '0';
+        o_idle : out std_logic := '0'
     );
 end entity;
 
@@ -46,9 +48,14 @@ architecture rtl of rabbitpunch_maintenance_clients is
     signal s_external, s_score, s_pending, s_valid, s_cancel : std_logic := '0';
 begin
     s_external <= '1' when styp_state = STATE_EXTERNAL or
-        (styp_state = STATE_IDLE and i_external_access = '1') else '0';
+        (styp_state = STATE_IDLE and i_external_access = '1' and i_external_quiesce = '0') else '0';
     s_score <= '1' when styp_state = STATE_SCORE or
-        (styp_state = STATE_IDLE and i_external_access = '0' and i_score_access = '1') else '0';
+        (styp_state = STATE_IDLE and s_external = '0' and i_score_access = '1') else '0';
+    -- Score admission is already controlled by its whole-operation lease. It
+    -- can have accepted an operation on the edge quiesce arrived, before this
+    -- byte-port owner saw its access level. Let that operation finish.
+    o_idle <= '1' when styp_state = STATE_IDLE and s_pending = '0' and
+        s_external = '0' and s_score = '0' else '0';
     s_cancel <= i_initialize or (s_score and i_score_initialize);
     o_memory_initialize <= s_cancel;
     o_memory_access <= (s_external and i_external_access) or (s_score and i_score_access) or s_pending;

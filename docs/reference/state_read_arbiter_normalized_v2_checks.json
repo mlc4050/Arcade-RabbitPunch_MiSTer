@@ -1,0 +1,11 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_sdram_types.vhd": "35c1406e611389f2ee18dd3da7b0805e389ac4b8bd763c8a603a691b5de66367",
+    "rtl/rabbitpunch_read_arbiter.vhd": "737f3161e737d020fd51227e8dd2b64b4e51af330b08a3663b4f987a446191bf",
+    "sim/state/state_read_arbiter_tb.vhd": "e25d7e0f92e0c4ca3377006223599b70abb9a6c3ab373a29498975d013ea0659"
+  },
+  "runner_sha256": "2d640be18f19b910670398a7af555990cfce3b5518f68e87fb2d5c1138b1161f",
+  "command_log_sha256": "7a5ec2fa29326a8d15d061cdf478d1955d85cd59ff11983581f928e2b6b6f0fb",
+  "scope": "Native VHDL queue with three seeded cursor positions. Normal mode retains prior round-robin order; empty normalization chooses0/1/2 for simultaneous requests.24 replies retain owners/data under backend stalls and variable latency. Busy normalization rejected by assertion; no full-machine or hardware qualification."
+}

@@ -1,0 +1,18 @@
+{
+  "case": "m68k_capture_masked",
+  "pass_marker": "M68K_CAPTURE_PASS",
+  "log": "debug\\baselines\\m68k_capture_masked\\result.log",
+  "source_sha256": {
+    "rtl/state/vendor/konamigx/fx68k/fx68k.sv": "9f327366a840badd2e3b192f77b76a4e2d5f568add7df3df5e31010e2ba21ab4",
+    "rtl/state/vendor/konamigx/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
+    "rtl/state/vendor/konamigx/fx68k/uaddrPla.sv": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a",
+    "rtl/state/vendor/konamigx/gx_ss_m68k.sv": "397e40f9dfcca76acb3039853db44d239a246f31671fd641e0cb81003d5daec4",
+    "rtl/state/rabbitpunch_state_fx68k.vhd": "13106124cb32f0f79f010e39bf6b833a3242b425064e4eae3f896ec2f2a6fe25",
+    "rtl/state/rabbitpunch_m68k_capture.vhd": "a825b7b56a2db4b9d6c9c99bf20e6e746181b6a49cc8a98e5b8f5e9889e15c13",
+    "rtl/state/rabbitpunch_capture_stack_undo.vhd": "9c209f0a9f237b0ad9db6a7662405510fe9afddb3217544d251ecac77514e7f1",
+    "sim/state/m68k_capture_tb.vhd": "8aea744f60c1282922f632198d4488b7e5590367ba877cbb362774f3ea242f05"
+  },
+  "initial_sr": "2700",
+  "log_sha256": "e7740f25a0cdc2bf610528f9574515bea5a862957503d6b5a5852b7a8e6cf738",
+  "scope": "Isolated unchanged GX fx68k/capture donor with new descriptive VHDL boundaries and native VHDL bench. Three repeated 400-write continuations and STOP recapture/resume, followed by normal IRQ wake. Transactional old-word read/write and pre-IACK stack undo; original stack sentinel preserved and journal validated against captured SSP-2. No full-game, sound, DDR, OSD, synthesis or hardware qualification; donor remains outside files.qip."
+}

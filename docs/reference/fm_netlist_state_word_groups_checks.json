@@ -1,0 +1,33 @@
+{
+  "case": "fm_netlist_state_word_groups",
+  "pass_marker": "FM_NETLIST_STATE_PASS",
+  "log": "debug\\baselines\\fm_netlist_state_word_groups\\result.log",
+  "source_sha256": {
+    "rtl/sound/jt51/hdl/jt51_acc.v": "633319a0e89a78d390cba54a24aabf6f1019b705b378b636e246dcf44c8829f8",
+    "rtl/sound/jt51/hdl/jt51_eg.v": "6e7c5f315edc82b70918ea61d6d5c992204d4e8b272e33fb3ce539a9843cac5e",
+    "rtl/sound/jt51/hdl/jt51_exp2lin.v": "cecc44acf6d7c8a81e80638e4a6eeb46f17d6c8d809e7a928338553bb23fb400",
+    "rtl/sound/jt51/hdl/jt51_exprom.v": "c9f33ede4c1c0af6f54ae45620d986a2c5a2f0ef16b453dc7d2eeeac85f8cbb5",
+    "rtl/sound/jt51/hdl/jt51_kon.v": "e1bb08fe65a53d2dc871459cc91e4beeec9efb9e839b3a39a941fa27ac19ba0f",
+    "rtl/sound/jt51/hdl/jt51_lfo.v": "2bb0e19b51982f761fd50eb992c90f6dbadf467528ac09fa033b48020cd8d193",
+    "rtl/sound/jt51/hdl/jt51_lin2exp.v": "c4351ea7711364ab394ab510326111dc5047f4e57830bddef15163cbc4dcb98e",
+    "rtl/sound/jt51/hdl/jt51_mmr.v": "db3a6506091e6ea99a17ad2f5b8b11ecf36d97f74dbf0c1098cf6db601d6fdd6",
+    "rtl/sound/jt51/hdl/jt51_mod.v": "1a04fe51a56756a98b577547bbd95cf984283288f2da2e4946d75063a69d357c",
+    "rtl/sound/jt51/hdl/jt51_noise_lfsr.v": "6b58949a51dbfe8c96f19eac3aa84aaace7fcc5cc4e1902c084a93d3d1c4da91",
+    "rtl/sound/jt51/hdl/jt51_noise.v": "87b70082becc58ece4c223ea5ed01b0c0bc0b05ae95ace9b498768429232f360",
+    "rtl/sound/jt51/hdl/jt51_op.v": "5dbb743c49af67e6dff7e6c65691a66371aaf5a126834525f9501a8af1420bbf",
+    "rtl/sound/jt51/hdl/jt51_pg.v": "d52c369e535196ee260243b2342c6a526a1d95425440512037f3f3b5185f0a8a",
+    "rtl/sound/jt51/hdl/jt51_phinc_rom.v": "41fefe0b9bc9a3b71a036d12d723666e4b588c57625228eee278f9704a6f53b1",
+    "rtl/sound/jt51/hdl/jt51_phrom.v": "b3fb0623737dd22befa0bfa9a130d7b1437e81ff3e1842538251d5cd29a75c89",
+    "rtl/sound/jt51/hdl/jt51_pm.v": "9625bda77a523371fc4704ac66cfec95a9d1aff343c2e770ea5aba11eb50c8f3",
+    "rtl/sound/jt51/hdl/jt51_reg_ch.v": "2303d898fa49bf67fa8aace6c1a1e00e48d2951f9a221e75058233953f670aad",
+    "rtl/sound/jt51/hdl/jt51_csr_op.v": "b129bf97cc155bc0e4312287af79b2c7985852ef65c1768f23ffa31badd5b648",
+    "rtl/sound/jt51/hdl/jt51_reg.v": "a9913cb08f562046c2f9375fd6f7a4a5a0eb4d46266df303875059761f304de7",
+    "rtl/sound/jt51/hdl/jt51_sh.v": "71246f6b6989f922220cdd370cee52ecd56c7244e11073ddc618028a4136f0aa",
+    "rtl/sound/jt51/hdl/jt51_timers.v": "e885ffd11d62c2bf42aafb90eb30e681c3d98ae9c4fe6714b13d72f491347e70",
+    "rtl/sound/jt51/hdl/jt51.v": "4c5f80dae49f435686d3f917897df867ba7725a44bd52c5d652658ba178689b0",
+    "debug/state_word_groups/jt51/jt51_state_netlist.vhd": "af6ad0f89208e06a192a139906735d958f46fa91b840ea0ffa2237c6b0d559a0",
+    "sim/state/fm_netlist_state_tb.vhd": "84f070f2eb4d8585391863ec3d3ec6648be5d1ab8e3681dd2286dff82345ea4c"
+  },
+  "log_sha256": "e40867c9c58a85c84f2638eb6cd7c1bf90ae652a6e58739410da9fd5d8e7254b",
+  "scope": "Generated VHDL from pristine synthesis-mode JT51 JSON. Native comparison uses the pristine four-state model without global initreg overrides; enabled reset clocks and real timer load writes establish the exercised startup state. Generated FPGA-zero initialization is not assumed identical at power-up. Nonzero feedback tone, both running timers and pending IRQ, all4016bits freeze/scan round trip, timer-clear perturbation, three immediate4096clock continuations including status/IRQ/sample/raw/fullstereoPCM. No formal equivalence, complete register/voice corpus, Quartus timing, production integration or full-game savestate qualification."
+}

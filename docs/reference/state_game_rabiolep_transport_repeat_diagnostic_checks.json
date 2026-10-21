@@ -1,0 +1,237 @@
+{
+  "accepted": false,
+  "diagnostic_checks_passed": true,
+  "exact_continuations_equal": true,
+  "failures": [],
+  "first_difference": null,
+  "coverage": [
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 6688,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 6688,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 6688,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83967,
+      "nonblack_pixels": 6751,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "49579bfa12b08817f119b0dac83ab8217372019c5e30def0717fcd16ba3bb69b"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83967,
+      "nonblack_pixels": 6751,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "49579bfa12b08817f119b0dac83ab8217372019c5e30def0717fcd16ba3bb69b"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83967,
+      "nonblack_pixels": 6751,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "49579bfa12b08817f119b0dac83ab8217372019c5e30def0717fcd16ba3bb69b"
+    }
+  ],
+  "checkpoint_differences": [
+    null,
+    null
+  ],
+  "published_images": [
+    {
+      "counter": 1,
+      "sha256": "471d606296a43cb1258d2347309ef0b8684b9cbb464d6191a0ad2898496767aa"
+    },
+    {
+      "counter": 2,
+      "sha256": "998bfb3041054d31d64bf446c6f355586bb0b1ddc99f332b18accff1296c4ad4"
+    }
+  ],
+  "active_audio_required": false,
+  "rom_identity": "46c87159",
+  "release_observations": [
+    [
+      "1",
+      "0",
+      "0",
+      "c",
+      "325",
+      "74"
+    ],
+    [
+      "2",
+      "0",
+      "0",
+      "c",
+      "325",
+      "74"
+    ],
+    [
+      "3",
+      "0",
+      "0",
+      "c",
+      "325",
+      "74"
+    ],
+    [
+      "4",
+      "0",
+      "0",
+      "c",
+      "159",
+      "75"
+    ],
+    [
+      "5",
+      "0",
+      "0",
+      "c",
+      "159",
+      "75"
+    ],
+    [
+      "6",
+      "0",
+      "0",
+      "c",
+      "159",
+      "75"
+    ]
+  ],
+  "independently_checked_header_and_body_crc": true,
+  "slot_sha256": "998bfb3041054d31d64bf446c6f355586bb0b1ddc99f332b18accff1296c4ad4",
+  "checker_sha256": "3a60408e583d9e030d59a02cf6c817e6083245725fcd04e58ef41b41b7d1a549",
+  "scope": "Real Rabio Lepus full-ROM load,120-frame warmup, two successive SAVEs and two RESTOREs of each. Every1,548,288-clock continuation in each group is identical, including main/sound writes, enabled pixels, PCM and cadence/IRQ observations. Independent header/body CRC and publication counters1/2 pass. The NOTICE-screen checkpoint is silent and has no observed STOP/HALT. Prototype ABI52500101/config0 and no host NVRAM profile are intentional fixture constraints. Native/export admission, active sound/gameplay, US set, full HPS/MiSTer composition, fitted timing and hardware remain independent gates.",
+  "frozen_commit": "60f35a441b3fd3bcf94655bad8f43adab3b3be6d",
+  "artifact_directory": "debug/state_full_machine_transport_repeat_v1/rabiolep",
+  "manifest_sha256": "d167e90ab4105b8608d54f0d4d4270df297e4cc4f0e50706b3a487de4535921f",
+  "plan_sha256": "757cf49f506b555dcb868d3000840549f76f06b9b1b866d382e4b4a80734633a",
+  "normalized_export_sha256": "a4369f9a9b072a53d02f1ba904957d7d45564f52791906729531d94e30b2aedf",
+  "executable_sha256": "08a5582d3dccb68708faae633d2b788f226aa7ee73b70ffaa86cbf529ccf91a6",
+  "fixture_sha256": "7821557655e516cf8bb6bff696571f24515be39bdefe5cd059dd45534f3d9445",
+  "transport_sha256": "8ed3cb02b6f81116b50f219095c0878cf487c87f1771ef815dbcd6ec6cb9afc8",
+  "coverage_receipt_sha256": "0d976888bf75280d4c96ec5a39bb8e2db5ea4299be53b52a1c3cb4865532c744",
+  "endpoints_sha256": "c5b0025ea22eb9ac905c4cee38932fa5317ee6d653df9f66caec603407f18309",
+  "run": {
+    "command": [
+      "D:\\git\\RabbitPunch-savestates\\debug\\state_full_machine_transport_repeat_v1\\obj\\sim.exe",
+      "D:\\git\\RabbitPunch-savestates\\.local\\deferred-state-evaluation\\full_machine_transport_repeat_v1\\roms\\rabiolep.bin"
+    ],
+    "returncode": 0,
+    "seconds": 1216.9004946999994
+  },
+  "comparison": {
+    "command": [
+      "python",
+      "-B",
+      "D:\\git\\RabbitPunch-savestates\\scripts\\check_state_game_continuation.py",
+      "D:\\git\\RabbitPunch-savestates\\debug\\state_full_machine_transport_repeat_v1\\rabiolep",
+      "--manifest",
+      "D:\\git\\RabbitPunch-savestates\\.local\\deferred-state-evaluation\\full_machine_transport_repeat_v1\\manifest.json",
+      "--game",
+      "rabiolep"
+    ],
+    "returncode": 0,
+    "seconds": 25.721692700004496
+  },
+  "export_mux_audit": {
+    "one_bit_identities": 486,
+    "exact_entire_file_delta": true,
+    "original_sha256": "fb4cc48941e93a12554597606cc23e8863417150985f9ab2efaefa71bfdcc387",
+    "simplified_sha256": "6ed51bb43d003abe7294117cdaab5277f0cd2641945cb5de570aa4e3a950643b"
+  },
+  "dq_alias_audit_sha256": "d0e8acca74a40835dc1e82f239cd4bb69562b74bf01c0f4d9632bb7241789ab1",
+  "native_ram_admission_sha256": "9fbb69042cf87e4eea3311b94fe3c6e0bc4bc7f796aa4668e5b87483fab174d9",
+  "pending_admissions": [
+    "dq_native_readback_admission.json",
+    "event_monitor_admission.json"
+  ]
+}

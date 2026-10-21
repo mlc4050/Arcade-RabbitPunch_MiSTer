@@ -12,7 +12,8 @@ entity rabbitpunch_machine is
     generic (
         GINT_SDRAM_READ_CAPTURE_ADJUST : natural range 0 to 2 := 0;
         GINT_IMAGE_BYTES : positive := CINT_ROM_IMAGE_SIZE;
-        GU16_DIP_DEFAULT : unsigned(15 downto 0) := x"0000"
+        GU16_DIP_DEFAULT : unsigned(15 downto 0) := x"0000";
+        GBOOL_STATE_CAPABLE : boolean := false
     );
     port (
         i_clk : in std_logic;
@@ -137,11 +138,93 @@ entity rabbitpunch_machine is
         ou9_horizontal_position : out unsigned(8 downto 0);
         ou9_vertical_position : out unsigned(8 downto 0);
         o_scanout_armed : out std_logic;
-        o_scanout_underflow : out std_logic
+        o_scanout_underflow : out std_logic;
+        i_state_capture : in std_logic := '0';
+        i_state_cancel : in std_logic := '0';
+        o_state_pending : out std_logic := '0';
+        o_state_held : out std_logic := '0';
+        o_state_error : out std_logic := '0';
+        i_state_resume : in std_logic := '0';
+        o_state_return_held : out std_logic := '0';
+        i_state_release : in std_logic := '0';
+        o_state_resumed : out std_logic := '0';
+        o_state_canceled : out std_logic := '0';
+        iu5_state_cpu_address : in unsigned(4 downto 0) := (others => '0');
+        i_state_cpu_write : in std_logic := '0';
+        iu32_state_cpu_data : in unsigned(31 downto 0) := (others => '0');
+        ou32_state_cpu_data : out unsigned(31 downto 0) := (others => '0');
+        o_state_cpu_stopped : out std_logic := '0';
+        ou52_state_cpu_bus : out unsigned(51 downto 0) := (others => '0');
+        i_state_hold : in std_logic := '0';
+        i_state_load : in std_logic := '0';
+        iu224_state_io : in unsigned(223 downto 0) := (others => '0');
+        ou224_state_io : out unsigned(223 downto 0) := (others => '0');
+        iu4_state_irq : in unsigned(3 downto 0) := (others => '0');
+        ou4_state_irq : out unsigned(3 downto 0) := (others => '0');
+        i_state_memory_access : in std_logic := '0';
+        i_state_memory_request : in std_logic := '0';
+        i_state_memory_write : in std_logic := '0';
+        iu24_state_memory_address : in unsigned(23 downto 0) := (others => '0');
+        iu16_state_memory_data : in unsigned(15 downto 0) := (others => '0');
+        iu2_state_memory_bytes : in unsigned(1 downto 0) := (others => '0');
+        o_state_memory_response : out std_logic := '0';
+        ou16_state_memory_data : out unsigned(15 downto 0) := (others => '0');
+        o_state_memory_busy : out std_logic := '0';
+        o_maintenance_idle : out std_logic := '0';
+        i_state_video_flush : in std_logic := '0';
+        i_state_sound_capture : in std_logic := '0';
+        o_state_sound_pending : out std_logic := '0';
+        o_state_sound_held : out std_logic := '0';
+        o_state_sound_drained : out std_logic := '0';
+        o_state_sound_bus_idle : out std_logic := '0';
+        i_state_sound_resume : in std_logic := '0';
+        i_state_sound_cpu_write : in std_logic := '0';
+        iu256_state_sound_cpu : in unsigned(255 downto 0) := (others => '0');
+        ou256_state_sound_cpu : out unsigned(255 downto 0) := (others => '0');
+        i_state_fm_write : in std_logic := '0';
+        iu16_state_chip_address : in unsigned(15 downto 0) := (others => '0');
+        iu32_state_chip_data : in unsigned(31 downto 0) := (others => '0');
+        ou32_state_fm_data : out unsigned(31 downto 0) := (others => '0');
+        i_state_sound_memory_access : in std_logic := '0';
+        i_state_sound_memory_request : in std_logic := '0';
+        i_state_sound_memory_write : in std_logic := '0';
+        iu16_state_sound_memory_address : in unsigned(15 downto 0) := (others => '0');
+        iu8_state_sound_memory_data : in unsigned(7 downto 0) := (others => '0');
+        o_state_sound_memory_response : out std_logic := '0';
+        ou8_state_sound_memory_data : out unsigned(7 downto 0) := (others => '0');
+        iu16_state_adpcm : in unsigned(15 downto 0) := (others => '0');
+        ou16_state_adpcm : out unsigned(15 downto 0) := (others => '0');
+        i_state_adpcm_write : in std_logic := '0';
+        ou32_state_adpcm_data : out unsigned(31 downto 0) := (others => '0');
+        i_state_rom_flush : in std_logic := '0';
+        i_state_sdram_prepare : in std_logic := '0';
+        o_state_sdram_aligned : out std_logic := '0';
+        o_state_transport_idle : out std_logic := '0';
+        o_state_board_idle : out std_logic := '0';
+        iu16_state_mixer : in unsigned(15 downto 0) := (others => '0');
+        ou16_state_mixer : out unsigned(15 downto 0) := (others => '0');
+        iu2_state_fm_startup : in unsigned(1 downto 0) := (others => '0');
+        ou2_state_fm_startup : out unsigned(1 downto 0) := (others => '0');
+        i_state_nvram_quiesce : in std_logic := '0';
+        i_state_legacy_quiesce : in std_logic := '0';
+        o_state_nvram_quiesced : out std_logic := '0';
+        i_state_reconcile : in std_logic := '0';
+        i_state_scores_ready : in std_logic := '0';
+        iu32_state_cadence : in unsigned(31 downto 0) := (others => '0');
+        iu18_state_beam : in unsigned(17 downto 0) := (others => '0');
+        ou32_state_cadence : out unsigned(31 downto 0) := (others => '0');
+        ou18_state_beam : out unsigned(17 downto 0) := (others => '0');
+        o_state_aligned : out std_logic := '0';
+        i_state_private_return : in std_logic := '0';
+        o_state_rom_identity_valid : out std_logic := '0';
+        o_state_rom_identity_error : out std_logic := '0';
+        ou32_state_rom_identity : out unsigned(31 downto 0) := (others => '0')
     );
 end entity;
 
 architecture rtl of rabbitpunch_machine is
+    signal s_state_aligned : std_logic;
+    signal su7_state_phase_offset : unsigned(6 downto 0);
     signal s_main_phase_enable, s_sound_enable, s_ym_enable, s_ym_half_enable, s_adpcm_enable : std_logic;
     signal s_vblank_start, s_half_frame, s_line_valid, s_line_ready, s_render_bank, s_line_done : std_logic;
     signal s_pixel_request, s_pixel_ready, s_pixel_bank, s_rgb_valid, s_rgb_error, s_ready : std_logic;
@@ -151,7 +234,12 @@ architecture rtl of rabbitpunch_machine is
     signal su8_source_pixel_y, su8_source_rgb_y : unsigned(7 downto 0);
     signal su16_video_flags : unsigned(15 downto 0);
     signal s_request_flip : std_logic;
+    signal s_state_video_flush, s_presentation_ready, s_private_main_phase, s_cpu_phase_enable : std_logic;
 begin
+    o_state_aligned <= s_state_aligned;
+    s_state_video_flush <= i_state_video_flush when GBOOL_STATE_CAPABLE else '0';
+    s_presentation_ready <= s_ready and not s_state_video_flush;
+    s_cpu_phase_enable <= s_private_main_phase when GBOOL_STATE_CAPABLE and i_state_private_return = '1' else s_main_phase_enable;
     o_ready <= s_ready;
     ou16_video_flags <= su16_video_flags;
     s_request_flip <= su16_video_flags(12) xor iu128_status(65);
@@ -159,7 +247,7 @@ begin
         port map (
             i_clk => i_clk,
             i_initialize => i_initialize,
-            i_game_ready => s_ready,
+            i_game_ready => s_presentation_ready,
             i_request_flip => s_request_flip,
             i_frame_prepare => s_vblank_start,
             i_line_valid => s_line_valid,
@@ -185,11 +273,12 @@ begin
             GINT_SDRAM_READ_CAPTURE_ADJUST => GINT_SDRAM_READ_CAPTURE_ADJUST,
             GINT_IMAGE_BYTES => GINT_IMAGE_BYTES,
             GU16_DIP_DEFAULT => GU16_DIP_DEFAULT,
-            GBOOL_EXTERNAL_PHASE_ENABLE => true
+            GBOOL_EXTERNAL_PHASE_ENABLE => true,
+            GBOOL_STATE_CAPABLE => GBOOL_STATE_CAPABLE
         )
         port map (
             i_clk => i_clk,
-            i_main_phase_enable => s_main_phase_enable,
+            i_main_phase_enable => s_cpu_phase_enable,
             i_initialize => i_initialize,
             i_framework_reset => i_framework_reset,
             iu128_status => iu128_status,
@@ -319,13 +408,92 @@ begin
             o_sdram_column_n => o_sdram_column_n,
             o_sdram_clock_enable => o_sdram_clock_enable,
             o_ready => s_ready,
-            o_loading => o_loading
+            o_loading => o_loading,
+            i_state_capture => i_state_capture,
+            i_state_cancel => i_state_cancel,
+            o_state_pending => o_state_pending,
+            o_state_held => o_state_held,
+            o_state_error => o_state_error,
+            i_state_resume => i_state_resume,
+            o_state_return_held => o_state_return_held,
+            i_state_release => i_state_release,
+            o_state_resumed => o_state_resumed,
+            o_state_canceled => o_state_canceled,
+            iu5_state_cpu_address => iu5_state_cpu_address,
+            i_state_cpu_write => i_state_cpu_write,
+            iu32_state_cpu_data => iu32_state_cpu_data,
+            ou32_state_cpu_data => ou32_state_cpu_data,
+            o_state_cpu_stopped => o_state_cpu_stopped,
+            ou52_state_cpu_bus => ou52_state_cpu_bus,
+            i_state_hold => i_state_hold,
+            i_state_load => i_state_load,
+            iu224_state_io => iu224_state_io,
+            ou224_state_io => ou224_state_io,
+            iu4_state_irq => iu4_state_irq,
+            ou4_state_irq => ou4_state_irq,
+            i_state_memory_access => i_state_memory_access,
+            i_state_memory_request => i_state_memory_request,
+            i_state_memory_write => i_state_memory_write,
+            iu24_state_memory_address => iu24_state_memory_address,
+            iu16_state_memory_data => iu16_state_memory_data,
+            iu2_state_memory_bytes => iu2_state_memory_bytes,
+            o_state_memory_response => o_state_memory_response,
+            ou16_state_memory_data => ou16_state_memory_data,
+            o_state_memory_busy => o_state_memory_busy,
+            o_maintenance_idle => o_maintenance_idle,
+            i_state_video_flush => i_state_video_flush,
+            i_state_sound_capture => i_state_sound_capture,
+            o_state_sound_pending => o_state_sound_pending,
+            o_state_sound_held => o_state_sound_held,
+            o_state_sound_drained => o_state_sound_drained,
+            o_state_sound_bus_idle => o_state_sound_bus_idle,
+            i_state_sound_resume => i_state_sound_resume,
+            i_state_sound_cpu_write => i_state_sound_cpu_write,
+            iu256_state_sound_cpu => iu256_state_sound_cpu,
+            ou256_state_sound_cpu => ou256_state_sound_cpu,
+            i_state_fm_write => i_state_fm_write,
+            iu16_state_chip_address => iu16_state_chip_address,
+            iu32_state_chip_data => iu32_state_chip_data,
+            ou32_state_fm_data => ou32_state_fm_data,
+            i_state_sound_memory_access => i_state_sound_memory_access,
+            i_state_sound_memory_request => i_state_sound_memory_request,
+            i_state_sound_memory_write => i_state_sound_memory_write,
+            iu16_state_sound_memory_address => iu16_state_sound_memory_address,
+            iu8_state_sound_memory_data => iu8_state_sound_memory_data,
+            o_state_sound_memory_response => o_state_sound_memory_response,
+            ou8_state_sound_memory_data => ou8_state_sound_memory_data,
+            iu16_state_adpcm => iu16_state_adpcm,
+            ou16_state_adpcm => ou16_state_adpcm,
+            i_state_adpcm_write => i_state_adpcm_write,
+            ou32_state_adpcm_data => ou32_state_adpcm_data,
+            i_state_rom_flush => i_state_rom_flush,
+            i_state_sdram_prepare => i_state_sdram_prepare,
+            i_state_sdram_anchor => s_state_aligned,
+            iu7_state_sdram_phase => su7_state_phase_offset,
+            o_state_sdram_aligned => o_state_sdram_aligned,
+            o_state_transport_idle => o_state_transport_idle,
+            o_state_board_idle => o_state_board_idle,
+            iu16_state_mixer => iu16_state_mixer,
+            ou16_state_mixer => ou16_state_mixer,
+            iu2_state_fm_startup => iu2_state_fm_startup,
+            ou2_state_fm_startup => ou2_state_fm_startup,
+            i_state_nvram_quiesce => i_state_nvram_quiesce,
+            i_state_legacy_quiesce => i_state_legacy_quiesce,
+            o_state_nvram_quiesced => o_state_nvram_quiesced,
+            i_state_reconcile => i_state_reconcile,
+            i_state_scores_ready => i_state_scores_ready,
+            o_state_rom_identity_valid => o_state_rom_identity_valid,
+            o_state_rom_identity_error => o_state_rom_identity_error,
+            ou32_state_rom_identity => ou32_state_rom_identity
         );
     scanout : entity work.rabbitpunch_scanout
+        generic map (
+            GBOOL_STATE_CAPABLE => GBOOL_STATE_CAPABLE
+        )
         port map (
             i_clk => i_clk,
             i_initialize => i_initialize,
-            i_game_ready => s_ready,
+            i_game_ready => s_presentation_ready,
             o_main_phase_enable => s_main_phase_enable,
             o_sound_cpu_enable => s_sound_enable,
             o_ym_enable => s_ym_enable,
@@ -364,6 +532,15 @@ begin
             ou9_horizontal_position => ou9_horizontal_position,
             ou9_vertical_position => ou9_vertical_position,
             o_armed => o_scanout_armed,
-            o_underflow => o_scanout_underflow
+            o_underflow => o_scanout_underflow,
+            i_state_hold => i_state_hold,
+            i_state_load => i_state_load,
+            iu32_state_cadence => iu32_state_cadence,
+            iu18_state_beam => iu18_state_beam,
+            ou32_state_cadence => ou32_state_cadence,
+            ou18_state_beam => ou18_state_beam,
+            o_state_aligned => s_state_aligned,
+            ou7_state_phase_offset => su7_state_phase_offset,
+            o_private_main_phase_enable => s_private_main_phase
         );
 end architecture;

@@ -1,0 +1,11 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_crc.vhd": "4de0b46eae23558ed02db73df8ce628e8a02cb8a6318405c4b8846dbed81e568",
+    "rtl/state/rabbitpunch_state_preflight.vhd": "39602b76e4bfcba1b6f94a0e6089518bfe5bb6faebcda54eef4321e21c4e34e6",
+    "sim/state/state_preflight_tb.vhd": "72d04c00408039d4fca5807218e1f6ee7c6b3efe5d2fe86f62e00070982f22f7"
+  },
+  "runner_sha256": "f6070baad4b92d993ab23bd7aad37bd8721baa51912359a09445f38f933c217e",
+  "log_sha256": "bef42ef30e73cfa54cf0084a37d8cbae043a02d43ed20a0f6e73a62b517e8465",
+  "scope": "Isolated stream-only board-image preflight:21 cases, valid retry after all rejection cases, independent zlib body-CRC fixture, stalled stream, simultaneous last-byte/finish, magic/version/ABI/ROM/config/headerCRC/bodyCRC/length/section/reserved checks, overflowing section values, early end, excess byte, live ROM/config change and abort with ignored late bytes. No state-write interface exists. CPU/beam field legality, immutable DDR source, two-pass application and whole-game rollback/restore remain parent integration requirements."
+}

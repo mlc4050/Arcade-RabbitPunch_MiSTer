@@ -4,10 +4,10 @@
     "pass_marker": "CLOCK_ENABLES_PASS",
     "log": "debug\\baselines\\clock_enables\\result.log",
     "source_sha256": {
-      "rtl/rabbitpunch_clock_enables.vhd": "3c2356fb1fd0d45bd58e710b9fd0262cd6aa40f7081da6c6ae4bd9f22fe11a10",
+      "rtl/rabbitpunch_clock_enables.vhd": "43f72dc52568f284236f9066f1f48d74d280c55bbb5fc7677d39a29093fbfcfa",
       "sim/board/clock_enables_tb.vhd": "0861ad2f7be2cf165e06f5c5fdefbd13766fae0bb6ef992c71fa354315eaf69a"
     },
-    "log_sha256": "15aa072f3c0fa5ff858f09c4780881038512336959b63f76cd59f9de70cc3aa0",
+    "log_sha256": "43558e257a30978cd87e38b4e2d5a74f34f8da3b8f7c69bf34892a8929d75cbd",
     "scope": "Provisional enable ratios and parameterized beam contract only: no PLL, game/render integration, original-board timing measurement or physical output proof"
   },
   {
@@ -15,11 +15,11 @@
     "pass_marker": "RASTER_PASS",
     "log": "debug\\baselines\\raster_small\\result.log",
     "source_sha256": {
-      "rtl/rabbitpunch_clock_enables.vhd": "3c2356fb1fd0d45bd58e710b9fd0262cd6aa40f7081da6c6ae4bd9f22fe11a10",
-      "rtl/rabbitpunch_raster.vhd": "b7b15034d670a33be035264c58c42a679a6cdb728d5a54b0f3f677ea3105b402",
-      "sim/video/raster_tb.vhd": "10c246843e44064dc65d97b31af73db350261c3bfb365992822142ca94aa98b9"
+      "rtl/rabbitpunch_clock_enables.vhd": "43f72dc52568f284236f9066f1f48d74d280c55bbb5fc7677d39a29093fbfcfa",
+      "rtl/rabbitpunch_raster.vhd": "57e3eac7e7560f4527251289fce1bd1d172ac245dc1bc59a101d656e1839769a",
+      "sim/video/raster_tb.vhd": "c0032e8ec42b61923c3e4bc018d162e29857bee9a6ed5babb6c252a89486ea74"
     },
-    "log_sha256": "f11ca084a1466a3d34231d9058849a1c9b3f0e024d0d74e63c9ca4324782abaa",
+    "log_sha256": "62c616fcdaa7018dafa2145d9f519177020a2860e4a7f1528a932407e5259b62",
     "scope": "Provisional enable ratios and parameterized beam contract only: no PLL, game/render integration, original-board timing measurement or physical output proof"
   },
   {
@@ -27,11 +27,11 @@
     "pass_marker": "RASTER_PASS",
     "log": "debug\\baselines\\raster_nominal\\result.log",
     "source_sha256": {
-      "rtl/rabbitpunch_clock_enables.vhd": "3c2356fb1fd0d45bd58e710b9fd0262cd6aa40f7081da6c6ae4bd9f22fe11a10",
-      "rtl/rabbitpunch_raster.vhd": "b7b15034d670a33be035264c58c42a679a6cdb728d5a54b0f3f677ea3105b402",
-      "sim/video/raster_tb.vhd": "10c246843e44064dc65d97b31af73db350261c3bfb365992822142ca94aa98b9"
+      "rtl/rabbitpunch_clock_enables.vhd": "43f72dc52568f284236f9066f1f48d74d280c55bbb5fc7677d39a29093fbfcfa",
+      "rtl/rabbitpunch_raster.vhd": "57e3eac7e7560f4527251289fce1bd1d172ac245dc1bc59a101d656e1839769a",
+      "sim/video/raster_tb.vhd": "c0032e8ec42b61923c3e4bc018d162e29857bee9a6ed5babb6c252a89486ea74"
     },
-    "log_sha256": "e5256c450a3d8d309311655234f2ea6a86c1cc1f261375f803da0fb891357671",
+    "log_sha256": "c3fa432d6ec269f8644a48bc7e7d5b5303a342b83722fc4f1e9b16d5459ea283",
     "scope": "Provisional enable ratios and parameterized beam contract only: no PLL, game/render integration, original-board timing measurement or physical output proof"
   }
 ]

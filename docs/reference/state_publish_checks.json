@@ -1,0 +1,13 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_layout.vhd": "dd5f77217553196f29570fb29d51b62993b29439fda34812c4fc19b7eec6c7ab",
+    "rtl/state/rabbitpunch_state_image_words.vhd": "818f00770ca62e64179d9610fff736915f6361d8752cb3f66f87508fcb20bb46",
+    "rtl/state/rabbitpunch_state_slot_writer.vhd": "372560c8120898213efee206a38d08273b3b7baae0748076392cca43f3809a9e",
+    "rtl/state/rabbitpunch_state_publish.vhd": "5b49157b082400cd1dd2799a1875db70d7c38cf09aa91eaefa0f10305fe62f78",
+    "sim/state/state_publish_tb.vhd": "fd14428e18bce20720393c2d0bb93443d61f128cfd46c5331b263bcb2eb6f1d6"
+  },
+  "runner_sha256": "0d7f9865a525b755a298c1a816fbcdc291b1e7fd9eb3ed7d0dca1149cf571d14",
+  "log_sha256": "b8d16fb694b138b76a351c2a18b734239790c2f30bd798b55fc2ba3529759b7a",
+  "scope": "Nine complete-image publisher cases with actual word stream and DDRslotwriter: full107280-byte payload and13410 ordered words, four slot addresses and repeated counters, payload-first publication with prior invalidation, stalls, dual image/DDR accepted read debt, cancel/reset, source-permission/error failure, final-commit cancellation and retry. Synthetic byte source/DDR endpoint; permission supplied by test, no CRC-validator/game-state restoration or host SD acknowledgement."
+}

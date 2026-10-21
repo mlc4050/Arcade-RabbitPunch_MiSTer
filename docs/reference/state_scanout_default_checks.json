@@ -1,0 +1,15 @@
+{
+  "case": "state_scanout_default",
+  "pass_marker": "SCANOUT_PASS",
+  "log": "debug\\baselines\\state_scanout_default\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_clock_enables.vhd": "43f72dc52568f284236f9066f1f48d74d280c55bbb5fc7677d39a29093fbfcfa",
+    "rtl/rabbitpunch_raster.vhd": "57e3eac7e7560f4527251289fce1bd1d172ac245dc1bc59a101d656e1839769a",
+    "rtl/rabbitpunch_scanline_scheduler.vhd": "38761b9a7f583d5ae02edb614cb0a043b43e206fd437f51a225e2c031dbe0b05",
+    "rtl/rabbitpunch_video_output.vhd": "50aa7b951abddfb3cb61e8f3687535ddfe33d09fa561abf49590cf6b08028b97",
+    "rtl/rabbitpunch_scanout.vhd": "1e8f9023a0b6c954458e5621e252163bac92fae291c828ef92546d662ffa2c4a",
+    "sim/video/scanout_tb.vhd": "b0631d8a0cce3d1b7b508fb047b543f27d1b7b469aeac4190c48e2ad46c1766a"
+  },
+  "log_sha256": "696517334ceb8bbde7e308ec41fd9415c995edd0b4d3848fda71b4c9107637a2",
+  "scope": "Continuous provisional raster/scheduler/output with 2557-cycle row and four-edge RGB models; 124416 synthetic RGB checks, deliberate 4000-cycle deadline violation, live sync through readiness loss/recovery; no actual graphics, CPU, SDRAM or hardware output proof"
+}

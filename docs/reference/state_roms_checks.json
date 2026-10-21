@@ -1,0 +1,21 @@
+{
+  "case": "state_roms_normalize",
+  "pass_marker": "STATE_ROMS_PASS",
+  "log": "debug\\baselines\\state_roms_normalize\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_layout.vhd": "31af791e125292f3d1eabaee3bab7fd7f08ae4bdbec95c8f2202e0b9429545e5",
+    "rtl/rabbitpunch_sdram_types.vhd": "35c1406e611389f2ee18dd3da7b0805e389ac4b8bd763c8a603a691b5de66367",
+    "rtl/memory/sdram/sdram.sv": "96f83d4618b42dbdbe840171a6760871cd9e778ec79a918692b217e56f9b3495",
+    "rtl/rabbitpunch_sdram.vhd": "c2bb1bd24c3b7ef22653e3ce8d7d888acb868b5b28ad6345bbc26e0d5694815a",
+    "rtl/rabbitpunch_rom_requests.vhd": "53c61ff61c68aeef1b4508d8ae8ebef18378e9b778fc1f264a57fdccf8554db7",
+    "rtl/rabbitpunch_rom_cache.vhd": "828c24531a06f6a39ea0d93bdf127ea213152c9bb90598b6b94cf5095e52ce90",
+    "rtl/rabbitpunch_read_arbiter.vhd": "59b5d349eb1915761066f26a7178d6b89b5835dbdb63f902fe706467720dd8e0",
+    "rtl/rabbitpunch_audio_roms.vhd": "7b718c0695820cb5c5113059ebedbd57a1c43f4df3897677ed6cf892628b13dd",
+    "rtl/rabbitpunch_audio_rom_transport.vhd": "4519236cca711e08b96ca693d0ff40faf483b4f2428a8734e365af58d9f3e2bc",
+    "rtl/rabbitpunch_roms.vhd": "ac27f63266a3a20ceb7caf5f26c8b39030de3a18afc0647b9a5bbd32ba00cfb8",
+    "sim/vendor/sdram/sdram_chip_model_wide.sv": "9c48769c8ae01a8e917dc4f57ff7aed88467537b035a5c818934241c18a8481c",
+    "sim/state/state_roms_tb.vhd": "2c10223647921261ae4f2a1ca4c59e354fd53ae7f005b28ae55587107b7da2fb"
+  },
+  "log_sha256": "9f6371b4c9a6089835f3598baf69bf3cba7b7a6414def8fedaefcfe682a1d2e7",
+  "scope": "Production ROM subsystem with actual SDRAM controller/chip model, loader and all five readers. Two image epochs, cache hits/refills, accepted sample read withdrawn before response, full debt drain then state cache invalidation without physical-controller reset. Exactly five new bursts after each normalization and zero for the warm repeat. Synthetic image bytes; no actual sound-chip capture, full-machine continuation or hardware timing proof."
+}

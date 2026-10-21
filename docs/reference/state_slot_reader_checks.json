@@ -1,0 +1,13 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_crc.vhd": "4de0b46eae23558ed02db73df8ce628e8a02cb8a6318405c4b8846dbed81e568",
+    "rtl/state/rabbitpunch_state_preflight.vhd": "39602b76e4bfcba1b6f94a0e6089518bfe5bb6faebcda54eef4321e21c4e34e6",
+    "rtl/state/rabbitpunch_state_image_buffer.vhd": "90ccae6b5ac6f22d6a06fb018393b34897e77bd238afebce452fbea9a692ac72",
+    "rtl/state/rabbitpunch_state_slot_reader.vhd": "84d5d13871be5ad1b6895758f582dbc675e1cbc5fa0b85675b1f08dc11f16ec4",
+    "sim/state/state_slot_reader_tb.vhd": "f0cc0e4f1dce9c059b33e409f792ae7986cb9bea66478e0a520427bc7c2938d7"
+  },
+  "runner_sha256": "02290679fffb9e137491e11f1f60d2477db6b824f5f98737446e612d885ccb4f",
+  "log_sha256": "8ca1fa0df33ea89eba890913000aadbf81294d1c66d3a6fcc828def943de7851",
+  "scope": "Native DDR reader/private RAM/preflight integration: stalled DDR and fill stream, complete byte ordering, outer length/empty checks, changed counter rejection, cancellation drains accepted read, corrupted body rejected by real preflight and valid retry. No game state write interface, host-copy lock, physical DDR, CPU semantic validation or full game restore qualification."
+}

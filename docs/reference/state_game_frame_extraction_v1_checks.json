@@ -1,0 +1,40 @@
+{
+  "accepted": true,
+  "cases": [
+    {
+      "trace_sha256": "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46",
+      "width": 288,
+      "height": 216,
+      "renderer_left": 8,
+      "complete_frames": 1,
+      "first_clock": 548102,
+      "last_clock": 1200271,
+      "rgb_sha256": "7a3170f1e6838177876e4299396f21a5feabea867ca7d7248ede4816f6d1fea9",
+      "png_sha256": "b85d98304b06de55f3554ed86139ad3fdaeda6b00bfbb6e9a86fea487af3066d",
+      "extractor_sha256": "f0c0dac96c3a09644f53e21a20e9a5e4f56342ff74c1245c637abe661eca683e",
+      "scope": "Passive trace visualization only. Every coordinate of the last complete native 288x216 frame is present once; no ROM, memory or model state is changed. This is not an independent MAME comparison or gameplay qualification.",
+      "game": "rabiolep",
+      "artifact": "debug/state_full_machine_cold_shared_jp_cw_selector_fixed_v1/rabiolep/native_frame1.json",
+      "visually_observed_screen": "NOTICE",
+      "upstream_receipt_sha256": "08a94e05919befbd5a5a9f05bc80a5815c4f382220630b97478fafe2fb41daf4"
+    },
+    {
+      "trace_sha256": "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954",
+      "width": 288,
+      "height": 216,
+      "renderer_left": 8,
+      "complete_frames": 1,
+      "first_clock": 547994,
+      "last_clock": 1200163,
+      "rgb_sha256": "fa8e1f73de94fceb4c29268f2eb342fcce0933ef47f2d93f96e3921201cad3d2",
+      "png_sha256": "e28800859996bf492b4ebfb2f8ae72f95de8610e4b2b62bb91c2cbe13bc14067",
+      "extractor_sha256": "f0c0dac96c3a09644f53e21a20e9a5e4f56342ff74c1245c637abe661eca683e",
+      "scope": "Passive trace visualization only. Every coordinate of the last complete native 288x216 frame is present once; no ROM, memory or model state is changed. This is not an independent MAME comparison or gameplay qualification.",
+      "game": "rpunch",
+      "artifact": "debug/state_full_machine_cold_restore_arm_us_v3/rpunch/native_frame1.json",
+      "visually_observed_screen": "GAME OVER",
+      "upstream_receipt_sha256": "d057ea0622cee9ea6ce6f4b1b2448cf5809251b29bd378b20981e1bf6725d0c0"
+    }
+  ],
+  "scope": "Passive frame extraction from two existing admitted real-game continuations. Every visible coordinate occurs once and PNG decoding reproduces the RGB bytes. Screen descriptions are visual observations; no new game execution, independent MAME comparison, active-player qualification or hardware result."
+}

@@ -1,0 +1,25 @@
+{
+  "case": "state_hdmi_presentation_netlists_v3",
+  "pass_marker": "STATE_HDMI_PRESENTATION_PASS",
+  "log": "debug\\baselines\\state_hdmi_presentation_netlists_v3\\result.log",
+  "accepted": true,
+  "source_sha256": {
+    "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+    "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
+    "rtl/rabbitpunch_ddr_write_queue.vhd": "d8a66938e884f6a26f18e3e7c2de7c5f4732ae7c507e745ce91101ce06d592e5",
+    "rtl/rabbitpunch_frame_publication.vhd": "2ab81ea58f2ddbc240095067d4ff6c267675d9213af684a37045e04b16552cb3",
+    "rtl/state/rabbitpunch_state_ddr_arbiter.vhd": "f7ac7ebe67c4e46c4d8f9d550efde19e989ed7a3a1b575efe974cf6cf9dcc77d",
+    "rtl/state/rabbitpunch_state_rotation_transport.vhd": "14ac95c7b7283e862a83bda904657e565850a31500b931059fe64df307b18a72",
+    "rtl/state/rabbitpunch_state_hdmi_presentation.vhd": "2aa92755c4c2ad6a7bed80e13f6231404266e39070c1d6d0c1b6fe83f3f83808",
+    "sim/state/state_hdmi_presentation_tb.vhd": "3db28fb302912970212641712a1e6160b02329beb108d8ed8fd74ad6e65c2aa1",
+    "rtl/rabbitpunch_hdmi_rotation.vhd": "769a309dcdc4422f0801e1149d0f3a621d15c3313c1f5f600d01f36bc88eb17c",
+    "rtl/video/rotation/screen_rotate_two.sv": "a704b114cc7d7c1684eb273ab98b436350a3ffb957b350fad975bb322ba11f9e",
+    "rtl/rabbitpunch_video_aspect.vhd": "15f15840b7ced43d06487c1e9c1b7251bc1b210dfa911c9273cf9c904c05759b",
+    "sys/video_freak.sv": "1c331bd8aee90bd722e8d9e400a8305de73392cb00cae256b8fb710e4fc2d478"
+  },
+  "runner_sha256": "c5bbabc46b5541081434e8502a9237aa4e5875ce5e17873cfeccc2ad6d224dcd",
+  "log_sha256": "c9b54a3b5934c2d55c521a67cee9802f72bb52dbd0d7a35900ee84d89484503b",
+  "rotation_netlist_receipt_sha256": "bc9880d0ebe15e8ebbef70e278a6cfb49302295b3bb39d16e59de503d125061c",
+  "aspect_netlist_receipt_sha256": "fdc142afef59c9150f241ee4c985ff81837f479ecc43c67ca081096a9aeb7c5e",
+  "scope": "Qualified Quartus functional netlist of the unchanged screen_rotate_two donor and descriptive VHDL wrapper; current source matches that fitted commit. Actual state RTL connects aspect, publication, queue and three-client state DDR arbiter. Synthetic 32x20 raster: retained native/custom/integer/direct mode checks; CW and CCW each publish a complete frame before midframe state flush, hold mode while flush spans VS, retire an accepted canceled state read to its original client, write state while presentation is held, and republish only after fresh capture. No full game, scaler, physical DDR controller, FPGA timing or hardware result is claimed."
+}

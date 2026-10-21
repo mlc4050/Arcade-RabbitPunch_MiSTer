@@ -40,7 +40,11 @@ entity rabbitpunch_raster is
         o_visible_line_start : out std_logic;
         o_frame_start : out std_logic;
         o_vblank_start : out std_logic;
-        o_half_frame : out std_logic
+        o_half_frame : out std_logic;
+        i_state_hold : in std_logic := '0';
+        i_state_load : in std_logic := '0';
+        iu18_state : in unsigned(17 downto 0) := (others => '0');
+        ou18_state : out unsigned(17 downto 0) := (others => '0')
     );
 end entity;
 
@@ -66,6 +70,7 @@ begin
 
     ou9_horizontal_position <= su9_horizontal_position;
     ou9_vertical_position <= su9_vertical_position;
+    ou18_state <= su9_vertical_position & su9_horizontal_position;
     s_horizontal_active <= '1' when su9_horizontal_position >= GINT_HORIZONTAL_VISIBLE_START and
         su9_horizontal_position < GINT_HORIZONTAL_VISIBLE_START + GINT_HORIZONTAL_VISIBLE_WIDTH else '0';
     s_vertical_active <= '1' when su9_vertical_position >= GINT_VERTICAL_VISIBLE_START and
@@ -81,7 +86,7 @@ begin
         when s_horizontal_active = '1' else (others => '0');
     ou8_pixel_y <= resize(su9_vertical_position - GINT_VERTICAL_VISIBLE_START + GINT_RENDER_Y_OFFSET, 8)
         when s_vertical_active = '1' else (others => '0');
-    s_line_start <= i_pixel_enable and not i_reset when su9_horizontal_position = 0 else '0';
+    s_line_start <= i_pixel_enable and not i_reset and not i_state_hold when su9_horizontal_position = 0 else '0';
     o_line_start <= s_line_start;
     o_visible_line_start <= s_line_start and s_vertical_active;
     o_frame_start <= s_line_start when su9_vertical_position = 0 else '0';
@@ -95,6 +100,14 @@ begin
             if (i_reset = '1') then
                 su9_horizontal_position <= (others => '0');
                 su9_vertical_position <= (others => '0');
+            elsif (i_state_hold = '1') then
+                if (i_state_load = '1') then
+                    assert (iu18_state(8 downto 0) < GINT_HORIZONTAL_TOTAL and
+                        iu18_state(17 downto 9) < GINT_VERTICAL_TOTAL)
+                        report "Invalid raster state" severity failure;
+                    su9_horizontal_position <= iu18_state(8 downto 0);
+                    su9_vertical_position <= iu18_state(17 downto 9);
+                end if;
             elsif (i_pixel_enable = '1') then
                 if (su9_horizontal_position = GINT_HORIZONTAL_TOTAL - 1) then
                     su9_horizontal_position <= (others => '0');

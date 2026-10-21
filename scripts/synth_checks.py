@@ -11,6 +11,27 @@ from hwlock import require_no_jtag
 
 
 CHECKS = {
+    "state_host": (0, ("state_host_check", "rabbitpunch_state_controls", "rabbitpunch_host", "hps_io")),
+    "state_scanout": (0, ("rabbitpunch_scanout", "rabbitpunch_state_game_timing", "rabbitpunch_clock_enables", "rabbitpunch_raster", "rabbitpunch_video_output")),
+    "state_image_validator": (0, ("rabbitpunch_state_image_validator", "rabbitpunch_state_preflight", "rabbitpunch_state_semantics")),
+    "state_apply": (0, ("rabbitpunch_state_apply",)),
+    "state_banks": (0, ("rabbitpunch_state_banks", "rabbitpunch_state_body", "rabbitpunch_state_memory")),
+    "state_publish": (0, ("rabbitpunch_state_publish", "rabbitpunch_state_image_words", "rabbitpunch_state_slot_writer")),
+    "state_service": (858240, ("rabbitpunch_state_service", "rabbitpunch_state_image_buffer", "rabbitpunch_state_snapshot", "rabbitpunch_state_slot_reader", "rabbitpunch_state_image_validator", "rabbitpunch_state_apply", "rabbitpunch_state_publish", "rabbitpunch_state_slot_writer")),
+    # Main board907936 + sound RAM16384 + NVRAM2048 + private image858240.
+    # M68K capture MLABs are checked independently of block-memory totals.
+    "state_machine": (1784608, ("rabbitpunch_state_machine", "rabbitpunch_state_machine_backend", "rabbitpunch_state_machine_access", "rabbitpunch_state_banks", "rabbitpunch_state_service", "rabbitpunch_state_image_buffer", "rabbitpunch_state_maincpu", "gx_ss_m68k", "T80", "rabbitpunch_jt51_state_netlist", "rabbitpunch_jt7759_state_netlist", "rabbitpunch_rom_identity", "rabbitpunch_hiscore_service", "rabbitpunch_rom_cache")),
+    "state_snapshot": (0, ("rabbitpunch_state_snapshot", "rabbitpunch_state_header")),
+    "state_audio": (16384, ("rabbitpunch_audio", "rabbitpunch_t80_capture", "T80", "rabbitpunch_jt51_state_netlist", "rabbitpunch_jt7759_state_netlist", "rabbitpunch_ram8")),
+    "state_maincpu": (39584, ("rabbitpunch_state_maincpu", "rabbitpunch_state_fx68k", "fx68k", "gx_ss_m68k", "rabbitpunch_capture_stack_undo", "rabbitpunch_capture_phase")),
+    "state_board": (907936, ("rabbitpunch_board", "rabbitpunch_state_maincpu", "gx_ss_m68k", "rabbitpunch_capture_stack_undo", "rabbitpunch_capture_phase", "rabbitpunch_state_main_bus", "rabbitpunch_bus_owner", "rabbitpunch_io", "rabbitpunch_irq", "rabbitpunch_board_video", "jtframe_draw")),
+    "state_slot_reader": (0, ("rabbitpunch_state_slot_reader",)),
+    "state_header": (0, ("rabbitpunch_state_header",)),
+    "state_slot_writer": (0, ("rabbitpunch_state_slot_writer",)),
+    "state_image_buffer": (858240, ("rabbitpunch_state_image_buffer",)),
+    "t80_capture": (0, ("rabbitpunch_t80_capture", "T80")),
+    "jt51_state": (0, ("rabbitpunch_jt51_state_netlist",)),
+    "jt7759_state": (0, ("rabbitpunch_jt7759_state_netlist",)),
     "hdmi_presentation": (40960, ("rabbitpunch_hdmi_presentation", "rabbitpunch_hdmi_rotation", "screen_rotate_two", "rabbitpunch_rotation_transport", "rabbitpunch_frame_publication", "rabbitpunch_ddr_write_queue", "rabbitpunch_video_aspect", "video_freak", "sys_umul", "sys_udiv")),
     "rotation_transport": (51712, ("rabbitpunch_rotation_transport", "rabbitpunch_frame_publication", "rabbitpunch_ddr_write_queue")),
     "frame_publication": (0, ("rabbitpunch_frame_publication",)),
@@ -67,7 +88,7 @@ CHECKS["clocked_machine"] = (CHECKS["machine"][0], CHECKS["machine"][1] +
     ("rabbitpunch_clocked_machine", "rabbitpunch_pll", "rabbitpunch_reset_release"))
 
 
-def run_check(stage, quartus_bin, stamp, name):
+def run_check(stage, quartus_bin, stamp, name, compile_project=True):
     expected_bits, required_instances = CHECKS[name]
     project_name=f"{name}_check"
     stage=Path(stage).resolve()
@@ -87,18 +108,30 @@ def run_check(stage, quartus_bin, stamp, name):
         path=scratch/folder
         path.mkdir(parents=True,exist_ok=True)
         env[key]=str(path)
-    marker.write_text(stamp,encoding="utf-8")
-    try:
-        with log_path.open("w",encoding="utf-8") as log:
-            result=subprocess.run([str(Path(quartus_bin)/"quartus_sh.exe"),"--flow","compile",project_name],
-                                  cwd=project,env=env,stdout=log,stderr=subprocess.STDOUT,**NO_WINDOW)
-    finally:
-        marker.unlink(missing_ok=True)
+    compile_returncode = 0
+    if compile_project:
+        marker.write_text(stamp,encoding="utf-8")
+        try:
+            with log_path.open("w",encoding="utf-8") as log:
+                result=subprocess.run([str(Path(quartus_bin)/"quartus_sh.exe"),"--flow","compile",project_name],
+                                      cwd=project,env=env,stdout=log,stderr=subprocess.STDOUT,**NO_WINDOW)
+        finally:
+            marker.unlink(missing_ok=True)
+        compile_returncode = result.returncode
+    else:
+        # Verify only the most recent immutable staged compilation. Never
+        # attach a newer checkout's identity to an older project's reports.
+        built = stage/"BUILT_COMMIT"
+        staged_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=stage,
+                                                text=True, **NO_WINDOW).strip()
+        if (marker.exists() or built.read_text().strip() != stamp.strip() or
+                stamp.split()[0] != staged_commit or log_path.stat().st_mtime < built.stat().st_mtime):
+            raise SystemExit("Existing fit verification requires the current completed staged snapshot")
     log=log_path.read_text(encoding="utf-8",errors="replace")
-    if result.returncode or "Full Compilation was successful" not in log:
+    if compile_returncode or "Full Compilation was successful" not in log:
         print("\n".join(log.splitlines()[-35:]))
         raise SystemExit(f"Standalone {name} compile failed: {log_path}")
-    if name in ("tiles", "sprites", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "system", "platform", "machine", "clocked_machine"):
+    if name in ("tiles", "sprites", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "state_board", "state_machine", "system", "platform", "machine", "clocked_machine"):
         stuck = re.findall(r'Pin "(ou17_(?:(?:sprite|tile)_)?rom_word_address\[\d+\])" is stuck', log)
         if stuck:
             raise SystemExit(f"Unexpected constant graphics ROM address bits: {stuck}")
@@ -110,6 +143,35 @@ def run_check(stage, quartus_bin, stamp, name):
     hierarchy=(output/f"{project_name}.map.rpt").read_text(encoding="utf-8",errors="replace")
     if any(instance not in hierarchy for instance in required_instances):
         raise SystemExit("A required block disappeared during synthesis")
+    state_main_memory = []
+    if name in ("state_maincpu", "state_board", "state_machine"):
+        fitted = (output/f"{project_name}.fit.rpt").read_text(encoding="utf-8", errors="replace")
+        expected_main_memory = {
+            **{"altdpram:"+bank+"_rtl_0": ("MLAB", 19, 16, 19, 16, 304)
+               for bank in ("ea_h", "ea_l", "eb_h", "eb_l")},
+            "nanoRom:nanoRom|": ("AUTO", 336, 68, 336, 66, 22176),
+            "uRom:uRom|": ("AUTO", 1024, 17, 1024, 17, 17408),
+        }
+        for line in fitted.splitlines():
+            columns = [value.strip() for value in line.split(";")[1:-1]]
+            if len(columns) > 19 and columns[1] in ("MLAB", "AUTO", "M10K"):
+                if name in ("state_board", "state_machine") and "rabbitpunch_state_maincpu:" not in columns[0]:
+                    continue
+                matches = [key for key in expected_main_memory if key in columns[0]]
+                if len(matches) != 1:
+                    raise SystemExit(f"Unexpected state CPU memory: {columns[0]}")
+                key = matches[0]
+                kind, depth, width, implemented_depth, implemented_width, logical_bits = expected_main_memory[key]
+                shape = (columns[1], *map(int, (columns[4], columns[5], columns[13], columns[14], columns[17])))
+                if shape != (kind, depth, width, implemented_depth, implemented_width, logical_bits):
+                    raise SystemExit(f"State CPU memory geometry changed: {key}: {shape}")
+                state_main_memory.append(dict(instance=key, kind=kind, depth=implemented_depth,
+                                              width=implemented_width, bits=logical_bits))
+        if len(state_main_memory) != 6 or len({row["instance"] for row in state_main_memory}) != 6:
+            raise SystemExit("State CPU ROM or duplicate capture-bank memory missing")
+        # Quartus excludes logic-array MLABs from Total block memory bits.
+        if sum(row["bits"] for row in state_main_memory if row["kind"] == "MLAB") != 1216:
+            raise SystemExit("Capture-bank MLAB capacity changed")
     crt_memory = []
     if name == "crt_adjust":
         expected_crt_memory = {"altsyncram:mem_rtl_0": (1024, 24),
@@ -225,6 +287,10 @@ def run_check(stage, quartus_bin, stamp, name):
             "timing_coverage":coverage,
             "fit_summary":fit.splitlines(),"log_sha256":hashlib.sha256(log_path.read_bytes()).hexdigest(),
             "scope":scope}
+    report.update(verification_only=not compile_project,
+                  checker_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
+    if state_main_memory:
+        report["state_main_memory"] = state_main_memory
     if name == "hdmi_presentation":
         report.update(rotation_queue_memory=rotation_memory, logical_queue_packet_width=101,
                       constant_zero_packet_columns=rotation_zero_columns)

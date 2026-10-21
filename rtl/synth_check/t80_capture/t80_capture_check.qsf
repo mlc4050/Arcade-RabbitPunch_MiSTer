@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 RabbitPunch contributors
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY t80_capture_check
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name VHDL_FILE ../../state/vendor/meatsauce_t80/T80_Reg.vhd -library state_t80
+set_global_assignment -name VHDL_FILE ../../state/vendor/meatsauce_t80/T80_MCode.vhd -library state_t80
+set_global_assignment -name VHDL_FILE ../../state/vendor/meatsauce_t80/T80_ALU.vhd -library state_t80
+set_global_assignment -name VHDL_FILE ../../state/vendor/meatsauce_t80/T80.vhd -library state_t80
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_t80_capture.vhd
+set_global_assignment -name VHDL_FILE t80_capture_check.vhd
+set_global_assignment -name SDC_FILE t80_capture_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_reset_n
+set_instance_assignment -name VIRTUAL_PIN ON -to i_clock_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to i_wait_n
+set_instance_assignment -name VIRTUAL_PIN ON -to i_interrupt_n
+set_instance_assignment -name VIRTUAL_PIN ON -to o_opcode_fetch_n
+set_instance_assignment -name VIRTUAL_PIN ON -to o_memory_request_n
+set_instance_assignment -name VIRTUAL_PIN ON -to o_io_request_n
+set_instance_assignment -name VIRTUAL_PIN ON -to o_read_n
+set_instance_assignment -name VIRTUAL_PIN ON -to o_write_n
+set_instance_assignment -name VIRTUAL_PIN ON -to o_refresh_n
+set_instance_assignment -name VIRTUAL_PIN ON -to o_halted_n
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_read_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_write_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_capture_request
+set_instance_assignment -name VIRTUAL_PIN ON -to i_cancel
+set_instance_assignment -name VIRTUAL_PIN ON -to i_bus_drained
+set_instance_assignment -name VIRTUAL_PIN ON -to o_capture_pending
+set_instance_assignment -name VIRTUAL_PIN ON -to o_held
+set_instance_assignment -name VIRTUAL_PIN ON -to i_resume
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_write
+set_instance_assignment -name VIRTUAL_PIN ON -to iu256_state_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou256_state_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_clean_boundary
+set_instance_assignment -name VIRTUAL_PIN ON -to ou3_machine_cycle[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou3_clock_phase[*]

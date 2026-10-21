@@ -11,8 +11,11 @@ from run_platform_tests import platform_sources
 root=core_root()
 parser=argparse.ArgumentParser()
 parser.add_argument('--host-netlist',action='store_true')
+parser.add_argument('--label',default='')
 args=parser.parse_args()
+assert all(character.isalnum() or character == '_' for character in args.label)
 case='platform_hiscore_host' if args.host_netlist else 'platform_hiscore'
+case += ('_' + args.label) if args.label else ''
 out=root/'debug/baselines'/case
 out.mkdir(parents=True,exist_ok=True)
 reference=json.loads((root/'docs/reference/hiscore_reference.json').read_text())

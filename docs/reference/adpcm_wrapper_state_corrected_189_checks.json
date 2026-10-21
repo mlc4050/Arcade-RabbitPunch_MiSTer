@@ -1,0 +1,12 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/generated/jt7759_state_netlist.vhd": "6fdc86fa46e21bd97109e1cafa221d0e31c04deb2c1af48d2e15be388be5c3a9",
+    "rtl/rabbitpunch_upd7759.vhd": "fbb2c6fb1e71f7b64534eb267a7eb82e3121189df7a846dc6a93ced054b50d0f",
+    "rtl/rabbitpunch_adpcm.vhd": "6cf0d6504dffd312e2822a07caead8ec2ef8ab074dc22e52835f0a3010cf9aed",
+    "sim/state/adpcm_wrapper_state_tb.vhd": "c4494631495f7d5f249e87bf9dc9167bff3205763478be59a86b0d286e09d3a7"
+  },
+  "runner_sha256": "58940dc119ebf28693e08c48a0afc75507c65a6a28f58fe1743af5a052e61b64",
+  "log_sha256": "3bcbd63f3d3df05156379a2a26050579c02f8d5fce1e8895531488fec4fb2f77",
+  "scope": "Integrated ADPCM VHDL wrapper/generated-chip state path: pending WAITING/START command snapshots, bank/reset/start readiness/command reload, complementary wrapper controls and all189 corrected chip bits, masked outward ROM requests during hold and nine1024-clock immediate continuations with nonzero PCM and gameplay reset priority over a held partial chip load. Synthetic throttled ROM, not physical transport or full game restore."
+}

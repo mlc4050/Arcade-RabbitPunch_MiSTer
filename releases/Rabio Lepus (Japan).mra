@@ -8,7 +8,7 @@
     <manufacturer>V-System Co.</manufacturer>
     <rotation>horizontal</rotation>
     <players>2</players>
-    <about>Development ROM/control definition; no playable core release yet.</about>
+    <about>Rabbit Punch / Rabio Lepus for MiSTer. Savestate controller mapping included.</about>
     <joystick ways="8" />
     <rom index="0" zip="rabiolep.zip" md5="None">
         <interleave output="16">
@@ -61,5 +61,5 @@
         <dip name="Extended Play" bits="12" ids="500000 points,300000 points" />
         <dip name="Demo Sounds" bits="13" ids="On,Off" />
     </switches>
-    <buttons names="Fire/Punch,Missile,-,-,-,-,Start,Coin,Pause,Service,Test" count="2" />
+    <buttons names="Fire/Punch,Missile,-,-,-,-,Start,Coin,Pause,Service,Test,Savestate (SS)" count="2" />
 </misterromdescription>

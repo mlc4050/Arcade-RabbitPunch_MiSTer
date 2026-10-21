@@ -1,0 +1,10 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_audio_mixer.vhd": "da1cd0fb2874740ec5447790d331a36396f90310d8aace84ac88fab29204284f",
+    "sim/state/audio_mixer_state_tb.vhd": "ed463a5fdaa508e10d075d73b9f5a5f3977e024eec7e457482ed682a09a81792"
+  },
+  "runner_sha256": "466acad05fc0d8d57eb83efc413db4864ecdd543efc1e9bdc3fdd5ff55e041fd",
+  "log_sha256": "6ca0bc2905ca6bf55841cc1e2d9a547a9cb4052f8eb91ee226b5867412eb4fa1",
+  "scope": "Registered mono mixer: original independent integer arithmetic vectors plus three state roundtrips, complementary16bit writes, changed inputs held stable, exact first resumed PCM and following sample phase, reset priority during held load. Normal mix arithmetic unchanged. Not physical audio or whole-game restore qualification."
+}

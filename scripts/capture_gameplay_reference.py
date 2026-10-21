@@ -19,6 +19,7 @@ parser.add_argument('--pulse-frames', type=int, default=6)
 parser.add_argument('--frames', type=int, default=600)
 parser.add_argument('--coin-frame', type=int, default=900)
 parser.add_argument('--start-frame', type=int, default=990)
+parser.add_argument('--wav', action='store_true', help='Record native mixed audio for checkpoint coverage')
 a = parser.parse_args()
 assert 2 <= a.coin_frame < a.start_frame < a.frames and 2 <= a.pulse_frames <= 60
 require_no_jtag('Scripted MAME gameplay reference')
@@ -34,13 +35,17 @@ r = regions()
 folder,exe = mame_paths()
 env = dict(os.environ, **lua_env(r), CORE_SCRIPT=script.as_posix(),CORE_OUT=out.as_posix(),CORE_FRAME=str(a.frames),
     CORE_READ=spec(r['read']),CORE_WTAP=spec(r['wtap']),CORE_COIN=str(a.coin_frame),GAME_START_FRAME=str(a.start_frame),GAME_PULSE_FRAMES=str(a.pulse_frames),GAME_ACTION_FRAME=str(a.action_frame),GAME_FORCE_INPUT_ERROR='1' if a.input_error_control else '0')
-cmd = mame_cmd(exe,a.game,'capture.lua',folder,['-seconds_to_run',str(a.frames//60+10),'-cfg_directory',str(out/'cfg'),'-nvram_directory',str(out/'nvram')])
+extra = ['-seconds_to_run',str(a.frames//60+10),'-cfg_directory',str(out/'cfg'),'-nvram_directory',str(out/'nvram')]
+if a.wav:
+    extra += ['-wavwrite', str(out/'audio.wav'), '-samplerate', '62500']
+cmd = mame_cmd(exe,a.game,'capture.lua',folder,extra)
 run = subprocess.run(cmd,cwd=folder,env=env,capture_output=True,text=True,timeout=120,**NO_WINDOW)
 (out/'run.log').write_text(run.stdout+run.stderr)
 check_lua_error(out)
 if (out/'ERROR.txt').exists():
     raise SystemExit('MAME callback failed: '+(out/'ERROR.txt').read_text()[:1000])
 assert 'CORE_CAPTURE_ERROR' not in run.stdout + run.stderr, 'MAME callback error marker'
+assert run.returncode == 0 and 'CORE_CAPTURE_OK' in run.stdout, (run.stdout+run.stderr)[-3000:]
 applied = [list(map(int,line.split())) for line in (out/'inputs.txt').read_text().splitlines()]
 assert len(applied) > a.frames-10
 assert [row[0] for row in applied if row[1]]==list(range(a.coin_frame,a.coin_frame+a.pulse_frames)), 'Coin pulse frames differ from request'
@@ -50,8 +55,8 @@ assert sum(bool(row[7] & 0x10) for row in applied)==a.pulse_frames, 'Coin 1 port
 assert sum(bool(row[7] & 0x20) for row in applied)==a.pulse_frames, 'Start 1 port did not observe pulse'
 assert sum(bool(row[8] & 0x20) for row in applied)==a.pulse_frames, 'Missile port did not observe pulse'
 assert any(row[8] & 0x10 for row in applied), 'Shoot port remained inactive'
-assert run.returncode == 0 and 'CORE_CAPTURE_OK' in run.stdout, (run.stdout+run.stderr)[-3000:]
 manifest=dict(set=a.game,frames=a.frames,coin_frame=a.coin_frame,start_frame=a.start_frame,pulse_frames=a.pulse_frames,action_frame=a.action_frame,mameversion='0289',
+    command=cmd, mixed_audio_recorded=a.wav,
     actual_requested_coin_frames=[row[0] for row in applied if row[1]],actual_requested_start_frames=[row[0] for row in applied if row[2]],
     generator_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
     capture_source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),

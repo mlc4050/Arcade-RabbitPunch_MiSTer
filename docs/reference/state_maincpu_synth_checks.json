@@ -1,0 +1,193 @@
+{
+  "commit": "ff3049f59e6697b99089f4ab36e57f2c8956bcb4",
+  "device": "5CSEBA6U23I7",
+  "project": "state_maincpu_check",
+  "constraint_mhz": 48,
+  "seed": 3,
+  "memory_bits": 39584,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 7.972
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.35
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.055
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 8.04
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.274
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 8.956
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 9.764
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.182
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.258
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 10.09
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.122
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.24
+    }
+  ],
+  "timing_coverage": {
+    "Illegal Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Port Paths": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Port Paths": {
+      "setup": 0,
+      "hold": 0
+    }
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Mon Oct 19 07:34:39 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : state_maincpu_check",
+    "Top-level Entity Name : state_maincpu_check",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 2,512 / 41,910 ( 6 % )",
+    "Total registers : 2067",
+    "Total pins : 1 / 314 ( < 1 % )",
+    "Total virtual pins : 224",
+    "Total block memory bits : 39,584 / 5,662,720 ( < 1 % )",
+    "Total RAM Blocks : 6 / 553 ( 1 % )",
+    "Total DSP Blocks : 0 / 112 ( 0 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 0 / 6 ( 0 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "log_sha256": "ba4bec8edfe2b5843b37a080566fb2f51c36c3ec70b744966691ef4c8433ab78",
+  "scope": "Isolated registered virtual-I/O parent at48MHz seed3. Exact committed dependencies and boundary inputs retained; expected memory, hierarchy, unconstrained-path and nonnegative timing gates passed. Register counts are preservation checks, not post-fit functional proof. Not a whole-core fit or game-state/hardware restore qualification.",
+  "verification_only": false,
+  "checker_sha256": "f3c9ee5c3e7e0441a39f2dda5c191ac2308c8edd79dd439bec810b1860261524",
+  "state_main_memory": [
+    {
+      "instance": "altdpram:ea_h_rtl_0",
+      "kind": "MLAB",
+      "depth": 19,
+      "width": 16,
+      "bits": 304
+    },
+    {
+      "instance": "altdpram:ea_l_rtl_0",
+      "kind": "MLAB",
+      "depth": 19,
+      "width": 16,
+      "bits": 304
+    },
+    {
+      "instance": "altdpram:eb_h_rtl_0",
+      "kind": "MLAB",
+      "depth": 19,
+      "width": 16,
+      "bits": 304
+    },
+    {
+      "instance": "altdpram:eb_l_rtl_0",
+      "kind": "MLAB",
+      "depth": 19,
+      "width": 16,
+      "bits": 304
+    },
+    {
+      "instance": "nanoRom:nanoRom|",
+      "kind": "AUTO",
+      "depth": 336,
+      "width": 66,
+      "bits": 22176
+    },
+    {
+      "instance": "uRom:uRom|",
+      "kind": "AUTO",
+      "depth": 1024,
+      "width": 17,
+      "bits": 17408
+    }
+  ],
+  "source_sha256": {
+    "rtl/synth_check/state_maincpu/state_maincpu_check.qsf": "ac02dbb14eb4224d870ecc8816c9ab28f12db04bfdcc8db85f5613f6160c45e8",
+    "rtl/synth_check/state_maincpu/state_maincpu_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "rtl/state/vendor/konamigx/fx68k/fx68k.sv": "9f327366a840badd2e3b192f77b76a4e2d5f568add7df3df5e31010e2ba21ab4",
+    "rtl/state/vendor/konamigx/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
+    "rtl/state/vendor/konamigx/fx68k/uaddrPla.sv": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a",
+    "rtl/state/vendor/konamigx/gx_ss_m68k.sv": "397e40f9dfcca76acb3039853db44d239a246f31671fd641e0cb81003d5daec4",
+    "rtl/state/rabbitpunch_state_fx68k.vhd": "5ec7ccd432103faf6cc817d7aff7b7aa9259fe05750062a08702455749c59dec",
+    "rtl/state/rabbitpunch_m68k_capture.vhd": "a825b7b56a2db4b9d6c9c99bf20e6e746181b6a49cc8a98e5b8f5e9889e15c13",
+    "rtl/state/rabbitpunch_capture_stack_undo.vhd": "2aa4223c523bd336ddc6c3ffeeb693c365aaf7d4fde784824cebe6b3bc0298f9",
+    "rtl/state/rabbitpunch_capture_phase.vhd": "2e91ee4ada46c28f1bb37df5919ed85666582f04b747569133c0790c91461d87",
+    "rtl/state/rabbitpunch_state_maincpu.vhd": "82d2d374497fb31a04bc16dc18bf888bca37437410b8041f6f34540941174043",
+    "rtl/synth_check/state_maincpu/state_maincpu_check.vhd": "3aea9f62b6b8b935a6752d9c8738259994c13a050585e2801282291930ea21c4",
+    "rtl/cpu/fx68k/microrom.mem": "06b3325e369b5bbf9ed2ec76737fe19aea12573775858a4ca62b8e5bcc173d0a",
+    "rtl/cpu/fx68k/nanorom.mem": "46ef9dea89372021949a78674aa67cf46a485d9524e3df9655dabc5126170457"
+  },
+  "committed_blob_sha256": {
+    "rtl/synth_check/state_maincpu/state_maincpu_check.qsf": "70fe6c21580dc190293f917df2e5e4f731248eaeaa32786d752129210c633ed7",
+    "rtl/synth_check/state_maincpu/state_maincpu_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "rtl/state/vendor/konamigx/fx68k/fx68k.sv": "9f327366a840badd2e3b192f77b76a4e2d5f568add7df3df5e31010e2ba21ab4",
+    "rtl/state/vendor/konamigx/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
+    "rtl/state/vendor/konamigx/fx68k/uaddrPla.sv": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a",
+    "rtl/state/vendor/konamigx/gx_ss_m68k.sv": "397e40f9dfcca76acb3039853db44d239a246f31671fd641e0cb81003d5daec4",
+    "rtl/state/rabbitpunch_state_fx68k.vhd": "5ec7ccd432103faf6cc817d7aff7b7aa9259fe05750062a08702455749c59dec",
+    "rtl/state/rabbitpunch_m68k_capture.vhd": "a825b7b56a2db4b9d6c9c99bf20e6e746181b6a49cc8a98e5b8f5e9889e15c13",
+    "rtl/state/rabbitpunch_capture_stack_undo.vhd": "2aa4223c523bd336ddc6c3ffeeb693c365aaf7d4fde784824cebe6b3bc0298f9",
+    "rtl/state/rabbitpunch_capture_phase.vhd": "2e91ee4ada46c28f1bb37df5919ed85666582f04b747569133c0790c91461d87",
+    "rtl/state/rabbitpunch_state_maincpu.vhd": "82d2d374497fb31a04bc16dc18bf888bca37437410b8041f6f34540941174043",
+    "rtl/synth_check/state_maincpu/state_maincpu_check.vhd": "3aea9f62b6b8b935a6752d9c8738259994c13a050585e2801282291930ea21c4",
+    "rtl/cpu/fx68k/microrom.mem": "06b3325e369b5bbf9ed2ec76737fe19aea12573775858a4ca62b8e5bcc173d0a",
+    "rtl/cpu/fx68k/nanorom.mem": "46ef9dea89372021949a78674aa67cf46a485d9524e3df9655dabc5126170457"
+  },
+  "artifacts_sha256": {
+    "build/rtl/synth_check/state_maincpu/state_maincpu_check.qsf": "ac02dbb14eb4224d870ecc8816c9ab28f12db04bfdcc8db85f5613f6160c45e8",
+    "build/rtl/synth_check/state_maincpu/state_maincpu_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "build/rtl/synth_check/state_maincpu/state_maincpu_check.vhd": "3aea9f62b6b8b935a6752d9c8738259994c13a050585e2801282291930ea21c4",
+    "build/rtl/synth_check/state_maincpu/output_files/state_maincpu_check.fit.rpt": "cb20cc3d09fad442feab244b26f24d247e79d650db9265fb13541f529cbb85d2"
+  },
+  "recorder_sha256": "965422943b04ce02d932f2317bd1c59c4962fe876d26461bd87794caf1603a19"
+}

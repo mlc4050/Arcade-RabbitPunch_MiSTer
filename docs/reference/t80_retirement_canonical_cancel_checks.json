@@ -1,0 +1,14 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/vendor/meatsauce_t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+    "rtl/state/vendor/meatsauce_t80/T80_MCode.vhd": "a73c512d7f03bc34759de560efe78c1813785c5ae3f52714df149455b876e5a5",
+    "rtl/state/vendor/meatsauce_t80/T80_ALU.vhd": "8e1dfd1c47fc0ce4a902f3d789f657a93f2b9faa6a72df70e1f12f27649291b8",
+    "rtl/state/vendor/meatsauce_t80/T80.vhd": "e6f6a31dcbc34f0193ff8aa4bc124e4967e527d10731d0acc6f3908d3384e0ef",
+    "rtl/state/rabbitpunch_t80_capture.vhd": "39a8c43ab6603958c36ba57e1cfa9ce0a0708c355bd76faf817e0b9219e51f16",
+    "sim/state/t80_retirement_tb.vhd": "cc6e8cf706b2b1ae8f98d2cc8c3f9f86a935c200e3584d2cc18ee0d942a594ec"
+  },
+  "runner_sha256": "9b46c3b62c13a45bd652c2cb83331122ca3c45458d2fd2cc349688c495434c2d",
+  "command_log_sha256": "c123152e8c65ccfa657b941091f4603cc23bc25ce695f7c64d547ffb4b6be8aa",
+  "scope": "Native VHDL unchanged T80 donor. Capture immediately after LD A,E; cancel during the normalization edge without abandoning the CPU, require committed accumulator and unconsumed next opcode, then three restores with256 exact architectural/bus clocks and RAM writes. Not a full instruction-set, board, whole-game or hardware proof."
+}

@@ -1,0 +1,2516 @@
+{
+  "accepted": true,
+  "cases": [
+    {
+      "case": "rabiolep_4s_mame_cmdc0_full38",
+      "game": "rabiolep",
+      "command": 192,
+      "sample": 0,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 30419,
+          "first_nonzero_seconds": 1.1074791666666666,
+          "last_nonzero_seconds": 1.8401666666666667,
+          "peak": 8367.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 38931,
+          "first_nonzero_seconds": 1.090176,
+          "last_nonzero_seconds": 1.74416,
+          "peak": 8320.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 38937,
+          "first_nonzero_seconds": 1.107184,
+          "last_nonzero_seconds": 1.838416,
+          "peak": 8320.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.5374536355580511,
+          "correlation": 0.8351251303620044,
+          "last_nonzero_offset_ms": -96.0066666666668
+        },
+        "corrected": {
+          "normalized_rms_error": 0.026512423842686945,
+          "correlation": 0.9996004571912559,
+          "last_nonzero_offset_ms": -1.7506666666666781
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -17.303166666666534,
+        "corrected": -0.29516666666662417
+      },
+      "corrected_minus_legacy_onset_ms": 17.00799999999991,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 81398261,
+          "duration_seconds": 0.6566404285714286,
+          "offset_vs_static_mame_ms": -99.03925892857146
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 85936521,
+          "duration_seconds": 0.7538888571428571,
+          "offset_vs_static_mame_ms": -1.7908303571428918
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "7b470f1f49d15764fbaf455fe0f728771fc243de9e31aac5fd5d79daf4690b07"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdc1_full38",
+      "game": "rabiolep",
+      "command": 193,
+      "sample": 1,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 43267,
+          "first_nonzero_seconds": 1.1046875,
+          "last_nonzero_seconds": 2.0866458333333333,
+          "peak": 9045.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 54906,
+          "first_nonzero_seconds": 1.091648,
+          "last_nonzero_seconds": 2.023872,
+          "peak": 8704.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 54912,
+          "first_nonzero_seconds": 1.1044,
+          "last_nonzero_seconds": 2.084512,
+          "peak": 8704.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.33931077377229324,
+          "correlation": 0.9318297378482758,
+          "last_nonzero_offset_ms": -62.773833333333414
+        },
+        "corrected": {
+          "normalized_rms_error": 0.02844090134277246,
+          "correlation": 0.9995372299428329,
+          "last_nonzero_offset_ms": -2.1338333333331683
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -13.039500000000093,
+        "corrected": -0.2874999999999961
+      },
+      "corrected_minus_legacy_onset_ms": 12.752000000000097,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 94591803,
+          "duration_seconds": 0.9393591857142857,
+          "offset_vs_static_mame_ms": -86.9267517857143
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 98540896,
+          "duration_seconds": 1.023982607142857,
+          "offset_vs_static_mame_ms": -2.3033303571429187
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "25fbb84543d3d9a4873c48f08da271d21a7c06d8563a6dcd30c1dc6372f49644"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdc2_full38",
+      "game": "rabiolep",
+      "command": 194,
+      "sample": 2,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 64352,
+          "first_nonzero_seconds": 1.1330208333333334,
+          "last_nonzero_seconds": 2.654166666666667,
+          "peak": 13435.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 81393,
+          "first_nonzero_seconds": 1.093344,
+          "last_nonzero_seconds": 2.488704,
+          "peak": 13376.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 81391,
+          "first_nonzero_seconds": 1.132656,
+          "last_nonzero_seconds": 2.65064,
+          "peak": 13376.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.9609659605404974,
+          "correlation": 0.41637815119243154,
+          "last_nonzero_offset_ms": -165.462666666667
+        },
+        "corrected": {
+          "normalized_rms_error": 0.057573661383956844,
+          "correlation": 0.9979102656694065,
+          "last_nonzero_offset_ms": -3.526666666666678
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -39.67683333333327,
+        "corrected": -0.36483333333325874
+      },
+      "corrected_minus_legacy_onset_ms": 39.31200000000001,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 116330303,
+          "duration_seconds": 1.4051841857142857,
+          "offset_vs_static_mame_ms": -196.49550178571417
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 125333980,
+          "duration_seconds": 1.5981201214285714,
+          "offset_vs_static_mame_ms": -3.5595660714284882
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "dbdcf383f9531691698762ce5aea8a292c788e190f4d8a52462ae68e5b40de1d"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdc3_full38",
+      "game": "rabiolep",
+      "command": 195,
+      "sample": 3,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 75513,
+          "first_nonzero_seconds": 1.1075416666666666,
+          "last_nonzero_seconds": 2.8950833333333335,
+          "peak": 13302.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 96133,
+          "first_nonzero_seconds": 1.090176,
+          "last_nonzero_seconds": 2.718032,
+          "peak": 13248.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 96146,
+          "first_nonzero_seconds": 1.107184,
+          "last_nonzero_seconds": 2.890656,
+          "peak": 13248.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.6960283519407471,
+          "correlation": 0.6610322545179834,
+          "last_nonzero_offset_ms": -177.05133333333345
+        },
+        "corrected": {
+          "normalized_rms_error": 0.08612992307135615,
+          "correlation": 0.9947970063931941,
+          "last_nonzero_offset_ms": -4.427333333333561
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -17.365666666666613,
+        "corrected": -0.35766666666670055
+      },
+      "corrected_minus_legacy_onset_ms": 17.00799999999991,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 127060428,
+          "duration_seconds": 1.6351154357142856,
+          "offset_vs_static_mame_ms": -212.29550178571444
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 136758855,
+          "duration_seconds": 1.8429388714285715,
+          "offset_vs_static_mame_ms": -4.472066071428582
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "859ca7d965cdf58ab8f1720c669c5b608d119ca1cca97d6bcdbeec70744687d0"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdc4_full38",
+      "game": "rabiolep",
+      "command": 196,
+      "sample": 4,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 12354,
+          "first_nonzero_seconds": 1.1281666666666668,
+          "last_nonzero_seconds": 1.3881041666666667,
+          "peak": 13334.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 15868,
+          "first_nonzero_seconds": 1.092704,
+          "last_nonzero_seconds": 1.351936,
+          "peak": 13184.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 15868,
+          "first_nonzero_seconds": 1.127872,
+          "last_nonzero_seconds": 1.387104,
+          "peak": 13184.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.566700700947856,
+          "correlation": 0.8325725254119635,
+          "last_nonzero_offset_ms": -36.168166666666664
+        },
+        "corrected": {
+          "normalized_rms_error": 0.01272145290481508,
+          "correlation": 0.9999243664839219,
+          "last_nonzero_offset_ms": -1.0001666666668019
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -35.46266666666686,
+        "corrected": -0.2946666666667763
+      },
+      "corrected_minus_legacy_onset_ms": 35.16800000000009,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 63262719,
+          "duration_seconds": 0.2680216714285714,
+          "offset_vs_static_mame_ms": -64.40176607142855
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 66219855,
+          "duration_seconds": 0.33138887142857143,
+          "offset_vs_static_mame_ms": -1.0345660714285443
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "f7133acec4bb5581128a66fd6a44046b9e29531dbda22b7e2cd808a168a9d611"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdc5_full38",
+      "game": "rabiolep",
+      "command": 197,
+      "sample": 5,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 13015,
+          "first_nonzero_seconds": 1.1089583333333333,
+          "last_nonzero_seconds": 1.3821666666666668,
+          "peak": 8037.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 16741,
+          "first_nonzero_seconds": 1.090272,
+          "last_nonzero_seconds": 1.362752,
+          "peak": 8000.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 16747,
+          "first_nonzero_seconds": 1.10864,
+          "last_nonzero_seconds": 1.381136,
+          "peak": 8000.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.29564941174061565,
+          "correlation": 0.9540474582126288,
+          "last_nonzero_offset_ms": -19.414666666666804
+        },
+        "corrected": {
+          "normalized_rms_error": 0.012263146786121549,
+          "correlation": 0.9999211114421354,
+          "last_nonzero_offset_ms": -1.0306666666668463
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -18.68633333333336,
+        "corrected": -0.31833333333319835
+      },
+      "corrected_minus_legacy_onset_ms": 18.368000000000162,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 63804344,
+          "duration_seconds": 0.2796279214285714,
+          "offset_vs_static_mame_ms": -53.245516071428575
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 66239396,
+          "duration_seconds": 0.3318076071428571,
+          "offset_vs_static_mame_ms": -1.0658303571428607
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "8306ffce9c66a66e5bc19381a91b4a7241ea126a4bbb76198855a431c2398b89"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdc6_full38",
+      "game": "rabiolep",
+      "command": 198,
+      "sample": 6,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 15624,
+          "first_nonzero_seconds": 1.1554791666666666,
+          "last_nonzero_seconds": 1.4861666666666666,
+          "peak": 13193.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 19963,
+          "first_nonzero_seconds": 1.09624,
+          "last_nonzero_seconds": 1.426096,
+          "peak": 13120.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 19963,
+          "first_nonzero_seconds": 1.1552,
+          "last_nonzero_seconds": 1.485056,
+          "peak": 13120.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.931165089835875,
+          "correlation": 0.5474277905950511,
+          "last_nonzero_offset_ms": -60.070666666666604
+        },
+        "corrected": {
+          "normalized_rms_error": 0.017808364559257342,
+          "correlation": 0.9998347261444746,
+          "last_nonzero_offset_ms": -1.1106666666667042
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -59.239166666666506,
+        "corrected": -0.27916666666660817
+      },
+      "corrected_minus_legacy_onset_ms": 58.9599999999999,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 66741719,
+          "duration_seconds": 0.3425716714285714,
+          "offset_vs_static_mame_ms": -91.11426607142859
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 70940188,
+          "duration_seconds": 0.4325388642857143,
+          "offset_vs_static_mame_ms": -1.1470732142856988
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "b02ba6f4f8db478090d4f1eec09b8e1525bf1989c5299ebe068d06894f586296"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdc7_full38",
+      "game": "rabiolep",
+      "command": 199,
+      "sample": 7,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 13806,
+          "first_nonzero_seconds": 1.1105625,
+          "last_nonzero_seconds": 1.4021875,
+          "peak": 14288.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 17721,
+          "first_nonzero_seconds": 1.09048,
+          "last_nonzero_seconds": 1.381328,
+          "peak": 14272.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 17717,
+          "first_nonzero_seconds": 1.110352,
+          "last_nonzero_seconds": 1.4012,
+          "peak": 14272.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.4513267526457015,
+          "correlation": 0.8923799050344784,
+          "last_nonzero_offset_ms": -20.859500000000033
+        },
+        "corrected": {
+          "normalized_rms_error": 0.0196533260888027,
+          "correlation": 0.9997959067611334,
+          "last_nonzero_offset_ms": -0.987499999999919
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -20.082500000000003,
+        "corrected": -0.21049999999989133
+      },
+      "corrected_minus_legacy_onset_ms": 19.872000000000114,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 64615761,
+          "duration_seconds": 0.2970154285714286,
+          "offset_vs_static_mame_ms": -46.289258928571385
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 66728230,
+          "duration_seconds": 0.3422826214285714,
+          "offset_vs_static_mame_ms": -1.0220660714285734
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "eb56a84cf6aceb6784acfd869a7e925dbc27cbb7e35229d39b93a4f5f3db0abf"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdc8_full38",
+      "game": "rabiolep",
+      "command": 200,
+      "sample": 8,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 20534,
+          "first_nonzero_seconds": 1.1073541666666666,
+          "last_nonzero_seconds": 1.5699791666666667,
+          "peak": 15624.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 25935,
+          "first_nonzero_seconds": 1.090048,
+          "last_nonzero_seconds": 1.533168,
+          "peak": 15296.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 25935,
+          "first_nonzero_seconds": 1.107056,
+          "last_nonzero_seconds": 1.568528,
+          "peak": 15296.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.2553397682059819,
+          "correlation": 0.965344509524965,
+          "last_nonzero_offset_ms": -36.811166666666615
+        },
+        "corrected": {
+          "normalized_rms_error": 0.037315739992569895,
+          "correlation": 0.9992588501445613,
+          "last_nonzero_offset_ms": -1.451166666666781
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -17.306166666666734,
+        "corrected": -0.2981666666665994
+      },
+      "corrected_minus_legacy_onset_ms": 17.008000000000134,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 71607594,
+          "duration_seconds": 0.44684042142857144,
+          "offset_vs_static_mame_ms": -48.276766071428554
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 73790355,
+          "duration_seconds": 0.49361387142857144,
+          "offset_vs_static_mame_ms": -1.503316071428562
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "1aec9fbc83f9b6b2a0ace1aa6aaafdff390484cc9999adccc304b0e299ddfc03"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdc9_full38",
+      "game": "rabiolep",
+      "command": 201,
+      "sample": 9,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 13674,
+          "first_nonzero_seconds": 1.0881666666666667,
+          "last_nonzero_seconds": 1.5490208333333333,
+          "peak": 11652.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 16312,
+          "first_nonzero_seconds": 1.08792,
+          "last_nonzero_seconds": 1.423904,
+          "peak": 11584.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 16323,
+          "first_nonzero_seconds": 1.08792,
+          "last_nonzero_seconds": 1.547792,
+          "peak": 11584.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.0701721724967248,
+          "correlation": 0.9974694640728381,
+          "last_nonzero_offset_ms": -125.11683333333323
+        },
+        "corrected": {
+          "normalized_rms_error": 0.029104180897474484,
+          "correlation": 0.9995652277696151,
+          "last_nonzero_offset_ms": -1.2288333333332346
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -0.24666666666672832,
+        "corrected": -0.24666666666672832
+      },
+      "corrected_minus_legacy_onset_ms": 0.0,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 66518594,
+          "duration_seconds": 0.3377904214285714,
+          "offset_vs_static_mame_ms": -137.9330160714286
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 72896688,
+          "duration_seconds": 0.4744638642857143,
+          "offset_vs_static_mame_ms": -1.2595732142857141
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "845d696959b5fb3839283463740f2c696f910d1edb0a3b288bb0babb19b3f493"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdca_full38",
+      "game": "rabiolep",
+      "command": 202,
+      "sample": 10,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 16712,
+          "first_nonzero_seconds": 1.0881666666666667,
+          "last_nonzero_seconds": 1.4842291666666667,
+          "peak": 13448.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 20675,
+          "first_nonzero_seconds": 1.08792,
+          "last_nonzero_seconds": 1.463168,
+          "peak": 13376.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 20672,
+          "first_nonzero_seconds": 1.08792,
+          "last_nonzero_seconds": 1.48304,
+          "peak": 13376.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.2692016973185626,
+          "correlation": 0.9620364687328076,
+          "last_nonzero_offset_ms": -21.061166666666686
+        },
+        "corrected": {
+          "normalized_rms_error": 0.01936942936093746,
+          "correlation": 0.9998075249464786,
+          "last_nonzero_offset_ms": -1.1891666666667966
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -0.24666666666672832,
+        "corrected": -0.24666666666672832
+      },
+      "corrected_minus_legacy_onset_ms": 0.0,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 68536928,
+          "duration_seconds": 0.3810404357142857,
+          "offset_vs_static_mame_ms": -61.90800178571432
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 71368355,
+          "duration_seconds": 0.44171387142857144,
+          "offset_vs_static_mame_ms": -1.2345660714285778
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "795881f1e90f2977e55f52b7d2481692290b91feff1f840ab36eeeb35b4ad84f"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdcb_full38",
+      "game": "rabiolep",
+      "command": 203,
+      "sample": 11,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 9265,
+          "first_nonzero_seconds": 1.1077291666666667,
+          "last_nonzero_seconds": 1.4487708333333333,
+          "peak": 7624.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 11704,
+          "first_nonzero_seconds": 1.090432,
+          "last_nonzero_seconds": 1.305792,
+          "peak": 7488.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 11704,
+          "first_nonzero_seconds": 1.107424,
+          "last_nonzero_seconds": 1.447792,
+          "peak": 7488.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.3568030865801355,
+          "correlation": 0.9338973638961917,
+          "last_nonzero_offset_ms": -142.97883333333328
+        },
+        "corrected": {
+          "normalized_rms_error": 0.017798279312466383,
+          "correlation": 0.9998374897650496,
+          "last_nonzero_offset_ms": -0.9788333333333732
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -17.297166666666584,
+        "corrected": -0.3051666666666897
+      },
+      "corrected_minus_legacy_onset_ms": 16.991999999999898,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 61127428,
+          "duration_seconds": 0.22226543571428573,
+          "offset_vs_static_mame_ms": -174.02675178571428
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 69200688,
+          "duration_seconds": 0.3952638642857143,
+          "offset_vs_static_mame_ms": -1.028323214285698
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "ee45ab1e68da591ed2ee356ee155a94ca241292e5482de8d60b35bdf3ba1e189"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdcc_full38",
+      "game": "rabiolep",
+      "command": 204,
+      "sample": 12,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 19885,
+          "first_nonzero_seconds": 1.1314166666666667,
+          "last_nonzero_seconds": 1.5678333333333334,
+          "peak": 13043.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 25571,
+          "first_nonzero_seconds": 1.093136,
+          "last_nonzero_seconds": 1.511488,
+          "peak": 12928.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 25567,
+          "first_nonzero_seconds": 1.131072,
+          "last_nonzero_seconds": 1.566416,
+          "peak": 12928.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.5435076064615659,
+          "correlation": 0.8410416718544942,
+          "last_nonzero_offset_ms": -56.34533333333347
+        },
+        "corrected": {
+          "normalized_rms_error": 0.028216712304228068,
+          "correlation": 0.9995838146735202,
+          "last_nonzero_offset_ms": -1.4173333333333815
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -38.28066666666663,
+        "corrected": -0.3446666666666598
+      },
+      "corrected_minus_legacy_onset_ms": 37.93599999999997,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 71128532,
+          "duration_seconds": 0.4365748071428571,
+          "offset_vs_static_mame_ms": -149.1861303571429
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 78022511,
+          "duration_seconds": 0.5843029285714286,
+          "offset_vs_static_mame_ms": -1.458008928571397
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "6fa7f405acf4ec05f66fd40e22d90368b601228643d4282ce5b2f56937e55f0e"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdcd_full38",
+      "game": "rabiolep",
+      "command": 205,
+      "sample": 13,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 13828,
+          "first_nonzero_seconds": 1.1089583333333333,
+          "last_nonzero_seconds": 1.4002083333333333,
+          "peak": 11935.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 17755,
+          "first_nonzero_seconds": 1.090272,
+          "last_nonzero_seconds": 1.380752,
+          "peak": 11776.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 17760,
+          "first_nonzero_seconds": 1.10864,
+          "last_nonzero_seconds": 1.399136,
+          "peak": 11776.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.2507820723525682,
+          "correlation": 0.9668755998196495,
+          "last_nonzero_offset_ms": -19.456333333333298
+        },
+        "corrected": {
+          "normalized_rms_error": 0.022716097655779047,
+          "correlation": 0.99973405155652,
+          "last_nonzero_offset_ms": -1.0723333333333418
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -18.68633333333336,
+        "corrected": -0.31833333333319835
+      },
+      "corrected_minus_legacy_onset_ms": 18.368000000000162,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 64653678,
+          "duration_seconds": 0.29782793571428573,
+          "offset_vs_static_mame_ms": -54.70175178571429
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 67154063,
+          "duration_seconds": 0.35140761428571426,
+          "offset_vs_static_mame_ms": -1.122073214285757
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "d7e8f89f0fb5ecec1e9c761e80c5ee6a5a740841d2040441058aae1aa1b29787"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdce_full38",
+      "game": "rabiolep",
+      "command": 206,
+      "sample": 14,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 23113,
+          "first_nonzero_seconds": 1.1025625,
+          "last_nonzero_seconds": 1.6062291666666666,
+          "peak": 13590.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 29531,
+          "first_nonzero_seconds": 1.08952,
+          "last_nonzero_seconds": 1.579136,
+          "peak": 13440.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 29526,
+          "first_nonzero_seconds": 1.102272,
+          "last_nonzero_seconds": 1.604752,
+          "peak": 13440.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.44338236492152444,
+          "correlation": 0.8951491556608284,
+          "last_nonzero_offset_ms": -27.0931666666665
+        },
+        "corrected": {
+          "normalized_rms_error": 0.03237518267263833,
+          "correlation": 0.9994474551379817,
+          "last_nonzero_offset_ms": -1.4771666666666405
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -13.042499999999846,
+        "corrected": -0.29049999999997134
+      },
+      "corrected_minus_legacy_onset_ms": 12.751999999999875,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 73892803,
+          "duration_seconds": 0.4958091857142857,
+          "offset_vs_static_mame_ms": -59.53925178571423
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 76600563,
+          "duration_seconds": 0.5538326142857143,
+          "offset_vs_static_mame_ms": -1.515823214285672
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "cb5016f613ab0c64743a4f933953ec04ec3f8e55f2fbde248635a2eeb461ad95"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdcf_full38",
+      "game": "rabiolep",
+      "command": 207,
+      "sample": 15,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 24640,
+          "first_nonzero_seconds": 1.1089583333333333,
+          "last_nonzero_seconds": 1.7295208333333334,
+          "peak": 10425.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 31358,
+          "first_nonzero_seconds": 1.090272,
+          "last_nonzero_seconds": 1.624992,
+          "peak": 10368.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 31354,
+          "first_nonzero_seconds": 1.10864,
+          "last_nonzero_seconds": 1.72776,
+          "peak": 10368.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.6112083074794181,
+          "correlation": 0.7980727431955877,
+          "last_nonzero_offset_ms": -104.52883333333341
+        },
+        "corrected": {
+          "normalized_rms_error": 0.04108824793592975,
+          "correlation": 0.9990918718634104,
+          "last_nonzero_offset_ms": -1.7608333333334336
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -18.68633333333336,
+        "corrected": -0.31833333333319835
+      },
+      "corrected_minus_legacy_onset_ms": 18.368000000000162,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 75902678,
+          "duration_seconds": 0.5388779357142857,
+          "offset_vs_static_mame_ms": -117.3642517857143
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 81295230,
+          "duration_seconds": 0.6544326214285714,
+          "offset_vs_static_mame_ms": -1.80956607142857
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "9bdcd1fa7f885a34b7f47e0a7505bcb889d94aaebefb5d8e68aa7d1dbaa3e439"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdd0_full38",
+      "game": "rabiolep",
+      "command": 208,
+      "sample": 16,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 19272,
+          "first_nonzero_seconds": 1.1121666666666667,
+          "last_nonzero_seconds": 1.6590833333333332,
+          "peak": 13315.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 24706,
+          "first_nonzero_seconds": 1.090688,
+          "last_nonzero_seconds": 1.514416,
+          "peak": 13248.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 24708,
+          "first_nonzero_seconds": 1.111936,
+          "last_nonzero_seconds": 1.657792,
+          "peak": 13248.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.7063159902638223,
+          "correlation": 0.733528172268864,
+          "last_nonzero_offset_ms": -144.66733333333326
+        },
+        "corrected": {
+          "normalized_rms_error": 0.010074686490619681,
+          "correlation": 0.9999482648468294,
+          "last_nonzero_offset_ms": -1.291333333333311
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -21.478666666666648,
+        "corrected": -0.23066666666671232
+      },
+      "corrected_minus_legacy_onset_ms": 21.247999999999934,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 70975844,
+          "duration_seconds": 0.4333029214285714,
+          "offset_vs_static_mame_ms": -192.50176607142856
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 79897271,
+          "duration_seconds": 0.6244763571428571,
+          "offset_vs_static_mame_ms": -1.3283303571428595
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "f0cedb817431e5b03269ca643e8181088195e71ce5f4bc228af867247463473c"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdd1_full38",
+      "game": "rabiolep",
+      "command": 209,
+      "sample": 17,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 20072,
+          "first_nonzero_seconds": 1.1041666666666667,
+          "last_nonzero_seconds": 1.6612083333333334,
+          "peak": 13482.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 25740,
+          "first_nonzero_seconds": 1.089728,
+          "last_nonzero_seconds": 1.527712,
+          "peak": 13376.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 25742,
+          "first_nonzero_seconds": 1.103872,
+          "last_nonzero_seconds": 1.659856,
+          "peak": 13376.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.5284611940078319,
+          "correlation": 0.8497129175656298,
+          "last_nonzero_offset_ms": -133.49633333333344
+        },
+        "corrected": {
+          "normalized_rms_error": 0.02282062760789975,
+          "correlation": 0.9997217704915033,
+          "last_nonzero_offset_ms": -1.3523333333333998
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -14.43866666666671,
+        "corrected": -0.2946666666667763
+      },
+      "corrected_minus_legacy_onset_ms": 14.143999999999934,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 71465553,
+          "duration_seconds": 0.4437966857142857,
+          "offset_vs_static_mame_ms": -161.7392517857143
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 78947605,
+          "duration_seconds": 0.6041263714285714,
+          "offset_vs_static_mame_ms": -1.409566071428614
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "0c9b9420e9f06faf1b78e5b7a525181c97c62de5c197b3bea53c57a8257caae0"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdd2_full38",
+      "game": "rabiolep",
+      "command": 210,
+      "sample": 18,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 17265,
+          "first_nonzero_seconds": 1.0882916666666667,
+          "last_nonzero_seconds": 1.6705416666666666,
+          "peak": 9818.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 22092,
+          "first_nonzero_seconds": 1.088048,
+          "last_nonzero_seconds": 1.481168,
+          "peak": 9536.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 22086,
+          "first_nonzero_seconds": 1.088048,
+          "last_nonzero_seconds": 1.669408,
+          "peak": 9536.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.8458969402980938,
+          "correlation": 0.6189680636216227,
+          "last_nonzero_offset_ms": -189.37366666666657
+        },
+        "corrected": {
+          "normalized_rms_error": 0.021498731374907265,
+          "correlation": 0.9997557424606083,
+          "last_nonzero_offset_ms": -1.1336666666665884
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -0.24366666666675307,
+        "corrected": -0.24366666666675307
+      },
+      "corrected_minus_legacy_onset_ms": 0.0,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 69364094,
+          "duration_seconds": 0.3987654214285714,
+          "offset_vs_static_mame_ms": -227.5392660714286
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 79922355,
+          "duration_seconds": 0.6250138714285715,
+          "offset_vs_static_mame_ms": -1.2908160714285577
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "b023849386958492a193b991dc8903949b5166e9fddc8cee7344195b431df849"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdd3_full38",
+      "game": "rabiolep",
+      "command": 211,
+      "sample": 19,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 17036,
+          "first_nonzero_seconds": 1.1013333333333333,
+          "last_nonzero_seconds": 1.6544166666666666,
+          "peak": 8983.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 21201,
+          "first_nonzero_seconds": 1.08968,
+          "last_nonzero_seconds": 1.483664,
+          "peak": 8832.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 21188,
+          "first_nonzero_seconds": 1.101056,
+          "last_nonzero_seconds": 1.652784,
+          "peak": 8832.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.5422352253679213,
+          "correlation": 0.8474205911017993,
+          "last_nonzero_offset_ms": -170.75266666666656
+        },
+        "corrected": {
+          "normalized_rms_error": 0.024445020498204722,
+          "correlation": 0.9997020376771169,
+          "last_nonzero_offset_ms": -1.6326666666666156
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -11.653333333333293,
+        "corrected": -0.2773333333332406
+      },
+      "corrected_minus_legacy_onset_ms": 11.376000000000053,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 69587219,
+          "duration_seconds": 0.4035466714285714,
+          "offset_vs_static_mame_ms": -225.58926607142854
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 80036688,
+          "duration_seconds": 0.6274638642857143,
+          "offset_vs_static_mame_ms": -1.672073214285641
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "3cda3d4cbabbcde41eb12d4d81a5e5c1a954b055cc01788afc58912bc2264838"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdd4_full38",
+      "game": "rabiolep",
+      "command": 212,
+      "sample": 20,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 20118,
+          "first_nonzero_seconds": 1.1025625,
+          "last_nonzero_seconds": 1.7663125,
+          "peak": 15149.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 25011,
+          "first_nonzero_seconds": 1.08952,
+          "last_nonzero_seconds": 1.55488,
+          "peak": 14976.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 25014,
+          "first_nonzero_seconds": 1.102272,
+          "last_nonzero_seconds": 1.764512,
+          "peak": 14976.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 1.1033269901240077,
+          "correlation": 0.3652629487019284,
+          "last_nonzero_offset_ms": -211.43249999999992
+        },
+        "corrected": {
+          "normalized_rms_error": 0.03036979990859237,
+          "correlation": 0.9995197573093652,
+          "last_nonzero_offset_ms": -1.8004999999998716
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -13.042499999999846,
+        "corrected": -0.29049999999997134
+      },
+      "corrected_minus_legacy_onset_ms": 12.751999999999875,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 72723803,
+          "duration_seconds": 0.4707591857142857,
+          "offset_vs_static_mame_ms": -238.26425178571426
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 83756896,
+          "duration_seconds": 0.7071826071428572,
+          "offset_vs_static_mame_ms": -1.8408303571427753
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "1ba2e5c319aa694e3167295d6ac7baab1f9d4c8fcbfee4f53c46edbf771123b6"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdd5_full38",
+      "game": "rabiolep",
+      "command": 213,
+      "sample": 21,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 59318,
+          "first_nonzero_seconds": 1.1089583333333333,
+          "last_nonzero_seconds": 2.520020833333333,
+          "peak": 15322.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 75014,
+          "first_nonzero_seconds": 1.090272,
+          "last_nonzero_seconds": 2.37712,
+          "peak": 15040.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 75005,
+          "first_nonzero_seconds": 1.10864,
+          "last_nonzero_seconds": 2.516624,
+          "peak": 15040.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.9534977113706811,
+          "correlation": 0.4441357450104445,
+          "last_nonzero_offset_ms": -142.90083333333303
+        },
+        "corrected": {
+          "normalized_rms_error": 0.05404115874085074,
+          "correlation": 0.9982190332081986,
+          "last_nonzero_offset_ms": -3.3968333333329603
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -18.68633333333336,
+        "corrected": -0.31833333333319835
+      },
+      "corrected_minus_legacy_onset_ms": 18.368000000000162,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 110964511,
+          "duration_seconds": 1.2902029285714285,
+          "offset_vs_static_mame_ms": -150.1330089285715
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 117810730,
+          "duration_seconds": 1.4369076214285714,
+          "offset_vs_static_mame_ms": -3.428316071428572
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "7da5cb6dde15839f5507f3ffa83f907835d9bacc2cab94aade8ba6843141beb0"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdd6_full38",
+      "game": "rabiolep",
+      "command": 214,
+      "sample": 22,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 57731,
+          "first_nonzero_seconds": 1.1185625,
+          "last_nonzero_seconds": 2.531645833333333,
+          "peak": 16099.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 73357,
+          "first_nonzero_seconds": 1.091536,
+          "last_nonzero_seconds": 2.338528,
+          "peak": 15872.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 73363,
+          "first_nonzero_seconds": 1.11832,
+          "last_nonzero_seconds": 2.528416,
+          "peak": 15872.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.8521727684187169,
+          "correlation": 0.5557947555546571,
+          "last_nonzero_offset_ms": -193.11783333333298
+        },
+        "corrected": {
+          "normalized_rms_error": 0.055579107790482585,
+          "correlation": 0.9981228417849953,
+          "last_nonzero_offset_ms": -3.229833333333154
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -27.026499999999842,
+        "corrected": -0.24249999999992333
+      },
+      "corrected_minus_legacy_onset_ms": 26.78399999999992,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 109387178,
+          "duration_seconds": 1.2564029357142856,
+          "offset_vs_static_mame_ms": -233.94550178571438
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 120153105,
+          "duration_seconds": 1.4871013714285715,
+          "offset_vs_static_mame_ms": -3.2470660714285504
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "174048c0b3118cf5a92a4b31c4122324178bcdcc06f7f14477593d82fc5c279a"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdd7_full38",
+      "game": "rabiolep",
+      "command": 215,
+      "sample": 23,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 74174,
+          "first_nonzero_seconds": 1.1090833333333334,
+          "last_nonzero_seconds": 2.943395833333333,
+          "peak": 15472.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 94309,
+          "first_nonzero_seconds": 1.090384,
+          "last_nonzero_seconds": 2.690496,
+          "peak": 15232.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 94304,
+          "first_nonzero_seconds": 1.108768,
+          "last_nonzero_seconds": 2.939504,
+          "peak": 15232.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.6352015045096546,
+          "correlation": 0.7353181212993215,
+          "last_nonzero_offset_ms": -252.89983333333322
+        },
+        "corrected": {
+          "normalized_rms_error": 0.06966983048342992,
+          "correlation": 0.9968227549969637,
+          "last_nonzero_offset_ms": -3.8918333333333166
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -18.6993333333334,
+        "corrected": -0.31533333333344515
+      },
+      "corrected_minus_legacy_onset_ms": 18.383999999999958,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 125756678,
+          "duration_seconds": 1.6071779357142857,
+          "offset_vs_static_mame_ms": -285.3330017857143
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 138888896,
+          "duration_seconds": 1.888582607142857,
+          "offset_vs_static_mame_ms": -3.9283303571429062
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "39955f8ac3fe182b3bb1ba7b7c84a571116ad85f7cc9bf04bb7fedc23310e1d6"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdd8_full38",
+      "game": "rabiolep",
+      "command": 216,
+      "sample": 24,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 27472,
+          "first_nonzero_seconds": 1.0881666666666667,
+          "last_nonzero_seconds": 1.9520833333333334,
+          "peak": 15914.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 35180,
+          "first_nonzero_seconds": 1.08792,
+          "last_nonzero_seconds": 1.70128,
+          "peak": 15744.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 35179,
+          "first_nonzero_seconds": 1.08792,
+          "last_nonzero_seconds": 1.950032,
+          "peak": 15744.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 1.0125243756810987,
+          "correlation": 0.4463527969613431,
+          "last_nonzero_offset_ms": -250.80333333333348
+        },
+        "corrected": {
+          "normalized_rms_error": 0.028519446310417296,
+          "correlation": 0.9995615819153222,
+          "last_nonzero_offset_ms": -2.051333333333405
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -0.24666666666672832,
+        "corrected": -0.24666666666672832
+      },
+      "corrected_minus_legacy_onset_ms": 0.0,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 79462761,
+          "duration_seconds": 0.6151654285714285,
+          "offset_vs_static_mame_ms": -263.6330089285714
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 91668355,
+          "duration_seconds": 0.8767138714285714,
+          "offset_vs_static_mame_ms": -2.084566071428595
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "7079cab9cd1e4d8a2734fa8f6678b2f94ad67592a0cc72a6547599bdea7f1025"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdd9_full38",
+      "game": "rabiolep",
+      "command": 217,
+      "sample": 25,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 31245,
+          "first_nonzero_seconds": 1.1041666666666667,
+          "last_nonzero_seconds": 1.9925833333333334,
+          "peak": 16610.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 39952,
+          "first_nonzero_seconds": 1.089728,
+          "last_nonzero_seconds": 1.773968,
+          "peak": 16320.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 39957,
+          "first_nonzero_seconds": 1.103872,
+          "last_nonzero_seconds": 1.99048,
+          "peak": 16320.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.9596108065375452,
+          "correlation": 0.4943777304844248,
+          "last_nonzero_offset_ms": -218.61533333333338
+        },
+        "corrected": {
+          "normalized_rms_error": 0.04217718147187193,
+          "correlation": 0.9990343233074761,
+          "last_nonzero_offset_ms": -2.103333333333346
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -14.43866666666671,
+        "corrected": -0.2946666666667763
+      },
+      "corrected_minus_legacy_onset_ms": 14.143999999999934,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 82798553,
+          "duration_seconds": 0.6866466857142857,
+          "offset_vs_static_mame_ms": -223.05800178571434
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 93107438,
+          "duration_seconds": 0.9075513642857143,
+          "offset_vs_static_mame_ms": -2.1533232142857406
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "4378ea3da4d82b2a4c2c4c0cb71836151e202dbfca633a266a7e2b5b902b389b"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdda_full38",
+      "game": "rabiolep",
+      "command": 218,
+      "sample": 26,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 34152,
+          "first_nonzero_seconds": 1.0881666666666667,
+          "last_nonzero_seconds": 2.1502083333333335,
+          "peak": 13226.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 43697,
+          "first_nonzero_seconds": 1.08792,
+          "last_nonzero_seconds": 1.855904,
+          "peak": 13120.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 43693,
+          "first_nonzero_seconds": 1.08792,
+          "last_nonzero_seconds": 2.148032,
+          "peak": 13120.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.9383158258441008,
+          "correlation": 0.4967210962063834,
+          "last_nonzero_offset_ms": -294.3043333333335
+        },
+        "corrected": {
+          "normalized_rms_error": 0.03160169208604147,
+          "correlation": 0.9994377881965855,
+          "last_nonzero_offset_ms": -2.1763333333333357
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -0.24666666666672832,
+        "corrected": -0.24666666666672832
+      },
+      "corrected_minus_legacy_onset_ms": 0.0,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 86753261,
+          "duration_seconds": 0.7713904285714286,
+          "offset_vs_static_mame_ms": -318.35175892857137
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 101505688,
+          "duration_seconds": 1.0875138642857143,
+          "offset_vs_static_mame_ms": -2.228323214285677
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "8711c770f07e2de59c376cb4c71178b177c16e92f20445ef7dfc56ffcd71c185"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmddb_full38",
+      "game": "rabiolep",
+      "command": 219,
+      "sample": 27,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 56300,
+          "first_nonzero_seconds": 1.1169583333333333,
+          "last_nonzero_seconds": 2.7796041666666667,
+          "peak": 16043.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 71166,
+          "first_nonzero_seconds": 1.091328,
+          "last_nonzero_seconds": 2.350928,
+          "peak": 15936.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 71166,
+          "first_nonzero_seconds": 1.11672,
+          "last_nonzero_seconds": 2.776448,
+          "peak": 15936.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 1.127138547304676,
+          "correlation": 0.22978570070719878,
+          "last_nonzero_offset_ms": -428.6761666666665
+        },
+        "corrected": {
+          "normalized_rms_error": 0.028077672956754157,
+          "correlation": 0.9995246997825019,
+          "last_nonzero_offset_ms": -3.1561666666668486
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -25.630333333333198,
+        "corrected": -0.2383333333333404
+      },
+      "corrected_minus_legacy_onset_ms": 25.39199999999986,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 109929094,
+          "duration_seconds": 1.2680154214285715,
+          "offset_vs_static_mame_ms": -463.9267660714286
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 131429230,
+          "duration_seconds": 1.7287326214285714,
+          "offset_vs_static_mame_ms": -3.209566071428638
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "ea8bfd0131bf9328eb0892d33175b097351296347ebfa0fa319313978b6098b1"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmddc_full38",
+      "game": "rabiolep",
+      "command": 220,
+      "sample": 28,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 63816,
+          "first_nonzero_seconds": 1.1265625,
+          "last_nonzero_seconds": 2.9909166666666667,
+          "peak": 16308.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 80745,
+          "first_nonzero_seconds": 1.092496,
+          "last_nonzero_seconds": 2.518736,
+          "peak": 16128.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 80759,
+          "first_nonzero_seconds": 1.126288,
+          "last_nonzero_seconds": 2.987024,
+          "peak": 16128.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 1.0688525166078637,
+          "correlation": 0.28935892685551196,
+          "last_nonzero_offset_ms": -472.1806666666666
+        },
+        "corrected": {
+          "normalized_rms_error": 0.04873200197388278,
+          "correlation": 0.9985373331558294,
+          "last_nonzero_offset_ms": -3.8926666666667664
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -34.0665,
+        "corrected": -0.27449999999995534
+      },
+      "corrected_minus_legacy_onset_ms": 33.792000000000044,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 117610136,
+          "duration_seconds": 1.4326091785714286,
+          "offset_vs_static_mame_ms": -485.03300892857146
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 140060813,
+          "duration_seconds": 1.9136951142857144,
+          "offset_vs_static_mame_ms": -3.947073214285668
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "5f6c34f3c2e6e67cee83be435f65799aedc5822818f7b39d814f8fc5a261a49f"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmddd_full38",
+      "game": "rabiolep",
+      "command": 221,
+      "sample": 29,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 38191,
+          "first_nonzero_seconds": 1.1089583333333333,
+          "last_nonzero_seconds": 1.9151041666666666,
+          "peak": 15143.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 49019,
+          "first_nonzero_seconds": 1.090272,
+          "last_nonzero_seconds": 1.894752,
+          "peak": 15040.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 49018,
+          "first_nonzero_seconds": 1.10864,
+          "last_nonzero_seconds": 1.913136,
+          "peak": 15040.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.28482122114289193,
+          "correlation": 0.9525408460982832,
+          "last_nonzero_offset_ms": -20.352166666666616
+        },
+        "corrected": {
+          "normalized_rms_error": 0.024574615192806168,
+          "correlation": 0.9996548478250116,
+          "last_nonzero_offset_ms": -1.9681666666666597
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -18.68633333333336,
+        "corrected": -0.31833333333319835
+      },
+      "corrected_minus_legacy_onset_ms": 18.368000000000162,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 88500344,
+          "duration_seconds": 0.8088279214285714,
+          "offset_vs_static_mame_ms": -34.60176607142862
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 90020730,
+          "duration_seconds": 0.8414076214285714,
+          "offset_vs_static_mame_ms": -2.02206607142863
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "f386c33092204edd9d56b76a5da10ccee79d9aeea8ea5b8146d11d0139f1a6d1"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmdde_full38",
+      "game": "rabiolep",
+      "command": 222,
+      "sample": 30,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 89803,
+          "first_nonzero_seconds": 1.1170208333333334,
+          "last_nonzero_seconds": 3.0106458333333332,
+          "peak": 13141.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 115839,
+          "first_nonzero_seconds": 1.091328,
+          "last_nonzero_seconds": 2.969936,
+          "peak": 13056.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 115837,
+          "first_nonzero_seconds": 1.11672,
+          "last_nonzero_seconds": 3.006704,
+          "peak": 13056.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.43824941145732316,
+          "correlation": 0.8491979363957066,
+          "last_nonzero_offset_ms": -40.70983333333311
+        },
+        "corrected": {
+          "normalized_rms_error": 0.04849773417948842,
+          "correlation": 0.9981540664362,
+          "last_nonzero_offset_ms": -3.9418333333332
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -25.692833333333276,
+        "corrected": -0.3008333333334168
+      },
+      "corrected_minus_legacy_onset_ms": 25.39199999999986,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 138787761,
+          "duration_seconds": 1.8864154285714285,
+          "offset_vs_static_mame_ms": -71.73300892857148
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 141950230,
+          "duration_seconds": 1.9541826214285714,
+          "offset_vs_static_mame_ms": -3.9658160714286517
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "3dd6579d70edec5d013777535a577e3b0e327be42764b80b227364ed8baea7ac"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmddf_full38",
+      "game": "rabiolep",
+      "command": 223,
+      "sample": 31,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 50579,
+          "first_nonzero_seconds": 1.1073541666666666,
+          "last_nonzero_seconds": 2.314604166666667,
+          "peak": 13378.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 64352,
+          "first_nonzero_seconds": 1.090048,
+          "last_nonzero_seconds": 2.172288,
+          "peak": 12736.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 64370,
+          "first_nonzero_seconds": 1.107056,
+          "last_nonzero_seconds": 2.311168,
+          "peak": 12736.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.11961070752160172,
+          "correlation": 0.9917564932429789,
+          "last_nonzero_offset_ms": -142.3161666666668
+        },
+        "corrected": {
+          "normalized_rms_error": 0.01474307333702621,
+          "correlation": 0.9999181404616873,
+          "last_nonzero_offset_ms": -3.4361666666669066
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -17.306166666666734,
+        "corrected": -0.2981666666665994
+      },
+      "corrected_minus_legacy_onset_ms": 17.008000000000134,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 101470761,
+          "duration_seconds": 1.0867654285714285,
+          "offset_vs_static_mame_ms": -159.36425892857153
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 108744855,
+          "duration_seconds": 1.2426388714285714,
+          "offset_vs_static_mame_ms": -3.4908160714286485
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "5d8c3b7ca336464e6f99cc0ca3e3a781d6b245b5f9a7f08aba00cb523fe83591"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmde0_full38",
+      "game": "rabiolep",
+      "command": 224,
+      "sample": 32,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 92389,
+          "first_nonzero_seconds": 1.1185625,
+          "last_nonzero_seconds": 3.1961458333333335,
+          "peak": 13487.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 118230,
+          "first_nonzero_seconds": 1.091536,
+          "last_nonzero_seconds": 3.046656,
+          "peak": 13120.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 118235,
+          "first_nonzero_seconds": 1.11832,
+          "last_nonzero_seconds": 3.191296,
+          "peak": 13120.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.11243526456367715,
+          "correlation": 0.9909166193548159,
+          "last_nonzero_offset_ms": -149.48983333333342
+        },
+        "corrected": {
+          "normalized_rms_error": 0.01955201236804352,
+          "correlation": 0.9998011956133872,
+          "last_nonzero_offset_ms": -4.849833333333553
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -27.026499999999842,
+        "corrected": -0.24249999999992333
+      },
+      "corrected_minus_legacy_onset_ms": 26.78399999999992,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 142442344,
+          "duration_seconds": 1.9647279214285713,
+          "offset_vs_static_mame_ms": -191.74551607142854
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 151161938,
+          "duration_seconds": 2.1515763642857144,
+          "offset_vs_static_mame_ms": -4.897073214285452
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "e3e211ea6bea4c48b0db7a97a82a41f7d264b6c07dfb0ea86c174d1de51e5bf9"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmde1_full38",
+      "game": "rabiolep",
+      "command": 225,
+      "sample": 33,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 37863,
+          "first_nonzero_seconds": 1.1012083333333333,
+          "last_nonzero_seconds": 2.0359375,
+          "peak": 8830.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 48032,
+          "first_nonzero_seconds": 1.089552,
+          "last_nonzero_seconds": 1.911536,
+          "peak": 8704.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 48024,
+          "first_nonzero_seconds": 1.100928,
+          "last_nonzero_seconds": 2.033904,
+          "peak": 8704.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.595402702878004,
+          "correlation": 0.7919910048270353,
+          "last_nonzero_offset_ms": -124.40150000000028
+        },
+        "corrected": {
+          "normalized_rms_error": 0.01802662097421925,
+          "correlation": 0.9998114629828807,
+          "last_nonzero_offset_ms": -2.0335000000000214
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -11.656333333333269,
+        "corrected": -0.2803333333334379
+      },
+      "corrected_minus_legacy_onset_ms": 11.37599999999983,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 89414719,
+          "duration_seconds": 0.8284216714285715,
+          "offset_vs_static_mame_ms": -158.23926607142846
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 96702521,
+          "duration_seconds": 0.9845888571428572,
+          "offset_vs_static_mame_ms": -2.0720803571427915
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "950eca2a98685f2e75985f1021acbe10e842997bb049db690adc22ff603d0a6d"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmde2_full38",
+      "game": "rabiolep",
+      "command": 226,
+      "sample": 34,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 31769,
+          "first_nonzero_seconds": 1.1074791666666666,
+          "last_nonzero_seconds": 2.4009375,
+          "peak": 9128.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 40379,
+          "first_nonzero_seconds": 1.090176,
+          "last_nonzero_seconds": 1.842032,
+          "peak": 9088.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 40365,
+          "first_nonzero_seconds": 1.107184,
+          "last_nonzero_seconds": 2.398528,
+          "peak": 9088.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 1.1159155417103066,
+          "correlation": 0.289735793204948,
+          "last_nonzero_offset_ms": -558.9055000000001
+        },
+        "corrected": {
+          "normalized_rms_error": 0.04300253763577828,
+          "correlation": 0.998945736362641,
+          "last_nonzero_offset_ms": -2.4094999999997313
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -17.303166666666534,
+        "corrected": -0.29516666666662417
+      },
+      "corrected_minus_legacy_onset_ms": 17.00799999999991,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 86077761,
+          "duration_seconds": 0.7569154285714286,
+          "offset_vs_static_mame_ms": -578.7455089285713
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 112971688,
+          "duration_seconds": 1.3332138642857143,
+          "offset_vs_static_mame_ms": -2.447073214285611
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "ee5daf2d70d9afbeeda45be6de7025820f1e04cdf988b56e6f20bfb6b68fa495"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmde3_full38",
+      "game": "rabiolep",
+      "command": 227,
+      "sample": 35,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 85803,
+          "first_nonzero_seconds": 1.1074791666666666,
+          "last_nonzero_seconds": 3.9401875,
+          "peak": 9197.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 108451,
+          "first_nonzero_seconds": 1.090176,
+          "last_nonzero_seconds": 3.080032,
+          "peak": 8960.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 108426,
+          "first_nonzero_seconds": 1.107184,
+          "last_nonzero_seconds": 3.935664,
+          "peak": 8960.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 1.0994425907126535,
+          "correlation": 0.12866109480472313,
+          "last_nonzero_offset_ms": -860.1554999999998
+        },
+        "corrected": {
+          "normalized_rms_error": 0.045028683031276204,
+          "correlation": 0.9985431666122178,
+          "last_nonzero_offset_ms": -4.523499999999903
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -17.303166666666534,
+        "corrected": -0.29516666666662417
+      },
+      "corrected_minus_legacy_onset_ms": 17.00799999999991,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 143785761,
+          "duration_seconds": 1.9935154285714285,
+          "offset_vs_static_mame_ms": -870.2017589285713
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 184181521,
+          "duration_seconds": 2.8591388571428573,
+          "offset_vs_static_mame_ms": -4.578330357142502
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "d7eb62da733ec7b0f8bc4193a165c5c9f40af76e8e1ab1ee2523cae9f1e4ec73"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmde4_full38",
+      "game": "rabiolep",
+      "command": 228,
+      "sample": 36,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 8029,
+          "first_nonzero_seconds": 1.1073541666666666,
+          "last_nonzero_seconds": 1.2760208333333334,
+          "peak": 8806.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 10311,
+          "first_nonzero_seconds": 1.090048,
+          "last_nonzero_seconds": 1.25816,
+          "peak": 8768.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 10311,
+          "first_nonzero_seconds": 1.107056,
+          "last_nonzero_seconds": 1.275168,
+          "peak": 8768.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.5151878950530582,
+          "correlation": 0.862862358351702,
+          "last_nonzero_offset_ms": -17.86083333333344
+        },
+        "corrected": {
+          "normalized_rms_error": 0.009196795512807318,
+          "correlation": 0.9999564467756217,
+          "last_nonzero_offset_ms": -0.8528333333333027
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -17.306166666666734,
+        "corrected": -0.2981666666665994
+      },
+      "corrected_minus_legacy_onset_ms": 17.008000000000134,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 58904928,
+          "duration_seconds": 0.17464043571428572,
+          "offset_vs_static_mame_ms": -48.889251785714265
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 61144855,
+          "duration_seconds": 0.22263887142857142,
+          "offset_vs_static_mame_ms": -0.890816071428574
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "e21649e23d9ed797d57b91c6d5242c5c180519463bd557ec04dc56b349ef8529"
+    },
+    {
+      "case": "rabiolep_4s_mame_cmde5_full38",
+      "game": "rabiolep",
+      "command": 229,
+      "sample": 37,
+      "activity": {
+        "mame": {
+          "rate": 48000,
+          "nonzero_samples": 51484,
+          "first_nonzero_seconds": 1.0894166666666667,
+          "last_nonzero_seconds": 2.1719791666666666,
+          "peak": 10960.0,
+          "rail_samples": 0
+        },
+        "legacy": {
+          "rate": 62500,
+          "nonzero_samples": 66290,
+          "first_nonzero_seconds": 1.089184,
+          "last_nonzero_seconds": 2.169408,
+          "peak": 10816.0,
+          "rail_samples": 0
+        },
+        "corrected": {
+          "rate": 62500,
+          "nonzero_samples": 66290,
+          "first_nonzero_seconds": 1.089184,
+          "last_nonzero_seconds": 2.169408,
+          "peak": 10816.0,
+          "rail_samples": 0
+        }
+      },
+      "absolute_20ms_envelope": {
+        "legacy": {
+          "normalized_rms_error": 0.019624353408358625,
+          "correlation": 0.9997670638111902,
+          "last_nonzero_offset_ms": -2.571166666666791
+        },
+        "corrected": {
+          "normalized_rms_error": 0.019624353408358625,
+          "correlation": 0.9997670638111902,
+          "last_nonzero_offset_ms": -2.571166666666791
+        }
+      },
+      "onset_offset_vs_mame_ms": {
+        "legacy": -0.23266666666676983,
+        "corrected": -0.23266666666676983
+      },
+      "corrected_minus_legacy_onset_ms": 0.0,
+      "corrected_onset_within_1ms": true,
+      "busy": {
+        "legacy": {
+          "start_cycle": 50755041,
+          "end_cycle": 101348261,
+          "duration_seconds": 1.0841404285714287,
+          "offset_vs_static_mame_ms": -19.38925892857135
+        },
+        "corrected": {
+          "start_cycle": 50755041,
+          "end_cycle": 102141521,
+          "duration_seconds": 1.101138857142857,
+          "offset_vs_static_mame_ms": -2.390830357142937
+        }
+      },
+      "old_probe_prefix": null,
+      "input_result_sha256": "1dc3a3ef3806bf332e7e36346ad166a49110f6d780208567274b7bab73f16eb4"
+    }
+  ],
+  "inventory_sha256": "e9a419d833559022342ccc986718ed96014cd96dc458f5207d9bc346d75197e1",
+  "analyzer_sha256": "dab745930a9b317d784846d2d94fdab2e79ab695e2356dcc6f871d0fa63e141e",
+  "scope": "Completed absolute-time onset/activity and busy audit. No independently fitted onset shift/gain. Acceptance requires no clipping, matching silence/non-silence status and no worse absolute onset beyond one16us output quantum. Busy comparison is against a STATIC MAME source inventory, not a directly captured MAME busy edge; within1ms onset is reported separately. Fixed absolute20ms RMS-envelope/error and last activity offsets are descriptive, with no threshold substituted for the onset gate. No complete chip accuracy, state restore, native phase or synthesis claim."
+}

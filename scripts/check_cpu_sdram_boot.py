@@ -23,7 +23,7 @@ def main():
         "rtl/rabbitpunch_fx68k.vhd", "rtl/rabbitpunch_maincpu.vhd", "rtl/rabbitpunch_io.vhd",
         "rtl/rabbitpunch_irq.vhd", "rtl/rabbitpunch_sdram_types.vhd", "rtl/memory/sdram/sdram.sv",
         "rtl/rabbitpunch_sdram.vhd", "rtl/rabbitpunch_rom_requests.vhd", "rtl/rabbitpunch_rom_cache.vhd",
-        "rtl/rabbitpunch_read_arbiter.vhd", "rtl/rabbitpunch_audio_roms.vhd", "rtl/rabbitpunch_audio_rom_transport.vhd", "rtl/rabbitpunch_roms.vhd", "sim/vendor/sdram/sdram_chip_model_wide.sv", "sim/board/cpu_sdram_boot_tb.vhd"]
+        "rtl/rabbitpunch_read_arbiter.vhd", "rtl/rabbitpunch_audio_roms.vhd", "rtl/rabbitpunch_audio_rom_transport.vhd", "rtl/state/rabbitpunch_state_sdram_phase.vhd", "rtl/rabbitpunch_roms.vhd", "sim/vendor/sdram/sdram_chip_model_wide.sv", "sim/board/cpu_sdram_boot_tb.vhd"]
     old = {row["set"]: row for row in json.loads((root / "docs/reference/boot_checks.json").read_text())}
     results = []
     for game in ((args.only,) if args.only else ("rabiolep", "rpunch")):

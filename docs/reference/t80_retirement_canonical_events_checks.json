@@ -1,0 +1,14 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/vendor/meatsauce_t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+    "rtl/state/vendor/meatsauce_t80/T80_MCode.vhd": "a73c512d7f03bc34759de560efe78c1813785c5ae3f52714df149455b876e5a5",
+    "rtl/state/vendor/meatsauce_t80/T80_ALU.vhd": "8e1dfd1c47fc0ce4a902f3d789f657a93f2b9faa6a72df70e1f12f27649291b8",
+    "rtl/state/vendor/meatsauce_t80/T80.vhd": "e6f6a31dcbc34f0193ff8aa4bc124e4967e527d10731d0acc6f3908d3384e0ef",
+    "rtl/state/rabbitpunch_t80_capture.vhd": "39a8c43ab6603958c36ba57e1cfa9ce0a0708c355bd76faf817e0b9219e51f16",
+    "sim/state/t80_retirement_tb.vhd": "d1035e3ee68e30e2505a0ee8d4ead5dd5ee680a08bf8226787a267586d4b4637"
+  },
+  "runner_sha256": "4abe4372e000a80f56d266e724ff563a735384495b73ac943f3015254a12f05a",
+  "command_log_sha256": "87dec0c824b1b02a0271f438ddd246af88ecc140397ab76b4acde7576064fa0f",
+  "scope": "Native VHDL unchanged T80 donor. Capture immediately after LD A,E; require committed accumulator and unconsumed next opcode, then three restores with256 exact architectural/bus clocks and RAM writes. Not a full instruction-set, board, whole-game or hardware proof."
+}

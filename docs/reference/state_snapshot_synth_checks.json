@@ -1,0 +1,133 @@
+{
+  "commit": "afad813a350e41c299a2c19d69d324386b2a52d0",
+  "device": "5CSEBA6U23I7",
+  "project": "state_snapshot_check",
+  "constraint_mhz": 48,
+  "seed": 3,
+  "memory_bits": 0,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 7.989
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.327
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.718
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 7.706
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.307
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.57
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 10.346
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.18
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.829
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 10.615
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.158
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.829
+    }
+  ],
+  "timing_coverage": {
+    "Illegal Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Port Paths": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Port Paths": {
+      "setup": 0,
+      "hold": 0
+    }
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Mon Oct 19 05:44:07 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : state_snapshot_check",
+    "Top-level Entity Name : state_snapshot_check",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 690 / 41,910 ( 2 % )",
+    "Total registers : 1223",
+    "Total pins : 1 / 314 ( < 1 % )",
+    "Total virtual pins : 344",
+    "Total block memory bits : 0 / 5,662,720 ( 0 % )",
+    "Total RAM Blocks : 0 / 553 ( 0 % )",
+    "Total DSP Blocks : 0 / 112 ( 0 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 0 / 6 ( 0 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "log_sha256": "dba375b0c9551c898c5b32659dcce9c10eaf81bf9381cdd0b013c4a73e20d2a0",
+  "scope": "Isolated registered virtual-I/O parent at48MHz seed3. Exact committed dependencies and boundary inputs retained; expected memory, hierarchy, unconstrained-path and nonnegative timing gates passed. Register counts are preservation checks, not post-fit functional proof. Not a whole-core fit or game-state/hardware restore qualification.",
+  "verification_only": false,
+  "checker_sha256": "b186daceec6953c19073cedbf5624dd870f243b668ece0342fc002193d1b2f56",
+  "source_sha256": {
+    "rtl/synth_check/state_snapshot/state_snapshot_check.qsf": "355a9362996929c6a55683f7199ca8ca6f8f30eae22d041d0fe11feabfd0fc5e",
+    "rtl/synth_check/state_snapshot/state_snapshot_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "rtl/state/rabbitpunch_state_crc.vhd": "4de0b46eae23558ed02db73df8ce628e8a02cb8a6318405c4b8846dbed81e568",
+    "rtl/state/rabbitpunch_state_header.vhd": "f516fa8d35f1b8b1ab73fa83e203a9ed89203d514ed4eb280982e10ef774e1ba",
+    "rtl/state/rabbitpunch_state_snapshot.vhd": "20f724580c0fa984a3f5ac52a79cd1dc4a406c165db7f3070cbe5e41e75520d5",
+    "rtl/synth_check/state_snapshot/state_snapshot_check.vhd": "0a464466a1414d331e9fcb0953795795a1ec9494c11b77a539ad4a4c91f9a79e"
+  },
+  "committed_blob_sha256": {
+    "rtl/synth_check/state_snapshot/state_snapshot_check.qsf": "355a9362996929c6a55683f7199ca8ca6f8f30eae22d041d0fe11feabfd0fc5e",
+    "rtl/synth_check/state_snapshot/state_snapshot_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "rtl/state/rabbitpunch_state_crc.vhd": "4de0b46eae23558ed02db73df8ce628e8a02cb8a6318405c4b8846dbed81e568",
+    "rtl/state/rabbitpunch_state_header.vhd": "f516fa8d35f1b8b1ab73fa83e203a9ed89203d514ed4eb280982e10ef774e1ba",
+    "rtl/state/rabbitpunch_state_snapshot.vhd": "20f724580c0fa984a3f5ac52a79cd1dc4a406c165db7f3070cbe5e41e75520d5",
+    "rtl/synth_check/state_snapshot/state_snapshot_check.vhd": "0a464466a1414d331e9fcb0953795795a1ec9494c11b77a539ad4a4c91f9a79e"
+  },
+  "artifacts_sha256": {
+    "build/rtl/synth_check/state_snapshot/state_snapshot_check.qsf": "355a9362996929c6a55683f7199ca8ca6f8f30eae22d041d0fe11feabfd0fc5e",
+    "build/rtl/synth_check/state_snapshot/state_snapshot_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "build/rtl/synth_check/state_snapshot/state_snapshot_check.vhd": "0a464466a1414d331e9fcb0953795795a1ec9494c11b77a539ad4a4c91f9a79e",
+    "build/rtl/synth_check/state_snapshot/output_files/state_snapshot_check.fit.rpt": "28278ff5d10dfea3b4c2ddae1ab9a8033fbe44307e0bcf3e3f37105a83428007"
+  },
+  "recorder_sha256": "9daff8ba93862d06a4dfbe42df042ce005cf79ff27507199d9687d3e70901d3a"
+}

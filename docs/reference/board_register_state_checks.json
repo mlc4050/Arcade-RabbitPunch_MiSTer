@@ -1,0 +1,13 @@
+{
+  "case": "board_register_state",
+  "pass_marker": "BOARD_REGISTER_STATE_PASS",
+  "log": "debug\\baselines\\board_register_state\\result.log",
+  "source_sha256": {
+    "rtl/rabbitpunch_layout.vhd": "31af791e125292f3d1eabaee3bab7fd7f08ae4bdbec95c8f2202e0b9429545e5",
+    "rtl/rabbitpunch_decode.vhd": "94f9077729e3f6cb75d06244c68648b0adeb70841b09b44ed6ea2f819f092f73",
+    "rtl/rabbitpunch_io.vhd": "4e2f26f3831df45b3d33223995572a7ecad5fed70c7d09f75e7d62697d77d652",
+    "rtl/rabbitpunch_irq.vhd": "ed1456938cc21512c8a54f0adaa5e0b1d8c3be8e7abe07545e613d9bd9474570",
+    "sim/state/board_register_state_tb.vhd": "635b4bea6284de766ad3f4b17cfcd3fe0bb30964ab08939e63cc941201760d00"
+  },
+  "log_sha256": "15143cb4d023b4f163afa67f32b0a5bf5f3613064ee63a852a58dfdd032c702b"
+}

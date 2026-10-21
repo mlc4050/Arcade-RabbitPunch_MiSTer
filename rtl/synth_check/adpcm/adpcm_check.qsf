@@ -10,6 +10,8 @@ set_global_assignment -name VERILOG_FILE ../../sound/jt7759/hdl/jt7759_adpcm.v
 set_global_assignment -name VERILOG_FILE ../../sound/jt7759/hdl/jt7759_ctrl.v
 set_global_assignment -name VERILOG_FILE ../../sound/jt7759/hdl/jt7759_data.v
 set_global_assignment -name VERILOG_FILE ../../sound/jt7759/hdl/jt7759_div.v
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_upd7759_control.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_upd7759_playback.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_upd7759.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_adpcm.vhd
 set_global_assignment -name VHDL_FILE adpcm_check.vhd

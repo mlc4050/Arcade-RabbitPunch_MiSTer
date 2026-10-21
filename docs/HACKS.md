@@ -118,3 +118,22 @@ initialization retain their separately documented limits. See TOOLCHAIN.md and
 reference/fast_sound_boot_archive.json. General instruction equivalence would
 require independent opcode qualification or a faithfully supported toolchain;
 these startup tests do not supply it.
+
+## Savestate evaluation limits
+
+The isolated GX 68000 capture donor keeps register stores and most exception
+frame writes off game RAM, but its first PC-low word reaches SSP-2 before the
+interrupt acknowledge identifies the capture. Repeated deterministic CPU tests
+and STOP/IRQ wake pass; original stack transparency does not. The earlier NMK16
+CPU monitors use more of the game's stack. Neither is a complete production
+savestate implementation. The tested RAM and board/timing state ports remain
+separate integration surfaces; exact hidden sound-chip state and full-machine
+restore are unavailable. OSD actions are withheld. See SAVESTATES.md.
+
+The isolated BoogieWings JT51 state donor is rejected for exact restoration:
+its 2820-bit vector round-trips, while all 32768 checked observable trace clocks
+differ after restore. Missing operator/feedback/accumulator state ports remain
+unpatched. The first fixture's uninitialized stopped timer counters are archived
+separately; the final negative result explicitly initializes both timers through
+normal writes. Production sound is unchanged. See
+`reference/fm_state_audit_checks.json` for source/log hashes and test scope.

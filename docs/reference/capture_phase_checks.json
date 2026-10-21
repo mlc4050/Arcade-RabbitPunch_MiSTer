@@ -1,0 +1,10 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_capture_phase.vhd": "1a314ca87474a95e1c6cf254f16b8115cdd6ba944150a15a6fbbceeb7376eb91",
+    "sim/state/capture_phase_tb.vhd": "1c9d2a9b0ceb60845db6ca60ac22ba47e7e971f93007af5b88fed487f20d0f1d"
+  },
+  "runner_sha256": "bdf2fd566fd7f1d813ab26bb40454fabc724a4f137c0ddb3e986a36506d7a296",
+  "log_sha256": "a4258e0dee07ec5e3de0964852c9ce7a936727243178288ae18a06a46467038a",
+  "scope": "Phase-controller-only test against exact imported fx68k E/eCntr recurrence:60 acquisition phases,12000 identical resume clocks and user-pause override/preservation. Both internal divider and fractional external enables tested. Not full CPU hidden-state equivalence, monitor RTE/STOP integration or physical display timing qualification."
+}

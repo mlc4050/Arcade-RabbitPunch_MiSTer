@@ -1,0 +1,60 @@
+{
+  "accepted": true,
+  "results": [
+    {
+      "case": "state_maincpu_compat_divider_100_lfref",
+      "pass_marker": "STATE_MAINCPU_COMPAT_PASS",
+      "log": "debug\\baselines\\state_maincpu_compat_divider_100_lfref\\result.log",
+      "external_phase": false,
+      "initial_reset_cycles": 100,
+      "warm_reset_cycles": 100,
+      "log_sha256": "bbb38907a3582288d5f7aa63b85534b70be9bf88fabc59eec1b6e011d0433e7b"
+    },
+    {
+      "case": "state_maincpu_compat_divider_101_lfref",
+      "pass_marker": "STATE_MAINCPU_COMPAT_PASS",
+      "log": "debug\\baselines\\state_maincpu_compat_divider_101_lfref\\result.log",
+      "external_phase": false,
+      "initial_reset_cycles": 101,
+      "warm_reset_cycles": 99,
+      "log_sha256": "f3ac62abb47c079e6f7ba0f06433f3c70469c3e5bf6b2e6601910ce73305b2f4"
+    },
+    {
+      "case": "state_maincpu_compat_fractional_100_lfref",
+      "pass_marker": "STATE_MAINCPU_COMPAT_PASS",
+      "log": "debug\\baselines\\state_maincpu_compat_fractional_100_lfref\\result.log",
+      "external_phase": true,
+      "initial_reset_cycles": 100,
+      "warm_reset_cycles": 100,
+      "log_sha256": "b590462519fdaf254bf56054611ab81102d5358c7042c386f2d3943eb2ce82c6"
+    },
+    {
+      "case": "state_maincpu_compat_fractional_101_lfref",
+      "pass_marker": "STATE_MAINCPU_COMPAT_PASS",
+      "log": "debug\\baselines\\state_maincpu_compat_fractional_101_lfref\\result.log",
+      "external_phase": true,
+      "initial_reset_cycles": 101,
+      "warm_reset_cycles": 99,
+      "log_sha256": "f3eb732d2845ad079c8983d82f52805a4035aec252553cdec3712dde38bf2695"
+    }
+  ],
+  "source_sha256": {
+    "rtl/state/vendor/konamigx/fx68k/fx68k.sv": "9f327366a840badd2e3b192f77b76a4e2d5f568add7df3df5e31010e2ba21ab4",
+    "rtl/state/vendor/konamigx/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
+    "rtl/state/vendor/konamigx/fx68k/uaddrPla.sv": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a",
+    "rtl/state/vendor/konamigx/gx_ss_m68k.sv": "397e40f9dfcca76acb3039853db44d239a246f31671fd641e0cb81003d5daec4",
+    "rtl/state/rabbitpunch_state_fx68k.vhd": "13106124cb32f0f79f010e39bf6b833a3242b425064e4eae3f896ec2f2a6fe25",
+    "rtl/state/rabbitpunch_m68k_capture.vhd": "a825b7b56a2db4b9d6c9c99bf20e6e746181b6a49cc8a98e5b8f5e9889e15c13",
+    "rtl/state/rabbitpunch_capture_stack_undo.vhd": "2aa4223c523bd336ddc6c3ffeeb693c365aaf7d4fde784824cebe6b3bc0298f9",
+    "rtl/state/rabbitpunch_capture_phase.vhd": "2e91ee4ada46c28f1bb37df5919ed85666582f04b747569133c0790c91461d87",
+    "rtl/state/rabbitpunch_state_maincpu.vhd": "82d2d374497fb31a04bc16dc18bf888bca37437410b8041f6f34540941174043",
+    "rtl/rabbitpunch_bus.vhd": "2ff140db32be1209154ffce745039cd569d3ba0fbb0531c560fd173fa080f5c5",
+    "rtl/rabbitpunch_clock_enables.vhd": "43f72dc52568f284236f9066f1f48d74d280c55bbb5fc7677d39a29093fbfcfa",
+    "sim/state/rabbitpunch_maincpu_reference.vhd": "9f0864e06faa3d6385a8acf4e54a5a0d2e1b53adb75fdd983f2d1d0d6497d0be",
+    "sim/state/state_maincpu_compat_tb.vhd": "454cb6ef3ed91707cc4bc29b59162f0ab9970983874afdb1b183d0405bd59656"
+  },
+  "original_control_sha256": "31ab1732aa5e8465cc71bc88ef068b50cb364daeb172f45c4dafa1f669dba5ce",
+  "original_control_lf_sha256": "31ab1732aa5e8465cc71bc88ef068b50cb364daeb172f45c4dafa1f669dba5ce",
+  "runner_sha256": "8064ed6d8ce6706be58888a1bdf6fd35e17f69e38b81e0ef101adf07ef27c635",
+  "scope": "Exact per-clock original phase/bus control versus actual state adapter, both instantiating the same unchanged GX instruction core. Only reference entity/boundary names and passive STOP output translation differ from original control source, checked byte-for-byte after that transformation. Divider and fractional enables; two reset-duration pairs, variable0/17/65-clock replies, two byte/readback diagnostics, user pause, STOP, reset replay and two IRQ/autovector handlers per case. Every request pulse/packet/write-data/IRQ/pause clock must match with no offset. Normal mode only; no game-ROM or capture/restore qualification in this gate."
+}

@@ -72,6 +72,26 @@ REQUIRED_INSTANCES = (
     "rabbitpunch_rotation_transport", "rabbitpunch_ddr_write_queue", "rabbitpunch_frame_publication",
 )
 
+# State compositions must retain their complete engine. Applying the legacy
+# core list would incorrectly demand the replaced CPU/audio wrappers.
+STATE_INSTANCES = (
+    "hps_io", "rabbitpunch_state_emu", "rabbitpunch_state_machine",
+    "rabbitpunch_state_machine_backend", "rabbitpunch_state_service",
+    "rabbitpunch_state_image_buffer", "rabbitpunch_state_banks",
+    "rabbitpunch_state_maincpu", "rabbitpunch_m68k_capture", "fx68k",
+    "rabbitpunch_t80_capture", "rabbitpunch_jt51_state_netlist",
+    "rabbitpunch_jt7759_state_netlist", "rabbitpunch_state_controls",
+    "rabbitpunch_scanout", "rabbitpunch_scanline_scheduler",
+    "rabbitpunch_rom_cache", "jtframe_draw", "rabbitpunch_hiscore_service",
+    "rabbitpunch_video_options", "video_mixer", "scandoubler", "Hq2x",
+    "rabbitpunch_video_aspect", "video_freak", "rabbitpunch_view_flip",
+    "rabbitpunch_status_led", "rabbitpunch_crt_adjust", "crt_adjust:geometry",
+    "rabbitpunch_state_hdmi_presentation", "rabbitpunch_hdmi_rotation",
+    "screen_rotate_two", "rabbitpunch_state_rotation_transport",
+    "rabbitpunch_state_ddr_arbiter", "rabbitpunch_ddr_write_queue",
+    "rabbitpunch_frame_publication",
+)
+
 # Macros the design needs defined in the .qsf, and what breaks without each.
 # Presence is not connection: a module can stay in the netlist with its ports
 # bound to implicitly declared wires because a VERILOG_MACRO went missing.
@@ -219,6 +239,12 @@ def check_macros(stage):
             if 'VERILOG_MACRO "%s=' % m not in text]
 
 
+def uses_state_engine(stage):
+    if REV in ("RabbitPunch_state_eval", "RabbitPunch_state_eval_stp"):
+        return True
+    return 'rtl/state/rabbitpunch_state_emu_boundary.vhd' in (Path(stage)/'files.qip').read_text()
+
+
 def check_present(stage):
     """Fail if a block that must exist is missing from the fitted netlist."""
     rpt = os.path.join(stage, "output_files", "%s.fit.rpt" % REV)
@@ -227,7 +253,8 @@ def check_present(stage):
     except OSError:
         print("  (no fit report at %s -- cannot check)" % rpt)
         return []
-    required = REQUIRED_INSTANCES + (("rabbitpunch_debug", "altsource_probe") if REV.endswith("_stp") else ())
+    required = STATE_INSTANCES if uses_state_engine(stage) else REQUIRED_INSTANCES
+    required += (("rabbitpunch_debug", "altsource_probe") if REV.endswith("_stp") else ())
     missing = [n for n in required if n not in text]
     for n in required:
         print("  %-18s %s" % (n, "present" if n in text else "MISSING"))
@@ -311,12 +338,60 @@ def inspect_full_clock_tree(stage, quartus_tools, rev):
     return report
 
 
+def state_eval_resources(fitted):
+    """Require all state-machine RAM and complete chip state in a full-shell fit."""
+    memory = []
+    for line in fitted.splitlines():
+        columns = [value.strip() for value in line.split(';')[1:-1]]
+        if (len(columns) > 19 and columns[1] in ('MLAB', 'AUTO', 'M10K', 'M10K block') and
+                'rabbitpunch_state_machine:machine|' in columns[0]):
+            memory.append(dict(instance=columns[0], kind=columns[1],
+                requested_depth=int(columns[4]), requested_width=int(columns[5]),
+                depth=int(columns[13]), width=int(columns[14]), bits=int(columns[17])))
+    if sum(row['bits'] for row in memory if row['kind'] != 'MLAB') != 1784608:
+        raise SystemExit('Full-shell state machine must retain1784608 block RAM bits')
+    expected_cpu = {
+        **{'altdpram:'+bank+'_rtl_0': ('MLAB', 19, 16, 19, 16, 304)
+           for bank in ('ea_h', 'ea_l', 'eb_h', 'eb_l')},
+        'nanoRom:nanoRom|': ('AUTO', 336, 68, 336, 66, 22176),
+        'uRom:uRom|': ('AUTO', 1024, 17, 1024, 17, 17408),
+    }
+    cpu = [row for row in memory if 'rabbitpunch_state_maincpu:' in row['instance']]
+    if len(cpu) != len(expected_cpu):
+        raise SystemExit('Full-shell CPU capture/ROM memory missing or duplicated')
+    for key, expected in expected_cpu.items():
+        matches = [row for row in cpu if key in row['instance']]
+        if len(matches) != 1:
+            raise SystemExit('Full-shell CPU memory missing or duplicated: '+key)
+        row = matches[0]
+        shape = tuple(row[name] for name in ('kind', 'requested_depth', 'requested_width', 'depth', 'width', 'bits'))
+        if shape != expected:
+            raise SystemExit('Full-shell CPU memory changed: '+key)
+    if sum(row['bits'] for row in memory if row['kind'] == 'MLAB') != 1216:
+        raise SystemExit('Full-shell capture-bank MLAB capacity changed')
+    chips = {}
+    for chip, minimum in (('jt51', 4016), ('jt7759', 189)):
+        model = 'rabbitpunch_'+chip+'_state_netlist'
+        rows = [line.split(';') for line in fitted.splitlines()]
+        matches = [row for row in rows if len(row) > 8 and row[1].strip().startswith('|'+model+':')]
+        if len(matches) != 1:
+            raise SystemExit('Full-shell sound-state hierarchy missing or duplicated: '+model)
+        count = int(matches[0][8].strip().split()[0].replace(',', ''))
+        if count < minimum:
+            raise SystemExit('Full-shell sound-state registers missing: '+model)
+        chips[model] = count
+    return dict(state_machine_block_bits=1784608, capture_mlab_bits=1216,
+                state_memory=memory, fitted_sound_registers=chips)
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--synth-check", choices=["hdmi_presentation", "rotation_transport", "frame_publication", "ddr_write_queue", "hdmi_rotation", "crt_adjust", "video_aspect", "video_options", "clocked_machine", "machine", "raster", "hiscore_service", "hiscore", "maintenance", "video_output", "platform", "controls", "host", "load_frontend", "ddr_copy", "audio_mixer", "audio_rom_transport", "audio", "adpcm", "sound_board", "soundcpu", "memory", "tiles", "sprites", "sprite_scan", "priority", "sprite_line", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "download", "system", "sdram", "rom_requests", "rom_cache", "roms"],
+    ap.add_argument("--synth-check", choices=["state_host", "state_machine", "state_service", "state_board", "state_scanout", "state_image_validator", "state_apply", "state_banks", "state_publish", "state_maincpu", "state_audio", "state_snapshot", "state_slot_reader", "state_header", "state_slot_writer", "state_image_buffer", "t80_capture", "jt51_state", "jt7759_state", "hdmi_presentation", "rotation_transport", "frame_publication", "ddr_write_queue", "hdmi_rotation", "crt_adjust", "video_aspect", "video_options", "clocked_machine", "machine", "raster", "hiscore_service", "hiscore", "maintenance", "video_output", "platform", "controls", "host", "load_frontend", "ddr_copy", "audio_mixer", "audio_rom_transport", "audio", "adpcm", "sound_board", "soundcpu", "memory", "tiles", "sprites", "sprite_scan", "priority", "sprite_line", "sprite_renderer", "tile_line", "video", "video_rgb", "board_video", "board", "download", "system", "sdram", "rom_requests", "rom_cache", "roms"],
                     help="fit an isolated block from HEAD instead of the MiSTer core")
     ap.add_argument("--rev", help="Quartus revision (default: CORE_REV, else the one "
                                   ".qsf in the core root, else the .qpf's last)")
+    ap.add_argument("--stage", help="create a fresh build worktree at this D-drive path "
+                                   "inside the repository; refuses an existing path")
     ap.add_argument("--seed", type=int,
                     help="override the fitter SEED in the STAGED .qsf "
                          "(placement only; worth trying before restructuring "
@@ -335,7 +410,13 @@ def main():
     here = str(core_root())
     REV = f"{args.synth_check}_check" if args.synth_check else revision(Path(here), args.rev)
     QUARTUS_BIN = str(quartus_bin(Path(here)))
-    stage = os.path.join(here, "build")
+    stage_path = Path(args.stage).resolve() if args.stage else Path(here)/'build'
+    if args.stage:
+        if stage_path.drive.upper() != 'D:' or Path(here).resolve() not in stage_path.parents:
+            ap.error("--stage must stay on D: inside this repository")
+        if stage_path.exists():
+            ap.error("--stage requires a fresh path; preserve existing worktrees and artifacts")
+    stage = str(stage_path)
 
     # scripts/hwlock.py: a compile must not start while a JTAG tool is
     # reading the device. The marker is machine-wide, so this also refuses
@@ -365,6 +446,7 @@ def main():
     # Create or update the stage worktree to exactly HEAD.
     if not os.path.isdir(os.path.join(stage, ".git")) and \
        not os.path.isfile(os.path.join(stage, ".git")):
+        Path(stage).parent.mkdir(parents=True, exist_ok=True)
         run(["git", "-C", here, "worktree", "add", "--detach", stage, head])
     else:
         # --force: a seed override patches the STAGED .qsf, and a leftover
@@ -395,6 +477,20 @@ def main():
         qsf = Path(stage) / f"{REV}.qsf"
         with qsf.open("a", encoding="utf-8", newline="\n") as output:
             output.write(f"\nset_global_assignment -name VERILOG_MACRO \"RABBITPUNCH_BUILD_ID=32'h{head[:8]}\"\n")
+        state_build = Path(stage) / 'rtl/state/rabbitpunch_state_build.vhd'
+        if state_build.exists():
+            # VHDL cannot consume SystemVerilog preprocessor macros. Generate
+            # equivalent constants only inside this committed build snapshot.
+            instrumented = bool(re.search(r'^set_global_assignment -name VERILOG_MACRO "DEBUG_ISSP=1"',
+                                           qsf.read_text(), re.M))
+            text = state_build.read_text()
+            assert text.count('CBOOL_DEBUG_ENABLE : boolean := false') == 1
+            assert text.count('x"00000000"') == 1
+            text = text.replace('CBOOL_DEBUG_ENABLE : boolean := false',
+                'CBOOL_DEBUG_ENABLE : boolean := '+str(instrumented).lower())
+            text = text.replace('x"00000000"', 'x"'+head[:8].upper()+'"')
+            state_build.write_text(text, newline='\n')
+            print('state VHDL build identity: '+head[:8]+' debug='+str(instrumented).lower())
 
     # THE SEED IS PART OF THE BUILD. Two .rbf files from the same commit at
     # different seeds are not interchangeable: one placement with every clock
@@ -491,6 +587,18 @@ def main():
               "on %d clock(s)." % len(violations))
 
     inspect_full_clock_tree(stage, QUARTUS_BIN, REV)
+    if uses_state_engine(stage):
+        output = Path(stage)/'output_files'
+        preservation = state_eval_resources((output/(REV+'.fit.rpt')).read_text())
+        preservation.update(commit=head, revision=REV,
+            validator_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            scope='Full-shell fitted RAM and chip-state preservation only; '
+                  'game continuation, physical DDR behavior and hardware remain independent gates.')
+        (output/'state_eval_resources.json').write_text(json.dumps(preservation, indent=2)+'\n')
+        if REV in ("RabbitPunch_state_eval", "RabbitPunch_state_eval_stp"):
+            print("\nOK -- offline full-shell state fit only. Game continuation and hardware "
+                  "qualification are independent; do not deploy this evaluation revision.")
+            return 0
     rbf = os.path.join(stage, "output_files", "%s.rbf" % REV)
     print("\nOK -- deploy with:\n"
           "  python scripts/deploy.py --rbf-only --rev %s --log \"%s\" \\\n"

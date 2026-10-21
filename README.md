@@ -2,7 +2,7 @@
 
 A MiSTer FPGA core for Video System's 1987 arcade hardware, supporting **Rabbit Punch** and **Rabio Lepus**. Built for the DE10-Nano with Quartus Prime Lite 17.0.2, using MAME 0.289's `vsystem/rpunch.cpp` as the reference.
 
-**Work in progress. Both games run with video and sound. Savestates are in development.**
+**Work in progress. Both games run with video and sound. Savestate save and restore work on MiSTer hardware.**
 
 ## Contents
 
@@ -21,6 +21,15 @@ A MiSTer FPGA core for Video System's 1987 arcade hardware, supporting **Rabbit 
 - [License](#license)
 
 ## History
+
+### Arcade-RabbitPunch_20261020 — savestates
+
+- Four savestate slots, optional slot autoincrement, Save state and Restore state in the OSD.
+- Additional **Savestate (SS)** controller action: hold SS with Down to save or Up to restore.
+- Existing controller button positions and separate high-score/NVRAM saving are preserved.
+- Deterministic save/restore continuation checks pass for both games, including active audio.
+- Release and instrumented builds pass the project's timing checks.
+- Savestate save and restore verified on MiSTer hardware.
 
 ### Arcade-RabbitPunch_20261018
 
@@ -49,9 +58,10 @@ Both games use the same RBF. Select the appropriate MRA for the game you want to
 - CRT position and size adjustment, subject to output-mode restrictions.
 - Audio mix options and mute during pause.
 - High-score saving through MiSTer's NVRAM interface.
+- Four-slot savestates with optional autoincrement.
 - Direct ROM loading, with optional DDR-staged loading MRAs.
 
-The Video settings submenu holds the display options. DIP switches, audio mix, pause behavior and NVRAM controls are available from the main OSD page.
+The Video settings submenu holds the display options. DIP switches, audio mix, pause behavior, NVRAM and savestate controls are available from the main OSD page.
 
 ## Controls
 
@@ -81,11 +91,32 @@ NVRAM contains the high-score table; a full game snapshot requires savestates. D
 
 ## Savestates
 
-Savestates are not available in this release.
+Savestates are included in the **October 20 build**. The same RBF supports
+both games. This build passes deterministic continuation tests in simulation.
+Save and restore also work on MiSTer hardware.
+
+The main OSD places these controls together after **Save NVRAM**:
+
+| Control | Function |
+|---|---|
+| Savestate slot | Select slot 1–4 |
+| Autoincrement slot | Advance to the next slot after a successful save |
+| Save state | Capture the running game in the selected slot |
+| Restore state | Resume the selected snapshot |
+
+Assign **Savestate (SS)** through MiSTer's **Define joystick buttons** menu.
+Hold SS and press **Down to save** or **Up to restore**, using the OSD's selected
+slot and autoincrement setting. SS has no default assignment; existing button
+positions are unchanged. That controller's game inputs are suppressed while
+SS is held.
+
+Savestates and high-score NVRAM are separate features. See
+[savestate implementation and validation](docs/SAVESTATES.md) for test coverage
+and current limitations.
 
 ## Installation
 
-1. Download [`Arcade-RabbitPunch_20261018.rbf`](releases/Arcade-RabbitPunch_20261018.rbf) and the desired game MRA from [`releases/`](releases/).
+1. Download [`Arcade-RabbitPunch_20261020.rbf`](releases/Arcade-RabbitPunch_20261020.rbf) and the matching game MRA from [`releases/`](releases/). The earlier [`October 18 build`](releases/Arcade-RabbitPunch_20261018.rbf) remains available without savestates.
 2. Copy the RBF to `_Arcade/cores/` on your MiSTer.
 3. Copy the MRA to `_Arcade/`.
 4. Place the matching ROM ZIP files in `games/mame/` and launch the game through its MRA.
@@ -100,8 +131,8 @@ Optional DDR-loading MRAs are under [`releases/_alternatives/_ddr/`](releases/_a
 |---|---|---|
 | Motorola 68000, 8 MHz | Main game CPU | fx68k |
 | Z80, 4 MHz | Sound CPU | T80 |
-| YM2151, 4 MHz | FM music | JT51 |
-| uPD7759, 640 kHz | ADPCM samples | JT7759 |
+| YM2151, 4 MHz | FM music | JT51-derived VHDL with state capture |
+| uPD7759, 640 kHz | ADPCM samples | JT7759-derived VHDL with state capture |
 | Video System video hardware | Tile layers, sprites, bitmap layer and priority | VHDL board logic with reused JTFRAME drawing components |
 | External SDRAM | Game ROM storage | Single-module SDRAM controller |
 | FPGA block RAM | Board RAM, caches and line buffers | Inferred FPGA memory |
@@ -121,26 +152,26 @@ These are the implemented timings. Original-board raw raster timings have not be
 
 ### Resource usage
 
-RabbitPunch revision, fitted October 18, 2026, seed 3:
+RabbitPunch release revision, fitted October 20, 2026, seed 3, source `6ac4a1b`:
 
 | Resource | Used | Available |
 |---|---:|---:|
-| Logic (ALMs) | 15,285 | 41,910 |
-| Registers | 25,260 | 83,820 |
-| Block memory bits | 1,445,728 | 5,662,720 |
-| M10K blocks | 187 | 553 |
-| DSP blocks | 35 | 112 |
+| Logic (ALMs) | 22,889 | 41,910 |
+| Registers | 29,824 | 83,820 |
+| Block memory bits | 2,303,968 | 5,662,720 |
+| M10K blocks | 292 | 553 |
+| DSP blocks | 34 | 112 |
 | PLLs | 3 | 6 |
 
-All **144 scoped timing checks** pass, with minimum setup slack **+0.419 ns** and hold slack **+0.079 ns**. Framework timing exclusions are documented in [SDRAM timing](docs/SDRAM_PIN_TIMING.md); the [build report](docs/reference/full_shell_final_osd_nvram_checks.json) records the full scope.
+All **144 scoped timing checks** pass, with minimum setup slack **+0.225 ns** and hold slack **+0.112 ns**. The [release build report](docs/reference/state_production_release_seed3_synth_checks.json) records the source, seed, artifact hashes and timing scope. The instrumented build also passes all 164 project timing checks.
 
 ### Floorplan
 
-RabbitPunch revision, fitted October 18, 2026. Colors identify the game machine, video processing, host interface and MiSTer framework; brightness indicates occupancy.
+RabbitPunch release revision, fitted October 20, 2026, seed 3. Colors identify the game machine, video processing, host interface and MiSTer framework; brightness indicates occupancy.
 
-![RabbitPunch FPGA floorplan](docs/floorplan/RabbitPunch.png)
+![RabbitPunch FPGA floorplan](docs/floorplan/RabbitPunch_20261020.png)
 
-[Resource groups](docs/floorplan/RabbitPunch_groups.md).
+[Resource groups](docs/floorplan/RabbitPunch_20261020_groups.md).
 
 ## Building
 
@@ -158,9 +189,13 @@ The staged build records its source commit and fitter seed and checks implementa
 
 ## Verification
 
-The core is checked against MAME for ROM loading, graphics and sound, with simulation tests and Quartus timing analysis. Complete music comparison and broader hardware testing remain in progress.
+The core is checked against MAME for ROM loading, graphics and sound, with simulation tests and Quartus timing analysis. Complete music comparison remains in progress.
 
-Detailed results are in [`docs/reference/`](docs/reference/). See [build identity mapping](docs/reference/publication_identity_checks.json) for the published RBF's source revision.
+Both games pass two saves and four restores with exact continuation in simulation. Focused native tests cover CPU STOP/HALT, interrupt state, repeated restores and recovery after an incomplete restore. Both production Quartus revisions pass their timing and state-resource checks. See [savestate validation](docs/SAVESTATES.md) for the evidence and scope.
+
+Savestate save and restore have been tested on MiSTer hardware. NVRAM saving, controller mappings and HDMI rotation were hardware-tested on earlier builds. CRT output remains untested.
+
+Detailed results are in [`docs/reference/`](docs/reference/). The [October 20 build report](docs/reference/state_production_release_seed3_synth_checks.json) identifies the savestate build; [build identity mapping](docs/reference/publication_identity_checks.json) records the earlier published build.
 
 [Roadmap](docs/ROADMAP.md) | [Known approximations](docs/HACKS.md) | [MAME behavior notes](docs/MAME_KLUDGES.md) | [Sound](docs/SOUND_BRINGUP.md) | [Savestates](docs/SAVESTATES.md)
 

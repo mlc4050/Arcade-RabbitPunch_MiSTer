@@ -1,0 +1,16 @@
+{
+  "case": "adpcm_netlist_state_grouped",
+  "pass_marker": "ADPCM_NETLIST_STATE_PASS",
+  "log": "debug\\baselines\\adpcm_netlist_state_grouped\\result.log",
+  "source_sha256": {
+    "rtl/sound/jt7759/hdl/jt7759.v": "a4defeee8f5b5fec795af00d6185aa941f4135ab72ae5f7fece31908c3c48c1a",
+    "rtl/sound/jt7759/hdl/jt7759_adpcm.v": "41d795e33e2085d3d07ee0acab23e85f495f3766e61bd91f177c46e84072380d",
+    "rtl/sound/jt7759/hdl/jt7759_ctrl.v": "19ad3a6572dec4e61d0046b222b6af53660cb558123b985f43db86dd5ed98aa9",
+    "rtl/sound/jt7759/hdl/jt7759_data.v": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d",
+    "rtl/sound/jt7759/hdl/jt7759_div.v": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862",
+    "debug/state_grouped/jt7759/jt7759_state_netlist.vhd": "805d8d405783d41cf3f40f43bbdd526f530dc4c259e1612720171c83632a8bf1",
+    "sim/state/adpcm_netlist_state_tb.vhd": "6334bd3548cad3be472d7636d755df3142ed742a510b75e3d0dbded14d804f49"
+  },
+  "log_sha256": "3203eff9d35cc7e7ea4604e738a2c1d51ec6cf8313523719126d4f758e25c27e",
+  "scope": "Generated VHDL from pristine synthesis-mode JT7759 JSON. Native comparison uses explicit FPGA-zero initial register/RAM contract, without SIMULATION-only divider seeds. Nonzero synthetic standalone sample, throttled ROM, all192bits freeze/scan round trip, three immediate4096clock continuations including ROM/DRQ/busy/PCM. No formal equivalence, real ROM corpus, slave mode, Quartus timing, production integration or full game savestate qualification."
+}

@@ -2,27 +2,27 @@
   "groups": [
     {
       "name": "Game machine",
-      "match": "emu\\|machine\\|",
+      "match": "emu\\|machine\\|machine\\|",
       "color": "#e6194b"
     },
     {
       "name": "CRT geometry",
-      "match": "emu\\|crt_geometry\\|",
+      "match": "emu\\|machine\\|crt_geometry\\|",
       "color": "#3cb44b"
     },
     {
       "name": "HDMI presentation",
-      "match": "emu\\|hdmi_presentation\\|",
+      "match": "emu\\|machine\\|hdmi_presentation\\|",
       "color": "#4363d8"
     },
     {
       "name": "Host interface",
-      "match": "emu\\|host\\|",
+      "match": "emu\\|machine\\|host\\|",
       "color": "#f58231"
     },
     {
       "name": "Video effects",
-      "match": "emu\\|video_options\\|",
+      "match": "emu\\|machine\\|video_options\\|",
       "color": "#911eb4"
     }
   ]

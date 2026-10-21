@@ -38,7 +38,11 @@ entity rabbitpunch_hiscore_service is
         ou8_memory_data : out unsigned(7 downto 0);
         i_memory_ready : in std_logic;
         i_memory_response : in std_logic;
-        iu8_memory_data : in unsigned(7 downto 0)
+        iu8_memory_data : in unsigned(7 downto 0);
+        i_state_quiesce : in std_logic := '0';
+        o_state_quiesced : out std_logic := '0';
+        i_state_reconcile : in std_logic := '0';
+        i_state_scores_ready : in std_logic := '0'
     );
 end entity;
 
@@ -99,6 +103,10 @@ begin
             ou8_memory_data => ou8_memory_data,
             i_memory_ready => i_memory_ready,
             i_memory_response => i_memory_response,
-            iu8_memory_data => iu8_memory_data
+            iu8_memory_data => iu8_memory_data,
+            i_state_quiesce => i_state_quiesce,
+            o_state_quiesced => o_state_quiesced,
+            i_state_reconcile => i_state_reconcile,
+            i_state_scores_ready => i_state_scores_ready
         );
 end architecture;

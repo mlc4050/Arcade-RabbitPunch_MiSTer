@@ -1,0 +1,10 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_image_buffer.vhd": "90ccae6b5ac6f22d6a06fb018393b34897e77bd238afebce452fbea9a692ac72",
+    "sim/state/state_image_buffer_tb.vhd": "2a7b8e40ae8ab6fb286200ef487075722aef3cfbf4f8e344ff83d54d60e169b5"
+  },
+  "runner_sha256": "2215675f02c7355c51dc7a01b7fe966d2880decb18c5d18eaa2010356cb4a84a",
+  "log_sha256": "d5e79cd9d5ca284820bc8ed108b1b05ea15c6101d2be9dd1225993c091c2ba07",
+  "scope": "Private synchronous single-port image RAM: three107280-byte fills and complete reverse reads, source stalls, simultaneous final byte/seal, ignored writes while sealed, rejected partial seals, illegal read addresses, session replacement and cancellation. No full-core resource/timing or DDR/preflight/application integration qualification."
+}

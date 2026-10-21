@@ -14,7 +14,8 @@ entity rabbitpunch_platform is
         GINT_SDRAM_READ_CAPTURE_ADJUST : natural range 0 to 2 := 0;
         GINT_IMAGE_BYTES : positive := CINT_ROM_IMAGE_SIZE;
         GU16_DIP_DEFAULT : unsigned(15 downto 0) := x"0000";
-        GBOOL_EXTERNAL_PHASE_ENABLE : boolean := false
+        GBOOL_EXTERNAL_PHASE_ENABLE : boolean := false;
+        GBOOL_STATE_CAPABLE : boolean := false
     );
     port (
         i_clk : in std_logic;
@@ -149,12 +150,89 @@ entity rabbitpunch_platform is
         o_sdram_column_n : out std_logic;
         o_sdram_clock_enable : out std_logic;
         o_ready : out std_logic;
-        o_loading : out std_logic
+        o_loading : out std_logic;
+        i_state_capture : in std_logic := '0';
+        i_state_cancel : in std_logic := '0';
+        o_state_pending : out std_logic := '0';
+        o_state_held : out std_logic := '0';
+        o_state_error : out std_logic := '0';
+        i_state_resume : in std_logic := '0';
+        o_state_return_held : out std_logic := '0';
+        i_state_release : in std_logic := '0';
+        o_state_resumed : out std_logic := '0';
+        o_state_canceled : out std_logic := '0';
+        iu5_state_cpu_address : in unsigned(4 downto 0) := (others => '0');
+        i_state_cpu_write : in std_logic := '0';
+        iu32_state_cpu_data : in unsigned(31 downto 0) := (others => '0');
+        ou32_state_cpu_data : out unsigned(31 downto 0) := (others => '0');
+        o_state_cpu_stopped : out std_logic := '0';
+        ou52_state_cpu_bus : out unsigned(51 downto 0) := (others => '0');
+        i_state_hold : in std_logic := '0';
+        i_state_load : in std_logic := '0';
+        iu224_state_io : in unsigned(223 downto 0) := (others => '0');
+        ou224_state_io : out unsigned(223 downto 0) := (others => '0');
+        iu4_state_irq : in unsigned(3 downto 0) := (others => '0');
+        ou4_state_irq : out unsigned(3 downto 0) := (others => '0');
+        i_state_memory_access : in std_logic := '0';
+        i_state_memory_request : in std_logic := '0';
+        i_state_memory_write : in std_logic := '0';
+        iu24_state_memory_address : in unsigned(23 downto 0) := (others => '0');
+        iu16_state_memory_data : in unsigned(15 downto 0) := (others => '0');
+        iu2_state_memory_bytes : in unsigned(1 downto 0) := (others => '0');
+        o_state_memory_response : out std_logic := '0';
+        ou16_state_memory_data : out unsigned(15 downto 0) := (others => '0');
+        o_state_memory_busy : out std_logic := '0';
+        o_maintenance_idle : out std_logic := '0';
+        i_state_video_flush : in std_logic := '0';
+        i_state_sound_capture : in std_logic := '0';
+        o_state_sound_pending : out std_logic := '0';
+        o_state_sound_held : out std_logic := '0';
+        o_state_sound_drained : out std_logic := '0';
+        o_state_sound_bus_idle : out std_logic := '0';
+        i_state_sound_resume : in std_logic := '0';
+        i_state_sound_cpu_write : in std_logic := '0';
+        iu256_state_sound_cpu : in unsigned(255 downto 0) := (others => '0');
+        ou256_state_sound_cpu : out unsigned(255 downto 0) := (others => '0');
+        i_state_fm_write : in std_logic := '0';
+        iu16_state_chip_address : in unsigned(15 downto 0) := (others => '0');
+        iu32_state_chip_data : in unsigned(31 downto 0) := (others => '0');
+        ou32_state_fm_data : out unsigned(31 downto 0) := (others => '0');
+        i_state_sound_memory_access : in std_logic := '0';
+        i_state_sound_memory_request : in std_logic := '0';
+        i_state_sound_memory_write : in std_logic := '0';
+        iu16_state_sound_memory_address : in unsigned(15 downto 0) := (others => '0');
+        iu8_state_sound_memory_data : in unsigned(7 downto 0) := (others => '0');
+        o_state_sound_memory_response : out std_logic := '0';
+        ou8_state_sound_memory_data : out unsigned(7 downto 0) := (others => '0');
+        iu16_state_adpcm : in unsigned(15 downto 0) := (others => '0');
+        ou16_state_adpcm : out unsigned(15 downto 0) := (others => '0');
+        i_state_adpcm_write : in std_logic := '0';
+        ou32_state_adpcm_data : out unsigned(31 downto 0) := (others => '0');
+        i_state_rom_flush : in std_logic := '0';
+        i_state_sdram_prepare : in std_logic := '0';
+        i_state_sdram_anchor : in std_logic := '0';
+        iu7_state_sdram_phase : in unsigned(6 downto 0) := (others => '0');
+        o_state_sdram_aligned : out std_logic := '0';
+        o_state_transport_idle : out std_logic := '0';
+        o_state_board_idle : out std_logic := '0';
+        iu16_state_mixer : in unsigned(15 downto 0) := (others => '0');
+        ou16_state_mixer : out unsigned(15 downto 0) := (others => '0');
+        iu2_state_fm_startup : in unsigned(1 downto 0) := (others => '0');
+        ou2_state_fm_startup : out unsigned(1 downto 0) := (others => '0');
+        i_state_nvram_quiesce : in std_logic := '0';
+        i_state_legacy_quiesce : in std_logic := '0';
+        o_state_nvram_quiesced : out std_logic := '0';
+        i_state_reconcile : in std_logic := '0';
+        i_state_scores_ready : in std_logic := '0';
+        o_state_rom_identity_valid : out std_logic := '0';
+        o_state_rom_identity_error : out std_logic := '0';
+        ou32_state_rom_identity : out unsigned(31 downto 0) := (others => '0')
     );
 end entity;
 
 architecture rtl of rabbitpunch_platform is
     signal s_system_loading, s_score_enabled : std_logic;
+    signal s_system_done, s_system_image_valid : std_logic;
     signal s_load_wait, s_score_wait, s_score_initialize : std_logic;
     signal s_score_access, s_score_valid, s_score_write, s_score_ready, s_score_response : std_logic;
     signal su14_score_address : unsigned(13 downto 0);
@@ -168,7 +246,67 @@ architecture rtl of rabbitpunch_platform is
     signal su27_word_address : unsigned(26 downto 0);
     signal su16_word_data, su16_dips : unsigned(15 downto 0);
     signal su8_player1, su8_player2, su8_service : unsigned(7 downto 0);
+    signal s_clients_idle, s_board_maintenance_idle : std_logic;
 begin
+    original_rom_identity : if (not GBOOL_STATE_CAPABLE) generate
+        o_state_rom_identity_valid <= '0';
+        o_state_rom_identity_error <= '0';
+        ou32_state_rom_identity <= (others => '0');
+    end generate;
+    captured_rom_identity : if (GBOOL_STATE_CAPABLE) generate
+        component rabbitpunch_rom_identity is
+            generic (
+                GINT_IMAGE_BYTES : positive := 16#210000#
+            );
+            port (
+                i_clk : in std_logic;
+                i_initialize : in std_logic;
+                i_begin : in std_logic;
+                i_word_accepted : in std_logic;
+                iu27_word_byte_address : in unsigned(26 downto 0);
+                iu16_word_data : in unsigned(15 downto 0);
+                i_finish : in std_logic;
+                i_image_committed : in std_logic;
+                o_active : out std_logic;
+                o_valid : out std_logic;
+                o_error : out std_logic;
+                ou32_identity : out unsigned(31 downto 0)
+            );
+        end component;
+        signal s_previous_download : std_logic := '0';
+    begin
+        process(i_clk)
+        begin
+            if (rising_edge(i_clk)) then
+                if (i_initialize = '1') then
+                    s_previous_download <= '0';
+                else
+                    s_previous_download <= s_downloading;
+                end if;
+            end if;
+        end process;
+        -- Observe the shared accepted-word stream after byte/DDR selection.
+        -- Host byte strobes alone cannot identify an image loaded through DDR.
+        identity : rabbitpunch_rom_identity
+            generic map (
+                GINT_IMAGE_BYTES => GINT_IMAGE_BYTES
+            )
+            port map (
+                i_clk => i_clk,
+                i_initialize => i_initialize,
+                i_begin => s_downloading and not s_previous_download,
+                i_word_accepted => s_word_valid and s_word_ready,
+                iu27_word_byte_address => su27_word_address,
+                iu16_word_data => su16_word_data,
+                i_finish => s_system_done,
+                i_image_committed => s_system_image_valid,
+                o_active => open,
+                o_valid => o_state_rom_identity_valid,
+                o_error => o_state_rom_identity_error,
+                ou32_identity => ou32_state_rom_identity
+            );
+    end generate;
+    o_maintenance_idle <= s_clients_idle and s_board_maintenance_idle;
     o_hiscore_enabled <= s_score_enabled;
     ou16_host_menu_mask <= to_unsigned(8, 16) when s_score_enabled = '0' else to_unsigned(0, 16);
     o_host_wait <= s_load_wait or s_score_wait;
@@ -178,6 +316,8 @@ begin
     o_ddr_mode <= s_ddr_mode;
     o_ddr_owner <= s_downloading and s_ddr_mode;
     o_loading <= s_system_loading;
+    o_done <= s_system_done;
+    o_image_valid <= s_system_image_valid;
     o_error <= s_frontend_error or s_system_error;
     o_pause_request <= s_pause_request;
     ou8_player1 <= su8_player1;
@@ -269,7 +409,11 @@ begin
             ou8_memory_data => su8_score_write_data,
             i_memory_ready => s_score_ready,
             i_memory_response => s_score_response,
-            iu8_memory_data => su8_score_read_data
+            iu8_memory_data => su8_score_read_data,
+            i_state_quiesce => i_state_nvram_quiesce,
+            o_state_quiesced => o_state_nvram_quiesced,
+            i_state_reconcile => i_state_reconcile,
+            i_state_scores_ready => i_state_scores_ready
         );
     maintenance_clients : entity work.rabbitpunch_maintenance_clients
         port map (
@@ -300,13 +444,16 @@ begin
             ou8_memory_data => su8_memory_write_data,
             i_memory_ready => s_memory_ready,
             i_memory_response => s_memory_response,
-            iu8_memory_data => su8_memory_read_data
+            iu8_memory_data => su8_memory_read_data,
+            i_external_quiesce => i_state_legacy_quiesce,
+            o_idle => s_clients_idle
         );
     system : entity work.rabbitpunch_system
         generic map (
             GINT_SDRAM_READ_CAPTURE_ADJUST => GINT_SDRAM_READ_CAPTURE_ADJUST,
             GINT_IMAGE_BYTES => GINT_IMAGE_BYTES,
-            GBOOL_EXTERNAL_PHASE_ENABLE => GBOOL_EXTERNAL_PHASE_ENABLE
+            GBOOL_EXTERNAL_PHASE_ENABLE => GBOOL_EXTERNAL_PHASE_ENABLE,
+            GBOOL_STATE_CAPABLE => GBOOL_STATE_CAPABLE
         )
         port map (
             i_clk => i_clk,
@@ -397,9 +544,9 @@ begin
             o_word_ready => s_word_ready,
             iu27_word_byte_address => su27_word_address,
             iu16_word_data => su16_word_data,
-            o_image_valid => o_image_valid,
+            o_image_valid => s_system_image_valid,
             o_error => s_system_error,
-            o_done => o_done,
+            o_done => s_system_done,
             ou27_bytes_loaded => ou27_bytes_loaded,
             iou16_sdram_data => iou16_sdram_data,
             ou13_sdram_address => ou13_sdram_address,
@@ -411,6 +558,74 @@ begin
             o_sdram_column_n => o_sdram_column_n,
             o_sdram_clock_enable => o_sdram_clock_enable,
             o_ready => o_ready,
-            o_loading => s_system_loading
+            o_loading => s_system_loading,
+            i_state_capture => i_state_capture,
+            i_state_cancel => i_state_cancel,
+            o_state_pending => o_state_pending,
+            o_state_held => o_state_held,
+            o_state_error => o_state_error,
+            i_state_resume => i_state_resume,
+            o_state_return_held => o_state_return_held,
+            i_state_release => i_state_release,
+            o_state_resumed => o_state_resumed,
+            o_state_canceled => o_state_canceled,
+            iu5_state_cpu_address => iu5_state_cpu_address,
+            i_state_cpu_write => i_state_cpu_write,
+            iu32_state_cpu_data => iu32_state_cpu_data,
+            ou32_state_cpu_data => ou32_state_cpu_data,
+            o_state_cpu_stopped => o_state_cpu_stopped,
+            ou52_state_cpu_bus => ou52_state_cpu_bus,
+            i_state_hold => i_state_hold,
+            i_state_load => i_state_load,
+            iu224_state_io => iu224_state_io,
+            ou224_state_io => ou224_state_io,
+            iu4_state_irq => iu4_state_irq,
+            ou4_state_irq => ou4_state_irq,
+            i_state_memory_access => i_state_memory_access,
+            i_state_memory_request => i_state_memory_request,
+            i_state_memory_write => i_state_memory_write,
+            iu24_state_memory_address => iu24_state_memory_address,
+            iu16_state_memory_data => iu16_state_memory_data,
+            iu2_state_memory_bytes => iu2_state_memory_bytes,
+            o_state_memory_response => o_state_memory_response,
+            ou16_state_memory_data => ou16_state_memory_data,
+            o_state_memory_busy => o_state_memory_busy,
+            o_maintenance_idle => s_board_maintenance_idle,
+            i_state_video_flush => i_state_video_flush,
+            i_state_sound_capture => i_state_sound_capture,
+            o_state_sound_pending => o_state_sound_pending,
+            o_state_sound_held => o_state_sound_held,
+            o_state_sound_drained => o_state_sound_drained,
+            o_state_sound_bus_idle => o_state_sound_bus_idle,
+            i_state_sound_resume => i_state_sound_resume,
+            i_state_sound_cpu_write => i_state_sound_cpu_write,
+            iu256_state_sound_cpu => iu256_state_sound_cpu,
+            ou256_state_sound_cpu => ou256_state_sound_cpu,
+            i_state_fm_write => i_state_fm_write,
+            iu16_state_chip_address => iu16_state_chip_address,
+            iu32_state_chip_data => iu32_state_chip_data,
+            ou32_state_fm_data => ou32_state_fm_data,
+            i_state_sound_memory_access => i_state_sound_memory_access,
+            i_state_sound_memory_request => i_state_sound_memory_request,
+            i_state_sound_memory_write => i_state_sound_memory_write,
+            iu16_state_sound_memory_address => iu16_state_sound_memory_address,
+            iu8_state_sound_memory_data => iu8_state_sound_memory_data,
+            o_state_sound_memory_response => o_state_sound_memory_response,
+            ou8_state_sound_memory_data => ou8_state_sound_memory_data,
+            iu16_state_adpcm => iu16_state_adpcm,
+            ou16_state_adpcm => ou16_state_adpcm,
+            i_state_adpcm_write => i_state_adpcm_write,
+            ou32_state_adpcm_data => ou32_state_adpcm_data,
+            i_state_rom_flush => i_state_rom_flush,
+            i_state_sdram_prepare => i_state_sdram_prepare,
+            i_state_sdram_anchor => i_state_sdram_anchor,
+            iu7_state_sdram_phase => iu7_state_sdram_phase,
+            o_state_sdram_aligned => o_state_sdram_aligned,
+            o_state_transport_idle => o_state_transport_idle,
+            o_state_board_idle => o_state_board_idle,
+            iu16_state_mixer => iu16_state_mixer,
+            ou16_state_mixer => ou16_state_mixer,
+            iu2_state_fm_startup => iu2_state_fm_startup,
+            ou2_state_fm_startup => ou2_state_fm_startup
         );
 end architecture;

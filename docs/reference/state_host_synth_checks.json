@@ -1,0 +1,126 @@
+{
+  "commit": "6e5f88f6c5fb9e9abd602ac92c0ffe5f29fbd104",
+  "device": "5CSEBA6U23I7",
+  "project": "state_host_check",
+  "constraint_mhz": 48,
+  "seed": 3,
+  "memory_bits": 0,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 7.427
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.406
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.723
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 7.531
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.373
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.574
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 8.351
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.185
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.821
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 8.913
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.172
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.824
+    }
+  ],
+  "timing_coverage": {
+    "Illegal Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Port Paths": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Port Paths": {
+      "setup": 0,
+      "hold": 0
+    }
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Tue Oct 20 14:35:07 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : state_host_check",
+    "Top-level Entity Name : state_host_check",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 423 / 41,910 ( 1 % )",
+    "Total registers : 469",
+    "Total pins : 1 / 314 ( < 1 % )",
+    "Total virtual pins : 190",
+    "Total block memory bits : 0 / 5,662,720 ( 0 % )",
+    "Total RAM Blocks : 0 / 553 ( 0 % )",
+    "Total DSP Blocks : 0 / 112 ( 0 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 0 / 6 ( 0 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "log_sha256": "9ae838c7b0b115cfe5aad0fec27df400fa13eb45c39c3383bd565e8b982bb88b",
+  "scope": "Isolated actual unchanged hps_io, VHDL host/state controls and enabled configuration;48MHz seed3,0 block RAM,423 ALMs and469 registers. All checked timing corners and unconstrained-path gates pass. Synthesized functional protocol proof is separate. No full MiSTer, ARM firmware/UI rendering, DDR state service or hardware qualification.",
+  "verification_only": false,
+  "checker_sha256": "f7a3de8c34ba3572f80acc40705baaeba1d26f3594dd49d2741fcc61eee863c0",
+  "accepted": true,
+  "stage_source_sha256": {
+    "sys/hps_io.sv": "f4a085fc23bdcefb57c600866a39a448c749cd3c93910f7005316e8df9019bec",
+    "rtl/rabbitpunch_config.vhd": "9946ae38c785e698dad4d6fb6466246b4653ef571bc5aca42837455c09d1436f",
+    "rtl/state/rabbitpunch_state_config.vhd": "810ddd62adcce07d427f709bc8bf114eec2d2c9dfeef0d10c6a5824360e49661",
+    "rtl/state/rabbitpunch_state_controls.vhd": "464352a37319cceca0f0485d8cd1aafd09352f6ecdcd3ac8bc6ba0c0c6243534",
+    "rtl/rabbitpunch_host.vhd": "80a082a7852dd3b4ebed8873686d2610d4997ba4732b7389fc773ffde50c7759",
+    "rtl/synth_check/state_host/state_host_check.vhd": "94c127e9bfa304e137c96ae78a1f393f2f0d8a2c30914bee75995e504c44e9fb",
+    "rtl/synth_check/state_host/state_host_check.sdc": "e138d8fbe9d3697dcd218a772d77ec30d0e836202586b0cd124b3773bbcd0edf",
+    "rtl/synth_check/state_host/state_host_check.qsf": "311518a828ac9f3f971769ac6fd5ef338724494056bb59b5259883b611c3ad4e"
+  },
+  "artifacts_sha256": {
+    "state_host_check.fit.rpt": "ea4e8bda1cee6718d346b171f6191957591f6ce738b880d99e782ed96720f9c8",
+    "state_host_check.sta.rpt": "2630922ffa26986ce6095ca388c59df1c71360ad2b508fec0903d2d23079387c",
+    "state_host_check.sta.summary": "33b28186374f222a84afba0a12596f01adf1fe271be7c9946bda520afd02852c"
+  }
+}

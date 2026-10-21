@@ -65,12 +65,13 @@ def revision(root=None, override=None):
     qsfs = sorted(root.glob("*.qsf"))
     if len(qsfs) == 1:
         return qsfs[0].stem
-    # several revisions: the .qpf lists them, last one current
+    # Evaluation projects may have their own .qpf beside the primary one.
+    # Their filenames must not change the primary project's default revision.
     revs = []
-    for qpf in sorted(root.glob("*.qpf")):
-        for ln in qpf.read_text(errors="replace").splitlines():
-            if ln.startswith("PROJECT_REVISION"):
-                revs.append(ln.split("=", 1)[1].strip().strip('"'))
+    qpf = root / (project(root)+'.qpf')
+    for ln in qpf.read_text(errors="replace").splitlines():
+        if ln.startswith("PROJECT_REVISION"):
+            revs.append(ln.split("=", 1)[1].strip().strip('"'))
     if revs:
         return revs[-1]
     sys.exit("cannot determine the revision in %s: %d .qsf files and no "

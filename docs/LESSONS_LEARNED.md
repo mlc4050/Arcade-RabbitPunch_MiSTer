@@ -1523,3 +1523,26 @@ production RTL was unchanged.
   callback-to-port latency explicitly. Superseded captures remain rejected for
   temporal claims even when their independent static pixel comparison passes.
   Evidence: reference/gameplay_mame_explicit_schedule_checks.json.
+
+### [RabbitPunch] Test constant presentation inputs across the export boundary
+
+An initialized combinational requested-rotation signal remained at its initial
+zero value in the GHDL-to-Verilator export when the fixture supplied a constant
+rotation input. Native simulation of the same presentation controller published
+a frame and issued 8,320 writes; the exported model issued none. Removing only
+the combinational signal initializer made both implementations agree. Keep
+registered mode initialization, and compare mode, traffic and publication with
+constant inputs before admitting a shared-game export. Evidence:
+`reference/state_presentation_constant_initialized_selector_rejected.json` and
+`reference/state_presentation_constant_combinational_selector_fixed_v1_checks.json`.
+
+### [RabbitPunch] Carry operation-specific recovery readiness into host controls
+
+After partial state application, the image service accepts RESTORE retries but
+cannot accept SAVE. Treating its restore-ready output as readiness for either
+action let the host create a SAVE ticket that could never complete, blocking
+recovery. Consume the incomplete flag at the host, reject SAVE without creating
+a ticket, and give SAVE and RESTORE separate menu masks. Exercise held and
+simultaneous actions as well as failed and successful retries. Evidence:
+`reference/state_controls_partial_incomplete_rejected.json` and
+`reference/state_controls_partial_incomplete_gate_fixed_v2_checks.json`.

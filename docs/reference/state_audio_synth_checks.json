@@ -1,0 +1,199 @@
+{
+  "commit": "995de74a317c4dc8990d5c7dbdbdd3e6b7aa2541",
+  "device": "5CSEBA6U23I7",
+  "project": "state_audio_check",
+  "constraint_mhz": 48,
+  "seed": 3,
+  "memory_bits": 16384,
+  "timings": [
+    {
+      "type": "Slow 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 5.868
+    },
+    {
+      "type": "Slow 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.271
+    },
+    {
+      "type": "Slow 1100mV 100C Model Recovery 'clk_sys'",
+      "slack_ns": 13.197
+    },
+    {
+      "type": "Slow 1100mV 100C Model Removal 'clk_sys'",
+      "slack_ns": 1.002
+    },
+    {
+      "type": "Slow 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.078
+    },
+    {
+      "type": "Slow 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 5.601
+    },
+    {
+      "type": "Slow 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.246
+    },
+    {
+      "type": "Slow 1100mV -40C Model Recovery 'clk_sys'",
+      "slack_ns": 13.513
+    },
+    {
+      "type": "Slow 1100mV -40C Model Removal 'clk_sys'",
+      "slack_ns": 0.966
+    },
+    {
+      "type": "Slow 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 8.997
+    },
+    {
+      "type": "Fast 1100mV 100C Model Setup 'clk_sys'",
+      "slack_ns": 8.881
+    },
+    {
+      "type": "Fast 1100mV 100C Model Hold 'clk_sys'",
+      "slack_ns": 0.158
+    },
+    {
+      "type": "Fast 1100mV 100C Model Recovery 'clk_sys'",
+      "slack_ns": 16.294
+    },
+    {
+      "type": "Fast 1100mV 100C Model Removal 'clk_sys'",
+      "slack_ns": 0.468
+    },
+    {
+      "type": "Fast 1100mV 100C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.207
+    },
+    {
+      "type": "Fast 1100mV -40C Model Setup 'clk_sys'",
+      "slack_ns": 9.473
+    },
+    {
+      "type": "Fast 1100mV -40C Model Hold 'clk_sys'",
+      "slack_ns": 0.108
+    },
+    {
+      "type": "Fast 1100mV -40C Model Recovery 'clk_sys'",
+      "slack_ns": 17.028
+    },
+    {
+      "type": "Fast 1100mV -40C Model Removal 'clk_sys'",
+      "slack_ns": 0.401
+    },
+    {
+      "type": "Fast 1100mV -40C Model Minimum Pulse Width 'clk_sys'",
+      "slack_ns": 9.196
+    }
+  ],
+  "timing_coverage": {
+    "Illegal Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Clocks": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Input Port Paths": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Ports": {
+      "setup": 0,
+      "hold": 0
+    },
+    "Unconstrained Output Port Paths": {
+      "setup": 0,
+      "hold": 0
+    }
+  },
+  "fit_summary": [
+    "Fitter Status : Successful - Mon Oct 19 09:52:55 2026",
+    "Quartus Prime Version : 17.0.2 Build 602 07/19/2017 SJ Lite Edition",
+    "Revision Name : state_audio_check",
+    "Top-level Entity Name : state_audio_check",
+    "Family : Cyclone V",
+    "Device : 5CSEBA6U23I7",
+    "Timing Models : Final",
+    "Logic utilization (in ALMs) : 7,032 / 41,910 ( 17 % )",
+    "Total registers : 6101",
+    "Total pins : 1 / 314 ( < 1 % )",
+    "Total virtual pins : 865",
+    "Total block memory bits : 16,384 / 5,662,720 ( < 1 % )",
+    "Total RAM Blocks : 2 / 553 ( < 1 % )",
+    "Total DSP Blocks : 0 / 112 ( 0 % )",
+    "Total HSSI RX PCSs : 0",
+    "Total HSSI PMA RX Deserializers : 0",
+    "Total HSSI TX PCSs : 0",
+    "Total HSSI PMA TX Serializers : 0",
+    "Total PLLs : 0 / 6 ( 0 % )",
+    "Total DLLs : 0 / 4 ( 0 % )"
+  ],
+  "log_sha256": "a261756997d8f140c2dad46e113b58c1acaea4119cbaf7a15e2df1cc44c8e4c0",
+  "scope": "Isolated registered virtual-I/O parent at48MHz seed3. Exact committed dependencies and boundary inputs retained; expected memory, hierarchy, unconstrained-path and nonnegative timing gates passed. Register counts are preservation checks, not post-fit functional proof. Not a whole-core fit or game-state/hardware restore qualification.",
+  "verification_only": false,
+  "checker_sha256": "369cf04f525f8677ef379c72419e1f962f79d2f688953b181b8fa50e0c87907b",
+  "fitted_sound_registers": {
+    "rabbitpunch_jt51_state_netlist": 4484,
+    "rabbitpunch_jt7759_state_netlist": 251
+  },
+  "source_sha256": {
+    "rtl/synth_check/state_audio/state_audio_check.qsf": "675a43309ee14399b36e594be0f8de19ed3700abedf8bca158ba5c5a85be4cd3",
+    "rtl/synth_check/state_audio/state_audio_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "rtl/state/vendor/meatsauce_t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+    "rtl/state/vendor/meatsauce_t80/T80_MCode.vhd": "a73c512d7f03bc34759de560efe78c1813785c5ae3f52714df149455b876e5a5",
+    "rtl/state/vendor/meatsauce_t80/T80_ALU.vhd": "8e1dfd1c47fc0ce4a902f3d789f657a93f2b9faa6a72df70e1f12f27649291b8",
+    "rtl/state/vendor/meatsauce_t80/T80.vhd": "e6f6a31dcbc34f0193ff8aa4bc124e4967e527d10731d0acc6f3908d3384e0ef",
+    "rtl/state/rabbitpunch_t80_capture.vhd": "55aec7bb27e91dc6d04e3f2e3f1a5535c866cda4c290389a8b5d887844dc8462",
+    "rtl/state/generated/jt51_state_netlist.vhd": "af6ad0f89208e06a192a139906735d958f46fa91b840ea0ffa2237c6b0d559a0",
+    "rtl/state/generated/jt7759_state_netlist.vhd": "6fdc86fa46e21bd97109e1cafa221d0e31c04deb2c1af48d2e15be388be5c3a9",
+    "rtl/rabbitpunch_z80.vhd": "4aae6436bc0957027f6f30b7caab38ec0d0d0efd330a5fa3a24f734979d4321d",
+    "rtl/rabbitpunch_soundcpu.vhd": "e2baa84d8bbbc8da959938f9ca338f27dec8f2265bb622a9c09b574218cfc682",
+    "rtl/rabbitpunch_ram8.vhd": "3125a846fd3c208c8512f604952bd4766ac4d2d7ee959c0b8e53b989e31fc7fa",
+    "rtl/rabbitpunch_sound_bus.vhd": "9801559d2b41a745280140813bc1da182a07cc52ee6b950d2145a0d3737a0c9d",
+    "rtl/rabbitpunch_ym2151.vhd": "6676c99a104e4665cff087cb0464506d96dcc1aa8f3f3dc0ed33a4be15b8f328",
+    "rtl/rabbitpunch_upd7759_control.vhd": "b3fabe48db6731c86fda4a54e7d8b7ce212a71fccb83a0b258facf8af1ede454",
+    "rtl/rabbitpunch_upd7759_playback.vhd": "ba2f11fb337e48ca03fd539abf167b262f6ca64002986ed0bdbe5f73afda65ca",
+    "rtl/rabbitpunch_upd7759.vhd": "3434be19e205f9b061aaf7158881901da02835cbc33f0a56b275eb5854a9354e",
+    "rtl/rabbitpunch_adpcm.vhd": "6cf0d6504dffd312e2822a07caead8ec2ef8ab074dc22e52835f0a3010cf9aed",
+    "rtl/rabbitpunch_sound_board.vhd": "0a523151ed32a08af40dcb503635b5395968e27d04dee58b9a82af0ddf7b2496",
+    "rtl/rabbitpunch_audio.vhd": "9116a3184e6019c87d5250db9dede968b986413ae9521942be62cc5a0927de4a",
+    "rtl/synth_check/state_audio/state_audio_check.vhd": "f00c9dc08a70de80fd9cf5eb0909060aa52f3c0d5fcfb9e1a0e270f49dccbf8d"
+  },
+  "committed_blob_sha256": {
+    "rtl/synth_check/state_audio/state_audio_check.qsf": "c5aa8efbc2d8d91497edabbd97992582015f6a78dccc49727fc3823a0cfde12f",
+    "rtl/synth_check/state_audio/state_audio_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "rtl/state/vendor/meatsauce_t80/T80_Reg.vhd": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+    "rtl/state/vendor/meatsauce_t80/T80_MCode.vhd": "a73c512d7f03bc34759de560efe78c1813785c5ae3f52714df149455b876e5a5",
+    "rtl/state/vendor/meatsauce_t80/T80_ALU.vhd": "8e1dfd1c47fc0ce4a902f3d789f657a93f2b9faa6a72df70e1f12f27649291b8",
+    "rtl/state/vendor/meatsauce_t80/T80.vhd": "e6f6a31dcbc34f0193ff8aa4bc124e4967e527d10731d0acc6f3908d3384e0ef",
+    "rtl/state/rabbitpunch_t80_capture.vhd": "55aec7bb27e91dc6d04e3f2e3f1a5535c866cda4c290389a8b5d887844dc8462",
+    "rtl/state/generated/jt51_state_netlist.vhd": "af6ad0f89208e06a192a139906735d958f46fa91b840ea0ffa2237c6b0d559a0",
+    "rtl/state/generated/jt7759_state_netlist.vhd": "6fdc86fa46e21bd97109e1cafa221d0e31c04deb2c1af48d2e15be388be5c3a9",
+    "rtl/rabbitpunch_z80.vhd": "4aae6436bc0957027f6f30b7caab38ec0d0d0efd330a5fa3a24f734979d4321d",
+    "rtl/rabbitpunch_soundcpu.vhd": "e2baa84d8bbbc8da959938f9ca338f27dec8f2265bb622a9c09b574218cfc682",
+    "rtl/rabbitpunch_ram8.vhd": "3125a846fd3c208c8512f604952bd4766ac4d2d7ee959c0b8e53b989e31fc7fa",
+    "rtl/rabbitpunch_sound_bus.vhd": "9801559d2b41a745280140813bc1da182a07cc52ee6b950d2145a0d3737a0c9d",
+    "rtl/rabbitpunch_ym2151.vhd": "6676c99a104e4665cff087cb0464506d96dcc1aa8f3f3dc0ed33a4be15b8f328",
+    "rtl/rabbitpunch_upd7759_control.vhd": "b3fabe48db6731c86fda4a54e7d8b7ce212a71fccb83a0b258facf8af1ede454",
+    "rtl/rabbitpunch_upd7759_playback.vhd": "ba2f11fb337e48ca03fd539abf167b262f6ca64002986ed0bdbe5f73afda65ca",
+    "rtl/rabbitpunch_upd7759.vhd": "3434be19e205f9b061aaf7158881901da02835cbc33f0a56b275eb5854a9354e",
+    "rtl/rabbitpunch_adpcm.vhd": "6cf0d6504dffd312e2822a07caead8ec2ef8ab074dc22e52835f0a3010cf9aed",
+    "rtl/rabbitpunch_sound_board.vhd": "0a523151ed32a08af40dcb503635b5395968e27d04dee58b9a82af0ddf7b2496",
+    "rtl/rabbitpunch_audio.vhd": "9116a3184e6019c87d5250db9dede968b986413ae9521942be62cc5a0927de4a",
+    "rtl/synth_check/state_audio/state_audio_check.vhd": "f00c9dc08a70de80fd9cf5eb0909060aa52f3c0d5fcfb9e1a0e270f49dccbf8d"
+  },
+  "artifacts_sha256": {
+    "build/rtl/synth_check/state_audio/state_audio_check.qsf": "675a43309ee14399b36e594be0f8de19ed3700abedf8bca158ba5c5a85be4cd3",
+    "build/rtl/synth_check/state_audio/state_audio_check.sdc": "a1f4b0ef8d6e2ae535aed24c1d0bc847c64e8e1c9618e385fbe422ec064aad75",
+    "build/rtl/synth_check/state_audio/state_audio_check.vhd": "f00c9dc08a70de80fd9cf5eb0909060aa52f3c0d5fcfb9e1a0e270f49dccbf8d",
+    "build/rtl/synth_check/state_audio/output_files/state_audio_check.fit.rpt": "95d6d9451ce920fee78b49592c352921b59bdde381b3944003a96aa6173e0fa9"
+  },
+  "recorder_sha256": "a46075f7f213ca082c215137b4939ec59b2addfe1ced7716d7ccd33edc458fc3"
+}

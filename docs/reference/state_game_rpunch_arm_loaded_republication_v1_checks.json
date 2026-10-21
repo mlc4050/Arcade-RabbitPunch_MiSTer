@@ -1,0 +1,16 @@
+{
+  "accepted": false,
+  "republication_bytes_equal": true,
+  "game": "rpunch",
+  "original_counter": 2,
+  "cold_counter": 0,
+  "compared_bytes": 262140,
+  "excluded_bytes": "Only the outer 32-bit publication counter",
+  "original_image_sha256": "02c6e3b6f6716fea6c3fe4a69e2f4d68a2f95064431b1470ba9ab644b284df80",
+  "cold_image_sha256": "ebc38287a93f8efae45da3ebcec727c4b6a674bcec719bae01ef6012a23df851",
+  "common_header_body_sha256": "282cde86695af7d45b36b435486aace5dbbdae9a8a129ad9d35e0111b78539d2",
+  "original_coverage_sha256": "514a3ea23e0b200f73c9e0cd5c0e12a67c05a789ae0480c20f3aa7d7d186a915",
+  "cold_coverage_sha256": "f97bd5f9124c485e0dfcd80962caa73d97dd7a65055c268e01a6421d308e4d7f",
+  "cold_report_sha256": "807ebcae81304d539b90ee0db60917312e941391b6f3435d9210ad255a7ce617",
+  "scope": "Independent byte comparison of the new SAVE after cold restoration against the original run second SAVE. All length, header, body and unused slot bytes match; only the expected outer publication counter differs. This does not add hardware or full MiSTer qualification."
+}

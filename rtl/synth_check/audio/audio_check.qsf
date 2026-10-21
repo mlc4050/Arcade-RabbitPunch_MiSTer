@@ -44,6 +44,8 @@ set_global_assignment -name VHDL_FILE ../../rabbitpunch_ram8.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_sound_bus.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_ym2151.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_sound_board.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_upd7759_control.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_upd7759_playback.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_upd7759.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_adpcm.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_audio.vhd

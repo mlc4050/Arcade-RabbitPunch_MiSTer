@@ -1,7 +1,24 @@
 scripts/hooks/* text eol=lf
 *.sh text eol=lf
 rtl/cpu/** -text
+rtl/state/vendor/** -text
+rtl/state/generated/*.vhd text eol=lf
+rtl/state/generated/*.json text eol=lf
+rtl/rabbitpunch_upd7759_control.vhd text eol=lf
+rtl/rabbitpunch_upd7759_playback.vhd text eol=lf
+scripts/generate_sound_state_vhdl.py text eol=lf
+scripts/inventory_sound_state.py text eol=lf
 rtl/jtframe/*.v -text
 sim/vendor/** -text
+# Copied qualification receipts retain the bytes pinned by linked evidence hashes.
+docs/reference/adpcm_silence_timing_diagnosis.json -text
+docs/reference/state_sound_sample_*_checks.json -text
+docs/reference/state_sound_music_*_cmd99_checks.json -text
+docs/reference/state_sound_corrected_189_music_checks.json -text
+docs/reference/jt7759_corrected_ea4c83e_state_normal_proof.json -text
+docs/reference/adpcm_corrected_ea4c83e_state_checks.json -text
+docs/reference/state_main_game*.json -text
+docs/reference/state_adpcm_source_admission.json -text
+docs/reference/state_adpcm_all38_absolute_checks.json -text
 rtl/memory/ddram/** -text
 rtl/video/rotation/*.sv -text

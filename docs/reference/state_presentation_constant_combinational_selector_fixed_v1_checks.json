@@ -1,0 +1,46 @@
+{
+  "accepted": true,
+  "native_result": [
+    1,
+    8320,
+    1
+  ],
+  "exported_result": [
+    1,
+    8320,
+    1
+  ],
+  "fields": [
+    "applied_rotation",
+    "DDR_writes",
+    "ever_unblanked"
+  ],
+  "native": {
+    "case": "state_presentation_constant_combinational_selector_fixed_v1",
+    "pass_marker": "STATE_PRESENTATION_CONSTANT_PASS",
+    "log": "debug\\baselines\\state_presentation_constant_combinational_selector_fixed_v1\\result.log"
+  },
+  "source_sha256": {
+    "debug/netlists/hdmi_rotation_8238d77/hdmi_rotation_check.vo": "c2f8ccc0cceabe2411d7a4aa281dac4dc884667778f0666ae7f6f6f241318fdb",
+    "debug/netlists/video_aspect_80527a6/video_aspect_check.vo": "b71e1bd5c84a78691efdbe5c57175fb451ae8b0213f0494fbada92f81f9f3f42",
+    "rtl/rabbitpunch_hdmi_rotation.vhd": "769a309dcdc4422f0801e1149d0f3a621d15c3313c1f5f600d01f36bc88eb17c",
+    "rtl/rabbitpunch_video_aspect.vhd": "15f15840b7ced43d06487c1e9c1b7251bc1b210dfa911c9273cf9c904c05759b",
+    "rtl/video/rotation/screen_rotate_two.sv": "a704b114cc7d7c1684eb273ab98b436350a3ffb957b350fad975bb322ba11f9e",
+    "sys/video_freak.sv": "1c331bd8aee90bd722e8d9e400a8305de73392cb00cae256b8fb710e4fc2d478",
+    "sys/math.sv": "74d7501a41886b0990cae4815b2583867bee1e0af9baebfae09d0581b30f96b3",
+    "rtl/rabbitpunch_ddr_write_queue.vhd": "d8a66938e884f6a26f18e3e7c2de7c5f4732ae7c507e745ce91101ce06d592e5",
+    "rtl/rabbitpunch_frame_publication.vhd": "2ab81ea58f2ddbc240095067d4ff6c267675d9213af684a37045e04b16552cb3",
+    "rtl/state/rabbitpunch_state_ddr_arbiter.vhd": "f7ac7ebe67c4e46c4d8f9d550efde19e989ed7a3a1b575efe974cf6cf9dcc77d",
+    "rtl/state/rabbitpunch_state_rotation_transport.vhd": "14ac95c7b7283e862a83bda904657e565850a31500b931059fe64df307b18a72",
+    "rtl/state/rabbitpunch_state_hdmi_presentation.vhd": "870ec3b2d658b059ad84faa70354751b4961de6d019fbefce1bbbcd35b66104e",
+    "sim/state/state_presentation_constant_eval.vhd": "5b274ebfa643a6838658399753df1b8deed160dc81ce0225099760a2b457b6a3",
+    "sim/state/state_presentation_constant_tb.vhd": "5e00be37fc57b82fc5d13334a3e584aa192f383bf8f29ae79a10d4f988b7a6ae",
+    "sim/fast/state_presentation_constant_transport.cpp": "420f58c02c50878c191bf6949e7f2bc9ca689c5f603bed0f01ebf6122ae4d749"
+  },
+  "runner_sha256": "5dc5c97d6d7d17217ced0cbcc710cc2c1651069605ce8c89d57048715c133ec4",
+  "native_result_sha256": "55ba3d8d15326bbb29477ed26f9b856381303a5e4ea62345d3d5b6c76a8b4f51",
+  "exported_result_sha256": "4bad9462614cae4d1341e9dd68e23fb572b12c1c598aef26d48575ca3dc4b0ec",
+  "raw_export_sha256": "4af33cfac9b80f1836dd29b867328db6437ce8cb9e54bca5e7ac1543d6a46bbc",
+  "executable_sha256": "954dd3ae69a63cbb5257810ae8841748c687337083f19f1fa7c2e779c653b37e",
+  "scope": "Constant clockwise input on the actual presentation composition with a 32x20 raster and 16 frames. Native uses the qualified unchanged donor functional netlists; export uses raw unchanged donor RTL. VHDL owns raster, completion and counters; C++ only supplies clock/initialization and observes public outputs. No export normalization, internal state deposits, complete game, physical DDR or hardware result."
+}

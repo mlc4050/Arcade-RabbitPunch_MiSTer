@@ -1,0 +1,10 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_slot_writer.vhd": "372560c8120898213efee206a38d08273b3b7baae0748076392cca43f3809a9e",
+    "sim/state/state_slot_writer_tb.vhd": "659dfb9fbae393d102327ac49ceebebd998f2b585ab48d4e24aae20db9de7e66"
+  },
+  "runner_sha256": "29677fa8911346ad3f85726294bf0d323d4457793c771cddbdc4791fbdb56973",
+  "log_sha256": "893f787abf5a921801566571f0ba01f7b39255f86f0729a53faf773af51df152",
+  "scope": "Isolated ordered single-beat DDR save transport: five saves across four slots, stalled source/DDR, latched slot, startup sentinel/counter wrap, read debt surviving cancel/reset, blocked restart during drain, simultaneous cancel/response, ten partial-stream cancellations and canceled final commit. No host SD acknowledgement, concurrent host-copy atomicity, DDR arbiter integration or full game restore qualification."
+}

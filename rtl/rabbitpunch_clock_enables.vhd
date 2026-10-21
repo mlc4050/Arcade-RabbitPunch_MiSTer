@@ -15,7 +15,11 @@ entity rabbitpunch_clock_enables is
         o_sound_cpu_enable : out std_logic;
         o_ym_enable : out std_logic;
         o_ym_half_enable : out std_logic;
-        o_adpcm_enable : out std_logic
+        o_adpcm_enable : out std_logic;
+        i_state_hold : in std_logic := '0';
+        i_state_load : in std_logic := '0';
+        iu32_state : in unsigned(31 downto 0) := (others => '0');
+        ou32_state : out unsigned(31 downto 0) := (others => '0')
     );
 end entity;
 
@@ -27,13 +31,16 @@ architecture rtl of rabbitpunch_clock_enables is
     signal s_sound_half_phase : std_logic := '0';
     signal s_sound_enable : std_logic;
 begin
-    o_pixel_enable <= '1' when sint_pixel_phase = 6 and i_reset = '0' else '0';
-    o_main_phase_enable <= '1' when sint_main_accumulator >= 23 and i_reset = '0' else '0';
-    s_sound_enable <= '1' when sint_sound_accumulator >= 32 and i_reset = '0' else '0';
+    ou32_state <= "000000" & s_sound_half_phase & to_unsigned(sint_adpcm_accumulator, 10) &
+        to_unsigned(sint_sound_accumulator, 6) & to_unsigned(sint_main_accumulator, 6) &
+        to_unsigned(sint_pixel_phase, 3);
+    o_pixel_enable <= '1' when sint_pixel_phase = 6 and i_reset = '0' and i_state_hold = '0' else '0';
+    o_main_phase_enable <= '1' when sint_main_accumulator >= 23 and i_reset = '0' and i_state_hold = '0' else '0';
+    s_sound_enable <= '1' when sint_sound_accumulator >= 32 and i_reset = '0' and i_state_hold = '0' else '0';
     o_sound_cpu_enable <= s_sound_enable;
     o_ym_enable <= s_sound_enable;
     o_ym_half_enable <= s_sound_enable and s_sound_half_phase;
-    o_adpcm_enable <= '1' when sint_adpcm_accumulator >= 863 and i_reset = '0' else '0';
+    o_adpcm_enable <= '1' when sint_adpcm_accumulator >= 863 and i_reset = '0' and i_state_hold = '0' else '0';
 
     cadence : process(i_clk)
     begin
@@ -44,6 +51,18 @@ begin
                 sint_sound_accumulator <= 0;
                 sint_adpcm_accumulator <= 0;
                 s_sound_half_phase <= '0';
+            elsif (i_state_hold = '1') then
+                if (i_state_load = '1') then
+                    assert (iu32_state(2 downto 0) < 7 and iu32_state(8 downto 3) < 35 and
+                        iu32_state(14 downto 9) < 35 and iu32_state(24 downto 15) < 875 and
+                        iu32_state(31 downto 26) = 0)
+                        report "Invalid clock-enable state" severity failure;
+                    sint_pixel_phase <= to_integer(iu32_state(2 downto 0));
+                    sint_main_accumulator <= to_integer(iu32_state(8 downto 3));
+                    sint_sound_accumulator <= to_integer(iu32_state(14 downto 9));
+                    sint_adpcm_accumulator <= to_integer(iu32_state(24 downto 15));
+                    s_sound_half_phase <= iu32_state(25);
+                end if;
             else
                 if (sint_pixel_phase = 6) then
                     sint_pixel_phase <= 0;

@@ -398,3 +398,39 @@ The final-menu candidate is source 3dfbd332d078da18f1d762df7fcb34be8cb05a51,
 RabbitPunch seed 3. The superseded 252ca88 fit was intentionally canceled
 and its log/source preserved as a canceled run, not accepted timing evidence.
 Savestate UI remains withheld while full capture/restore is unfinished.
+
+## October 19 hardware confirmation and audio work
+
+Immediate manual NVRAM saving on the updated RBF is confirmed. Controller action
+mappings and rotation are confirmed working. Analog/CRT output remains untested.
+The first offline gameplay music audit matches 1620/1869 ordered non-timer YM
+writes and compares 5.9 seconds of PCM for each set. See
+reference/music_comparison_checks.json and SOUND_BRINGUP.md for scope and remaining
+timer/long-track work. Continue audio first, then complete savestates.
+
+## Independent savestate branch
+
+Savestates are implemented on `codex/savestates`, based on develop `cf3be57`,
+in `D:/git/RabbitPunch-savestates`. The production source snapshot `6ac4a1b`
+selects the VHDL state composition with CPU, main/sound RAM, board/video,
+full FM/ADPCM state, transaction draining, private image validation and ordered
+restoration. Focused native tests cover STOP/HALT, interrupts, repeated
+restores, partial-apply recovery and NVRAM coexistence.
+
+Both real ROM sets pass two SAVEs and four RESTOREs with exact continuation.
+The Japanese 1500-frame scenario uses the production image identity and shared
+rotation DDR path, with active audio at both checkpoints. Persisted ARM-marked
+slots also pass cold restore diagnostics. Instrumented and release seed3 full
+fits pass all project timing, state-resource, hierarchy and clock checks.
+See [SAVESTATES.md](SAVESTATES.md) for the exact receipts and coverage limits.
+
+The four OSD controls follow Save NVRAM with blank separators and Reset last.
+The additional MRA action `Savestate (SS)` preserves existing mappings: bind it
+manually, then hold SS with Down to save or Up to restore. Both interfaces use
+the same selected slot, autoincrement and recovery guards.
+
+The October 20 release includes the new RBF and matching MRAs. Savestate save
+and restore work on MiSTer hardware. Native whole-game event timing, exhaustive
+ARM persistence/display-mode coverage and CRT remain separate qualification
+surfaces. No agent deployment or JTAG operation was performed. Earlier rejected
+donors, diagnostic failures, worktrees and ignored build artifacts are preserved.

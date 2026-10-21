@@ -1,0 +1,34 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_config.vhd": "9946ae38c785e698dad4d6fb6466246b4653ef571bc5aca42837455c09d1436f",
+    "rtl/state/rabbitpunch_state_config.vhd": "9eb1ba638c888b2f607be9ee619015d5b83426a0e8f65eeda926045f550a7442",
+    "rtl/state/rabbitpunch_state_controls.vhd": "33129775230c604370bccdbf2325f4f5fdbde93b07ec810299bfa3c3ef979348",
+    "sim/state/state_controls_joystick_tb.vhd": "46c04c0949e62d720b8d084ec6e19953e4f654d52221d399868e49a851245f8a"
+  },
+  "controller_mappings": {
+    "releases/Rabbit Punch (US).mra": {
+      "sha256": "afc05d0160506fc47de79bc2b3663109f85e231fbffaa38ca95cdf55af6851d1",
+      "savestate_joystick_bit": 15,
+      "existing_action_positions_preserved": true
+    },
+    "releases/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra": {
+      "sha256": "84b6fe90d2ec9b47a266f7172de88545b88b7353308a9a11c97ab4bf6c48640e",
+      "savestate_joystick_bit": 15,
+      "existing_action_positions_preserved": true
+    },
+    "releases/Rabio Lepus (Japan).mra": {
+      "sha256": "89686bb0fe518f5f87546915b6a3a17c9bf93d4d952a1c38f6055841a6939850",
+      "savestate_joystick_bit": 15,
+      "existing_action_positions_preserved": true
+    },
+    "releases/_alternatives/_ddr/Rabio Lepus (Japan) - DDR load.mra": {
+      "sha256": "e6bcec3b57694ca4d11f05c0d875ea85070bd6f55f552bedd29b6be92c25549f",
+      "savestate_joystick_bit": 15,
+      "existing_action_positions_preserved": true
+    }
+  },
+  "runner_sha256": "73814f9b74b8d379fa85d82f975af0a7a089d9ad8c6f49f4f25d2c15a4383519",
+  "log_sha256": "e46cbc884b60987908e4cf72b1c81e1a6c30a584f4ffd80bdec5ac07113cf06b",
+  "scope": "Controller SS+Down/Up and OSD share operation admission, selected slot, final-successful-save autoincrement and host feedback ticket. Both controllers, held/unavailable edges, cross-controller isolation and partial-restore retries; game-action suppression function preserves legacy disabled behavior. Synthetic service/host endpoints; no actual controller hardware, hps_io or whole-shell proof."
+}

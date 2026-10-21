@@ -1,0 +1,189 @@
+-- SPDX-License-Identifier: GPL-3.0-or-later
+-- Copyright (C) 2026 RabbitPunch contributors
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use work.rabbitpunch_state_build.all;
+
+-- Unchanged MiSTer pin names are required at this translation boundary.
+-- This composition supports MISTER_FB, without palette/dual SDRAM.
+
+entity emu is
+    port (
+        CLK_50M : in std_logic;
+        RESET : in std_logic;
+        HPS_BUS : inout unsigned(45 downto 0);
+        CLK_VIDEO : out std_logic;
+        CE_PIXEL : out std_logic;
+        VIDEO_ARX : out unsigned(12 downto 0);
+        VIDEO_ARY : out unsigned(12 downto 0);
+        VGA_R : out unsigned(7 downto 0);
+        VGA_G : out unsigned(7 downto 0);
+        VGA_B : out unsigned(7 downto 0);
+        VGA_HS : out std_logic;
+        VGA_VS : out std_logic;
+        VGA_DE : out std_logic;
+        VGA_F1 : out std_logic;
+        VGA_SL : out unsigned(1 downto 0);
+        VGA_SCALER : out std_logic;
+        VGA_DISABLE : out std_logic;
+        HDMI_WIDTH : in unsigned(11 downto 0);
+        HDMI_HEIGHT : in unsigned(11 downto 0);
+        HDMI_FREEZE : out std_logic;
+        HDMI_BLACKOUT : out std_logic;
+        HDMI_BOB_DEINT : out std_logic;
+        LFB_FMT : in unsigned(5 downto 0);
+        LFB_BASE : in unsigned(31 downto 0);
+        LFB_WIDTH : in unsigned(11 downto 0);
+        LFB_HEIGHT : in unsigned(11 downto 0);
+        LFB_STRIDE : in unsigned(13 downto 0);
+        FB_EN : out std_logic;
+        FB_FORMAT : out unsigned(4 downto 0);
+        FB_WIDTH : out unsigned(11 downto 0);
+        FB_HEIGHT : out unsigned(11 downto 0);
+        FB_BASE : out unsigned(31 downto 0);
+        FB_STRIDE : out unsigned(13 downto 0);
+        FB_VBL : in std_logic;
+        FB_LL : in std_logic;
+        FB_FORCE_BLANK : out std_logic;
+        LED_USER : out std_logic;
+        LED_POWER : out unsigned(1 downto 0);
+        LED_DISK : out unsigned(1 downto 0);
+        BUTTONS : out unsigned(1 downto 0);
+        CLK_AUDIO : in std_logic;
+        AUDIO_L : out unsigned(15 downto 0);
+        AUDIO_R : out unsigned(15 downto 0);
+        AUDIO_S : out std_logic;
+        AUDIO_MIX : out unsigned(1 downto 0);
+        ADC_BUS : inout unsigned(3 downto 0);
+        SD_SCK : out std_logic;
+        SD_MOSI : out std_logic;
+        SD_MISO : in std_logic;
+        SD_CS : out std_logic;
+        SD_CD : in std_logic;
+        DDRAM_CLK : out std_logic;
+        DDRAM_BUSY : in std_logic;
+        DDRAM_BURSTCNT : out unsigned(7 downto 0);
+        DDRAM_ADDR : out unsigned(28 downto 0);
+        DDRAM_DOUT : in unsigned(63 downto 0);
+        DDRAM_DOUT_READY : in std_logic;
+        DDRAM_RD : out std_logic;
+        DDRAM_DIN : out unsigned(63 downto 0);
+        DDRAM_BE : out unsigned(7 downto 0);
+        DDRAM_WE : out std_logic;
+        SDRAM_CLK : out std_logic;
+        SDRAM_CKE : out std_logic;
+        SDRAM_A : out unsigned(12 downto 0);
+        SDRAM_BA : out unsigned(1 downto 0);
+        SDRAM_DQ : inout unsigned(15 downto 0);
+        SDRAM_DQML : out std_logic;
+        SDRAM_DQMH : out std_logic;
+        SDRAM_nCS : out std_logic;
+        SDRAM_nCAS : out std_logic;
+        SDRAM_nRAS : out std_logic;
+        SDRAM_nWE : out std_logic;
+        UART_CTS : in std_logic;
+        UART_RTS : out std_logic;
+        UART_RXD : in std_logic;
+        UART_TXD : out std_logic;
+        UART_DTR : out std_logic;
+        UART_DSR : in std_logic;
+        USER_IN : in unsigned(6 downto 0);
+        USER_OUT : out unsigned(6 downto 0);
+        OSD_STATUS : in std_logic
+    );
+end entity;
+
+architecture boundary of emu is
+begin
+    machine : entity work.rabbitpunch_state_emu
+        generic map (
+            GBOOL_ENABLE_STATES => true,
+            GBOOL_DEBUG_ENABLE => CBOOL_DEBUG_ENABLE,
+            GU32_BUILD_ID => CU32_BUILD_ID
+        )
+        port map (
+            i_clk_50m => CLK_50M,
+            i_reset => RESET,
+            iou46_hps_bus => HPS_BUS,
+            o_clk_video => CLK_VIDEO,
+            o_ce_pixel => CE_PIXEL,
+            ou13_video_arx => VIDEO_ARX,
+            ou13_video_ary => VIDEO_ARY,
+            ou8_vga_r => VGA_R,
+            ou8_vga_g => VGA_G,
+            ou8_vga_b => VGA_B,
+            o_vga_hs => VGA_HS,
+            o_vga_vs => VGA_VS,
+            o_vga_de => VGA_DE,
+            o_vga_f1 => VGA_F1,
+            ou2_vga_sl => VGA_SL,
+            o_vga_scaler => VGA_SCALER,
+            o_vga_disable => VGA_DISABLE,
+            iu12_hdmi_width => HDMI_WIDTH,
+            iu12_hdmi_height => HDMI_HEIGHT,
+            o_hdmi_freeze => HDMI_FREEZE,
+            o_hdmi_blackout => HDMI_BLACKOUT,
+            o_hdmi_bob_deint => HDMI_BOB_DEINT,
+            iu6_lfb_fmt => LFB_FMT,
+            iu32_lfb_base => LFB_BASE,
+            iu12_lfb_width => LFB_WIDTH,
+            iu12_lfb_height => LFB_HEIGHT,
+            iu14_lfb_stride => LFB_STRIDE,
+            o_fb_en => FB_EN,
+            ou5_fb_format => FB_FORMAT,
+            ou12_fb_width => FB_WIDTH,
+            ou12_fb_height => FB_HEIGHT,
+            ou32_fb_base => FB_BASE,
+            ou14_fb_stride => FB_STRIDE,
+            i_fb_vbl => FB_VBL,
+            i_fb_ll => FB_LL,
+            o_fb_force_blank => FB_FORCE_BLANK,
+            o_led_user => LED_USER,
+            ou2_led_power => LED_POWER,
+            ou2_led_disk => LED_DISK,
+            ou2_buttons => BUTTONS,
+            i_clk_audio => CLK_AUDIO,
+            ou16_audio_l => AUDIO_L,
+            ou16_audio_r => AUDIO_R,
+            o_audio_s => AUDIO_S,
+            ou2_audio_mix => AUDIO_MIX,
+            iou4_adc_bus => ADC_BUS,
+            o_sd_sck => SD_SCK,
+            o_sd_mosi => SD_MOSI,
+            i_sd_miso => SD_MISO,
+            o_sd_cs => SD_CS,
+            i_sd_cd => SD_CD,
+            o_ddram_clk => DDRAM_CLK,
+            i_ddram_busy => DDRAM_BUSY,
+            ou8_ddram_burstcnt => DDRAM_BURSTCNT,
+            ou29_ddram_addr => DDRAM_ADDR,
+            iu64_ddram_dout => DDRAM_DOUT,
+            i_ddram_dout_ready => DDRAM_DOUT_READY,
+            o_ddram_rd => DDRAM_RD,
+            ou64_ddram_din => DDRAM_DIN,
+            ou8_ddram_be => DDRAM_BE,
+            o_ddram_we => DDRAM_WE,
+            o_sdram_clk => SDRAM_CLK,
+            o_sdram_cke => SDRAM_CKE,
+            ou13_sdram_a => SDRAM_A,
+            ou2_sdram_ba => SDRAM_BA,
+            iou16_sdram_dq => SDRAM_DQ,
+            o_sdram_dqml => SDRAM_DQML,
+            o_sdram_dqmh => SDRAM_DQMH,
+            o_sdram_ncs => SDRAM_nCS,
+            o_sdram_ncas => SDRAM_nCAS,
+            o_sdram_nras => SDRAM_nRAS,
+            o_sdram_nwe => SDRAM_nWE,
+            i_uart_cts => UART_CTS,
+            o_uart_rts => UART_RTS,
+            i_uart_rxd => UART_RXD,
+            o_uart_txd => UART_TXD,
+            o_uart_dtr => UART_DTR,
+            i_uart_dsr => UART_DSR,
+            iu7_user_in => USER_IN,
+            ou7_user_out => USER_OUT,
+            i_osd_status => OSD_STATUS
+        );
+
+end architecture;

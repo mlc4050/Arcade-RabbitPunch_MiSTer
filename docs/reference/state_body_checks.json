@@ -1,0 +1,11 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_layout.vhd": "dd5f77217553196f29570fb29d51b62993b29439fda34812c4fc19b7eec6c7ab",
+    "rtl/state/rabbitpunch_state_body.vhd": "80f2dc2e2677934632d0e413e62774238f38c007d60548933ccb9599e50e4d9f",
+    "sim/state/state_body_tb.vhd": "4ca1fd80c0f4ff19fc9b413fc089ca37f9e2929172f29327f19db92bb4606de5"
+  },
+  "runner_sha256": "fb3b6ddf08cd65176c95a401a139b488e79d27070ac2e8888f60e76ac44e581e",
+  "log_sha256": "c128eebe4bc3aeae95d94d2f8be8af75040c86cbef74d6a6219ca138720fbabb",
+  "scope": "Held-body adapter with synthetic bank endpoints: every107216-byte read before and after a complete ordered write; two independent patterns, canonical zero donor/FM padding with unknown imported unused bits,20 CPU words,126 FM words,6 ADPCM words, deferred atomic T80/board load, denied partial/out-of-order commits, delayed RAM and session-loss debt. Tests packing/protocol only; does not prove CPU/chip or complete-game restoration."
+}

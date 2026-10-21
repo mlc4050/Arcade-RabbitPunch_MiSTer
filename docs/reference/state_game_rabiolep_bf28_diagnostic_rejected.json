@@ -1,0 +1,120 @@
+{
+  "accepted": false,
+  "diagnostic_checks_passed": false,
+  "exact_continuations_equal": false,
+  "failures": [
+    "Exact per-clock continuation differs"
+  ],
+  "first_difference": {
+    "line": 1048,
+    "records": [
+      "S 915 fffd 00",
+      "C 916 0000 0000 0000 000 0 0 1 1 0 0 0 0 c",
+      "C 916 0000 0000 0000 000 0 0 1 1 0 0 0 0 c"
+    ]
+  },
+  "coverage": [
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5541,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 6688,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5478,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 6688,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "28b82a54cdf2c0b548fc39de9cab8009b11c01861ce5454b5ce9c191df7fa4dd"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 162,
+      "sound_writes": 5478,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 6688,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "28b82a54cdf2c0b548fc39de9cab8009b11c01861ce5454b5ce9c191df7fa4dd"
+    }
+  ],
+  "active_audio_required": false,
+  "rom_identity": "46c87159",
+  "release_observations": [
+    [
+      "1",
+      "0",
+      "0",
+      "c",
+      "325",
+      "74"
+    ],
+    [
+      "2",
+      "0",
+      "0",
+      "c",
+      "325",
+      "74"
+    ],
+    [
+      "3",
+      "0",
+      "0",
+      "c",
+      "325",
+      "74"
+    ]
+  ],
+  "independently_checked_header_and_body_crc": true,
+  "slot_sha256": "6657bb623f238aa48d2cc8491eb928e1b0ee2ac11984e0e6f5039d279c9aee47",
+  "checker_sha256": "e67f151c67ced2c1e224621b44f493be72a633c12fdaf7d2c702411f76658ee9",
+  "scope": "Diagnostic evidence only. Native/export admission and full MiSTer integration remain independent gates. STOP/HALT/IRQ counts describe observed coverage, not proof of every interrupt or stopped-state case.",
+  "source_commit": "bf28f0a6096cf9681dba798f245c2d6f091ffa97",
+  "run": {
+    "command": [
+      "D:\\git\\RabbitPunch-savestates\\debug\\state_full_machine_bf28_v7\\obj\\sim.exe",
+      "D:\\git\\RabbitPunch-savestates\\.local\\deferred-state-evaluation\\full_machine_bf28f0a_v8\\roms\\rabiolep.bin"
+    ],
+    "returncode": 0,
+    "seconds": 1075.5416272999937
+  },
+  "frozen_manifest_sha256": "1d1a142690914836baf9d1def164e76fa0f14815e2d121508ef06411e50cf7f4",
+  "normalized_export_sha256": "ad620c885a664ed10ea66945cf47b2282356629f74db7a54e3ab524ff2d03011",
+  "diagnosis": "Saved Z80 accumulator precedes pending LD A,E retirement. Focused native regression rejects the old wrapper; corrected whole-game continuation must be rerun.",
+  "artifacts": "debug/state_full_machine_bf28_v7/rabiolep"
+}

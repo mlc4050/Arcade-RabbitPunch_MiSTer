@@ -1,0 +1,12 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_machine_access.vhd": "ae8d28076ca040e45b6db012891eefee16afb90209364843fbacdfd427011496",
+    "sim/state/state_machine_access_tb.vhd": "3c799611a4d4ad37c420db76024ff6ef0337f7adf0302c0dd957d13dcd576e80"
+  },
+  "runner_sha256": "091a62fad440f50fd542514d9889296fe9430d1f9b2cf9aeaa042dc51f373cfb",
+  "log": "debug/ghdl/state_machine_access_release_ticket_baseline/result.log",
+  "log_sha256": "e8f58674da1fd0475198a6bd16ae5fc32b2551afa87805c38d63ae6b9e7c343a",
+  "scope": "Machine access protocol with synthetic CPU/bank/transport credit endpoints. Paired acquisition after NVRAM/legacy drain, chips held only after captured CPU drains, entry/return cache barriers, private return after bank debt, single-clock physical alignment release, held NVRAM readiness load/reconciliation, three incomplete-apply retries, early/late cancellation, acquisition/alignment timeouts and reset debt retirement. No actual CPU/chip/renderer composition, DDR image engine, whole-game continuation, FPGA or hardware proof.",
+  "resume_request_feedback": false
+}

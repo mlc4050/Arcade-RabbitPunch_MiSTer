@@ -1,0 +1,77 @@
+{
+  "accepted": true,
+  "reference_only": true,
+  "game": "rabiolep",
+  "mame_version": "0.289",
+  "input_frames": {
+    "coin": 600,
+    "start": 660,
+    "action": 780,
+    "pulse": 6
+  },
+  "frames": 1200,
+  "sample_rate": 62500,
+  "channels": 1,
+  "sample_bits": 16,
+  "samples": 1250001,
+  "nonzero_samples": 305503,
+  "first_nonzero_seconds": 10.207472,
+  "windows": [
+    {
+      "center_frame": 800,
+      "samples": 16666,
+      "nonzero": 0,
+      "distinct_values": 1
+    },
+    {
+      "center_frame": 850,
+      "samples": 16667,
+      "nonzero": 0,
+      "distinct_values": 1
+    },
+    {
+      "center_frame": 900,
+      "samples": 16667,
+      "nonzero": 0,
+      "distinct_values": 1
+    },
+    {
+      "center_frame": 950,
+      "samples": 16666,
+      "nonzero": 16661,
+      "distinct_values": 2444
+    },
+    {
+      "center_frame": 1000,
+      "samples": 16667,
+      "nonzero": 16662,
+      "distinct_values": 2286
+    },
+    {
+      "center_frame": 1050,
+      "samples": 16667,
+      "nonzero": 16662,
+      "distinct_values": 2442
+    },
+    {
+      "center_frame": 1100,
+      "samples": 16666,
+      "nonzero": 16662,
+      "distinct_values": 2416
+    },
+    {
+      "center_frame": 1150,
+      "samples": 16667,
+      "nonzero": 16663,
+      "distinct_values": 2326
+    }
+  ],
+  "reference_directory": "debug/gameplay_mame/rabiolep_1200_pulse6_checked_actions780_state_audio_600",
+  "reference_sha256": "bf0c82ccb2dc238e265358851f0b7c54354d8d7117bfe07318e2f2edaec36754",
+  "wav_sha256": "45fcebe062520e6850528edb719d85d2f9f59d197bc40e2beddc15666764065f",
+  "inputs_sha256": "972edc0e9596e3f4054cda22f322b1ec821c0895a137c5a9d78e9170352e492a",
+  "run_log_sha256": "a7409f07355719415dfe1c6d095954813f10fd08f0caf21311f3a7d58a7753f7",
+  "generator_sha256": "2cb5e942908caa09fa96882797c10e775734096ae8ee0ec125275159e49b2923",
+  "capture_source_sha256": "9d09fdbe446c3e8dc7f5b4b2925660f6bcf04f7df0ba122862b447e177284a31",
+  "scope": "MAME reference only: ordinary six-frame coin/start/missile pulses and sustained fire/movement produce varying mixed audio around later candidate checkpoints. Early samples are silent. No RTL startup alignment, audio equivalence, or savestate continuation is established by this reference."
+}

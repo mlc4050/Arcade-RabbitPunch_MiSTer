@@ -1,0 +1,11 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_capture_stack_undo.vhd": "9c209f0a9f237b0ad9db6a7662405510fe9afddb3217544d251ecac77514e7f1",
+    "sim/state/capture_stack_undo_tb.vhd": "5477f43b615ff8483dadbcfcedbfafc9075a4548436922632d138a7232346fc8"
+  },
+  "runner_sha256": "579d0ad0253ac431a955f7b48f9da7bea5c3377a6483f8f0528534907619fbb9",
+  "log_sha256": "3523842a6dd5ccb8fb3b0b6b5713407b38fdce4092f7e43cc108f8d865278412",
+  "ghdl": "GHDL 6.0.0 (6.0.0.r0.ge589c698c.dirty) [Dunoon edition]",
+  "scope": "Isolated RAM adapter, delayed backend: last-word undo preserves earlier writes, five repeated undo operations, both byte lanes, normal pass-through without speculative reads, missing-journal rejection, cancellation during old-word read and accepted game-write debt, explicit journal discard. Not yet connected to GX CPU, production RAM or a game state controller; parent must validate journal address against captured SSP-2."
+}

@@ -1,0 +1,31 @@
+{
+  "accepted": false,
+  "diagnostic_checks_passed": false,
+  "reason": "Shared case produced no rotation traffic",
+  "game": "rabiolep",
+  "rotation": "clockwise",
+  "run": {
+    "command": [
+      "D:\\git\\RabbitPunch-savestates\\debug\\state_full_machine_cold_shared_jp_cw_v3\\obj\\sim.exe",
+      "D:\\git\\RabbitPunch-savestates\\.local\\deferred-state-evaluation\\full_machine_cold_shared_jp_cw_v3\\roms\\rabiolep.bin"
+    ],
+    "returncode": 2,
+    "seconds": 342.59545049999724
+  },
+  "artifact_directory": "debug/state_full_machine_cold_shared_jp_cw_v3/rabiolep",
+  "frozen_commit": "da098c9043f1c1ee114002a5b485b28f953bae63",
+  "manifest_sha256": "26ed1d23bda988e3ae890aa60b9572e09b1e95cea0cf25987890d4f8fbc1c290",
+  "run_log_sha256": "17dc236d69d647d1ae5b5fbec6261bf4fa0b43d3c2ada3201b008340e3e56bb8",
+  "endpoints_sha256": "d4f9a68f35cc20f53239d5f2adc755049b7dc0f32ac6d98187ec72606ba82ca4",
+  "trace_sha256": [
+    "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46",
+    "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46",
+    "4911778089d8957988f144afb0b892fa9c559a1b8b76a4745741b6599b7bbe46",
+    "49579bfa12b08817f119b0dac83ab8217372019c5e30def0717fcd16ba3bb69b",
+    "49579bfa12b08817f119b0dac83ab8217372019c5e30def0717fcd16ba3bb69b",
+    "49579bfa12b08817f119b0dac83ab8217372019c5e30def0717fcd16ba3bb69b"
+  ],
+  "initial_traces_equal_original_save": true,
+  "second_group_traces_equal": true,
+  "scope": "Rejected shared-presentation attempt. All six VHDL operation windows completed, but the mandatory rotation-traffic endpoint failed. No positive shared DDR, frame publication or complete-game qualification is claimed."
+}

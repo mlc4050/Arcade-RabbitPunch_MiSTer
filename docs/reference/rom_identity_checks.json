@@ -1,0 +1,11 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/state/rabbitpunch_state_crc.vhd": "4de0b46eae23558ed02db73df8ce628e8a02cb8a6318405c4b8846dbed81e568",
+    "rtl/state/rabbitpunch_rom_identity.vhd": "c5f3a878615d75ce3d4bc9c6506a99bafaef4dc4e27d0d9164fbadd7e0760311",
+    "sim/state/rom_identity_tb.vhd": "3d1edc4631fe8cdf99b2aaf7f0f85377e9e0620dee115ccea9d3476e1c176e3b"
+  },
+  "runner_sha256": "6da55da886ee7a3a49c9c9b917d06b8aafcc33c619cad53e3cbf7e7d5045749b",
+  "log_sha256": "6b534afe76b05276074236f5232b6a8e0c3cfe2f170b3858af9d05f9734265bb",
+  "scope": "Standalone reflected IEEE CRC-32 helper and passive raw-ROM identity observer: standard123456789 check, low-byte-first download words, three identical downloads, replacement ROM, commit gating, simultaneous final word/finish, truncated/misordered/oversized/uncommitted image rejection, and cold invalidation. Not connected to production loader or image preflight; CRC is integrity/compatibility metadata, not a cryptographic identity."
+}

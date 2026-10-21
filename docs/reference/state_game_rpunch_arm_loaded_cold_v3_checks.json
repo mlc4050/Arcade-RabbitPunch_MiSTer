@@ -1,0 +1,342 @@
+{
+  "accepted": false,
+  "cold_continuation_checks_passed": true,
+  "failures": [],
+  "seed_sha256": "0b692097fe7cd551aca88f98c4703ec9faaeef22089cf8b2e09e8e715a4f4f24",
+  "seed_admission_sha256": "dd4f1dd9535a04b70a8d64f938f67c7416feedc69520bbca0b8b5fdce56796df",
+  "bundle_manifest_sha256": "25e3e975c946ca8e4e4d4132abb1571e666f394ed41b19391a0d165dc02de16c",
+  "original_coverage_sha256": "514a3ea23e0b200f73c9e0cd5c0e12a67c05a789ae0480c20f3aa7d7d186a915",
+  "cold_coverage_sha256": "f97bd5f9124c485e0dfcd80962caa73d97dd7a65055c268e01a6421d308e4d7f",
+  "expected_trace_sha256": [
+    "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954",
+    "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954",
+    "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954"
+  ],
+  "actual_trace_sha256": [
+    "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954",
+    "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954",
+    "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954"
+  ],
+  "checker_sha256": "92e1e8bdb3eba3304f58b825c41d22730817fcbad0128f1a1b12ecb6d968952e",
+  "scope": "Fresh machine/ROM load, ARM file-sized zero-filled external slot with rewritten FFFFFFFF counter, ordinary restore, and three exact two-frame continuations compared with the original SAVE. Includes a new SAVE and two further RESTOREs checked by the ordinary continuation checker. No internal model deposits; this does not qualify hardware or the complete MiSTer presentation/DDR path.",
+  "game": "rpunch",
+  "frozen_commit": "e849fc891d71c261a03201f4136eb13fc8a2a907",
+  "artifact_directory": "debug/state_full_machine_cold_restore_arm_us_v3/rpunch",
+  "scenario": {
+    "checkpoint_frames": 850,
+    "dips": 8192,
+    "save_count": 2,
+    "hiscore_profile": {
+      "game": "rpunch",
+      "config_hex": "02dc6c00ffff00020002000100000000000ffe0100730017",
+      "config_sha256": "c3407b043c1d2ec2092c241d78366949f1a969dac977f2692ffe3153e94bb774",
+      "mra": "releases/Rabbit Punch (US).mra",
+      "mra_commit": "e849fc891d71c261a03201f4136eb13fc8a2a907",
+      "mra_sha256": "7c9d04943b261fbcda7c1db29093eb8981946e14f25d029ce2012391b4b5b540",
+      "polling_waits_unchanged": true,
+      "require_ready": true
+    },
+    "boot_restore": true,
+    "boot_pad": 0,
+    "image_identity": {
+      "abi": "52500101",
+      "config": 0,
+      "production": false
+    },
+    "shared_presentation": false,
+    "rotation": 1,
+    "gameplay": false,
+    "coin_frame": 900,
+    "start_frame": 990,
+    "action_frame": 1290,
+    "phase_cycle_limit": 2000000000
+  },
+  "seed_admission": {
+    "accepted": true,
+    "admission_kind": "persisted_external_DDR_seed",
+    "bundle_manifest_sha256": "25e3e975c946ca8e4e4d4132abb1571e666f394ed41b19391a0d165dc02de16c",
+    "game": "rpunch",
+    "loaded_counter": 4294967295,
+    "expected_counters": [
+      4294967295,
+      0
+    ],
+    "original_published_slot_sha256": "378f268f9e4b96eb95b227b6e46b336ad4154a224ff3059aab4d5826a834b923",
+    "persisted_file_sha256": "04f8f1ad0cf66df9d34af23298de6d4261356a0de83062c87404f53d9de22aae",
+    "source_policy_admission": {
+      "file": "rtl/state/rabbitpunch_state_slot_reader.vhd",
+      "contract_sha256": "5e14850e27e8559e46cf7190c8d31248faf938149f839f52370befb05d994a55",
+      "presentation": {
+        "added_sources": [
+          "rtl/rabbitpunch_ddr_write_queue.vhd",
+          "rtl/rabbitpunch_frame_publication.vhd",
+          "rtl/rabbitpunch_hdmi_rotation.vhd",
+          "rtl/rabbitpunch_video_aspect.vhd",
+          "rtl/state/rabbitpunch_state_ddr_arbiter.vhd",
+          "rtl/state/rabbitpunch_state_hdmi_presentation.vhd",
+          "rtl/state/rabbitpunch_state_rotation_transport.vhd",
+          "rtl/video/rotation/screen_rotate_two.sv",
+          "sys/video_freak.sv"
+        ],
+        "proof_sha256": "532a1a1e6b2f104f2c56c9772cd4506bd37efb01f9c4e1835db075c5ad413e4a"
+      },
+      "original_normalized_sha256": "84d5d13871be5ad1b6895758f582dbc675e1cbc5fa0b85675b1f08dc11f16ec4",
+      "corrected_normalized_sha256": "c2cb1787f6372bf33b0e6f7473e52319d8bab25ce8f1340d5c5955a25db970dc"
+    },
+    "seed_sha256": "0b692097fe7cd551aca88f98c4703ec9faaeef22089cf8b2e09e8e715a4f4f24",
+    "origin_manifest_sha256": "461c6d62f448c89c5f360a8f91315233a5e92588d95fc20a39e09e954c9208a6",
+    "origin_coverage_sha256": "514a3ea23e0b200f73c9e0cd5c0e12a67c05a789ae0480c20f3aa7d7d186a915",
+    "origin_case": "D:\\git\\RabbitPunch-savestates\\debug\\state_full_machine_rpunch_profile_v1_audio_checkpoint1_analysis\\rpunch",
+    "expected_trace_sha256": [
+      "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954",
+      "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954",
+      "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954"
+    ],
+    "expected_release_observations": [
+      [
+        "1",
+        "0",
+        "0",
+        "c",
+        "340",
+        "74"
+      ],
+      [
+        "2",
+        "0",
+        "0",
+        "c",
+        "340",
+        "74"
+      ],
+      [
+        "3",
+        "0",
+        "0",
+        "c",
+        "340",
+        "74"
+      ]
+    ],
+    "frozen_pad": 0,
+    "recorder_sha256": "7eba19bbea8aff3f7081198c650b13df7279a788670b2abfdcf13233ad4cd95c",
+    "scope": "Only the external DDR slot is initialized from an independently CRC-checked published SAVE, using ARM file length, zero fill and FFFFFFFF change-counter rewrite. No internal model state is written. Original continuation passed with matching guest RTL, ROMs, DIPs and score descriptor; only the separately native-proved outer reader sentinel correction may differ. Optional presentation source additions must match their qualified native composition; actual shared-bus continuation is still a separate test. Cold continuation must still pass separately; this admission is not that test."
+  },
+  "coverage": [
+    {
+      "clocks": 1548288,
+      "main_writes": 2097,
+      "sound_writes": 5470,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 65207,
+      "nonzero_pcm_clocks": 1547667,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 2073,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 901,
+      "sha256": "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 2097,
+      "sound_writes": 5470,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 65207,
+      "nonzero_pcm_clocks": 1547667,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 2073,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 901,
+      "sha256": "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 2097,
+      "sound_writes": 5470,
+      "pixels": 221184,
+      "active_pixels": 83808,
+      "nonblack_pixels": 65207,
+      "nonzero_pcm_clocks": 1547667,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 2073,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 901,
+      "sha256": "832bdbbde00064b1de34c5e78aadc52a99f5f6fbb917b8a46898388127565954"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 2402,
+      "sound_writes": 5465,
+      "pixels": 221184,
+      "active_pixels": 83989,
+      "nonblack_pixels": 65320,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "4d26860368de5574b438fd42cef407b619261a2c901b246a7c18b824c327c07e"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 2402,
+      "sound_writes": 5465,
+      "pixels": 221184,
+      "active_pixels": 83989,
+      "nonblack_pixels": 65320,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "4d26860368de5574b438fd42cef407b619261a2c901b246a7c18b824c327c07e"
+    },
+    {
+      "clocks": 1548288,
+      "main_writes": 2402,
+      "sound_writes": 5465,
+      "pixels": 221184,
+      "active_pixels": 83989,
+      "nonblack_pixels": 65320,
+      "nonzero_pcm_clocks": 0,
+      "sample_markers": 2074,
+      "nonzero_pcm_samples": 0,
+      "stopped_clocks": 0,
+      "halted_clocks": 0,
+      "irq_levels": [
+        12,
+        13
+      ],
+      "distinct_sampled_pcm_values": 1,
+      "sha256": "4d26860368de5574b438fd42cef407b619261a2c901b246a7c18b824c327c07e"
+    }
+  ],
+  "published_images": [
+    {
+      "counter": 4294967295,
+      "sha256": "0b692097fe7cd551aca88f98c4703ec9faaeef22089cf8b2e09e8e715a4f4f24",
+      "hiscore": {
+        "ready": true,
+        "address": 1048065,
+        "length": 115,
+        "table_sha256": "fbe1d8db9aea48f7812155e85d26e5142caa8176fb50b4de8c71f57f05cd0d70",
+        "initial_guards_match": true
+      }
+    },
+    {
+      "counter": 0,
+      "sha256": "ebc38287a93f8efae45da3ebcec727c4b6a674bcec719bae01ef6012a23df851",
+      "hiscore": {
+        "ready": true,
+        "address": 1048065,
+        "length": 115,
+        "table_sha256": "fbe1d8db9aea48f7812155e85d26e5142caa8176fb50b4de8c71f57f05cd0d70",
+        "initial_guards_match": true
+      }
+    }
+  ],
+  "release_observations": [
+    [
+      "1",
+      "0",
+      "0",
+      "c",
+      "340",
+      "74"
+    ],
+    [
+      "2",
+      "0",
+      "0",
+      "c",
+      "340",
+      "74"
+    ],
+    [
+      "3",
+      "0",
+      "0",
+      "c",
+      "340",
+      "74"
+    ],
+    [
+      "4",
+      "0",
+      "0",
+      "c",
+      "182",
+      "75"
+    ],
+    [
+      "5",
+      "0",
+      "0",
+      "c",
+      "182",
+      "75"
+    ],
+    [
+      "6",
+      "0",
+      "0",
+      "c",
+      "182",
+      "75"
+    ]
+  ],
+  "active_audio_checkpoints_required": [
+    1
+  ],
+  "run": {
+    "command": [
+      "D:\\git\\RabbitPunch-savestates\\debug\\state_full_machine_cold_restore_arm_us_v3\\obj\\sim.exe",
+      "D:\\git\\RabbitPunch-savestates\\.local\\deferred-state-evaluation\\full_machine_cold_restore_arm_us_v3\\roms\\rpunch.bin"
+    ],
+    "returncode": 0,
+    "seconds": 335.46786650000286
+  },
+  "file_sha256": {
+    "debug/state_full_machine_cold_restore_arm_us_v3/plan.json": "1a80bd97c198c7ec175d123ee7fb4ea939b1499e0427ad2bc7839eea4194de90",
+    "debug/state_full_machine_cold_restore_arm_us_v3/fixture_dq.v": "60490520c7e2d34eaad350b727540294a28e9da5109f5d1f4936662a0d6e5908",
+    "debug/state_full_machine_cold_restore_arm_us_v3/obj/sim.exe": "6a450dd2650858e87fb3778999c3c9b67dc8c1947970beff8d4ce368ac91c164",
+    "debug/state_full_machine_cold_restore_arm_us_v3/native_state_ram_admission.json": "2a3de15d048bb19bb2c60404d317b4fbb17756c9176d192f0b2de9d8543116f2",
+    "debug/state_full_machine_cold_restore_arm_us_v3/dq_native_readback_admission.json": "60b00c17af1316dea5c00676b18c5de58938db238acb6dd6c1e5dc2ccd7d8274",
+    "debug/state_full_machine_cold_restore_arm_us_v3/event_monitor_admission.json": "34b8030cfbe7c3fa23e87617cd7fe83aad8f8b391d76746caac21a380680d005",
+    "debug/state_full_machine_cold_restore_arm_us_v3/rpunch/run.json": "277553f406b97c8e99d377539cd9fa35d28ac114efff59e0f4920e8490b490e4",
+    "debug/state_full_machine_cold_restore_arm_us_v3/rpunch/endpoints.txt": "0efd2df6fece0fb6d7311dbe72628259d5b986e647541e19bc8fadee9ddf4078",
+    "debug/state_full_machine_cold_restore_arm_us_v3/rpunch/slot0_save1.bin": "0b692097fe7cd551aca88f98c4703ec9faaeef22089cf8b2e09e8e715a4f4f24",
+    "debug/state_full_machine_cold_restore_arm_us_v3/rpunch/slot0_save2.bin": "ebc38287a93f8efae45da3ebcec727c4b6a674bcec719bae01ef6012a23df851",
+    "debug/state_full_machine_cold_restore_arm_us_v3/rpunch/slot0.bin": "ebc38287a93f8efae45da3ebcec727c4b6a674bcec719bae01ef6012a23df851",
+    "debug/state_full_machine_cold_restore_arm_us_v3/rpunch/cold_continuation_comparison.json": "807ebcae81304d539b90ee0db60917312e941391b6f3435d9210ad255a7ce617"
+  },
+  "native_game_event_miter": false,
+  "shared_presentation_observations": null
+}

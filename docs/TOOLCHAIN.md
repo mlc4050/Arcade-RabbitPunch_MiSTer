@@ -170,3 +170,13 @@ worktree RAM contract is reference/fast_ram_sound_contract_checks.json. These ar
 supplemental startup proofs, excluding game commands, uPD samples, shared SDRAM,
 audible output, general CPU equivalence and hardware. --reference-root selects
 private ROM/MAME fixtures; --native-reference-root selects existing native traces.
+
+
+## Offline music comparison
+
+`scripts/compare_music_captures.py` uses NumPy to compare private immutable
+MAME/RTL captures under `debug/audio_reference/`. Install NumPy in the local
+D-drive package directory and set `PYTHONPATH` to that directory when invoking
+through `scripts/d_drive.ps1`. The script verifies the original qualification
+hashes and writes `docs/reference/music_comparison_checks.json`. Audio captures
+and ROM data stay gitignored.

@@ -1,0 +1,164 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 RabbitPunch contributors
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEBA6U23I7
+set_global_assignment -name TOP_LEVEL_ENTITY state_board_check
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name SEED 3
+set_global_assignment -name SEARCH_PATH ../../..
+set_global_assignment -name SYSTEMVERILOG_FILE ../../state/vendor/konamigx/fx68k/fx68k.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../state/vendor/konamigx/fx68k/fx68kAlu.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../state/vendor/konamigx/fx68k/uaddrPla.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../state/vendor/konamigx/gx_ss_m68k.sv
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_state_fx68k.vhd
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_m68k_capture.vhd
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_capture_stack_undo.vhd
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_capture_phase.vhd
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_state_maincpu.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_layout.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_decode.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_ram16.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_board_memory.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprite_priority.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_pixel_mixer.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_tile_row.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_tile_lookup.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_tile_layer.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_tiles.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprite_scan.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprite_row.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprite_line.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_sprites.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_bitmap_pixel.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_video.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_palette_pixel.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_rgb_video.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_board_video.vhd
+set_global_assignment -name SYSTEMVERILOG_FILE ../../jtframe/jtframe_draw.v
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_bus.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_fx68k.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_maincpu.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_io.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_irq.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_maintenance.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_bus_owner.vhd
+set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_state_main_bus.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_board.vhd
+set_global_assignment -name VHDL_FILE state_board_check.vhd
+set_global_assignment -name SDC_FILE state_board_check.sdc
+set_location_assignment PIN_V11 -to i_clk
+set_instance_assignment -name VIRTUAL_PIN ON -to i_main_phase_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to i_initialize
+set_instance_assignment -name VIRTUAL_PIN ON -to i_reset
+set_instance_assignment -name VIRTUAL_PIN ON -to i_pause
+set_instance_assignment -name VIRTUAL_PIN ON -to o_paused
+set_instance_assignment -name VIRTUAL_PIN ON -to i_maintenance_initialize
+set_instance_assignment -name VIRTUAL_PIN ON -to i_maintenance_access
+set_instance_assignment -name VIRTUAL_PIN ON -to i_maintenance_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to i_maintenance_write
+set_instance_assignment -name VIRTUAL_PIN ON -to iu14_maintenance_byte_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_maintenance_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_maintenance_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to o_maintenance_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_maintenance_response_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_maintenance_pause
+set_instance_assignment -name VIRTUAL_PIN ON -to i_maintenance_permitted
+set_instance_assignment -name VIRTUAL_PIN ON -to o_transport_idle
+set_instance_assignment -name VIRTUAL_PIN ON -to i_vblank_start
+set_instance_assignment -name VIRTUAL_PIN ON -to i_half_frame
+set_instance_assignment -name VIRTUAL_PIN ON -to i_line_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_line_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to i_render_bank
+set_instance_assignment -name VIRTUAL_PIN ON -to iu9_line_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_line_done
+set_instance_assignment -name VIRTUAL_PIN ON -to o_sprite_rom_request
+set_instance_assignment -name VIRTUAL_PIN ON -to ou17_sprite_rom_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_sprite_rom_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to iu32_sprite_rom_response_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_tile_rom_request
+set_instance_assignment -name VIRTUAL_PIN ON -to ou17_tile_rom_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_tile_rom_foreground
+set_instance_assignment -name VIRTUAL_PIN ON -to i_tile_rom_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to iu32_tile_rom_response_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_pixel_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_pixel_ready
+set_instance_assignment -name VIRTUAL_PIN ON -to i_pixel_bank
+set_instance_assignment -name VIRTUAL_PIN ON -to iu9_pixel_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_pixel_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_pixel_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to o_pixel_error
+set_instance_assignment -name VIRTUAL_PIN ON -to ou9_pixel_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_pixel_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_red[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_green[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_blue[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_rom_request
+set_instance_assignment -name VIRTUAL_PIN ON -to ou18_rom_byte_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_rom_response_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_rom_response_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_view_enable
+set_instance_assignment -name VIRTUAL_PIN ON -to iu5_view_target[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu15_view_word_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_view_valid
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_view_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_player1[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_player2[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu8_service[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_dips[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_sound_command_read
+set_instance_assignment -name VIRTUAL_PIN ON -to o_sound_command_write
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_sound_command[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_sound_pending
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_video_flags[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou9_scroll0_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou9_scroll0_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou9_scroll1_y[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou9_scroll1_x[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou6_sprite_count[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou6_sprite_priority[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou4_gga_selected[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu4_gga_view_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_gga_view_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_gga_write
+set_instance_assignment -name VIRTUAL_PIN ON -to ou4_gga_write_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou8_gga_write_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_cpu_request
+set_instance_assignment -name VIRTUAL_PIN ON -to o_cpu_request_write
+set_instance_assignment -name VIRTUAL_PIN ON -to ou24_cpu_request_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_cpu_request_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou2_cpu_request_bytes[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_capture
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_cancel
+set_instance_assignment -name VIRTUAL_PIN ON -to o_state_pending
+set_instance_assignment -name VIRTUAL_PIN ON -to o_state_held
+set_instance_assignment -name VIRTUAL_PIN ON -to o_state_error
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_resume
+set_instance_assignment -name VIRTUAL_PIN ON -to o_state_return_held
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_release
+set_instance_assignment -name VIRTUAL_PIN ON -to o_state_resumed
+set_instance_assignment -name VIRTUAL_PIN ON -to o_state_canceled
+set_instance_assignment -name VIRTUAL_PIN ON -to iu5_state_cpu_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_cpu_write
+set_instance_assignment -name VIRTUAL_PIN ON -to iu32_state_cpu_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou32_state_cpu_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_state_cpu_stopped
+set_instance_assignment -name VIRTUAL_PIN ON -to ou52_state_cpu_bus[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_hold
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_load
+set_instance_assignment -name VIRTUAL_PIN ON -to iu224_state_io[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou224_state_io[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu4_state_irq[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to ou4_state_irq[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_memory_access
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_memory_request
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_memory_write
+set_instance_assignment -name VIRTUAL_PIN ON -to iu24_state_memory_address[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu16_state_memory_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to iu2_state_memory_bytes[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_state_memory_response
+set_instance_assignment -name VIRTUAL_PIN ON -to ou16_state_memory_data[*]
+set_instance_assignment -name VIRTUAL_PIN ON -to o_state_memory_busy
+set_instance_assignment -name VIRTUAL_PIN ON -to o_maintenance_idle
+set_instance_assignment -name VIRTUAL_PIN ON -to i_state_video_flush

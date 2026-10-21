@@ -1,3 +1,5 @@
+-- SPDX-License-Identifier: GPL-3.0-or-later
+-- Copyright (C) 2026 RabbitPunch contributors
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -38,7 +40,11 @@ entity rabbitpunch_io is
         ou4_gga_write_address : out unsigned(3 downto 0);
         ou8_gga_write_data : out unsigned(7 downto 0);
         o_irq_configure : out std_logic;
-        o_irq_twice_per_frame : out std_logic
+        o_irq_twice_per_frame : out std_logic;
+        i_state_hold : in std_logic := '0';
+        i_state_load : in std_logic := '0';
+        iu224_state : in unsigned(223 downto 0) := (others => '0');
+        ou224_state : out unsigned(223 downto 0) := (others => '0')
     );
 end entity;
 
@@ -61,6 +67,23 @@ begin
     ou4_gga_selected <= su4_gga_selected;
     ou8_gga_view_data <= su8_gga(to_integer(iu4_gga_view_address));
     o_sound_pending <= s_sound_pending;
+    -- Fixed image layout; unused upper bits are canonical zero. Restore bypasses
+    -- bus writes so it cannot send a command or re-arm the GGA interrupt timer.
+    ou224_state(15 downto 0) <= ou16_video_flags;
+    ou224_state(24 downto 16) <= ou9_scroll0_y;
+    ou224_state(33 downto 25) <= ou9_scroll0_x;
+    ou224_state(42 downto 34) <= ou9_scroll1_y;
+    ou224_state(51 downto 43) <= ou9_scroll1_x;
+    ou224_state(57 downto 52) <= ou6_sprite_count;
+    ou224_state(63 downto 58) <= ou6_sprite_priority;
+    gga_state : for sint_index in 0 to 15 generate
+        ou224_state(64 + 8 * sint_index + 7 downto 64 + 8 * sint_index) <= su8_gga(sint_index);
+    end generate;
+    ou224_state(195 downto 192) <= su4_gga_selected;
+    ou224_state(203 downto 196) <= ou8_sound_command;
+    ou224_state(204) <= s_sound_pending;
+    ou224_state(205) <= o_irq_twice_per_frame;
+    ou224_state(223 downto 206) <= (others => '0');
     process(i_clk)
     begin
         if (rising_edge(i_clk)) then
@@ -84,6 +107,24 @@ begin
                 ou4_gga_write_address <= (others => '0');
                 ou8_gga_write_data <= (others => '0');
                 ou16_response_data <= (others => '1');
+            elsif (i_state_hold = '1') then
+                o_response_valid <= '0';
+                if (i_state_load = '1') then
+                    ou16_video_flags <= iu224_state(15 downto 0);
+                    ou9_scroll0_y <= iu224_state(24 downto 16);
+                    ou9_scroll0_x <= iu224_state(33 downto 25);
+                    ou9_scroll1_y <= iu224_state(42 downto 34);
+                    ou9_scroll1_x <= iu224_state(51 downto 43);
+                    ou6_sprite_count <= iu224_state(57 downto 52);
+                    ou6_sprite_priority <= iu224_state(63 downto 58);
+                    for sint_index in 0 to 15 loop
+                        su8_gga(sint_index) <= iu224_state(64 + 8 * sint_index + 7 downto 64 + 8 * sint_index);
+                    end loop;
+                    su4_gga_selected <= iu224_state(195 downto 192);
+                    ou8_sound_command <= iu224_state(203 downto 196);
+                    s_sound_pending <= iu224_state(204);
+                    o_irq_twice_per_frame <= iu224_state(205);
+                end if;
             else
                 if (i_sound_command_read = '1') then
                     s_sound_pending <= '0';

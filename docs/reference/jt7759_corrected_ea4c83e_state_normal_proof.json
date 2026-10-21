@@ -1,0 +1,19 @@
+{
+  "chip": "jt7759",
+  "accepted": true,
+  "state_bits": 189,
+  "strategy": "direct_output_cones",
+  "generated_sha256": "6fdc86fa46e21bd97109e1cafa221d0e31c04deb2c1af48d2e15be388be5c3a9",
+  "source_sha256": {
+    "rtl/rabbitpunch_upd7759_control.vhd": "b3fabe48db6731c86fda4a54e7d8b7ce212a71fccb83a0b258facf8af1ede454",
+    "rtl/sound/jt7759/hdl/jt7759_div.v": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862",
+    "rtl/sound/jt7759/hdl/jt7759_data.v": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d",
+    "rtl/sound/jt7759/hdl/jt7759_adpcm.v": "41d795e33e2085d3d07ee0acab23e85f495f3766e61bd91f177c46e84072380d",
+    "rtl/sound/jt7759/hdl/jt7759.v": "a4defeee8f5b5fec795af00d6185aa941f4135ab72ae5f7fece31908c3c48c1a"
+  },
+  "generator_sha256": "33c927c1bbfa296181e48f72ddfa08b285928e6dd9033098cc30159f8ab0cfea",
+  "yosys": "Yosys 0.70+157 (git sha1 af9f71e51, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 15.2.1)",
+  "prover_sha256": "618c2085d329cba4406c3bd4ac5d226172de11c1f9213f9f6f252da33513dfc4",
+  "proof_log_sha256": "fd664ea3d2da6dfc390ec296704dadcb4abd297f45cf832be173639c09ad33c8",
+  "scope": "Two-state normal-mode combinational proof under identical arbitrary corresponding flop state and arbitrary native inputs: all original output bits, every flop D input and async reset condition/value. Positive clock and complete state correspondence checked. Scan controls tied inactive. The scan-write protocol assertion is omitted by GHDL --no-formal; it is inactive with scan controls tied off. Synthesis frontends/primitive mapping are trusted. Not a proof of power-up identity, scan mode, analog timing, Quartus fitness or full game states."
+}

@@ -30,7 +30,8 @@ entity rabbitpunch_sound_bus is
         ou8_adpcm_data : out unsigned(7 downto 0);
         i_view_enable : in std_logic;
         iu11_view_address : in unsigned(10 downto 0);
-        ou8_view_data : out unsigned(7 downto 0)
+        ou8_view_data : out unsigned(7 downto 0);
+        o_idle : out std_logic := '0'
     );
 end entity;
 
@@ -40,6 +41,8 @@ architecture rtl of rabbitpunch_sound_bus is
     signal s_ram_enable : std_logic;
     signal su8_ram_data : unsigned(7 downto 0);
 begin
+    o_idle <= '1' when styp_state = STATE_IDLE and i_request = '0' and
+        o_response_valid = '0' and o_adpcm_control_write = '0' and o_adpcm_command_write = '0' else '0';
     s_ram_enable <= '1' when i_request = '1' and iu16_request_address >= x"F800" else '0';
     o_rom_request <= '1' when styp_state = STATE_ROM_REQUEST else '0';
     -- JT51's register interface consumes writes on every system clock.

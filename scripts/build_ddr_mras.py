@@ -41,7 +41,7 @@ for row in reference:
     candidate = copy.deepcopy(doc)
     candidate.find("rom[@index='0']").set('address', hex(base))
     candidate.find('name').text += ' [DDR load]'
-    candidate.find('about').text = 'Development DDR-staged load alternative. Physical HPS/DDR loading and speed are unverified. Game ROMs execute from external SDRAM.'
+    candidate.find('about').text = 'DDR-staged ROM loading; game ROMs execute from external SDRAM. Savestate controller mapping included.'
     # Only the presentation label, explanatory text and staging address differ.
     comparison = copy.deepcopy(candidate)
     comparison.find("rom[@index='0']").attrib.pop('address')

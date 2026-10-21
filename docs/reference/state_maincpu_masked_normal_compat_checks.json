@@ -1,0 +1,20 @@
+{
+  "case": "state_maincpu_masked_stress_normal_compat",
+  "pass_marker": "STATE_MAINCPU_PASS",
+  "log": "debug\\baselines\\state_maincpu_masked_stress_normal_compat\\result.log",
+  "source_sha256": {
+    "rtl/state/vendor/konamigx/fx68k/fx68k.sv": "9f327366a840badd2e3b192f77b76a4e2d5f568add7df3df5e31010e2ba21ab4",
+    "rtl/state/vendor/konamigx/fx68k/fx68kAlu.sv": "c1cdc7d46a63107b27de8e6153828e3d5c675aba6bbc72aa637363a3f52d6775",
+    "rtl/state/vendor/konamigx/fx68k/uaddrPla.sv": "ace374b8f68b5a7a58cfa010b58999084ae825ca0f2209b2df3f322f0dbb604a",
+    "rtl/state/vendor/konamigx/gx_ss_m68k.sv": "397e40f9dfcca76acb3039853db44d239a246f31671fd641e0cb81003d5daec4",
+    "rtl/state/rabbitpunch_state_fx68k.vhd": "13106124cb32f0f79f010e39bf6b833a3242b425064e4eae3f896ec2f2a6fe25",
+    "rtl/state/rabbitpunch_m68k_capture.vhd": "a825b7b56a2db4b9d6c9c99bf20e6e746181b6a49cc8a98e5b8f5e9889e15c13",
+    "rtl/state/rabbitpunch_capture_stack_undo.vhd": "2aa4223c523bd336ddc6c3ffeeb693c365aaf7d4fde784824cebe6b3bc0298f9",
+    "rtl/state/rabbitpunch_capture_phase.vhd": "2e91ee4ada46c28f1bb37df5919ed85666582f04b747569133c0790c91461d87",
+    "rtl/state/rabbitpunch_state_maincpu.vhd": "82d2d374497fb31a04bc16dc18bf888bca37437410b8041f6f34540941174043",
+    "sim/state/state_maincpu_tb.vhd": "3e3edf61dbe2eaa91c4cdc391f8057a8c25046fde69a7cd0bd8691388ac43938"
+  },
+  "initial_sr": "2700",
+  "log_sha256": "6f2acc2c3c978584b347f4e6b9ec8630a4974b760cd247fb2acca9ba009bf246",
+  "scope": "Isolated unchanged GX fx68k/capture donor with new descriptive VHDL boundaries and native VHDL bench. Full CPU/capture/undo adapter with entry and private-return E normalization, real work-RAM stack qualification,1536 exact observable bus/phase clocks and three repeated400-write continuations and STOP recapture/resume, followed by normal IRQ wake, retained user pause and reset during a65-clock delayed backend read. Transactional old-word read/write and pre-IACK stack undo; original stack sentinel preserved and journal validated against captured SSP-2. No full-game, sound, DDR, OSD, synthesis or hardware qualification; donor remains outside files.qip."
+}

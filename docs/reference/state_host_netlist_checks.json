@@ -1,0 +1,16 @@
+{
+  "case": "gate_state_host",
+  "pass_marker": "STATE_HOST_PASS",
+  "log": "debug\\baselines\\gate_state_host\\result.log",
+  "commit": "6e5f88f6c5fb9e9abd602ac92c0ffe5f29fbd104",
+  "vectors_sha256": {},
+  "netlist_sha256": "1a84aa138ccf90a9ff8519547e52ae9776f74ea9cf74c3920bf9fc208a8312b7",
+  "source_sha256": {
+    "debug/netlists/state_host_6e5f88f/state_host_check.vo": "1a84aa138ccf90a9ff8519547e52ae9776f74ea9cf74c3920bf9fc208a8312b7",
+    "rtl/rabbitpunch_config.vhd": "9946ae38c785e698dad4d6fb6466246b4653ef571bc5aca42837455c09d1436f",
+    "rtl/state/rabbitpunch_state_config.vhd": "810ddd62adcce07d427f709bc8bf114eec2d2c9dfeef0d10c6a5824360e49661",
+    "sim/state/state_host_tb.vhd": "dc4e86d31ba6ead31ddfff2fcedf86b9dd29c96124d809e57e3961656ab15352"
+  },
+  "log_sha256": "69a464fdfba0e785bb0477c07544e8f9c40b3e44041dc751032c07a4906db2f4",
+  "scope": "Quartus synthesized functional netlist against existing VHDL tests; no SDF back-annotation, routed timing checked by TimeQuest; actual unchanged hps_io and VHDL state controls, complete enabled configuration bytes,128-bit status request/ack, four slot increments/wrap after final SAVE only, failed SAVE and failed/successful RESTORE without increment, held-trigger acknowledgment and unavailable mask. Service endpoints synthetic; no whole-game, ARM firmware/UI rendering or hardware qualification"
+}

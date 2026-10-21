@@ -1,0 +1,77 @@
+{
+  "accepted": true,
+  "state_bits": 189,
+  "state_words": 6,
+  "model_sha256": "6fdc86fa46e21bd97109e1cafa221d0e31c04deb2c1af48d2e15be388be5c3a9",
+  "bundle_sha256": "d36c93577b1cec88715c80d614b6d1a6a3e94c932997e567592d47c3454b9827",
+  "frontend_source_commit": "fd3434b7dcfacb2b4e1f2d70106b4e6846d3ef85",
+  "cases": [
+    {
+      "game": "rabiolep",
+      "seconds": 3,
+      "command": 228,
+      "sample_count": 187493,
+      "exact_corrected_production_pcm_wav_and_timed_writes": true,
+      "artifacts": {
+        "pcm.raw": "67adeb205d583fdc44486a0ff4cb015d7254f4df5a770e21745acbbce1a83ea6",
+        "mono.wav": "0ba9d823a776c4e093d5e41691568839583575739095db16ab432d47e667bea3",
+        "rtl_sound_writes.txt": "a6b62670a3244cb22303b08590c1bf9e374d6137ff3b1ee0993e1b3b8720469d"
+      },
+      "export_identity": {
+        "one_bit_identities": 486,
+        "exact_entire_file_delta": true,
+        "original_sha256": "e390b3b9ed64a179f97897f397d3dc5010ff436d797bcb8f84e9b34b20e8ce93",
+        "simplified_sha256": "2b3dc49e25a94d6d7447bb131719d7196877b602cfaa0b35a166816119dc2608"
+      },
+      "candidate_result_sha256": "a4f42a7ad9bfbc2ba176d9033c8ec47ae4fc2d97cb28095b0394b9fc672362af",
+      "production_result_sha256": "53b4df7bc7ef4db5d465b80d5db006756e13c1c995ca2a9e73a219ff5759f685",
+      "native_startup_prefix_checked": true
+    },
+    {
+      "game": "rpunch",
+      "seconds": 3,
+      "command": 228,
+      "sample_count": 187493,
+      "exact_corrected_production_pcm_wav_and_timed_writes": true,
+      "artifacts": {
+        "pcm.raw": "67adeb205d583fdc44486a0ff4cb015d7254f4df5a770e21745acbbce1a83ea6",
+        "mono.wav": "0ba9d823a776c4e093d5e41691568839583575739095db16ab432d47e667bea3",
+        "rtl_sound_writes.txt": "849f57ae82dc942a878060ddfa8fd83c713b3ea7df2143c71a97619dff5645ec"
+      },
+      "export_identity": {
+        "one_bit_identities": 486,
+        "exact_entire_file_delta": true,
+        "original_sha256": "4557b11bf719077ed9f707115e2e3f3b768497f49b333f42272b0bc31b950453",
+        "simplified_sha256": "f9bf21ba76c873af9388f1b662837994e04bc897679b1ad2a7d09940f366119a"
+      },
+      "candidate_result_sha256": "ce3be78c45f16cd0003029ce8b45f528dd3d8487b193c9283a88b24542c054d1",
+      "production_result_sha256": "5d3760676c96641843abdebbba17c5674ec1ef4e63a402c24834870d900c6074",
+      "native_startup_prefix_checked": false
+    },
+    {
+      "game": "rabiolep",
+      "seconds": 9,
+      "command": 153,
+      "sample_count": 562493,
+      "exact_corrected_production_pcm_wav_and_timed_writes": true,
+      "artifacts": {
+        "pcm.raw": "73109809c145a000efe86b6069bda5b92678d0b3ab9934502416694c44bc2e7d",
+        "mono.wav": "76631ca50473cc38e400d047d3e4f4bd33af3166e77ba408307ba40df5ffd48b",
+        "rtl_sound_writes.txt": "d38a73d1f059bc2d820c070df141099f217ac712a105b8224531bc75061c12ee"
+      },
+      "export_identity": {
+        "one_bit_identities": 486,
+        "exact_entire_file_delta": true,
+        "original_sha256": "c519a76ad0d360a1b5ac53ea39b338fddc90bed1a23343af7b6e893bb7822862",
+        "simplified_sha256": "393ad4b7a83df90bc552e4ee127cc529ab7dc6858f8ac21130c1ad335e230f21"
+      },
+      "candidate_result_sha256": "39e66aa07f25033c3fd97e3b90d354145b2627caec8594f929a45bb09bbd51d8",
+      "production_result_sha256": "b4ca57d2ac54a755976beab7b724b78932cc2a60e109f05e0e4b44a45e7c1b29",
+      "native_startup_prefix_checked": true
+    }
+  ],
+  "formal_sha256": "2349ee6c345d8f2d2fc5d473a4b3f74bfd864407b72931c7518b274c8cb64ae6",
+  "native_scan_sha256": "7abe19aa1927fcb75d0a9a5dab237698f5cd81ab5bb19d3c523762c2226d8c0b",
+  "analyzer_sha256": "77b0297dc6c18496ee3e38c3173523cddad494a27f166b6b853fb00f8cac094e",
+  "scope": "Corrected generated189-bit ADPCM model substituted into the previously qualified fd3434b state-capable sound frontend/CPU/FM/mixer with capture controls inactive. Both real sound-CPU ROMs run E4; JP9s99 music runs. Complete PCM/WAV and every timed sound write exactly equal the corrected production audio baseline. Every export simplification is module-local verified one-bit identity and the entire file delta is checked. Not active whole-game restore, latest upper state/barrier wiring, Quartus timing, physical audio or a new RBF."
+}

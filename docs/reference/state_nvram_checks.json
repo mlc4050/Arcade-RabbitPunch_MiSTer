@@ -1,0 +1,13 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "sim/fast/rabbitpunch_ram8_model.vhd": "f62607533326005bea02cd44014270dd8884c46ca76cbc114878d9cd121598d1",
+    "rtl/rabbitpunch_hiscore.vhd": "cfb2f3830e496e4fe1d05e091b4b32d7769dd9dc835204f730076100e7453b98",
+    "sim/state/state_nvram_tb.vhd": "e455a2853c842452be7636bf531667f11bb20e525781667b58ff1a732546d92d"
+  },
+  "runner_sha256": "ae415aad9b7eb9a4cefce4877ee6a9344551424299e45645d7f4cc6d302e2d66",
+  "fixture_sha256": "a5e80056ce64e6e2d66b94e6b2735605a49db050c52f15a65311bd61cab96881",
+  "log": "debug\\ghdl\\state_nvram_readiness_reset\\result.log",
+  "log_sha256": "d974e78b25ad4096d2f7483f621f7b82d4d93d4ff427510a0d4600a2d171d64c",
+  "scope": "Both pinned MAME score geometries with original score fixtures, production score controller, logical RAM8 model and delayed byte backend. Quiesce during an active full-table restore, idle lease stability, repeated state restore/rescan without stale RAM writes, trusted captured readiness with legitimately changed guard bytes, invalid guard retry, deferred manual save and a host download announced while held. No physical RAM, complete platform, host disk persistence or hardware proof."
+}
