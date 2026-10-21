@@ -21,6 +21,9 @@ architecture test of state_controls_joystick_tb is
     signal s_save, s_restore, s_set, s_unavailable : std_logic;
     signal su2_slot : unsigned(1 downto 0);
     signal s_disabled_save, s_disabled_restore : std_logic;
+    signal s_info_request, s_disabled_info : std_logic;
+    signal su8_info_message : unsigned(7 downto 0);
+    signal sint_info_count : natural := 0;
 begin
     s_clk <= not s_clk after 5 ns;
     disabled : entity work.rabbitpunch_state_controls
@@ -34,6 +37,8 @@ begin
             i_service_busy => s_busy,
             i_service_finished => s_finished,
             i_service_success => s_success,
+            o_info_request => s_disabled_info,
+            ou8_info_message => open,
             o_save => s_disabled_save,
             o_restore => s_disabled_restore,
             ou2_slot => open,
@@ -57,6 +62,8 @@ begin
             i_service_finished => s_finished,
             i_service_success => s_success,
             i_service_incomplete => s_incomplete,
+            o_info_request => s_info_request,
+            ou8_info_message => su8_info_message,
             o_save => s_save,
             o_restore => s_restore,
             ou2_slot => su2_slot,
@@ -65,12 +72,24 @@ begin
             o_status_set => s_set,
             ou128_status_data => su128_feedback
         );
+    popup_monitor : process(s_clk)
+    begin
+        if (rising_edge(s_clk)) then
+            if (s_info_request = '1') then
+                assert (s_set = '1' and s_save = '0' and s_restore = '0')
+                    report "Slot popup without an accepted slot-selection request" severity failure;
+                assert (su8_info_message = CINT_SLOT_INFO_BASE + to_integer(su128_feedback(6 downto 5)))
+                    report "Popup message does not match the requested slot" severity failure;
+                sint_info_count <= sint_info_count + 1;
+            end if;
+        end if;
+    end process;
     stimulus : process
         procedure tick is
         begin
             wait until rising_edge(s_clk);
             wait for 1 ns;
-            assert (s_disabled_save = '0' and s_disabled_restore = '0')
+            assert (s_disabled_save = '0' and s_disabled_restore = '0' and s_disabled_info = '0')
                 report "Disabled controller path issued a state command" severity failure;
         end procedure;
         procedure complete(vbool_success : boolean) is
@@ -86,10 +105,12 @@ begin
         end procedure;
         procedure change_slot(vint_player, vint_direction, vint_expected : natural) is
             variable vu128_expected : unsigned(127 downto 0);
+            variable vint_previous_count : natural;
         begin
             su32_joystick0 <= (others => '0');
             su32_joystick1 <= (others => '0');
             tick;
+            vint_previous_count := sint_info_count;
             vu128_expected := su128_status;
             vu128_expected(6 downto 5) := to_unsigned(vint_expected, 2);
             if (vint_player = 0) then
@@ -99,13 +120,16 @@ begin
             end if;
             tick;
             assert (s_set = '1' and su128_feedback = vu128_expected and
-                s_save = '0' and s_restore = '0' and s_unavailable = '1')
+                s_save = '0' and s_restore = '0' and s_unavailable = '1' and
+                s_info_request = '1' and su8_info_message = CINT_SLOT_INFO_BASE + vint_expected)
                 report "Controller slot selection lost status, direction, wrap or feedback guard" severity failure;
             for vint_cycle in 0 to 3 loop
                 tick;
-                assert (s_set = '0' and s_save = '0' and s_restore = '0')
+                assert (s_set = '0' and s_save = '0' and s_restore = '0' and s_info_request = '0')
                     report "Held slot-selection chord repeated or issued a command" severity failure;
             end loop;
+            assert (sint_info_count = vint_previous_count + 1)
+                report "Held slot chord did not produce exactly one popup" severity failure;
             su128_status <= su128_feedback;
             tick;
             tick;
@@ -186,6 +210,10 @@ begin
         change_slot(0, 0, 0);
         change_slot(1, 0, 1);
         change_slot(1, 1, 0);
+        change_slot(0, 0, 1);
+        change_slot(0, 0, 2);
+        change_slot(0, 0, 3);
+        change_slot(0, 0, 0);
 
         -- SS and direction must belong to the same controller. Opposing
         -- directions do not pick an arbitrary winner.
@@ -257,6 +285,8 @@ begin
         su32_joystick0 <= (others => '0');
         tick;
         change_slot(0, 1, 1);
+        assert (sint_info_count = 11)
+            report "Unexpected popup on reset, auto increment, operation or rejected chord" severity failure;
         report "STATE_CONTROLS_JOYSTICK_PASS";
         finish;
     end process;

@@ -238,6 +238,8 @@ architecture rtl of rabbitpunch_state_emu is
     signal s_state_unavailable : std_logic;
     signal s_state_save_unavailable, s_state_incomplete : std_logic;
     signal s_status_set : std_logic;
+    signal s_info_request : std_logic;
+    signal su8_info_message : unsigned(7 downto 0);
     signal su128_status_data : unsigned(127 downto 0);
     signal su2_state_slot : unsigned(1 downto 0);
     signal s_state_read : std_logic;
@@ -400,6 +402,8 @@ begin
             iu8_file_upload_data => su8_upload_data,
             o_file_upload => s_file_upload,
             o_file_read => open,
+            i_info_request => s_info_request,
+            iu8_info_message => su8_info_message,
             i_status_set => s_status_set,
             iu128_status_data => su128_status_data
         );
@@ -729,6 +733,8 @@ begin
             ou2_slot => su2_state_slot,
             o_unavailable => s_state_unavailable,
             o_save_unavailable => s_state_save_unavailable,
+            o_info_request => s_info_request,
+            ou8_info_message => su8_info_message,
             o_status_set => s_status_set,
             ou128_status_data => su128_status_data
         );

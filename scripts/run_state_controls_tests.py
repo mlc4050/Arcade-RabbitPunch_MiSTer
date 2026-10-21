@@ -63,7 +63,7 @@ def main():
         controller_mappings=mapping,
         runner_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         log_sha256=hashlib.sha256((out/'result.log').read_bytes()).hexdigest(),
-        scope=('Controller SS+Left/Right selects the shared OSD slot with wrap and acknowledged feedback; SS+Down/Up and OSD share operation admission, selected slot, '
+        scope=('Controller SS+Left/Right selects the shared OSD slot with wrap, acknowledged feedback and one native info-request pulse containing the selected slot; all four message IDs, both players and held/rejected chords checked. SS+Down/Up and OSD share operation admission, selected slot, '
               'final-successful-save autoincrement and host feedback ticket. Both controllers, '
               'held/unavailable edges, cross-controller isolation and partial-restore retries; '
               'game-action suppression function preserves legacy disabled behavior. Synthetic '

@@ -20,9 +20,11 @@ def git(*args):
 
 parser=argparse.ArgumentParser(description='Package a timed private candidate with matching cheat MRAs.')
 parser.add_argument('--label',default='cheats')
+parser.add_argument('--stage', type=Path, help='Previously qualified build snapshot inside this repository')
 args=parser.parse_args()
 assert args.label.replace('_','').isalnum()
-stage=root/'build'
+stage=args.stage.resolve() if args.stage else root/'build'
+assert root.resolve() in stage.resolve().parents and stage.drive.upper() == 'D:'
 stamp=(stage/'BUILT_COMMIT').read_text()
 commit=stamp.split()[0]
 assert 'seed=3' in stamp
@@ -40,7 +42,7 @@ production=['RabbitPunch.sv','RabbitPunch.qsf','RabbitPunch.sdc','files.qip','st
 assert not git('diff','--name-only',commit,'--',*production)
 assert not git('ls-files','--others','--exclude-standard','--','rtl','sys')
 line_ending_equivalence=[]
-for receipt in ('cheats_board_v1','cheats_engine_mirrored_v2','cheats_host_v4','cheats_trace_rpunch_v1','cheats_trace_rabiolep_v1', 'state_controls_joystick_slotselect_v2', 'state_controls_slotselect_v2', 'state_controls_partial_slotselect_v2'):
+for receipt in ('cheats_board_v1','cheats_engine_mirrored_v2','cheats_host_popup_v1','cheats_trace_rpunch_v1','cheats_trace_rabiolep_v1', 'state_controls_joystick_popup_v2', 'state_controls_popup_v2', 'state_controls_partial_popup_v2'):
     report=json.loads((root/f'docs/reference/{receipt}_checks.json').read_text())
     assert report['accepted']
     for name,digest in report['source_sha256'].items():
@@ -89,7 +91,7 @@ for block in re.split(r'\n\s*\n',(stage/'output_files/RabbitPunch.sta.summary').
     if kind and slack:
         rows.append((kind[1].strip(),float(slack[1])))
 minimum={kind:min(slack for name,slack in rows if kind in name) for kind in ('Setup','Hold','Recovery','Removal','Minimum Pulse Width') if any(kind in name for name,slack in rows)}
-(out/'README.txt').write_text('Rabbit Punch / Rabio Lepus cheats candidate\n\nCopy the contents of _Arcade to your MiSTer _Arcade folder. Replace both game MRAs as well as the RBF; the Cheats submenu uses code definitions from these MRAs. No ROM files are included.\n\nCheats > offers Infinite Missiles, Infinite Lives and Infinite Energy/Shield for each player. Enable/disable independently. Hold SS with Left/Right to select the savestate slot, Down to save or Up to restore. The slot also updates in the OSD. Existing savestate image compatibility is retained.\n\nMAME 0.289 and native VHDL simulations pass; full fitted timing passes. Cheats have not yet been checked on physical MiSTer hardware. Test both sets, toggle each cheat, disable them again, and save/restore with a cheat enabled. Cheat choices follow the current menu selection rather than the saved game.\n\nSource '+commit+', Quartus 17.0.2 Lite, seed3. See manifest.json for hashes and timing.\n')
+(out/'README.txt').write_text('Rabbit Punch / Rabio Lepus cheats candidate\n\nCopy the contents of _Arcade to your MiSTer _Arcade folder. Replace both game MRAs as well as the RBF; the Cheats submenu uses code definitions from these MRAs. No ROM files are included.\n\nCheats > offers Infinite Missiles, Infinite Lives and Infinite Energy/Shield for each player. Enable/disable independently. Hold SS with Left/Right to select the savestate slot, Down to save or Up to restore. Each accepted SS + Left/Right change shows a brief Savestate slot 1-4 popup and updates the OSD slot. Existing savestate image compatibility is retained.\n\nMAME 0.289 and native VHDL simulations pass; full fitted timing passes. Cheats have not yet been checked on physical MiSTer hardware. Test both sets, toggle each cheat, disable them again, and save/restore with a cheat enabled. Cheat choices follow the current menu selection rather than the saved game.\n\nSource '+commit+', Quartus 17.0.2 Lite, seed3. See manifest.json for hashes and timing.\n')
 report=dict(accepted=True,commit=commit,revision='RabbitPunch',seed=3,
     rbf=rbf.relative_to(root).as_posix(),rbf_sha256=sha(rbf),timing_checks=len(rows),minimum_slack_ns=minimum,
     mras=mra_records,source_line_ending_equivalence=line_ending_equivalence,hardware_verified=False,published=False,deployed=False,

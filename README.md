@@ -109,7 +109,7 @@ The main OSD places these controls together after **Save NVRAM**:
 Assign **Savestate (SS)** through MiSTer's **Define joystick buttons** menu.
 Hold SS and press **Left/Right to select a slot**, **Down to save** or **Up to
 restore**. Slot selection wraps between 1 and 4 and stays synchronized with the
-OSD. Save uses the selected slot and autoincrement setting. SS has no default assignment; existing button
+OSD, with a brief **Savestate slot 1-4** popup on each accepted SS + Left/Right change. Save uses the selected slot and autoincrement setting. SS has no default assignment; existing button
 positions are unchanged. That controller's game inputs are suppressed while
 SS is held.
 

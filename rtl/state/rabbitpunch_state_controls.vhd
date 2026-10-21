@@ -3,6 +3,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use work.rabbitpunch_state_config.all;
 
 -- Host controls only. Service completion means final DDR publication for SAVE;
 -- private CPU return is deliberately not a completion input here.
@@ -26,6 +27,8 @@ entity rabbitpunch_state_controls is
         ou2_slot : out unsigned(1 downto 0);
         o_unavailable : out std_logic;
         o_save_unavailable : out std_logic;
+        o_info_request : out std_logic := '0';
+        ou8_info_message : out unsigned(7 downto 0) := (others => '0');
         o_status_set : out std_logic := '0';
         ou128_status_data : out unsigned(127 downto 0) := (others => '0')
     );
@@ -67,6 +70,7 @@ begin
             o_save <= '0';
             o_restore <= '0';
             o_status_set <= '0';
+            o_info_request <= '0';
             s_previous_save <= s_request_save;
             s_previous_restore <= s_request_restore;
             s_previous_previous <= s_request_previous;
@@ -127,6 +131,8 @@ begin
                         end if;
                         ou128_status_data <= vu128_status;
                         o_status_set <= '1';
+                        ou8_info_message <= to_unsigned(CINT_SLOT_INFO_BASE, 8) + resize(vu128_status(6 downto 5), 8);
+                        o_info_request <= '1';
                         s_feedback_pending <= '1';
                         su2_feedback_source <= iu128_status(6 downto 5);
                     end if;

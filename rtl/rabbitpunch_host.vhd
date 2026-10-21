@@ -17,6 +17,8 @@ entity rabbitpunch_host is
         iou46_hps_bus : inout unsigned(45 downto 0);
         iu16_menu_mask : in unsigned(15 downto 0) := (others => '0');
         i_status_set : in std_logic := '0';
+        i_info_request : in std_logic := '0';
+        iu8_info_message : in unsigned(7 downto 0) := (others => '0');
         iu128_status_data : in unsigned(127 downto 0) := (others => '0');
         ou128_status : out unsigned(127 downto 0);
         ou2_audio_mix : out unsigned(1 downto 0);
@@ -124,8 +126,8 @@ begin
             status_in => iu128_status_data,
             status_set => i_status_set,
             status_menumask => iu16_menu_mask,
-            info_req => '0',
-            info => (others => '0'),
+            info_req => i_info_request,
+            info => iu8_info_message,
             ioctl_download => o_file_download,
             ioctl_index => ou16_file_index,
             ioctl_wr => o_file_write,

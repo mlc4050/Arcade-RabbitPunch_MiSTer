@@ -8,6 +8,7 @@ use work.rabbitpunch_config.all;
 -- Selecting this configuration is an explicit integration gate. Normal cores
 -- retain their exact configuration string and advertise no state storage.
 package rabbitpunch_state_config is
+    constant CINT_SLOT_INFO_BASE : natural := 2;
     function F_STATE_CONFIG(vbool_enable : boolean) return string;
     function F_STATE_GAME_ACTIONS(vu32_actions : unsigned(31 downto 0); vbool_enable : boolean) return unsigned;
 end package;
@@ -38,6 +39,11 @@ package body rabbitpunch_state_config is
         constant CSTR_HEAD : string := "RabbitPunch;;";
         constant CSTR_SAVE : string := "H3T4,Save NVRAM;";
         constant CSTR_STATE_HEAD : string := "RabbitPunch;SS3E000000:40000;";
+        -- Native Main info messages are one-based; entry 1 is chord help.
+        -- Keep the info list after all menu entries to preserve their indexes.
+        constant CSTR_SLOT_INFO : string :=
+            "I,Slot=SS+LR|Save/Load=SS+DU," &
+            "Savestate slot 1,Savestate slot 2,Savestate slot 3,Savestate slot 4;";
         constant CSTR_CONTROLS : string :=
             "-;" &
             "O[6:5],Savestate slot,1,2,3,4;" &
@@ -55,7 +61,7 @@ package body rabbitpunch_state_config is
                 return F_STATE_BUTTON_CONFIG(CSTR_STATE_HEAD &
                     CSTR_DEFAULT_CONFIG_STRING(CSTR_HEAD'length + 1 to vint_index + CSTR_SAVE'length - 1) &
                     CSTR_CONTROLS &
-                    CSTR_DEFAULT_CONFIG_STRING(vint_index + CSTR_SAVE'length to CSTR_DEFAULT_CONFIG_STRING'length));
+                    CSTR_DEFAULT_CONFIG_STRING(vint_index + CSTR_SAVE'length to CSTR_DEFAULT_CONFIG_STRING'length)) & CSTR_SLOT_INFO;
             end if;
         end loop;
         assert (false) report "State configuration has no Save NVRAM insertion point" severity failure;

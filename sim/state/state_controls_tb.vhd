@@ -145,7 +145,7 @@ begin
             "H3T4,Save NVRAM;-;O[6:5],Savestate slot,1,2,3,4;" &
             "O7,Autoincrement slot,Off,On;H9T8,Save state;H8T9,Restore state;-;R0,Reset;") = 1)
             report "State controls are not together after NVRAM with separators and Reset last" severity failure;
-        assert (F_COUNT(CSTR_STATE_CONFIG, "Savestate slot") = 1 and
+        assert (F_COUNT(CSTR_STATE_CONFIG, "O[6:5],Savestate slot,") = 1 and
             F_COUNT(CSTR_STATE_CONFIG, "Autoincrement slot") = 1 and
             F_COUNT(CSTR_STATE_CONFIG, "Save state") = 1 and
             F_COUNT(CSTR_STATE_CONFIG, "Restore state") = 1 and
@@ -153,6 +153,11 @@ begin
         assert (F_COUNT(CSTR_STATE_CONFIG,
             "J1,Fire/Punch,Missile,-,-,-,-,Start,Coin,Pause,Service,Test,Savestate (SS);") = 1)
             report "State controller mapping changed existing action positions" severity failure;
+        assert (F_COUNT(CSTR_STATE_CONFIG, "I,") = 1 and CINT_SLOT_INFO_BASE = 2)
+            report "Native info table must use the expected one-based message IDs" severity failure;
+        assert (CSTR_STATE_CONFIG(CSTR_STATE_CONFIG'length - 97 + 1 to CSTR_STATE_CONFIG'length) =
+            "I,Slot=SS+LR|Save/Load=SS+DU,Savestate slot 1,Savestate slot 2,Savestate slot 3,Savestate slot 4;")
+            report "Native info messages must follow all OSD items in slot order" severity failure;
         su128_status <= x"FEDCBA98765432100123456789ABC01A";
         tick;
         s_initialize <= '0';

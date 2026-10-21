@@ -445,3 +445,14 @@ required hierarchy, fitted clocks, preserved state RAM/chip resources and the
 existing framework timing scope. Private candidate packaging is verified; see
 reference/cheats_release_seed3_checks.json. Physical cheat checks remain pending.
 Published October 20 assets are unchanged.
+
+## Savestate slot popup
+
+SS + Left/Right now emits one native MiSTer info message for the accepted
+slot (1 through 4), alongside the existing OSD status feedback. No popup is
+emitted for held or rejected chords, reset, or automatic slot increments.
+The four message IDs and the end-of-config info table pass native VHDL
+regressions, alongside existing command and partial-recovery tests. State ABI
+3A1B6DDE is unchanged. Full seed3 implementation and timing qualification are
+pending; physical popup rendering remains unverified.
+
