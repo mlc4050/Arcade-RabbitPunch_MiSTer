@@ -1,0 +1,20 @@
+{
+  "accepted": true,
+  "result": {
+    "case": "cheats_host_v4",
+    "pass_marker": "CHEATS_HOST_PASS",
+    "log": "debug\\baselines\\cheats_host_v4\\result.log"
+  },
+  "source_sha256": {
+    "rtl/rabbitpunch_config.vhd": "f70285b8d6208fed1939b4c54f4d8a8f20f1f9e72796fd81e9a022cf601b0383",
+    "rtl/state/rabbitpunch_state_config.vhd": "9eb1ba638c888b2f607be9ee619015d5b83426a0e8f65eeda926045f550a7442",
+    "rtl/rabbitpunch_layout.vhd": "31af791e125292f3d1eabaee3bab7fd7f08ae4bdbec95c8f2202e0b9429545e5",
+    "rtl/memory/ddram/ddram_phy.sv": "5a0cc2eeca7d71ba83fbd19d79c38b9983f5956cb737acf4df64e20848d0578c",
+    "rtl/memory/ddram/rom_loader.sv": "01ea1c583107760fedb7457a35cc44e8a77d53e4be7593a4eae85fb4702602d5",
+    "rtl/rabbitpunch_ddr_copy.vhd": "87da9d959e0e94afac2e961e360bd7df06f4bd15d2b3f1bf389265d6d352d101",
+    "rtl/rabbitpunch_load_frontend.vhd": "3df610c1e14523fe18076f863b2571e4aadf4042cdd8defc711deda6354b61f5",
+    "sim/cheats/cheats_host_tb.vhd": "6a3fded2d9e79e858e43edfd35f51285de00d506de76a28553963d57577c0826"
+  },
+  "log_sha256": "44ca7f20bcd88b705391dbfb2484b76ad100a99cb9b50614f5ba361bf7ec3eba",
+  "scope": "State-enabled configuration retains DIP separator and standard Cheats submenu. Production ROM frontend ignores index255 writes, alongside ordinary direct/DDR regression cases. Behavioral host/DDR; not physical Main menu execution."
+}

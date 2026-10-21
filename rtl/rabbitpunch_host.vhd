@@ -48,7 +48,7 @@ architecture boundary of rabbitpunch_host is
     begin
         for vint_index in v_text'range loop
             vint_byte := v_text'length - 1 - (vint_index - v_text'low);
-            vux_result(vint_byte * 8 + 7 downto vint_byte * 8) := to_unsigned(character'pos(v_text(vint_index)), 8);
+            vux_result(vint_byte * 8 + 7 downto vint_byte * 8) := F_HOST_CONFIG_BYTE(v_text(vint_index));
         end loop;
         return vux_result;
     end function;

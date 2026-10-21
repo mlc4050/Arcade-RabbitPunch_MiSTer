@@ -29,7 +29,7 @@ package rabbitpunch_config is
         "-;" &
         "DIP;" &
         "-;" &
-        "C,Cheats                    " & character'val(16#16#) & ";" &
+        "C,Cheats                    >;" &
         "-;" &
         "O2,Pause when OSD is open,Off,On;" &
         "H3O3,Autosave NVRAM,Off,On;" &
@@ -38,4 +38,17 @@ package rabbitpunch_config is
         "R0,Reset;" &
         "J1,Fire/Punch,Missile,-,-,-,-,Start,Coin,Pause,Service,Test;" &
         "V,v0.1-dev;";
+    function F_HOST_CONFIG_BYTE(vchar_character : character) return unsigned;
 end package;
+
+package body rabbitpunch_config is
+    function F_HOST_CONFIG_BYTE(vchar_character : character) return unsigned is
+    begin
+        -- Quartus string generics require printable text. Encode the native
+        -- right-arrow glyph only when packing bytes for unchanged hps_io.
+        if (vchar_character = '>') then
+            return to_unsigned(16#16#, 8);
+        end if;
+        return to_unsigned(character'pos(vchar_character), 8);
+    end function;
+end package body;

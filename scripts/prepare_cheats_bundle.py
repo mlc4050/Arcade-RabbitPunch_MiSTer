@@ -39,7 +39,7 @@ assert resources['commit']==commit
 production=['RabbitPunch.sv','RabbitPunch.qsf','RabbitPunch.sdc','files.qip','state_emu_eval.qip','rtl','sys']
 assert not git('diff','--name-only',commit,'--',*production)
 assert not git('ls-files','--others','--exclude-standard','--','rtl','sys')
-for receipt in ('cheats_board_v1','cheats_engine_mirrored_v2','cheats_host_v3','cheats_trace_rpunch_v1','cheats_trace_rabiolep_v1', 'state_controls_joystick_slotselect_v1', 'state_controls_slotselect_v1', 'state_controls_partial_slotselect_v1'):
+for receipt in ('cheats_board_v1','cheats_engine_mirrored_v2','cheats_host_v4','cheats_trace_rpunch_v1','cheats_trace_rabiolep_v1', 'state_controls_joystick_slotselect_v2', 'state_controls_slotselect_v2', 'state_controls_partial_slotselect_v2'):
     report=json.loads((root/f'docs/reference/{receipt}_checks.json').read_text())
     assert report['accepted']
     for name,digest in report['source_sha256'].items():

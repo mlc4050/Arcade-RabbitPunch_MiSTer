@@ -4,6 +4,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.rabbitpunch_state_config.all;
+use work.rabbitpunch_config.all;
 use std.env.all;
 
 entity cheats_host_tb is
@@ -37,7 +38,7 @@ architecture test of cheats_host_tb is
 begin
     process
         constant CSTR_CONFIG : string := F_STATE_CONFIG(true);
-        constant CSTR_EXPECTED : string := "DIP;-;C,Cheats                    " & character'val(16#16#) & ";-;";
+        constant CSTR_EXPECTED : string := "DIP;-;C,Cheats                    >;-;";
         variable vbool_found : boolean := false;
     begin
         for vint_index in CSTR_CONFIG'low to CSTR_CONFIG'high - CSTR_EXPECTED'length + 1 loop
@@ -46,6 +47,15 @@ begin
             end if;
         end loop;
         assert (vbool_found) report "State OSD lost separated Cheats submenu" severity failure;
+        for vint_character in 32 to 126 loop
+            if (vint_character = character'pos('>')) then
+                assert (F_HOST_CONFIG_BYTE(character'val(vint_character)) = 16#16#)
+                    report "Cheats arrow was not encoded as the native HPS glyph" severity failure;
+            else
+                assert (F_HOST_CONFIG_BYTE(character'val(vint_character)) = vint_character)
+                    report "Ordinary host configuration text changed during packing" severity failure;
+            end if;
+        end loop;
         wait;
     end process;
     s_clk <= not s_clk after 10417 ps;

@@ -82,3 +82,9 @@ The original published assets remain unchanged.
 The Cheats label explicitly includes MiSTer glyph 16 hex, matching the
 right-aligned DIP submenu arrow. The standard C menu action is preserved.
 The native state-enabled configuration assertion checks the glyph and spacing.
+
+Quartus rejects nonprintable characters inside the host string generic. The
+source uses printable > for the arrow; F_HOST_CONFIG_BYTE encodes it as MiSTer
+glyph 16 hex when the host wrapper packs the configuration bytes. Native tests
+check all printable characters and the actual state-enabled menu spacing. The
+failed 0ee28dd compilation is retained under debug/rejected.

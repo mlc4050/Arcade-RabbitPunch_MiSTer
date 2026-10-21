@@ -699,6 +699,6 @@ All three state-control tests pass, including failed saves, autoincrement,
 delayed host acknowledgment and partial-restore recovery. The savestate ABI
 remains 3A1B6DDE. This changes host controls only, with no game/graphics/audio
 state mapping changes. Physical controller verification uses the next RBF.
-Receipts: reference/state_controls_joystick_slotselect_v1_checks.json,
-reference/state_controls_slotselect_v1_checks.json and
-reference/state_controls_partial_slotselect_v1_checks.json.
+Receipts: reference/state_controls_joystick_slotselect_v2_checks.json,
+reference/state_controls_slotselect_v2_checks.json and
+reference/state_controls_partial_slotselect_v2_checks.json.
