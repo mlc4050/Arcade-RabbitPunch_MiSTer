@@ -33,7 +33,7 @@ def main():
         assert int(row[0],16) == address and int(row[1],16) == value
         assert int(row[2]) > 0 and int(row[3]) > 0
     title = 'Rabio Lepus (Japan)' if args.game == 'rabiolep' else 'Rabbit Punch (US)'
-    descriptor = root/'releases/_dev/cheats'/(title+'.mra')
+    descriptor = root/'releases'/(title+'.mra')
     block = ET.parse(descriptor).getroot().find('cheats')
     assert block.get('size') == '16' and block.get('max') == '8' and len(block) == 6
     codes = [bytes.fromhex(node.text) for node in block]

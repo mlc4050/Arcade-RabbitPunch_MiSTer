@@ -1,6 +1,6 @@
 # US manual DIP audit
 
-Source: [Rabbit Punch manual](https://www.crazykong.com/manuals/RabbitPunch.man.pdf), OPTION SWITCH SETTINGS banks 1 and 2, supplied by the user. The PDF and screenshot hashes are recorded in `reference/manual_dip_reference.json`. Physical ON is a set bit; switch 1 is bit 0.
+Source: [Rabbit Punch manual](manuals/RabbitPunch.man.pdf), OPTION SWITCH SETTINGS banks 1 and 2, supplied by the user. The PDF and screenshot hashes are recorded in `reference/manual_dip_reference.json`. Physical ON is a set bit; switch 1 is bit 0.
 
 ## Coinage additions
 

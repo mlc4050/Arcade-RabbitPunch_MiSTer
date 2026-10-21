@@ -60,12 +60,11 @@ MRAs and verified ZIP. Physical cheat testing remains pending.
 
 ## Descriptors and provenance
 
-Run scripts/build_cheat_mras.py once in a fresh feature checkout to create
-releases/_dev/cheats, including the DDR alternatives. It adds only the cheat
-block to published descriptors and checks the assembled ROM image hashes.
-Published descriptors and the previously qualified RBF remain unchanged.
-Use this generator for cheat candidates; the historical build_mras.py does not
-add this development feature.
+The published MRAs in releases/ include the six cheat definitions, including
+the DDR alternatives. Tests and candidate packaging use these same files.
+The former releases/_dev/cheats copies have been removed after promotion.
+scripts/build_cheat_mras.py is the historical generator used before publication;
+its creation and ROM-image checks are preserved in reference/cheat_mra_checks.json.
 
 Address/value definitions derive from the historical Pugsy cheat collection
 preserved in [libretro's MAME2003-Plus metadata](https://github.com/libretro/mame2003-plus-libretro/blob/master/metadata/cheat.dat),

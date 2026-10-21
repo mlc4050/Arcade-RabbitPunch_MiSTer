@@ -71,6 +71,8 @@ The Video settings submenu holds the display options. DIP switches, audio mix, p
 
 ## Controls
 
+[Original Rabbit Punch manual (PDF)](docs/manuals/RabbitPunch.man.pdf)
+
 Define controller buttons through MiSTer's **Define joystick buttons** menu. If upgrading from an earlier MRA with Shoot/Missile labels, redefine the buttons to match the corrected order.
 
 | Action | Player 1 keyboard | Player 2 keyboard |

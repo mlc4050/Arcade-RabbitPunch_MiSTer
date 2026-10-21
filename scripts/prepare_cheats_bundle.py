@@ -82,8 +82,10 @@ rbf=cores/f'Arcade-RabbitPunch_{date}.rbf'
 shutil.copy2(stage/'output_files/RabbitPunch.rbf',rbf)
 assert rbf.stat().st_size>1000000
 mra_records=[]
-for source in (root/'releases/_dev/cheats').rglob('*.mra'):
-    relative=source.relative_to(root/'releases/_dev/cheats')
+for relative in (Path(title+suffix) for title in ('Rabbit Punch (US)','Rabio Lepus (Japan)') for suffix in ('.mra',' - DDR load.mra')):
+    if relative.name.endswith(' - DDR load.mra'):
+        relative=Path('_alternatives/_ddr')/relative
+    source=root/'releases'/relative
     target=out/'_Arcade'/relative
     target.parent.mkdir(parents=True,exist_ok=True)
     shutil.copy2(source,target)

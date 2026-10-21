@@ -29,7 +29,7 @@ def main():
         target = out/'rtl/cpu/fx68k'/filename
         target.parent.mkdir(parents=True,exist_ok=True)
         shutil.copyfile(root/'rtl/state/vendor/konamigx/fx68k'/filename,target)
-    codes = ET.parse(root/'releases/_dev/cheats/Rabbit Punch (US).mra').getroot().find('cheats')
+    codes = ET.parse(root/'releases/Rabbit Punch (US).mra').getroot().find('cheats')
     assert len(codes) == 6
     (out/'codes.txt').write_bytes((''.join(' '.join(map(str,bytes.fromhex(node.text)))+'\n' for node in codes)).encode())
     sources = board_sources()[:-1]+['sim/cheats/cheats_board_tb.vhd']
