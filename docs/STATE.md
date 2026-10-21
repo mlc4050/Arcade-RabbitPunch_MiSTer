@@ -1002,3 +1002,10 @@ storage into the analog pixel stream. Normal ratio metadata becomes 3:4 only
 while rotation is applied; integer geometry is calculated against transposed
 HDMI dimensions and transposed back. This is presentation state to discard on
 restore, not original-board memory.
+
+## Cheat policy
+
+The cheat loader/list is external policy, outside the game image ABI. Warm
+reset retains it; cold initialization/new ROM clears it. State/debug masters
+access raw RAM, while CPU reads use the currently selected list after restore.
+The game can store values derived from cheat reads. See CHEATS.md.

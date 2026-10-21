@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='utf-8'?>
+<misterromdescription>
+    <name>Rabbit Punch (US)</name>
+    <setname>rpunch</setname>
+    <rbf>RabbitPunch</rbf>
+    <mameversion>0289</mameversion>
+    <year>1987</year>
+    <manufacturer>V-System Co. (Bally/Midway/Sente license)</manufacturer>
+    <rotation>horizontal</rotation>
+    <players>2</players>
+    <about>Rabbit Punch / Rabio Lepus for MiSTer. Savestate controller mapping included.</about>
+    <joystick ways="8" />
+    <rom index="0" zip="rpunch.zip|rabiolep.zip" md5="None">
+        <interleave output="16">
+            <part name="rpunch.20" crc="a2028d59" length="0x8000" map="01" />
+            <part name="rpunch.21" crc="1cdb13d3" length="0x8000" map="10" />
+        </interleave>
+        <interleave output="16">
+            <part name="rpunch.2" crc="9b9729bb" length="0x8000" map="01" />
+            <part name="rpunch.3" crc="5704a688" length="0x8000" map="10" />
+        </interleave>
+        <part repeat="0x20000">00</part>
+        <part name="rpunch.92" crc="5e1870e3" length="0x10000" />
+        <part name="rl_c13.bin" crc="7c8403b0" length="0x40000" />
+        <part name="rl_c10.bin" crc="312eb260" length="0x8000" />
+        <part name="rl_c12.bin" crc="bea85219" length="0x8000" />
+        <part repeat="0x10000">FF</part>
+        <part repeat="0x20000">FF</part>
+        <part name="rl_a10.bin" crc="c2a77619" length="0x40000" />
+        <part name="rl_a13.bin" crc="a39c2c16" length="0x8000" />
+        <part name="rpunch.54" crc="e2969747" length="0x8000" />
+        <part repeat="0x30000">FF</part>
+        <interleave output="16">
+            <part name="rl_4g.bin" crc="c5cb4b7a" length="0x20000" map="01" />
+            <part name="rl_4h.bin" crc="8a4d3c99" length="0x20000" map="10" />
+        </interleave>
+        <interleave output="16">
+            <part name="rl_1g.bin" crc="74d41b2e" length="0x8000" map="01" />
+            <part name="rl_1h.bin" crc="7dcb32bb" length="0x8000" map="10" />
+        </interleave>
+        <interleave output="16">
+            <part name="rpunch.85" crc="60b88a2c" length="0x8000" map="01" />
+            <part name="rpunch.86" crc="91d204f6" length="0x8000" map="10" />
+        </interleave>
+        <part repeat="0x20000">FF</part>
+        <part name="rl_f18.bin" crc="47840673" length="0x20000" />
+        <part repeat="0x20000">00</part>
+    </rom>
+    <rom index="3">
+        <part>02 DC 6C 00 FF FF 00 02 00 02 00 01 00 00 00 00 00 0F FE 01 00 73 00 17</part>
+    </rom>
+    <nvram index="4" size="115" />
+    <switches default="00,20" base="0">
+        <dip name="Coin A" bits="0,3" ids="1C/1C,1C/1C+2C/3C,4C/5C,5C/6C,1C/6C,6C/4C,2C/3C,-,1C/2C,1C/3C,1C/4C,1C/5C,2C/1C,3C/1C,4C/1C,-" />
+        <dip name="Coin B" bits="4,7" ids="1C/1C,1C/1C+2C/3C,4C/5C,5C/6C,1C/6C,6C/4C,2C/3C,-,1C/2C,1C/3C,1C/4C,1C/5C,2C/1C,3C/1C,4C/1C,-" />
+        <dip name="Difficulty" bits="8,9" ids="Normal,Hard,Easy,Hardest" />
+        <dip name="Lives" bits="10" ids="2,3" />
+        <dip name="Laser" bits="11" ids="Manual,Semi-Automatic" />
+        <dip name="Extended Play" bits="12" ids="500000 points,None" />
+        <dip name="Demo Sounds" bits="13" ids="Off,On" />
+        <dip name="Continues" bits="14" ids="On,Off" />
+        <dip name="Flip Screen" bits="15" ids="Off,On" />
+    </switches>
+    <buttons names="Fire/Punch,Missile,-,-,-,-,Start,Coin,Pause,Service,Test,Savestate (SS)" count="2" />
+    <cheats size="16" max="8">
+        <cheat name="P1 Infinite Missiles">00 00 00 10 00 0F C2 69 00 00 00 00 00 00 00 90</cheat>
+        <cheat name="P1 Infinite Lives">00 00 00 10 00 0F C3 D9 00 00 00 00 00 00 00 03</cheat>
+        <cheat name="P1 Infinite Energy/Shield">00 00 00 10 00 0F C3 D8 00 00 00 00 00 00 00 00</cheat>
+        <cheat name="P2 Infinite Missiles">00 00 00 10 00 0F C2 A9 00 00 00 00 00 00 00 90</cheat>
+        <cheat name="P2 Infinite Lives">00 00 00 10 00 0F C3 F9 00 00 00 00 00 00 00 03</cheat>
+        <cheat name="P2 Infinite Energy/Shield">00 00 00 10 00 0F C3 F8 00 00 00 00 00 00 00 00</cheat>
+    </cheats>
+</misterromdescription>

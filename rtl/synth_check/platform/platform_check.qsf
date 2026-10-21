@@ -36,6 +36,7 @@ set_global_assignment -name VHDL_FILE ../../rabbitpunch_io.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_irq.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_maintenance.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_bus_owner.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_cheats.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_board.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_sdram_types.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_sdram.vhd

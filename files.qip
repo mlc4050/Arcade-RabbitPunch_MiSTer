@@ -58,6 +58,7 @@ set_global_assignment -name VHDL_FILE rtl/rabbitpunch_board_video.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_maintenance.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_bus_owner.vhd
 set_global_assignment -name VHDL_FILE rtl/state/rabbitpunch_state_main_bus.vhd
+set_global_assignment -name VHDL_FILE rtl/rabbitpunch_cheats.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_board.vhd
 set_global_assignment -name VHDL_FILE rtl/rabbitpunch_download.vhd
 set_global_assignment -name VHDL_FILE rtl/cpu/t80/T80_Pack.vhd

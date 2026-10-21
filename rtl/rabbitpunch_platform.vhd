@@ -231,7 +231,7 @@ entity rabbitpunch_platform is
 end entity;
 
 architecture rtl of rabbitpunch_platform is
-    signal s_system_loading, s_score_enabled : std_logic;
+    signal s_system_loading, s_score_enabled, s_cheat_download : std_logic;
     signal s_system_done, s_system_image_valid : std_logic;
     signal s_load_wait, s_score_wait, s_score_initialize : std_logic;
     signal s_score_access, s_score_valid, s_score_write, s_score_ready, s_score_response : std_logic;
@@ -306,6 +306,7 @@ begin
                 ou32_identity => ou32_state_rom_identity
             );
     end generate;
+    s_cheat_download <= '1' when (i_host_download = '1' and iu16_host_index = 255) else '0';
     o_maintenance_idle <= s_clients_idle and s_board_maintenance_idle;
     o_hiscore_enabled <= s_score_enabled;
     ou16_host_menu_mask <= to_unsigned(8, 16) when s_score_enabled = '0' else to_unsigned(0, 16);
@@ -462,6 +463,10 @@ begin
             i_game_reset => s_game_reset,
             i_pause => s_pause_request,
             o_paused => o_paused,
+            i_cheat_download => s_cheat_download,
+            i_cheat_write => i_host_write,
+            iu27_cheat_byte_address => iu27_host_byte_address,
+            iu8_cheat_byte_data => iu8_host_data,
             i_maintenance_initialize => s_memory_initialize,
             i_maintenance_access => s_memory_access,
             i_maintenance_valid => s_memory_valid,

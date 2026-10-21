@@ -1,0 +1,60 @@
+{
+  "accepted": true,
+  "game": "rabiolep",
+  "reads": 7657,
+  "result": {
+    "case": "cheats_trace_rabiolep_v1",
+    "pass_marker": "CHEATS_TRACE_REPLAY_PASS",
+    "log": "debug\\baselines\\cheats_trace_rabiolep_v1\\result.log"
+  },
+  "source_sha256": {
+    "rtl/rabbitpunch_cheats.vhd": "1255adb2b56fcfd15c9623f53c1ca3ad8bf578907f2e53c90d748e2bf19cf732",
+    "sim/cheats/cheats_trace_replay_tb.vhd": "e248fa5294f41a1f907e69da8d729b242c0d68bfe0afd5bc1459885f37fb8884"
+  },
+  "mame_reference_sha256": "af677dd2b9368662f41e35edae736264ebfcc38cc7991115db04c6af1c4dc2c5",
+  "mra_sha256": "19548dd5ad5a3a161101463cb2189f6fa94bf09b1e07883d57bd3d4bff039e0f",
+  "semantic_counters": [
+    [
+      "0FC269",
+      "90",
+      "1371",
+      "1371"
+    ],
+    [
+      "0FC3D9",
+      "03",
+      "629",
+      "365"
+    ],
+    [
+      "0FC3D8",
+      "00",
+      "585",
+      "360"
+    ],
+    [
+      "0FC2A9",
+      "90",
+      "674",
+      "542"
+    ],
+    [
+      "0FC3F9",
+      "03",
+      "629",
+      "365"
+    ],
+    [
+      "0FC3F8",
+      "00",
+      "571",
+      "333"
+    ]
+  ],
+  "files": {
+    "vectors.txt": "8ce2818b82baaca0c1c9a6f3a72a96ee04ba4213fe0028cc2d3fa6155a2663e1",
+    "codes.txt": "77772c7ead342981d99d3b4af3215ddff3182850a1a0077ef80443f1afd798da",
+    "result.log": "eb3e38298034388b0e2102cb680b7bbfd299176d16e1319506bbb2cee9f7c3ee"
+  },
+  "scope": "Native production VHDL cheat engine matches every complete MAME read-response word during disabled/enabled/disabled phases, using the six actual development MRA codes. Raw input unchanged. MAME controlled life/damage perturbations are retained in the reference; no whole-machine cycle or hardware claim."
+}

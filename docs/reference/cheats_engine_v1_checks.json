@@ -1,0 +1,15 @@
+{
+  "accepted": true,
+  "result": {
+    "case": "cheats_v1",
+    "pass_marker": "CHEATS_PASS",
+    "log": "debug\\baselines\\cheats_v1\\result.log"
+  },
+  "source_sha256": {
+    "rtl/rabbitpunch_cheats.vhd": "2d86eae819b74a2997ccbcf90b622f11acef24679e2bb1b22f2641b853a7743a",
+    "sim/cheats/cheats_tb.vhd": "a5506ab84b8975379b9662ae6ad81d6c88139ddadb25ae327011a48c9f6dbb7d"
+  },
+  "runner_sha256": "d91be7fe04bebb302db61d884174d0af303854ae9154e86417eea1a009dd439c",
+  "transcript_sha256": "fd6f47f02b58bf45da6dbf0d049ca7c092cfd33fad2fcbdcf0d769e75417b790",
+  "scope": "Native VHDL loader/protocol, six game codes, big-endian byte/word/long compare and replace/OR/AND, overlap priority, eight-slot bound, malformed/truncated/empty reload, write bypass and clear. No game, whole-machine or synthesis claim."
+}

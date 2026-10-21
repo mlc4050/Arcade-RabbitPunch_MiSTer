@@ -19,6 +19,10 @@ entity rabbitpunch_board is
         i_reset : in std_logic;
         i_pause : in std_logic;
         o_paused : out std_logic;
+        i_cheat_download : in std_logic := '0';
+        i_cheat_write : in std_logic := '0';
+        iu27_cheat_byte_address : in unsigned(26 downto 0) := (others => '0');
+        iu8_cheat_byte_data : in unsigned(7 downto 0) := (others => '0');
         i_maintenance_initialize : in std_logic := '0';
         i_maintenance_access : in std_logic := '0';
         i_maintenance_valid : in std_logic := '0';
@@ -148,7 +152,23 @@ architecture rtl of rabbitpunch_board is
     signal su2_maintenance_bytes, su2_backend_bytes : unsigned(1 downto 0);
     signal s_state_hold, s_state_load, s_video_flush : std_logic;
     signal s_maintenance_block : std_logic;
+    signal su16_cheated_cpu_data : unsigned(15 downto 0);
 begin
+    cheats : entity work.rabbitpunch_cheats
+        port map (
+            i_clk => i_clk,
+            i_clear => i_initialize,
+            i_download => i_cheat_download,
+            i_write => i_cheat_write,
+            iu27_byte_address => iu27_cheat_byte_address,
+            iu8_byte_data => iu8_cheat_byte_data,
+            i_cpu_read => s_cpu_response_valid and not s_request_write,
+            iu24_cpu_address => su24_request_address,
+            iu16_cpu_data => su16_cpu_response_data,
+            ou16_cpu_data => su16_cheated_cpu_data,
+            o_available => open,
+            o_load_error => open
+        );
     s_state_hold <= i_state_hold when GBOOL_STATE_CAPABLE else '0';
     s_state_load <= i_state_load when GBOOL_STATE_CAPABLE else '0';
     s_video_flush <= i_state_video_flush when GBOOL_STATE_CAPABLE else '0';
@@ -251,7 +271,7 @@ begin
                 ou16_request_data => su16_request_data,
                 ou2_request_bytes => su2_request_bytes,
                 i_response_valid => s_cpu_response_valid,
-                iu16_response_data => su16_cpu_response_data,
+                iu16_response_data => su16_cheated_cpu_data,
                 o_paused => s_cpu_paused
             );
     end generate;
@@ -396,7 +416,7 @@ begin
                 ou16_request_data => su16_request_data,
                 ou2_request_bytes => su2_request_bytes,
                 i_response_valid => s_cpu_response_valid,
-                iu16_response_data => su16_cpu_response_data,
+                iu16_response_data => su16_cheated_cpu_data,
                 o_paused => s_cpu_paused,
                 i_capture_request => i_state_capture,
                 i_capture_cancel => i_state_cancel,

@@ -29,6 +29,8 @@ package rabbitpunch_config is
         "-;" &
         "DIP;" &
         "-;" &
+        "C,Cheats;" &
+        "-;" &
         "O2,Pause when OSD is open,Off,On;" &
         "H3O3,Autosave NVRAM,Off,On;" &
         "H3T4,Save NVRAM;" &

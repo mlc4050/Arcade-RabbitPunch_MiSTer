@@ -1,0 +1,70 @@
+{
+  "accepted": true,
+  "mras": [
+    {
+      "path": "releases/_dev/cheats/Rabio Lepus (Japan).mra",
+      "source": "releases/Rabio Lepus (Japan).mra",
+      "source_sha256": "fe2c21689d359a13572ad7749c080819bd6d5f06a6e0af5ffa0054cf35d8ed85",
+      "sha256": "19548dd5ad5a3a161101463cb2189f6fa94bf09b1e07883d57bd3d4bff039e0f",
+      "only_cheat_block_added": true,
+      "rom_image_sha256": "f99fedd7cee90bf4dcc0fd4c6aeb27bcaedbf9f0e07061b12f441017b80c7386",
+      "cheat_codes": [
+        "00000010000fc2690000000000000090",
+        "00000010000fc3d90000000000000003",
+        "00000010000fc3d80000000000000000",
+        "00000010000fc2a90000000000000090",
+        "00000010000fc3f90000000000000003",
+        "00000010000fc3f80000000000000000"
+      ]
+    },
+    {
+      "path": "releases/_dev/cheats/_alternatives/_ddr/Rabio Lepus (Japan) - DDR load.mra",
+      "source": "releases/_alternatives/_ddr/Rabio Lepus (Japan) - DDR load.mra",
+      "source_sha256": "b75b39e557a4fa470761fd19cfcd635dc66b0f22c4fbaf99a09ba92514471948",
+      "sha256": "6b12c27078101b94691a5872bf018371d44fc20bd4966761b90f15a61a9ca200",
+      "only_cheat_block_added": true,
+      "rom_image_sha256": "f99fedd7cee90bf4dcc0fd4c6aeb27bcaedbf9f0e07061b12f441017b80c7386",
+      "cheat_codes": [
+        "00000010000fc2690000000000000090",
+        "00000010000fc3d90000000000000003",
+        "00000010000fc3d80000000000000000",
+        "00000010000fc2a90000000000000090",
+        "00000010000fc3f90000000000000003",
+        "00000010000fc3f80000000000000000"
+      ]
+    },
+    {
+      "path": "releases/_dev/cheats/Rabbit Punch (US).mra",
+      "source": "releases/Rabbit Punch (US).mra",
+      "source_sha256": "bf274d48c3aea2eed914aab20a2ac6f53af9dc6c34aaf7a3f3710b81605050f5",
+      "sha256": "50adac91d9e1fe003f3f4c951fb521986c4f9766e462ff18a8c82b3487c10a5b",
+      "only_cheat_block_added": true,
+      "rom_image_sha256": "cf849688f863acfc771cfeca8e9812cbfee62d025966b997bdbf2f9efc5e3117",
+      "cheat_codes": [
+        "00000010000fc2690000000000000090",
+        "00000010000fc3d90000000000000003",
+        "00000010000fc3d80000000000000000",
+        "00000010000fc2a90000000000000090",
+        "00000010000fc3f90000000000000003",
+        "00000010000fc3f80000000000000000"
+      ]
+    },
+    {
+      "path": "releases/_dev/cheats/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra",
+      "source": "releases/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra",
+      "source_sha256": "e84b6fbffa23694839772b00f92c558a8c1563f793ab88cd4b9346f9f717377e",
+      "sha256": "712c9e2a7c0060c5594450442fcbba5c5fd538fbefa5642980757e9e909fb1e4",
+      "only_cheat_block_added": true,
+      "rom_image_sha256": "cf849688f863acfc771cfeca8e9812cbfee62d025966b997bdbf2f9efc5e3117",
+      "cheat_codes": [
+        "00000010000fc2690000000000000090",
+        "00000010000fc3d90000000000000003",
+        "00000010000fc3d80000000000000000",
+        "00000010000fc2a90000000000000090",
+        "00000010000fc3f90000000000000003",
+        "00000010000fc3f80000000000000000"
+      ]
+    }
+  ],
+  "scope": "Four development-only MRA descriptors retain complete published settings and exact ROM images; six codes fit the eight-slot loader. No cheat gameplay, RBF or hardware claim."
+}

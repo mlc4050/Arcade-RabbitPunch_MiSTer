@@ -66,6 +66,7 @@ set_global_assignment -name VHDL_FILE ../../rabbitpunch_board_video.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_maintenance.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_bus_owner.vhd
 set_global_assignment -name VHDL_FILE ../../state/rabbitpunch_state_main_bus.vhd
+set_global_assignment -name VHDL_FILE ../../rabbitpunch_cheats.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_board.vhd
 set_global_assignment -name VHDL_FILE ../../rabbitpunch_download.vhd
 set_global_assignment -name VHDL_FILE ../../cpu/t80/T80_Pack.vhd

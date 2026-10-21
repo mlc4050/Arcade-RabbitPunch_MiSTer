@@ -1,0 +1,56 @@
+{
+  "accepted": true,
+  "game": "rabiolep",
+  "frames": 6600,
+  "mameversion": "0289",
+  "semantic_counters": [
+    [
+      "0FC269",
+      "90",
+      "1371",
+      "1371"
+    ],
+    [
+      "0FC3D9",
+      "03",
+      "629",
+      "365"
+    ],
+    [
+      "0FC3D8",
+      "00",
+      "585",
+      "360"
+    ],
+    [
+      "0FC2A9",
+      "90",
+      "674",
+      "542"
+    ],
+    [
+      "0FC3F9",
+      "03",
+      "629",
+      "365"
+    ],
+    [
+      "0FC3F8",
+      "00",
+      "571",
+      "333"
+    ]
+  ],
+  "controlled_test_ram_perturbation_frame": 3000,
+  "files": {
+    "cheat_perturbations.txt": "5fe3603fe48eaaf5455e37d6810b581c079fef17c2e7664913a154206eda7d24",
+    "cheat_reads.txt": "578f14f52af01d2aeafce8d9565ce5793859e742afa0d8f52af67fa1b7ff4703",
+    "cheat_semantics.txt": "fde31fec77b7542834c76c231dba1f906c241fe3118da05a0ae4cb2588131d8b",
+    "cheat_states.txt": "9fdcdec87cf25de589d644b8d4de0a57f23c9c73ff7bbe004d8f67081cbc6cd8",
+    "cheat_writes.txt": "7ee4140b172975678e3fb8aa1481b3740656f0bbf00538624c4bb2c35c14e007",
+    "gameplay.png": "c0111d76fa1aa86a2f9d522a280d364cbfb28661c51276a9ffc0bb861ef0426d",
+    "run.log": "e9545d1d26dd17695bc4d09cd5de1bf5002302e99e6ffe73006f7f96d45e8beb"
+  },
+  "script_sha256": "5f3b57d49122da8b71d18a42acd13a6ce8d46880e3ed7412da845f05b6b602dd",
+  "scope": "Two-player MAME game run through combat, read-tap enabled frames800..4999, disabled before/after. Four explicit test-only RAM perturbations at frame3000 exercise both life and damage counters. All six fields have natural CPU reads that change with overrides; probe reads preserve underlying RAM. Not RTL, original-board or hardware qualification."
+}

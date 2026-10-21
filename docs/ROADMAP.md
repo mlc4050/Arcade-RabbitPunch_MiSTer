@@ -434,3 +434,11 @@ and restore work on MiSTer hardware. Native whole-game event timing, exhaustive
 ARM persistence/display-mode coverage and CRT remain separate qualification
 surfaces. No agent deployment or JTAG operation was performed. Earlier rejected
 donors, diagnostic failures, worktrees and ignored build artifacts are preserved.
+
+## Cheats candidate
+
+Six P1/P2 missile, life and energy/shield cheats are implemented with the
+standard Cheats submenu and development-only MRAs. Both MAME sets, exact native
+read replay, real CPU/board integration and disabled state continuation pass.
+See CHEATS.md for proof scopes and receipts. Full candidate fitting and MiSTer
+hardware checks remain pending. Published October 20 assets are unchanged.
