@@ -2,7 +2,7 @@
 
 A MiSTer FPGA core for Video System's 1987 arcade hardware, supporting **Rabbit Punch** and **Rabio Lepus**. Built for the DE10-Nano with Quartus Prime Lite 17.0.2, using MAME 0.289's `vsystem/rpunch.cpp` as the reference.
 
-**Work in progress. Both games run with video and sound. Savestate save and restore work on MiSTer hardware.**
+**Cheats for both players, automatic high-score saving, and four-slot savestates with controller shortcuts and on-screen slot selection.**
 
 ## Contents
 
@@ -22,11 +22,13 @@ A MiSTer FPGA core for Video System's 1987 arcade hardware, supporting **Rabbit 
 
 ## History
 
-### Arcade-RabbitPunch_20261021
+### Arcade-RabbitPunch_20261021: cheats and savestate shortcuts
+
+The **Cheats >** submenu adds independent P1/P2 missile, life and energy/shield switches.
 
 Hold **SS + Left/Right** to select savestate slot 1-4, with an on-screen slot indicator. **SS + Down** saves; **SS + Up** restores and shows the slot being loaded.
 
-### Arcade-RabbitPunch_20261020 — savestates
+### Arcade-RabbitPunch_20261020: savestates
 
 - Four savestate slots, optional slot autoincrement, Save state and Restore state in the OSD.
 - Additional **Savestate (SS)** controller action: hold SS with Down to save or Up to restore.
@@ -107,7 +109,7 @@ The main OSD places these controls together after **Save NVRAM**:
 
 | Control | Function |
 |---|---|
-| Savestate slot | Select slot 1–4 |
+| Savestate slot | Select slot 1-4 |
 | Autoincrement slot | Advance to the next slot after a successful save |
 | Save state | Capture the running game in the selected slot |
 | Restore state | Resume the selected snapshot |
