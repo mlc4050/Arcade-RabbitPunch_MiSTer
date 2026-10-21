@@ -37,7 +37,7 @@ architecture test of cheats_host_tb is
 begin
     process
         constant CSTR_CONFIG : string := F_STATE_CONFIG(true);
-        constant CSTR_EXPECTED : string := "DIP;-;C,Cheats;-;";
+        constant CSTR_EXPECTED : string := "DIP;-;C,Cheats                    " & character'val(16#16#) & ";-;";
         variable vbool_found : boolean := false;
     begin
         for vint_index in CSTR_CONFIG'low to CSTR_CONFIG'high - CSTR_EXPECTED'length + 1 loop

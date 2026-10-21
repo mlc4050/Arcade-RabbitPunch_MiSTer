@@ -78,3 +78,7 @@ The private candidate is debug/bringup/RabbitPunch_Cheats_20261021.zip. Replace
 both MRAs and the dated RBF together. The ZIP contains only those five files
 inside _Arcade, including the two DDR alternatives; it contains no ROMs.
 The original published assets remain unchanged.
+
+The Cheats label explicitly includes MiSTer glyph 16 hex, matching the
+right-aligned DIP submenu arrow. The standard C menu action is preserved.
+The native state-enabled configuration assertion checks the glyph and spacing.
