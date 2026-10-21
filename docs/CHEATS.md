@@ -41,6 +41,8 @@ outside the game savestate ABI: restored games use the currently selected codes.
   board RAM/ownership logic. It checks both players, mirrored CPU reads, raw
   state-master reads/writes, warm reset retention and disabling the list.
 * The existing state-board continuation test passes with cheats disabled.
+* The actual state-enabled configuration retains the separated Cheats submenu;
+  the production ROM frontend ignores cheat-index 255 downloads.
 
 Receipts: reference/cheats_engine_mirrored_v2_checks.json,
 reference/cheats_trace_rpunch_v1_checks.json,
