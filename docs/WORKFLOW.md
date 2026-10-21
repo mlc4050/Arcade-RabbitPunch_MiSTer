@@ -447,10 +447,13 @@ Generate every `.mra` from a script (`scripts/build_mra.py`), not by hand:
 
 ## 13. Branching and history
 
-`develop` is the working branch and carries granular commits, committed as work lands without
-being asked each time. It is **not pushed**. At intervals that work is **squashed onto `master`**,
-which is what gets pushed — and only when the user asks for it. `master` is a curated history of
-milestones, not a replay of every bisection step.
+`main` is the integrated baseline. Development is complete unless an issue or new
+feature calls for more work. Start such work on a branch from `main`, commit as
+work lands, then merge qualified changes back. Push only when the user asks.
+The former `develop` branch and obsolete linked worktrees have been removed.
+Their complete history and checkout snapshots are retained locally under
+`.local/archives/20261021-cleanup/`. All project storage, including archives,
+must remain under `D:/git`.
 
 A build that the user rejects has its commit **reverted**, not left in the branch for later: the
 history should not carry a bitstream nobody accepted.
