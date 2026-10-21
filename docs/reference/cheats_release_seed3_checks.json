@@ -1,0 +1,70 @@
+{
+  "accepted": true,
+  "commit": "9747aee84445ac5e6c12535601f41fa6a1e28c1f",
+  "revision": "RabbitPunch",
+  "seed": 3,
+  "rbf": "debug/bringup/20261021_cheats_9747aee/_Arcade/cores/Arcade-RabbitPunch_20261021.rbf",
+  "rbf_sha256": "53188edbcf60368535e337db12603f6480850d34c8c37bf078969f9e286667f3",
+  "timing_checks": 144,
+  "minimum_slack_ns": {
+    "Setup": 0.604,
+    "Hold": 0.074,
+    "Recovery": 3.574,
+    "Removal": 0.486,
+    "Minimum Pulse Width": 1.122
+  },
+  "mras": [
+    {
+      "path": "_Arcade/Rabbit Punch (US).mra",
+      "sha256": "50adac91d9e1fe003f3f4c951fb521986c4f9766e462ff18a8c82b3487c10a5b"
+    },
+    {
+      "path": "_Arcade/Rabio Lepus (Japan).mra",
+      "sha256": "19548dd5ad5a3a161101463cb2189f6fa94bf09b1e07883d57bd3d4bff039e0f"
+    },
+    {
+      "path": "_Arcade/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra",
+      "sha256": "712c9e2a7c0060c5594450442fcbba5c5fd538fbefa5642980757e9e909fb1e4"
+    },
+    {
+      "path": "_Arcade/_alternatives/_ddr/Rabio Lepus (Japan) - DDR load.mra",
+      "sha256": "6b12c27078101b94691a5872bf018371d44fc20bd4966761b90f15a61a9ca200"
+    }
+  ],
+  "hardware_verified": false,
+  "published": false,
+  "deployed": false,
+  "scope": "Private source-matched full fitted cheats candidate. All reported timing checks, required hierarchy, framework coverage scope, fitted clock and state resource checks pass. No physical cheat validation, publication or deployment.",
+  "files": {
+    "README.txt": "118d0926b6dfb15192678ca5cf092a591064319fde6376d9cfc3be715b2a3d42",
+    "fit_evidence/BUILT_COMMIT": "3d0932486fd6d512191ed28d8bc8fb72b4667c532288f4b5ab5ce30349e5533c",
+    "fit_evidence/framework_timing_scope.json": "62ee1fbf1806ef45ea1300bbae65a60b231b0acaf68ee903ce42fb1d7af95a96",
+    "fit_evidence/full_clock_tree.json": "160cecae0164f3cb1ce09a99a49c0749075af0d2f6d3023f9e7979250dece11e",
+    "fit_evidence/q_staged.log": "78c1d10d481f3412d24621a700b3a93a53ca4116068ea65d5bf5cb55deb6000c",
+    "fit_evidence/RabbitPunch.asm.rpt": "d83c87e243b90c87ec0070f2687acf603dc541d4f1977f808d8535f773f17f4d",
+    "fit_evidence/RabbitPunch.done": "d9ce4cc3786eefe5719c70200f52f825c37a48eff87f9e512b1b7271d0ff6c91",
+    "fit_evidence/RabbitPunch.fit.rpt": "4f13bb1830f69b6ac7dc786ee50c2b506eae7b2d43a2a7f66228d925c6e32b55",
+    "fit_evidence/RabbitPunch.fit.smsg": "981d933ea34a7ffe0409382dcfbebc27b524474dec07c9e43ce201943016f266",
+    "fit_evidence/RabbitPunch.fit.summary": "2ad399621ba082d1ce3b4bf14a8a36968b9cab5151088da84cba4106cddbcb44",
+    "fit_evidence/RabbitPunch.flow.rpt": "8a3d480d4cfe48c7338947515bcc71d8146076c15096d06fa97994ffde9e80fd",
+    "fit_evidence/RabbitPunch.jdi": "0cd83a79940517190a1961992e24ec4c07dff5ddd050b23b13a3b49367458eaa",
+    "fit_evidence/RabbitPunch.map.rpt": "ee5988ef9011a9e0aa42479091458504730c43d4b0641fb7546c66d8c6f1c924",
+    "fit_evidence/RabbitPunch.map.smsg": "b45419cd328a89293e50404d0e2eb84df985f6d60c43850514001cec032d25db",
+    "fit_evidence/RabbitPunch.map.summary": "228f5c667904ca5c0e6c5fbd5aa8819c0655e77b8f5f4ab81365374b5bd2dcff",
+    "fit_evidence/RabbitPunch.pin": "d33728eb0a1bd76d7d6e579e0c22fce92bebeeaaf0117b1f7823f2c427041d9a",
+    "fit_evidence/RabbitPunch.rbf": "53188edbcf60368535e337db12603f6480850d34c8c37bf078969f9e286667f3",
+    "fit_evidence/RabbitPunch.sld": "c7de3cc5544a1144192d6825eb69cf5e065bf99f16fb9acb42fadd23adede991",
+    "fit_evidence/RabbitPunch.sta.rpt": "c51c67cc7e552732174d08929be48ff6a5ebcb0394b88781f696632d7d485ffe",
+    "fit_evidence/RabbitPunch.sta.summary": "9873134e09e01f1f05b28beccf7f2e6d4a7e3f00b2e2e8bc393e8fa22c3d48aa",
+    "fit_evidence/state_eval_resources.json": "5fb677aa6c39810d820bff89ba5eaaab332c501b4b442501cfc0a3d8190258c8",
+    "_Arcade/Rabbit Punch (US).mra": "50adac91d9e1fe003f3f4c951fb521986c4f9766e462ff18a8c82b3487c10a5b",
+    "_Arcade/Rabio Lepus (Japan).mra": "19548dd5ad5a3a161101463cb2189f6fa94bf09b1e07883d57bd3d4bff039e0f",
+    "_Arcade/cores/Arcade-RabbitPunch_20261021.rbf": "53188edbcf60368535e337db12603f6480850d34c8c37bf078969f9e286667f3",
+    "_Arcade/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra": "712c9e2a7c0060c5594450442fcbba5c5fd538fbefa5642980757e9e909fb1e4",
+    "_Arcade/_alternatives/_ddr/Rabio Lepus (Japan) - DDR load.mra": "6b12c27078101b94691a5872bf018371d44fc20bd4966761b90f15a61a9ca200"
+  },
+  "zip": "debug/bringup/RabbitPunch_Cheats_20261021.zip",
+  "zip_sha256": "eea490267009499deceb73caa3edac0f8b7912fe6cec77089b7e372e64bcdc47",
+  "zip_verified": true,
+  "state_abi_signature": "3A1B6DDE"
+}

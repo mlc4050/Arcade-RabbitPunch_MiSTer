@@ -52,8 +52,11 @@ reference/state_board_cheats_disabled_v2_checks.json.
 MAME capture metadata is retained in reference/cheat_game_*_checks.json;
 ignored debug/cheats directories hold raw captures and earlier diagnostic runs.
 These tests establish response behavior and integration, not whole-machine
-cycle equivalence or MiSTer hardware qualification. Full fitted timing and the
-private candidate bitstream are recorded separately after the build finishes.
+cycle equivalence or MiSTer hardware qualification. Source 9747aee, release seed3 passes all144 fitted timing checks: minimum
+setup +0.604ns, hold +0.074ns. Required hierarchy, fitted clocks and state
+resources pass under the existing scoped framework timing policy.
+reference/cheats_release_seed3_checks.json identifies the private RBF, matching
+MRAs and verified ZIP. Physical cheat testing remains pending.
 
 ## Descriptors and provenance
 
@@ -70,3 +73,8 @@ then independently exercised against the current pinned MAME reference above.
 Thanks to [Pugsy and contributors](https://www.mamecheat.co.uk/).
 Source hash and the six extracted definitions are in
 reference/cheat_code_provenance.json. No ROM data is included.
+
+The private candidate is debug/bringup/RabbitPunch_Cheats_20261021.zip. Replace
+both MRAs and the dated RBF together. The ZIP contains only those five files
+inside _Arcade, including the two DDR alternatives; it contains no ROMs.
+The original published assets remain unchanged.

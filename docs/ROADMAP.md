@@ -440,5 +440,8 @@ donors, diagnostic failures, worktrees and ignored build artifacts are preserved
 Six P1/P2 missile, life and energy/shield cheats are implemented with the
 standard Cheats submenu and development-only MRAs. Both MAME sets, exact native
 read replay, real CPU/board integration and disabled state continuation pass.
-See CHEATS.md for proof scopes and receipts. Full candidate fitting and MiSTer
-hardware checks remain pending. Published October 20 assets are unchanged.
+See CHEATS.md for proof scopes and receipts. Source 9747aee, release seed3 passes the complete fit, all144 timing checks,
+required hierarchy, fitted clocks, preserved state RAM/chip resources and the
+existing framework timing scope. Private candidate packaging is verified; see
+reference/cheats_release_seed3_checks.json. Physical cheat checks remain pending.
+Published October 20 assets are unchanged.
