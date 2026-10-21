@@ -61,6 +61,8 @@ Both games use the same RBF. Select the appropriate MRA for the game you want to
 - Four-slot savestates with optional autoincrement.
 - Direct ROM loading, with optional DDR-staged loading MRAs.
 
+Development cheat candidates add a **Cheats >** submenu with independent P1/P2 missile, life and energy/shield switches. See [CHEATS.md](docs/CHEATS.md) for matching MRAs and verification status.
+
 The Video settings submenu holds the display options. DIP switches, audio mix, pause behavior, NVRAM and savestate controls are available from the main OSD page.
 
 ## Controls
@@ -200,6 +202,8 @@ Detailed results are in [`docs/reference/`](docs/reference/). The [October 20 bu
 [Roadmap](docs/ROADMAP.md) | [Known approximations](docs/HACKS.md) | [MAME behavior notes](docs/MAME_KLUDGES.md) | [Sound](docs/SOUND_BRINGUP.md) | [Savestates](docs/SAVESTATES.md)
 
 ## Acknowledgements
+
+- **Pugsy and cheat contributors**, for the historical Rabbit Punch / Rabio Lepus cheat definitions. See [cheat implementation and validation](docs/CHEATS.md).
 
 - **MiSTer developers and contributors** for the platform and core template.
 - **MAME developers** for the Rabbit Punch / Rabio Lepus hardware model and reference implementation.
