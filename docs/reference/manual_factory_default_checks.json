@@ -1,0 +1,67 @@
+{
+  "accepted": true,
+  "set": "rpunch",
+  "manual_sha256": "0edf3b05bfadab5bf5dede2f9af75d17e29bd5d597673f1d016d2d0dfecc0b07",
+  "manual_printed_page": 12,
+  "before_default": "00,20",
+  "after_default": "00,24",
+  "selected_lives": 3,
+  "demo_sounds": "On",
+  "files": [
+    {
+      "path": "releases/Rabbit Punch (US).mra",
+      "before_sha256": "bf274d48c3aea2eed914aab20a2ac6f53af9dc6c34aaf7a3f3710b81605050f5",
+      "after_sha256": "4b78bbcbd1ec44bd971151d890026376ac50181cd27e00ad2a3a933be71a5222",
+      "only_default_changed": true
+    },
+    {
+      "path": "releases/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra",
+      "before_sha256": "e84b6fbffa23694839772b00f92c558a8c1563f793ab88cd4b9346f9f717377e",
+      "after_sha256": "39f32bb2c2755a2468578fccbf0603af8fb7e679eda37af745b066aebcbd2503",
+      "only_default_changed": true
+    },
+    {
+      "path": "releases/_dev/cheats/Rabbit Punch (US).mra",
+      "before_sha256": "2bf91e3ce46997ecfe3757c2228a4f4ca5e574dcddfeb580989e0cfcf4ee0102",
+      "after_sha256": "febfd70eb444dfc75375295315bcf8fe65b3826811609f2f3602f470b90d57c7",
+      "only_default_changed": true
+    },
+    {
+      "path": "releases/_dev/cheats/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra",
+      "before_sha256": "106017ceb20a33e503f1e3c010be63a85626f9fb97b79bdc758c4112c0d1f37b",
+      "after_sha256": "b7c3c94fea62b22a81044cc5360d4a558e056c4994a26f942ca9028f1ec983e6",
+      "only_default_changed": true
+    }
+  ],
+  "japanese_unchanged_sha256": {
+    "releases\\Rabio Lepus (Japan).mra": "fe2c21689d359a13572ad7749c080819bd6d5f06a6e0af5ffa0054cf35d8ed85",
+    "releases\\_alternatives\\_ddr\\Rabio Lepus (Japan) - DDR load.mra": "b75b39e557a4fa470761fd19cfcd635dc66b0f22c4fbaf99a09ba92514471948",
+    "releases\\_dev\\cheats\\Rabio Lepus (Japan).mra": "ba6b2101de37615058bad8f929bdca39da7288c6ec87f5c0108da494370e03a2",
+    "releases\\_dev\\cheats\\_alternatives\\_ddr\\Rabio Lepus (Japan) - DDR load.mra": "543b882df83366972fd56a287915c64c5d1126abf576fad6eb614433e4ba73d4"
+  },
+  "generator_defaults": {
+    "rpunch": "00,24",
+    "rabiolep": "00,00"
+  },
+  "generator_matches_all_eight_mras": true,
+  "validated_descriptors": 8,
+  "validator_baseline_limitations": {
+    "releases/_dev/cheats/Rabbit Punch (US).mra": "Existing validator treats valid cheat payloads as stray text; identical findings before/after. DIP and remaining descriptor checks pass.",
+    "releases/_dev/cheats/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra": "Existing validator treats valid cheat payloads as stray text; identical findings before/after. DIP and remaining descriptor checks pass.",
+    "releases/_dev/cheats/Rabio Lepus (Japan).mra": "Existing validator treats valid cheat payloads as stray text; identical findings before/after. DIP and remaining descriptor checks pass.",
+    "releases/_dev/cheats/_alternatives/_ddr/Rabio Lepus (Japan) - DDR load.mra": "Existing validator treats valid cheat payloads as stray text; identical findings before/after. DIP and remaining descriptor checks pass."
+  },
+  "production_hdl_changed": false,
+  "new_rbf_required": false,
+  "bundle": {
+    "path": "debug/bringup/RabbitPunch_manual_defaults_20261021.zip",
+    "sha256": "01ba56a154d1f67da6b326b4217fa99e8aaefa4fd8b1cba4a39100f2ae54962a",
+    "compared_with": "debug/bringup/RabbitPunch_slot_select_20261021.zip",
+    "changed_members": [
+      "_Arcade/Rabbit Punch (US).mra",
+      "_Arcade/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra"
+    ],
+    "rbf_and_japanese_mras_identical": true,
+    "files": 5
+  }
+}

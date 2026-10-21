@@ -157,12 +157,18 @@ def switches(parent, name, driver):
     default = 0
     for _, _, value, _ in dips:
         default |= value
+    if name == "rpunch":
+        lives = [(mask, value, settings) for label, mask, value, settings in dips if label == "Lives"]
+        if default != 0x2000 or lives != [(0x0400, 0, {0: "2", 0x0400: "3"})]:
+            raise ValueError("Review US manual factory override against changed MAME DIPs")
+        # Manual Bank 2 factory note: all OFF except Lives and Demo Sound.
+        default |= 0x0400
     node = ET.SubElement(parent, "switches", default=f"{default & 255:02X},{default >> 8:02X}", base="0")
     for label, mask, _, settings in dips:
         if settings is None:
             continue
         # US manual plus actual US/Japan ROM accounting establish two omitted values.
-        # Preserve each set's MAME defaults and other switches; see MANUAL_DIPS.md.
+        # Other switch definitions remain MAME-derived; see MANUAL_DIPS.md.
         if name in ("rpunch", "rabiolep") and label in ("Coin A", "Coin B"):
             shift = 0 if label == "Coin A" else 4
             if mask != (0xF << shift):

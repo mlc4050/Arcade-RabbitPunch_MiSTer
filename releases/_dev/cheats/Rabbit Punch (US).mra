@@ -50,7 +50,7 @@
         <part>02 DC 6C 00 FF FF 00 02 00 02 00 01 00 00 00 00 00 0F FE 01 00 73 00 17</part>
     </rom>
     <nvram index="4" size="115" />
-    <switches default="00,20" base="0">
+    <switches default="00,24" base="0">
         <dip name="Coin A" bits="0,3" ids="1C/1C,1C/1C+2C/3C,4C/5C,5C/6C,1C/6C,6C/4C,2C/3C,-,1C/2C,1C/3C,1C/4C,1C/5C,2C/1C,3C/1C,4C/1C,-" />
         <dip name="Coin B" bits="4,7" ids="1C/1C,1C/1C+2C/3C,4C/5C,5C/6C,1C/6C,6C/4C,2C/3C,-,1C/2C,1C/3C,1C/4C,1C/5C,2C/1C,3C/1C,4C/1C,-" />
         <dip name="Difficulty" bits="8,9" ids="Normal,Hard,Easy,Hardest" />

@@ -89,7 +89,7 @@ Service adds a credit without using the normal coin input. Test is a separate bo
 
 High-score tables are saved separately for each game through MiSTer's `.nvm` files. Enable **Autosave NVRAM**, or use **Save NVRAM** in the OSD to request a manual save.
 
-NVRAM contains the high-score table; a full game snapshot requires savestates. DIP settings are handled by MiSTer's per-game configuration.
+NVRAM contains the high-score table; a full game snapshot requires savestates. DIP settings are handled by MiSTer's per-game configuration. Rabbit Punch defaults to the manual factory settings: 3 lives and demo sound On. Existing saved DIP settings take precedence; use Reset after changing gameplay DIPs.
 
 ## Savestates
 
