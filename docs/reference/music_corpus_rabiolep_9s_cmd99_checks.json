@@ -1,0 +1,137 @@
+{
+  "game": "rabiolep",
+  "seconds": 9,
+  "music_command": 153,
+  "reset_coverage_checked": true,
+  "raw_ym": {
+    "mame_count": 75164,
+    "rtl_count": 74550,
+    "matching_prefix": 334,
+    "shorter_is_exact_prefix": false,
+    "first_difference": {
+      "index": 334,
+      "mame": [
+        20,
+        10
+      ],
+      "rtl": [
+        20,
+        42
+      ]
+    }
+  },
+  "non_timer_ym": {
+    "mame_count": 1293,
+    "rtl_count": 1293,
+    "matching_prefix": 1293,
+    "shorter_is_exact_prefix": true,
+    "first_difference": null,
+    "endpoint_tolerance_seconds": 0.005,
+    "endpoint_compatible": true
+  },
+  "note_timing": {
+    "sequence": {
+      "mame_count": 126,
+      "rtl_count": 126,
+      "matching_prefix": 126,
+      "shorter_is_exact_prefix": true,
+      "first_difference": null,
+      "endpoint_tolerance_seconds": 0.005,
+      "endpoint_compatible": true
+    },
+    "paired_notes": 126,
+    "first_mame_seconds": 1.06971025,
+    "first_rtl_seconds": 1.069570286,
+    "maximum_absolute_offset_ms": 0.1559790000000838,
+    "median_offset_ms": -0.14772499999993194,
+    "fitted_drift_ppm": -1.7740727444222468,
+    "fitted_initial_offset_ms": -0.13690656289734546,
+    "span_seconds": 7.766158000000001
+  },
+  "timer_acknowledgements": {
+    "mame": {
+      "acknowledge_bursts": 528,
+      "timer_programming": [
+        {
+          "seconds": 0.030399,
+          "value": 0,
+          "period_ms": 65.536
+        },
+        {
+          "seconds": 0.0322495,
+          "value": 222,
+          "period_ms": 8.704
+        },
+        {
+          "seconds": 1.0172875,
+          "value": 166,
+          "period_ms": 23.040000000000003
+        }
+      ],
+      "expected_music_period_ms": 23.040000000000003,
+      "median_music_ack_interval_ms": 23.03899999999981,
+      "minimum_music_ack_interval_ms": 1.015499999999392,
+      "maximum_music_ack_interval_ms": 23.04300000000037,
+      "scope": "CPU acknowledgement intervals include interrupt/poll service latency, not direct chip overflow timestamps."
+    },
+    "rtl": {
+      "acknowledge_bursts": 527,
+      "timer_programming": [
+        {
+          "seconds": 0.030606771,
+          "value": 0,
+          "period_ms": 65.536
+        },
+        {
+          "seconds": 0.032468786,
+          "value": 222,
+          "period_ms": 8.704
+        },
+        {
+          "seconds": 1.017316779,
+          "value": 166,
+          "period_ms": 23.040000000000003
+        }
+      ],
+      "expected_music_period_ms": 23.040000000000003,
+      "median_music_ack_interval_ms": 23.03948499999997,
+      "minimum_music_ack_interval_ms": 1.0170000000000456,
+      "maximum_music_ack_interval_ms": 23.044008000000282,
+      "scope": "CPU acknowledgement intervals include interrupt/poll service latency, not direct chip overflow timestamps."
+    }
+  },
+  "adpcm_commands": {
+    "mame_count": 0,
+    "rtl_count": 0,
+    "matching_prefix": 0,
+    "shorter_is_exact_prefix": true,
+    "first_difference": null
+  },
+  "adpcm_controls": {
+    "mame_count": 2,
+    "rtl_count": 2,
+    "matching_prefix": 2,
+    "shorter_is_exact_prefix": true,
+    "first_difference": null
+  },
+  "waveform": {
+    "onsets_seconds": {
+      "mame": 1.0735625,
+      "rtl": 1.07336
+    },
+    "duration_seconds": 7.875,
+    "rms_ratio": 0.9718750165511183,
+    "gain_difference_db": -0.24779163793989215,
+    "envelope_correlation": 0.9839671016772313,
+    "mean_spectral_cosine": 0.9810221351511657,
+    "spectral_active_windows": 392,
+    "spectral_both_silent_windows": 0,
+    "scope": "Independently threshold-aligned PCM, linear resampling to 48kHz, no gain fitting/time stretch; descriptive metrics, no percent-accuracy interpretation."
+  },
+  "input_reports": {
+    "mame_sha256": "016eeaecd6ef3a2acd5c6a5d01c30ba96d16ed5f68538e32166aa258c94cf62a",
+    "rtl_sha256": "153432e6a207c7a0bd0040f529fe40962305de4c590086e6d0e6714238c9bcbf"
+  },
+  "analyzer_sha256": "63c8a291852533b550a0c81bbc7768885a6a8e2499159c8675d94c11f047a245",
+  "scope": "Controlled original sound-ROM CPU and chip comparison. A 68000 test loop isolates MAME sound; RTL uses fixed one-cycle ROM replies. Note timing/sequence metrics are separate from raw timer polling and waveform metrics. Does not qualify video/SDRAM/hardware or untested tracks."
+}

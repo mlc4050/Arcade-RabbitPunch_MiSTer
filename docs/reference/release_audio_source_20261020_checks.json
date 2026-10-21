@@ -1,0 +1,260 @@
+{
+  "accepted": true,
+  "scope": "Source identity only; no additional simulation or hardware claim.",
+  "release_commit": "d269f2b962482bdd00809207dee3710a90edbf5e",
+  "published_commit": "e20f02c1b5af5d22d2545d9ff7246b2d418e6273",
+  "release_tree": "4865b15a399635f375557d273c8874848a50c100",
+  "published_tree": "4865b15a399635f375557d273c8874848a50c100",
+  "manifest_sha256": "a9fafbfed6483d52ca98db4e840077093cd7877ca10cc606241f9e25c91afd00",
+  "sources": {
+    "rtl/rabbitpunch_z80.vhd": {
+      "snapshot_sha256": "4aae6436bc0957027f6f30b7caab38ec0d0d0efd330a5fa3a24f734979d4321d",
+      "git_blob_sha256": "4aae6436bc0957027f6f30b7caab38ec0d0d0efd330a5fa3a24f734979d4321d",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/rabbitpunch_soundcpu.vhd": {
+      "snapshot_sha256": "e2baa84d8bbbc8da959938f9ca338f27dec8f2265bb622a9c09b574218cfc682",
+      "git_blob_sha256": "e2baa84d8bbbc8da959938f9ca338f27dec8f2265bb622a9c09b574218cfc682",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/rabbitpunch_sound_bus.vhd": {
+      "snapshot_sha256": "9801559d2b41a745280140813bc1da182a07cc52ee6b950d2145a0d3737a0c9d",
+      "git_blob_sha256": "9801559d2b41a745280140813bc1da182a07cc52ee6b950d2145a0d3737a0c9d",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/rabbitpunch_sound_board.vhd": {
+      "snapshot_sha256": "0a523151ed32a08af40dcb503635b5395968e27d04dee58b9a82af0ddf7b2496",
+      "git_blob_sha256": "0a523151ed32a08af40dcb503635b5395968e27d04dee58b9a82af0ddf7b2496",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/rabbitpunch_audio.vhd": {
+      "snapshot_sha256": "9116a3184e6019c87d5250db9dede968b986413ae9521942be62cc5a0927de4a",
+      "git_blob_sha256": "9116a3184e6019c87d5250db9dede968b986413ae9521942be62cc5a0927de4a",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/rabbitpunch_ym2151.vhd": {
+      "snapshot_sha256": "6676c99a104e4665cff087cb0464506d96dcc1aa8f3f3dc0ed33a4be15b8f328",
+      "git_blob_sha256": "6676c99a104e4665cff087cb0464506d96dcc1aa8f3f3dc0ed33a4be15b8f328",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/rabbitpunch_upd7759.vhd": {
+      "snapshot_sha256": "3434be19e205f9b061aaf7158881901da02835cbc33f0a56b275eb5854a9354e",
+      "git_blob_sha256": "3434be19e205f9b061aaf7158881901da02835cbc33f0a56b275eb5854a9354e",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/rabbitpunch_adpcm.vhd": {
+      "snapshot_sha256": "6cf0d6504dffd312e2822a07caead8ec2ef8ab074dc22e52835f0a3010cf9aed",
+      "git_blob_sha256": "6cf0d6504dffd312e2822a07caead8ec2ef8ab074dc22e52835f0a3010cf9aed",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/rabbitpunch_audio_mixer.vhd": {
+      "snapshot_sha256": "da1cd0fb2874740ec5447790d331a36396f90310d8aace84ac88fab29204284f",
+      "git_blob_sha256": "da1cd0fb2874740ec5447790d331a36396f90310d8aace84ac88fab29204284f",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/state/generated/jt51_state_netlist.vhd": {
+      "snapshot_sha256": "af6ad0f89208e06a192a139906735d958f46fa91b840ea0ffa2237c6b0d559a0",
+      "git_blob_sha256": "af6ad0f89208e06a192a139906735d958f46fa91b840ea0ffa2237c6b0d559a0",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/state/generated/jt7759_state_netlist.vhd": {
+      "snapshot_sha256": "6fdc86fa46e21bd97109e1cafa221d0e31c04deb2c1af48d2e15be388be5c3a9",
+      "git_blob_sha256": "6fdc86fa46e21bd97109e1cafa221d0e31c04deb2c1af48d2e15be388be5c3a9",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/cpu/t80/T80_Pack.vhd": {
+      "snapshot_sha256": "f0e6aff273f25d904fd55e53372e44b52d07a82b8c6cb58fe73ea7fde06ec22d",
+      "git_blob_sha256": "f0e6aff273f25d904fd55e53372e44b52d07a82b8c6cb58fe73ea7fde06ec22d",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/cpu/t80/T80_Reg.vhd": {
+      "snapshot_sha256": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+      "git_blob_sha256": "b40f92eb96fc55fa0adc8ca1bbb20d99133ae1dfe3728b146e37ee00ef588783",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/cpu/t80/T80_MCode.vhd": {
+      "snapshot_sha256": "d4f03ddd9693e341ace2a685153838aec39085826fd2f6128ece1a9f8852f02e",
+      "git_blob_sha256": "d4f03ddd9693e341ace2a685153838aec39085826fd2f6128ece1a9f8852f02e",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/cpu/t80/T80_ALU.vhd": {
+      "snapshot_sha256": "823a062b8be873505ac16e627351a5105101243a11483bf8f2446214893b739e",
+      "git_blob_sha256": "823a062b8be873505ac16e627351a5105101243a11483bf8f2446214893b739e",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/cpu/t80/T80.vhd": {
+      "snapshot_sha256": "ba63aaa402eadfc0d47e59e9747c516a22b7454ad0b27430e99d968efcae6ec0",
+      "git_blob_sha256": "ba63aaa402eadfc0d47e59e9747c516a22b7454ad0b27430e99d968efcae6ec0",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/cpu/t80/T80se.vhd": {
+      "snapshot_sha256": "d528be5e4a75a8e45d1965740bcd6c77180bd54e1862b8e177bea8a432e58588",
+      "git_blob_sha256": "d528be5e4a75a8e45d1965740bcd6c77180bd54e1862b8e177bea8a432e58588",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_acc.v": {
+      "snapshot_sha256": "633319a0e89a78d390cba54a24aabf6f1019b705b378b636e246dcf44c8829f8",
+      "git_blob_sha256": "633319a0e89a78d390cba54a24aabf6f1019b705b378b636e246dcf44c8829f8",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_eg.v": {
+      "snapshot_sha256": "6e7c5f315edc82b70918ea61d6d5c992204d4e8b272e33fb3ce539a9843cac5e",
+      "git_blob_sha256": "6e7c5f315edc82b70918ea61d6d5c992204d4e8b272e33fb3ce539a9843cac5e",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_exp2lin.v": {
+      "snapshot_sha256": "cecc44acf6d7c8a81e80638e4a6eeb46f17d6c8d809e7a928338553bb23fb400",
+      "git_blob_sha256": "cecc44acf6d7c8a81e80638e4a6eeb46f17d6c8d809e7a928338553bb23fb400",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_exprom.v": {
+      "snapshot_sha256": "c9f33ede4c1c0af6f54ae45620d986a2c5a2f0ef16b453dc7d2eeeac85f8cbb5",
+      "git_blob_sha256": "c9f33ede4c1c0af6f54ae45620d986a2c5a2f0ef16b453dc7d2eeeac85f8cbb5",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_kon.v": {
+      "snapshot_sha256": "e1bb08fe65a53d2dc871459cc91e4beeec9efb9e839b3a39a941fa27ac19ba0f",
+      "git_blob_sha256": "e1bb08fe65a53d2dc871459cc91e4beeec9efb9e839b3a39a941fa27ac19ba0f",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_lfo.v": {
+      "snapshot_sha256": "2bb0e19b51982f761fd50eb992c90f6dbadf467528ac09fa033b48020cd8d193",
+      "git_blob_sha256": "2bb0e19b51982f761fd50eb992c90f6dbadf467528ac09fa033b48020cd8d193",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_lin2exp.v": {
+      "snapshot_sha256": "c4351ea7711364ab394ab510326111dc5047f4e57830bddef15163cbc4dcb98e",
+      "git_blob_sha256": "c4351ea7711364ab394ab510326111dc5047f4e57830bddef15163cbc4dcb98e",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_mmr.v": {
+      "snapshot_sha256": "db3a6506091e6ea99a17ad2f5b8b11ecf36d97f74dbf0c1098cf6db601d6fdd6",
+      "git_blob_sha256": "db3a6506091e6ea99a17ad2f5b8b11ecf36d97f74dbf0c1098cf6db601d6fdd6",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_mod.v": {
+      "snapshot_sha256": "1a04fe51a56756a98b577547bbd95cf984283288f2da2e4946d75063a69d357c",
+      "git_blob_sha256": "1a04fe51a56756a98b577547bbd95cf984283288f2da2e4946d75063a69d357c",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_noise_lfsr.v": {
+      "snapshot_sha256": "6b58949a51dbfe8c96f19eac3aa84aaace7fcc5cc4e1902c084a93d3d1c4da91",
+      "git_blob_sha256": "6b58949a51dbfe8c96f19eac3aa84aaace7fcc5cc4e1902c084a93d3d1c4da91",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_noise.v": {
+      "snapshot_sha256": "87b70082becc58ece4c223ea5ed01b0c0bc0b05ae95ace9b498768429232f360",
+      "git_blob_sha256": "87b70082becc58ece4c223ea5ed01b0c0bc0b05ae95ace9b498768429232f360",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_op.v": {
+      "snapshot_sha256": "5dbb743c49af67e6dff7e6c65691a66371aaf5a126834525f9501a8af1420bbf",
+      "git_blob_sha256": "5dbb743c49af67e6dff7e6c65691a66371aaf5a126834525f9501a8af1420bbf",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_pg.v": {
+      "snapshot_sha256": "d52c369e535196ee260243b2342c6a526a1d95425440512037f3f3b5185f0a8a",
+      "git_blob_sha256": "d52c369e535196ee260243b2342c6a526a1d95425440512037f3f3b5185f0a8a",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_phinc_rom.v": {
+      "snapshot_sha256": "41fefe0b9bc9a3b71a036d12d723666e4b588c57625228eee278f9704a6f53b1",
+      "git_blob_sha256": "41fefe0b9bc9a3b71a036d12d723666e4b588c57625228eee278f9704a6f53b1",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_phrom.v": {
+      "snapshot_sha256": "b3fb0623737dd22befa0bfa9a130d7b1437e81ff3e1842538251d5cd29a75c89",
+      "git_blob_sha256": "b3fb0623737dd22befa0bfa9a130d7b1437e81ff3e1842538251d5cd29a75c89",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_pm.v": {
+      "snapshot_sha256": "9625bda77a523371fc4704ac66cfec95a9d1aff343c2e770ea5aba11eb50c8f3",
+      "git_blob_sha256": "9625bda77a523371fc4704ac66cfec95a9d1aff343c2e770ea5aba11eb50c8f3",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_reg_ch.v": {
+      "snapshot_sha256": "2303d898fa49bf67fa8aace6c1a1e00e48d2951f9a221e75058233953f670aad",
+      "git_blob_sha256": "2303d898fa49bf67fa8aace6c1a1e00e48d2951f9a221e75058233953f670aad",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_csr_op.v": {
+      "snapshot_sha256": "b129bf97cc155bc0e4312287af79b2c7985852ef65c1768f23ffa31badd5b648",
+      "git_blob_sha256": "b129bf97cc155bc0e4312287af79b2c7985852ef65c1768f23ffa31badd5b648",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_reg.v": {
+      "snapshot_sha256": "a9913cb08f562046c2f9375fd6f7a4a5a0eb4d46266df303875059761f304de7",
+      "git_blob_sha256": "a9913cb08f562046c2f9375fd6f7a4a5a0eb4d46266df303875059761f304de7",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_sh.v": {
+      "snapshot_sha256": "71246f6b6989f922220cdd370cee52ecd56c7244e11073ddc618028a4136f0aa",
+      "git_blob_sha256": "71246f6b6989f922220cdd370cee52ecd56c7244e11073ddc618028a4136f0aa",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51_timers.v": {
+      "snapshot_sha256": "e885ffd11d62c2bf42aafb90eb30e681c3d98ae9c4fe6714b13d72f491347e70",
+      "git_blob_sha256": "e885ffd11d62c2bf42aafb90eb30e681c3d98ae9c4fe6714b13d72f491347e70",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt51/hdl/jt51.v": {
+      "snapshot_sha256": "4c5f80dae49f435686d3f917897df867ba7725a44bd52c5d652658ba178689b0",
+      "git_blob_sha256": "4c5f80dae49f435686d3f917897df867ba7725a44bd52c5d652658ba178689b0",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt7759/hdl/jt7759.v": {
+      "snapshot_sha256": "a4defeee8f5b5fec795af00d6185aa941f4135ab72ae5f7fece31908c3c48c1a",
+      "git_blob_sha256": "a4defeee8f5b5fec795af00d6185aa941f4135ab72ae5f7fece31908c3c48c1a",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt7759/hdl/jt7759_adpcm.v": {
+      "snapshot_sha256": "41d795e33e2085d3d07ee0acab23e85f495f3766e61bd91f177c46e84072380d",
+      "git_blob_sha256": "41d795e33e2085d3d07ee0acab23e85f495f3766e61bd91f177c46e84072380d",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt7759/hdl/jt7759_ctrl.v": {
+      "snapshot_sha256": "19ad3a6572dec4e61d0046b222b6af53660cb558123b985f43db86dd5ed98aa9",
+      "git_blob_sha256": "19ad3a6572dec4e61d0046b222b6af53660cb558123b985f43db86dd5ed98aa9",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt7759/hdl/jt7759_data.v": {
+      "snapshot_sha256": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d",
+      "git_blob_sha256": "ee4208a1d401eee3e63e45bbf70be7efc26b93af03d91fde2d9ce9ca02f4173d",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/sound/jt7759/hdl/jt7759_div.v": {
+      "snapshot_sha256": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862",
+      "git_blob_sha256": "0ff1696f123dcbfd325fb7288606eceb4d343aed78113e3dbe26a411a19b5862",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/rabbitpunch_ram8.vhd": {
+      "snapshot_sha256": "3125a846fd3c208c8512f604952bd4766ac4d2d7ee959c0b8e53b989e31fc7fa",
+      "git_blob_sha256": "3125a846fd3c208c8512f604952bd4766ac4d2d7ee959c0b8e53b989e31fc7fa",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/rabbitpunch_upd7759_control.vhd": {
+      "snapshot_sha256": "b3fabe48db6731c86fda4a54e7d8b7ce212a71fccb83a0b258facf8af1ede454",
+      "git_blob_sha256": "b3fabe48db6731c86fda4a54e7d8b7ce212a71fccb83a0b258facf8af1ede454",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/rabbitpunch_upd7759_playback.vhd": {
+      "snapshot_sha256": "ba2f11fb337e48ca03fd539abf167b262f6ca64002986ed0bdbe5f73afda65ca",
+      "git_blob_sha256": "ba2f11fb337e48ca03fd539abf167b262f6ca64002986ed0bdbe5f73afda65ca",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/rabbitpunch_clock_enables.vhd": {
+      "snapshot_sha256": "43f72dc52568f284236f9066f1f48d74d280c55bbb5fc7677d39a29093fbfcfa",
+      "git_blob_sha256": "43f72dc52568f284236f9066f1f48d74d280c55bbb5fc7677d39a29093fbfcfa",
+      "equal_after_line_ending_normalization": true
+    },
+    "rtl/state/rabbitpunch_t80_capture.vhd": {
+      "snapshot_sha256": "39a8c43ab6603958c36ba57e1cfa9ce0a0708c355bd76faf817e0b9219e51f16",
+      "git_blob_sha256": "39a8c43ab6603958c36ba57e1cfa9ce0a0708c355bd76faf817e0b9219e51f16",
+      "equal_after_line_ending_normalization": true
+    }
+  },
+  "command_fixture_scope": "Previously qualified controlled sound-command fixture, state capability enabled; external ROM response modeled as one clock.",
+  "native_anchor_scope": "Previously qualified donor CPU and startup golden traces only; latest capture wrapper native admission not transferred.",
+  "base_bundle_source_commit": "fd3434b7dcfacb2b4e1f2d70106b4e6846d3ef85",
+  "runner_scope": "The inherited base source_commit identifies the older fixture bundle; the release_audio.commit field and audited source bytes identify the current tested implementation."
+}

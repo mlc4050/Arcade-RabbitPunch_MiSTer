@@ -191,7 +191,7 @@ The staged build records its source commit and fitter seed and checks implementa
 
 ## Verification
 
-The core is checked against MAME for ROM loading, graphics and sound, with simulation tests and Quartus timing analysis. Complete music comparison remains in progress.
+The core is checked against MAME for ROM loading and graphics, with simulation tests and Quartus timing analysis. Music and sound effects have been verified against MAME for both games. See [audio verification](docs/AUDIO_VERIFICATION.md) for the tested passages and results.
 
 Both games pass two saves and four restores with exact continuation in simulation. Focused native tests cover CPU STOP/HALT, interrupt state, repeated restores and recovery after an incomplete restore. Both production Quartus revisions pass their timing and state-resource checks. See [savestate validation](docs/SAVESTATES.md) for the evidence and scope.
 

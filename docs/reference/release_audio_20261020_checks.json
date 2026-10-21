@@ -1,0 +1,352 @@
+{
+  "accepted": true,
+  "release_commit": "d269f2b962482bdd00809207dee3710a90edbf5e",
+  "published_commit": "e20f02c1b5af5d22d2545d9ff7246b2d418e6273",
+  "checker_sha256": "3fb4ae16bc59289643ba6f28dd3c7540f80c0c90189c3d6f8d648acd01bff0bd",
+  "published_bitstream": {
+    "path": "releases/Arcade-RabbitPunch_20261020.rbf",
+    "sha256": "f7cc5bcd9f89ac3b9a4b976b7b7782bb6980dd88d7722e5df3b0b573f11f83e3",
+    "build_commit": "6ac4a1bb138d8aaaa1ee021442a7691ea4eeb3f3",
+    "release_receipt_sha256": "71eb58015af1e0c7144111f0cd45d9b669f7f4e33307723b1e8ace2af8fcc3d1",
+    "tested_release_rtl_identical_to_fitted_source": true
+  },
+  "source_identity_report_sha256": "43b2cc72e96db968550b21a8d9f7a52b391d680367982a7fa8e7ac8abbf556c7",
+  "cases": [
+    {
+      "case": "rabiolep_3s_rtl_cmde4_release_20261020_v2",
+      "samples": 187493,
+      "result_sha256": "0a8087a9216f8e76fbf37b6a02acee6d4d08e9aa6f25e240f6ea6353116c90e1",
+      "golden_case": "rabiolep_3s_rtl_cmde4_silence_correction",
+      "golden_result_sha256": "53b4df7bc7ef4db5d465b80d5db006756e13c1c995ca2a9e73a219ff5759f685",
+      "directly_audited_release_sources": [
+        "rtl/state/generated/jt51_state_netlist.vhd",
+        "rtl/state/generated/jt7759_state_netlist.vhd",
+        "rtl/state/rabbitpunch_t80_capture.vhd",
+        "rtl/rabbitpunch_z80.vhd",
+        "rtl/rabbitpunch_soundcpu.vhd",
+        "rtl/rabbitpunch_ym2151.vhd",
+        "rtl/rabbitpunch_ram8.vhd",
+        "rtl/rabbitpunch_sound_bus.vhd",
+        "rtl/rabbitpunch_sound_board.vhd",
+        "rtl/rabbitpunch_upd7759_control.vhd",
+        "rtl/rabbitpunch_upd7759_playback.vhd",
+        "rtl/rabbitpunch_upd7759.vhd",
+        "rtl/rabbitpunch_adpcm.vhd",
+        "rtl/rabbitpunch_audio.vhd",
+        "rtl/rabbitpunch_audio_mixer.vhd",
+        "rtl/rabbitpunch_clock_enables.vhd"
+      ],
+      "exact_golden_pcm_wav_timed_writes_and_sample_marker_timing": true,
+      "mame_non_timer_registers": {
+        "mame_count": 266,
+        "rtl_count": 266,
+        "matching_prefix": 266,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "artifacts": {
+        "pcm.raw": "67adeb205d583fdc44486a0ff4cb015d7254f4df5a770e21745acbbce1a83ea6",
+        "mono.wav": "0ba9d823a776c4e093d5e41691568839583575739095db16ab432d47e667bea3",
+        "rtl_sound_writes.txt": "a6b62670a3244cb22303b08590c1bf9e374d6137ff3b1ee0993e1b3b8720469d"
+      },
+      "mame_sample_starts": {
+        "mame_count": 1,
+        "rtl_count": 1,
+        "matching_prefix": 1,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "mame_sample_controls": {
+        "mame_count": 4,
+        "rtl_count": 4,
+        "matching_prefix": 4,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "export_one_bit_identities": 486
+    },
+    {
+      "case": "rpunch_3s_rtl_cmde4_release_20261020_v3",
+      "samples": 187493,
+      "result_sha256": "ec4d66379d8124c582560c3683592455ff0bf5989c87408cf735c98701918170",
+      "golden_case": "rpunch_3s_rtl_cmde4_silence_correction",
+      "golden_result_sha256": "5d3760676c96641843abdebbba17c5674ec1ef4e63a402c24834870d900c6074",
+      "directly_audited_release_sources": [
+        "rtl/state/generated/jt51_state_netlist.vhd",
+        "rtl/state/generated/jt7759_state_netlist.vhd",
+        "rtl/state/rabbitpunch_t80_capture.vhd",
+        "rtl/rabbitpunch_z80.vhd",
+        "rtl/rabbitpunch_soundcpu.vhd",
+        "rtl/rabbitpunch_ym2151.vhd",
+        "rtl/rabbitpunch_ram8.vhd",
+        "rtl/rabbitpunch_sound_bus.vhd",
+        "rtl/rabbitpunch_sound_board.vhd",
+        "rtl/rabbitpunch_upd7759_control.vhd",
+        "rtl/rabbitpunch_upd7759_playback.vhd",
+        "rtl/rabbitpunch_upd7759.vhd",
+        "rtl/rabbitpunch_adpcm.vhd",
+        "rtl/rabbitpunch_audio.vhd",
+        "rtl/rabbitpunch_audio_mixer.vhd",
+        "rtl/rabbitpunch_clock_enables.vhd"
+      ],
+      "exact_golden_pcm_wav_timed_writes_and_sample_marker_timing": true,
+      "mame_non_timer_registers": {
+        "mame_count": 266,
+        "rtl_count": 266,
+        "matching_prefix": 266,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "artifacts": {
+        "pcm.raw": "67adeb205d583fdc44486a0ff4cb015d7254f4df5a770e21745acbbce1a83ea6",
+        "mono.wav": "0ba9d823a776c4e093d5e41691568839583575739095db16ab432d47e667bea3",
+        "rtl_sound_writes.txt": "849f57ae82dc942a878060ddfa8fd83c713b3ea7df2143c71a97619dff5645ec"
+      },
+      "mame_sample_starts": {
+        "mame_count": 1,
+        "rtl_count": 1,
+        "matching_prefix": 1,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "mame_sample_controls": {
+        "mame_count": 4,
+        "rtl_count": 4,
+        "matching_prefix": 4,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "export_one_bit_identities": 486
+    },
+    {
+      "case": "rabiolep_9s_rtl_cmd99_release_20261020_parallel_v4",
+      "samples": 562493,
+      "result_sha256": "249e95a9119e5cadc734e59889fa37c4625fea93e3ba55b71e33e37312871440",
+      "golden_case": "rabiolep_9s_rtl_cmd99_silence_correction",
+      "golden_result_sha256": "b4ca57d2ac54a755976beab7b724b78932cc2a60e109f05e0e4b44a45e7c1b29",
+      "directly_audited_release_sources": [
+        "rtl/state/generated/jt51_state_netlist.vhd",
+        "rtl/state/generated/jt7759_state_netlist.vhd",
+        "rtl/state/rabbitpunch_t80_capture.vhd",
+        "rtl/rabbitpunch_z80.vhd",
+        "rtl/rabbitpunch_soundcpu.vhd",
+        "rtl/rabbitpunch_ym2151.vhd",
+        "rtl/rabbitpunch_ram8.vhd",
+        "rtl/rabbitpunch_sound_bus.vhd",
+        "rtl/rabbitpunch_sound_board.vhd",
+        "rtl/rabbitpunch_upd7759_control.vhd",
+        "rtl/rabbitpunch_upd7759_playback.vhd",
+        "rtl/rabbitpunch_upd7759.vhd",
+        "rtl/rabbitpunch_adpcm.vhd",
+        "rtl/rabbitpunch_audio.vhd",
+        "rtl/rabbitpunch_audio_mixer.vhd",
+        "rtl/rabbitpunch_clock_enables.vhd"
+      ],
+      "exact_golden_pcm_wav_timed_writes_and_sample_marker_timing": true,
+      "mame_non_timer_registers": {
+        "mame_count": 1293,
+        "rtl_count": 1293,
+        "matching_prefix": 1293,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "artifacts": {
+        "pcm.raw": "73109809c145a000efe86b6069bda5b92678d0b3ab9934502416694c44bc2e7d",
+        "mono.wav": "76631ca50473cc38e400d047d3e4f4bd33af3166e77ba408307ba40df5ffd48b",
+        "rtl_sound_writes.txt": "d38a73d1f059bc2d820c070df141099f217ac712a105b8224531bc75061c12ee"
+      },
+      "mame_sample_starts": {
+        "mame_count": 0,
+        "rtl_count": 0,
+        "matching_prefix": 0,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "mame_sample_controls": {
+        "mame_count": 2,
+        "rtl_count": 2,
+        "matching_prefix": 2,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "export_one_bit_identities": 486,
+      "mame_music": {
+        "analysis_sha256": "2d47742dbfc7064d5dafa3c55e9ab32b535df10de5c828ec85a9f59b1e6e83f2",
+        "analysis_git_blob_sha256": "6dca1faa52dc4b6d992aa7c67a628bc2e3a0df9cb348ba19eda52c151100b5fe",
+        "analysis_hash_scope": "Local retained analysis bytes; separate Git blob hash records repository LF form. Equality checked after line-ending normalization.",
+        "metric_transfer": "Current WAV and complete timed writes are byte-identical to both verified corpus metric inputs; preserved MAME metadata/files match original report hashes.",
+        "note_timing": {
+          "sequence": {
+            "mame_count": 126,
+            "rtl_count": 126,
+            "matching_prefix": 126,
+            "shorter_is_exact_prefix": true,
+            "first_difference": null,
+            "endpoint_tolerance_seconds": 0.005,
+            "endpoint_compatible": true
+          },
+          "paired_notes": 126,
+          "first_mame_seconds": 1.06971025,
+          "first_rtl_seconds": 1.069570286,
+          "maximum_absolute_offset_ms": 0.1559790000000838,
+          "median_offset_ms": -0.14772499999993194,
+          "fitted_drift_ppm": -1.7740727444222468,
+          "fitted_initial_offset_ms": -0.13690656289734546,
+          "span_seconds": 7.766158000000001
+        },
+        "waveform": {
+          "onsets_seconds": {
+            "mame": 1.0735625,
+            "rtl": 1.07336
+          },
+          "duration_seconds": 7.875,
+          "rms_ratio": 0.9718750165511183,
+          "gain_difference_db": -0.24779163793989215,
+          "envelope_correlation": 0.9839671016772313,
+          "mean_spectral_cosine": 0.9810221351511657,
+          "spectral_active_windows": 392,
+          "spectral_both_silent_windows": 0,
+          "scope": "Independently threshold-aligned PCM, linear resampling to 48kHz, no gain fitting/time stretch; descriptive metrics, no percent-accuracy interpretation."
+        },
+        "raw_timer_difference_retained": {
+          "mame_count": 75164,
+          "rtl_count": 74550,
+          "matching_prefix": 334,
+          "shorter_is_exact_prefix": false,
+          "first_difference": {
+            "index": 334,
+            "mame": [
+              20,
+              10
+            ],
+            "rtl": [
+              20,
+              42
+            ]
+          }
+        },
+        "scope": "Ordered note/timing checks and descriptive waveform metrics; not bit-exact MAME PCM or all-track/analog-board accuracy."
+      }
+    },
+    {
+      "case": "rpunch_9s_rtl_cmd99_release_20261020_v5",
+      "samples": 562493,
+      "result_sha256": "004b7ecb04b1cb86a1c8fa87ca7af2f03f286f73831415d5116c308eccffac57",
+      "golden_case": "rpunch_9s_rtl_cmd99_corpus",
+      "golden_result_sha256": "1ceb28ad4239c0b6fda7ade2975261d164080fa84370c151783fcd607a38ff4f",
+      "directly_audited_release_sources": [
+        "rtl/state/generated/jt51_state_netlist.vhd",
+        "rtl/state/generated/jt7759_state_netlist.vhd",
+        "rtl/state/rabbitpunch_t80_capture.vhd",
+        "rtl/rabbitpunch_z80.vhd",
+        "rtl/rabbitpunch_soundcpu.vhd",
+        "rtl/rabbitpunch_ym2151.vhd",
+        "rtl/rabbitpunch_ram8.vhd",
+        "rtl/rabbitpunch_sound_bus.vhd",
+        "rtl/rabbitpunch_sound_board.vhd",
+        "rtl/rabbitpunch_upd7759_control.vhd",
+        "rtl/rabbitpunch_upd7759_playback.vhd",
+        "rtl/rabbitpunch_upd7759.vhd",
+        "rtl/rabbitpunch_adpcm.vhd",
+        "rtl/rabbitpunch_audio.vhd",
+        "rtl/rabbitpunch_audio_mixer.vhd",
+        "rtl/rabbitpunch_clock_enables.vhd"
+      ],
+      "exact_golden_pcm_wav_timed_writes_and_sample_marker_timing": true,
+      "mame_non_timer_registers": {
+        "mame_count": 1545,
+        "rtl_count": 1545,
+        "matching_prefix": 1545,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "artifacts": {
+        "pcm.raw": "8e4e00eed2ec90518f0c2ef249f08d92d4836cee075f76a00521a124c01cd3be",
+        "mono.wav": "8b86555556bc71876306875a51cd5328c05bc7004c0a69077fb62638a37ee5e7",
+        "rtl_sound_writes.txt": "50e0dd30d221b624b324d60cb156d59bf32ab9ed681c7c4c5b1b5c07d6d39814"
+      },
+      "mame_sample_starts": {
+        "mame_count": 0,
+        "rtl_count": 0,
+        "matching_prefix": 0,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "mame_sample_controls": {
+        "mame_count": 2,
+        "rtl_count": 2,
+        "matching_prefix": 2,
+        "shorter_is_exact_prefix": true,
+        "first_difference": null
+      },
+      "export_one_bit_identities": 486,
+      "mame_music": {
+        "analysis_sha256": "0c7d30ea76e26f8299feaf6e1de0882e4e1a1b44d6fde92d1546a469378cddb6",
+        "analysis_git_blob_sha256": "8a23997c42d941089451bb83eb74bf49e567ddccffcf9241baf1bf2a1d0ee0fb",
+        "analysis_hash_scope": "Local retained analysis bytes; separate Git blob hash records repository LF form. Equality checked after line-ending normalization.",
+        "metric_transfer": "Current WAV and complete timed writes are byte-identical to both verified corpus metric inputs; preserved MAME metadata/files match original report hashes.",
+        "note_timing": {
+          "sequence": {
+            "mame_count": 126,
+            "rtl_count": 126,
+            "matching_prefix": 126,
+            "shorter_is_exact_prefix": true,
+            "first_difference": null,
+            "endpoint_tolerance_seconds": 0.005,
+            "endpoint_compatible": true
+          },
+          "paired_notes": 126,
+          "first_mame_seconds": 1.09301425,
+          "first_rtl_seconds": 1.093123779,
+          "maximum_absolute_offset_ms": 0.21802900000000847,
+          "median_offset_ms": 0.09953249999972158,
+          "fitted_drift_ppm": -2.047391113555011,
+          "fitted_initial_offset_ms": 0.11142735376107488,
+          "span_seconds": 7.76615825
+        },
+        "waveform": {
+          "onsets_seconds": {
+            "mame": 1.0968541666666667,
+            "rtl": 1.096928
+          },
+          "duration_seconds": 7.85,
+          "rms_ratio": 0.96780089045305,
+          "gain_difference_db": -0.2842796528415923,
+          "envelope_correlation": 0.9846791782716284,
+          "mean_spectral_cosine": 0.9814590798041417,
+          "spectral_active_windows": 391,
+          "spectral_both_silent_windows": 0,
+          "scope": "Independently threshold-aligned PCM, linear resampling to 48kHz, no gain fitting/time stretch; descriptive metrics, no percent-accuracy interpretation."
+        },
+        "raw_timer_difference_retained": {
+          "mame_count": 75222,
+          "rtl_count": 74608,
+          "matching_prefix": 334,
+          "shorter_is_exact_prefix": false,
+          "first_difference": {
+            "index": 334,
+            "mame": [
+              20,
+              10
+            ],
+            "rtl": [
+              20,
+              42
+            ]
+          }
+        },
+        "scope": "Ordered note/timing checks and descriptive waveform metrics; not bit-exact MAME PCM or all-track/analog-board accuracy."
+      }
+    }
+  ],
+  "retained_pause_mute": {
+    "source": "rtl/rabbitpunch_system.vhd",
+    "source_sha256": "8ce975faa00e9916ed3ef4a14e7518dd8661509e09cfa91119ae0d4550277275",
+    "assignment": "ou16_mono_pcm <= (others => '0') when (i_pause = '1') else su16_mono_pcm;",
+    "scope": "Retained source gate; no new mute change or new hardware pause test."
+  },
+  "production_rtl_changed": false,
+  "new_rbf_required": false,
+  "native_capture_admission_transferred": false,
+  "scope": "Four bounded ordinary sound-playback tests of the published state-capable release: both ROM sets, corrected ADPCM example and nine-second music99. Exact golden PCM/WAV/timed writes/sample timing, complete MAME non-timer sequences; note/waveform metrics transferred only through verified input equality. No new active-restore/native whole-machine/hardware qualification."
+}
