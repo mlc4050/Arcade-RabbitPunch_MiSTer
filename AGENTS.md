@@ -32,7 +32,8 @@ These conventions apply to every VHDL file we author or maintain, including
 testbenches and packages. Wrap imported entry points used by our board logic;
 required vendor-type conversions stay inside that wrapper. Do not rename imported
 internal hierarchies or MiSTer sys sources for style cleanup.
-All generated work, caches, build outputs, logs and temporary files go on D:.
+All generated work, caches, build outputs, logs, temporary files and archives
+must stay under D:/git. Do not store project files elsewhere on D: or on C:.
 Use scripts/d_drive.ps1 to launch Python tools with D-drive temporary/cache paths.
 
 The user requests continuous independent work within the approved scope. Keep

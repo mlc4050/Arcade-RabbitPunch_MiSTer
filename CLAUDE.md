@@ -22,7 +22,7 @@ MiSTer arcade core for RabbitPunch. Built with the `mister-arcade-core` skill.
   session's JTAG (`docs/WORKFLOW.md`, section 2a). JTAG has priority: a session waiting for the
   Blaster reserves it, and no new build or simulation starts while that reservation stands
   (`python scripts/hwlock.py --status`).
-- Commit to `develop` as work lands. Never push `develop`; squash onto `master` only when asked.
+- `main` is the integrated baseline. Start future fixes/features from `main`, commit as work lands, and merge qualified changes back. Push only when the user asks. The finished `develop` branch has been removed.
   Revert the commit of a build that is rejected.
 - MAME is the reference. Follow it where it is wrong and log it in `docs/MAME_KLUDGES.md`.
 - Anything approximate, stubbed or special-cased goes in `docs/HACKS.md` when written.
