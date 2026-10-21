@@ -39,11 +39,28 @@ assert resources['commit']==commit
 production=['RabbitPunch.sv','RabbitPunch.qsf','RabbitPunch.sdc','files.qip','state_emu_eval.qip','rtl','sys']
 assert not git('diff','--name-only',commit,'--',*production)
 assert not git('ls-files','--others','--exclude-standard','--','rtl','sys')
+line_ending_equivalence=[]
 for receipt in ('cheats_board_v1','cheats_engine_mirrored_v2','cheats_host_v4','cheats_trace_rpunch_v1','cheats_trace_rabiolep_v1', 'state_controls_joystick_slotselect_v2', 'state_controls_slotselect_v2', 'state_controls_partial_slotselect_v2'):
     report=json.loads((root/f'docs/reference/{receipt}_checks.json').read_text())
     assert report['accepted']
     for name,digest in report['source_sha256'].items():
-        assert sha(root/name)==digest,name
+        if sha(root/name)!=digest:
+            # Earlier worktrees used LF; the main Windows checkout may use
+            # CRLF. Admit only authored text that matches the hash-pinned
+            # original test snapshot after CRLF normalization.
+            assert '/vendor/' not in name and not name.startswith('rtl/cpu/'),name
+            case=report.get('result',{}).get('case',receipt)
+            candidates=[root/'debug/baselines'/case/'inputs'/name,
+                root/'.local/archives/20261021-cleanup/snapshots/RabbitPunch-cheats-work/debug/baselines'/case/'inputs'/name]
+            matches=[candidate for candidate in candidates if candidate.is_file() and sha(candidate)==digest]
+            assert matches,'Original source snapshot missing: '+name
+            current=(root/name).read_bytes().replace(b'\r\n',b'\n')
+            original=matches[0].read_bytes().replace(b'\r\n',b'\n')
+            assert current==original,'Production source changed: '+name
+            line_ending_equivalence.append(dict(receipt=receipt,path=name,
+                original_sha256=digest,current_sha256=sha(root/name),
+                normalized_sha256=hashlib.sha256(current).hexdigest(),
+                snapshot=matches[0].relative_to(root).as_posix()))
 date=git('show','-s','--format=%cs',commit).replace('-','')
 out=root/f'debug/bringup/{date}_{args.label}_{commit[:7]}'
 assert not out.exists()
@@ -75,7 +92,7 @@ minimum={kind:min(slack for name,slack in rows if kind in name) for kind in ('Se
 (out/'README.txt').write_text('Rabbit Punch / Rabio Lepus cheats candidate\n\nCopy the contents of _Arcade to your MiSTer _Arcade folder. Replace both game MRAs as well as the RBF; the Cheats submenu uses code definitions from these MRAs. No ROM files are included.\n\nCheats > offers Infinite Missiles, Infinite Lives and Infinite Energy/Shield for each player. Enable/disable independently. Hold SS with Left/Right to select the savestate slot, Down to save or Up to restore. The slot also updates in the OSD. Existing savestate image compatibility is retained.\n\nMAME 0.289 and native VHDL simulations pass; full fitted timing passes. Cheats have not yet been checked on physical MiSTer hardware. Test both sets, toggle each cheat, disable them again, and save/restore with a cheat enabled. Cheat choices follow the current menu selection rather than the saved game.\n\nSource '+commit+', Quartus 17.0.2 Lite, seed3. See manifest.json for hashes and timing.\n')
 report=dict(accepted=True,commit=commit,revision='RabbitPunch',seed=3,
     rbf=rbf.relative_to(root).as_posix(),rbf_sha256=sha(rbf),timing_checks=len(rows),minimum_slack_ns=minimum,
-    mras=mra_records,hardware_verified=False,published=False,deployed=False,
+    mras=mra_records,source_line_ending_equivalence=line_ending_equivalence,hardware_verified=False,published=False,deployed=False,
     scope='Private source-matched full fitted cheats candidate. All reported timing checks, required hierarchy, framework coverage scope, fitted clock and state resource checks pass. No physical cheat validation, publication or deployment.',
     files={p.relative_to(out).as_posix():sha(p) for p in out.rglob('*') if p.is_file()})
 (out/'manifest.json').write_text(json.dumps(report,indent=2)+'\n')

@@ -702,3 +702,11 @@ state mapping changes. Physical controller verification uses the next RBF.
 Receipts: reference/state_controls_joystick_slotselect_v2_checks.json,
 reference/state_controls_slotselect_v2_checks.json and
 reference/state_controls_partial_slotselect_v2_checks.json.
+
+The slot-selection candidate is built from c39670f, release seed3. All144
+required timing checks pass (minimum setup +0.178ns, hold +0.088ns), as do the
+clock, hierarchy and state-resource checks. The private verified ZIP is
+debug/bringup/RabbitPunch_slot_select_20261021.zip, with a dated RBF and both
+sets' direct/DDR cheat MRAs. See reference/slot_select_release_seed3_checks.json.
+The candidate retains ABI3A1B6DDE; controller operation on physical MiSTer
+hardware is still a separate check. No ROMs, deployment or publication.
