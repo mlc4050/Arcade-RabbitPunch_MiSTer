@@ -16,6 +16,7 @@ architecture test of state_controls_joystick_tb is
     signal su128_status, su128_feedback : unsigned(127 downto 0) := (others => '0');
     signal su32_joystick0, su32_joystick1 : unsigned(31 downto 0) := (others => '0');
     signal s_ready : std_logic := '1';
+    signal s_busy : std_logic := '0';
     signal s_finished, s_success, s_incomplete : std_logic := '0';
     signal s_save, s_restore, s_set, s_unavailable : std_logic;
     signal su2_slot : unsigned(1 downto 0);
@@ -30,7 +31,7 @@ begin
             iu32_joystick0 => su32_joystick0,
             iu32_joystick1 => su32_joystick1,
             i_service_ready => s_ready,
-            i_service_busy => '0',
+            i_service_busy => s_busy,
             i_service_finished => s_finished,
             i_service_success => s_success,
             o_save => s_disabled_save,
@@ -52,7 +53,7 @@ begin
             iu32_joystick0 => su32_joystick0,
             iu32_joystick1 => su32_joystick1,
             i_service_ready => s_ready,
-            i_service_busy => '0',
+            i_service_busy => s_busy,
             i_service_finished => s_finished,
             i_service_success => s_success,
             i_service_incomplete => s_incomplete,
@@ -82,6 +83,34 @@ begin
             end if;
             tick;
             s_finished <= '0';
+        end procedure;
+        procedure change_slot(vint_player, vint_direction, vint_expected : natural) is
+            variable vu128_expected : unsigned(127 downto 0);
+        begin
+            su32_joystick0 <= (others => '0');
+            su32_joystick1 <= (others => '0');
+            tick;
+            vu128_expected := su128_status;
+            vu128_expected(6 downto 5) := to_unsigned(vint_expected, 2);
+            if (vint_player = 0) then
+                su32_joystick0 <= to_unsigned(16#8000# + 2 ** vint_direction, 32);
+            else
+                su32_joystick1 <= to_unsigned(16#8000# + 2 ** vint_direction, 32);
+            end if;
+            tick;
+            assert (s_set = '1' and su128_feedback = vu128_expected and
+                s_save = '0' and s_restore = '0' and s_unavailable = '1')
+                report "Controller slot selection lost status, direction, wrap or feedback guard" severity failure;
+            for vint_cycle in 0 to 3 loop
+                tick;
+                assert (s_set = '0' and s_save = '0' and s_restore = '0')
+                    report "Held slot-selection chord repeated or issued a command" severity failure;
+            end loop;
+            su128_status <= su128_feedback;
+            tick;
+            tick;
+            assert (s_unavailable = '0' and su2_slot = vint_expected and s_set = '0')
+                report "Selected controller slot did not synchronize with OSD" severity failure;
         end procedure;
     begin
         assert (F_STATE_CONFIG(false) = CSTR_DEFAULT_CONFIG_STRING) severity failure;
@@ -145,6 +174,89 @@ begin
         complete(false);
         tick;
         assert (s_restore = '0' and s_set = '0') severity failure;
+        -- Controller slot selection shares the host's OSD slot, independently
+        -- of autoincrement. Both directions wrap and both players can use it.
+        su32_joystick0 <= (others => '0');
+        su32_joystick1 <= (others => '0');
+        s_incomplete <= '0';
+        su128_status(7) <= '0';
+        su128_status(100) <= '1';
+        tick;
+        change_slot(0, 1, 3);
+        change_slot(0, 0, 0);
+        change_slot(1, 0, 1);
+        change_slot(1, 1, 0);
+
+        -- SS and direction must belong to the same controller. Opposing
+        -- directions do not pick an arbitrary winner.
+        su32_joystick0 <= x"00008000";
+        su32_joystick1 <= x"00000001";
+        tick;
+        assert (s_set = '0') report "Cross-controller SS/Right changed slot" severity failure;
+        su32_joystick0 <= x"00008003";
+        tick;
+        assert (s_set = '0') report "Opposing directions changed slot" severity failure;
+        su32_joystick0 <= (others => '0');
+        su32_joystick1 <= (others => '0');
+        tick;
+
+        -- Busy/unavailable edges are discarded, not replayed on becoming ready.
+        s_busy <= '1';
+        su32_joystick0 <= x"00008001";
+        tick;
+        s_busy <= '0';
+        tick;
+        assert (s_set = '0') report "Busy selection edge was deferred" severity failure;
+        su32_joystick0 <= (others => '0');
+        tick;
+        s_ready <= '0';
+        su32_joystick1 <= x"00008002";
+        tick;
+        s_ready <= '1';
+        tick;
+        assert (s_set = '0') report "Unavailable selection edge was deferred" severity failure;
+        change_slot(1, 0, 1);
+
+        -- SAVE cannot use the previous slot while feedback is unacknowledged.
+        su32_joystick1 <= (others => '0');
+        tick;
+        su32_joystick0 <= x"00008001";
+        tick;
+        assert (s_set = '1' and su128_feedback(6 downto 5) = 2) severity failure;
+        su32_joystick1 <= x"00008004";
+        tick;
+        assert (s_save = '0') report "SAVE bypassed pending slot feedback" severity failure;
+        su128_status <= su128_feedback;
+        tick;
+        tick;
+        assert (s_save = '0') report "Held SAVE was replayed after slot feedback" severity failure;
+        su32_joystick0 <= (others => '0');
+        su32_joystick1 <= (others => '0');
+        tick;
+        su32_joystick1 <= x"00008004";
+        tick;
+        assert (s_save = '1' and su2_slot = 2)
+            report "SAVE did not use controller-selected slot" severity failure;
+        su32_joystick1 <= (others => '0');
+        su32_joystick0 <= x"00008002";
+        tick;
+        assert (s_set = '0' and su2_slot = 2)
+            report "Slot changed during an active state transfer" severity failure;
+        complete(true);
+        tick;
+        assert (s_set = '0' and su2_slot = 2)
+            report "Pending selection was deferred until transfer completion" severity failure;
+        su32_joystick0 <= (others => '0');
+        tick;
+        su32_joystick0 <= x"00008008";
+        tick;
+        assert (s_restore = '1' and su2_slot = 2)
+            report "RESTORE did not use controller-selected slot" severity failure;
+        complete(true);
+        tick;
+        su32_joystick0 <= (others => '0');
+        tick;
+        change_slot(0, 1, 1);
         report "STATE_CONTROLS_JOYSTICK_PASS";
         finish;
     end process;

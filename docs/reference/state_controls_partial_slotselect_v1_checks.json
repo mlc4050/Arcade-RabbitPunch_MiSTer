@@ -1,0 +1,13 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_config.vhd": "25c7f951d4742faaedfef48e65766eaf23c2cb7f5a82bfce39354b066db7a719",
+    "rtl/state/rabbitpunch_state_config.vhd": "9eb1ba638c888b2f607be9ee619015d5b83426a0e8f65eeda926045f550a7442",
+    "rtl/state/rabbitpunch_state_controls.vhd": "a5728515222df981b8065105be57369b9a6fe2ed28a12ef55fbc2f2870d5d809",
+    "sim/state/state_controls_partial_tb.vhd": "2c70c453d5ba0ca648928edc1e547269b411f79f813022b87d6581524c20fcfb"
+  },
+  "controller_mappings": {},
+  "runner_sha256": "bd7e956b57fbf90a4f9b8664f3b4ca6f64f83383e0628cbe9138ad0cac0643ab",
+  "log_sha256": "11ea6f659aae526968d042935f260ecc273dfc4dde163055d5149a684e248e0e",
+  "scope": "Partial-apply service hold with restore-only readiness. Reject SAVE without a pending UI ticket; admit RESTORE with the rejected SAVE held; no deferred SAVE or slot increment on recovery. Synthetic service/host endpoints; no actual hps_io, full apply engine, OSD rendering or hardware."
+}

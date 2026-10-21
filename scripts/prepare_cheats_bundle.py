@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 from pathlib import Path
+import argparse
 import hashlib
 import json
 import re
@@ -17,6 +18,10 @@ def sha(path):
 def git(*args):
     return subprocess.check_output(['git','-C',str(root),*args],text=True).strip()
 
+parser=argparse.ArgumentParser(description='Package a timed private candidate with matching cheat MRAs.')
+parser.add_argument('--label',default='cheats')
+args=parser.parse_args()
+assert args.label.replace('_','').isalnum()
 stage=root/'build'
 stamp=(stage/'BUILT_COMMIT').read_text()
 commit=stamp.split()[0]
@@ -34,13 +39,13 @@ assert resources['commit']==commit
 production=['RabbitPunch.sv','RabbitPunch.qsf','RabbitPunch.sdc','files.qip','state_emu_eval.qip','rtl','sys']
 assert not git('diff','--name-only',commit,'--',*production)
 assert not git('ls-files','--others','--exclude-standard','--','rtl','sys')
-for receipt in ('cheats_board_v1','cheats_engine_mirrored_v2','cheats_host_v2','cheats_trace_rpunch_v1','cheats_trace_rabiolep_v1'):
+for receipt in ('cheats_board_v1','cheats_engine_mirrored_v2','cheats_host_v3','cheats_trace_rpunch_v1','cheats_trace_rabiolep_v1', 'state_controls_joystick_slotselect_v1', 'state_controls_slotselect_v1', 'state_controls_partial_slotselect_v1'):
     report=json.loads((root/f'docs/reference/{receipt}_checks.json').read_text())
     assert report['accepted']
     for name,digest in report['source_sha256'].items():
         assert sha(root/name)==digest,name
 date=git('show','-s','--format=%cs',commit).replace('-','')
-out=root/f'debug/bringup/{date}_cheats_{commit[:7]}'
+out=root/f'debug/bringup/{date}_{args.label}_{commit[:7]}'
 assert not out.exists()
 archive=out/'fit_evidence'
 archive.mkdir(parents=True)
@@ -67,15 +72,17 @@ for block in re.split(r'\n\s*\n',(stage/'output_files/RabbitPunch.sta.summary').
     if kind and slack:
         rows.append((kind[1].strip(),float(slack[1])))
 minimum={kind:min(slack for name,slack in rows if kind in name) for kind in ('Setup','Hold','Recovery','Removal','Minimum Pulse Width') if any(kind in name for name,slack in rows)}
-(out/'README.txt').write_text('Rabbit Punch / Rabio Lepus cheats candidate\n\nCopy the contents of _Arcade to your MiSTer _Arcade folder. Replace both game MRAs as well as the RBF; the Cheats submenu uses code definitions from these MRAs. No ROM files are included.\n\nCheats > offers Infinite Missiles, Infinite Lives and Infinite Energy/Shield for each player. Enable/disable independently. Existing savestates and controls are retained.\n\nMAME 0.289 and native VHDL simulations pass; full fitted timing passes. Cheats have not yet been checked on physical MiSTer hardware. Test both sets, toggle each cheat, disable them again, and save/restore with a cheat enabled. Cheat choices follow the current menu selection rather than the saved game.\n\nSource '+commit+', Quartus 17.0.2 Lite, seed3. See manifest.json for hashes and timing.\n')
+(out/'README.txt').write_text('Rabbit Punch / Rabio Lepus cheats candidate\n\nCopy the contents of _Arcade to your MiSTer _Arcade folder. Replace both game MRAs as well as the RBF; the Cheats submenu uses code definitions from these MRAs. No ROM files are included.\n\nCheats > offers Infinite Missiles, Infinite Lives and Infinite Energy/Shield for each player. Enable/disable independently. Hold SS with Left/Right to select the savestate slot, Down to save or Up to restore. The slot also updates in the OSD. Existing savestate image compatibility is retained.\n\nMAME 0.289 and native VHDL simulations pass; full fitted timing passes. Cheats have not yet been checked on physical MiSTer hardware. Test both sets, toggle each cheat, disable them again, and save/restore with a cheat enabled. Cheat choices follow the current menu selection rather than the saved game.\n\nSource '+commit+', Quartus 17.0.2 Lite, seed3. See manifest.json for hashes and timing.\n')
 report=dict(accepted=True,commit=commit,revision='RabbitPunch',seed=3,
     rbf=rbf.relative_to(root).as_posix(),rbf_sha256=sha(rbf),timing_checks=len(rows),minimum_slack_ns=minimum,
     mras=mra_records,hardware_verified=False,published=False,deployed=False,
     scope='Private source-matched full fitted cheats candidate. All reported timing checks, required hierarchy, framework coverage scope, fitted clock and state resource checks pass. No physical cheat validation, publication or deployment.',
     files={p.relative_to(out).as_posix():sha(p) for p in out.rglob('*') if p.is_file()})
 (out/'manifest.json').write_text(json.dumps(report,indent=2)+'\n')
-(root/'docs/reference/cheats_release_seed3_checks.json').write_text(json.dumps(report,indent=2)+'\n')
-bundle=root/f'debug/bringup/RabbitPunch_Cheats_{date}'
+target=root/f'docs/reference/{args.label}_release_seed3_checks.json'
+assert not target.exists(), 'Preserve earlier receipts'
+target.write_text(json.dumps(report,indent=2)+'\n')
+bundle=root/f'debug/bringup/RabbitPunch_{args.label}_{date}'
 assert not bundle.with_suffix('.zip').exists()
 shutil.make_archive(str(bundle),'zip',out,'_Arcade')
 print('CHEATS_CANDIDATE_READY',out)

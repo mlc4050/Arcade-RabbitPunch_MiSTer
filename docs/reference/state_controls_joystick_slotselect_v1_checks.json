@@ -1,0 +1,34 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_config.vhd": "25c7f951d4742faaedfef48e65766eaf23c2cb7f5a82bfce39354b066db7a719",
+    "rtl/state/rabbitpunch_state_config.vhd": "9eb1ba638c888b2f607be9ee619015d5b83426a0e8f65eeda926045f550a7442",
+    "rtl/state/rabbitpunch_state_controls.vhd": "a5728515222df981b8065105be57369b9a6fe2ed28a12ef55fbc2f2870d5d809",
+    "sim/state/state_controls_joystick_tb.vhd": "981efcfb1cdf1761da1dfe97a50a6848096d3d6622fae7f13365d659592fd5e0"
+  },
+  "controller_mappings": {
+    "releases/Rabbit Punch (US).mra": {
+      "sha256": "bf274d48c3aea2eed914aab20a2ac6f53af9dc6c34aaf7a3f3710b81605050f5",
+      "savestate_joystick_bit": 15,
+      "existing_action_positions_preserved": true
+    },
+    "releases/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra": {
+      "sha256": "e84b6fbffa23694839772b00f92c558a8c1563f793ab88cd4b9346f9f717377e",
+      "savestate_joystick_bit": 15,
+      "existing_action_positions_preserved": true
+    },
+    "releases/Rabio Lepus (Japan).mra": {
+      "sha256": "fe2c21689d359a13572ad7749c080819bd6d5f06a6e0af5ffa0054cf35d8ed85",
+      "savestate_joystick_bit": 15,
+      "existing_action_positions_preserved": true
+    },
+    "releases/_alternatives/_ddr/Rabio Lepus (Japan) - DDR load.mra": {
+      "sha256": "b75b39e557a4fa470761fd19cfcd635dc66b0f22c4fbaf99a09ba92514471948",
+      "savestate_joystick_bit": 15,
+      "existing_action_positions_preserved": true
+    }
+  },
+  "runner_sha256": "bd7e956b57fbf90a4f9b8664f3b4ca6f64f83383e0628cbe9138ad0cac0643ab",
+  "log_sha256": "8aae4cf508e81f2c88951a93b6470408560aad4a560d1fa1d62739dbf02e41ca",
+  "scope": "Controller SS+Left/Right selects the shared OSD slot with wrap and acknowledged feedback; SS+Down/Up and OSD share operation admission, selected slot, final-successful-save autoincrement and host feedback ticket. Both controllers, held/unavailable edges, cross-controller isolation and partial-restore retries; game-action suppression function preserves legacy disabled behavior. Synthetic service/host endpoints; no actual controller hardware, hps_io or whole-shell proof."
+}

@@ -34,6 +34,8 @@ end entity;
 architecture rtl of rabbitpunch_state_controls is
     signal s_previous_save, s_previous_restore : std_logic := '0';
     signal s_request_save, s_request_restore : std_logic;
+    signal s_request_previous, s_request_next : std_logic;
+    signal s_previous_previous, s_previous_next : std_logic := '0';
     signal s_pending, s_saving, s_increment : std_logic := '0';
     signal s_feedback_pending : std_logic := '0';
     signal su2_slot : unsigned(1 downto 0) := (others => '0');
@@ -47,6 +49,12 @@ begin
     s_request_restore <= iu128_status(9) or
         (iu32_joystick0(15) and iu32_joystick0(3)) or
         (iu32_joystick1(15) and iu32_joystick1(3));
+    s_request_previous <=
+        (iu32_joystick0(15) and iu32_joystick0(1)) or
+        (iu32_joystick1(15) and iu32_joystick1(1));
+    s_request_next <=
+        (iu32_joystick0(15) and iu32_joystick0(0)) or
+        (iu32_joystick1(15) and iu32_joystick1(0));
     ou2_slot <= su2_slot when s_pending = '1' else iu128_status(6 downto 5);
     o_unavailable <= '1' when not GBOOL_ENABLE else
         s_pending or s_feedback_pending or i_service_busy or not i_service_ready;
@@ -61,6 +69,8 @@ begin
             o_status_set <= '0';
             s_previous_save <= s_request_save;
             s_previous_restore <= s_request_restore;
+            s_previous_previous <= s_request_previous;
+            s_previous_next <= s_request_next;
             if (i_initialize = '1') then
                 s_pending <= '0';
                 s_saving <= '0';
@@ -105,6 +115,20 @@ begin
                         s_saving <= '0';
                         s_increment <= '0';
                         su2_slot <= iu128_status(6 downto 5);
+                    elsif ((s_request_previous = '1' and s_previous_previous = '0' and s_request_next = '0') or
+                        (s_request_next = '1' and s_previous_next = '0' and s_request_previous = '0')) then
+                        -- Use the same host feedback ticket as autoincrement.
+                        -- Commands wait until the OSD slot acknowledges it.
+                        vu128_status := iu128_status;
+                        if (s_request_previous = '1') then
+                            vu128_status(6 downto 5) := iu128_status(6 downto 5) - 1;
+                        else
+                            vu128_status(6 downto 5) := iu128_status(6 downto 5) + 1;
+                        end if;
+                        ou128_status_data <= vu128_status;
+                        o_status_set <= '1';
+                        s_feedback_pending <= '1';
+                        su2_feedback_source <= iu128_status(6 downto 5);
                     end if;
                 end if;
             end if;

@@ -683,3 +683,22 @@ corpus and whole-core integration/timing remain pending. The corrected189-bit
 model has not inherited the earlier192-bit FPGA qualification.
 See [SOUND_STATE_NETLIST.md](SOUND_STATE_NETLIST.md) for exact inventory, proof
 boundaries, initialization policy, evidence and regeneration commands.
+
+## Controller slot selection
+
+Hold Savestate (SS) and press Left/Right to select the previous/next slot.
+Selection wraps 1 to 4 in either direction. SS+Down saves and SS+Up restores.
+The shared OSD selection is updated through the existing host status handshake.
+Each press changes one slot; holding a direction does not repeat. Both players
+can select slots, but SS and direction must come from the same controller.
+Opposing Left/Right requests are ignored. Save/restore takes priority over a
+simultaneous slot-change edge. Commands wait for the host's slot acknowledgment;
+edges during a busy transfer or unavailable service are discarded, not queued.
+
+All three state-control tests pass, including failed saves, autoincrement,
+delayed host acknowledgment and partial-restore recovery. The savestate ABI
+remains 3A1B6DDE. This changes host controls only, with no game/graphics/audio
+state mapping changes. Physical controller verification uses the next RBF.
+Receipts: reference/state_controls_joystick_slotselect_v1_checks.json,
+reference/state_controls_slotselect_v1_checks.json and
+reference/state_controls_partial_slotselect_v1_checks.json.
