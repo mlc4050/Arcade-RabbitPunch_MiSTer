@@ -453,8 +453,10 @@ slot (1 through 4), alongside the existing OSD status feedback. No popup is
 emitted for held or rejected chords, reset, or automatic slot increments.
 The four message IDs and the end-of-config info table pass native VHDL
 regressions, alongside existing command and partial-recovery tests. State ABI
-3A1B6DDE is unchanged. Full seed3 implementation and timing qualification are
-pending; physical popup rendering remains unverified.
+3A1B6DDE is unchanged. The combined popup candidate passes the full seed2 implementation and all
+144 scoped timing checks at source 5e02229; physical popup rendering remains
+unverified. See reference/slot_popup_release_seed2_checks.json and
+reference/slot_popup_bundle_checks.json.
 
 
 The initial slot-popup fit at bdde886 was intentionally stopped during fitting
@@ -462,3 +464,11 @@ to include the requested Loading state notification. It is not a qualified
 RBF and its logs remain in .local/builds/slot_popup_v1. The replacement build
 also emits a selected-slot Loading state popup on every admitted restore,
 including SS + Up and the OSD command.
+
+The combined popup seed3 fit at 5e02229 compiled successfully but failed one
+HDMI scaler setup corner by 0.169 ns (Slow 1100mV -40C, ascal o_dir to
+o_hfrac, three logic levels). This RBF is rejected. See
+reference/slot_popup_seed3_rejected_checks.json. The fresh seed2 fit passes
+with the same RTL and timing constraints: minimum setup +0.229 ns and hold
++0.076 ns. ZIP contents and the post-fit floorplan are verified. No deployment
+or publication.

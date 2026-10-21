@@ -1,0 +1,12 @@
+{
+  "accepted": true,
+  "commit": "5e02229106b4ada3d34cb1e9a059352640254840",
+  "revision": "RabbitPunch",
+  "seed": 2,
+  "stage": ".local/builds/slot_loading_popup_seed2_v1",
+  "files": {
+    "docs/floorplan/RabbitPunch_slot_popup_20261021_seed2.png": "9d5e718e74d38b2404c38273cd4ceb2cea21c40f313454750fa054c4647b1fdb",
+    "docs/floorplan/RabbitPunch_slot_popup_20261021_seed2_groups.md": "84a2c68e24f9ff24dcc520fa22f9fd98642d31716fdfc8f13cdcd3ea78817b48"
+  },
+  "scope": "Post-fit resource occupancy from qualified database; not a hardware gameplay test."
+}

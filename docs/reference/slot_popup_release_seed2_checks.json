@@ -1,0 +1,124 @@
+{
+  "accepted": true,
+  "commit": "5e02229106b4ada3d34cb1e9a059352640254840",
+  "revision": "RabbitPunch",
+  "seed": 2,
+  "rbf": "debug/bringup/20261021_slot_popup_5e02229/_Arcade/cores/Arcade-RabbitPunch_20261021.rbf",
+  "rbf_sha256": "5f2df78addd9f83713f00e8a6fbab084a6b6128fcac9673f3dfc5733dd9c32dd",
+  "timing_checks": 144,
+  "minimum_slack_ns": {
+    "Setup": 0.229,
+    "Hold": 0.076,
+    "Recovery": 4.369,
+    "Removal": 0.479,
+    "Minimum Pulse Width": 1.122
+  },
+  "mras": [
+    {
+      "path": "_Arcade/Rabbit Punch (US).mra",
+      "sha256": "febfd70eb444dfc75375295315bcf8fe65b3826811609f2f3602f470b90d57c7"
+    },
+    {
+      "path": "_Arcade/Rabio Lepus (Japan).mra",
+      "sha256": "ba6b2101de37615058bad8f929bdca39da7288c6ec87f5c0108da494370e03a2"
+    },
+    {
+      "path": "_Arcade/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra",
+      "sha256": "b7c3c94fea62b22a81044cc5360d4a558e056c4994a26f942ca9028f1ec983e6"
+    },
+    {
+      "path": "_Arcade/_alternatives/_ddr/Rabio Lepus (Japan) - DDR load.mra",
+      "sha256": "543b882df83366972fd56a287915c64c5d1126abf576fad6eb614433e4ba73d4"
+    }
+  ],
+  "source_line_ending_equivalence": [
+    {
+      "receipt": "cheats_board_v1",
+      "path": "rtl/rabbitpunch_sprite_row.vhd",
+      "original_sha256": "716949c5ab9525240f6a2bfbdb4a97eaafe4027910efbee16b9008cbb53fa6a9",
+      "current_sha256": "9f63d8d98e4002b79034d85b197f0cb96fa6f92024b974c8bd77b9297a92c525",
+      "normalized_sha256": "716949c5ab9525240f6a2bfbdb4a97eaafe4027910efbee16b9008cbb53fa6a9",
+      "snapshot": ".local/archives/20261021-cleanup/snapshots/RabbitPunch-cheats-work/debug/baselines/cheats_board_v1/inputs/rtl/rabbitpunch_sprite_row.vhd"
+    },
+    {
+      "receipt": "cheats_board_v1",
+      "path": "rtl/rabbitpunch_rgb_video.vhd",
+      "original_sha256": "e5fa59dbb896814e27eb03e217be7079a79e3fbc62c660a05a447ef23e5dc637",
+      "current_sha256": "c419fc5897ed61a113c9abc7d1ac5684e70a373042babae86882b131ee3f923b",
+      "normalized_sha256": "e5fa59dbb896814e27eb03e217be7079a79e3fbc62c660a05a447ef23e5dc637",
+      "snapshot": ".local/archives/20261021-cleanup/snapshots/RabbitPunch-cheats-work/debug/baselines/cheats_board_v1/inputs/rtl/rabbitpunch_rgb_video.vhd"
+    },
+    {
+      "receipt": "cheats_board_v1",
+      "path": "rtl/rabbitpunch_board_video.vhd",
+      "original_sha256": "18c5d8143d927063946082dcfdebac39fd45f8fbb04888ecf47929280c04751b",
+      "current_sha256": "7422292b3bb135d3fd879d5e0292368230c74e6a543d8917439eb40b85e0efcc",
+      "normalized_sha256": "18c5d8143d927063946082dcfdebac39fd45f8fbb04888ecf47929280c04751b",
+      "snapshot": ".local/archives/20261021-cleanup/snapshots/RabbitPunch-cheats-work/debug/baselines/cheats_board_v1/inputs/rtl/rabbitpunch_board_video.vhd"
+    },
+    {
+      "receipt": "cheats_board_v1",
+      "path": "rtl/rabbitpunch_bus.vhd",
+      "original_sha256": "2ff140db32be1209154ffce745039cd569d3ba0fbb0531c560fd173fa080f5c5",
+      "current_sha256": "52221fad23889c1f8b35da5ddc59b6b966a7171d353211cd253ecf0c5e771e03",
+      "normalized_sha256": "2ff140db32be1209154ffce745039cd569d3ba0fbb0531c560fd173fa080f5c5",
+      "snapshot": ".local/archives/20261021-cleanup/snapshots/RabbitPunch-cheats-work/debug/baselines/cheats_board_v1/inputs/rtl/rabbitpunch_bus.vhd"
+    },
+    {
+      "receipt": "cheats_board_v1",
+      "path": "rtl/rabbitpunch_fx68k.vhd",
+      "original_sha256": "f58d91e270636a92f629854f63e923aa6a8a7175b5f9d409a0f2e401e0a53ea1",
+      "current_sha256": "43b10e7085f96e2c006488a9e83a5853e2b63204e6a636b8ff1d9ecb7e5defd2",
+      "normalized_sha256": "f58d91e270636a92f629854f63e923aa6a8a7175b5f9d409a0f2e401e0a53ea1",
+      "snapshot": ".local/archives/20261021-cleanup/snapshots/RabbitPunch-cheats-work/debug/baselines/cheats_board_v1/inputs/rtl/rabbitpunch_fx68k.vhd"
+    },
+    {
+      "receipt": "cheats_board_v1",
+      "path": "rtl/rabbitpunch_maintenance.vhd",
+      "original_sha256": "19d90ccaf6c967a05b7c6964dceb46e34ba7945bf3ae3a9e30d7cade5c6c1268",
+      "current_sha256": "dac3e1ba29d16a7a7024c3c8fe23a07baa4597c1d7e305b90a04ba5ae10911c0",
+      "normalized_sha256": "19d90ccaf6c967a05b7c6964dceb46e34ba7945bf3ae3a9e30d7cade5c6c1268",
+      "snapshot": ".local/archives/20261021-cleanup/snapshots/RabbitPunch-cheats-work/debug/baselines/cheats_board_v1/inputs/rtl/rabbitpunch_maintenance.vhd"
+    }
+  ],
+  "hardware_verified": false,
+  "published": false,
+  "deployed": false,
+  "scope": "Private source-matched full fitted cheats candidate. All reported timing checks, required hierarchy, framework coverage scope, fitted clock and state resource checks pass. No physical cheat validation, publication or deployment.",
+  "files": {
+    "README.txt": "8a6ba07b403e8295424cb62956b2f2c78a4e65c9c948503f3d1b7f07e10cf38d",
+    "fit_evidence/BUILT_COMMIT": "e33f2c810e903586bba9de6677751a3f74e4ac62e9de31e5ae3d4ba5cdde3e62",
+    "fit_evidence/framework_timing_scope.json": "62ee1fbf1806ef45ea1300bbae65a60b231b0acaf68ee903ce42fb1d7af95a96",
+    "fit_evidence/full_clock_tree.json": "18409cade0d254effd35192051dcb11a819448fe5c9f65292947a5224071f856",
+    "fit_evidence/q_staged.log": "e3da48d69c3cde161e9bc4f90195481324ec1f338da9475958c4c0af4149e6c8",
+    "fit_evidence/RabbitPunch.asm.rpt": "cb3a24d62b04b58569f80f089e50b5972d7469be4a8c29a770e33fd9cda3d3b5",
+    "fit_evidence/RabbitPunch.done": "55ac9687ec9ac755d188f8fc454fc302ac2f728513e74b5622c34b3d074ee450",
+    "fit_evidence/RabbitPunch.fit.rpt": "2318e28c16c2b343ca8735e5d87076c3fd81107c16db8d05b782ef5db0355b00",
+    "fit_evidence/RabbitPunch.fit.smsg": "3aad8523c2d3ae2606e1a88dee4eb740ab77ed5d02b5d12d8198339a027549b8",
+    "fit_evidence/RabbitPunch.fit.summary": "1344f03c8169ef4881a1e40725d9a3e749b0e50c5dc043626e07440b243a2d22",
+    "fit_evidence/RabbitPunch.flow.rpt": "d96a3e357dc8ef301f9cad04259ac28f51e928ae94f0ca92dab277c2f00ba3db",
+    "fit_evidence/RabbitPunch.jdi": "437065afa23c5046fda2142c6bcdb5919c11b351c66895e93364847825f1dc03",
+    "fit_evidence/RabbitPunch.map.rpt": "c565b1bb622d2c8b6ec605de9e53db649ab490684b8dda3d8efc9aceff7f9eb4",
+    "fit_evidence/RabbitPunch.map.smsg": "3227348495783f14f4b1333d89bd3acee3b945eb8425c83b45555a3e7208c822",
+    "fit_evidence/RabbitPunch.map.summary": "0283663bd1fd647b0556fd966d935d417f1d5f096050be882b17f2130511d207",
+    "fit_evidence/RabbitPunch.pin": "d33728eb0a1bd76d7d6e579e0c22fce92bebeeaaf0117b1f7823f2c427041d9a",
+    "fit_evidence/RabbitPunch.rbf": "5f2df78addd9f83713f00e8a6fbab084a6b6128fcac9673f3dfc5733dd9c32dd",
+    "fit_evidence/RabbitPunch.sld": "c7de3cc5544a1144192d6825eb69cf5e065bf99f16fb9acb42fadd23adede991",
+    "fit_evidence/RabbitPunch.sta.rpt": "07907ca6b11cd182161ad69d3b768b5c3277b148527c8fc8153998f6be5329bf",
+    "fit_evidence/RabbitPunch.sta.summary": "3b42a4b2569b6bfdb09d5c140894aeb8db06c0d5364cd48e142c3fc3657b3a9f",
+    "fit_evidence/state_eval_resources.json": "b494ab7f29967676cb8c09408281a8dbb195d446137e688fea2d1879c7b1b992",
+    "_Arcade/Rabbit Punch (US).mra": "febfd70eb444dfc75375295315bcf8fe65b3826811609f2f3602f470b90d57c7",
+    "_Arcade/Rabio Lepus (Japan).mra": "ba6b2101de37615058bad8f929bdca39da7288c6ec87f5c0108da494370e03a2",
+    "_Arcade/cores/Arcade-RabbitPunch_20261021.rbf": "5f2df78addd9f83713f00e8a6fbab084a6b6128fcac9673f3dfc5733dd9c32dd",
+    "_Arcade/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra": "b7c3c94fea62b22a81044cc5360d4a558e056c4994a26f942ca9028f1ec983e6",
+    "_Arcade/_alternatives/_ddr/Rabio Lepus (Japan) - DDR load.mra": "543b882df83366972fd56a287915c64c5d1126abf576fad6eb614433e4ba73d4"
+  },
+  "zip": "debug/bringup/RabbitPunch_slot_popup_20261021.zip",
+  "zip_sha256": "ea4d32062fcb0571a4f94745e5c03e842705bba501e3e4ced0afdd30a2163a62",
+  "features": [
+    "SS + Left/Right: Savestate slot 1-4 popup",
+    "Accepted SS + Up or OSD restore: Loading state 1-4 popup",
+    "US manual factory DIPs: 3 lives and demo sound On"
+  ],
+  "popup_hardware_verified": false
+}

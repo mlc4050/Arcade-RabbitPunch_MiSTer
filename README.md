@@ -155,26 +155,26 @@ These are the implemented timings. Original-board raw raster timings have not be
 
 ### Resource usage
 
-RabbitPunch release revision, fitted October 20, 2026, seed 3, source `6ac4a1b`:
+Current RabbitPunch candidate, fitted October 21, 2026, seed 2, source `5e02229`:
 
 | Resource | Used | Available |
 |---|---:|---:|
-| Logic (ALMs) | 22,889 | 41,910 |
-| Registers | 29,824 | 83,820 |
+| Logic (ALMs) | 23,688 | 41,910 |
+| Registers | 30,542 | 83,820 |
 | Block memory bits | 2,303,968 | 5,662,720 |
 | M10K blocks | 292 | 553 |
 | DSP blocks | 34 | 112 |
 | PLLs | 3 | 6 |
 
-All **144 scoped timing checks** pass, with minimum setup slack **+0.225 ns** and hold slack **+0.112 ns**. The [release build report](docs/reference/state_production_release_seed3_synth_checks.json) records the source, seed, artifact hashes and timing scope. The instrumented build also passes all 164 project timing checks.
+All **144 scoped timing checks** pass, with minimum setup slack **+0.229 ns** and hold slack **+0.076 ns**. The [candidate build report](docs/reference/slot_popup_release_seed2_checks.json) records the source, seed, artifact hashes and timing scope.
 
 ### Floorplan
 
-RabbitPunch release revision, fitted October 20, 2026, seed 3. Colors identify the game machine, video processing, host interface and MiSTer framework; brightness indicates occupancy.
+Current RabbitPunch candidate, fitted October 21, 2026, seed 2. Colors identify the game machine, video processing, host interface and MiSTer framework; brightness indicates occupancy.
 
-![RabbitPunch FPGA floorplan](docs/floorplan/RabbitPunch_20261020.png)
+![RabbitPunch FPGA floorplan](docs/floorplan/RabbitPunch_slot_popup_20261021_seed2.png)
 
-[Resource groups](docs/floorplan/RabbitPunch_20261020_groups.md).
+[Resource groups](docs/floorplan/RabbitPunch_slot_popup_20261021_seed2_groups.md).
 
 ## Building
 

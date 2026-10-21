@@ -1,0 +1,26 @@
+{
+  "accepted": false,
+  "commit": "5e02229106b4ada3d34cb1e9a059352640254840",
+  "revision": "RabbitPunch",
+  "seed": 3,
+  "stage": ".local/builds/slot_loading_popup_v1",
+  "full_compilation_successful": true,
+  "timing_checks": 144,
+  "failing_setup_ns": -0.169,
+  "corner": "Slow 1100mV -40C",
+  "from_node": "ascal:ascal|o_dir[2][6]",
+  "to_node": "ascal:ascal|o_hfrac[1][4]",
+  "logic_levels": 3,
+  "setup_relationship_ns": 6.732,
+  "data_delay_ns": 6.138,
+  "clock_skew_ns": -0.563,
+  "disposition": "Rejected RBF; retry unchanged RTL and timing constraints with fitter seed2. No deployment or publication.",
+  "evidence": {
+    ".local/builds/slot_loading_popup_v1/BUILT_COMMIT": "fdfd8463e45d91b53cea40733bc26acaabb1d88ec5d368f378b26160cfba554b",
+    ".local/builds/slot_loading_popup_v1/q_staged.log": "4116ecbf756c6f467a54a2257088e1bac1e5c00e9abcb986089910b74f9e7f3d",
+    ".local/builds/slot_loading_popup_v1/output_files/RabbitPunch.sta.summary": "6bf77f9d39abf8fed2791f388b57b8968719c69ddafa09e59eca7df4194cdc70",
+    ".local/builds/slot_loading_popup_v1/output_files/popup_hdmi_cold_paths.rpt": "619f1d1842fc9b5f16d34f6fa2433d124aa95091e869e47be74fbd86dca470e7"
+  },
+  "quarantined_rbf": "debug/rejected/slot_popup_seed3_5e02229/RabbitPunch.rbf.rejected",
+  "quarantined_rbf_sha256": "ae8606624543e21e67c8feb799c988d586199710e982293967b3dd4fb9f60c25"
+}

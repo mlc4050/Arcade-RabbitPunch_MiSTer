@@ -735,3 +735,11 @@ https://github.com/MiSTer-devel/Main_MiSTer/blob/master/user_io.cpp
 (show_core_info and UIO_INFO_GET). Existing local savestate_ui examples in
 Arcade-JalecoMS1BCD_MiSTer and Arcade-SeibuSPI_MiSTer use the same interface.
 
+The combined slot-selection/loading popup candidate at source 5e02229 passes
+the full release seed2 fit and all 144 scoped timing checks, plus required
+hierarchy, state resources and clock checks. The verified ZIP is
+debug/bringup/RabbitPunch_slot_popup_20261021.zip. It includes the dated RBF
+and both sets' direct/DDR MRAs, with the US manual factory defaults. See
+reference/slot_popup_release_seed2_checks.json and
+reference/slot_popup_bundle_checks.json. Physical popup rendering remains
+unverified; no deployment or publication was performed.

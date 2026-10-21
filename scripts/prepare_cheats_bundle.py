@@ -27,8 +27,13 @@ stage=args.stage.resolve() if args.stage else root/'build'
 assert root.resolve() in stage.resolve().parents and stage.drive.upper() == 'D:'
 stamp=(stage/'BUILT_COMMIT').read_text()
 commit=stamp.split()[0]
-assert 'seed=3' in stamp
+seed_match=re.search(r'\bseed=(\d+)\b',stamp)
+assert seed_match
+seed=int(seed_match[1])
+assert seed>0
+assert re.findall(r'^set_global_assignment -name SEED (\d+)$',(stage/'RabbitPunch.qsf').read_text(),re.M)==[str(seed)]
 assert not (root/'.build_running').exists()
+assert not (stage/'.build_running').exists()
 assert 'Full Compilation was successful' in (stage/'q_staged.log').read_text()[-7000:]
 gates.REV='RabbitPunch'
 assert not gates.check_present(stage)
@@ -91,14 +96,14 @@ for block in re.split(r'\n\s*\n',(stage/'output_files/RabbitPunch.sta.summary').
     if kind and slack:
         rows.append((kind[1].strip(),float(slack[1])))
 minimum={kind:min(slack for name,slack in rows if kind in name) for kind in ('Setup','Hold','Recovery','Removal','Minimum Pulse Width') if any(kind in name for name,slack in rows)}
-(out/'README.txt').write_text('Rabbit Punch / Rabio Lepus cheats candidate\n\nCopy the contents of _Arcade to your MiSTer _Arcade folder. Replace both game MRAs as well as the RBF; the Cheats submenu uses code definitions from these MRAs. No ROM files are included.\n\nCheats > offers Infinite Missiles, Infinite Lives and Infinite Energy/Shield for each player. Enable/disable independently. Hold SS with Left/Right to select the savestate slot, Down to save or Up to restore. Each accepted SS + Left/Right change shows a brief Savestate slot 1-4 popup and updates the OSD slot. SS + Up shows Loading state 1-4 when restore starts. Existing savestate image compatibility is retained.\n\nMAME 0.289 and native VHDL simulations pass; full fitted timing passes. Cheats have not yet been checked on physical MiSTer hardware. Test both sets, toggle each cheat, disable them again, and save/restore with a cheat enabled. Cheat choices follow the current menu selection rather than the saved game.\n\nSource '+commit+', Quartus 17.0.2 Lite, seed3. See manifest.json for hashes and timing.\n')
-report=dict(accepted=True,commit=commit,revision='RabbitPunch',seed=3,
+(out/'README.txt').write_text('Rabbit Punch / Rabio Lepus cheats candidate\n\nCopy the contents of _Arcade to your MiSTer _Arcade folder. Replace both game MRAs as well as the RBF; the Cheats submenu uses code definitions from these MRAs. No ROM files are included.\n\nCheats > offers Infinite Missiles, Infinite Lives and Infinite Energy/Shield for each player. Enable/disable independently. Hold SS with Left/Right to select the savestate slot, Down to save or Up to restore. Each accepted SS + Left/Right change shows a brief Savestate slot 1-4 popup and updates the OSD slot. SS + Up shows Loading state 1-4 when restore starts. Existing savestate image compatibility is retained.\n\nMAME 0.289 and native VHDL simulations pass; full fitted timing passes. Cheats have not yet been checked on physical MiSTer hardware. Test both sets, toggle each cheat, disable them again, and save/restore with a cheat enabled. Cheat choices follow the current menu selection rather than the saved game.\n\nSource '+commit+', Quartus 17.0.2 Lite, seed '+str(seed)+'. See manifest.json for hashes and timing.\n')
+report=dict(accepted=True,commit=commit,revision='RabbitPunch',seed=seed,
     rbf=rbf.relative_to(root).as_posix(),rbf_sha256=sha(rbf),timing_checks=len(rows),minimum_slack_ns=minimum,
     mras=mra_records,source_line_ending_equivalence=line_ending_equivalence,hardware_verified=False,published=False,deployed=False,
     scope='Private source-matched full fitted cheats candidate. All reported timing checks, required hierarchy, framework coverage scope, fitted clock and state resource checks pass. No physical cheat validation, publication or deployment.',
     files={p.relative_to(out).as_posix():sha(p) for p in out.rglob('*') if p.is_file()})
 (out/'manifest.json').write_text(json.dumps(report,indent=2)+'\n')
-target=root/f'docs/reference/{args.label}_release_seed3_checks.json'
+target=root/f'docs/reference/{args.label}_release_seed{seed}_checks.json'
 assert not target.exists(), 'Preserve earlier receipts'
 target.write_text(json.dumps(report,indent=2)+'\n')
 bundle=root/f'debug/bringup/RabbitPunch_{args.label}_{date}'
