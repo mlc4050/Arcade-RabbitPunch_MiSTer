@@ -30,6 +30,8 @@ architecture test of state_controls_tb is
     signal s_busy, s_finished, s_success : std_logic := '0';
     signal s_save, s_restore, s_unavailable, s_set : std_logic;
     signal su2_slot : unsigned(1 downto 0);
+    signal s_info_request : std_logic;
+    signal su8_info_message : unsigned(7 downto 0);
     signal s_disabled_save, s_disabled_restore, s_disabled_unavailable, s_disabled_set : std_logic;
     signal s_disabled_save_unavailable : std_logic;
 begin
@@ -47,6 +49,8 @@ begin
             i_service_finished => s_finished,
             i_service_success => s_success,
             i_service_incomplete => '0',
+            o_info_request => s_info_request,
+            ou8_info_message => su8_info_message,
             o_save => s_save,
             o_restore => s_restore,
             ou2_slot => su2_slot,
@@ -101,13 +105,15 @@ begin
             assert (su2_slot = vint_slot and s_unavailable = '1')
                 report "Control admission/slot failed" severity failure;
             if (vbool_save) then
-                assert (s_save = '1' and s_restore = '0') severity failure;
+                assert (s_save = '1' and s_restore = '0' and s_info_request = '0') severity failure;
             else
-                assert (s_save = '0' and s_restore = '1') severity failure;
+                assert (s_save = '0' and s_restore = '1' and s_info_request = '1' and
+                    su8_info_message = CINT_RESTORE_INFO_BASE + vint_slot)
+                    report "Restore popup must identify the admitted slot" severity failure;
             end if;
             for vint_delay in 1 to 4 loop
                 tick;
-                assert (s_save = '0' and s_restore = '0' and s_set = '0' and
+                assert (s_save = '0' and s_restore = '0' and s_set = '0' and s_info_request = '0' and
                     s_unavailable = '1' and su2_slot = vint_slot)
                     report "Held button retriggered or early increment occurred" severity failure;
             end loop;
@@ -153,10 +159,10 @@ begin
         assert (F_COUNT(CSTR_STATE_CONFIG,
             "J1,Fire/Punch,Missile,-,-,-,-,Start,Coin,Pause,Service,Test,Savestate (SS);") = 1)
             report "State controller mapping changed existing action positions" severity failure;
-        assert (F_COUNT(CSTR_STATE_CONFIG, "I,") = 1 and CINT_SLOT_INFO_BASE = 2)
+        assert (F_COUNT(CSTR_STATE_CONFIG, "I,") = 1 and CINT_SLOT_INFO_BASE = 2 and CINT_RESTORE_INFO_BASE = 6)
             report "Native info table must use the expected one-based message IDs" severity failure;
-        assert (CSTR_STATE_CONFIG(CSTR_STATE_CONFIG'length - 97 + 1 to CSTR_STATE_CONFIG'length) =
-            "I,Slot=SS+LR|Save/Load=SS+DU,Savestate slot 1,Savestate slot 2,Savestate slot 3,Savestate slot 4;")
+        assert (CSTR_STATE_CONFIG(CSTR_STATE_CONFIG'length - 161 + 1 to CSTR_STATE_CONFIG'length) =
+            "I,Slot=SS+LR|Save/Load=SS+DU,Savestate slot 1,Savestate slot 2,Savestate slot 3,Savestate slot 4,Loading state 1,Loading state 2,Loading state 3,Loading state 4;")
             report "Native info messages must follow all OSD items in slot order" severity failure;
         su128_status <= x"FEDCBA98765432100123456789ABC01A";
         tick;
@@ -184,8 +190,10 @@ begin
             report "Host acknowledgment failed to resolve the slot ticket" severity failure;
         start(true, 2, '1');
         complete('0', false);
-        start(false, 2, '1');
-        complete('1', false);
+        for vint_slot in 0 to 3 loop
+            start(false, vint_slot, '1');
+            complete('1', false);
+        end loop;
         start(false, 2, '1');
         complete('0', false);
         start(true, 2, '0');
@@ -223,7 +231,7 @@ begin
         tick;
         su128_status(9 downto 8) <= "11";
         tick;
-        assert (s_save = '1' and s_restore = '0') severity failure;
+        assert (s_save = '1' and s_restore = '0' and s_info_request = '0') severity failure;
         complete('0', false);
         -- Reset abandons the UI ticket, and a high trigger stays consumed.
         start(true, 1, '1');

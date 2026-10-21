@@ -76,10 +76,16 @@ begin
     begin
         if (rising_edge(s_clk)) then
             if (s_info_request = '1') then
-                assert (s_set = '1' and s_save = '0' and s_restore = '0')
-                    report "Slot popup without an accepted slot-selection request" severity failure;
-                assert (su8_info_message = CINT_SLOT_INFO_BASE + to_integer(su128_feedback(6 downto 5)))
-                    report "Popup message does not match the requested slot" severity failure;
+                if (s_restore = '1') then
+                    assert (s_save = '0' and s_set = '0' and
+                        su8_info_message = CINT_RESTORE_INFO_BASE + to_integer(su2_slot))
+                        report "Loading popup does not match the admitted restore slot" severity failure;
+                else
+                    assert (s_set = '1' and s_save = '0')
+                        report "Slot popup without an accepted slot-selection request" severity failure;
+                    assert (su8_info_message = CINT_SLOT_INFO_BASE + to_integer(su128_feedback(6 downto 5)))
+                        report "Popup message does not match the requested slot" severity failure;
+                end if;
                 sint_info_count <= sint_info_count + 1;
             end if;
         end if;
@@ -285,8 +291,8 @@ begin
         su32_joystick0 <= (others => '0');
         tick;
         change_slot(0, 1, 1);
-        assert (sint_info_count = 11)
-            report "Unexpected popup on reset, auto increment, operation or rejected chord" severity failure;
+        assert (sint_info_count = 14)
+            report "Unexpected popup on reset, auto increment, save or rejected chord" severity failure;
         report "STATE_CONTROLS_JOYSTICK_PASS";
         finish;
     end process;

@@ -9,6 +9,7 @@ use work.rabbitpunch_config.all;
 -- retain their exact configuration string and advertise no state storage.
 package rabbitpunch_state_config is
     constant CINT_SLOT_INFO_BASE : natural := 2;
+    constant CINT_RESTORE_INFO_BASE : natural := 6;
     function F_STATE_CONFIG(vbool_enable : boolean) return string;
     function F_STATE_GAME_ACTIONS(vu32_actions : unsigned(31 downto 0); vbool_enable : boolean) return unsigned;
 end package;
@@ -43,7 +44,8 @@ package body rabbitpunch_state_config is
         -- Keep the info list after all menu entries to preserve their indexes.
         constant CSTR_SLOT_INFO : string :=
             "I,Slot=SS+LR|Save/Load=SS+DU," &
-            "Savestate slot 1,Savestate slot 2,Savestate slot 3,Savestate slot 4;";
+            "Savestate slot 1,Savestate slot 2,Savestate slot 3,Savestate slot 4," &
+            "Loading state 1,Loading state 2,Loading state 3,Loading state 4;";
         constant CSTR_CONTROLS : string :=
             "-;" &
             "O[6:5],Savestate slot,1,2,3,4;" &

@@ -456,3 +456,9 @@ regressions, alongside existing command and partial-recovery tests. State ABI
 3A1B6DDE is unchanged. Full seed3 implementation and timing qualification are
 pending; physical popup rendering remains unverified.
 
+
+The initial slot-popup fit at bdde886 was intentionally stopped during fitting
+to include the requested Loading state notification. It is not a qualified
+RBF and its logs remain in .local/builds/slot_popup_v1. The replacement build
+also emits a selected-slot Loading state popup on every admitted restore,
+including SS + Up and the OSD command.

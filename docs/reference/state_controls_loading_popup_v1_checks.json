@@ -1,0 +1,13 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_config.vhd": "f70285b8d6208fed1939b4c54f4d8a8f20f1f9e72796fd81e9a022cf601b0383",
+    "rtl/state/rabbitpunch_state_config.vhd": "e51223cf11fa1aecffe1f01d42e20df9eb98dfcd89d5f3ef7a20e2b6c489b8e3",
+    "rtl/state/rabbitpunch_state_controls.vhd": "0ac0270e0bb3e642c318944e03047ad3efd54fc2bf9f9dcd1ee88b266acc9be1",
+    "sim/state/state_controls_tb.vhd": "e5140bc2676ae73696851b9893c5a86b0167af359c39a8eb8e12aa7fd39d451c"
+  },
+  "controller_mappings": {},
+  "runner_sha256": "ae0b0974bd10611252d32a28db8743a54dc230ff5aeb95b121f82fc32d7cb428",
+  "log_sha256": "6be4efe909f479341a65913e45943107121d8d7048633d8d517c1f0b22b6b8df",
+  "scope": "State control module with synthetic service and host endpoints. All four slots/wrap, final-successful-save-only increment, failures, restore, no-auto, host slot/auto edits during transfer, held buttons, unavailable edge discard, simultaneous priority, reset/stray completion, default-disabled outputs, exact disabled configuration and enabled configuration header/order/separators/unique controls. No actual hps_io, OSD visibility, DDR publication, whole-game restore, FPGA or hardware qualification."
+}

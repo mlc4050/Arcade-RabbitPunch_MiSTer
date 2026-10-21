@@ -710,3 +710,28 @@ debug/bringup/RabbitPunch_slot_select_20261021.zip, with a dated RBF and both
 sets' direct/DDR cheat MRAs. See reference/slot_select_release_seed3_checks.json.
 The candidate retains ABI3A1B6DDE; controller operation on physical MiSTer
 hardware is still a separate check. No ROMs, deployment or publication.
+
+## Controller slot popup
+
+Each accepted SS + Left/Right selection issues a native MiSTer popup showing
+Savestate slot 1 through Savestate slot 4. It uses the unchanged hps_io info
+request transport and a final I message table in the host configuration.
+Message IDs 2 through 5 match the selected slot; IDs 6 through 9 identify
+the slot being restored. Entry 1 is controller help.
+Held chords produce one request. Busy, unavailable, opposing and cross-player
+chords do not produce a popup. Accepted restore requests show Loading state 1 through Loading state 4.
+Save and autoincrement do not emit a slot-selection popup. The existing status acknowledgment guard is retained.
+
+The popup, command and partial-recovery VHDL tests pass:
+reference/state_controls_joystick_loading_popup_v1_checks.json,
+reference/state_controls_loading_popup_v1_checks.json and
+reference/state_controls_partial_loading_popup_v1_checks.json. The Cheats/menu and
+ROM-index isolation regression also passes in
+reference/cheats_host_loading_popup_v1_checks.json. The state image ABI remains
+3A1B6DDE. Physical popup rendering is pending the new candidate RBF.
+
+Main's message lookup and polling implementation is in
+https://github.com/MiSTer-devel/Main_MiSTer/blob/master/user_io.cpp
+(show_core_info and UIO_INFO_GET). Existing local savestate_ui examples in
+Arcade-JalecoMS1BCD_MiSTer and Arcade-SeibuSPI_MiSTer use the same interface.
+

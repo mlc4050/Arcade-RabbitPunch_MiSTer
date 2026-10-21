@@ -115,6 +115,8 @@ begin
                         su2_slot <= iu128_status(6 downto 5);
                     elsif (s_request_restore = '1' and s_previous_restore = '0') then
                         o_restore <= '1';
+                        ou8_info_message <= to_unsigned(CINT_RESTORE_INFO_BASE, 8) + resize(iu128_status(6 downto 5), 8);
+                        o_info_request <= '1';
                         s_pending <= '1';
                         s_saving <= '0';
                         s_increment <= '0';

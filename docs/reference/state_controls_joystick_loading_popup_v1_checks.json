@@ -1,0 +1,34 @@
+{
+  "accepted": true,
+  "source_sha256": {
+    "rtl/rabbitpunch_config.vhd": "f70285b8d6208fed1939b4c54f4d8a8f20f1f9e72796fd81e9a022cf601b0383",
+    "rtl/state/rabbitpunch_state_config.vhd": "e51223cf11fa1aecffe1f01d42e20df9eb98dfcd89d5f3ef7a20e2b6c489b8e3",
+    "rtl/state/rabbitpunch_state_controls.vhd": "0ac0270e0bb3e642c318944e03047ad3efd54fc2bf9f9dcd1ee88b266acc9be1",
+    "sim/state/state_controls_joystick_tb.vhd": "ec668ee334f7f4d96f9ec96b986ce7d886781430e7f4bf0a63389bbf8e17a0aa"
+  },
+  "controller_mappings": {
+    "releases/Rabbit Punch (US).mra": {
+      "sha256": "4b78bbcbd1ec44bd971151d890026376ac50181cd27e00ad2a3a933be71a5222",
+      "savestate_joystick_bit": 15,
+      "existing_action_positions_preserved": true
+    },
+    "releases/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra": {
+      "sha256": "39f32bb2c2755a2468578fccbf0603af8fb7e679eda37af745b066aebcbd2503",
+      "savestate_joystick_bit": 15,
+      "existing_action_positions_preserved": true
+    },
+    "releases/Rabio Lepus (Japan).mra": {
+      "sha256": "fe2c21689d359a13572ad7749c080819bd6d5f06a6e0af5ffa0054cf35d8ed85",
+      "savestate_joystick_bit": 15,
+      "existing_action_positions_preserved": true
+    },
+    "releases/_alternatives/_ddr/Rabio Lepus (Japan) - DDR load.mra": {
+      "sha256": "b75b39e557a4fa470761fd19cfcd635dc66b0f22c4fbaf99a09ba92514471948",
+      "savestate_joystick_bit": 15,
+      "existing_action_positions_preserved": true
+    }
+  },
+  "runner_sha256": "ae0b0974bd10611252d32a28db8743a54dc230ff5aeb95b121f82fc32d7cb428",
+  "log_sha256": "e0b81d4b838833b8edfdcaf166e35de8410129027571d491510335e2e146a88d",
+  "scope": "Controller SS+Left/Right selects the shared OSD slot with wrap, acknowledged feedback and one native info-request pulse containing the selected slot; all four slot message IDs and selected-slot loading messages, both players and held/rejected chords checked. SS+Down/Up and OSD share operation admission, selected slot, final-successful-save autoincrement and host feedback ticket. Both controllers, held/unavailable edges, cross-controller isolation and partial-restore retries; game-action suppression function preserves legacy disabled behavior. Synthetic service/host endpoints; no actual controller hardware, hps_io or whole-shell proof."
+}
