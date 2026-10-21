@@ -1,0 +1,84 @@
+{
+  "audit_completed": true,
+  "manual_sha256": "0edf3b05bfadab5bf5dede2f9af75d17e29bd5d597673f1d016d2d0dfecc0b07",
+  "manual_pdf_pages": [
+    16,
+    17
+  ],
+  "manual_printed_pages": [
+    11,
+    12
+  ],
+  "set": "rpunch",
+  "switch_options_match": true,
+  "mras": [
+    {
+      "path": "releases/Rabbit Punch (US).mra",
+      "sha256": "bf274d48c3aea2eed914aab20a2ac6f53af9dc6c34aaf7a3f3710b81605050f5",
+      "all_option_encodings_match": true,
+      "default": "00,20",
+      "default_lives": 2
+    },
+    {
+      "path": "releases/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra",
+      "sha256": "e84b6fbffa23694839772b00f92c558a8c1563f793ab88cd4b9346f9f717377e",
+      "all_option_encodings_match": true,
+      "default": "00,20",
+      "default_lives": 2
+    },
+    {
+      "path": "releases/_dev/cheats/Rabbit Punch (US).mra",
+      "sha256": "2bf91e3ce46997ecfe3757c2228a4f4ca5e574dcddfeb580989e0cfcf4ee0102",
+      "all_option_encodings_match": true,
+      "default": "00,20",
+      "default_lives": 2
+    },
+    {
+      "path": "releases/_dev/cheats/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra",
+      "sha256": "106017ceb20a33e503f1e3c010be63a85626f9fb97b79bdc758c4112c0d1f37b",
+      "all_option_encodings_match": true,
+      "default": "00,20",
+      "default_lives": 2
+    },
+    {
+      "path": "debug/bringup/20261021_slot_select_c39670f/_Arcade/Rabbit Punch (US).mra",
+      "sha256": "2bf91e3ce46997ecfe3757c2228a4f4ca5e574dcddfeb580989e0cfcf4ee0102",
+      "all_option_encodings_match": true,
+      "default": "00,20",
+      "default_lives": 2
+    },
+    {
+      "path": "debug/bringup/20261021_slot_select_c39670f/_Arcade/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra",
+      "sha256": "106017ceb20a33e503f1e3c010be63a85626f9fb97b79bdc758c4112c0d1f37b",
+      "all_option_encodings_match": true,
+      "default": "00,20",
+      "default_lives": 2
+    },
+    {
+      "path": "debug/bringup/20261021_cheats_9747aee/_Arcade/Rabbit Punch (US).mra",
+      "sha256": "50adac91d9e1fe003f3f4c951fb521986c4f9766e462ff18a8c82b3487c10a5b",
+      "all_option_encodings_match": true,
+      "default": "00,20",
+      "default_lives": 2
+    },
+    {
+      "path": "debug/bringup/20261021_cheats_9747aee/_Arcade/_alternatives/_ddr/Rabbit Punch (US) - DDR load.mra",
+      "sha256": "712c9e2a7c0060c5594450442fcbba5c5fd538fbefa5642980757e9e909fb1e4",
+      "all_option_encodings_match": true,
+      "default": "00,20",
+      "default_lives": 2
+    }
+  ],
+  "manual_factory_default": "00,24",
+  "current_mame_default": "00,20",
+  "factory_defaults_match": false,
+  "difference": "Manual Bank2 note1 excludes Lives and Demo Sound from all-OFF: both ON gives3 lives and demo sound. Current MAME default gives2 lives and demo sound.",
+  "coinage_label_note": "6C/4C,5C/6C,4C/5C summarize cumulative bonus schedules, not each intermediate credit step.",
+  "physical_coin_slot_note": "Coin A/B retain MAME naming. Existing ROM audits show input Coin1 uses CoinB and Coin2 uses CoinA; no physical wiring claim.",
+  "japanese_scope": "This is the US Rabbit Punch manual. Rabio Lepus retains separate MAME definitions; US lives/laser/bonus/demo settings do not apply to Japan.",
+  "source_sha256": {
+    "rtl/rabbitpunch_inputs.vhd": "9b6e552c490ba4f725b5838c5cefbe206abfbced5ac24d8000d9b80f59be0b40",
+    "rtl/rabbitpunch_io.vhd": "4e2f26f3831df45b3d33223995572a7ecad5fed70c7d09f75e7d62697d77d652"
+  },
+  "scope": "Visual PDF table audit and exact XML option/default comparison for published, development and two private candidate descriptor sets. Existing raw DIP latch/read logic inspected. No new live game, physical DIP or hardware qualification; no MRA or RTL changes."
+}

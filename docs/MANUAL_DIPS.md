@@ -17,7 +17,7 @@ Existing MAME labels 6C/4C, 5C/6C and 4C/5C describe the end of cumulative bonus
 
 All eight US bank 2 settings match the current MAME-derived menu: difficulty, lives, laser mode, extended play, demo sound, continue buy-in and flip screen. Difficulty bits are packed in switch order, so normal/easy/hard/hardest correspond to values 0/2/1/3. Physical continue switch OFF permits continuing; menu Continues On is correct for that position.
 
-The manual specifies factory switches all OFF (`00,00`). MAME defaults are `00,20`, which enables demo sound. We retain the MAME default; Demo Sounds Off already selects the manual factory state. This difference is explicit rather than silently changing the existing default.
+The supplied manual, printed page12 (PDF page17), specifies all Bank2 switches OFF **except Lives and Demo Sound**. Its factory setting is therefore `00,24`: three lives and demo sound On. MAME and the current MRAs default to `00,20`: two lives and demo sound On. Set Lives to3 and use Reset to apply to reproduce the manual factory settings. The previous audit incorrectly described both banks as all OFF; that reading missed the Bank2 exception. Switch options and bit encodings already match; defaults are retained rather than changed by this audit. See `reference/manual_dip_current_checks.json` for the current PDF and descriptor checks.
 
 These are menu additions only. ROM assembly, button slots, DIP bit positions and production HDL are unchanged. Physical coin accounting remains unverified on MiSTer.
 

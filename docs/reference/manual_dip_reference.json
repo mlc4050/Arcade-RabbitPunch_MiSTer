@@ -11,6 +11,7 @@
     "14": "4C/1C"
   },
   "switch_on_bit": 1,
-  "default_policy": "Retain MAME 0.289 defaults 00,20; physical manual factory all OFF would be 00,00.",
-  "japanese_manual_overrides": false
+  "default_policy": "Retain MAME0.289 defaults00,20 (2 lives, demo sound On). Manual Bank2 factory note excepts Lives and Demo Sound from all-OFF, giving00,24 (3 lives, demo sound On).",
+  "japanese_manual_overrides": false,
+  "factory_note_correction": "Verified supplied PDF pages16/17, printed11/12; supersedes the earlier mistaken all-OFF Bank2 interpretation. See manual_dip_current_checks.json."
 }
